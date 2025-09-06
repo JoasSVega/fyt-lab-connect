@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Team from "@/components/Team";
+import Tools from "@/components/Tools";
 import Projects from "@/components/Projects";
 import News from "@/components/News";
 import Contact from "@/components/Contact";
@@ -24,6 +25,9 @@ const Index = () => {
         
         {/* Team Section */} 
         <Team />
+        
+        {/* Pharmaceutical Tools Section */}
+        <Tools />
         
         {/* Projects and Publications */}
         <Projects />
