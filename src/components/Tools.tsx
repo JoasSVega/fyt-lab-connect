@@ -1,7 +1,107 @@
-import { Calculator, Database, Search, Microscope, Pill, FlaskConical, Stethoscope, Clock } from "lucide-react";
+import { Calculator, Database, Search, Microscope, Pill, FlaskConical, Stethoscope, Clock, ChevronRight, AlertTriangle, Info, CheckCircle, AlertCircle } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
+import { Input } from "./ui/input";
+import { Button } from "./ui/button";
+import { Badge } from "./ui/badge";
+import { useState } from "react";
 
 const Tools = () => {
+  // Estado para el buscador de fármacos
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState<any>(null);
+  const [isSearching, setIsSearching] = useState(false);
+
+  // Datos de demostración para el buscador
+  const mockDrugData = {
+    "morfina": {
+      name: "Morfina",
+      alerts: [
+        { type: "high-risk", text: "Medicamento de alto riesgo", icon: <AlertTriangle className="h-4 w-4" /> },
+        { type: "lasa", text: "Medicamento LASA", icon: <AlertCircle className="h-4 w-4" /> },
+        { type: "controlled", text: "Sustancia controlada", icon: <Info className="h-4 w-4" /> }
+      ],
+      routes: [
+        {
+          name: "Oral",
+          icon: "💊",
+          doses: ["5-15 mg cada 4h", "30-60 mg liberación prolongada cada 12h"],
+          notes: "Ajustar dosis en insuficiencia hepática"
+        },
+        {
+          name: "Intravenosa",
+          icon: "💉",
+          doses: ["2-10 mg cada 4h", "0.1-0.2 mg/kg en pediatría"],
+          notes: "Administrar lentamente, monitorear función respiratoria"
+        },
+        {
+          name: "Subcutánea",
+          icon: "🩹",
+          doses: ["5-20 mg cada 4h"],
+          notes: "Rotar sitios de inyección"
+        }
+      ],
+      precautions: "No administrar en insuficiencia respiratoria severa. Requiere monitoreo de niveles plasmáticos en uso prolongado."
+    },
+    "paracetamol": {
+      name: "Paracetamol",
+      alerts: [
+        { type: "hepatotoxic", text: "Riesgo de hepatotoxicidad", icon: <AlertTriangle className="h-4 w-4" /> },
+        { type: "safe", text: "Seguro en embarazo", icon: <CheckCircle className="h-4 w-4" /> }
+      ],
+      routes: [
+        {
+          name: "Oral",
+          icon: "💊",
+          doses: ["500-1000 mg cada 6-8h", "Máximo 4g/día"],
+          notes: "Tomar con alimentos si hay molestias gástricas"
+        },
+        {
+          name: "Intravenosa",
+          icon: "💉",
+          doses: ["1g cada 6h", "15 mg/kg cada 4-6h en pediatría"],
+          notes: "Infusión en 15 minutos mínimo"
+        },
+        {
+          name: "Rectal",
+          icon: "🔹",
+          doses: ["500-1000 mg cada 6-8h"],
+          notes: "Útil cuando la vía oral no está disponible"
+        }
+      ],
+      precautions: "Reducir dosis en insuficiencia hepática. No exceder dosis máxima diaria."
+    }
+  };
+
+  // Función de búsqueda
+  const handleSearch = () => {
+    if (!searchTerm.trim()) return;
+    
+    setIsSearching(true);
+    // Simular llamada a API
+    setTimeout(() => {
+      const result = mockDrugData[searchTerm.toLowerCase() as keyof typeof mockDrugData];
+      setSearchResults(result || null);
+      setIsSearching(false);
+    }, 1000);
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
+  const getBadgeVariant = (type: string) => {
+    switch (type) {
+      case 'high-risk': return 'destructive';
+      case 'lasa': return 'secondary';
+      case 'controlled': return 'outline';
+      case 'hepatotoxic': return 'destructive';
+      case 'safe': return 'default';
+      default: return 'outline';
+    }
+  };
+
   // Calculadoras clínicas disponibles
   const clinicalCalculators = [
     {
@@ -148,7 +248,142 @@ const Tools = () => {
           </div>
         </div>
 
-        {/* Herramientas Futuras */}
+        {/* Buscador de Fármacos */}
+        <div className="mb-16">
+          <div className="flex items-center space-x-3 mb-8">
+            <div className="p-2 rounded-lg bg-fyt-blue text-white shadow-soft">
+              <Search className="h-6 w-6" />
+            </div>
+            <h3 className="text-2xl font-bold text-fyt-dark">
+              Buscador de Fármacos
+            </h3>
+          </div>
+
+          {/* Barra de búsqueda */}
+          <div className="mb-8">
+            <Card className="border-card-border bg-card/50 backdrop-blur-sm">
+              <CardContent className="p-6">
+                <div className="flex space-x-4">
+                  <div className="relative flex-1">
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+                    <Input
+                      placeholder="Buscar medicamento (ej: morfina, paracetamol)..."
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      onKeyPress={handleKeyPress}
+                      className="pl-10"
+                    />
+                  </div>
+                  <Button 
+                    onClick={handleSearch}
+                    disabled={isSearching || !searchTerm.trim()}
+                    className="bg-gradient-hero text-white hover:bg-primary/90"
+                  >
+                    {isSearching ? "Buscando..." : "Buscar"}
+                  </Button>
+                </div>
+                <p className="text-sm text-muted-foreground mt-2">
+                  Los resultados aquí mostrados son solo de demostración. Próximamente se integrará la base de datos completa.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Resultados de búsqueda */}
+          {searchResults && (
+            <Card className="border-card-border bg-card shadow-medium">
+              <CardHeader className="pb-4">
+                <div className="flex items-center space-x-3 mb-3">
+                  <Pill className="h-8 w-8 text-fyt-blue" />
+                  <CardTitle className="text-3xl text-fyt-dark">
+                    {searchResults.name}
+                  </CardTitle>
+                </div>
+                
+                {/* Etiquetas de alerta */}
+                <div className="flex flex-wrap gap-2">
+                  {searchResults.alerts.map((alert: any, index: number) => (
+                    <Badge 
+                      key={index} 
+                      variant={getBadgeVariant(alert.type)}
+                      className="flex items-center space-x-1"
+                    >
+                      {alert.icon}
+                      <span>{alert.text}</span>
+                    </Badge>
+                  ))}
+                </div>
+              </CardHeader>
+
+              <CardContent>
+                {/* Vías de administración */}
+                <h4 className="text-xl font-bold text-fyt-dark mb-4">Vías de Administración</h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+                  {searchResults.routes.map((route: any, index: number) => (
+                    <Card key={index} className="border border-card-border bg-background/50">
+                      <CardHeader className="pb-3">
+                        <div className="flex items-center space-x-2">
+                          <span className="text-2xl">{route.icon}</span>
+                          <CardTitle className="text-lg text-fyt-dark">
+                            {route.name}
+                          </CardTitle>
+                        </div>
+                      </CardHeader>
+                      <CardContent className="pt-0">
+                        <div className="space-y-2 mb-3">
+                          {route.doses.map((dose: string, doseIndex: number) => (
+                            <div key={doseIndex} className="flex items-center space-x-2">
+                              <ChevronRight className="h-4 w-4 text-fyt-blue" />
+                              <span className="text-sm font-medium">{dose}</span>
+                            </div>
+                          ))}
+                        </div>
+                        {route.notes && (
+                          <div className="bg-fyt-light/10 border border-fyt-blue/20 rounded-md p-3">
+                            <p className="text-xs text-muted-foreground">
+                              <Info className="h-3 w-3 inline mr-1" />
+                              {route.notes}
+                            </p>
+                          </div>
+                        )}
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+
+                {/* Precauciones adicionales */}
+                {searchResults.precautions && (
+                  <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-4">
+                    <h5 className="font-bold text-destructive mb-2 flex items-center">
+                      <AlertTriangle className="h-4 w-4 mr-2" />
+                      Precauciones Importantes
+                    </h5>
+                    <p className="text-sm text-muted-foreground">
+                      {searchResults.precautions}
+                    </p>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          )}
+
+          {/* Mensaje cuando no hay resultados */}
+          {searchTerm && searchResults === null && !isSearching && (
+            <Card className="border-card-border bg-card/50">
+              <CardContent className="p-8 text-center">
+                <Search className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+                <h4 className="text-lg font-medium text-fyt-dark mb-2">
+                  No se encontraron resultados
+                </h4>
+                <p className="text-muted-foreground">
+                  No se encontró información para "{searchTerm}". Intenta con otro medicamento como "morfina" o "paracetamol".
+                </p>
+              </CardContent>
+            </Card>
+          )}
+        </div>
+
+        {/* Herramientas Avanzadas */}
         <div>
           <div className="flex items-center space-x-3 mb-8">
             <div className="p-2 rounded-lg bg-gradient-accent shadow-soft">
