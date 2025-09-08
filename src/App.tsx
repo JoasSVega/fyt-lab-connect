@@ -9,6 +9,7 @@ import DosageCalculator from "./components/DosageCalculator";
 import GFRCalculator from "./components/GFRCalculator";
 import BMICalculator from "./components/BMICalculator";
 import BSACalculator from "./components/BSACalculator";
+import Sidebar from "./components/Sidebar";
 
 const queryClient = new QueryClient();
 
@@ -18,51 +19,66 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          {/* Página principal */}
-          <Route path="/" element={<Index />} />
-
-          {/* Calculadoras */}
-          <Route
-            path="/calculator/dosage"
-            element={
-              <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
-                <h1 className="text-3xl font-bold mb-6">FyT Lab Connect</h1>
-                <DosageCalculator />
-              </div>
-            }
-          />
-          <Route
-            path="/calculator/gfr"
-            element={
-              <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
-                <h1 className="text-3xl font-bold mb-6">FyT Lab Connect</h1>
-                <GFRCalculator />
-              </div>
-            }
-          />
-          <Route
-            path="/calculator/bmi"
-            element={
-              <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
-                <h1 className="text-3xl font-bold mb-6">FyT Lab Connect</h1>
-                <BMICalculator />
-              </div>
-            }
-          />
-          <Route
-            path="/calculator/bsa"
-            element={
-              <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
-                <h1 className="text-3xl font-bold mb-6">FyT Lab Connect</h1>
-                <BSACalculator />
-              </div>
-            }
-          />
-
-          {/* Página no encontrada */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <div className="flex">
+          <Sidebar />
+          <main className="flex-1 bg-gray-50 p-6 ml-0 md:ml-64 min-h-screen">
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <div className="flex flex-col items-center justify-center min-h-screen p-8">
+                    <h1 className="text-3xl font-bold mb-6">Página principal</h1>
+                    <Index />
+                  </div>
+                }
+              />
+              <Route
+                path="/calculator/dosage"
+                element={
+                  <div className="flex flex-col items-center justify-center min-h-screen p-8">
+                    <h1 className="text-3xl font-bold mb-6">Calculadora de Dosificación</h1>
+                    <DosageCalculator />
+                  </div>
+                }
+              />
+              <Route
+                path="/calculator/gfr"
+                element={
+                  <div className="flex flex-col items-center justify-center min-h-screen p-8">
+                    <h1 className="text-3xl font-bold mb-6">Calculadora de TFG</h1>
+                    <GFRCalculator />
+                  </div>
+                }
+              />
+              <Route
+                path="/calculator/bmi"
+                element={
+                  <div className="flex flex-col items-center justify-center min-h-screen p-8">
+                    <h1 className="text-3xl font-bold mb-6">Calculadora de IMC</h1>
+                    <BMICalculator />
+                  </div>
+                }
+              />
+              <Route
+                path="/calculator/bsa"
+                element={
+                  <div className="flex flex-col items-center justify-center min-h-screen p-8">
+                    <h1 className="text-3xl font-bold mb-6">Calculadora de Superficie Corporal</h1>
+                    <BSACalculator />
+                  </div>
+                }
+              />
+              <Route
+                path="*"
+                element={
+                  <div className="flex flex-col items-center justify-center min-h-screen p-8">
+                    <NotFound />
+                  </div>
+                }
+              />
+            </Routes>
+          </main>
+        </div>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
