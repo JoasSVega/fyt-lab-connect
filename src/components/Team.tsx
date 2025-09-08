@@ -1,15 +1,18 @@
+import React, { useState } from "react";
 import { ExternalLink, Mail, GraduationCap } from "lucide-react";
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
+import ImageUpload from "./ui/image-upload";
 
 const Team = () => {
+  const [memberImages, setMemberImages] = useState<{[key: number]: string}>({});
   const teamMembers = [
     {
       name: "Antistio Alviz Amador",
       role: "Director del grupo",
       specialty: "QF, M.Sc. Farmacología, PhD en Ciencias Biomédicas",
       description: "Docente y Director del programa de Química Farmacéutica, líder del grupo de investigación FyT.",
-      image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=400&fit=crop&crop=face",
+      
       links: {
         orcid: "0000-0000-0000-0000",
         scholar: "scholar-profile",
@@ -21,7 +24,7 @@ const Team = () => {
       role: "Coordinadora del Semillero FyT",
       specialty: "QF, Esp. en Administración Educativa",
       description: "Docente de planta y coordinadora del semillero de investigación FyT.",
-      image: "https://images.unsplash.com/photo-1594824502624-c60a444e862f?w=400&h=400&fit=crop&crop=face",
+      
       links: {
         orcid: "0000-0000-0000-0001",
         scholar: "scholar-profile-2",
@@ -33,7 +36,7 @@ const Team = () => {
       role: "Jefe del departamento académico",
       specialty: "QF, M.Sc. Farmacia Clínica Universitaria",
       description: "Jefe del departamento académico con especialización en farmacia clínica.",
-      image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop&crop=face",
+      
       links: {
         orcid: "0000-0000-0000-0002",
         scholar: "scholar-profile-3",
@@ -45,7 +48,7 @@ const Team = () => {
       role: "Docente de planta",
       specialty: "QF, M.Sc. Farmacología",
       description: "Docente de planta especializado en farmacología.",
-      image: "https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?w=400&h=400&fit=crop&crop=face",
+      
       links: {
         orcid: "0000-0000-0000-0003",
         scholar: "scholar-profile-4",
@@ -57,7 +60,7 @@ const Team = () => {
       role: "Docente de planta, subgerente HUC",
       specialty: "QF, M.Sc. Farmacología",
       description: "Docente de planta y subgerente del Hospital Universitario del Caribe.",
-      image: "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=400&h=400&fit=crop&crop=face",
+      
       links: {
         orcid: "0000-0000-0000-0004",
         scholar: "scholar-profile-5",
@@ -69,7 +72,7 @@ const Team = () => {
       role: "Docente de cátedra",
       specialty: "QF, M.Sc. Farmacología",
       description: "Docente de cátedra especializado en farmacología.",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
+      
       links: {
         orcid: "0000-0000-0000-0005",
         scholar: "scholar-profile-6",
@@ -81,7 +84,7 @@ const Team = () => {
       role: "Químico Farmacéutico asistencial",
       specialty: "QF, M.Sc. Farmacología, PhD(c) Ciencias Biomédicas",
       description: "Químico Farmacéutico asistencial, candidato a PhD en Ciencias Biomédicas.",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
+      
       links: {
         orcid: "0000-0000-0000-0006",
         scholar: "scholar-profile-7",
@@ -93,7 +96,7 @@ const Team = () => {
       role: "Estudiante Coordinadora (VII semestre)",
       specialty: "Estudiante de Química Farmacéutica",
       description: "Estudiante coordinadora del semillero FyT, cursando séptimo semestre.",
-      image: "https://images.unsplash.com/photo-1494790108755-2616c96ad731?w=400&h=400&fit=crop&crop=face",
+      
       links: {
         orcid: "0000-0000-0000-0007",
         scholar: "scholar-profile-8",
@@ -101,6 +104,10 @@ const Team = () => {
       }
     }
   ];
+
+  const handleImageUpload = (index: number, imageUrl: string) => {
+    setMemberImages(prev => ({ ...prev, [index]: imageUrl }));
+  };
 
   return (
     <section id="equipo" className="py-20 bg-background">
@@ -121,13 +128,25 @@ const Team = () => {
           {teamMembers.map((member, index) => (
             <Card key={index} className="overflow-hidden bg-gradient-card shadow-soft hover:shadow-medium transition-all duration-300 group">
               {/* Image */}
-              <div className="relative overflow-hidden">
-                <img 
-                  src={member.image} 
-                  alt={member.name}
-                  className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-fyt-dark/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="relative overflow-hidden h-64">
+                {memberImages[index] ? (
+                  <>
+                    <img 
+                      src={memberImages[index]} 
+                      alt={member.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-fyt-dark/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </>
+                ) : (
+                  <ImageUpload
+                    onImageUpload={(imageUrl) => handleImageUpload(index, imageUrl)}
+                    currentImage={memberImages[index] || ''}
+                    placeholder={`Foto de ${member.name}`}
+                    aspectRatio="square"
+                    className="h-full"
+                  />
+                )}
               </div>
 
               {/* Content */}

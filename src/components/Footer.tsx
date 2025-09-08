@@ -1,7 +1,10 @@
+import React, { useState } from "react";
 import { Mail, Phone, MapPin, ExternalLink } from "lucide-react";
 import { Button } from "./ui/button";
+import ImageUpload from "./ui/image-upload";
 
 const Footer = () => {
+  const [logoImage, setLogoImage] = useState<string>('');
   const quickLinks = [
     { name: "Inicio", href: "#inicio" },
     { name: "Sobre nosotros", href: "#sobre" },
@@ -33,32 +36,57 @@ const Footer = () => {
           {/* Logo and Description */}
           <div className="lg:col-span-2">
             <div className="flex items-center space-x-3 mb-6">
-              <div className="w-12 h-12 bg-gradient-hero rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-lg">FYT</span>
+              <div className="flex-shrink-0">
+                {logoImage ? (
+                  <img 
+                    src={logoImage} 
+                    alt="Logo FYT"
+                    className="w-12 h-12 object-contain rounded-full"
+                  />
+                ) : (
+                  <div className="w-12 h-12 bg-gradient-hero rounded-full flex items-center justify-center">
+                    <span className="text-white font-bold text-lg">FYT</span>
+                  </div>
+                )}
               </div>
               <div>
-                <h3 className="text-xl font-bold">Semillero FYT</h3>
+                <h3 className="text-xl font-bold">Grupo FyT</h3>
                 <p className="text-white/70 text-sm">Farmacología y Terapéutica</p>
               </div>
             </div>
+            
+            {/* Logo Upload */}
+            <div className="mb-6 max-w-xs">
+              <ImageUpload
+                onImageUpload={setLogoImage}
+                currentImage={logoImage}
+                aspectRatio="square"
+                placeholder="Subir logo oficial"
+                className="mb-2"
+              />
+              <p className="text-white/60 text-xs">
+                Sube el logo oficial del grupo de investigación
+              </p>
+            </div>
+            
             <p className="text-white/80 leading-relaxed mb-6 max-w-md">
-              Promoviendo la excelencia en la investigación farmacológica y terapéutica 
-              a través de la innovación científica y el compromiso académico.
+              Desarrollando investigaciones en Farmacología, Terapéutica, Farmacia Asistencial, 
+              Farmacovigilancia, Farmacoepidemiología, Farmacoeconomía y estudios in sílico.
             </p>
             
             {/* Contact Info */}
             <div className="space-y-3">
               <div className="flex items-center space-x-3 text-sm text-white/70">
                 <Mail className="h-4 w-4 text-fyt-blue" />
-                <span>semillero.fyt@universidad.edu.co</span>
+                <span>aalviza@unicartagena.edu.co</span>
               </div>
               <div className="flex items-center space-x-3 text-sm text-white/70">
                 <Phone className="h-4 w-4 text-fyt-blue" />
-                <span>+57 (1) 234-5678</span>
+                <span>Universidad de Cartagena</span>
               </div>
               <div className="flex items-center space-x-3 text-sm text-white/70">
                 <MapPin className="h-4 w-4 text-fyt-blue" />
-                <span>Universidad Nacional, Bogotá, Colombia</span>
+                <span>Cartagena, Colombia</span>
               </div>
             </div>
           </div>
@@ -170,7 +198,7 @@ const Footer = () => {
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-sm text-white/60">
             <p>
-              © 2024 Semillero de Investigación FYT. Todos los derechos reservados.
+              © 2024 Grupo de Investigación FyT. Todos los derechos reservados.
             </p>
             <div className="flex space-x-6">
               <button className="hover:text-white transition-colors">

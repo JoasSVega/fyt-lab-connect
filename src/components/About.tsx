@@ -1,8 +1,10 @@
+import React, { useState } from "react";
 import { Target, Eye, Microscope, Heart, Users, BookOpen } from "lucide-react";
 import { Card } from "./ui/card";
-import researchImage from "@/assets/research-team.jpg";
+import ImageUpload from "./ui/image-upload";
 
 const About = () => {
+  const [researchImage, setResearchImage] = useState<string>('');
   const values = [
     {
       icon: Microscope,
@@ -54,12 +56,25 @@ const About = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
           {/* Image */}
           <div className="relative">
-            <img 
-              src={researchImage} 
-              alt="Equipo de investigación FYT"
-              className="rounded-xl shadow-large w-full h-[400px] object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-fyt-dark/20 to-transparent rounded-xl"></div>
+            {researchImage ? (
+              <>
+                <img 
+                  src={researchImage} 
+                  alt="Equipo de investigación FYT"
+                  className="rounded-xl shadow-large w-full h-[400px] object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-fyt-dark/20 to-transparent rounded-xl"></div>
+              </>
+            ) : (
+              <div className="h-[400px]">
+                <ImageUpload
+                  onImageUpload={setResearchImage}
+                  currentImage={researchImage}
+                  placeholder="Subir foto del equipo de investigación"
+                  className="h-full"
+                />
+              </div>
+            )}
           </div>
 
           {/* Content */}

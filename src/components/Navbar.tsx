@@ -1,9 +1,11 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "./ui/button";
+import ImageUpload from "./ui/image-upload";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [logoImage, setLogoImage] = useState<string>('');
 
   const navigation = [
     { name: "Inicio", href: "#inicio" },
@@ -27,11 +29,33 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-hero rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-sm">FYT</span>
+            <div className="flex-shrink-0 relative group">
+              {logoImage ? (
+                <img 
+                  src={logoImage} 
+                  alt="Logo FYT"
+                  className="w-10 h-10 object-contain rounded-full"
+                />
+              ) : (
+                <div className="w-10 h-10 bg-gradient-hero rounded-full flex items-center justify-center">
+                  <span className="text-white font-bold text-sm">FYT</span>
+                </div>
+              )}
+              
+              {/* Mini upload overlay on hover */}
+              <div className="absolute inset-0 bg-fyt-dark/80 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center">
+                <div className="w-6 h-6">
+                  <ImageUpload
+                    onImageUpload={setLogoImage}
+                    currentImage={logoImage}
+                    placeholder=""
+                    className="w-full h-full"
+                  />
+                </div>
+              </div>
             </div>
             <div className="text-lg font-bold text-fyt-dark">
-              Semillero FYT
+              Grupo FyT
               <span className="block text-xs text-muted-foreground font-normal">
                 Farmacología y Terapéutica
               </span>
