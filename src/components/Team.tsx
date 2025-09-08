@@ -5,75 +5,99 @@ import { Button } from "./ui/button";
 const Team = () => {
   const teamMembers = [
     {
-      name: "Dr. María Fernández García",
-      role: "Directora del Semillero",
-      specialty: "Químico Farmacéutico Clínico",
-      description: "Especialista en farmacología clínica con más de 15 años de experiencia en investigación.",
-      image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop&crop=face",
+      name: "Antistio Alviz Amador",
+      role: "Director del grupo",
+      specialty: "QF, M.Sc. Farmacología, PhD en Ciencias Biomédicas",
+      description: "Docente y Director del programa de Química Farmacéutica, líder del grupo de investigación FyT.",
+      image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=400&fit=crop&crop=face",
       links: {
         orcid: "0000-0000-0000-0000",
         scholar: "scholar-profile",
-        email: "maria.fernandez@universidad.edu.co"
+        email: "aalviza@unicartagena.edu.co"
       }
     },
     {
-      name: "Dr. Carlos Rodríguez López",
-      role: "Codirector",
-      specialty: "Farmacéutico Hospitalario",
-      description: "Experto en farmacoterapia y seguridad de medicamentos en el ámbito hospitalario.",
-      image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=400&fit=crop&crop=face",
+      name: "Yaneth García Milano",
+      role: "Coordinadora del Semillero FyT",
+      specialty: "QF, Esp. en Administración Educativa",
+      description: "Docente de planta y coordinadora del semillero de investigación FyT.",
+      image: "https://images.unsplash.com/photo-1594824502624-c60a444e862f?w=400&h=400&fit=crop&crop=face",
       links: {
         orcid: "0000-0000-0000-0001",
         scholar: "scholar-profile-2",
-        email: "carlos.rodriguez@universidad.edu.co"
+        email: "ygarciam1@unicartagena.edu.co"
       }
     },
     {
-      name: "Dra. Ana Sofía Martínez",
-      role: "Investigadora Principal",
-      specialty: "Farmacóloga Clínica",
-      description: "Especialista en farmacogenómica y medicina personalizada.",
-      image: "https://images.unsplash.com/photo-1594824502624-c60a444e862f?w=400&h=400&fit=crop&crop=face",
+      name: "Shirley Cavadia Puello",
+      role: "Jefe del departamento académico",
+      specialty: "QF, M.Sc. Farmacia Clínica Universitaria",
+      description: "Jefe del departamento académico con especialización en farmacia clínica.",
+      image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop&crop=face",
       links: {
         orcid: "0000-0000-0000-0002",
         scholar: "scholar-profile-3",
-        email: "ana.martinez@universidad.edu.co"
+        email: "scavadiap@unicartagena.edu.co"
       }
     },
     {
-      name: "Dr. Jorge Luis Herrera",
-      role: "Investigador Asociado",
-      specialty: "Químico Farmacéutico Asistencial",
-      description: "Especialista en atención farmacéutica y seguimiento farmacoterapéutico.",
+      name: "Julian Martinez",
+      role: "Docente de planta",
+      specialty: "QF, M.Sc. Farmacología",
+      description: "Docente de planta especializado en farmacología.",
       image: "https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?w=400&h=400&fit=crop&crop=face",
       links: {
         orcid: "0000-0000-0000-0003",
         scholar: "scholar-profile-4",
-        email: "jorge.herrera@universidad.edu.co"
+        email: "jmartinezz@unicartagena.edu.co"
       }
     },
     {
-      name: "Dra. Laura Patricia Vega",
-      role: "Investigadora Junior",
-      specialty: "Química Farmacéutica",
-      description: "Especialista en desarrollo de formulaciones y tecnología farmacéutica.",
+      name: "Roger Caraballo",
+      role: "Docente de planta, subgerente HUC",
+      specialty: "QF, M.Sc. Farmacología",
+      description: "Docente de planta y subgerente del Hospital Universitario del Caribe.",
       image: "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=400&h=400&fit=crop&crop=face",
       links: {
         orcid: "0000-0000-0000-0004",
         scholar: "scholar-profile-5",
-        email: "laura.vega@universidad.edu.co"
+        email: "rcaraballom@unicartagena.edu.co"
       }
     },
     {
-      name: "Mg. Diego Alejandro Castro",
-      role: "Estudiante de Doctorado",
-      specialty: "Farmacología Experimental",
-      description: "Investigador en formación especializado en modelos preclínicos.",
+      name: "Luis Utria",
+      role: "Docente de cátedra",
+      specialty: "QF, M.Sc. Farmacología",
+      description: "Docente de cátedra especializado en farmacología.",
       image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
       links: {
         orcid: "0000-0000-0000-0005",
         scholar: "scholar-profile-6",
-        email: "diego.castro@universidad.edu.co"
+        email: "lutriaa@unicartagena.edu.co"
+      }
+    },
+    {
+      name: "Sergio Uribe",
+      role: "Químico Farmacéutico asistencial",
+      specialty: "QF, M.Sc. Farmacología, PhD(c) Ciencias Biomédicas",
+      description: "Químico Farmacéutico asistencial, candidato a PhD en Ciencias Biomédicas.",
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
+      links: {
+        orcid: "0000-0000-0000-0006",
+        scholar: "scholar-profile-7",
+        email: "suribem@unicartagena.edu.co"
+      }
+    },
+    {
+      name: "Mariana Mercado Imitola",
+      role: "Estudiante Coordinadora (VII semestre)",
+      specialty: "Estudiante de Química Farmacéutica",
+      description: "Estudiante coordinadora del semillero FyT, cursando séptimo semestre.",
+      image: "https://images.unsplash.com/photo-1494790108755-2616c96ad731?w=400&h=400&fit=crop&crop=face",
+      links: {
+        orcid: "0000-0000-0000-0007",
+        scholar: "scholar-profile-8",
+        email: "mmercadoi1@unicartagena.edu.co"
       }
     }
   ];

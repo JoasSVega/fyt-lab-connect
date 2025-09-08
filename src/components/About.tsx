@@ -27,12 +27,12 @@ const About = () => {
   ];
 
   const researchLines = [
-    "Farmacología Clínica y Translacional",
-    "Desarrollo de Nuevas Terapias",
-    "Farmacovigilancia y Seguridad de Medicamentos",
-    "Medicina Personalizada y Farmacogenómica",
-    "Investigación en Enfermedades Crónicas",
-    "Evaluación de Tecnologías Sanitarias"
+    "Farmacología y Terapéutica",
+    "Farmacovigilancia",
+    "Farmacia Asistencial y Atención Farmacéutica",
+    "Farmacoepidemiología",
+    "Farmacoeconomía",
+    "Estudios in sílico y modelización molecular para el diseño de nuevos fármacos"
   ];
 
   return (
@@ -44,8 +44,9 @@ const About = () => {
             Sobre Nosotros
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            El Semillero de Investigación FYT es un grupo académico comprometido con la excelencia 
-            en la investigación farmacológica y terapéutica.
+            El Grupo de Investigación en Farmacología y Terapéutica (FyT) desarrolla investigaciones 
+            en Farmacología, Terapéutica, Farmacia Asistencial, Farmacovigilancia, Farmacoepidemiología, 
+            Farmacoeconomía, estudios in sílico y modelización molecular para el diseño de nuevos fármacos.
           </p>
         </div>
 
@@ -65,12 +66,13 @@ const About = () => {
           <div className="space-y-8">
             {/* History */}
             <div>
-              <h3 className="text-2xl font-semibold text-fyt-dark mb-4">Nuestra Historia</h3>
+              <h3 className="text-2xl font-semibold text-fyt-dark mb-4">Nuestro Objetivo</h3>
               <p className="text-muted-foreground leading-relaxed">
-                Fundado con el propósito de fomentar la investigación de calidad en el área de 
-                farmacología y terapéutica, nuestro semillero ha crecido hasta convertirse en 
-                un referente académico en el desarrollo de conocimiento científico aplicado a 
-                la mejora de la salud humana.
+                El objetivo principal del grupo es desarrollar investigaciones en Farmacología, Terapéutica, 
+                Farmacia Asistencial, Farmacovigilancia, Farmacoepidemiología, Farmacoeconomía, estudios in 
+                sílico y modelización molecular para el diseño de nuevos fármacos. Busca que los estudiantes 
+                adquieran competencias investigativas a través de proyectos, estudios temáticos y el intercambio 
+                académico entre miembros del grupo.
               </p>
             </div>
 
@@ -80,8 +82,9 @@ const About = () => {
                 <Target className="h-8 w-8 text-fyt-blue mb-3" />
                 <h4 className="text-lg font-semibold text-fyt-dark mb-2">Misión</h4>
                 <p className="text-sm text-muted-foreground">
-                  Generar conocimiento científico de alta calidad en farmacología y terapéutica, 
-                  formando investigadores comprometidos con el avance de las ciencias de la salud.
+                  Desarrollar trabajos de investigación en Farmacología, Terapéutica, Farmacia Asistencial, 
+                  Farmacovigilancia, Farmacoepidemiología, Farmacoeconomía y estudios in sílico/modelización 
+                  molecular, para apoyar programas de pregrado y postgrado.
                 </p>
               </Card>
 
@@ -89,8 +92,10 @@ const About = () => {
                 <Eye className="h-8 w-8 text-fyt-purple mb-3" />
                 <h4 className="text-lg font-semibold text-fyt-dark mb-2">Visión</h4>
                 <p className="text-sm text-muted-foreground">
-                  Ser reconocidos como un grupo líder en investigación farmacológica, 
-                  contribuyendo al desarrollo de terapias innovadoras y seguras.
+                  Posicionarse entre los mejores grupos de investigación en Farmacología y Terapéutica 
+                  a nivel nacional en 2030 e internacional en 2035, desarrollando trabajos de alto nivel 
+                  científico que respondan a necesidades locales, nacionales e internacionales, y formando 
+                  nuevos investigadores.
                 </p>
               </Card>
             </div>
@@ -119,7 +124,7 @@ const About = () => {
         </div>
 
         {/* Research Lines */}
-        <div>
+        <div className="mb-16">
           <h3 className="text-2xl font-semibold text-center text-fyt-dark mb-8">
             Líneas de Investigación
           </h3>
@@ -129,6 +134,52 @@ const About = () => {
                 <div className="flex items-center space-x-3">
                   <div className="w-2 h-2 bg-gradient-hero rounded-full"></div>
                   <p className="text-sm font-medium text-fyt-dark">{line}</p>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        {/* Graduation Modalities */}
+        <div className="mb-16">
+          <h3 className="text-2xl font-semibold text-center text-fyt-dark mb-8">
+            Modalidades de Grado
+          </h3>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
+            {[
+              "Proyecto de investigación",
+              "Monografías",
+              "Pasantías",
+              "Asignaturas de postgrado",
+              "Diplomados",
+              "Publicación de artículo científico o capítulo de libro"
+            ].map((modality, index) => (
+              <Card key={index} className="p-4 bg-gradient-card shadow-soft hover:shadow-medium transition-shadow">
+                <div className="flex items-center space-x-3">
+                  <div className="w-2 h-2 bg-gradient-hero rounded-full"></div>
+                  <p className="text-sm font-medium text-fyt-dark">{modality}</p>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        {/* Activities and Products */}
+        <div>
+          <h3 className="text-2xl font-semibold text-center text-fyt-dark mb-8">
+            Actividades y Productos
+          </h3>
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {[
+              "Participación de semilleristas y tesistas en proyectos y productos del grupo",
+              "Ponencias y posters",
+              "Comunidad de aprendizaje entre estudiantes y docentes",
+              "Cursos y actividades académicas"
+            ].map((activity, index) => (
+              <Card key={index} className="p-6 bg-gradient-card shadow-soft hover:shadow-medium transition-shadow">
+                <div className="flex items-center space-x-3">
+                  <div className="w-3 h-3 bg-gradient-hero rounded-full"></div>
+                  <p className="text-sm font-medium text-fyt-dark">{activity}</p>
                 </div>
               </Card>
             ))}
