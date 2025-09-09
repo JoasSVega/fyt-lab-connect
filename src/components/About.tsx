@@ -143,12 +143,12 @@ const About = () => {
           <h3 className="text-2xl font-semibold text-center text-fyt-dark mb-8">
             Líneas de Investigación
           </h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {researchLines.map((line, index) => (
-              <Card key={index} className="p-4 bg-gradient-card shadow-soft hover:shadow-medium transition-shadow">
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-gradient-hero rounded-full"></div>
-                  <p className="text-sm font-medium text-fyt-dark">{line}</p>
+              <Card key={index} className="p-6 bg-gradient-card shadow-soft hover:shadow-medium transition-shadow min-h-[120px] flex items-center justify-center">
+                <div className="flex items-center space-x-3 text-center">
+                  <div className="w-3 h-3 bg-gradient-hero rounded-full flex-shrink-0"></div>
+                  <p className="text-sm font-medium text-fyt-dark leading-relaxed">{line}</p>
                 </div>
               </Card>
             ))}
@@ -160,7 +160,7 @@ const About = () => {
           <h3 className="text-2xl font-semibold text-center text-fyt-dark mb-8">
             Modalidades de Grado
           </h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {[
               "Proyecto de investigación",
               "Monografías",
@@ -169,10 +169,10 @@ const About = () => {
               "Diplomados",
               "Publicación de artículo científico o capítulo de libro"
             ].map((modality, index) => (
-              <Card key={index} className="p-4 bg-gradient-card shadow-soft hover:shadow-medium transition-shadow">
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-gradient-hero rounded-full"></div>
-                  <p className="text-sm font-medium text-fyt-dark">{modality}</p>
+              <Card key={index} className="p-6 bg-gradient-card shadow-soft hover:shadow-medium transition-shadow min-h-[120px] flex items-center justify-center">
+                <div className="flex items-center space-x-3 text-center">
+                  <div className="w-3 h-3 bg-gradient-hero rounded-full flex-shrink-0"></div>
+                  <p className="text-sm font-medium text-fyt-dark leading-relaxed">{modality}</p>
                 </div>
               </Card>
             ))}
@@ -184,17 +184,17 @@ const About = () => {
           <h3 className="text-2xl font-semibold text-center text-fyt-dark mb-8">
             Actividades y Productos
           </h3>
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
             {[
               "Participación de semilleristas y tesistas en proyectos y productos del grupo",
               "Ponencias y posters",
               "Comunidad de aprendizaje entre estudiantes y docentes",
               "Cursos y actividades académicas"
             ].map((activity, index) => (
-              <Card key={index} className="p-6 bg-gradient-card shadow-soft hover:shadow-medium transition-shadow">
-                <div className="flex items-center space-x-3">
-                  <div className="w-3 h-3 bg-gradient-hero rounded-full"></div>
-                  <p className="text-sm font-medium text-fyt-dark">{activity}</p>
+              <Card key={index} className="p-6 bg-gradient-card shadow-soft hover:shadow-medium transition-shadow min-h-[120px] flex items-center justify-center">
+                <div className="flex items-center space-x-3 text-center">
+                  <div className="w-3 h-3 bg-gradient-hero rounded-full flex-shrink-0"></div>
+                  <p className="text-sm font-medium text-fyt-dark leading-relaxed">{activity}</p>
                 </div>
               </Card>
             ))}
