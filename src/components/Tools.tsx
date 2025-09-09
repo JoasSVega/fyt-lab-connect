@@ -102,46 +102,60 @@ const Tools = () => {
     }
   };
 
-  // Calculadoras clínicas disponibles
-  const clinicalCalculators = [
+  // Calculadoras de Función Renal
+  const renalCalculators = [
     {
       title: "Tasa de Filtrado Glomerular (TFG)",
       description: "Cálculo de TFG usando fórmulas CKD-EPI, MDRD y Cockcroft-Gault",
       icon: <Calculator className="h-6 w-6 text-fyt-blue" />,
-      comingSoon: false
-    },
-    {
-      title: "Ajuste de Dosis por Función Renal",
-      description: "Ajusta dosificación según función renal del paciente",
-      icon: <Pill className="h-6 w-6 text-fyt-red" />,
-      comingSoon: false
-    },
-    {
-      title: "Conversión de Dosis",
-      description: "Equivalencias entre diferentes vías de administración (ej. morfina oral vs IV)",
-      icon: <FlaskConical className="h-6 w-6 text-fyt-purple" />,
-      comingSoon: false
-    },
-    {
-      title: "IMC y Fórmulas Antropométricas",
-      description: "Índice de masa corporal y otras medidas antropométricas útiles",
-      icon: <Stethoscope className="h-6 w-6 text-fyt-blue" />,
+      href: "/calculator/gfr",
       comingSoon: false
     }
   ];
 
-  // Herramientas de interacciones y comparaciones
-  const drugTools = [
+  // Calculadoras Antropométricas
+  const anthropometricCalculators = [
     {
-      title: "Verificador de Interacciones",
-      description: "Identifica interacciones medicamentosas potenciales entre fármacos",
+      title: "Calculadora de IMC",
+      description: "Índice de masa corporal y clasificación según estándares internacionales",
+      icon: <Stethoscope className="h-6 w-6 text-fyt-blue" />,
+      href: "/calculator/bmi",
+      comingSoon: false
+    },
+    {
+      title: "Superficie Corporal (BSA)",
+      description: "Cálculo de superficie corporal usando fórmulas de Dubois y Mosteller",
+      icon: <Calculator className="h-6 w-6 text-fyt-purple" />,
+      href: "/calculator/bsa",
+      comingSoon: false
+    }
+  ];
+
+  // Otras calculadoras clínicas
+  const otherCalculators = [
+    {
+      title: "Calculadora de Dosificación",
+      description: "Cálculo de dosis farmacológicas personalizadas según parámetros del paciente",
+      icon: <Pill className="h-6 w-6 text-fyt-red" />,
+      href: "/calculator/dosage",
+      comingSoon: false
+    }
+  ];
+
+  // Herramientas de análisis farmacológico
+  const analysisTools = [
+    {
+      title: "Consultor Farmacológico",
+      description: "Sistema inteligente de consulta para información farmacológica",
       icon: <Search className="h-6 w-6 text-fyt-red" />,
+      href: "/consultor",
       comingSoon: true
     },
     {
-      title: "Comparador de Medicamentos",
+      title: "Comparador de Fármacos",
       description: "Compara eficacia, precio y efectos adversos entre medicamentos",
       icon: <Database className="h-6 w-6 text-fyt-purple" />,
+      href: "/comparador",
       comingSoon: true
     }
   ];
@@ -184,16 +198,21 @@ const Tools = () => {
           {tool.description}
         </CardDescription>
         <div className="mt-4">
-          <button 
-            className={`w-full px-4 py-2 rounded-md font-medium transition-all duration-200 ${
-              tool.comingSoon 
-                ? 'bg-muted text-muted-foreground cursor-not-allowed' 
-                : 'bg-gradient-hero text-white hover:bg-primary/90 hover:shadow-soft'
-            }`}
-            disabled={tool.comingSoon}
-          >
-            {tool.comingSoon ? 'En desarrollo' : 'Acceder'}
-          </button>
+          {tool.comingSoon ? (
+            <button 
+              className="w-full px-4 py-2 rounded-md font-medium bg-muted text-muted-foreground cursor-not-allowed"
+              disabled
+            >
+              En desarrollo
+            </button>
+          ) : (
+            <a 
+              href={tool.href}
+              className="block w-full px-4 py-2 rounded-md font-medium transition-all duration-200 bg-gradient-hero text-white hover:bg-primary/90 hover:shadow-soft text-center"
+            >
+              Acceder
+            </a>
+          )}
         </div>
       </CardContent>
     </Card>
@@ -214,19 +233,53 @@ const Tools = () => {
           </p>
         </div>
 
-        {/* Calculadoras Clínicas */}
+        {/* Calculadoras de Función Renal */}
         <div className="mb-16">
           <div className="flex items-center space-x-3 mb-8">
             <div className="p-2 rounded-lg bg-gradient-hero shadow-soft">
               <Calculator className="h-6 w-6 text-white" />
             </div>
             <h3 className="text-2xl font-bold text-fyt-dark">
-              Calculadoras Clínicas
+              Calculadora de Función Renal
             </h3>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {clinicalCalculators.map((tool, index) => (
-              <ToolCard key={index} tool={tool} category="calculators" />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {renalCalculators.map((tool, index) => (
+              <ToolCard key={index} tool={tool} category="renal" />
+            ))}
+          </div>
+        </div>
+
+        {/* Calculadoras Antropométricas */}
+        <div className="mb-16">
+          <div className="flex items-center space-x-3 mb-8">
+            <div className="p-2 rounded-lg bg-gradient-card shadow-soft">
+              <Stethoscope className="h-6 w-6 text-white" />
+            </div>
+            <h3 className="text-2xl font-bold text-fyt-dark">
+              Calculadoras Antropométricas
+            </h3>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {anthropometricCalculators.map((tool, index) => (
+              <ToolCard key={index} tool={tool} category="anthropometric" />
+            ))}
+          </div>
+        </div>
+
+        {/* Otras Calculadoras */}
+        <div className="mb-16">
+          <div className="flex items-center space-x-3 mb-8">
+            <div className="p-2 rounded-lg bg-gradient-accent shadow-soft">
+              <Pill className="h-6 w-6 text-white" />
+            </div>
+            <h3 className="text-2xl font-bold text-fyt-dark">
+              Otras Calculadoras
+            </h3>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {otherCalculators.map((tool, index) => (
+              <ToolCard key={index} tool={tool} category="other" />
             ))}
           </div>
         </div>
@@ -242,7 +295,7 @@ const Tools = () => {
             </h3>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {drugTools.map((tool, index) => (
+            {analysisTools.map((tool, index) => (
               <ToolCard key={index} tool={tool} category="analysis" />
             ))}
           </div>

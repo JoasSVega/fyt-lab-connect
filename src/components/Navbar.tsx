@@ -31,9 +31,9 @@ const Navbar = () => {
       href: "#",
       isDropdown: true,
       dropdownItems: [
+        { name: "Calculadora de Función Renal", href: "/calculator/gfr" },
+        { name: "Calculadoras Antropométricas", href: "/calculator/bmi" },
         { name: "Calculadora de Dosificación", href: "/calculator/dosage" },
-        { name: "Calculadora de TFG", href: "/calculator/gfr" },
-        { name: "Calculadora de IMC", href: "/calculator/bmi" },
         { name: "Calculadora de Superficie Corporal", href: "/calculator/bsa" },
         { name: "Consultor Farmacológico", href: "/consultor" },
         { name: "Comparador de Fármacos", href: "/comparador" }
@@ -117,7 +117,7 @@ const Navbar = () => {
           </div>
 
           {/* Menú principal centrado - Desktop */}
-          <div className="hidden md:flex items-center space-x-8 flex-1 justify-center">
+          <div className="hidden lg:flex items-center space-x-8 flex-1 justify-center">
             {menuItems.map((item) => (
               <div
                 key={item.name}
@@ -180,8 +180,8 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* Botón hamburguesa - Mobile */}
-          <div className="md:hidden">
+          {/* Botón hamburguesa - Mobile y Tablet */}
+          <div className="lg:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-gray-700 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 p-2"
@@ -192,9 +192,9 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Menú móvil */}
+        {/* Menú móvil y tablet */}
         {isMenuOpen && (
-          <div className="md:hidden border-t border-gray-200 py-4 bg-white">
+          <div className="lg:hidden border-t border-gray-200 py-4 bg-white">
             <div className="space-y-2">
               {menuItems.map((item) => (
                 <div key={item.name}>

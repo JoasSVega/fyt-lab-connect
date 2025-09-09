@@ -20,21 +20,21 @@ const Contact = () => {
   const contactInfo = [
     {
       icon: Mail,
-      title: "Correo Electrónico",
-      info: "semillero.fyt@universidad.edu.co",
+      title: "Correo Institucional",
+      info: "farmacologiayterapeutica.gi@gmail.com",
       description: "Respuesta en 24-48 horas"
     },
     {
       icon: Phone,
-      title: "Teléfono",
-      info: "+57 (1) 234-5678",
+      title: "Teléfono y WhatsApp",
+      info: "+57 313 7375217",
       description: "Lunes a Viernes, 8:00 AM - 5:00 PM"
     },
     {
       icon: MapPin,
       title: "Ubicación",
-      info: "Facultad de Ciencias de la Salud",
-      description: "Universidad Nacional, Bogotá, Colombia"
+      info: "Facultad de Ciencias Farmacéuticas",
+      description: "Universidad de Cartagena, Colombia"
     }
   ];
 
@@ -119,6 +119,19 @@ const Contact = () => {
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Information */}
           <div className="space-y-8">
+            {/* Información Institucional */}
+            <Card className="p-6 bg-gradient-hero text-white shadow-soft">
+              <h3 className="text-xl font-semibold mb-3">
+                Grupo de Investigación en Farmacología y Terapéutica
+              </h3>
+              <p className="text-white/90 mb-2">
+                Universidad de Cartagena
+              </p>
+              <p className="text-white/90">
+                Facultad de Ciencias Farmacéuticas
+              </p>
+            </Card>
+
             <div>
               <h3 className="text-2xl font-semibold text-fyt-dark mb-6">
                 Información de Contacto
