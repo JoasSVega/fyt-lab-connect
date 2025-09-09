@@ -9,7 +9,7 @@ import DosageCalculator from "./components/DosageCalculator";
 import GFRCalculator from "./components/GFRCalculator";
 import BMICalculator from "./components/BMICalculator";
 import BSACalculator from "./components/BSACalculator";
-import Sidebar from "./components/Sidebar";
+import Navbar from "./components/Navbar";
 
 const queryClient = new QueryClient();
 
@@ -19,9 +19,9 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <div className="flex">
-          <Sidebar />
-          <main className="flex-1 bg-gray-50 p-6 ml-0 md:ml-64 min-h-screen">
+        <div className="min-h-screen">
+          <Navbar />
+          <main className="pt-16 bg-gray-50 min-h-screen">
             <Routes>
               <Route
                 path="/"
@@ -65,6 +65,24 @@ const App = () => (
                   <div className="flex flex-col items-center justify-center min-h-screen p-8">
                     <h1 className="text-3xl font-bold mb-6">Calculadora de Superficie Corporal</h1>
                     <BSACalculator />
+                  </div>
+                }
+              />
+              <Route
+                path="/consultor"
+                element={
+                  <div className="flex flex-col items-center justify-center min-h-screen p-8">
+                    <h1 className="text-3xl font-bold mb-6">Consultor Farmacológico</h1>
+                    <p className="text-gray-600">Página en construcción...</p>
+                  </div>
+                }
+              />
+              <Route
+                path="/comparador"
+                element={
+                  <div className="flex flex-col items-center justify-center min-h-screen p-8">
+                    <h1 className="text-3xl font-bold mb-6">Comparador de Fármacos</h1>
+                    <p className="text-gray-600">Página en construcción...</p>
                   </div>
                 }
               />
