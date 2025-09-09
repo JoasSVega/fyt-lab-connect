@@ -13,25 +13,21 @@ import Navbar from "./components/Navbar";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <div className="min-h-screen">
+const App: React.FC = () => {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          {/* Barra superior fija */}
           <Navbar />
-          <main className="pt-16 bg-gray-50 min-h-screen">
+          {/* Contenido principal: darle padding-top para no quedar debajo del navbar */}
+          <main className="flex-1 bg-gray-50 p-6 pt-16 min-h-screen">
             <Routes>
-              <Route
-                path="/"
-                element={
-                  <div className="flex flex-col items-center justify-center min-h-screen p-8">
-                    <h1 className="text-3xl font-bold mb-6">Página principal</h1>
-                    <Index />
-                  </div>
-                }
-              />
+              {/* Página principal */}
+              <Route path="/" element={<Index />} />
+              {/* Calculadoras */}
               <Route
                 path="/calculator/dosage"
                 element={
@@ -68,38 +64,14 @@ const App = () => (
                   </div>
                 }
               />
-              <Route
-                path="/consultor"
-                element={
-                  <div className="flex flex-col items-center justify-center min-h-screen p-8">
-                    <h1 className="text-3xl font-bold mb-6">Consultor Farmacológico</h1>
-                    <p className="text-gray-600">Página en construcción...</p>
-                  </div>
-                }
-              />
-              <Route
-                path="/comparador"
-                element={
-                  <div className="flex flex-col items-center justify-center min-h-screen p-8">
-                    <h1 className="text-3xl font-bold mb-6">Comparador de Fármacos</h1>
-                    <p className="text-gray-600">Página en construcción...</p>
-                  </div>
-                }
-              />
-              <Route
-                path="*"
-                element={
-                  <div className="flex flex-col items-center justify-center min-h-screen p-8">
-                    <NotFound />
-                  </div>
-                }
-              />
+              {/* Página no encontrada */}
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
-        </div>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;
