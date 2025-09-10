@@ -125,8 +125,8 @@ const About = () => {
           </h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {researchLines.map((line, index) => (
-              <Card key={index} className="p-6 bg-gradient-card shadow-soft hover:shadow-medium transition-shadow min-h-[120px] flex items-center justify-center">
-                <div className="flex items-center space-x-3 text-center">
+              <Card key={index} className="p-6 bg-gradient-card shadow-soft hover:shadow-medium transition-shadow min-h-[120px] flex items-center justify-start">
+                <div className="flex items-center space-x-3">
                   <div className="w-3 h-3 bg-gradient-hero rounded-full flex-shrink-0"></div>
                   <p className="text-sm font-medium text-fyt-dark leading-relaxed">{line}</p>
                 </div>
@@ -149,8 +149,8 @@ const About = () => {
               "Diplomados",
               "Publicación de artículo científico o capítulo de libro"
             ].map((modality, index) => (
-              <Card key={index} className="p-6 bg-gradient-card shadow-soft hover:shadow-medium transition-shadow min-h-[120px] flex items-center justify-center">
-                <div className="flex items-center space-x-3 text-center">
+              <Card key={index} className="p-6 bg-gradient-card shadow-soft hover:shadow-medium transition-shadow min-h-[120px] flex items-center justify-start">
+                <div className="flex items-center space-x-3">
                   <div className="w-3 h-3 bg-gradient-hero rounded-full flex-shrink-0"></div>
                   <p className="text-sm font-medium text-fyt-dark leading-relaxed">{modality}</p>
                 </div>
@@ -171,8 +171,8 @@ const About = () => {
               "Comunidad de aprendizaje entre estudiantes y docentes",
               "Cursos y actividades académicas"
             ].map((activity, index) => (
-              <Card key={index} className="p-6 bg-gradient-card shadow-soft hover:shadow-medium transition-shadow min-h-[120px] flex items-center justify-center">
-                <div className="flex items-center space-x-3 text-center">
+              <Card key={index} className="p-6 bg-gradient-card shadow-soft hover:shadow-medium transition-shadow min-h-[120px] flex items-center justify-start">
+                <div className="flex items-center space-x-3">
                   <div className="w-3 h-3 bg-gradient-hero rounded-full flex-shrink-0"></div>
                   <p className="text-sm font-medium text-fyt-dark leading-relaxed">{activity}</p>
                 </div>
