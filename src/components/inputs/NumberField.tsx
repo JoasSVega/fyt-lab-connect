@@ -14,6 +14,7 @@ interface NumberFieldProps {
   error?: string;
   required?: boolean;
   disabled?: boolean;
+  name?: string;
 }
 
 const NumberField: React.FC<NumberFieldProps> = ({
@@ -30,6 +31,7 @@ const NumberField: React.FC<NumberFieldProps> = ({
   error,
   required,
   disabled,
+  name,
 }) => (
   <div className="mb-4">
     <label htmlFor={id} className="block font-medium mb-1">
@@ -38,6 +40,7 @@ const NumberField: React.FC<NumberFieldProps> = ({
     </label>
     <input
       id={id}
+  name={name}
       type="number"
       value={value}
       onChange={onChange}
@@ -47,12 +50,14 @@ const NumberField: React.FC<NumberFieldProps> = ({
       step={step}
       required={required}
       disabled={disabled}
+      aria-invalid={!!error}
+      aria-describedby={error ? `${id}-error` : undefined}
       className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 ${
         error ? "border-red-500" : "border-gray-300"
       }`}
     />
     {help && !error && <div className="text-xs text-gray-500 mt-1">{help}</div>}
-    {error && <div className="text-xs text-red-600 mt-1">{error}</div>}
+    {error && <div id={`${id}-error`} className="text-xs text-red-600 mt-1">{error}</div>}
   </div>
 );
 

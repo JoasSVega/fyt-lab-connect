@@ -1,3 +1,5 @@
+import AnthropometricCalculatorsPage from "./pages/AnthropometricCalculatorsPage";
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -10,6 +12,8 @@ import GFRCalculator from "./components/GFRCalculator";
 import BMICalculator from "./components/BMICalculator";
 import BSACalculator from "./components/BSACalculator";
 import Navbar from "./components/Navbar";
+import RenalFunctionPage from "./pages/RenalFunctionPage";
+import { pathRenal } from "./pages/RenalFunctionPage";
 
 const queryClient = new QueryClient();
 
@@ -64,6 +68,10 @@ const App: React.FC = () => {
                   </div>
                 }
               />
+              {/* Función Renal */}
+                <Route path={pathRenal} element={<RenalFunctionPage />} />
+                {/* Antropometría */}
+                <Route path="/herramientas/antropometricas" element={<AnthropometricCalculatorsPage />} />
               {/* Página no encontrada */}
               <Route path="*" element={<NotFound />} />
             </Routes>
@@ -73,5 +81,7 @@ const App: React.FC = () => {
     </QueryClientProvider>
   );
 };
+
+
 
 export default App;

@@ -5,7 +5,6 @@ interface CalculatorCardProps {
   children: React.ReactNode;
   onCalculate: () => void;
   onReset: () => void;
-  canCalculate: boolean;
   result?: React.ReactNode;
   onCopy?: () => void;
 }
@@ -15,16 +14,15 @@ const CalculatorCard: React.FC<CalculatorCardProps> = ({
   children,
   onCalculate,
   onReset,
-  canCalculate,
   result,
   onCopy,
 }) => (
-  <div className="bg-white rounded-2xl shadow p-6 w-full max-w-xl mx-auto mb-8">
+  <div className="bg-white rounded-2xl shadow p-5 w-full max-w-xl mx-auto mb-8">
     <h2 className="text-xl font-bold mb-4 text-blue-700">{title}</h2>
     <form
       onSubmit={e => {
         e.preventDefault();
-        if (canCalculate) onCalculate();
+        onCalculate();
       }}
       className="space-y-2"
       autoComplete="off"
@@ -33,8 +31,7 @@ const CalculatorCard: React.FC<CalculatorCardProps> = ({
       <div className="flex space-x-2 mt-4">
         <button
           type="submit"
-          className={`px-4 py-2 rounded bg-blue-600 text-white font-semibold shadow hover:bg-blue-700 transition disabled:opacity-50`}
-          disabled={!canCalculate}
+          className="px-4 py-2 rounded bg-blue-600 text-white font-semibold shadow hover:bg-blue-700 transition"
         >
           Calcular
         </button>

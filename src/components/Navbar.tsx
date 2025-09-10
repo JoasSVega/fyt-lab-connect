@@ -31,8 +31,8 @@ const Navbar = () => {
       href: "#",
       isDropdown: true,
       dropdownItems: [
-        { name: "Calculadora de Función Renal", href: "/calculator/gfr" },
-        { name: "Calculadoras Antropométricas", href: "/calculator/bmi" },
+  { name: "Calculadoras de función renal (prueba)", href: "/herramientas/funcion-renal" },
+  { name: "Calculadoras Antropométricas", href: "/herramientas/antropometricas" },
         { name: "Calculadora de Dosificación", href: "/calculator/dosage" },
         { name: "Calculadora de Superficie Corporal", href: "/calculator/bsa" },
         { name: "Consultor Farmacológico", href: "/consultor" },

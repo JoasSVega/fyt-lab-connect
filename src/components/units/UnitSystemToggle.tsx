@@ -1,6 +1,6 @@
 import React from "react";
 
-export type UnitSystem = "mgdl" | "umoll";
+export type UnitSystem = "mgdl" | "umol";
 
 interface UnitSystemToggleProps {
   value: UnitSystem;
@@ -24,12 +24,12 @@ const UnitSystemToggle: React.FC<UnitSystemToggleProps> = ({ value, onChange }) 
     <button
       type="button"
       className={`px-3 py-1 rounded-r-full border border-blue-500 focus:outline-none transition-colors -ml-px ${
-        value === "umoll"
+        value === "umol"
           ? "bg-blue-500 text-white"
           : "bg-white text-blue-500 hover:bg-blue-50"
       }`}
-      onClick={() => onChange("umoll")}
-      aria-pressed={value === "umoll"}
+      onClick={() => onChange("umol")}
+      aria-pressed={value === "umol"}
     >
       Internacional (µmol/L)
     </button>

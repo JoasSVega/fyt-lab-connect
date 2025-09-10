@@ -3,374 +3,454 @@ import UnitSystemToggle, { UnitSystem } from "../components/units/UnitSystemTogg
 import NumberField from "../components/inputs/NumberField";
 import CalculatorCard from "../components/panels/CalculatorCard";
 import {
-  mgdlToUmolL,
-  umolLToMgdl,
   cockcroftGault,
   cockcroftGaultBSA,
   mdrd4,
   mdrd6,
   ckdEpi2009,
   ckdEpi2021,
+  mgdlToUmol,
+  umolToMgdl,
 } from "../utils/renal";
 
 export const pathRenal = "/herramientas/funcion-renal";
 
-type Sex = "male" | "female";
+const TABS = [
+  { key: "cg", label: "Cockcroft-Gault" },
+  { key: "mdrd", label: "MDRD" },
+  { key: "ckd", label: "CKD-EPI" },
+];
 
-const defaultState = {
-  age: "",
-  weight: "",
-  height: "",
-  scr: "",
-  bun: "",
-  alb: "",
-  sex: "male" as Sex,
-  black: false,
-};
-
-const validate = (state: typeof defaultState, unit: UnitSystem) => {
-  const age = Number(state.age);
-  const weight = Number(state.weight);
-  const height = Number(state.height);
-  const scr = Number(state.scr);
-  const bun = Number(state.bun);
-  const alb = Number(state.alb);
-  const scrMin = unit === "mgdl" ? 0.2 : 18;
-  const scrMax = unit === "mgdl" ? 20 : 1768;
-  return {
-    age: age >= 14 && age <= 120,
-    weight: weight >= 25 && weight <= 300,
-    height: height >= 120 && height <= 220,
-    scr: scr >= scrMin && scr <= scrMax,
-    bun: bun === 0 || (bun >= 5 && bun <= 200),
-    alb: alb === 0 || (alb >= 1 && alb <= 6),
-  };
-};
+const SEX_OPTIONS = [
+  { value: "male", label: "Masculino" },
+  { value: "female", label: "Femenino" },
+];
 
 const RenalFunctionPage: React.FC = () => {
   const [unit, setUnit] = useState<UnitSystem>("mgdl");
-  const [tab, setTab] = useState<"cg" | "mdrd" | "ckdepi">("cg");
-  const [state, setState] = useState(defaultState);
-  const [result, setResult] = useState<string>("");
-  const [copied, setCopied] = useState(false);
+  const [tab, setTab] = useState("cg");
 
-  // Conversiones
-  const scrValue = unit === "mgdl" ? Number(state.scr) : umolLToMgdl(Number(state.scr));
-  const scrDisplay = unit === "mgdl" ? Number(state.scr) : Number(state.scr);
+  // Cockcroft-Gault state
+  const [cg, setCg] = useState({
+    age: "",
+    weight: "",
+    sex: "male",
+    scr: "",
+    adjust: false,
+    height: "",
+  });
+  const [cgResult, setCgResult] = useState<{ crcl: number; crclAdj?: number } | null>(null);
+  const [cgError, setCgError] = useState<string>("");
 
-  // Validaciones
-  const v = validate(state, unit);
-  const canCalcCG = v.age && v.weight && v.scr;
-  const canCalcMDRD = v.age && v.scr;
-  const canCalcCKDEPI = v.age && v.scr;
+  // MDRD state
+  const [mdrd, setMdrd] = useState({
+    age: "",
+    sex: "male",
+    scr: "",
+    method: "4v",
+    bun: "",
+    alb: "",
+    black: false,
+  });
+  const [mdrdResult, setMdrdResult] = useState<number | null>(null);
+  const [mdrdError, setMdrdError] = useState<string>("");
+
+  // CKD-EPI state
+  const [ckd, setCkd] = useState({
+    age: "",
+    sex: "male",
+    scr: "",
+    version: "2021",
+    black: false,
+  });
+  const [ckdResult, setCkdResult] = useState<number | null>(null);
+  const [ckdError, setCkdError] = useState<string>("");
 
   // Handlers
-  const handleChange = (field: keyof typeof defaultState) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    setState(s => ({ ...s, [field]: e.target.value }));
+  const handleCgChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value, type } = e.target;
+    const checked = (e.target instanceof HTMLInputElement && type === "checkbox") ? e.target.checked : undefined;
+    setCg(prev => ({ ...prev, [name]: type === "checkbox" ? checked : value }));
   };
-  const handleSex = (e: React.ChangeEvent<HTMLSelectElement>) => setState(s => ({ ...s, sex: e.target.value as Sex }));
-  const handleBlack = (e: React.ChangeEvent<HTMLInputElement>) => setState(s => ({ ...s, black: e.target.checked }));
-  const handleUnit = (val: UnitSystem) => {
-    // Convierte creatinina automáticamente
-    setState(s => ({
-      ...s,
-      scr:
-        val === "mgdl"
-          ? s.scr
-            ? (umolLToMgdl(Number(s.scr))).toFixed(2)
-            : ""
-          : s.scr
-          ? (mgdlToUmolL(Number(s.scr))).toFixed(0)
-          : "",
-    }));
-    setUnit(val);
+  const handleCgReset = () => {
+    setCg({ age: "", weight: "", sex: "male", scr: "", adjust: false, height: "" });
+    setCgResult(null);
+    setCgError("");
   };
-  const handleReset = () => {
-    setState(defaultState);
-    setResult("");
-    setCopied(false);
-  };
-  const handleCopy = () => {
-    if (result) {
-      navigator.clipboard.writeText(result);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1500);
-    }
-  };
-
-  // Cockcroft-Gault
-  const calcCG = () => {
-    const age = Number(state.age);
-    const weight = Number(state.weight);
-    const height = Number(state.height);
-    const scr = scrValue;
-    const sex = state.sex;
-    if (!canCalcCG) return;
-    const cg = cockcroftGault(age, weight, scr, sex);
-    const cgBSA = height ? cockcroftGaultBSA(cg, weight, height) : undefined;
-    let res = `Cockcroft-Gault: ${cg.toFixed(2)} ml/min`;
-    if (cgBSA) res += ` (ajustado BSA: ${cgBSA.toFixed(2)} ml/min/1.73m²)`;
-    setResult(res);
+  const handleCgCalc = () => {
+    setCgError("");
+    const age = Number(cg.age), weight = Number(cg.weight), scr = Number(cg.scr), height = Number(cg.height);
+    if (!age || age < 18 || age > 120) return setCgError("Edad válida: 18-120 años");
+    if (!weight || weight < 20 || weight > 300) return setCgError("Peso válido: 20-300 kg");
+    if (!scr || scr <= 0) return setCgError("Creatinina válida > 0");
+    if (cg.adjust && (!height || height < 100 || height > 250)) return setCgError("Talla válida: 100-250 cm");
+    const crcl = cockcroftGault(age, weight, scr, cg.sex as 'male' | 'female', unit);
+    let crclAdj: number | undefined = undefined;
+    if (cg.adjust && height) crclAdj = cockcroftGaultBSA(crcl, weight, height);
+    setCgResult({ crcl, crclAdj });
   };
 
   // MDRD
-  const calcMDRD = () => {
-    const age = Number(state.age);
-    const scr = scrValue;
-    const sex = state.sex;
-    const black = state.black;
-    const bun = Number(state.bun);
-    const alb = Number(state.alb);
-    let res = "";
-    if (bun && alb) {
-      const gfr6 = mdrd6(age, scr, bun, alb, sex, black);
-      res = `MDRD (6 variables): ${gfr6.toFixed(2)} ml/min/1.73m²\n`;
+  const handleMdrdChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value, type } = e.target;
+    const checked = (e.target instanceof HTMLInputElement && type === "checkbox") ? e.target.checked : undefined;
+    setMdrd(prev => ({ ...prev, [name]: type === "checkbox" ? checked : value }));
+  };
+  const handleMdrdReset = () => {
+    setMdrd({ age: "", sex: "male", scr: "", method: "4v", bun: "", alb: "", black: false });
+    setMdrdResult(null);
+    setMdrdError("");
+  };
+  const handleMdrdCalc = () => {
+    setMdrdError("");
+    const age = Number(mdrd.age), scr = Number(mdrd.scr), bun = Number(mdrd.bun), alb = Number(mdrd.alb);
+    if (!age || age < 18 || age > 120) return setMdrdError("Edad válida: 18-120 años");
+    if (!scr || scr <= 0) return setMdrdError("Creatinina válida > 0");
+    if (mdrd.method === "6v") {
+      if (!bun || bun <= 0) return setMdrdError("Urea válida > 0");
+      if (!alb || alb <= 0) return setMdrdError("Albúmina válida > 0");
+      setMdrdResult(mdrd6(age, scr, bun, alb, mdrd.sex as 'male' | 'female', mdrd.black, unit));
+    } else {
+      setMdrdResult(mdrd4(age, scr, mdrd.sex as 'male' | 'female', mdrd.black, unit));
     }
-    const gfr4 = mdrd4(age, scr, sex, black);
-    res += `MDRD (4 variables): ${gfr4.toFixed(2)} ml/min/1.73m²`;
-    setResult(res);
   };
 
   // CKD-EPI
-  const calcCKDEPI = () => {
-    const age = Number(state.age);
-    const scr = scrValue;
-    const sex = state.sex;
-    const black = state.black;
-    const gfr2009 = ckdEpi2009(age, scr, sex, black);
-    const gfr2021 = ckdEpi2021(age, scr, sex);
-    const res = `CKD-EPI 2009: ${gfr2009.toFixed(2)} ml/min/1.73m²\nCKD-EPI 2021: ${gfr2021.toFixed(2)} ml/min/1.73m²`;
-    setResult(res);
+  const handleCkdChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value, type } = e.target;
+    const checked = (e.target instanceof HTMLInputElement && type === "checkbox") ? e.target.checked : undefined;
+    setCkd(prev => ({ ...prev, [name]: type === "checkbox" ? checked : value }));
+  };
+  const handleCkdReset = () => {
+    setCkd({ age: "", sex: "male", scr: "", version: "2021", black: false });
+    setCkdResult(null);
+    setCkdError("");
+  };
+  const handleCkdCalc = () => {
+    setCkdError("");
+    const age = Number(ckd.age), scr = Number(ckd.scr);
+    if (!age || age < 18 || age > 120) return setCkdError("Edad válida: 18-120 años");
+    if (!scr || scr <= 0) return setCkdError("Creatinina válida > 0");
+    if (ckd.version === "2009") {
+      setCkdResult(ckdEpi2009(age, scr, ckd.sex as 'male' | 'female', ckd.black, unit));
+    } else {
+      setCkdResult(ckdEpi2021(age, scr, ckd.sex as 'male' | 'female', unit));
+    }
   };
 
-  // Tabs
-  const tabClass = (t: string) =>
-    `px-4 py-2 rounded-t-lg font-semibold cursor-pointer transition-colors ${
-      tab === t ? "bg-blue-600 text-white" : "bg-blue-100 text-blue-700 hover:bg-blue-200"
-    }`;
-
+  // Render
   return (
-    <div className="max-w-4xl mx-auto pt-8 pb-16">
-      <h1 className="text-2xl md:text-3xl font-bold text-center mb-6">Calculadoras de Función Renal</h1>
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-4">
-        <UnitSystemToggle value={unit} onChange={handleUnit} />
+    <div className="max-w-3xl mx-auto px-2 py-8">
+      <h1 className="text-3xl font-bold text-blue-700 mb-2">Calculadoras de Función Renal</h1>
+      <div className="mb-4 flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+        <UnitSystemToggle value={unit} onChange={setUnit} />
         <div className="flex space-x-2 mt-2 md:mt-0">
-          <button className={tabClass("cg")} onClick={() => { setTab("cg"); setResult(""); }}>
-            Cockcroft-Gault
-          </button>
-          <button className={tabClass("mdrd")} onClick={() => { setTab("mdrd"); setResult(""); }}>
-            MDRD
-          </button>
-          <button className={tabClass("ckdepi")} onClick={() => { setTab("ckdepi"); setResult(""); }}>
-            CKD-EPI
-          </button>
+          {TABS.map(t => (
+            <button
+              key={t.key}
+              className={`px-4 py-2 rounded-t-lg font-semibold border-b-2 transition-colors ${
+                tab === t.key
+                  ? "border-blue-600 text-blue-700 bg-blue-50"
+                  : "border-transparent text-gray-500 hover:bg-gray-100"
+              }`}
+              onClick={() => setTab(t.key)}
+              aria-current={tab === t.key ? "page" : undefined}
+              type="button"
+            >
+              {t.label}
+            </button>
+          ))}
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {tab === "cg" && (
-          <CalculatorCard
-            title="Cockcroft-Gault"
-            onCalculate={calcCG}
-            onReset={handleReset}
-            canCalculate={canCalcCG}
-            result={result}
-            onCopy={handleCopy}
-          >
+
+      {/* Cockcroft-Gault */}
+      {tab === "cg" && (
+        <CalculatorCard
+          title="Cockcroft-Gault"
+          onCalculate={handleCgCalc}
+          onReset={handleCgReset}
+          result={cgResult && (
+            <div>
+              <div>ClCr: <b>{cgResult.crcl.toFixed(2)}</b> ml/min</div>
+              {cg.adjust && cgResult.crclAdj !== undefined && (
+                <div>ClCr ajustada: <b>{cgResult.crclAdj.toFixed(2)}</b> ml/min/1.73m²</div>
+              )}
+            </div>
+          )}
+          onCopy={cgResult ? () => {
+            let txt = `ClCr: ${cgResult.crcl.toFixed(2)} ml/min`;
+            if (cg.adjust && cgResult.crclAdj !== undefined) txt += `\nClCr ajustada: ${cgResult.crclAdj.toFixed(2)} ml/min/1.73m²`;
+            navigator.clipboard.writeText(txt);
+          } : undefined}
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <NumberField
-              id="age"
+              id="cg-age"
               label="Edad"
-              value={state.age}
-              onChange={handleChange("age")}
-              min={14}
+              value={cg.age}
+              onChange={handleCgChange}
+              name="age"
+              min={18}
               max={120}
               required
-              unit="años"
-              error={state.age && !v.age ? "Edad 14–120" : undefined}
+              error={cgError && !cg.age ? cgError : undefined}
             />
             <NumberField
-              id="weight"
+              id="cg-weight"
               label="Peso"
-              value={state.weight}
-              onChange={handleChange("weight")}
-              min={25}
+              value={cg.weight}
+              onChange={handleCgChange}
+              name="weight"
+              min={20}
               max={300}
               required
+              error={cgError && !cg.weight ? cgError : undefined}
               unit="kg"
-              error={state.weight && !v.weight ? "Peso 25–300 kg" : undefined}
             />
-            <NumberField
-              id="height"
-              label="Talla"
-              value={state.height}
-              onChange={handleChange("height")}
-              min={120}
-              max={220}
-              unit="cm"
-              error={state.height && !v.height ? "Talla 120–220 cm" : undefined}
-              help="Opcional para ajuste por superficie corporal"
-            />
-            <NumberField
-              id="scr"
-              label="Creatinina sérica"
-              value={state.scr}
-              onChange={handleChange("scr")}
-              min={unit === "mgdl" ? 0.2 : 18}
-              max={unit === "mgdl" ? 20 : 1768}
-              required
-              unit={unit === "mgdl" ? "mg/dL" : "µmol/L"}
-              error={state.scr && !v.scr ? (unit === "mgdl" ? "0.2–20 mg/dL" : "18–1768 µmol/L") : undefined}
-            />
-            <div className="flex items-center gap-2">
-              <label htmlFor="sex" className="font-medium">Sexo:</label>
+            <div>
+              <label className="block font-medium mb-1">Sexo</label>
               <select
-                id="sex"
-                value={state.sex}
-                onChange={handleSex}
-                className="border rounded px-2 py-1"
+                name="sex"
+                value={cg.sex}
+                onChange={handleCgChange}
+                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                aria-label="Sexo"
               >
-                <option value="male">Masculino</option>
-                <option value="female">Femenino</option>
+                {SEX_OPTIONS.map(opt => (
+                  <option key={opt.value} value={opt.value}>{opt.label}</option>
+                ))}
               </select>
             </div>
-          </CalculatorCard>
-        )}
-        {tab === "mdrd" && (
-          <CalculatorCard
-            title="MDRD"
-            onCalculate={calcMDRD}
-            onReset={handleReset}
-            canCalculate={canCalcMDRD}
-            result={result}
-            onCopy={handleCopy}
-          >
             <NumberField
-              id="age"
-              label="Edad"
-              value={state.age}
-              onChange={handleChange("age")}
-              min={14}
-              max={120}
-              required
-              unit="años"
-              error={state.age && !v.age ? "Edad 14–120" : undefined}
-            />
-            <NumberField
-              id="scr"
+              id="cg-scr"
               label="Creatinina sérica"
-              value={state.scr}
-              onChange={handleChange("scr")}
-              min={unit === "mgdl" ? 0.2 : 18}
-              max={unit === "mgdl" ? 20 : 1768}
+              value={cg.scr}
+              onChange={handleCgChange}
+              name="scr"
+              min={0.1}
               required
+              error={cgError && !cg.scr ? cgError : undefined}
               unit={unit === "mgdl" ? "mg/dL" : "µmol/L"}
-              error={state.scr && !v.scr ? (unit === "mgdl" ? "0.2–20 mg/dL" : "18–1768 µmol/L") : undefined}
             />
-            <NumberField
-              id="bun"
-              label="Urea (opcional)"
-              value={state.bun}
-              onChange={handleChange("bun")}
-              min={0}
-              max={200}
-              unit="mg/dL"
-              help="Solo para MDRD 6 variables"
-              error={state.bun && !v.bun ? "Urea 5–200 mg/dL" : undefined}
-            />
-            <NumberField
-              id="alb"
-              label="Albúmina (opcional)"
-              value={state.alb}
-              onChange={handleChange("alb")}
-              min={0}
-              max={6}
-              unit="g/dL"
-              help="Solo para MDRD 6 variables"
-              error={state.alb && !v.alb ? "Albúmina 1–6 g/dL" : undefined}
-            />
-            <div className="flex items-center gap-2">
-              <label htmlFor="sex" className="font-medium">Sexo:</label>
-              <select
-                id="sex"
-                value={state.sex}
-                onChange={handleSex}
-                className="border rounded px-2 py-1"
-              >
-                <option value="male">Masculino</option>
-                <option value="female">Femenino</option>
-              </select>
-              <label htmlFor="black" className="ml-4 font-medium">Raza negra:</label>
+            <div className="md:col-span-2 flex items-center mt-2">
               <input
-                id="black"
+                id="cg-adjust"
+                name="adjust"
                 type="checkbox"
-                checked={state.black}
-                onChange={handleBlack}
-                className="accent-blue-600"
+                checked={cg.adjust}
+                onChange={handleCgChange}
+                className="mr-2"
               />
+              <label htmlFor="cg-adjust" className="text-sm">Ajustar a 1.73m² (requiere talla)</label>
             </div>
-          </CalculatorCard>
-        )}
-        {tab === "ckdepi" && (
-          <CalculatorCard
-            title="CKD-EPI"
-            onCalculate={calcCKDEPI}
-            onReset={handleReset}
-            canCalculate={canCalcCKDEPI}
-            result={result}
-            onCopy={handleCopy}
-          >
-            <NumberField
-              id="age"
-              label="Edad"
-              value={state.age}
-              onChange={handleChange("age")}
-              min={14}
-              max={120}
-              required
-              unit="años"
-              error={state.age && !v.age ? "Edad 14–120" : undefined}
-            />
-            <NumberField
-              id="scr"
-              label="Creatinina sérica"
-              value={state.scr}
-              onChange={handleChange("scr")}
-              min={unit === "mgdl" ? 0.2 : 18}
-              max={unit === "mgdl" ? 20 : 1768}
-              required
-              unit={unit === "mgdl" ? "mg/dL" : "µmol/L"}
-              error={state.scr && !v.scr ? (unit === "mgdl" ? "0.2–20 mg/dL" : "18–1768 µmol/L") : undefined}
-            />
-            <div className="flex items-center gap-2">
-              <label htmlFor="sex" className="font-medium">Sexo:</label>
-              <select
-                id="sex"
-                value={state.sex}
-                onChange={handleSex}
-                className="border rounded px-2 py-1"
-              >
-                <option value="male">Masculino</option>
-                <option value="female">Femenino</option>
-              </select>
-              <label htmlFor="black" className="ml-4 font-medium">Raza negra:</label>
-              <input
-                id="black"
-                type="checkbox"
-                checked={state.black}
-                onChange={handleBlack}
-                className="accent-blue-600"
+            {cg.adjust && (
+              <NumberField
+                id="cg-height"
+                label="Talla"
+                value={cg.height}
+                onChange={handleCgChange}
+                name="height"
+                min={100}
+                max={250}
+                required
+                error={cgError && !cg.height ? cgError : undefined}
+                unit="cm"
               />
-            </div>
-          </CalculatorCard>
-        )}
-      </div>
-      <div className="mt-8 text-xs text-gray-500 text-center">
-        Estas ecuaciones son de uso clínico educativo y no reemplazan el juicio profesional.
-      </div>
-      {copied && (
-        <div className="fixed bottom-4 left-1/2 -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded shadow-lg z-50">
-          ¡Resultado copiado!
-        </div>
+            )}
+          </div>
+          {cgError && <div className="text-red-600 text-sm mt-2">{cgError}</div>}
+        </CalculatorCard>
       )}
+
+      {/* MDRD */}
+      {tab === "mdrd" && (
+        <CalculatorCard
+          title="MDRD"
+          onCalculate={handleMdrdCalc}
+          onReset={handleMdrdReset}
+          result={mdrdResult !== null && (
+            <div>TFG: <b>{mdrdResult.toFixed(2)}</b> ml/min/1.73 m²</div>
+          )}
+          onCopy={mdrdResult !== null ? () => {
+            navigator.clipboard.writeText(`TFG: ${mdrdResult.toFixed(2)} ml/min/1.73 m²`);
+          } : undefined}
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <NumberField
+              id="mdrd-age"
+              label="Edad"
+              value={mdrd.age}
+              onChange={handleMdrdChange}
+              name="age"
+              min={18}
+              max={120}
+              required
+              error={mdrdError && !mdrd.age ? mdrdError : undefined}
+            />
+            <div>
+              <label className="block font-medium mb-1">Sexo</label>
+              <select
+                name="sex"
+                value={mdrd.sex}
+                onChange={handleMdrdChange}
+                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                aria-label="Sexo"
+              >
+                {SEX_OPTIONS.map(opt => (
+                  <option key={opt.value} value={opt.value}>{opt.label}</option>
+                ))}
+              </select>
+            </div>
+            <NumberField
+              id="mdrd-scr"
+              label="Creatinina sérica"
+              value={mdrd.scr}
+              onChange={handleMdrdChange}
+              name="scr"
+              min={0.1}
+              required
+              error={mdrdError && !mdrd.scr ? mdrdError : undefined}
+              unit={unit === "mgdl" ? "mg/dL" : "µmol/L"}
+            />
+            <div>
+              <label className="block font-medium mb-1">Metodología</label>
+              <select
+                name="method"
+                value={mdrd.method}
+                onChange={handleMdrdChange}
+                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                aria-label="Metodología"
+              >
+                <option value="4v">4 variables</option>
+                <option value="6v">6 variables</option>
+              </select>
+            </div>
+            {mdrd.method === "6v" && (
+              <>
+                <NumberField
+                  id="mdrd-bun"
+                  label="Urea"
+                  value={mdrd.bun}
+                  onChange={handleMdrdChange}
+                  name="bun"
+                  min={1}
+                  required
+                  error={mdrdError && !mdrd.bun ? mdrdError : undefined}
+                  unit="mg/dL"
+                />
+                <NumberField
+                  id="mdrd-alb"
+                  label="Albúmina"
+                  value={mdrd.alb}
+                  onChange={handleMdrdChange}
+                  name="alb"
+                  min={0.1}
+                  required
+                  error={mdrdError && !mdrd.alb ? mdrdError : undefined}
+                  unit="g/dL"
+                />
+              </>
+            )}
+            <div className="md:col-span-2 flex items-center mt-2">
+              <input
+                id="mdrd-black"
+                name="black"
+                type="checkbox"
+                checked={mdrd.black}
+                onChange={handleMdrdChange}
+                className="mr-2"
+              />
+              <label htmlFor="mdrd-black" className="text-sm">¿Afrodescendiente?</label>
+            </div>
+          </div>
+          {mdrdError && <div className="text-red-600 text-sm mt-2">{mdrdError}</div>}
+        </CalculatorCard>
+      )}
+
+      {/* CKD-EPI */}
+      {tab === "ckd" && (
+        <CalculatorCard
+          title="CKD-EPI"
+          onCalculate={handleCkdCalc}
+          onReset={handleCkdReset}
+          result={ckdResult !== null && (
+            <div>TFG: <b>{ckdResult.toFixed(2)}</b> ml/min/1.73 m²</div>
+          )}
+          onCopy={ckdResult !== null ? () => {
+            navigator.clipboard.writeText(`TFG: ${ckdResult.toFixed(2)} ml/min/1.73 m²`);
+          } : undefined}
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <NumberField
+              id="ckd-age"
+              label="Edad"
+              value={ckd.age}
+              onChange={handleCkdChange}
+              name="age"
+              min={18}
+              max={120}
+              required
+              error={ckdError && !ckd.age ? ckdError : undefined}
+            />
+            <div>
+              <label className="block font-medium mb-1">Sexo</label>
+              <select
+                name="sex"
+                value={ckd.sex}
+                onChange={handleCkdChange}
+                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                aria-label="Sexo"
+              >
+                {SEX_OPTIONS.map(opt => (
+                  <option key={opt.value} value={opt.value}>{opt.label}</option>
+                ))}
+              </select>
+            </div>
+            <NumberField
+              id="ckd-scr"
+              label="Creatinina sérica"
+              value={ckd.scr}
+              onChange={handleCkdChange}
+              name="scr"
+              min={0.1}
+              required
+              error={ckdError && !ckd.scr ? ckdError : undefined}
+              unit={unit === "mgdl" ? "mg/dL" : "µmol/L"}
+            />
+            <div>
+              <label className="block font-medium mb-1">Versión</label>
+              <select
+                name="version"
+                value={ckd.version}
+                onChange={handleCkdChange}
+                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                aria-label="Versión"
+              >
+                <option value="2021">2021 (sin raza)</option>
+                <option value="2009">2009 (con raza)</option>
+              </select>
+            </div>
+            {ckd.version === "2009" && (
+              <div className="md:col-span-2 flex items-center mt-2">
+                <input
+                  id="ckd-black"
+                  name="black"
+                  type="checkbox"
+                  checked={ckd.black}
+                  onChange={handleCkdChange}
+                  className="mr-2"
+                />
+                <label htmlFor="ckd-black" className="text-sm">¿Afrodescendiente?</label>
+              </div>
+            )}
+          </div>
+          {ckdError && <div className="text-red-600 text-sm mt-2">{ckdError}</div>}
+        </CalculatorCard>
+      )}
+
+      <footer className="mt-8 text-xs text-gray-500 text-center">
+        Estas ecuaciones son de uso clínico educativo y no reemplazan el juicio profesional.
+      </footer>
     </div>
   );
 };
