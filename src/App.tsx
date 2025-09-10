@@ -1,3 +1,4 @@
+import logoFyt from "./assets/Logo FyT.png";
 import AnthropometricCalculatorsPage from "./pages/AnthropometricCalculatorsPage";
 
 import { Toaster } from "@/components/ui/toaster";
@@ -27,7 +28,8 @@ const App: React.FC = () => {
           {/* Barra superior fija */}
           <Navbar />
           {/* Contenido principal: darle padding-top para no quedar debajo del navbar */}
-          <main className="flex-1 bg-gray-50 p-6 pt-16 min-h-screen">
+          <main className="flex-1 bg-gray-50 p-6 pt-16 min-h-screen flex flex-col items-center justify-center">
+            <img src={logoFyt} alt="Logo Grupo FyT" className="h-20 w-auto mb-8" />
             <Routes>
               {/* Página principal */}
               <Route path="/" element={<Index />} />

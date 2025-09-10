@@ -1,3 +1,4 @@
+// Eliminado: funcionalidad de subida de imágenes eliminada del proyecto.
 import React, { useState, useRef } from 'react';
 import { Upload, X, Camera } from 'lucide-react';
 import { Button } from './button';
@@ -29,23 +30,21 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
         onImageUpload(result);
       };
       reader.readAsDataURL(file);
+    } else {
+      console.warn("El archivo no es una imagen válida");
     }
   };
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      handleImageUpload(file);
-    }
+    if (file) handleImageUpload(file);
   };
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
     setIsDragging(false);
-    const file = e.dataTransfer.files[0];
-    if (file) {
-      handleImageUpload(file);
-    }
+    const file = e.dataTransfer.files?.[0];
+    if (file) handleImageUpload(file);
   };
 
   const handleDragOver = (e: React.DragEvent) => {
@@ -58,13 +57,9 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
     setIsDragging(false);
   };
 
-  const removeImage = () => {
-    onImageUpload('');
-  };
+  const removeImage = () => onImageUpload('');
 
-  const openFileDialog = () => {
-    fileInputRef.current?.click();
-  };
+  const openFileDialog = () => fileInputRef.current?.click();
 
   const getAspectRatioClass = () => {
     switch (aspectRatio) {
@@ -117,6 +112,8 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
         </div>
       ) : (
         <div
+          role="button"
+          tabIndex={0}
           className={cn(
             "border-2 border-dashed rounded-xl transition-colors duration-300 cursor-pointer",
             getAspectRatioClass(),
@@ -128,6 +125,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
           onClick={openFileDialog}
+          onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && openFileDialog()}
         >
           <div className="flex flex-col items-center justify-center h-full p-6 text-center">
             <Upload className="h-12 w-12 text-muted-foreground mb-4" />

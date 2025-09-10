@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import { ArrowRight, Users, BookOpen, Award } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
-import ImageUpload from "./ui/image-upload";
 const Hero = () => {
-  const [heroImage, setHeroImage] = useState<string>('');
   const quickActions = [{
     title: "Equipo",
     description: "Conoce a nuestros investigadores",
@@ -32,36 +30,16 @@ const Hero = () => {
   };
   return (
     <section id="inicio" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
+      {/* Background Gradient */}
       <div className="absolute inset-0">
-        {heroImage ? (
-          <>
-            <img 
-              src={heroImage} 
-              alt="Investigación farmacéutica"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-fyt-dark/90 via-fyt-dark/70 to-fyt-dark/50"></div>
-          </>
-        ) : (
-          <div className="w-full h-full bg-gradient-hero flex items-center justify-center">
-            <div className="absolute inset-0 bg-gradient-to-r from-fyt-dark/90 via-fyt-dark/70 to-fyt-dark/50"></div>
-          </div>
-        )}
+        <div className="w-full h-full bg-gradient-hero flex items-center justify-center">
+          <div className="absolute inset-0 bg-gradient-to-r from-fyt-dark/90 via-fyt-dark/70 to-fyt-dark/50"></div>
+        </div>
       </div>
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 text-center">
         <div className="max-w-4xl mx-auto">
-          {/* Logo/Badge */}
-          <div className="mb-8 flex justify-center">
-            <div className="bg-white/10 backdrop-blur-sm rounded-full p-6 border border-white/20">
-              <div className="w-16 h-16 bg-gradient-hero rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-xl">FYT</span>
-              </div>
-            </div>
-          </div>
-
           {/* Main Title */}
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
             Grupo de Investigación
@@ -78,20 +56,6 @@ const Hero = () => {
             Desarrollando investigaciones en Farmacología, Terapéutica, Farmacia Asistencial, 
             Farmacovigilancia, Farmacoepidemiología, Farmacoeconomía y estudios in sílico.
           </p>
-
-          {/* Image Upload Section */}
-          <div className="mb-8 max-w-md mx-auto">
-            <ImageUpload
-              onImageUpload={setHeroImage}
-              currentImage={heroImage}
-              aspectRatio="wide"
-              placeholder="Subir imagen de portada"
-              className="mb-4"
-            />
-            <p className="text-white/80 text-sm text-center">
-              Sube una imagen de portada que represente tu grupo de investigación
-            </p>
-          </div>
 
           {/* Quick Actions */}
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
@@ -118,13 +82,6 @@ const Hero = () => {
               );
             })}
           </div>
-        </div>
-      </div>
-
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-white/50 rounded-full mt-2"></div>
         </div>
       </div>
     </section>

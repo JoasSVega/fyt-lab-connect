@@ -1,11 +1,11 @@
+
 import React, { useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { NavLink } from "react-router-dom";
-import ImageUpload from "./ui/image-upload";
+import logoFyt from "../assets/Logo FyT.png";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [logoImage, setLogoImage] = useState<string>('');
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
   const menuItems = [
@@ -84,29 +84,8 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo y nombre */}
           <div className="flex items-center space-x-3">
-            <div className="flex-shrink-0 relative group">
-              {logoImage ? (
-                <img 
-                  src={logoImage} 
-                  alt="Logo FYT"
-                  className="w-10 h-10 object-contain rounded-full"
-                />
-              ) : (
-                <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">FYT</span>
-                </div>
-              )}
-              
-              <div className="absolute inset-0 bg-gray-800/80 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center">
-                <div className="w-6 h-6">
-                  <ImageUpload
-                    onImageUpload={setLogoImage}
-                    currentImage={logoImage}
-                    placeholder=""
-                    className="w-full h-full"
-                  />
-                </div>
-              </div>
+            <div className="flex-shrink-0">
+              <img src={logoFyt} alt="Logo Grupo FyT" className="h-12 w-auto transition-all duration-300" />
             </div>
             <div className="text-lg font-bold text-gray-800">
               Grupo FyT

@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import { ExternalLink, Mail, GraduationCap } from "lucide-react";
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
-import ImageUpload from "./ui/image-upload";
 
 const Team = () => {
-  const [memberImages, setMemberImages] = useState<{[key: number]: string}>({});
   const teamMembers = [
     {
       name: "Antistio Alviz Amador",
@@ -105,9 +103,6 @@ const Team = () => {
     }
   ];
 
-  const handleImageUpload = (index: number, imageUrl: string) => {
-    setMemberImages(prev => ({ ...prev, [index]: imageUrl }));
-  };
 
   return (
     <section id="equipo" className="py-20 bg-background">
@@ -127,26 +122,9 @@ const Team = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {teamMembers.map((member, index) => (
             <Card key={index} className="overflow-hidden bg-gradient-card shadow-soft hover:shadow-medium transition-all duration-300 group">
-              {/* Image */}
-              <div className="relative overflow-hidden h-64">
-                {memberImages[index] ? (
-                  <>
-                    <img 
-                      src={memberImages[index]} 
-                      alt={member.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-fyt-dark/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  </>
-                ) : (
-                  <ImageUpload
-                    onImageUpload={(imageUrl) => handleImageUpload(index, imageUrl)}
-                    currentImage={memberImages[index] || ''}
-                    placeholder={`Foto de ${member.name}`}
-                    aspectRatio="square"
-                    className="h-full"
-                  />
-                )}
+              {/* Imagen fija o avatar por defecto (puedes poner un logo o dejar vacío) */}
+              <div className="relative overflow-hidden h-64 bg-gradient-hero flex items-center justify-center">
+                {/* Aquí podrías poner un logo fijo si lo deseas */}
               </div>
 
               {/* Content */}

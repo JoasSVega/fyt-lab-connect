@@ -1,10 +1,9 @@
+import LogoFyT from "../assets/Logo FyT.png";
 import React, { useState } from "react";
 import { Mail, Phone, MapPin, ExternalLink } from "lucide-react";
 import { Button } from "./ui/button";
-import ImageUpload from "./ui/image-upload";
 
 const Footer = () => {
-  const [logoImage, setLogoImage] = useState<string>('');
   const quickLinks = [
     { name: "Inicio", href: "#inicio" },
     { name: "Sobre nosotros", href: "#sobre" },
@@ -37,17 +36,7 @@ const Footer = () => {
           <div className="lg:col-span-2">
             <div className="flex items-center space-x-3 mb-6">
               <div className="flex-shrink-0">
-                {logoImage ? (
-                  <img 
-                    src={logoImage} 
-                    alt="Logo FYT"
-                    className="w-12 h-12 object-contain rounded-full"
-                  />
-                ) : (
-                  <div className="w-12 h-12 bg-gradient-hero rounded-full flex items-center justify-center">
-                    <span className="text-white font-bold text-lg">FYT</span>
-                  </div>
-                )}
+                <img src={LogoFyT} alt="Logo Grupo FyT" className="w-20 h-20 md:w-28 md:h-28 object-contain drop-shadow-lg transition-all duration-300" />
               </div>
               <div>
                 <h3 className="text-xl font-bold">Grupo FyT</h3>
@@ -55,19 +44,6 @@ const Footer = () => {
               </div>
             </div>
             
-            {/* Logo Upload */}
-            <div className="mb-6 max-w-xs">
-              <ImageUpload
-                onImageUpload={setLogoImage}
-                currentImage={logoImage}
-                aspectRatio="square"
-                placeholder="Subir logo oficial"
-                className="mb-2"
-              />
-              <p className="text-white/60 text-xs">
-                Sube el logo oficial del grupo de investigación
-              </p>
-            </div>
             
             <p className="text-white/80 leading-relaxed mb-6 max-w-md">
               Desarrollando investigaciones en Farmacología, Terapéutica, Farmacia Asistencial, 
