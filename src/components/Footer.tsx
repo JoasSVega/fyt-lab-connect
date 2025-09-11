@@ -1,4 +1,4 @@
-import LogoFyT from "../assets/Logo FyT.png";
+import logoFyt from "../assets/Logo FyT.png";
 import React, { useState } from "react";
 import { Mail, Phone, MapPin, ExternalLink } from "lucide-react";
 import { Button } from "./ui/button";
@@ -36,7 +36,7 @@ const Footer = () => {
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 md:gap-4 mb-6 flex-wrap">
               <div className="flex-shrink-0">
-                <img src={LogoFyT} alt="Logo Grupo FyT" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 object-contain drop-shadow-lg transition-all duration-300" />
+                <img src={logoFyt} alt="Logo Grupo FyT" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 object-contain drop-shadow-lg transition-all duration-300" />
               </div>
               <div>
                 <h3 className="text-lg sm:text-xl font-bold text-slate-800">Grupo FyT</h3>
