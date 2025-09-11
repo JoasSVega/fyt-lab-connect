@@ -74,9 +74,11 @@ const About = () => {
             {/* Mission & Vision */}
             <div className="grid md:grid-cols-2 gap-6">
               <Card className="p-6 border-fyt-blue/20 bg-gradient-card shadow-soft">
-                <Target className="h-8 w-8 text-fyt-blue mb-3" />
-                <h4 className="text-lg font-semibold text-fyt-dark mb-2">Misión</h4>
-                <p className="text-sm text-muted-foreground">
+                <div className="flex flex-col items-center mb-4">
+                  <Target className="h-8 w-8 text-fyt-blue mb-3" />
+                  <h4 className="text-lg font-semibold text-fyt-dark">Misión</h4>
+                </div>
+                <p className="text-sm text-muted-foreground text-left">
                   Desarrollar trabajos de investigación en Farmacología, Terapéutica, Farmacia Asistencial, 
                   Farmacovigilancia, Farmacoepidemiología, Farmacoeconomía y estudios in sílico/modelización 
                   molecular, para apoyar programas de pregrado y postgrado.
@@ -84,9 +86,11 @@ const About = () => {
               </Card>
 
               <Card className="p-6 border-fyt-purple/20 bg-gradient-card shadow-soft">
-                <Eye className="h-8 w-8 text-fyt-purple mb-3" />
-                <h4 className="text-lg font-semibold text-fyt-dark mb-2">Visión</h4>
-                <p className="text-sm text-muted-foreground">
+                <div className="flex flex-col items-center mb-4">
+                  <Eye className="h-8 w-8 text-fyt-purple mb-3" />
+                  <h4 className="text-lg font-semibold text-fyt-dark">Visión</h4>
+                </div>
+                <p className="text-sm text-muted-foreground text-left">
                   Posicionarse entre los mejores grupos de investigación en Farmacología y Terapéutica 
                   a nivel nacional en 2030 e internacional en 2035, desarrollando trabajos de alto nivel 
                   científico que respondan a necesidades locales, nacionales e internacionales, y formando 
