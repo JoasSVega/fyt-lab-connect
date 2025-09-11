@@ -28,40 +28,40 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/20 border-t border-slate-200/50">
+  <footer className="bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/20 border-t border-slate-200/50 w-full overflow-x-hidden">
       {/* Main Footer Content */}
-      <div className="container mx-auto px-4 py-16">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14 lg:py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 lg:gap-12">
           {/* Logo and Description */}
           <div className="lg:col-span-2">
-            <div className="flex items-center space-x-3 mb-6">
+            <div className="flex items-center gap-3 md:gap-4 mb-6 flex-wrap">
               <div className="flex-shrink-0">
-                <img src={LogoFyT} alt="Logo Grupo FyT" className="w-20 h-20 md:w-28 md:h-28 object-contain drop-shadow-lg transition-all duration-300" />
+                <img src={LogoFyT} alt="Logo Grupo FyT" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 object-contain drop-shadow-lg transition-all duration-300" />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-slate-800">Grupo FyT</h3>
-                <p className="text-slate-600 text-sm">Farmacología y Terapéutica</p>
+                <h3 className="text-lg sm:text-xl font-bold text-slate-800">Grupo FyT</h3>
+                <p className="text-slate-600 text-xs sm:text-sm">Farmacología y Terapéutica</p>
               </div>
             </div>
             
             
-            <p className="text-slate-700 leading-relaxed mb-6 max-w-md">
+            <p className="text-slate-700 leading-relaxed mb-6 max-w-md text-sm sm:text-base">
               Desarrollando investigaciones en Farmacología, Terapéutica, Farmacia Asistencial, 
               Farmacovigilancia, Farmacoepidemiología, Farmacoeconomía y estudios in sílico.
             </p>
             
             {/* Contact Info */}
-            <div className="space-y-3">
-              <div className="flex items-center space-x-3 text-sm text-slate-600">
-                <Mail className="h-4 w-4 text-fyt-blue" />
+            <div className="space-y-2 sm:space-y-3">
+              <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-slate-600 flex-wrap">
+                <Mail className="h-4 w-4 text-fyt-blue flex-shrink-0" />
                 <span>aalviza@unicartagena.edu.co</span>
               </div>
-              <div className="flex items-center space-x-3 text-sm text-slate-600">
-                <Phone className="h-4 w-4 text-fyt-blue" />
+              <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-slate-600 flex-wrap">
+                <Phone className="h-4 w-4 text-fyt-blue flex-shrink-0" />
                 <span>Universidad de Cartagena</span>
               </div>
-              <div className="flex items-center space-x-3 text-sm text-slate-600">
-                <MapPin className="h-4 w-4 text-fyt-blue" />
+              <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-slate-600 flex-wrap">
+                <MapPin className="h-4 w-4 text-fyt-blue flex-shrink-0" />
                 <span>Cartagena, Colombia</span>
               </div>
             </div>
@@ -69,13 +69,13 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-lg font-semibold mb-6 text-slate-800">Enlaces Rápidos</h4>
-            <ul className="space-y-3">
+            <h4 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6 text-slate-800">Enlaces Rápidos</h4>
+            <ul className="space-y-2 sm:space-y-3">
               {quickLinks.map((link, index) => (
                 <li key={index}>
                   <button
                     onClick={() => scrollToSection(link.href)}
-                    className="text-slate-600 hover:text-fyt-blue transition-colors duration-200 text-sm"
+                    className="text-slate-600 hover:text-fyt-blue transition-colors duration-200 text-xs sm:text-sm"
                   >
                     {link.name}
                   </button>
@@ -86,12 +86,12 @@ const Footer = () => {
 
           {/* Research Areas */}
           <div>
-            <h4 className="text-lg font-semibold mb-6 text-slate-800">Áreas de Investigación</h4>
-            <ul className="space-y-3">
+            <h4 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6 text-slate-800">Áreas de Investigación</h4>
+            <ul className="space-y-2 sm:space-y-3">
               {researchAreas.map((area, index) => (
-                <li key={index} className="text-slate-600 text-sm">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-1.5 h-1.5 bg-fyt-purple rounded-full"></div>
+                <li key={index} className="text-slate-600 text-xs sm:text-sm">
+                  <div className="flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 bg-fyt-purple rounded-full flex-shrink-0"></div>
                     <span>{area}</span>
                   </div>
                 </li>
@@ -101,15 +101,15 @@ const Footer = () => {
         </div>
 
         {/* Social Media and External Links */}
-        <div className="border-t border-slate-200/60 mt-12 pt-8">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-            <div>
-              <h4 className="text-sm font-semibold mb-3 text-slate-800">Síguenos</h4>
-              <div className="flex space-x-3">
+        <div className="border-t border-slate-200/60 mt-10 pt-8">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-6 flex-wrap">
+            <div className="mb-4 md:mb-0">
+              <h4 className="text-xs sm:text-sm font-semibold mb-2 sm:mb-3 text-slate-800">Síguenos</h4>
+              <div className="flex flex-wrap gap-2 sm:gap-3">
                 <Button 
                   variant="outline" 
                   size="sm"
-                  className="border-slate-300 text-slate-700 hover:bg-fyt-blue hover:border-fyt-blue hover:text-white"
+                  className="border-slate-300 text-slate-700 hover:bg-fyt-blue hover:border-fyt-blue hover:text-white min-w-[90px]"
                   onClick={() => window.open('#', '_blank')}
                 >
                   Twitter
@@ -117,7 +117,7 @@ const Footer = () => {
                 <Button 
                   variant="outline" 
                   size="sm"
-                  className="border-slate-300 text-slate-700 hover:bg-fyt-purple hover:border-fyt-purple hover:text-white"
+                  className="border-slate-300 text-slate-700 hover:bg-fyt-purple hover:border-fyt-purple hover:text-white min-w-[90px]"
                   onClick={() => window.open('#', '_blank')}
                 >
                   LinkedIn
@@ -125,7 +125,7 @@ const Footer = () => {
                 <Button 
                   variant="outline" 
                   size="sm"
-                  className="border-slate-300 text-slate-700 hover:bg-fyt-red hover:border-fyt-red hover:text-white"
+                  className="border-slate-300 text-slate-700 hover:bg-fyt-red hover:border-fyt-red hover:text-white min-w-[90px]"
                   onClick={() => window.open('#', '_blank')}
                 >
                   ResearchGate
@@ -134,12 +134,12 @@ const Footer = () => {
             </div>
 
             <div>
-              <h4 className="text-sm font-semibold mb-3 text-slate-800">Enlaces Institucionales</h4>
-              <div className="flex flex-wrap gap-3">
+              <h4 className="text-xs sm:text-sm font-semibold mb-2 sm:mb-3 text-slate-800">Enlaces Institucionales</h4>
+              <div className="flex flex-wrap gap-2 sm:gap-3">
                 <Button 
                   variant="ghost" 
                   size="sm"
-                  className="text-slate-600 hover:text-fyt-blue p-0 h-auto"
+                  className="text-slate-600 hover:text-fyt-blue p-0 h-auto min-w-[120px]"
                   onClick={() => window.open('#', '_blank')}
                 >
                   Universidad Nacional
@@ -148,7 +148,7 @@ const Footer = () => {
                 <Button 
                   variant="ghost" 
                   size="sm"
-                  className="text-slate-600 hover:text-fyt-blue p-0 h-auto"
+                  className="text-slate-600 hover:text-fyt-blue p-0 h-auto min-w-[120px]"
                   onClick={() => window.open('#', '_blank')}
                 >
                   Facultad de Ciencias
@@ -157,7 +157,7 @@ const Footer = () => {
                 <Button 
                   variant="ghost" 
                   size="sm"
-                  className="text-slate-600 hover:text-fyt-blue p-0 h-auto"
+                  className="text-slate-600 hover:text-fyt-blue p-0 h-auto min-w-[120px]"
                   onClick={() => window.open('#', '_blank')}
                 >
                   MinCiencias
@@ -171,12 +171,12 @@ const Footer = () => {
 
       {/* Copyright */}
       <div className="border-t border-slate-200/60">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-sm text-slate-500">
-            <p>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 md:gap-4 text-xs sm:text-sm text-slate-500 flex-wrap">
+            <p className="text-center md:text-left w-full md:w-auto">
               © 2024 Grupo de Investigación FyT. Todos los derechos reservados.
             </p>
-            <div className="flex space-x-6">
+            <div className="flex flex-wrap gap-3 md:gap-6 justify-center md:justify-end w-full md:w-auto">
               <button className="hover:text-fyt-blue transition-colors">
                 Política de Privacidad
               </button>
