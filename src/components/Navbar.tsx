@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { NavLink } from "react-router-dom";
-import logoFyt from "../assets/Logo FyT.png";
+// Using standardized logo from public folder
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -85,7 +85,7 @@ const Navbar = () => {
           {/* Logo y nombre */}
           <div className="flex items-center space-x-3">
             <div className="flex-shrink-0">
-              <img src={logoFyt} alt="Logo Grupo FyT" className="h-12 w-auto transition-all duration-300" />
+              <img src="/logo-fyt.png" alt="Logo Grupo FyT" className="h-12 w-auto transition-all duration-300" />
             </div>
             <div className="text-lg font-bold text-gray-800">
               Grupo FyT

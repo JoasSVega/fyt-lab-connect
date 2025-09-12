@@ -37,7 +37,7 @@ const About = () => {
 
   return (
     <section id="sobre" className="py-20 bg-gradient-to-b from-background to-muted/30">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-fyt-dark mb-4">
