@@ -54,7 +54,7 @@ const Footer = () => {
             <div className="space-y-2 sm:space-y-3">
               <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-slate-600 flex-wrap">
                 <Mail className="h-4 w-4 text-fyt-blue flex-shrink-0" />
-                <span>aalviza@unicartagena.edu.co</span>
+                <span>farmacologiayterapeutica.gi@gmail.com</span>
               </div>
               <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-slate-600 flex-wrap">
                 <Phone className="h-4 w-4 text-fyt-blue flex-shrink-0" />
@@ -109,26 +109,10 @@ const Footer = () => {
                 <Button 
                   variant="outline" 
                   size="sm"
-                  className="border-slate-300 text-slate-700 hover:bg-fyt-blue hover:border-fyt-blue hover:text-white min-w-[90px]"
-                  onClick={() => window.open('#', '_blank')}
-                >
-                  Twitter
-                </Button>
-                <Button 
-                  variant="outline" 
-                  size="sm"
                   className="border-slate-300 text-slate-700 hover:bg-fyt-purple hover:border-fyt-purple hover:text-white min-w-[90px]"
-                  onClick={() => window.open('#', '_blank')}
+                  onClick={() => window.open('https://instagram.com', '_blank')}
                 >
-                  LinkedIn
-                </Button>
-                <Button 
-                  variant="outline" 
-                  size="sm"
-                  className="border-slate-300 text-slate-700 hover:bg-fyt-red hover:border-fyt-red hover:text-white min-w-[90px]"
-                  onClick={() => window.open('#', '_blank')}
-                >
-                  ResearchGate
+                  Instagram
                 </Button>
               </div>
             </div>
@@ -142,7 +126,7 @@ const Footer = () => {
                   className="text-slate-600 hover:text-fyt-blue p-0 h-auto min-w-[120px]"
                   onClick={() => window.open('#', '_blank')}
                 >
-                  Universidad Nacional
+                  Universidad de Cartagena
                   <ExternalLink className="h-3 w-3 ml-1" />
                 </Button>
                 <Button 

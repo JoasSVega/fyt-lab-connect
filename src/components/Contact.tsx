@@ -116,7 +116,7 @@ const Contact = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Contact Information */}
           <div className="space-y-8">
             {/* Información Institucional */}
@@ -172,26 +172,10 @@ const Contact = () => {
                 <Button 
                   variant="outline" 
                   size="sm"
-                  className="border-fyt-blue/20 hover:bg-fyt-blue hover:text-white"
-                  onClick={() => window.open('#', '_blank')}
-                >
-                  Twitter
-                </Button>
-                <Button 
-                  variant="outline" 
-                  size="sm"
                   className="border-fyt-purple/20 hover:bg-fyt-purple hover:text-white"
-                  onClick={() => window.open('#', '_blank')}
+                  onClick={() => window.open('https://instagram.com', '_blank')}
                 >
-                  LinkedIn
-                </Button>
-                <Button 
-                  variant="outline" 
-                  size="sm"
-                  className="border-fyt-red/20 hover:bg-fyt-red hover:text-white"
-                  onClick={() => window.open('#', '_blank')}
-                >
-                  ResearchGate
+                  Instagram
                 </Button>
               </div>
             </Card>
@@ -296,7 +280,7 @@ const Contact = () => {
               variant="secondary"
               size="lg"
               className="bg-white text-fyt-dark hover:bg-white/90"
-              onClick={() => window.open('mailto:semillero.fyt@universidad.edu.co?subject=Propuesta de Colaboración', '_blank')}
+              onClick={() => window.open('mailto:farmacologiayterapeutica.gi@gmail.com?subject=Propuesta de Colaboración', '_blank')}
             >
               <Mail className="h-4 w-4 mr-2" />
               Proponer Colaboración

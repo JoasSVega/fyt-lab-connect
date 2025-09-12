@@ -14,7 +14,7 @@ const Team = () => {
       links: {
         orcid: "0000-0000-0000-0000",
         scholar: "scholar-profile",
-        email: "aalviza@unicartagena.edu.co"
+        email: "farmacologiayterapeutica.gi@gmail.com"
       }
     },
     {
@@ -26,7 +26,7 @@ const Team = () => {
       links: {
         orcid: "0000-0000-0000-0001",
         scholar: "scholar-profile-2",
-        email: "ygarciam1@unicartagena.edu.co"
+        email: "farmacologiayterapeutica.gi@gmail.com"
       }
     },
     {
@@ -38,7 +38,7 @@ const Team = () => {
       links: {
         orcid: "0000-0000-0000-0002",
         scholar: "scholar-profile-3",
-        email: "scavadiap@unicartagena.edu.co"
+        email: "farmacologiayterapeutica.gi@gmail.com"
       }
     },
     {
@@ -50,7 +50,7 @@ const Team = () => {
       links: {
         orcid: "0000-0000-0000-0003",
         scholar: "scholar-profile-4",
-        email: "jmartinezz@unicartagena.edu.co"
+        email: "farmacologiayterapeutica.gi@gmail.com"
       }
     },
     {
@@ -62,7 +62,7 @@ const Team = () => {
       links: {
         orcid: "0000-0000-0000-0004",
         scholar: "scholar-profile-5",
-        email: "rcaraballom@unicartagena.edu.co"
+        email: "farmacologiayterapeutica.gi@gmail.com"
       }
     },
     {
@@ -74,7 +74,7 @@ const Team = () => {
       links: {
         orcid: "0000-0000-0000-0005",
         scholar: "scholar-profile-6",
-        email: "lutriaa@unicartagena.edu.co"
+        email: "farmacologiayterapeutica.gi@gmail.com"
       }
     },
     {
@@ -86,7 +86,7 @@ const Team = () => {
       links: {
         orcid: "0000-0000-0000-0006",
         scholar: "scholar-profile-7",
-        email: "suribem@unicartagena.edu.co"
+        email: "farmacologiayterapeutica.gi@gmail.com"
       }
     },
     {
@@ -98,7 +98,7 @@ const Team = () => {
       links: {
         orcid: "0000-0000-0000-0007",
         scholar: "scholar-profile-8",
-        email: "mmercadoi1@unicartagena.edu.co"
+        email: "farmacologiayterapeutica.gi@gmail.com"
       }
     }
   ];
