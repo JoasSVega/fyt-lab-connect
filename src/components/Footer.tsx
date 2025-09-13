@@ -129,7 +129,7 @@ const Footer = () => {
                   variant="ghost" 
                   size="sm"
                   className="text-slate-600 hover:text-fyt-blue p-0 h-auto min-w-[120px]"
-                  onClick={() => window.open('#', '_blank')}
+                  onClick={() => window.open('https://www.unicartagena.edu.co/', '_blank')}
                 >
                   Universidad de Cartagena
                   <ExternalLink className="h-3 w-3 ml-1" />
@@ -138,9 +138,9 @@ const Footer = () => {
                   variant="ghost" 
                   size="sm"
                   className="text-slate-600 hover:text-fyt-blue p-0 h-auto min-w-[120px]"
-                  onClick={() => window.open('#', '_blank')}
+                  onClick={() => window.open('https://www.unicartagena.edu.co/estudia-con-nosotros?view=search&resetSearch=1&preserve=1&geo-latitude=&geo-longitude=&geo-country=&location-detected=&geolocation=&categorySuggestion=&suggestionType=&categorySearch=250', '_blank')}
                 >
-                  Facultad de Ciencias
+                  Facultad de Ciencias Farmacéuticas
                   <ExternalLink className="h-3 w-3 ml-1" />
                 </Button>
                 <Button 
@@ -159,13 +159,13 @@ const Footer = () => {
       </div>
 
       {/* Copyright */}
-      <div className="border-t border-slate-200/60">
+      <div className="border-t border-slate-200/60 relative">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 md:gap-4 text-xs sm:text-sm text-slate-500 flex-wrap">
-            <p className="text-center md:text-left w-full md:w-auto">
+            <p className="text-left w-full md:w-auto">
               © 2024 Grupo de Investigación FyT. Todos los derechos reservados.
             </p>
-            <div className="flex flex-wrap gap-3 md:gap-6 justify-center md:justify-end w-full md:w-auto">
+            <div className="flex flex-wrap gap-3 md:gap-6 justify-start md:justify-end w-full md:w-auto">
               <button className="hover:text-fyt-blue transition-colors">
                 Política de Privacidad
               </button>
@@ -176,6 +176,18 @@ const Footer = () => {
                 Código de Ética
               </button>
             </div>
+          </div>
+          {/* LinkedIn credit bottom left */}
+          <div className="w-full flex justify-start mt-2">
+            <a
+              href="https://www.linkedin.com/in/joassvega"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs sm:text-sm text-slate-500 hover:text-fyt-blue transition-colors flex items-center gap-1"
+            >
+              Desarrollado por: Joas S. Vega
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 ml-1"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm15.5 11.268h-3v-5.604c0-1.337-.025-3.063-1.868-3.063-1.868 0-2.154 1.459-2.154 2.968v5.699h-3v-10h2.881v1.367h.041c.401-.761 1.379-1.563 2.838-1.563 3.036 0 3.6 2.001 3.6 4.601v5.595z"/></svg>
+            </a>
           </div>
         </div>
       </div>

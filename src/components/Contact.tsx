@@ -103,24 +103,24 @@ const Contact = () => {
   };
 
   return (
-    <section id="contacto" className="py-20 bg-gradient-to-b from-muted/30 to-background">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contacto" className="py-10 sm:py-16 md:py-20 bg-gradient-to-b from-muted/30 to-background min-h-screen">
+      <div className="container mx-auto px-2 sm:px-4 md:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-fyt-dark mb-4">
+        <div className="text-center mb-10 sm:mb-14 md:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-fyt-dark mb-4 break-words">
             Contáctanos
           </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg text-muted-foreground max-w-full sm:max-w-2xl md:max-w-3xl mx-auto break-words">
             ¿Tienes preguntas sobre nuestras investigaciones o quieres colaborar con nosotros? 
             Estamos aquí para ayudarte.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
+  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
           {/* Contact Information */}
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             {/* Información Institucional */}
-            <Card className="p-6 bg-gradient-hero text-white shadow-soft">
+            <Card className="p-4 sm:p-6 bg-gradient-hero text-white shadow-soft w-full max-w-full">
               <h3 className="text-xl font-semibold mb-3">
                 Grupo de Investigación en Farmacología y Terapéutica
               </h3>
@@ -140,28 +140,28 @@ const Contact = () => {
                 {contactInfo.map((item, index) => {
                   const Icon = item.icon;
                   return (
-                    <Card key={index} className="p-6 bg-gradient-card shadow-soft hover:shadow-medium transition-shadow">
+                    <Card key={index} className="p-4 sm:p-6 bg-gradient-card shadow-soft hover:shadow-medium transition-shadow w-full max-w-full">
                       <div className="flex items-start space-x-4">
-                        <div className="w-12 h-12 bg-gradient-hero rounded-full flex items-center justify-center shrink-0">
-                          <Icon className="h-6 w-6 text-white" />
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-hero rounded-full flex items-center justify-center shrink-0">
+                          <Icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
                         </div>
                         <div>
-                          <h4 className="text-lg font-semibold text-fyt-dark mb-1">
+                          <h4 className="text-base sm:text-lg font-semibold text-fyt-dark mb-1 break-words">
                             {item.title}
                           </h4>
                           {item.icon === Mail ? (
                             <a 
                               href={`mailto:${item.info}`}
-                              className="text-fyt-blue font-medium mb-1 hover:underline cursor-pointer"
+                              className="text-fyt-blue font-medium mb-1 hover:underline cursor-pointer break-all"
                             >
                               {item.info}
                             </a>
                           ) : (
-                            <p className="text-fyt-blue font-medium mb-1">
+                            <p className="text-fyt-blue font-medium mb-1 break-all">
                               {item.info}
                             </p>
                           )}
-                          <p className="text-muted-foreground text-sm">
+                          <p className="text-muted-foreground text-xs sm:text-sm">
                             {item.description}
                           </p>
                         </div>
@@ -173,11 +173,11 @@ const Contact = () => {
             </div>
 
             {/* Social Media & Additional Info */}
-            <Card className="p-6 bg-gradient-card shadow-soft">
-              <h4 className="text-lg font-semibold text-fyt-dark mb-4">
+            <Card className="p-4 sm:p-6 bg-gradient-card shadow-soft w-full max-w-full">
+              <h4 className="text-base sm:text-lg font-semibold text-fyt-dark mb-4">
                 Síguenos en Redes Sociales
               </h4>
-              <div className="flex space-x-4">
+              <div className="flex flex-wrap gap-2 sm:space-x-4">
                 <Button 
                   variant="outline" 
                   size="sm"
@@ -192,13 +192,13 @@ const Contact = () => {
 
           {/* Contact Form */}
           <div>
-            <Card className="p-8 bg-gradient-card shadow-soft">
-              <h3 className="text-2xl font-semibold text-fyt-dark mb-6">
+            <Card className="p-4 sm:p-6 md:p-8 bg-gradient-card shadow-soft w-full max-w-full">
+              <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-fyt-dark mb-4 sm:mb-6">
                 Envíanos un Mensaje
               </h3>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
+              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+                  <div className="space-y-1 sm:space-y-2">
                     <Label htmlFor="name">Nombre completo *</Label>
                     <Input
                       id="name"
@@ -208,9 +208,10 @@ const Contact = () => {
                       onChange={handleInputChange}
                       placeholder="Tu nombre completo"
                       required
+                      className="text-sm sm:text-base"
                     />
                   </div>
-                  <div className="space-y-2">
+                  <div className="space-y-1 sm:space-y-2">
                     <Label htmlFor="email">Correo electrónico *</Label>
                     <Input
                       id="email"
@@ -220,11 +221,12 @@ const Contact = () => {
                       onChange={handleInputChange}
                       placeholder="tu@email.com"
                       required
+                      className="text-sm sm:text-base"
                     />
                   </div>
                 </div>
 
-                <div className="space-y-2">
+                <div className="space-y-1 sm:space-y-2">
                   <Label htmlFor="subject">Asunto *</Label>
                   <Input
                     id="subject"
@@ -234,10 +236,11 @@ const Contact = () => {
                     onChange={handleInputChange}
                     placeholder="¿En qué podemos ayudarte?"
                     required
+                    className="text-sm sm:text-base"
                   />
                 </div>
 
-                <div className="space-y-2">
+                <div className="space-y-1 sm:space-y-2">
                   <Label htmlFor="message">Mensaje *</Label>
                   <Textarea
                     id="message"
@@ -247,12 +250,13 @@ const Contact = () => {
                     placeholder="Escribe tu mensaje aquí..."
                     rows={5}
                     required
+                    className="text-sm sm:text-base"
                   />
                 </div>
 
                 <Button 
                   type="submit" 
-                  className="w-full bg-gradient-hero text-white"
+                  className="w-full bg-gradient-hero text-white text-base sm:text-lg"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
@@ -277,10 +281,10 @@ const Contact = () => {
         </div>
 
         {/* Map or Additional CTA */}
-        <div className="mt-16">
-          <Card className="p-8 bg-gradient-hero text-white shadow-large text-center">
-            <h3 className="text-2xl font-semibold mb-4">¿Interesado en Colaborar?</h3>
-            <p className="mb-6 text-white/90 max-w-2xl mx-auto">
+        <div className="mt-10 sm:mt-14 md:mt-16">
+          <Card className="p-4 sm:p-6 md:p-8 bg-gradient-hero text-white shadow-large text-center w-full max-w-full">
+            <h3 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2 sm:mb-4 break-words">¿Interesado en Colaborar?</h3>
+            <p className="mb-4 sm:mb-6 text-white/90 max-w-full sm:max-w-2xl mx-auto break-words">
               Si eres investigador, estudiante o institución interesada en establecer 
               colaboraciones académicas o de investigación, estaremos encantados de conocer 
               más sobre tus propuestas.
@@ -288,7 +292,7 @@ const Contact = () => {
             <Button 
               variant="secondary"
               size="lg"
-              className="bg-white text-fyt-dark hover:bg-white/90"
+              className="bg-white text-fyt-dark hover:bg-white/90 text-base sm:text-lg"
               onClick={() => window.open('mailto:farmacologiayterapeutica.gi@gmail.com?subject=Propuesta de Colaboración', '_blank')}
             >
               <Mail className="h-4 w-4 mr-2" />

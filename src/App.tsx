@@ -13,9 +13,6 @@ import Equipo from "./pages/Equipo";
 import Contactos from "./pages/Contactos";
 import NotFound from "./pages/NotFound";
 import DosageCalculator from "./components/DosageCalculator";
-import GFRCalculator from "./components/GFRCalculator";
-import BMICalculator from "./components/BMICalculator";
-import BSACalculator from "./components/BSACalculator";
 import Navbar from "./components/Navbar";
 import ScrollToTop from "./components/ScrollToTop";
 import RenalFunctionPage from "./pages/RenalFunctionPage";
@@ -60,24 +57,7 @@ function AnimatedRoutes() {
               </div>
             }
           />
-          <Route
-            path="/calculator/bmi"
-            element={
-              <div className="flex flex-col items-center justify-center min-h-screen p-4 sm:p-8">
-                <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-center">Calculadora de IMC</h1>
-                <BMICalculator />
-              </div>
-            }
-          />
-          <Route
-            path="/calculator/bsa"
-            element={
-              <div className="flex flex-col items-center justify-center min-h-screen p-4 sm:p-8">
-                <h1 className="text-xl sm:text-3xl font-bold mb-6 text-center">Calculadora de Superficie Corporal</h1>
-                <BSACalculator />
-              </div>
-            }
-          />
+          {/* Rutas de calculadoras eliminadas: BMI, BSA */}
           {/* Función Renal */}
           <Route path={pathRenal} element={<RenalFunctionPage />} />
           {/* Antropometría */}
