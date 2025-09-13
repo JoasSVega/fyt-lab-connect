@@ -6,7 +6,10 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import Index from "./pages/Index";
+import Equipo from "./pages/Equipo";
+import Contactos from "./pages/Contactos";
 import NotFound from "./pages/NotFound";
 import DosageCalculator from "./components/DosageCalculator";
 import GFRCalculator from "./components/GFRCalculator";
@@ -15,6 +18,8 @@ import BSACalculator from "./components/BSACalculator";
 import Navbar from "./components/Navbar";
 import RenalFunctionPage from "./pages/RenalFunctionPage";
 import { pathRenal } from "./pages/RenalFunctionPage";
+import Proyectos from "./pages/Proyectos";
+import Noticias from "./pages/Noticias";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +39,11 @@ const App: React.FC = () => {
             <Routes>
               {/* Página principal */}
               <Route path="/" element={<Index />} />
+              {/* Proyectos y Noticias */}
+              <Route path="/proyectos" element={<Proyectos />} />
+              <Route path="/noticias" element={<Noticias />} />
+                <Route path="/equipo" element={<Equipo />} />
+                <Route path="/contactos" element={<Contactos />} />
               {/* Calculadoras */}
               <Route
                 path="/calculator/dosage"

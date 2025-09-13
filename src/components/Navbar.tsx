@@ -21,18 +21,17 @@ const Navbar = () => {
       isAnchor: true
     },
     {
-      name: "Equipo",
-      href: "#equipo", 
-      isDropdown: false,
-      isAnchor: true
+      name: "Nuestro Equipo",
+      href: "/equipo",
+      isDropdown: false
     },
     {
       name: "Herramientas",
       href: "#",
       isDropdown: true,
       dropdownItems: [
-  { name: "Calculadoras de función renal (prueba)", href: "/herramientas/funcion-renal" },
-  { name: "Calculadoras Antropométricas", href: "/herramientas/antropometricas" },
+        { name: "Calculadoras de función renal (prueba)", href: "/herramientas/funcion-renal" },
+        { name: "Calculadoras Antropométricas", href: "/herramientas/antropometricas" },
         { name: "Calculadora de Dosificación", href: "/calculator/dosage" },
         { name: "Calculadora de Superficie Corporal", href: "/calculator/bsa" },
         { name: "Consultor Farmacológico", href: "/consultor" },
@@ -41,21 +40,18 @@ const Navbar = () => {
     },
     {
       name: "Proyectos",
-      href: "#proyectos",
-      isDropdown: false,
-      isAnchor: true
+      href: "/proyectos",
+      isDropdown: false
     },
     {
       name: "Noticias",
-      href: "#noticias",
-      isDropdown: false,
-      isAnchor: true
+      href: "/noticias",
+      isDropdown: false
     },
     {
-      name: "Contacto",
-      href: "#contacto",
-      isDropdown: false,
-      isAnchor: true
+      name: "Contactos",
+      href: "/contactos",
+      isDropdown: false
     }
   ];
 
