@@ -126,6 +126,7 @@ All colors MUST be HSL and based on institutional branding.
   body {
     @apply bg-background text-foreground;
     overflow-x: hidden;
+    width: 100%;
   }
 
   /* Responsive images */
@@ -138,19 +139,30 @@ All colors MUST be HSL and based on institutional branding.
   .container {
     width: 100%;
     max-width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Fix for full width sections */
+  section {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
   }
 
   /* Mobile-first responsive design */
   @media (max-width: 768px) {
     .container {
-      padding-left: 1rem;
-      padding-right: 1rem;
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
     }
     
     /* Prevent text overflow on mobile */
     h1, h2, h3, h4, h5, h6 {
       word-wrap: break-word;
       overflow-wrap: break-word;
+      hyphens: auto;
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
     }
     
     /* Ensure images are responsive */
@@ -158,6 +170,7 @@ All colors MUST be HSL and based on institutional branding.
       width: 100%;
       height: auto;
       object-fit: contain;
+      max-width: 100%;
     }
     
     /* Prevent horizontal scrolling */
@@ -165,13 +178,73 @@ All colors MUST be HSL and based on institutional branding.
       max-width: 100%;
       box-sizing: border-box;
     }
+
+    /* Grid responsive fixes */
+    .grid {
+      grid-template-columns: 1fr !important;
+      gap: 1rem;
+    }
+
+    /* Card responsive fixes */
+    .card, [class*="Card"] {
+      margin-left: 0;
+      margin-right: 0;
+      width: 100%;
+    }
+
+    /* Text size adjustments */
+    p {
+      font-size: clamp(0.875rem, 2.5vw, 1rem);
+      line-height: 1.6;
+    }
   }
 
   /* Additional mobile optimizations */
   @media (max-width: 480px) {
     .container {
-      padding-left: 0.75rem;
-      padding-right: 0.75rem;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
+
+    /* Extra small screens */
+    h1 {
+      font-size: clamp(1.25rem, 5vw, 2rem) !important;
+    }
+
+    h2 {
+      font-size: clamp(1.125rem, 4vw, 1.5rem) !important;
+    }
+
+    /* Button responsive fixes */
+    button {
+      width: 100%;
+      max-width: 100%;
+      padding: 0.75rem 1rem;
+    }
+
+    /* Spacing adjustments */
+    .space-y-4 > * + * {
+      margin-top: 1rem;
+    }
+
+    .space-y-6 > * + * {
+      margin-top: 1.5rem;
+    }
+  }
+
+  /* Tablet optimizations */
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+
+    .grid-cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid-cols-3 {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 }

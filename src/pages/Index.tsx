@@ -11,12 +11,12 @@ import FloatingContact from "@/components/FloatingContact";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="w-full bg-background overflow-x-hidden">
       {/* Fixed Navigation */}
       <Navbar />
       
       {/* Main Content */}
-      <main>
+      <main className="w-full">
         {/* Hero Section */}
         <Hero />
         
