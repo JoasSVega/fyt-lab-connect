@@ -148,7 +148,7 @@ const Team = () => {
                     variant="outline" 
                     size="sm" 
                     className="text-xs border-fyt-red/20 hover:bg-fyt-red hover:text-white"
-                    onClick={() => window.open(`mailto:${member.links.email.replace(/\s+/g, '')}`, '_blank')}
+                    onClick={() => window.open(`mailto:${member.links.email}`, '_blank')}
                   >
                     <Mail className="h-3 w-3 mr-1" />
                     Contactar
