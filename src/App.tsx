@@ -6,7 +6,7 @@ import { Toaster as ToasterShadcn } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 import Index from "./pages/Index";
 import Equipo from "./pages/Equipo";
@@ -28,15 +28,21 @@ import Footer from "./components/Footer";
 const queryClient = new QueryClient();
 
 
+
 function AnimatedRoutes() {
   const location = useLocation();
   return (
     <AnimatePresence mode="wait" initial={false}>
-      <div key={location.pathname} className="w-full flex flex-col items-center justify-center pt-16 pb-6 px-2 sm:px-4 lg:px-8">
-        <img src="/logo-fyt.png" alt="Logo Grupo FyT" className="h-16 sm:h-20 w-auto mb-4 sm:mb-8" />
+      <motion.div
+        key={location.pathname}
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -24 }}
+        transition={{ duration: 0.35, ease: "easeInOut" }}
+        className="w-full pt-16 pb-6 px-2 sm:px-4 lg:px-8"
+      >
         <Routes location={location}>
           {/* Página principal */}
-
           <Route path="/" element={<Index />} />
           {/* Proyectos, Noticias y Herramientas */}
           <Route path="/proyectos" element={<Proyectos />} />
@@ -79,7 +85,7 @@ function AnimatedRoutes() {
           {/* Página no encontrada */}
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </div>
+      </motion.div>
     </AnimatePresence>
   );
 }
@@ -95,7 +101,7 @@ const App: React.FC = () => {
           {/* Barra superior fija */}
           <Navbar />
           {/* Contenido principal: darle padding-top para no quedar debajo del navbar */}
-          <main className="flex-1 bg-gray-50 w-full min-h-screen">
+          <main className="flex-1 bg-gray-50 w-full">
             <AnimatedRoutes />
           </main>
           <Footer />

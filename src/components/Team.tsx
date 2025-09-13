@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ExternalLink, Mail, GraduationCap } from "lucide-react";
 import { Card } from "./ui/card";
+import ScrollReveal from "./ScrollReveal";
 import { Button } from "./ui/button";
 
 const Team = () => {
@@ -120,8 +121,9 @@ const Team = () => {
 
         {/* Team Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {teamMembers.map((member, index) => (
-            <Card key={index} className="overflow-hidden bg-gradient-card shadow-soft hover:shadow-medium transition-all duration-300 group">
+            {teamMembers.map((member, idx) => (
+              <ScrollReveal key={member.name}>
+                <Card className="overflow-hidden bg-gradient-card shadow-soft hover:shadow-medium transition-all duration-300 group">
               {/* Imagen fija o avatar por defecto (puedes poner un logo o dejar vacío) */}
               <div className="relative overflow-hidden h-64 bg-gradient-hero flex items-center justify-center">
                 {/* Aquí podrías poner un logo fijo si lo deseas */}
@@ -156,6 +158,7 @@ const Team = () => {
                 </div>
               </div>
             </Card>
+              </ScrollReveal>
           ))}
         </div>
 

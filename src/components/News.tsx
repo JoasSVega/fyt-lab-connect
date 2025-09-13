@@ -1,5 +1,6 @@
 import { Calendar, MapPin, Users, ArrowRight, Bell } from "lucide-react";
 import { Card } from "./ui/card";
+import ScrollReveal from "./ScrollReveal";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 
@@ -159,6 +160,7 @@ const News = () => {
         {/* Regular News Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {regularNews.map((item, index) => (
+              <ScrollReveal key={item.title}>
             <Card key={index} className="overflow-hidden bg-gradient-card shadow-soft hover:shadow-medium transition-all duration-300 group cursor-pointer">
               {/* Image */}
               <div className="relative overflow-hidden">
@@ -214,6 +216,7 @@ const News = () => {
                 </div>
               </div>
             </Card>
+              </ScrollReveal>
           ))}
         </div>
 
