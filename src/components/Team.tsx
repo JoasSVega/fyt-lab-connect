@@ -143,33 +143,15 @@ const Team = () => {
                 </p>
 
                 {/* Links */}
-                <div className="flex flex-wrap gap-2">
-                  <Button 
-                    variant="outline" 
-                    size="sm" 
-                    className="text-xs border-fyt-blue/20 hover:bg-fyt-blue hover:text-white"
-                    onClick={() => window.open(`https://orcid.org/${member.links.orcid}`, '_blank')}
-                  >
-                    <ExternalLink className="h-3 w-3 mr-1" />
-                    ORCID
-                  </Button>
-                  <Button 
-                    variant="outline" 
-                    size="sm" 
-                    className="text-xs border-fyt-purple/20 hover:bg-fyt-purple hover:text-white"
-                    onClick={() => window.open(`https://scholar.google.com/citations?user=${member.links.scholar}`, '_blank')}
-                  >
-                    <ExternalLink className="h-3 w-3 mr-1" />
-                    Scholar
-                  </Button>
+                <div className="flex justify-center">
                   <Button 
                     variant="outline" 
                     size="sm" 
                     className="text-xs border-fyt-red/20 hover:bg-fyt-red hover:text-white"
-                    onClick={() => window.open(`mailto:${member.links.email}`, '_blank')}
+                    onClick={() => window.open(`mailto:${member.links.email.replace(/\s+/g, '')}`, '_blank')}
                   >
                     <Mail className="h-3 w-3 mr-1" />
-                    Email
+                    Contactar
                   </Button>
                 </div>
               </div>

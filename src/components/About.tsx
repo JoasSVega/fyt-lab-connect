@@ -150,7 +150,7 @@ const About = () => {
             {/* History */}
             <div>
               <h3 className="text-2xl font-semibold text-fyt-dark mb-4">Nuestro Objetivo</h3>
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed text-justify">
                 El objetivo principal del grupo es desarrollar investigaciones en Farmacología, Terapéutica, 
                 Farmacia Asistencial, Farmacovigilancia, Farmacoepidemiología, Farmacoeconomía, estudios in 
                 sílico y modelización molecular para el diseño de nuevos fármacos. Busca que los estudiantes 
@@ -166,7 +166,7 @@ const About = () => {
                   <Target className="h-8 w-8 text-fyt-blue mb-3" />
                   <h4 className="text-lg font-semibold text-fyt-dark">Misión</h4>
                 </div>
-                <p className="text-sm text-muted-foreground text-left">
+                <p className="text-sm text-muted-foreground text-justify">
                   Desarrollar trabajos de investigación en Farmacología, Terapéutica, Farmacia Asistencial, 
                   Farmacovigilancia, Farmacoepidemiología, Farmacoeconomía y estudios in sílico/modelización 
                   molecular, para apoyar programas de pregrado y postgrado.
@@ -178,7 +178,7 @@ const About = () => {
                   <Eye className="h-8 w-8 text-fyt-purple mb-3" />
                   <h4 className="text-lg font-semibold text-fyt-dark">Visión</h4>
                 </div>
-                <p className="text-sm text-muted-foreground text-left">
+                <p className="text-sm text-muted-foreground text-justify">
                   Posicionarse entre los mejores grupos de investigación en Farmacología y Terapéutica 
                   a nivel nacional en 2030 e internacional en 2035, desarrollando trabajos de alto nivel 
                   científico que respondan a necesidades locales, nacionales e internacionales, y formando 
@@ -237,7 +237,7 @@ const About = () => {
                       </div>
                       <div className="p-6">
                         <h4 className="text-lg font-semibold text-fyt-dark mb-3">{line.title}</h4>
-                        <p className="text-sm text-muted-foreground leading-relaxed">{line.description}</p>
+                        <p className="text-sm text-muted-foreground leading-relaxed text-justify">{line.description}</p>
                       </div>
                     </Card>
                   </CarouselItem>
@@ -276,7 +276,7 @@ const About = () => {
                       </div>
                       <div className="p-6">
                         <h4 className="text-lg font-semibold text-fyt-dark mb-3">{modality.title}</h4>
-                        <p className="text-sm text-muted-foreground leading-relaxed">{modality.description}</p>
+                        <p className="text-sm text-muted-foreground leading-relaxed text-justify">{modality.description}</p>
                       </div>
                     </Card>
                   </CarouselItem>
@@ -315,7 +315,7 @@ const About = () => {
                       </div>
                       <div className="p-6">
                         <h4 className="text-lg font-semibold text-fyt-dark mb-3">{activity.title}</h4>
-                        <p className="text-sm text-muted-foreground leading-relaxed">{activity.description}</p>
+                        <p className="text-sm text-muted-foreground leading-relaxed text-justify">{activity.description}</p>
                       </div>
                     </Card>
                   </CarouselItem>
