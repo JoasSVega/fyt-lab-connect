@@ -1,6 +1,5 @@
 import Contact from "@/components/Contact";
 import Navbar from "../components/Navbar";
-import Footer from "@/components/Footer";
 import FloatingContact from "@/components/FloatingContact";
 
 const Contactos = () => (
@@ -9,7 +8,6 @@ const Contactos = () => (
     <main className="flex-1 w-full pt-16">
       <Contact />
     </main>
-    <Footer />
     <FloatingContact />
   </div>
 );

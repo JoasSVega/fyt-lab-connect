@@ -2,6 +2,10 @@
 export const pathAnthropometric = "/herramientas/antropometricas";
 
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
+import { motion } from "framer-motion";
 import CalculatorCard from "../components/panels/CalculatorCard";
 import NumberField from "../components/inputs/NumberField";
 
@@ -20,6 +24,7 @@ const bmiCategory = (bmi: number): string => {
 };
 
 const AnthropometricCalculatorsPage: React.FC = () => {
+  const navigate = useNavigate();
   // --- IMC ---
   const [bmiWeight, setBmiWeight] = useState("");
   const [bmiHeight, setBmiHeight] = useState("");
@@ -227,334 +232,371 @@ const AnthropometricCalculatorsPage: React.FC = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto px-2 py-8">
-      <h1 className="text-3xl font-bold text-blue-700 mb-6">Calculadoras Antropométricas</h1>
+    <motion.div
+      className="max-w-3xl mx-auto px-2 py-8"
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -30 }}
+      transition={{ duration: 0.5 }}
+    >
+      <Button
+        variant="ghost"
+        className="mb-4 flex items-center gap-2 text-blue-700 hover:bg-blue-50"
+        onClick={() => navigate("/herramientas")}
+      >
+        <ArrowLeft className="w-5 h-5" /> Volver a Herramientas
+      </Button>
+      <motion.h1
+        className="text-3xl font-bold text-blue-700 mb-6"
+        initial={{ opacity: 0, x: -40 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 0.1, duration: 0.5 }}
+      >
+        Calculadoras Antropométricas
+      </motion.h1>
 
       {/* IMC */}
-      <CalculatorCard
-        title="Índice de Masa Corporal (IMC)"
-        onCalculate={handleBmiCalc}
-        onReset={handleBmiReset}
-        result={bmiResult !== null && (
-          <span>
-            IMC: <b>{bmiResult}</b> kg/m² ({bmiCategory(bmiResult)})
-          </span>
-        )}
-        onCopy={bmiResult !== null ? handleBmiCopy : undefined}
-      >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <NumberField
-            id="bmi-weight"
-            label="Peso"
-            value={bmiWeight}
-            onChange={e => setBmiWeight(e.target.value)}
-            name="weight"
-            min={1}
-            max={500}
-            required
-            unit="kg"
-            error={bmiError && !bmiWeight ? bmiError : undefined}
-          />
-          <NumberField
-            id="bmi-height"
-            label="Estatura"
-            value={bmiHeight}
-            onChange={e => setBmiHeight(e.target.value)}
-            name="height"
-            min={30}
-            max={300}
-            required
-            unit="cm"
-            error={bmiError && !bmiHeight ? bmiError : undefined}
-          />
-          <NumberField
-            id="bmi-age"
-            label="Edad (opcional)"
-            value={bmiAge}
-            onChange={e => setBmiAge(e.target.value)}
-            name="age"
-            min={5}
-            max={120}
-            unit="años"
-          />
-          <div>
-            <label htmlFor="bmi-sex" className="block font-medium mb-1">Sexo (opcional)</label>
-            <select
-              id="bmi-sex"
-              name="sex"
-              value={bmiSex}
-              onChange={e => setBmiSex(e.target.value as Sex)}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-              aria-label="Sexo"
-            >
-              {sexOptions.map(opt => (
-                <option key={opt.value} value={opt.value}>{opt.label}</option>
-              ))}
-            </select>
+      <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2, duration: 0.4 }}>
+        <CalculatorCard
+          title="Índice de Masa Corporal (IMC)"
+          onCalculate={handleBmiCalc}
+          onReset={handleBmiReset}
+          result={bmiResult !== null && (
+            <span>
+              IMC: <b>{bmiResult}</b> kg/m² ({bmiCategory(bmiResult)})
+            </span>
+          )}
+          onCopy={bmiResult !== null ? handleBmiCopy : undefined}
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <NumberField
+              id="bmi-weight"
+              label="Peso"
+              value={bmiWeight}
+              onChange={e => setBmiWeight(e.target.value)}
+              name="weight"
+              min={1}
+              max={500}
+              required
+              unit="kg"
+              error={bmiError && !bmiWeight ? bmiError : undefined}
+            />
+            <NumberField
+              id="bmi-height"
+              label="Estatura"
+              value={bmiHeight}
+              onChange={e => setBmiHeight(e.target.value)}
+              name="height"
+              min={30}
+              max={300}
+              required
+              unit="cm"
+              error={bmiError && !bmiHeight ? bmiError : undefined}
+            />
+            <NumberField
+              id="bmi-age"
+              label="Edad (opcional)"
+              value={bmiAge}
+              onChange={e => setBmiAge(e.target.value)}
+              name="age"
+              min={5}
+              max={120}
+              unit="años"
+            />
+            <div>
+              <label htmlFor="bmi-sex" className="block font-medium mb-1">Sexo (opcional)</label>
+              <select
+                id="bmi-sex"
+                name="sex"
+                value={bmiSex}
+                onChange={e => setBmiSex(e.target.value as Sex)}
+                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                aria-label="Sexo"
+              >
+                {sexOptions.map(opt => (
+                  <option key={opt.value} value={opt.value}>{opt.label}</option>
+                ))}
+              </select>
+            </div>
           </div>
-        </div>
-        {bmiError && <div className="text-red-600 text-sm mt-2">{bmiError}</div>}
-      </CalculatorCard>
+          {bmiError && <div className="text-red-600 text-sm mt-2">{bmiError}</div>}
+        </CalculatorCard>
+      </motion.div>
 
       {/* BSA */}
-      <CalculatorCard
-        title="Superficie Corporal (BSA)"
-        onCalculate={handleBsaCalc}
-        onReset={handleBsaReset}
-        result={bsaDuBois !== null || bsaMosteller !== null ? (
-          <div>
-            <div>DuBois: <b>{bsaDuBois}</b> m²</div>
-            <div>Mosteller: <b>{bsaMosteller}</b> m²</div>
+      <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.3, duration: 0.4 }}>
+        <CalculatorCard
+          title="Superficie Corporal (BSA)"
+          onCalculate={handleBsaCalc}
+          onReset={handleBsaReset}
+          result={bsaDuBois !== null || bsaMosteller !== null ? (
+            <div>
+              <div>DuBois: <b>{bsaDuBois}</b> m²</div>
+              <div>Mosteller: <b>{bsaMosteller}</b> m²</div>
+            </div>
+          ) : null}
+          onCopy={bsaDuBois !== null || bsaMosteller !== null ? handleBsaCopy : undefined}
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <NumberField
+              id="bsa-weight"
+              label="Peso"
+              value={bsaWeight}
+              onChange={e => setBsaWeight(e.target.value)}
+              name="weight"
+              min={1}
+              max={500}
+              required
+              unit="kg"
+              error={bsaError && !bsaWeight ? bsaError : undefined}
+            />
+            <NumberField
+              id="bsa-height"
+              label="Estatura"
+              value={bsaHeight}
+              onChange={e => setBsaHeight(e.target.value)}
+              name="height"
+              min={30}
+              max={300}
+              required
+              unit="cm"
+              error={bsaError && !bsaHeight ? bsaError : undefined}
+            />
           </div>
-        ) : null}
-        onCopy={bsaDuBois !== null || bsaMosteller !== null ? handleBsaCopy : undefined}
-      >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <NumberField
-            id="bsa-weight"
-            label="Peso"
-            value={bsaWeight}
-            onChange={e => setBsaWeight(e.target.value)}
-            name="weight"
-            min={1}
-            max={500}
-            required
-            unit="kg"
-            error={bsaError && !bsaWeight ? bsaError : undefined}
-          />
-          <NumberField
-            id="bsa-height"
-            label="Estatura"
-            value={bsaHeight}
-            onChange={e => setBsaHeight(e.target.value)}
-            name="height"
-            min={30}
-            max={300}
-            required
-            unit="cm"
-            error={bsaError && !bsaHeight ? bsaError : undefined}
-          />
-        </div>
-        {bsaError && <div className="text-red-600 text-sm mt-2">{bsaError}</div>}
-      </CalculatorCard>
+          {bsaError && <div className="text-red-600 text-sm mt-2">{bsaError}</div>}
+        </CalculatorCard>
+      </motion.div>
 
       {/* % Grasa corporal (Deurenberg) */}
-      <CalculatorCard
-        title="% Grasa corporal (Deurenberg)"
-        onCalculate={handleBfCalc}
-        onReset={handleBfReset}
-        result={bfResult !== null && (
-          <span>% Grasa corporal: <b>{bfResult}</b> %</span>
-        )}
-        onCopy={bfResult !== null ? handleBfCopy : undefined}
-      >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <NumberField
-            id="bf-weight"
-            label="Peso"
-            value={bfWeight}
-            onChange={e => setBfWeight(e.target.value)}
-            name="weight"
-            min={1}
-            max={500}
-            required
-            unit="kg"
-            error={bfError && !bfWeight ? bfError : undefined}
-          />
-          <NumberField
-            id="bf-height"
-            label="Estatura"
-            value={bfHeight}
-            onChange={e => setBfHeight(e.target.value)}
-            name="height"
-            min={30}
-            max={300}
-            required
-            unit="cm"
-            error={bfError && !bfHeight ? bfError : undefined}
-          />
-          <NumberField
-            id="bf-age"
-            label="Edad"
-            value={bfAge}
-            onChange={e => setBfAge(e.target.value)}
-            name="age"
-            min={5}
-            max={120}
-            required
-            unit="años"
-            error={bfError && !bfAge ? bfError : undefined}
-          />
-          <div>
-            <label htmlFor="bf-sex" className="block font-medium mb-1">Sexo</label>
-            <select
-              id="bf-sex"
-              name="sex"
-              value={bfSex}
-              onChange={e => setBfSex(e.target.value as Sex)}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-              aria-label="Sexo"
-            >
-              {sexOptions.map(opt => (
-                <option key={opt.value} value={opt.value}>{opt.label}</option>
-              ))}
-            </select>
+      <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.4, duration: 0.4 }}>
+        <CalculatorCard
+          title="% Grasa corporal (Deurenberg)"
+          onCalculate={handleBfCalc}
+          onReset={handleBfReset}
+          result={bfResult !== null && (
+            <span>% Grasa corporal: <b>{bfResult}</b> %</span>
+          )}
+          onCopy={bfResult !== null ? handleBfCopy : undefined}
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <NumberField
+              id="bf-weight"
+              label="Peso"
+              value={bfWeight}
+              onChange={e => setBfWeight(e.target.value)}
+              name="weight"
+              min={1}
+              max={500}
+              required
+              unit="kg"
+              error={bfError && !bfWeight ? bfError : undefined}
+            />
+            <NumberField
+              id="bf-height"
+              label="Estatura"
+              value={bfHeight}
+              onChange={e => setBfHeight(e.target.value)}
+              name="height"
+              min={30}
+              max={300}
+              required
+              unit="cm"
+              error={bfError && !bfHeight ? bfError : undefined}
+            />
+            <NumberField
+              id="bf-age"
+              label="Edad"
+              value={bfAge}
+              onChange={e => setBfAge(e.target.value)}
+              name="age"
+              min={5}
+              max={120}
+              required
+              unit="años"
+              error={bfError && !bfAge ? bfError : undefined}
+            />
+            <div>
+              <label htmlFor="bf-sex" className="block font-medium mb-1">Sexo</label>
+              <select
+                id="bf-sex"
+                name="sex"
+                value={bfSex}
+                onChange={e => setBfSex(e.target.value as Sex)}
+                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                aria-label="Sexo"
+              >
+                {sexOptions.map(opt => (
+                  <option key={opt.value} value={opt.value}>{opt.label}</option>
+                ))}
+              </select>
+            </div>
           </div>
-        </div>
-        {bfError && <div className="text-red-600 text-sm mt-2">{bfError}</div>}
-      </CalculatorCard>
+          {bfError && <div className="text-red-600 text-sm mt-2">{bfError}</div>}
+        </CalculatorCard>
+      </motion.div>
 
       {/* Masa magra */}
-      <CalculatorCard
-        title="Masa magra (Lean mass)"
-        onCalculate={handleLmCalc}
-        onReset={handleLmReset}
-        result={lmResult !== null && (
-          <span>Masa magra: <b>{lmResult}</b> kg</span>
-        )}
-        onCopy={lmResult !== null ? handleLmCopy : undefined}
-      >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <NumberField
-            id="lm-weight"
-            label="Peso"
-            value={lmWeight}
-            onChange={e => setLmWeight(e.target.value)}
-            name="weight"
-            min={1}
-            max={500}
-            required
-            unit="kg"
-            error={lmError && !lmWeight ? lmError : undefined}
-          />
-          <NumberField
-            id="lm-bf"
-            label="% Grasa corporal"
-            value={lmBf}
-            onChange={e => setLmBf(e.target.value)}
-            name="bf"
-            min={0}
-            max={100}
-            required
-            unit="%"
-            error={lmError && !lmBf ? lmError : undefined}
-          />
-        </div>
-        {lmError && <div className="text-red-600 text-sm mt-2">{lmError}</div>}
-      </CalculatorCard>
+      <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.5, duration: 0.4 }}>
+        <CalculatorCard
+          title="Masa magra (Lean mass)"
+          onCalculate={handleLmCalc}
+          onReset={handleLmReset}
+          result={lmResult !== null && (
+            <span>Masa magra: <b>{lmResult}</b> kg</span>
+          )}
+          onCopy={lmResult !== null ? handleLmCopy : undefined}
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <NumberField
+              id="lm-weight"
+              label="Peso"
+              value={lmWeight}
+              onChange={e => setLmWeight(e.target.value)}
+              name="weight"
+              min={1}
+              max={500}
+              required
+              unit="kg"
+              error={lmError && !lmWeight ? lmError : undefined}
+            />
+            <NumberField
+              id="lm-bf"
+              label="% Grasa corporal"
+              value={lmBf}
+              onChange={e => setLmBf(e.target.value)}
+              name="bf"
+              min={0}
+              max={100}
+              required
+              unit="%"
+              error={lmError && !lmBf ? lmError : undefined}
+            />
+          </div>
+          {lmError && <div className="text-red-600 text-sm mt-2">{lmError}</div>}
+        </CalculatorCard>
+      </motion.div>
 
       {/* Peso ideal (Devine) */}
-      <CalculatorCard
-        title="Peso ideal (Devine)"
-        onCalculate={handlePiCalc}
-        onReset={handlePiReset}
-        result={piResult !== null && (
-          <span>Peso ideal: <b>{piResult}</b> kg <span className="block text-xs text-gray-500">(Devine, 1974)</span></span>
-        )}
-        onCopy={piResult !== null ? handlePiCopy : undefined}
-      >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <NumberField
-            id="pi-height"
-            label="Estatura"
-            value={piHeight}
-            onChange={e => setPiHeight(e.target.value)}
-            name="height"
-            min={30}
-            max={300}
-            required
-            unit="cm"
-            error={piError && !piHeight ? piError : undefined}
-          />
-          <div>
-            <label htmlFor="pi-sex" className="block font-medium mb-1">Sexo</label>
-            <select
-              id="pi-sex"
-              name="sex"
-              value={piSex}
-              onChange={e => setPiSex(e.target.value as Sex)}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-              aria-label="Sexo"
-            >
-              {sexOptions.map(opt => (
-                <option key={opt.value} value={opt.value}>{opt.label}</option>
-              ))}
-            </select>
+      <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.6, duration: 0.4 }}>
+        <CalculatorCard
+          title="Peso ideal (Devine)"
+          onCalculate={handlePiCalc}
+          onReset={handlePiReset}
+          result={piResult !== null && (
+            <span>Peso ideal: <b>{piResult}</b> kg <span className="block text-xs text-gray-500">(Devine, 1974)</span></span>
+          )}
+          onCopy={piResult !== null ? handlePiCopy : undefined}
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <NumberField
+              id="pi-height"
+              label="Estatura"
+              value={piHeight}
+              onChange={e => setPiHeight(e.target.value)}
+              name="height"
+              min={30}
+              max={300}
+              required
+              unit="cm"
+              error={piError && !piHeight ? piError : undefined}
+            />
+            <div>
+              <label htmlFor="pi-sex" className="block font-medium mb-1">Sexo</label>
+              <select
+                id="pi-sex"
+                name="sex"
+                value={piSex}
+                onChange={e => setPiSex(e.target.value as Sex)}
+                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                aria-label="Sexo"
+              >
+                {sexOptions.map(opt => (
+                  <option key={opt.value} value={opt.value}>{opt.label}</option>
+                ))}
+              </select>
+            </div>
           </div>
-        </div>
-        {piError && <div className="text-red-600 text-sm mt-2">{piError}</div>}
-      </CalculatorCard>
+          {piError && <div className="text-red-600 text-sm mt-2">{piError}</div>}
+        </CalculatorCard>
+      </motion.div>
 
       {/* BMR (Mifflin–St Jeor) */}
-      <CalculatorCard
-        title="Tasa metabólica basal (BMR, Mifflin–St Jeor)"
-        onCalculate={handleBmrCalc}
-        onReset={handleBmrReset}
-        result={bmrResult !== null && (
-          <span>BMR: <b>{bmrResult}</b> kcal/día</span>
-        )}
-        onCopy={bmrResult !== null ? handleBmrCopy : undefined}
-      >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <NumberField
-            id="bmr-weight"
-            label="Peso"
-            value={bmrWeight}
-            onChange={e => setBmrWeight(e.target.value)}
-            name="weight"
-            min={1}
-            max={500}
-            required
-            unit="kg"
-            error={bmrError && !bmrWeight ? bmrError : undefined}
-          />
-          <NumberField
-            id="bmr-height"
-            label="Estatura"
-            value={bmrHeight}
-            onChange={e => setBmrHeight(e.target.value)}
-            name="height"
-            min={30}
-            max={300}
-            required
-            unit="cm"
-            error={bmrError && !bmrHeight ? bmrError : undefined}
-          />
-          <NumberField
-            id="bmr-age"
-            label="Edad"
-            value={bmrAge}
-            onChange={e => setBmrAge(e.target.value)}
-            name="age"
-            min={5}
-            max={120}
-            required
-            unit="años"
-            error={bmrError && !bmrAge ? bmrError : undefined}
-          />
-          <div>
-            <label htmlFor="bmr-sex" className="block font-medium mb-1">Sexo</label>
-            <select
-              id="bmr-sex"
-              name="sex"
-              value={bmrSex}
-              onChange={e => setBmrSex(e.target.value as Sex)}
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-              aria-label="Sexo"
-            >
-              {sexOptions.map(opt => (
-                <option key={opt.value} value={opt.value}>{opt.label}</option>
-              ))}
-            </select>
+      <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.7, duration: 0.4 }}>
+        <CalculatorCard
+          title="Tasa metabólica basal (BMR, Mifflin–St Jeor)"
+          onCalculate={handleBmrCalc}
+          onReset={handleBmrReset}
+          result={bmrResult !== null && (
+            <span>BMR: <b>{bmrResult}</b> kcal/día</span>
+          )}
+          onCopy={bmrResult !== null ? handleBmrCopy : undefined}
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <NumberField
+              id="bmr-weight"
+              label="Peso"
+              value={bmrWeight}
+              onChange={e => setBmrWeight(e.target.value)}
+              name="weight"
+              min={1}
+              max={500}
+              required
+              unit="kg"
+              error={bmrError && !bmrWeight ? bmrError : undefined}
+            />
+            <NumberField
+              id="bmr-height"
+              label="Estatura"
+              value={bmrHeight}
+              onChange={e => setBmrHeight(e.target.value)}
+              name="height"
+              min={30}
+              max={300}
+              required
+              unit="cm"
+              error={bmrError && !bmrHeight ? bmrError : undefined}
+            />
+            <NumberField
+              id="bmr-age"
+              label="Edad"
+              value={bmrAge}
+              onChange={e => setBmrAge(e.target.value)}
+              name="age"
+              min={5}
+              max={120}
+              required
+              unit="años"
+              error={bmrError && !bmrAge ? bmrError : undefined}
+            />
+            <div>
+              <label htmlFor="bmr-sex" className="block font-medium mb-1">Sexo</label>
+              <select
+                id="bmr-sex"
+                name="sex"
+                value={bmrSex}
+                onChange={e => setBmrSex(e.target.value as Sex)}
+                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                aria-label="Sexo"
+              >
+                {sexOptions.map(opt => (
+                  <option key={opt.value} value={opt.value}>{opt.label}</option>
+                ))}
+              </select>
+            </div>
           </div>
-        </div>
-        {bmrError && <div className="text-red-600 text-sm mt-2">{bmrError}</div>}
-      </CalculatorCard>
+          {bmrError && <div className="text-red-600 text-sm mt-2">{bmrError}</div>}
+        </CalculatorCard>
+      </motion.div>
 
-      <footer className="mt-8 text-xs text-gray-500 text-center">
+      <motion.footer
+        className="mt-8 text-xs text-gray-500 text-center"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.8, duration: 0.5 }}
+      >
         Estas calculadoras son de uso educativo y no reemplazan el juicio profesional.
-      </footer>
-    </div>
+      </motion.footer>
+    </motion.div>
   );
 };
 

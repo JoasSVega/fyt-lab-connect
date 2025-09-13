@@ -1,7 +1,7 @@
 
 import React, { useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 // Using standardized logo from public folder
 
 const Navbar = () => {
@@ -15,28 +15,14 @@ const Navbar = () => {
       isDropdown: false
     },
     {
-      name: "Sobre nosotros",
-      href: "#sobre",
-      isDropdown: false,
-      isAnchor: true
-    },
-    {
       name: "Nuestro Equipo",
       href: "/equipo",
       isDropdown: false
     },
     {
       name: "Herramientas",
-      href: "#",
-      isDropdown: true,
-      dropdownItems: [
-        { name: "Calculadoras de función renal (prueba)", href: "/herramientas/funcion-renal" },
-        { name: "Calculadoras Antropométricas", href: "/herramientas/antropometricas" },
-        { name: "Calculadora de Dosificación", href: "/calculator/dosage" },
-        { name: "Calculadora de Superficie Corporal", href: "/calculator/bsa" },
-        { name: "Consultor Farmacológico", href: "/consultor" },
-        { name: "Comparador de Fármacos", href: "/comparador" }
-      ]
+      href: "/herramientas",
+      isDropdown: false
     },
     {
       name: "Proyectos",
@@ -79,17 +65,17 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo y nombre */}
-          <div className="flex items-center space-x-3">
+          <Link to="/" className="flex items-center space-x-3 group focus:outline-none">
             <div className="flex-shrink-0">
-              <img src="/logo-fyt.png" alt="Logo Grupo FyT" className="h-12 w-auto transition-all duration-300" />
+              <img src="/logo-fyt.png" alt="Logo Grupo FyT" className="h-12 w-auto transition-all duration-300 group-hover:scale-105" />
             </div>
-            <div className="text-lg font-bold text-gray-800">
+            <div className="text-lg font-bold text-gray-800 group-hover:text-fyt-blue transition-colors">
               Grupo FyT
-              <span className="block text-xs text-gray-600 font-normal">
+              <span className="block text-xs text-gray-600 font-normal group-hover:text-fyt-blue/80">
                 Farmacología y Terapéutica
               </span>
             </div>
-          </div>
+          </Link>
 
           {/* Menú principal centrado - Desktop */}
           <div className="hidden lg:flex items-center space-x-8 flex-1 justify-center">
@@ -112,13 +98,6 @@ const Navbar = () => {
                       }`} 
                     />
                   </button>
-                ) : item.isAnchor ? (
-                  <button
-                    onClick={() => scrollToSection(item.href)}
-                    className="text-gray-700 hover:text-blue-600 transition-all duration-200 font-medium px-3 py-2 rounded-md"
-                  >
-                    {item.name}
-                  </button>
                 ) : (
                   <NavLink
                     to={item.href}
@@ -132,25 +111,7 @@ const Navbar = () => {
                   </NavLink>
                 )}
 
-                {/* Dropdown menu */}
-                {item.isDropdown && openDropdown === item.name && (
-                  <div className="absolute top-full left-0 mt-1 w-64 bg-white rounded-md shadow-lg border border-gray-200 py-2 z-50">
-                    {item.dropdownItems?.map((dropdownItem) => (
-                      <NavLink
-                        key={dropdownItem.name}
-                        to={dropdownItem.href}
-                        className={({ isActive }) =>
-                          `block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition-all duration-200 ${
-                            isActive ? 'bg-blue-50 text-blue-600' : ''
-                          }`
-                        }
-                        onClick={() => setOpenDropdown(null)}
-                      >
-                        {dropdownItem.name}
-                      </NavLink>
-                    ))}
-                  </div>
-                )}
+                {/* Dropdown menu eliminado para Herramientas */}
               </div>
             ))}
           </div>
@@ -173,61 +134,17 @@ const Navbar = () => {
             <div className="space-y-2">
               {menuItems.map((item) => (
                 <div key={item.name}>
-                  {item.isDropdown ? (
-                    <>
-                      <button
-                        onClick={() => handleDropdownToggle(item.name)}
-                        className="flex items-center justify-between w-full px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all duration-200 font-medium"
-                      >
-                        <span>{item.name}</span>
-                        <ChevronDown 
-                          className={`w-4 h-4 transition-transform duration-200 ${
-                            openDropdown === item.name ? 'rotate-180' : ''
-                          }`} 
-                        />
-                      </button>
-                      {openDropdown === item.name && (
-                        <div className="pl-4 space-y-1 bg-gray-50">
-                          {item.dropdownItems?.map((dropdownItem) => (
-                            <NavLink
-                              key={dropdownItem.name}
-                              to={dropdownItem.href}
-                              className={({ isActive }) =>
-                                `block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white transition-all duration-200 rounded ${
-                                  isActive ? 'bg-blue-50 text-blue-600' : ''
-                                }`
-                              }
-                              onClick={() => {
-                                setIsMenuOpen(false);
-                                setOpenDropdown(null);
-                              }}
-                            >
-                              {dropdownItem.name}
-                            </NavLink>
-                          ))}
-                        </div>
-                      )}
-                    </>
-                  ) : item.isAnchor ? (
-                    <button
-                      onClick={() => scrollToSection(item.href)}
-                      className="block w-full text-left px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all duration-200 font-medium"
-                    >
-                      {item.name}
-                    </button>
-                  ) : (
-                    <NavLink
-                      to={item.href}
-                      className={({ isActive }) =>
-                        `block px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all duration-200 font-medium ${
-                          isActive ? 'text-blue-600 bg-blue-50' : ''
-                        }`
-                      }
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      {item.name}
-                    </NavLink>
-                  )}
+                  <NavLink
+                    to={item.href}
+                    className={({ isActive }) =>
+                      `block px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all duration-200 font-medium ${
+                        isActive ? 'text-blue-600 bg-blue-50' : ''
+                      }`
+                    }
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.name}
+                  </NavLink>
                 </div>
               ))}
             </div>

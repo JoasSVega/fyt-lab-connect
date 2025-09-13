@@ -5,12 +5,12 @@ import { Button } from "./ui/button";
 
 const Footer = () => {
   const quickLinks = [
-    { name: "Inicio", href: "#inicio" },
-    { name: "Sobre nosotros", href: "#sobre" },
-    { name: "Equipo", href: "#equipo" },
-    { name: "Proyectos", href: "#proyectos" },
-    { name: "Noticias", href: "#noticias" },
-    { name: "Contacto", href: "#contacto" }
+    { name: "Inicio", href: "/" },
+    { name: "Sobre Nosotros", href: "/#sobre" },
+    { name: "Equipo", href: "/equipo" },
+    { name: "Proyectos", href: "/proyectos" },
+    { name: "Noticias", href: "/noticias" },
+    { name: "Contactos", href: "/contactos" }
   ];
 
   const researchAreas = [
@@ -78,12 +78,12 @@ const Footer = () => {
             <ul className="space-y-2 sm:space-y-3">
               {quickLinks.map((link, index) => (
                 <li key={index}>
-                  <button
-                    onClick={() => scrollToSection(link.href)}
+                  <a
+                    href={link.href}
                     className="text-slate-600 hover:text-fyt-blue transition-colors duration-200 text-xs sm:text-sm"
                   >
                     {link.name}
-                  </button>
+                  </a>
                 </li>
               ))}
             </ul>

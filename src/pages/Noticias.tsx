@@ -1,6 +1,5 @@
 import News from "@/components/News";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import FloatingContact from "@/components/FloatingContact";
 
 const Noticias = () => (
@@ -9,7 +8,6 @@ const Noticias = () => (
     <main className="flex-1 w-full pt-16">
       <News />
     </main>
-    <Footer />
     <FloatingContact />
   </div>
 );

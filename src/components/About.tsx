@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Target, Eye, Microscope, Heart, Users, BookOpen, ChevronLeft, ChevronRight } from "lucide-react";
+import { Target, Eye, Microscope, Heart, Users, BookOpen, ChevronLeft, ChevronRight, Bell } from "lucide-react";
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "./ui/carousel";
@@ -293,7 +293,7 @@ const About = () => {
           <h3 className="text-2xl font-semibold text-center text-fyt-dark mb-8">
             Actividades y Productos
           </h3>
-          <div className="relative px-4 sm:px-8 lg:px-12">
+          <div className="relative px-4 sm:px-8 lg:px-12 mb-12">
             <Carousel
               opts={{
                 align: "start",
@@ -324,6 +324,25 @@ const About = () => {
               <CarouselPrevious className="hidden md:flex -left-12" />
               <CarouselNext className="hidden md:flex -right-12" />
             </Carousel>
+          </div>
+          {/* INSCRÍBETE AHORA Card */}
+          <div className="flex justify-center mt-8">
+            <Card className="max-w-2xl w-full p-8 bg-gradient-hero text-white shadow-large text-center">
+              <Bell className="h-12 w-12 mx-auto mb-4 text-white/90" />
+              <h3 className="text-2xl font-semibold mb-4">INSCRÍBETE AHORA</h3>
+              <p className="mb-6 text-white/90">
+                ¿Interesado en formar parte de nuestro semillero de investigación? 
+                Completa el formulario oficial de inscripción.
+              </p>
+              <Button 
+                variant="secondary"
+                size="lg"
+                className="bg-white text-fyt-dark hover:bg-white/90"
+                onClick={() => window.open('https://forms.gle/3fbXVW7b4Db6Q9dWA', '_blank')}
+              >
+                Inscribirse Ahora
+              </Button>
+            </Card>
           </div>
         </div>
       </div>

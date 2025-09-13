@@ -217,25 +217,6 @@ const News = () => {
           ))}
         </div>
 
-        {/* Enrollment Call to Action */}
-        <div className="mt-16">
-          <Card className="max-w-2xl mx-auto p-8 bg-gradient-hero text-white shadow-large text-center">
-            <Bell className="h-12 w-12 mx-auto mb-4 text-white/90" />
-            <h3 className="text-2xl font-semibold mb-4">Inscríbete</h3>
-            <p className="mb-6 text-white/90">
-              ¿Interesado en formar parte de nuestro semillero de investigación? 
-              Completa el formulario oficial de inscripción.
-            </p>
-            <Button 
-              variant="secondary"
-              size="lg"
-              className="bg-white text-fyt-dark hover:bg-white/90"
-              onClick={() => window.open('https://forms.gle/3fbXVW7b4Db6Q9dWA', '_blank')}
-            >
-              Inscribirse Ahora
-            </Button>
-          </Card>
-        </div>
       </div>
     </section>
   );
