@@ -217,28 +217,23 @@ const News = () => {
           ))}
         </div>
 
-        {/* Newsletter Subscription */}
+        {/* Enrollment Call to Action */}
         <div className="mt-16">
           <Card className="max-w-2xl mx-auto p-8 bg-gradient-hero text-white shadow-large text-center">
             <Bell className="h-12 w-12 mx-auto mb-4 text-white/90" />
-            <h3 className="text-2xl font-semibold mb-4">Mantente Informado</h3>
+            <h3 className="text-2xl font-semibold mb-4">Inscríbete</h3>
             <p className="mb-6 text-white/90">
-              Suscríbete a nuestro boletín para recibir las últimas noticias y eventos 
-              directamente en tu correo electrónico.
+              ¿Interesado en formar parte de nuestro semillero de investigación? 
+              Completa el formulario oficial de inscripción.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-              <input 
-                type="email" 
-                placeholder="Tu correo electrónico"
-                className="flex-1 px-4 py-2 rounded-lg text-fyt-dark focus:outline-none focus:ring-2 focus:ring-white/50"
-              />
-              <Button 
-                variant="secondary"
-                className="bg-white text-fyt-dark hover:bg-white/90"
-              >
-                Suscribirse
-              </Button>
-            </div>
+            <Button 
+              variant="secondary"
+              size="lg"
+              className="bg-white text-fyt-dark hover:bg-white/90"
+              onClick={() => window.open('https://forms.gle/3fbXVW7b4Db6Q9dWA', '_blank')}
+            >
+              Inscribirse Ahora
+            </Button>
           </Card>
         </div>
       </div>

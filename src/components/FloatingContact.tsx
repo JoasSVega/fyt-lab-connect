@@ -10,23 +10,19 @@ const FloatingContact = () => {
     {
       icon: MessageCircle,
       label: "WhatsApp",
-      action: () => window.open('https://wa.me/573001234567?text=Hola, me interesa conocer más sobre el Semillero FYT', '_blank'),
+      action: () => window.open('https://wa.me/573137375217?text=Hola, me interesa conocer más sobre el Grupo FyT', '_blank'),
       color: "bg-green-500 hover:bg-green-600"
     },
     {
       icon: Phone,
       label: "Llamar",
-      action: () => window.open('tel:+573001234567', '_blank'),
+      action: () => window.open('tel:+573137375217', '_blank'),
       color: "bg-fyt-blue hover:bg-fyt-blue/90"
     },
     {
       icon: Mail,
-      label: "Email",
-      action: () => {
-        const element = document.querySelector('#contacto');
-        element?.scrollIntoView({ behavior: 'smooth' });
-        setIsOpen(false);
-      },
+      label: "Gmail",
+      action: () => window.open('mailto:farmacologiayterapeutica.gi@gmail.com', '_blank'),
       color: "bg-fyt-purple hover:bg-fyt-purple/90"
     }
   ];

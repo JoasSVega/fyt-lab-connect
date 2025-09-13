@@ -149,9 +149,18 @@ const Contact = () => {
                           <h4 className="text-lg font-semibold text-fyt-dark mb-1">
                             {item.title}
                           </h4>
-                          <p className="text-fyt-blue font-medium mb-1">
-                            {item.info}
-                          </p>
+                          {item.icon === Mail ? (
+                            <a 
+                              href={`mailto:${item.info}`}
+                              className="text-fyt-blue font-medium mb-1 hover:underline cursor-pointer"
+                            >
+                              {item.info}
+                            </a>
+                          ) : (
+                            <p className="text-fyt-blue font-medium mb-1">
+                              {item.info}
+                            </p>
+                          )}
                           <p className="text-muted-foreground text-sm">
                             {item.description}
                           </p>
@@ -173,7 +182,7 @@ const Contact = () => {
                   variant="outline" 
                   size="sm"
                   className="border-fyt-purple/20 hover:bg-fyt-purple hover:text-white"
-                  onClick={() => window.open('https://instagram.com', '_blank')}
+                  onClick={() => window.open('https://www.instagram.com/grupo_fyt?igsh=MXNxbXo3eHM2MHRweA==', '_blank')}
                 >
                   Instagram
                 </Button>

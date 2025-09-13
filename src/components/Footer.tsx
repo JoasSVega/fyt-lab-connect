@@ -54,7 +54,12 @@ const Footer = () => {
             <div className="space-y-2 sm:space-y-3">
               <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-slate-600 flex-wrap">
                 <Mail className="h-4 w-4 text-fyt-blue flex-shrink-0" />
-                <span>farmacologiayterapeutica.gi@gmail.com</span>
+                <a 
+                  href="mailto:farmacologiayterapeutica.gi@gmail.com"
+                  className="hover:text-fyt-blue hover:underline cursor-pointer"
+                >
+                  farmacologiayterapeutica.gi@gmail.com
+                </a>
               </div>
               <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-slate-600 flex-wrap">
                 <Phone className="h-4 w-4 text-fyt-blue flex-shrink-0" />
@@ -110,7 +115,7 @@ const Footer = () => {
                   variant="outline" 
                   size="sm"
                   className="border-slate-300 text-slate-700 hover:bg-fyt-purple hover:border-fyt-purple hover:text-white min-w-[90px]"
-                  onClick={() => window.open('https://instagram.com', '_blank')}
+                  onClick={() => window.open('https://www.instagram.com/grupo_fyt?igsh=MXNxbXo3eHM2MHRweA==', '_blank')}
                 >
                   Instagram
                 </Button>
