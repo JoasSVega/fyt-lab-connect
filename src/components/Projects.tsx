@@ -1,6 +1,8 @@
 import { Calendar, ExternalLink, FileText, Users, Clock, CheckCircle } from "lucide-react";
 import { Card } from "./ui/card";
-import ScrollReveal from "./ScrollReveal";
+import { CardReveal } from "./animations/CardReveal";
+import { FadeInUp } from "./animations/FadeInUp";
+import { ButtonReveal } from "./animations/ButtonReveal";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 
@@ -99,13 +101,17 @@ const Projects = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-fyt-dark mb-4">
-            Proyectos y Publicaciones
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Conoce nuestras investigaciones actuales y los resultados científicos que hemos logrado 
-            a través de nuestro trabajo riguroso y colaborativo.
-          </p>
+          <FadeInUp>
+            <h2 className="text-3xl md:text-4xl font-bold text-fyt-dark mb-4">
+              Proyectos y Publicaciones
+            </h2>
+          </FadeInUp>
+          <FadeInUp delay={0.1}>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+              Conoce nuestras investigaciones actuales y los resultados científicos que hemos logrado 
+              a través de nuestro trabajo riguroso y colaborativo.
+            </p>
+          </FadeInUp>
         </div>
 
         {/* Current Projects */}
@@ -116,54 +122,66 @@ const Projects = () => {
           </h3>
           <div className="grid lg:grid-cols-2 gap-8">
             {currentProjects.map((project) => (
-              <ScrollReveal key={project.title}>
+              <CardReveal key={project.title}>
                 <Card className="p-6 bg-gradient-card shadow-soft hover:shadow-medium transition-shadow">
                   <div className="mb-4">
                     <div className="flex items-start justify-between mb-3">
-                      <Badge variant="secondary" className="text-xs">
-                        {project.category}
-                      </Badge>
-                      <Badge 
-                        variant="outline" 
-                        className="text-xs border-green-500 text-green-600"
-                      >
-                        {project.status}
-                      </Badge>
+                      <FadeInUp>
+                        <Badge variant="secondary" className="text-xs">
+                          {project.category}
+                        </Badge>
+                      </FadeInUp>
+                      <FadeInUp delay={0.1}>
+                        <Badge 
+                          variant="outline" 
+                          className="text-xs border-green-500 text-green-600"
+                        >
+                          {project.status}
+                        </Badge>
+                      </FadeInUp>
                     </div>
-                    <h4 className="text-lg font-semibold text-fyt-dark mb-2">{project.title}</h4>
-                    <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-                      {project.description}
-                    </p>
+                    <FadeInUp delay={0.15}>
+                      <h4 className="text-lg font-semibold text-fyt-dark mb-2">{project.title}</h4>
+                    </FadeInUp>
+                    <FadeInUp delay={0.2}>
+                      <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                        {project.description}
+                      </p>
+                    </FadeInUp>
                   </div>
                   {/* Progress Bar */}
-                  <div className="mb-4">
-                    <div className="flex justify-between text-sm text-muted-foreground mb-1">
-                      <span>Progreso</span>
-                      <span>{project.progress}%</span>
+                  <FadeInUp delay={0.25}>
+                    <div className="mb-4">
+                      <div className="flex justify-between text-sm text-muted-foreground mb-1">
+                        <span>Progreso</span>
+                        <span>{project.progress}%</span>
+                      </div>
+                      <div className="w-full bg-muted rounded-full h-2">
+                        <div 
+                          className="bg-gradient-hero h-2 rounded-full transition-all duration-500"
+                          style={{ width: `${project.progress}%` }}
+                        ></div>
+                      </div>
                     </div>
-                    <div className="w-full bg-muted rounded-full h-2">
-                      <div 
-                        className="bg-gradient-hero h-2 rounded-full transition-all duration-500"
-                        style={{ width: `${project.progress}%` }}
-                      ></div>
-                    </div>
-                  </div>
+                  </FadeInUp>
                   {/* Project Details */}
-                  <div className="grid grid-cols-2 gap-4 text-sm">
-                    <div className="flex items-center space-x-2 text-muted-foreground">
-                      <Calendar className="h-4 w-4" />
-                      <span>{project.duration}</span>
+                  <FadeInUp delay={0.3}>
+                    <div className="grid grid-cols-2 gap-4 text-sm">
+                      <div className="flex items-center space-x-2 text-muted-foreground">
+                        <Calendar className="h-4 w-4" />
+                        <span>{project.duration}</span>
+                      </div>
+                      <div className="flex items-center space-x-2 text-muted-foreground">
+                        <Users className="h-4 w-4" />
+                        <span>{project.team} investigadores</span>
+                      </div>
+                      <div className="col-span-2 text-fyt-purple font-medium">
+                        Financiado por: {project.funding}
+                      </div>
                     </div>
-                    <div className="flex items-center space-x-2 text-muted-foreground">
-                      <Users className="h-4 w-4" />
-                      <span>{project.team} investigadores</span>
-                    </div>
-                    <div className="col-span-2 text-fyt-purple font-medium">
-                      Financiado por: {project.funding}
-                    </div>
-                  </div>
+                  </FadeInUp>
                 </Card>
-              </ScrollReveal>
+              </CardReveal>
             ))}
           </div>
         </div>
@@ -176,19 +194,27 @@ const Projects = () => {
           </h3>
           <div className="grid md:grid-cols-2 gap-6">
             {completedProjects.map((project) => (
-              <ScrollReveal key={project.title}>
+              <CardReveal key={project.title}>
                 <Card className="p-6 bg-gradient-card shadow-soft">
-                  <Badge variant="outline" className="text-xs mb-3 border-green-500 text-green-600">
-                    {project.category}
-                  </Badge>
-                  <h4 className="text-lg font-semibold text-fyt-dark mb-2">{project.title}</h4>
-                  <p className="text-muted-foreground text-sm mb-4">{project.description}</p>
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="text-muted-foreground">Año: {project.year}</span>
-                    <span className="text-fyt-purple font-medium">{project.impact}</span>
-                  </div>
+                  <FadeInUp>
+                    <Badge variant="outline" className="text-xs mb-3 border-green-500 text-green-600">
+                      {project.category}
+                    </Badge>
+                  </FadeInUp>
+                  <FadeInUp delay={0.1}>
+                    <h4 className="text-lg font-semibold text-fyt-dark mb-2">{project.title}</h4>
+                  </FadeInUp>
+                  <FadeInUp delay={0.15}>
+                    <p className="text-muted-foreground text-sm mb-4">{project.description}</p>
+                  </FadeInUp>
+                  <FadeInUp delay={0.2}>
+                    <div className="flex justify-between items-center text-sm">
+                      <span className="text-muted-foreground">Año: {project.year}</span>
+                      <span className="text-fyt-purple font-medium">{project.impact}</span>
+                    </div>
+                  </FadeInUp>
                 </Card>
-              </ScrollReveal>
+              </CardReveal>
             ))}
           </div>
         </div>
@@ -201,42 +227,54 @@ const Projects = () => {
           </h3>
           <div className="space-y-6">
             {publications.map((pub) => (
-              <ScrollReveal key={pub.title}>
+              <CardReveal key={pub.title}>
                 <Card className="p-6 bg-gradient-card shadow-soft hover:shadow-medium transition-shadow">
                   <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
                     <div className="flex-1">
-                      <h4 className="text-lg font-semibold text-fyt-dark mb-2">{pub.title}</h4>
-                      <p className="text-muted-foreground text-sm mb-2">{pub.authors}</p>
-                      <div className="flex flex-wrap gap-2 items-center text-sm">
-                        <span className="text-fyt-purple font-medium">{pub.journal}</span>
-                        <span className="text-muted-foreground">•</span>
-                        <span className="text-muted-foreground">{pub.year}</span>
-                        <Badge variant="outline" className="text-xs">
-                          {pub.impact}
-                        </Badge>
-                      </div>
-                      <p className="text-xs text-muted-foreground mt-2">DOI: {pub.doi}</p>
+                      <FadeInUp>
+                        <h4 className="text-lg font-semibold text-fyt-dark mb-2">{pub.title}</h4>
+                      </FadeInUp>
+                      <FadeInUp delay={0.1}>
+                        <p className="text-muted-foreground text-sm mb-2">{pub.authors}</p>
+                      </FadeInUp>
+                      <FadeInUp delay={0.15}>
+                        <div className="flex flex-wrap gap-2 items-center text-sm">
+                          <span className="text-fyt-purple font-medium">{pub.journal}</span>
+                          <span className="text-muted-foreground">•</span>
+                          <span className="text-muted-foreground">{pub.year}</span>
+                          <Badge variant="outline" className="text-xs">
+                            {pub.impact}
+                          </Badge>
+                        </div>
+                      </FadeInUp>
+                      <FadeInUp delay={0.2}>
+                        <p className="text-xs text-muted-foreground mt-2">DOI: {pub.doi}</p>
+                      </FadeInUp>
                     </div>
-                    <Button 
-                      variant="outline" 
-                      size="sm"
-                      className="border-fyt-blue/20 hover:bg-fyt-blue hover:text-white shrink-0"
-                      onClick={() => window.open(pub.url, '_blank')}
-                    >
-                      <ExternalLink className="h-4 w-4 mr-2" />
-                      Ver Artículo
-                    </Button>  
+                    <ButtonReveal delay={0.25}>
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        className="border-fyt-blue/20 hover:bg-fyt-blue hover:text-white shrink-0"
+                        onClick={() => window.open(pub.url, '_blank')}
+                      >
+                        <ExternalLink className="h-4 w-4 mr-2" />
+                        Ver Artículo
+                      </Button>
+                    </ButtonReveal>
                   </div>
                 </Card>
-              </ScrollReveal>
+              </CardReveal>
             ))}
           </div>
 
           {/* View More Button */}
           <div className="text-center mt-8">
-            <Button variant="outline" size="lg" className="border-fyt-purple/20 hover:bg-fyt-purple hover:text-white">
-              Ver Todas las Publicaciones
-            </Button>
+            <ButtonReveal>
+              <Button variant="outline" size="lg" className="border-fyt-purple/20 hover:bg-fyt-purple hover:text-white">
+                Ver Todas las Publicaciones
+              </Button>
+            </ButtonReveal>
           </div>
         </div>
       </div>

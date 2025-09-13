@@ -1,6 +1,9 @@
 import { Calendar, MapPin, Users, ArrowRight, Bell } from "lucide-react";
 import { Card } from "./ui/card";
-import ScrollReveal from "./ScrollReveal";
+import { CardReveal } from "./animations/CardReveal";
+import { FadeInUp } from "./animations/FadeInUp";
+import { ButtonReveal } from "./animations/ButtonReveal";
+import { ImageReveal } from "./animations/ImageReveal";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 
@@ -77,146 +80,166 @@ const News = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-fyt-dark mb-4">
-            Noticias y Eventos
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Mantente informado sobre nuestras últimas actividades, eventos académicos 
-            y logros en investigación.
-          </p>
+          <FadeInUp>
+            <h2 className="text-3xl md:text-4xl font-bold text-fyt-dark mb-4">
+              Noticias y Eventos
+            </h2>
+          </FadeInUp>
+          <FadeInUp delay={0.1}>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+              Mantente informado sobre nuestras últimas actividades, eventos académicos 
+              y logros en investigación.
+            </p>
+          </FadeInUp>
         </div>
 
         {/* Featured News */}
         {featuredNews && (
           <div className="mb-16">
-            <Card className="overflow-hidden bg-gradient-card shadow-large hover:shadow-large transition-shadow">
-              <div className="grid lg:grid-cols-2">
-                {/* Image */}
-                <div className="relative">
-                  <img 
-                    src={featuredNews.image} 
-                    alt={featuredNews.title}
-                    className="w-full h-64 lg:h-full object-cover"
-                  />
-                  <div className="absolute top-4 left-4">
-                    <Badge 
-                      variant="secondary" 
-                      className="bg-fyt-red text-white"
-                    >
-                      Destacado
-                    </Badge>
-                  </div>
-                  {isUpcoming(featuredNews.date) && (
-                    <div className="absolute top-4 right-4">
-                      <Badge 
-                        variant="outline" 
-                        className="bg-white/90 border-fyt-blue text-fyt-blue"
-                      >
-                        <Bell className="h-3 w-3 mr-1" />
-                        Próximo
-                      </Badge>
-                    </div>
-                  )}
-                </div>
-
-                {/* Content */}
-                <div className="p-8">
-                  <div className="mb-4">
-                    <Badge variant="outline" className="text-xs mb-3">
-                      {featuredNews.category}
-                    </Badge>
-                    <h3 className="text-2xl font-bold text-fyt-dark mb-3">
-                      {featuredNews.title}
-                    </h3>
-                  </div>
-
-                  <p className="text-muted-foreground mb-6 leading-relaxed">
-                    {featuredNews.description}
-                  </p>
-
-                  <div className="space-y-3 mb-6">
-                    <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-                      <Calendar className="h-4 w-4 text-fyt-blue" />
-                      <span>{formatDate(featuredNews.date)}</span>
-                    </div>
-                    {featuredNews.location && (
-                      <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-                        <MapPin className="h-4 w-4 text-fyt-purple" />
-                        <span>{featuredNews.location}</span>
+            <CardReveal>
+              <Card className="overflow-hidden bg-gradient-card shadow-large hover:shadow-large transition-shadow">
+                <div className="grid lg:grid-cols-2">
+                  {/* Image */}
+                  <ImageReveal>
+                    <div className="relative">
+                      <img 
+                        src={featuredNews.image} 
+                        alt={featuredNews.title}
+                        className="w-full h-64 lg:h-full object-cover"
+                      />
+                      <div className="absolute top-4 left-4">
+                        <Badge 
+                          variant="secondary" 
+                          className="bg-fyt-red text-white"
+                        >
+                          Destacado
+                        </Badge>
                       </div>
-                    )}
-                  </div>
+                      {isUpcoming(featuredNews.date) && (
+                        <div className="absolute top-4 right-4">
+                          <Badge 
+                            variant="outline" 
+                            className="bg-white/90 border-fyt-blue text-fyt-blue"
+                          >
+                            <Bell className="h-3 w-3 mr-1" />
+                            Próximo
+                          </Badge>
+                        </div>
+                      )}
+                    </div>
+                  </ImageReveal>
 
-                  <Button className="bg-gradient-hero text-white">
-                    Más Información
-                    <ArrowRight className="h-4 w-4 ml-2" />
-                  </Button>
+                  {/* Content */}
+                  <div className="p-8">
+                    <FadeInUp>
+                      <div className="mb-4">
+                        <Badge variant="outline" className="text-xs mb-3">
+                          {featuredNews.category}
+                        </Badge>
+                        <h3 className="text-2xl font-bold text-fyt-dark mb-3">
+                          {featuredNews.title}
+                        </h3>
+                      </div>
+                    </FadeInUp>
+                    <FadeInUp delay={0.1}>
+                      <p className="text-muted-foreground mb-6 leading-relaxed">
+                        {featuredNews.description}
+                      </p>
+                    </FadeInUp>
+                    <FadeInUp delay={0.15}>
+                      <div className="space-y-3 mb-6">
+                        <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+                          <Calendar className="h-4 w-4 text-fyt-blue" />
+                          <span>{formatDate(featuredNews.date)}</span>
+                        </div>
+                        {featuredNews.location && (
+                          <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+                            <MapPin className="h-4 w-4 text-fyt-purple" />
+                            <span>{featuredNews.location}</span>
+                          </div>
+                        )}
+                      </div>
+                    </FadeInUp>
+                    <ButtonReveal delay={0.2}>
+                      <Button className="bg-gradient-hero text-white">
+                        Más Información
+                        <ArrowRight className="h-4 w-4 ml-2" />
+                      </Button>
+                    </ButtonReveal>
+                  </div>
                 </div>
-              </div>
-            </Card>
+              </Card>
+            </CardReveal>
           </div>
         )}
 
         {/* Regular News Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {regularNews.map((item, index) => (
-              <ScrollReveal key={item.title}>
-            <Card key={index} className="overflow-hidden bg-gradient-card shadow-soft hover:shadow-medium transition-all duration-300 group cursor-pointer">
-              {/* Image */}
-              <div className="relative overflow-hidden">
-                <img 
-                  src={item.image} 
-                  alt={item.title}
-                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                <div className="absolute top-3 left-3">
-                  <Badge 
-                    variant="secondary" 
-                    className={`text-xs ${
-                      item.type === 'Evento' 
-                        ? 'bg-fyt-blue text-white' 
-                        : 'bg-fyt-purple text-white'
-                    }`}
-                  >
-                    {item.category}
-                  </Badge>
-                </div>
-                {item.type === 'Evento' && isUpcoming(item.date) && (
-                  <div className="absolute top-3 right-3">
-                    <Badge 
-                      variant="outline" 
-                      className="bg-white/90 border-green-500 text-green-600 text-xs"
-                    >
-                      Próximo
-                    </Badge>
-                  </div>
-                )}
-              </div>
-
-              {/* Content */}
-              <div className="p-6">
-                <h4 className="text-lg font-semibold text-fyt-dark mb-3 group-hover:text-fyt-blue transition-colors">
-                  {item.title}
-                </h4>
-                <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
-                  {item.description}
-                </p>
-
-                <div className="space-y-2">
-                  <div className="flex items-center space-x-2 text-xs text-muted-foreground">
-                    <Calendar className="h-3 w-3" />
-                    <span>{formatDate(item.date)}</span>
-                  </div>
-                  {item.location && (
-                    <div className="flex items-center space-x-2 text-xs text-muted-foreground">
-                      <MapPin className="h-3 w-3" />
-                      <span>{item.location}</span>
+            <CardReveal key={item.title}>
+              <Card key={index} className="overflow-hidden bg-gradient-card shadow-soft hover:shadow-medium transition-all duration-300 group cursor-pointer">
+                {/* Image */}
+                <ImageReveal>
+                  <div className="relative overflow-hidden">
+                    <img 
+                      src={item.image} 
+                      alt={item.title}
+                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute top-3 left-3">
+                      <Badge 
+                        variant="secondary" 
+                        className={`text-xs ${
+                          item.type === 'Evento' 
+                            ? 'bg-fyt-blue text-white' 
+                            : 'bg-fyt-purple text-white'
+                        }`}
+                      >
+                        {item.category}
+                      </Badge>
                     </div>
-                  )}
+                    {item.type === 'Evento' && isUpcoming(item.date) && (
+                      <div className="absolute top-3 right-3">
+                        <Badge 
+                          variant="outline" 
+                          className="bg-white/90 border-green-500 text-green-600 text-xs"
+                        >
+                          Próximo
+                        </Badge>
+                      </div>
+                    )}
+                  </div>
+                </ImageReveal>
+
+                {/* Content */}
+                <div className="p-6">
+                  <FadeInUp>
+                    <h4 className="text-lg font-semibold text-fyt-dark mb-3 group-hover:text-fyt-blue transition-colors">
+                      {item.title}
+                    </h4>
+                  </FadeInUp>
+                  <FadeInUp delay={0.1}>
+                    <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
+                      {item.description}
+                    </p>
+                  </FadeInUp>
+                  <FadeInUp delay={0.15}>
+                    <div className="space-y-2">
+                      <div className="flex items-center space-x-2 text-xs text-muted-foreground">
+                        <Calendar className="h-3 w-3" />
+                        <span>{formatDate(item.date)}</span>
+                      </div>
+                      {item.location && (
+                        <div className="flex items-center space-x-2 text-xs text-muted-foreground">
+                          <MapPin className="h-3 w-3" />
+                          <span>{item.location}</span>
+                        </div>
+                      )}
+                    </div>
+                  </FadeInUp>
                 </div>
-              </div>
-            </Card>
-              </ScrollReveal>
+              </Card>
+            </CardReveal>
           ))}
         </div>
 

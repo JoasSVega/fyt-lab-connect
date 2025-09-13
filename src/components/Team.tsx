@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { ExternalLink, Mail, GraduationCap } from "lucide-react";
 import { Card } from "./ui/card";
-import ScrollReveal from "./ScrollReveal";
+import { CardReveal } from "./animations/CardReveal";
+import { FadeInUp } from "./animations/FadeInUp";
+import { ButtonReveal } from "./animations/ButtonReveal";
 import { Button } from "./ui/button";
 
 const Team = () => {
@@ -110,78 +112,97 @@ const Team = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-fyt-dark mb-4">
-            Nuestro Equipo
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Un equipo multidisciplinario de investigadores comprometidos con la excelencia 
-            académica y científica en farmacología y terapéutica.
-          </p>
+          <FadeInUp>
+            <h2 className="text-3xl md:text-4xl font-bold text-fyt-dark mb-4">
+              Nuestro Equipo
+            </h2>
+          </FadeInUp>
+          <FadeInUp delay={0.1}>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+              Un equipo multidisciplinario de investigadores comprometidos con la excelencia 
+              académica y científica en farmacología y terapéutica.
+            </p>
+          </FadeInUp>
         </div>
 
         {/* Team Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {teamMembers.map((member, idx) => (
-              <ScrollReveal key={member.name}>
+              <CardReveal key={member.name}>
                 <Card className="overflow-hidden bg-gradient-card shadow-soft hover:shadow-medium transition-all duration-300 group">
-              {/* Imagen fija o avatar por defecto (puedes poner un logo o dejar vacío) */}
-              <div className="relative overflow-hidden h-64 bg-gradient-hero flex items-center justify-center">
-                {/* Aquí podrías poner un logo fijo si lo deseas */}
-              </div>
-
-              {/* Content */}
-              <div className="p-6">
-                <div className="mb-4">
-                  <h3 className="text-xl font-semibold text-fyt-dark mb-1">{member.name}</h3>
-                  <p className="text-fyt-purple font-medium text-sm mb-1">{member.role}</p>
-                  <div className="flex items-center space-x-2 text-muted-foreground text-sm">
-                    <GraduationCap className="h-4 w-4" />
-                    <span>{member.specialty}</span>
+                  {/* Imagen fija o avatar por defecto (puedes poner un logo o dejar vacío) */}
+                  <div className="relative overflow-hidden h-64 bg-gradient-hero flex items-center justify-center">
+                    {/* Aquí podrías poner un logo fijo si lo deseas */}
                   </div>
-                </div>
 
-                <p className="text-muted-foreground text-sm mb-6 leading-relaxed">
-                  {member.description}
-                </p>
-
-                {/* Links */}
-                <div className="flex justify-center">
-                  <Button 
-                    variant="outline" 
-                    size="sm" 
-                    className="text-xs border-fyt-red/20 hover:bg-fyt-red hover:text-white"
-                    onClick={() => window.open(`mailto:${member.links.email}`, '_blank')}
-                  >
-                    <Mail className="h-3 w-3 mr-1" />
-                    Contactar
-                  </Button>
-                </div>
-              </div>
-            </Card>
-              </ScrollReveal>
-          ))}
+                  {/* Content */}
+                  <div className="p-6">
+                    <FadeInUp>
+                      <div className="mb-4">
+                        <h3 className="text-xl font-semibold text-fyt-dark mb-1">{member.name}</h3>
+                        <p className="text-fyt-purple font-medium text-sm mb-1">{member.role}</p>
+                        <div className="flex items-center space-x-2 text-muted-foreground text-sm">
+                          <GraduationCap className="h-4 w-4" />
+                          <span>{member.specialty}</span>
+                        </div>
+                      </div>
+                    </FadeInUp>
+                    <FadeInUp delay={0.1}>
+                      <p className="text-muted-foreground text-sm mb-6 leading-relaxed">
+                        {member.description}
+                      </p>
+                    </FadeInUp>
+                    {/* Links */}
+                    <ButtonReveal delay={0.15}>
+                      <div className="flex justify-center">
+                        <Button 
+                          variant="outline" 
+                          size="sm" 
+                          className="text-xs border-fyt-red/20 hover:bg-fyt-red hover:text-white"
+                          onClick={() => window.open(`mailto:${member.links.email}`, '_blank')}
+                        >
+                          <Mail className="h-3 w-3 mr-1" />
+                          Contactar
+                        </Button>
+                      </div>
+                    </ButtonReveal>
+                  </div>
+                </Card>
+              </CardReveal>
+            ))}
         </div>
 
         {/* Call to Action */}
         <div className="mt-16 text-center">
-          <Card className="max-w-2xl mx-auto p-8 bg-gradient-hero text-white shadow-large">
-            <h3 className="text-2xl font-semibold mb-4">¿Interesado en unirte?</h3>
-            <p className="mb-6 text-white/90">
-              Si eres estudiante, profesional o investigador interesado en formar parte 
-              de nuestro equipo, te invitamos a contactarnos.
-            </p>
-            <Button 
-              variant="secondary" 
-              size="lg"
-              className="bg-white text-fyt-dark hover:bg-white/90"
-              onClick={() => {
-                const element = document.querySelector('#contacto');
-                element?.scrollIntoView({ behavior: 'smooth' });
-              }}
-            >
-              Contactar
-            </Button>
-          </Card>
+          <CardReveal>
+            <Card className="max-w-2xl mx-auto p-8 bg-gradient-hero text-white shadow-large">
+              <FadeInUp>
+                  <h3 className="text-2xl font-semibold mb-4">¿Te interesa unirte a nuestro grupo de investigación?</h3>
+              </FadeInUp>
+              <FadeInUp delay={0.1}>
+                <p className="mb-6 text-white/90">
+                  Si eres estudiante, profesional o investigador interesado en formar parte 
+                  de nuestro equipo, te invitamos a contactarnos.
+                </p>
+              </FadeInUp>
+              <ButtonReveal delay={0.15}>
+                  <Button
+                    asChild
+                    variant="secondary"
+                    size="lg"
+                    className="bg-white text-fyt-dark hover:bg-fyt-red hover:text-white transition-colors duration-200 shadow-md border border-fyt-red/30"
+                  >
+                    <a
+                      href="mailto:grupoinvestigacion@gmail.com?subject=Unirse%20al%20grupo%20de%20investigaci%C3%B3n"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Contactar
+                    </a>
+                  </Button>
+              </ButtonReveal>
+            </Card>
+          </CardReveal>
         </div>
       </div>
     </section>
