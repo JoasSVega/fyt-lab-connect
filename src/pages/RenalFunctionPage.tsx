@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
-import { motion } from "framer-motion";
 import UnitSystemToggle, { UnitSystem } from "../components/units/UnitSystemToggle";
 import NumberField from "../components/inputs/NumberField";
 import CalculatorCard from "../components/panels/CalculatorCard";
@@ -145,13 +144,7 @@ const RenalFunctionPage: React.FC = () => {
 
   // Render
   return (
-    <motion.div
-      className="max-w-3xl mx-auto px-2 py-8"
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -30 }}
-      transition={{ duration: 0.5 }}
-    >
+    <div className="max-w-3xl mx-auto px-2 py-8">
       <Button
         variant="ghost"
         className="mb-4 flex items-center gap-2 text-blue-700 hover:bg-blue-50"
@@ -159,24 +152,14 @@ const RenalFunctionPage: React.FC = () => {
       >
         <ArrowLeft className="w-5 h-5" /> Volver a Herramientas
       </Button>
-      <motion.h1
-        className="text-3xl font-bold text-blue-700 mb-2"
-        initial={{ opacity: 0, x: -40 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 0.1, duration: 0.5 }}
-      >
+      <h1 className="text-3xl font-bold text-blue-700 mb-2">
         Calculadoras de Función Renal
-      </motion.h1>
-      <motion.div
-        className="mb-4 flex flex-col md:flex-row md:items-center md:justify-between gap-2"
-        initial={{ opacity: 0, x: 40 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 0.2, duration: 0.5 }}
-      >
+      </h1>
+      <div className="mb-4 flex flex-col md:flex-row md:items-center md:justify-between gap-2">
         <UnitSystemToggle value={unit} onChange={setUnit} />
         <div className="flex space-x-2 mt-2 md:mt-0">
-          {TABS.map((t, i) => (
-            <motion.button
+          {TABS.map((t) => (
+            <button
               key={t.key}
               className={`px-4 py-2 rounded-t-lg font-semibold border-b-2 transition-colors ${
                 tab === t.key
@@ -186,19 +169,16 @@ const RenalFunctionPage: React.FC = () => {
               onClick={() => setTab(t.key)}
               aria-current={tab === t.key ? "page" : undefined}
               type="button"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 + i * 0.07, duration: 0.3 }}
             >
               {t.label}
-            </motion.button>
+            </button>
           ))}
         </div>
-      </motion.div>
+      </div>
 
       {/* Cockcroft-Gault */}
       {tab === "cg" && (
-        <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.4, duration: 0.4 }}>
+        <div>
           <CalculatorCard
             title="Cockcroft-Gault"
             onCalculate={handleCgCalc}
@@ -294,12 +274,12 @@ const RenalFunctionPage: React.FC = () => {
             </div>
             {cgError && <div className="text-red-600 text-sm mt-2">{cgError}</div>}
           </CalculatorCard>
-        </motion.div>
+        </div>
       )}
 
       {/* MDRD */}
       {tab === "mdrd" && (
-        <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.45, duration: 0.4 }}>
+        <div>
           <CalculatorCard
             title="MDRD"
             onCalculate={handleMdrdCalc}
@@ -401,12 +381,12 @@ const RenalFunctionPage: React.FC = () => {
             </div>
             {mdrdError && <div className="text-red-600 text-sm mt-2">{mdrdError}</div>}
           </CalculatorCard>
-        </motion.div>
+        </div>
       )}
 
       {/* CKD-EPI */}
       {tab === "ckd" && (
-        <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.5, duration: 0.4 }}>
+        <div>
           <CalculatorCard
             title="CKD-EPI"
             onCalculate={handleCkdCalc}
@@ -484,18 +464,13 @@ const RenalFunctionPage: React.FC = () => {
             </div>
             {ckdError && <div className="text-red-600 text-sm mt-2">{ckdError}</div>}
           </CalculatorCard>
-        </motion.div>
+        </div>
       )}
 
-      <motion.footer
-        className="mt-8 text-xs text-gray-500 text-center"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.6, duration: 0.5 }}
-      >
+      <footer className="mt-8 text-xs text-gray-500 text-center">
         Estas ecuaciones son de uso clínico educativo y no reemplazan el juicio profesional.
-      </motion.footer>
-    </motion.div>
+      </footer>
+    </div>
   );
 };
 
