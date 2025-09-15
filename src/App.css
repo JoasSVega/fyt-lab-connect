@@ -1,3 +1,18 @@
+/* Escalado de títulos para móviles */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.5rem !important; /* 24px */
+    font-weight: 700 !important;
+    color: #1e293b !important; /* text-slate-800 */
+    line-height: 1.2;
+  }
+  h2 {
+    font-size: 1.25rem !important; /* 20px */
+    font-weight: 700 !important;
+    color: #334155 !important; /* text-slate-700 */
+    line-height: 1.25;
+  }
+}
 #root {
 }
 

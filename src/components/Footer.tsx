@@ -67,7 +67,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-slate-600 flex-wrap">
                 <MapPin className="h-4 w-4 text-fyt-blue flex-shrink-0" />
-                <span>Cartagena, Colombia</span>
+                <span>Cra. 50 #24120, Zaragocilla, Cartagena de Indias, Provincia de Cartagena, Bolívar</span>
               </div>
             </div>
           </div>
@@ -123,12 +123,12 @@ const Footer = () => {
             </div>
 
             <div>
-              <h4 className="text-xs sm:text-sm font-semibold mb-2 sm:mb-3 text-slate-800">Enlaces Institucionales</h4>
-              <div className="flex flex-wrap gap-2 sm:gap-3">
+              <h4 className="text-xs sm:text-sm font-semibold mb-2 sm:mb-3 text-slate-800 text-left">Enlaces Institucionales</h4>
+              <div className="flex flex-col items-start gap-2 sm:gap-3 sm:flex-row sm:flex-wrap">
                 <Button 
                   variant="ghost" 
                   size="sm"
-                  className="text-slate-600 hover:text-fyt-blue p-0 h-auto min-w-[120px]"
+                  className="text-slate-600 hover:text-fyt-blue p-0 h-auto min-w-[120px] justify-start"
                   onClick={() => window.open('https://www.unicartagena.edu.co/', '_blank')}
                 >
                   Universidad de Cartagena
@@ -137,7 +137,7 @@ const Footer = () => {
                 <Button 
                   variant="ghost" 
                   size="sm"
-                  className="text-slate-600 hover:text-fyt-blue p-0 h-auto min-w-[120px]"
+                  className="text-slate-600 hover:text-fyt-blue p-0 h-auto min-w-[120px] justify-start"
                   onClick={() => window.open('https://www.unicartagena.edu.co/estudia-con-nosotros?view=search&resetSearch=1&preserve=1&geo-latitude=&geo-longitude=&geo-country=&location-detected=&geolocation=&categorySuggestion=&suggestionType=&categorySearch=250', '_blank')}
                 >
                   Facultad de Ciencias Farmacéuticas
@@ -146,7 +146,7 @@ const Footer = () => {
                 <Button 
                   variant="ghost" 
                   size="sm"
-                  className="text-slate-600 hover:text-fyt-blue p-0 h-auto min-w-[120px]"
+                  className="text-slate-600 hover:text-fyt-blue p-0 h-auto min-w-[120px] justify-start"
                   onClick={() => window.open('#', '_blank')}
                 >
                   MinCiencias
@@ -165,16 +165,18 @@ const Footer = () => {
             <p className="text-left w-full md:w-auto">
               © 2024 Grupo de Investigación FyT. Todos los derechos reservados.
             </p>
-            <div className="flex flex-wrap gap-3 md:gap-6 justify-start md:justify-end w-full md:w-auto">
-              <button className="hover:text-fyt-blue transition-colors">
-                Política de Privacidad
-              </button>
-              <button className="hover:text-fyt-blue transition-colors">
-                Términos de Uso
-              </button>
-              <button className="hover:text-fyt-blue transition-colors">
-                Código de Ética
-              </button>
+            <div className="flex flex-col items-start gap-1 w-full md:w-auto md:flex-row md:items-center md:justify-end md:gap-6 md:space-y-0 md:space-x-0 md:gap-x-6 md:gap-y-0 md:flex-nowrap md:space-x-6 md:space-y-0 md:mt-0 mt-1">
+              <div className="flex flex-row gap-3 md:gap-6 w-full md:w-auto">
+                <a href="/PrivacyPolicy" className="hover:text-fyt-blue transition-colors text-left md:text-center" aria-label="Política de Privacidad">
+                  Política de Privacidad
+                </a>
+                <a href="/TermsOfUse" className="hover:text-fyt-blue transition-colors text-left md:text-center" aria-label="Términos de Uso">
+                  Términos de Uso
+                </a>
+                <a href="/CodeOfEthics" className="hover:text-fyt-blue transition-colors text-left md:text-center" aria-label="Código de Ética">
+                  Código de Ética
+                </a>
+              </div>
             </div>
           </div>
           {/* LinkedIn credit bottom left */}

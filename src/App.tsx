@@ -21,6 +21,9 @@ import Proyectos from "./pages/Proyectos";
 import Noticias from "./pages/Noticias";
 import Herramientas from "./pages/Herramientas";
 import Footer from "./components/Footer";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfUse from "./pages/TermsOfUse";
+import CodeOfEthics from "./pages/CodeOfEthics";
 
 const queryClient = new QueryClient();
 
@@ -47,6 +50,10 @@ function AnimatedRoutes() {
           <Route path="/herramientas" element={<Herramientas />} />
           <Route path="/equipo" element={<Equipo />} />
           <Route path="/contactos" element={<Contactos />} />
+          {/* Páginas legales */}
+          <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
+          <Route path="/TermsOfUse" element={<TermsOfUse />} />
+          <Route path="/CodeOfEthics" element={<CodeOfEthics />} />
           {/* Calculadoras */}
           <Route
             path="/calculator/dosage"
