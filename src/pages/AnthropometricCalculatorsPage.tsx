@@ -588,14 +588,7 @@ const AnthropometricCalculatorsPage: React.FC = () => {
         </CalculatorCard>
       </motion.div>
 
-      <motion.footer
-        className="mt-8 text-xs text-gray-500 text-center"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.8, duration: 0.5 }}
-      >
-        Estas calculadoras son de uso educativo y no reemplazan el juicio profesional.
-      </motion.footer>
+      {/* Mensaje educativo eliminado para evitar duplicado de footer global */}
     </motion.div>
   );
 };

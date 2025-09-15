@@ -1,3 +1,12 @@
+// Rutas de investigación
+import InvestigacionPage from "./pages/InvestigacionPage";
+import PublicacionesPage from "./pages/PublicacionesPage";
+import ProyectosPage from "./pages/ProyectosPage";
+
+// Exportar paths
+export const pathInvestigacion = "/investigacion";
+export const pathProyectos = "/investigacion/proyectos";
+export const pathPublicaciones = "/investigacion/publicaciones";
 //
 // Using standardized logo from public folder
 import AnthropometricCalculatorsPage from "./pages/AnthropometricCalculatorsPage";
@@ -17,7 +26,6 @@ import Navbar from "./components/Navbar";
 import ScrollToTop from "./components/ScrollToTop";
 import RenalFunctionPage from "./pages/RenalFunctionPage";
 import { pathRenal } from "./pages/RenalFunctionPage";
-import Proyectos from "./pages/Proyectos";
 import Noticias from "./pages/Noticias";
 import Herramientas from "./pages/Herramientas";
 import Footer from "./components/Footer";
@@ -42,10 +50,13 @@ function AnimatedRoutes() {
         className="w-full pt-16 pb-6 px-2 sm:px-4 lg:px-8"
       >
         <Routes location={location}>
+          {/* Investigación y Producción Académica */}
+          <Route path={pathInvestigacion} element={<InvestigacionPage />} />
+          <Route path={pathProyectos} element={<ProyectosPage />} />
+          <Route path={pathPublicaciones} element={<PublicacionesPage />} />
           {/* Página principal */}
           <Route path="/" element={<Index />} />
-          {/* Proyectos, Noticias y Herramientas */}
-          <Route path="/proyectos" element={<Proyectos />} />
+          {/* Noticias y Herramientas */}
           <Route path="/noticias" element={<Noticias />} />
           <Route path="/herramientas" element={<Herramientas />} />
           <Route path="/equipo" element={<Equipo />} />

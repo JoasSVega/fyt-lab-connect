@@ -1,6 +1,5 @@
 import React from "react";
 import Navbar from "./Navbar";
-import Footer from "./Footer";
 
 interface BaseLayoutProps {
   children: React.ReactNode;
@@ -12,7 +11,7 @@ const BaseLayout: React.FC<BaseLayoutProps> = ({ children }) => (
     <div className="flex-1 w-full">
       {children}
     </div>
-    <Footer />
+  {/* Footer eliminado para evitar duplicado, ya está en App.tsx */}
   </div>
 );
 

@@ -1,8 +1,7 @@
 
 import React, { useState } from "react";
-import { Menu, X, ChevronDown } from "lucide-react";
 import { NavLink, Link } from "react-router-dom";
-// Using standardized logo from public folder
+import { Menu, X, ChevronDown } from "lucide-react";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -25,8 +24,8 @@ const Navbar = () => {
       isDropdown: false
     },
     {
-      name: "Proyectos",
-      href: "/proyectos",
+      name: "Investigación",
+      href: "/investigacion",
       isDropdown: false
     },
     {

@@ -1,0 +1,6 @@
+[
+  {"id": 1, "title": "Citas en Scopus", "value": 1200, "type": "Citas", "description": "Total de citas recibidas en Scopus por publicaciones del grupo."},
+  {"id": 2, "title": "Índice H", "value": 18, "type": "Índice H", "description": "Índice H acumulado por los investigadores principales."},
+  {"id": 3, "title": "Colaboraciones internacionales", "value": 14, "type": "Colaboraciones", "description": "Proyectos y publicaciones con instituciones extranjeras."},
+  {"id": 4, "title": "Premios y reconocimientos", "value": 7, "type": "Premios", "description": "Distinciones académicas y científicas recibidas por el grupo."}
+]

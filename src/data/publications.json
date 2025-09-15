@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "title": "Efectos adversos de antibióticos en pediatría",
+    "authors": "García Y., Vega J., et al.",
+    "journal": "Revista Colombiana de Farmacología",
+    "year": 2024,
+    "summary": "Estudio observacional sobre reacciones adversas a antibióticos en niños hospitalizados.",
+    "image": "",
+    "type": "articulo"
+  },
+  {
+    "id": 2,
+    "title": "Farmacogenómica y respuesta terapéutica en cáncer",
+    "authors": "Martínez J., Alviz A., et al.",
+    "journal": "Journal of Personalized Medicine",
+    "year": 2023,
+    "summary": "Revisión de polimorfismos genéticos y su impacto en la eficacia de tratamientos oncológicos.",
+    "image": "",
+    "type": "articulo"
+  },
+  {
+    "id": 3,
+    "title": "Adherencia a tratamientos antihipertensivos en adultos mayores",
+    "authors": "Caraballo R., Mercado M., et al.",
+    "journal": "Salud Pública y Sociedad",
+    "year": 2022,
+    "summary": "Factores asociados a la adherencia terapéutica en pacientes mayores de 65 años.",
+    "image": "",
+    "type": "articulo"
+  },
+  {
+    "id": 4,
+    "title": "Uso racional de antibióticos en hospitales públicos",
+    "authors": "Uribe S., Vega J., et al.",
+    "journal": "Antibiotics (Basel)",
+    "year": 2021,
+    "summary": "Análisis de prescripción y resistencia bacteriana en hospitales de Cartagena.",
+    "image": "",
+    "type": "articulo"
+  },
+  {
+    "id": 5,
+    "title": "Farmacovigilancia en la región Caribe colombiana",
+    "authors": "García Y., Alviz A., et al.",
+    "journal": "Revista de Salud Pública",
+    "year": 2020,
+    "summary": "Resultados de un programa de farmacovigilancia en instituciones de salud del Caribe.",
+    "image": "",
+    "type": "articulo"
+  },
+  {
+    "id": 6,
+    "title": "Farmacoeconomía de tratamientos biológicos en artritis reumatoide",
+    "authors": "Mercado M., Vega J., et al.",
+    "journal": "PharmacoEconomics",
+    "year": 2023,
+    "summary": "Evaluación de costos y resultados en pacientes con artritis reumatoide tratados con biológicos.",
+    "image": "",
+    "type": "articulo"
+  },
+  {
+    "id": 7,
+    "title": "Seguridad de medicamentos en adultos mayores",
+    "authors": "Alviz A., Caraballo R., et al.",
+    "journal": "Geriatría y Gerontología",
+    "year": 2022,
+    "summary": "Incidencia de eventos adversos a medicamentos en población geriátrica.",
+    "image": "",
+    "type": "articulo"
+  },
+  {
+    "id": 8,
+    "title": "Terapéutica personalizada en enfermedades infecciosas",
+    "authors": "Vega J., Martínez J., et al.",
+    "journal": "Infectio",
+    "year": 2024,
+    "summary": "Aplicación de la farmacogenómica en la selección de tratamientos antiinfecciosos.",
+    "image": "",
+    "type": "articulo"
+  },
+  {
+    "id": 9,
+    "title": "Manual de Farmacología Clínica",
+    "authors": "Vega J., García Y., et al.",
+    "journal": "Editorial Médica FyT",
+    "year": 2022,
+    "summary": "Libro de referencia sobre farmacología clínica y terapéutica moderna.",
+    "image": "",
+    "type": "libro"
+  },
+  {
+    "id": 10,
+    "title": "Capítulo: Interacciones medicamentosas en geriatría",
+    "authors": "Caraballo R., Alviz A.",
+    "journal": "Manual de Farmacología Clínica",
+    "year": 2022,
+    "summary": "Análisis de interacciones farmacológicas relevantes en adultos mayores.",
+    "image": "",
+    "type": "capitulo"
+  },
+  {
+    "id": 11,
+    "title": "Reporte técnico: Farmacovigilancia en hospitales universitarios",
+    "authors": "García Y., Vega J.",
+    "journal": "Divulgación FyT",
+    "year": 2023,
+    "summary": "Informe sobre la implementación de sistemas de farmacovigilancia en hospitales universitarios.",
+    "image": "",
+    "type": "divulgacion"
+  }
+]

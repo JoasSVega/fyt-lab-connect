@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "title": "Desarrollo de nuevos fármacos para enfermedades infecciosas",
+    "summary": "Investigación sobre compuestos innovadores para el tratamiento de infecciones bacterianas resistentes.",
+    "meta": "2024 · En curso · Farmacología",
+    "image": "",
+    "status": "En curso",
+    "year": 2024,
+    "area": "Farmacología"
+  },
+  {
+    "id": 2,
+    "title": "Farmacovigilancia en pacientes pediátricos",
+    "summary": "Monitoreo de reacciones adversas a medicamentos en población infantil en la región Caribe.",
+    "meta": "2023 · Finalizado · Farmacovigilancia",
+    "image": "",
+    "status": "Finalizado",
+    "year": 2023,
+    "area": "Farmacovigilancia"
+  },
+  {
+    "id": 3,
+    "title": "Impacto de la farmacogenómica en la terapia personalizada",
+    "summary": "Estudio multicéntrico sobre la influencia genética en la respuesta a tratamientos oncológicos.",
+    "meta": "2022 · En curso · Farmacogenómica",
+    "image": "",
+    "status": "En curso",
+    "year": 2022,
+    "area": "Farmacogenómica"
+  },
+  {
+    "id": 4,
+    "title": "Evaluación de la adherencia terapéutica en adultos mayores",
+    "summary": "Análisis de factores que afectan la adherencia a tratamientos crónicos en adultos mayores.",
+    "meta": "2021 · Finalizado · Terapéutica",
+    "image": "",
+    "status": "Finalizado",
+    "year": 2021,
+    "area": "Terapéutica"
+  },
+  {
+    "id": 5,
+    "title": "Farmacoepidemiología de antibióticos en hospitales públicos",
+    "summary": "Uso y resistencia de antibióticos en instituciones de salud pública de Cartagena.",
+    "meta": "2020 · Finalizado · Farmacoepidemiología",
+    "image": "",
+    "status": "Finalizado",
+    "year": 2020,
+    "area": "Farmacoepidemiología"
+  }
+]

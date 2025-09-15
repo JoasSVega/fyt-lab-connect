@@ -4,7 +4,7 @@ import BaseLayout from "@/components/BaseLayout";
 const TermsOfUse = () => (
   <BaseLayout>
     <main className="max-w-3xl mx-auto px-4 py-10 sm:py-16">
-      <h1 className="text-2xl sm:text-3xl font-bold mb-8 text-slate-800">Términos de Uso – Grupo de Investigación en Farmacología y Terapéutica</h1>
+  <h1 className="text-4xl sm:text-5xl font-serif font-extrabold text-slate-800 mb-8 text-center">Términos de Uso – Grupo de Investigación en Farmacología y Terapéutica</h1>
       <p className="text-slate-700 text-base mb-2">Universidad de Cartagena</p>
       <section className="mb-6">
         <h2 className="text-lg font-semibold mb-2 text-slate-700">1. Aceptación de los términos</h2>

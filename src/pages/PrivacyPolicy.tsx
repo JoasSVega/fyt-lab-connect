@@ -4,7 +4,7 @@ import BaseLayout from "@/components/BaseLayout";
 const PrivacyPolicy = () => (
   <BaseLayout>
     <main className="max-w-3xl mx-auto px-4 py-10 sm:py-16">
-      <h1 className="text-2xl sm:text-3xl font-bold mb-8 text-slate-800">Política de Privacidad del Grupo de Investigación en Farmacología y Terapéutica</h1>
+  <h1 className="text-4xl sm:text-5xl font-serif font-extrabold text-slate-800 mb-8 text-center">Política de Privacidad del Grupo de Investigación en Farmacología y Terapéutica</h1>
       <section className="mb-6">
         <h2 className="text-lg font-semibold mb-2 text-slate-700">1. Introducción</h2>
         <p className="text-slate-700 text-base leading-relaxed">El Grupo de Investigación en Farmacología y Terapéutica de la Universidad de Cartagena reconoce la importancia de la privacidad y la protección de los datos personales de los participantes, colaboradores y usuarios de nuestras plataformas. Esta Política establece los lineamientos para el manejo responsable de la información, en cumplimiento de la Ley 1581 de 2012, el Decreto 1377 de 2013, la Ley 1266 de 2008 y demás disposiciones aplicables en materia de Habeas Data y protección de información en Colombia.</p>

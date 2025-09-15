@@ -152,7 +152,7 @@ const RenalFunctionPage: React.FC = () => {
       >
         <ArrowLeft className="w-5 h-5" /> Volver a Herramientas
       </Button>
-      <h1 className="text-3xl font-bold text-blue-700 mb-2">
+      <h1 className="text-4xl sm:text-5xl font-serif font-extrabold text-slate-800 mb-4 text-center">
         Calculadoras de Función Renal
       </h1>
       <div className="mb-4 flex flex-col md:flex-row md:items-center md:justify-between gap-2">
@@ -467,9 +467,7 @@ const RenalFunctionPage: React.FC = () => {
         </div>
       )}
 
-      <footer className="mt-8 text-xs text-gray-500 text-center">
-        Estas ecuaciones son de uso clínico educativo y no reemplazan el juicio profesional.
-      </footer>
+      {/* Mensaje educativo eliminado para evitar duplicado de footer global */}
     </div>
   );
 };

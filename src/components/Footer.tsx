@@ -6,9 +6,9 @@ import { Button } from "./ui/button";
 const Footer = () => {
   const quickLinks = [
     { name: "Inicio", href: "/" },
-    { name: "Sobre Nosotros", href: "/#sobre" },
-    { name: "Equipo", href: "/equipo" },
-    { name: "Proyectos", href: "/proyectos" },
+    { name: "Nuestro Equipo", href: "/equipo" },
+    { name: "Herramientas", href: "/herramientas" },
+    { name: "Investigación", href: "/investigacion" },
     { name: "Noticias", href: "/noticias" },
     { name: "Contactos", href: "/contactos" }
   ];
@@ -147,7 +147,7 @@ const Footer = () => {
                   variant="ghost" 
                   size="sm"
                   className="text-slate-600 hover:text-fyt-blue p-0 h-auto min-w-[120px] justify-start"
-                  onClick={() => window.open('#', '_blank')}
+                  onClick={() => window.open('https://scienti.minciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000008618', '_blank')}
                 >
                   MinCiencias
                   <ExternalLink className="h-3 w-3 ml-1" />
@@ -163,7 +163,7 @@ const Footer = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 md:gap-4 text-xs sm:text-sm text-slate-500 flex-wrap">
             <p className="text-left w-full md:w-auto">
-              © 2024 Grupo de Investigación FyT. Todos los derechos reservados.
+              © 2025 Grupo de Investigación FyT. Todos los derechos reservados.
             </p>
             <div className="flex flex-col items-start gap-1 w-full md:w-auto md:flex-row md:items-center md:justify-end md:gap-6 md:space-y-0 md:space-x-0 md:gap-x-6 md:gap-y-0 md:flex-nowrap md:space-x-6 md:space-y-0 md:mt-0 mt-1">
               <div className="flex flex-row gap-3 md:gap-6 w-full md:w-auto">

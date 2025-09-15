@@ -2,25 +2,28 @@ import FloatingContact from "@/components/FloatingContact";
 // import ScrollReveal from "@/components/ScrollReveal";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Droplet, Ruler, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 // Lista de herramientas farmacéuticas (fácil de extender)
 const tools = [
-	{
-		title: "Calculadoras de Función Renal",
-		description: "Herramienta farmacéutica para cálculos clínicos de función renal.",
-		color: "bg-fyt-blue",
-		href: "/herramientas/funcion-renal",
-		buttonText: "Ir a Calculadoras de Función Renal",
-	},
-	{
-		title: "Calculadoras Antropométricas",
-		description: "Herramienta farmacéutica para cálculos clínicos antropométricos.",
-		color: "bg-fyt-purple",
-		href: "/herramientas/antropometricas",
-		buttonText: "Ir a Calculadoras Antropométricas",
-	},
-	// Agrega aquí nuevas herramientas fácilmente
+  {
+    title: "Calculadoras de Función Renal",
+    description: "Herramienta farmacéutica para cálculos clínicos de función renal.",
+    color: "bg-blue-50",
+    href: "/herramientas/funcion-renal",
+    buttonText: "Ir a Calculadoras de Función Renal",
+  icon: <Droplet className="w-8 h-8 text-blue-600" aria-label="Función Renal" />,
+  },
+  {
+    title: "Calculadoras Antropométricas",
+    description: "Herramienta farmacéutica para cálculos clínicos antropométricos.",
+    color: "bg-green-50",
+    href: "/herramientas/antropometricas",
+    buttonText: "Ir a Calculadoras Antropométricas",
+    icon: <Ruler className="w-8 h-8 text-green-600" aria-label="Antropométricas" />,
+  },
+  // Agrega aquí nuevas herramientas fácilmente
 ];
 
 const Herramientas = () => {
@@ -29,9 +32,9 @@ const Herramientas = () => {
 			<div className="w-full bg-background overflow-x-hidden flex flex-col">
 			<main className="flex-1 w-full pt-24">
                 <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-                  <h2 className="text-3xl md:text-4xl font-bold text-fyt-dark mb-10 text-center">
+                  <h1 className="text-4xl sm:text-5xl font-serif font-extrabold text-slate-800 mb-8 text-center">
                     Herramientas Farmacéuticas
-                  </h2>
+                  </h1>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
                     {tools.map((tool, idx) => (
                       <Card
@@ -41,9 +44,9 @@ const Herramientas = () => {
                         <CardContent className="flex flex-col items-center gap-4 p-8 w-full">
                           {/* Espacio reservado para imagen/icono */}
                           <div
-                            className={`w-16 h-16 flex items-center justify-center rounded-full mb-2 ${tool.color} bg-opacity-10`}
+                            className={`w-16 h-16 flex items-center justify-center rounded-full mb-2 ${tool.color}`}
                           >
-                            {/* Imagen o icono aquí en el futuro */}
+                            {tool.icon}
                           </div>
                           <h3 className="text-xl font-bold text-fyt-dark mb-2 text-center">
                             {tool.title}
@@ -53,7 +56,7 @@ const Herramientas = () => {
                           </p>
                           <Button
                             onClick={() => navigate(tool.href)}
-                            className={`w-full text-white hover:opacity-90 ${tool.color}`}
+                            className={`w-full rounded-full px-5 py-2 font-semibold shadow bg-fyt-blue text-white hover:bg-fyt-blue/90 transition`}
                           >
                             {tool.buttonText}
                           </Button>
