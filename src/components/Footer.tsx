@@ -65,9 +65,9 @@ const Footer = () => {
                 <Phone className="h-4 w-4 text-fyt-blue flex-shrink-0" />
                 <span>Universidad de Cartagena</span>
               </div>
-              <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-slate-600 flex-wrap">
+              <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-slate-600 whitespace-nowrap overflow-x-auto">
                 <MapPin className="h-4 w-4 text-fyt-blue flex-shrink-0" />
-                <span>Cra. 50 #24120, Zaragocilla, Cartagena de Indias, Provincia de Cartagena, Bolívar</span>
+                <span className="whitespace-nowrap">Cra. 50 #24120, Zaragocilla, Cartagena de Indias, Provincia de Cartagena, Bolívar</span>
               </div>
             </div>
           </div>
