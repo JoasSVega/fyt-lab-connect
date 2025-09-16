@@ -105,16 +105,7 @@ const Contact = () => {
   return (
     <section id="contacto" className="py-10 sm:py-16 md:py-20 bg-gradient-to-b from-muted/30 to-background min-h-screen">
       <div className="container mx-auto px-2 sm:px-4 md:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-10 sm:mb-14 md:mb-16">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-fyt-dark mb-4 break-words">
-            Contáctanos
-          </h2>
-          <p className="text-base sm:text-lg text-muted-foreground max-w-full sm:max-w-2xl md:max-w-3xl mx-auto break-words">
-            ¿Tienes preguntas sobre nuestras investigaciones o quieres colaborar con nosotros? 
-            Estamos aquí para ayudarte.
-          </p>
-        </div>
+        {/* Header eliminado para evitar duplicidad de título principal. */}
 
   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
           {/* Contact Information */}

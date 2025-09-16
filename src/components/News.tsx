@@ -78,20 +78,7 @@ const News = () => {
   return (
     <section id="noticias" className="py-20 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <FadeInUp>
-            <h2 className="text-3xl md:text-4xl font-bold text-fyt-dark mb-4">
-              Noticias y Eventos
-            </h2>
-          </FadeInUp>
-          <FadeInUp delay={0.1}>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Mantente informado sobre nuestras últimas actividades, eventos académicos 
-              y logros en investigación.
-            </p>
-          </FadeInUp>
-        </div>
+        {/* Header eliminado para evitar duplicidad de título principal. */}
 
         {/* Featured News */}
         {featuredNews && (

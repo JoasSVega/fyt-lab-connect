@@ -110,20 +110,7 @@ const Team = () => {
   return (
     <section id="equipo" className="py-20 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <FadeInUp>
-            <h2 className="text-3xl md:text-4xl font-bold text-fyt-dark mb-4">
-              Nuestro Equipo
-            </h2>
-          </FadeInUp>
-          <FadeInUp delay={0.1}>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Un equipo multidisciplinario de investigadores comprometidos con la excelencia 
-              académica y científica en farmacología y terapéutica.
-            </p>
-          </FadeInUp>
-        </div>
+        {/* Header eliminado para evitar duplicidad de título principal. */}
 
         {/* Team Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

@@ -126,17 +126,7 @@ const About = () => {
   return (
     <section id="sobre" className="py-20 bg-gradient-to-b from-background to-muted/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-fyt-dark mb-4">
-            Sobre Nosotros
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            El Grupo de Investigación en Farmacología y Terapéutica (FyT) desarrolla investigaciones 
-            en Farmacología, Terapéutica, Farmacia Asistencial, Farmacovigilancia, Farmacoepidemiología, 
-            Farmacoeconomía, estudios in sílico y modelización molecular para el diseño de nuevos fármacos.
-          </p>
-        </div>
+        {/* Header eliminado para evitar duplicidad de título principal. */}
 
         {/* Main Content */}
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
@@ -161,7 +151,7 @@ const About = () => {
 
             {/* Mission & Vision */}
             <div className="grid md:grid-cols-2 gap-6">
-              <Card className="p-6 border-fyt-blue/20 bg-gradient-card shadow-soft">
+              <Card className="p-6 border-fyt-blue/20 bg-white shadow-soft rounded-xl">
                 <div className="flex flex-col items-center mb-4">
                   <Target className="h-8 w-8 text-fyt-blue mb-3" />
                   <h4 className="text-lg font-semibold text-fyt-dark">Misión</h4>
@@ -173,7 +163,7 @@ const About = () => {
                 </p>
               </Card>
 
-              <Card className="p-6 border-fyt-purple/20 bg-gradient-card shadow-soft">
+              <Card className="p-6 border-fyt-purple/20 bg-white shadow-soft rounded-xl">
                 <div className="flex flex-col items-center mb-4">
                   <Eye className="h-8 w-8 text-fyt-purple mb-3" />
                   <h4 className="text-lg font-semibold text-fyt-dark">Visión</h4>
