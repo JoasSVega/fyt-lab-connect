@@ -31,9 +31,9 @@ const Index = () => {
             <Button onClick={() => navigate('/equipo')} className="w-full rounded-full px-5 py-2 font-semibold shadow bg-fyt-blue text-white hover:bg-fyt-blue/90 transition">Ver Equipo</Button>
           </div>
           {/* Investigación */}
-          <div className="flex flex-col items-center gap-4 bg-white rounded-xl shadow-soft p-8 max-w-xs w-full border border-green-100">
-            <span className="w-14 h-14 flex items-center justify-center rounded-full bg-green-100 mb-2">
-              <Microscope className="w-8 h-8 text-green-600" aria-label="Investigación" />
+          <div className="flex flex-col items-center gap-4 bg-white rounded-xl shadow-soft p-8 max-w-xs w-full border border-purple-100">
+            <span className="w-14 h-14 flex items-center justify-center rounded-full bg-purple-100 mb-2">
+              <Microscope className="w-8 h-8 text-purple-600" aria-label="Investigación" />
             </span>
             <h3 className="text-xl font-bold text-fyt-dark mb-2">Investigación</h3>
             <p className="text-muted-foreground text-center text-sm mb-4">Conoce nuestras investigaciones actuales y resultados científicos.</p>
