@@ -177,7 +177,16 @@ const Tools = () => {
   ];
 
   const ToolCard = ({ tool, category }: { tool: any, category: string }) => (
-    <Card className="group hover:shadow-medium transition-all duration-300 border-card-border bg-card/50 backdrop-blur-sm">
+    <Card className="group hover:shadow-2xl transition-all duration-300 border-2 border-[#3BB9FF]/20 bg-white/90 backdrop-blur-sm animate-fade-in-card">
+      {/* Animaciones CSS */}
+      <style>{`
+        @keyframes fadeInCard {
+          0% { opacity: 0; transform: translateY(30px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-card { animation: fadeInCard 1.2s cubic-bezier(.42,0,.58,1); }
+        .group:hover { box-shadow: 0 8px 32px 0 rgba(59,185,255,0.15), 0 1.5px 6px 0 rgba(155,89,182,0.10); transform: scale(1.04); }
+      `}</style>
       <CardHeader className="pb-3">
         <div className="flex items-center space-x-3 mb-2">
           <div className="p-2 rounded-lg bg-background/80 shadow-soft">
@@ -219,14 +228,14 @@ const Tools = () => {
   );
 
   return (
-    <section id="herramientas" className="py-20 bg-gradient-to-b from-background to-fyt-light/5">
+  <section id="herramientas" className="py-20 min-h-[80vh] bg-[#f8fafc]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-fyt-dark mb-4">
+          <h2 className="text-4xl font-bold text-fyt-dark mb-4 drop-shadow-lg">
             Herramientas Farmacéuticas
           </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg text-fyt-dark/90 max-w-3xl mx-auto leading-relaxed">
             Conjunto de utilidades clínicas diseñadas para profesionales farmacéuticos. 
             Calculadoras, verificadores de interacciones y herramientas de análisis 
             para optimizar la práctica farmacéutica.
@@ -237,7 +246,7 @@ const Tools = () => {
         <div className="mb-16">
           <div className="flex items-center space-x-3 mb-8">
             <div className="p-2 rounded-lg bg-gradient-hero shadow-soft">
-              <Calculator className="h-6 w-6 text-white" />
+              <Calculator className="h-6 w-6 text-fyt-blue" />
             </div>
             <h3 className="text-2xl font-bold text-fyt-dark">
               Calculadora de Función Renal
@@ -254,7 +263,7 @@ const Tools = () => {
         <div className="mb-16">
           <div className="flex items-center space-x-3 mb-8">
             <div className="p-2 rounded-lg bg-gradient-card shadow-soft">
-              <Stethoscope className="h-6 w-6 text-white" />
+              <Stethoscope className="h-6 w-6 text-fyt-blue" />
             </div>
             <h3 className="text-2xl font-bold text-fyt-dark">
               Calculadoras Antropométricas
@@ -271,7 +280,7 @@ const Tools = () => {
         <div className="mb-16">
           <div className="flex items-center space-x-3 mb-8">
             <div className="p-2 rounded-lg bg-gradient-accent shadow-soft">
-              <Pill className="h-6 w-6 text-white" />
+              <Pill className="h-6 w-6 text-fyt-red" />
             </div>
             <h3 className="text-2xl font-bold text-fyt-dark">
               Otras Calculadoras
@@ -288,7 +297,7 @@ const Tools = () => {
         <div className="mb-16">
           <div className="flex items-center space-x-3 mb-8">
             <div className="p-2 rounded-lg bg-gradient-card shadow-soft">
-              <Database className="h-6 w-6 text-white" />
+              <Database className="h-6 w-6 text-fyt-purple" />
             </div>
             <h3 className="text-2xl font-bold text-fyt-dark">
               Análisis Farmacológico
@@ -304,7 +313,7 @@ const Tools = () => {
         {/* Buscador de Fármacos */}
         <div className="mb-16">
           <div className="flex items-center space-x-3 mb-8">
-            <div className="p-2 rounded-lg bg-fyt-blue text-white shadow-soft">
+            <div className="p-2 rounded-lg bg-fyt-blue text-fyt-dark shadow-soft">
               <Search className="h-6 w-6" />
             </div>
             <h3 className="text-2xl font-bold text-fyt-dark">
@@ -330,7 +339,7 @@ const Tools = () => {
                   <Button 
                     onClick={handleSearch}
                     disabled={isSearching || !searchTerm.trim()}
-                    className="bg-gradient-hero text-white hover:bg-primary/90"
+                    className="bg-gradient-hero text-fyt-dark hover:bg-primary/90"
                   >
                     {isSearching ? "Buscando..." : "Buscar"}
                   </Button>
@@ -440,7 +449,7 @@ const Tools = () => {
         <div>
           <div className="flex items-center space-x-3 mb-8">
             <div className="p-2 rounded-lg bg-gradient-accent shadow-soft">
-              <Microscope className="h-6 w-6 text-white" />
+              <Microscope className="h-6 w-6 text-fyt-blue" />
             </div>
             <h3 className="text-2xl font-bold text-fyt-dark">
               Herramientas Avanzadas
@@ -455,15 +464,15 @@ const Tools = () => {
 
         {/* Call to Action */}
         <div className="mt-16 text-center">
-          <div className="bg-card border border-card-border rounded-lg p-8 shadow-soft">
-            <h4 className="text-xl font-bold text-fyt-dark mb-4">
+          <div className="bg-gradient-to-tr from-[#3BB9FF] via-[#9B59B6] to-[#FF4C4C] border-2 border-white/30 rounded-lg p-8 shadow-2xl animate-fade-in">
+            <h4 className="text-xl font-bold text-fyt-dark mb-4 drop-shadow-lg">
               ¿Necesitas una herramienta específica?
             </h4>
-            <p className="text-muted-foreground mb-6">
+            <p className="text-fyt-dark/90 mb-6">
               Estamos en constante desarrollo de nuevas utilidades. 
               Comparte tus necesidades y sugerencias con nuestro equipo.
             </p>
-            <button className="bg-gradient-hero text-white px-6 py-3 rounded-md font-medium hover:bg-primary/90 transition-all duration-200 hover:shadow-soft">
+            <button className="bg-white text-fyt-purple font-bold px-6 py-3 rounded-md hover:bg-white/90 transition-all duration-200 hover:shadow-lg">
               Solicitar Herramienta
             </button>
           </div>

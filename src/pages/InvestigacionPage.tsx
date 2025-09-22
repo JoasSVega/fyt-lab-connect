@@ -3,8 +3,7 @@
 import React, { useState } from "react";
 import BaseLayout from "@/components/BaseLayout";
 import { BookOpen, Microscope, FileText, Folder, Users, Award, Dna, Atom, Briefcase, Star } from "lucide-react";
-import KPISection from "@/components/KPISection";
-import KPICard from "@/components/KPICard";
+import HeroInvestigacion from "@/components/HeroInvestigacion";
 
 
 // Importar datos reales desde JSON
@@ -103,39 +102,8 @@ const InvestigacionPage: React.FC = () => {
 
   return (
     <BaseLayout>
-      {/* Hero con fondo degradado, íconos difuminados y tipografía académica */}
-      <section
-        className="w-full py-10 px-2 sm:px-6 rounded-3xl mb-10"
-        style={{
-          background: "linear-gradient(120deg, #e0f2ff 0%, #f8fafc 60%, #f3f4f6 100%)",
-        }}
-        aria-label="Indicadores académicos"
-      >
-        <h1 className="text-4xl sm:text-5xl font-serif font-extrabold text-slate-800 mb-4 text-center">
-          Investigación y Producción Académica
-        </h1>
-        <p className="text-lg text-slate-500 mb-10 text-center max-w-2xl mx-auto">
-          Contribuciones científicas, proyectos y producción intelectual del grupo.
-        </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          {kpis.map((kpi, i) => (
-            <KPICard
-              key={kpi.label}
-              icon={kpi.icon}
-              value={kpi.value}
-              label={kpi.label}
-              subtitle={kpi.subtitle}
-              colorFrom={kpi.colorFrom}
-              colorTo={kpi.colorTo}
-              iconBg={kpi.iconBg}
-              numberColor={kpi.numberColor}
-              subtitleColor={kpi.subtitleColor}
-              duration={2500 + i * 300}
-              delay={i * 0.2}
-            />
-          ))}
-        </div>
-      </section>
+      {/* HeroInvestigacion: Hero moderno con KPIs animados y accesibles */}
+      <HeroInvestigacion />
 
       {/* Proyectos destacados */}
       <section className="mb-10">

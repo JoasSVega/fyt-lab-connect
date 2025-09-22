@@ -19,19 +19,19 @@ const Contact = () => {
 
   const contactInfo = [
     {
-      icon: Mail,
+      icon: <Mail className="w-8 h-8 text-fyt-blue" aria-label="Correo Institucional" />,
       title: "Correo Institucional",
       info: "farmacologiayterapeutica.gi@gmail.com",
       description: "Respuesta en 24-48 horas"
     },
     {
-      icon: Phone,
+      icon: <Phone className="w-8 h-8 text-fyt-purple" aria-label="Teléfono y WhatsApp" />,
       title: "Teléfono y WhatsApp",
       info: "+57 313 7375217",
       description: "Lunes a Viernes, 8:00 AM - 5:00 PM"
     },
     {
-      icon: MapPin,
+      icon: <MapPin className="w-8 h-8 text-fyt-red" aria-label="Ubicación" />,
       title: "Ubicación",
       info: "Facultad de Ciencias Farmacéuticas",
       description: "Universidad de Cartagena, Colombia"
@@ -103,76 +103,73 @@ const Contact = () => {
   };
 
   return (
-    <section id="contacto" className="py-10 sm:py-16 md:py-20 bg-gradient-to-b from-muted/30 to-background min-h-screen">
-      <div className="container mx-auto px-2 sm:px-4 md:px-6 lg:px-8">
+  <section id="contacto" className="py-10 sm:py-16 md:py-20 min-h-screen bg-[#f8fafc]">
+  <div className="container mx-auto px-2 sm:px-4 md:px-6 lg:px-8">
         {/* Header eliminado para evitar duplicidad de título principal. */}
 
   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
           {/* Contact Information */}
           <div className="space-y-6 sm:space-y-8">
             {/* Información Institucional */}
-            <Card className="p-4 sm:p-6 bg-gradient-hero text-white shadow-soft w-full max-w-full">
-              <h3 className="text-xl font-semibold mb-3">
+            <Card className="p-4 sm:p-6 bg-white text-fyt-dark shadow-2xl w-full max-w-full animate-fade-in">
+              <h3 className="text-xl font-semibold mb-3 drop-shadow-lg">
                 Grupo de Investigación en Farmacología y Terapéutica
               </h3>
-              <p className="text-white/90 mb-2">
+              <p className="text-fyt-dark/90 mb-2">
                 Universidad de Cartagena
               </p>
-              <p className="text-white/90">
+              <p className="text-fyt-dark/90">
                 Facultad de Ciencias Farmacéuticas
               </p>
             </Card>
 
             <div>
-              <h3 className="text-2xl font-semibold text-fyt-dark mb-6">
+              <h3 className="text-2xl font-semibold text-fyt-dark mb-6 drop-shadow-lg">
                 Información de Contacto
               </h3>
               <div className="space-y-6">
-                {contactInfo.map((item, index) => {
-                  const Icon = item.icon;
-                  return (
-                    <Card key={index} className="p-4 sm:p-6 bg-gradient-card shadow-soft hover:shadow-medium transition-shadow w-full max-w-full">
-                      <div className="flex items-start space-x-4">
-                        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-hero rounded-full flex items-center justify-center shrink-0">
-                          <Icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
-                        </div>
-                        <div>
-                          <h4 className="text-base sm:text-lg font-semibold text-fyt-dark mb-1 break-words">
-                            {item.title}
-                          </h4>
-                          {item.icon === Mail ? (
-                            <a 
-                              href={`mailto:${item.info}`}
-                              className="text-fyt-blue font-medium mb-1 hover:underline cursor-pointer break-all"
-                            >
-                              {item.info}
-                            </a>
-                          ) : (
-                            <p className="text-fyt-blue font-medium mb-1 break-all">
-                              {item.info}
-                            </p>
-                          )}
-                          <p className="text-muted-foreground text-xs sm:text-sm">
-                            {item.description}
-                          </p>
-                        </div>
+                {contactInfo.map((item, index) => (
+                  <Card key={index} className="p-4 sm:p-6 bg-white border-2 border-[#3BB9FF]/20 shadow-xl hover:shadow-2xl hover:scale-[1.03] transition-all duration-300 w-full max-w-full animate-fade-in">
+                    <div className="flex items-start space-x-4">
+                      <div className="flex items-center justify-center shrink-0">
+                        {item.icon}
                       </div>
-                    </Card>
-                  );
-                })}
+                      <div>
+                        <h4 className="text-base sm:text-lg font-semibold text-fyt-blue mb-1 break-words">
+                          {item.title}
+                        </h4>
+                        {item.title === "Correo Institucional" ? (
+                          <a 
+                            href={`mailto:${item.info}`}
+                            className="text-fyt-purple font-medium mb-1 hover:underline cursor-pointer break-all"
+                          >
+                            {item.info}
+                          </a>
+                        ) : (
+                          <p className="text-fyt-purple font-medium mb-1 break-all">
+                            {item.info}
+                          </p>
+                        )}
+                        <p className="text-gray-700 text-xs sm:text-sm">
+                          {item.description}
+                        </p>
+                      </div>
+                    </div>
+                  </Card>
+                ))}
               </div>
             </div>
 
             {/* Social Media & Additional Info */}
-            <Card className="p-4 sm:p-6 bg-gradient-card shadow-soft w-full max-w-full">
-              <h4 className="text-base sm:text-lg font-semibold text-fyt-dark mb-4">
+            <Card className="p-4 sm:p-6 bg-white border-2 border-[#9B59B6]/20 shadow-xl w-full max-w-full animate-fade-in">
+              <h4 className="text-base sm:text-lg font-semibold text-[#9B59B6] mb-4">
                 Síguenos en Redes Sociales
               </h4>
               <div className="flex flex-wrap gap-2 sm:space-x-4">
                 <Button 
                   variant="outline" 
                   size="sm"
-                  className="border-fyt-purple/20 hover:bg-fyt-purple hover:text-white"
+                  className="border-[#9B59B6]/40 hover:bg-[#ede9fe] hover:text-fyt-dark"
                   onClick={() => window.open('https://www.instagram.com/grupo_fyt?igsh=MXNxbXo3eHM2MHRweA==', '_blank')}
                 >
                   Instagram
@@ -183,8 +180,8 @@ const Contact = () => {
 
           {/* Contact Form */}
           <div>
-            <Card className="p-4 sm:p-6 md:p-8 bg-gradient-card shadow-soft w-full max-w-full">
-              <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-fyt-dark mb-4 sm:mb-6">
+            <Card className="p-4 sm:p-6 md:p-8 bg-white border-2 border-[#FF4C4C]/20 shadow-xl w-full max-w-full animate-fade-in">
+              <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-[#FF4C4C] mb-4 sm:mb-6">
                 Envíanos un Mensaje
               </h3>
               <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
@@ -247,7 +244,7 @@ const Contact = () => {
 
                 <Button 
                   type="submit" 
-                  className="w-full bg-gradient-hero text-white text-base sm:text-lg"
+                  className="w-full bg-[#3BB9FF] text-[#1e293b] text-base sm:text-lg font-bold shadow-lg hover:bg-[#e0f2ff]"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
@@ -273,9 +270,9 @@ const Contact = () => {
 
         {/* Map or Additional CTA */}
         <div className="mt-10 sm:mt-14 md:mt-16">
-          <Card className="p-4 sm:p-6 md:p-8 bg-gradient-hero text-white shadow-large text-center w-full max-w-full">
-            <h3 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2 sm:mb-4 break-words">¿Interesado en Colaborar?</h3>
-            <p className="mb-4 sm:mb-6 text-white/90 max-w-full sm:max-w-2xl mx-auto break-words">
+          <Card className="p-4 sm:p-6 md:p-8 bg-white text-fyt-dark shadow-2xl text-center w-full max-w-full animate-fade-in">
+            <h3 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2 sm:mb-4 break-words drop-shadow-lg">¿Interesado en Colaborar?</h3>
+            <p className="mb-4 sm:mb-6 text-fyt-dark/90 max-w-full sm:max-w-2xl mx-auto break-words">
               Si eres investigador, estudiante o institución interesada en establecer 
               colaboraciones académicas o de investigación, estaremos encantados de conocer 
               más sobre tus propuestas.
@@ -283,14 +280,22 @@ const Contact = () => {
             <Button 
               variant="secondary"
               size="lg"
-              className="bg-white text-fyt-dark hover:bg-white/90 text-base sm:text-lg"
+              className="bg-white text-fyt-purple font-bold hover:bg-white/90 text-base sm:text-lg shadow-lg"
               onClick={() => window.open('mailto:farmacologiayterapeutica.gi@gmail.com?subject=Propuesta de Colaboración', '_blank')}
             >
-              <Mail className="h-4 w-4 mr-2" />
+              <Mail className="w-5 h-5 mr-2 text-fyt-blue" aria-label="Proponer Colaboración" />
               Proponer Colaboración
             </Button>
           </Card>
         </div>
+      {/* Animaciones CSS */}
+      <style>{`
+        @keyframes fadeIn {
+          0% { opacity: 0; transform: translateY(30px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in { animation: fadeIn 1.2s cubic-bezier(.42,0,.58,1); }
+      `}</style>
       </div>
     </section>
   );
