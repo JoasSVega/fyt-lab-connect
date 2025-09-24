@@ -14,8 +14,8 @@ const Navbar = () => {
       isDropdown: false
     },
     {
-      name: "Nuestro Equipo",
-      href: "/equipo",
+      name: "Sobre Nosotros",
+      href: "/sobre-nosotros",
       isDropdown: false
     },
     {
@@ -68,11 +68,11 @@ const Navbar = () => {
             <div className="flex-shrink-0">
               <img src="/logo-fyt.png" alt="Logo Grupo FyT" className="h-12 w-auto transition-all duration-300 group-hover:scale-105" />
             </div>
-            <div className="text-lg font-bold text-gray-800 group-hover:text-fyt-blue transition-colors">
-              Grupo FyT
-              <span className="block text-xs text-gray-600 font-normal group-hover:text-fyt-blue/80">
-                Farmacología y Terapéutica
-              </span>
+              <div className="text-lg font-poppins font-bold text-gray-800 group-hover:text-fyt-blue transition-colors">
+                Grupo FyT
+                <span className="block text-xs font-raleway font-medium text-gray-600 group-hover:text-fyt-blue/80">
+                  Farmacología y Terapéutica
+                </span>
             </div>
           </Link>
 
@@ -88,7 +88,7 @@ const Navbar = () => {
                 {item.isDropdown ? (
                   <button
                     onClick={() => handleDropdownToggle(item.name)}
-                    className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 transition-all duration-200 font-medium px-3 py-2 rounded-md"
+                      className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 transition-all duration-200 font-inter px-3 py-2 rounded-md"
                   >
                     <span>{item.name}</span>
                     <ChevronDown 
@@ -119,7 +119,7 @@ const Navbar = () => {
           <div className="lg:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-700 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 p-2"
+              className="text-gray-700 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 p-2 font-inter"
               aria-label="Toggle menu"
             >
               {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -129,14 +129,14 @@ const Navbar = () => {
 
         {/* Menú móvil y tablet */}
         {isMenuOpen && (
-          <div className="lg:hidden border-t border-gray-200 py-4 bg-white">
+          <div className="lg:hidden border-t border-gray-200 py-4 bg-white font-inter">
             <div className="space-y-2">
               {menuItems.map((item) => (
                 <div key={item.name}>
                   <NavLink
                     to={item.href}
                     className={({ isActive }) =>
-                      `block px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all duration-200 font-medium ${
+                      `block px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all duration-200 font-inter ${
                         isActive ? 'text-blue-600 bg-blue-50' : ''
                       }`
                     }

@@ -15,10 +15,10 @@ export default function DosageCalculator() {
 
   return (
     <div className="p-6 bg-white rounded-2xl shadow-md max-w-md mx-auto">
-      <h2 className="text-xl font-bold mb-4 text-blue-600">💊 Calculadora de dosis</h2>
+  <h2 className="text-xl font-poppins font-bold mb-4 text-blue-600">💊 Calculadora de dosis</h2>
 
       <div className="mb-3">
-        <label className="block text-sm font-medium">Peso del paciente (kg)</label>
+  <label className="block text-sm font-raleway font-medium">Peso del paciente (kg)</label>
         <input
           type="number"
           value={weight}
@@ -28,7 +28,7 @@ export default function DosageCalculator() {
       </div>
 
       <div className="mb-3">
-        <label className="block text-sm font-medium">Dosis (mg/kg)</label>
+  <label className="block text-sm font-raleway font-medium">Dosis (mg/kg)</label>
         <input
           type="number"
           value={dosePerKg}
@@ -39,13 +39,13 @@ export default function DosageCalculator() {
 
       <button
         onClick={calculateDose}
-        className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
+        className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition font-inter"
       >
         Calcular
       </button>
 
       {result !== null && (
-        <div className="mt-4 p-3 bg-green-100 text-green-800 rounded-lg">
+        <div className="mt-4 p-3 bg-green-100 text-green-800 rounded-lg font-inter">
           <p><strong>Resultado:</strong> {result} mg</p>
         </div>
       )}

@@ -116,7 +116,8 @@ const Contact = () => {
                         {item.title === "Correo Institucional" ? (
                           <a 
                             href={`mailto:${item.info}`}
-                            className="text-fyt-purple font-medium mb-1 hover:underline cursor-pointer break-all"
+                            className="text-fyt-purple font-medium mb-1 hover:underline cursor-pointer whitespace-nowrap text-xs sm:text-base"
+                            style={{fontSize: '0.85rem'}}
                           >
                             {item.info}
                           </a>

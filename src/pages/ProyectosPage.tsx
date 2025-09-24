@@ -18,14 +18,14 @@ const ProyectosPage: React.FC = () => {
   return (
     <BaseLayout>
       <section className="max-w-6xl mx-auto px-4 py-10 sm:py-16">
-        <h1 className="text-4xl sm:text-5xl font-serif font-extrabold text-slate-800 mb-8 text-center">
+        <h1 className="text-4xl sm:text-5xl font-poppins font-bold text-slate-800 mb-8 text-center">
           Proyectos de Investigación
         </h1>
         <div className="flex gap-2 justify-end mb-8">
           {TABS.map(t => (
             <button
               key={t.key}
-              className={`px-3 py-1 rounded-full text-sm font-semibold border transition-colors focus:outline-none focus:ring-2 focus:ring-blue-200 ${
+              className={`px-3 py-1 rounded-full text-sm font-inter border transition-colors focus:outline-none focus:ring-2 focus:ring-blue-200 ${
                 tab === t.key
                   ? "bg-blue-100 text-blue-800 border-blue-300"
                   : "bg-white text-blue-700 border-blue-100 hover:bg-blue-50"

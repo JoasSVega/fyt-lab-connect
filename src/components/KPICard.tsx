@@ -65,10 +65,10 @@ const KPICard: React.FC<KPICardProps> = ({
       <div className={`w-14 h-14 flex items-center justify-center rounded-full ${iconBg} mb-3 group-hover:scale-110 transition-transform`}>
         {icon}
       </div>
-      <span className={`text-4xl font-extrabold font-serif tracking-tight mb-1 ${numberColor}`}>{count}</span>
-      <span className="text-base font-semibold text-slate-800 text-center mb-1">{label}</span>
+      <span className={`text-4xl font-extrabold font-poppins tracking-tight mb-1 ${numberColor}`}>{count}</span>
+      <span className="text-base font-raleway font-medium text-slate-800 text-center mb-1">{label}</span>
       {subtitle && (
-        <span className={`text-sm ${subtitleColor} text-center leading-tight`}>{subtitle}</span>
+        <span className={`text-sm font-inter ${subtitleColor} text-center leading-tight`}>{subtitle}</span>
       )}
       {/* Gradiente de borde sutil */}
       <div className={`absolute inset-0 rounded-2xl pointer-events-none border-2 border-transparent group-hover:border-blue-200`} style={{zIndex:1}} />

@@ -152,7 +152,7 @@ const RenalFunctionPage: React.FC = () => {
       >
         <ArrowLeft className="w-5 h-5" /> Volver a Herramientas
       </Button>
-      <h1 className="text-4xl sm:text-5xl font-serif font-extrabold text-slate-800 mb-4 text-center">
+      <h1 className="text-4xl sm:text-5xl font-poppins font-bold text-slate-800 mb-4 text-center">
         Calculadoras de Función Renal
       </h1>
       <div className="mb-4 flex flex-col md:flex-row md:items-center md:justify-between gap-2">
@@ -180,11 +180,11 @@ const RenalFunctionPage: React.FC = () => {
       {tab === "cg" && (
         <div>
           <CalculatorCard
-            title="Cockcroft-Gault"
+            title={<span className="font-raleway text-xl font-bold">Cockcroft-Gault</span>}
             onCalculate={handleCgCalc}
             onReset={handleCgReset}
             result={cgResult && (
-              <div>
+              <div className="font-inter">
                 <div>ClCr: <b>{cgResult.crcl.toFixed(2)}</b> ml/min</div>
                 {cg.adjust && cgResult.crclAdj !== undefined && (
                   <div>ClCr ajustada: <b>{cgResult.crclAdj.toFixed(2)}</b> ml/min/1.73m²</div>
@@ -281,11 +281,11 @@ const RenalFunctionPage: React.FC = () => {
       {tab === "mdrd" && (
         <div>
           <CalculatorCard
-            title="MDRD"
+            title={<span className="font-raleway text-xl font-bold">MDRD</span>}
             onCalculate={handleMdrdCalc}
             onReset={handleMdrdReset}
             result={mdrdResult !== null && (
-              <div>TFG: <b>{mdrdResult.toFixed(2)}</b> ml/min/1.73 m²</div>
+              <div className="font-inter">TFG: <b>{mdrdResult.toFixed(2)}</b> ml/min/1.73 m²</div>
             )}
             onCopy={mdrdResult !== null ? () => {
               navigator.clipboard.writeText(`TFG: ${mdrdResult.toFixed(2)} ml/min/1.73 m²`);
@@ -388,11 +388,11 @@ const RenalFunctionPage: React.FC = () => {
       {tab === "ckd" && (
         <div>
           <CalculatorCard
-            title="CKD-EPI"
+            title={<span className="font-raleway text-xl font-bold">CKD-EPI</span>}
             onCalculate={handleCkdCalc}
             onReset={handleCkdReset}
             result={ckdResult !== null && (
-              <div>TFG: <b>{ckdResult.toFixed(2)}</b> ml/min/1.73 m²</div>
+              <div className="font-inter">TFG: <b>{ckdResult.toFixed(2)}</b> ml/min/1.73 m²</div>
             )}
             onCopy={ckdResult !== null ? () => {
               navigator.clipboard.writeText(`TFG: ${ckdResult.toFixed(2)} ml/min/1.73 m²`);

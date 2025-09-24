@@ -10,6 +10,7 @@ export const pathPublicaciones = "/investigacion/publicaciones";
 //
 // Using standardized logo from public folder
 import AnthropometricCalculatorsPage from "./pages/AnthropometricCalculatorsPage";
+import SobreNosotros from "./pages/SobreNosotros";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster as ToasterShadcn } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -59,7 +60,7 @@ function AnimatedRoutes() {
           {/* Noticias y Herramientas */}
           <Route path="/noticias" element={<Noticias />} />
           <Route path="/herramientas" element={<Herramientas />} />
-          <Route path="/equipo" element={<Equipo />} />
+          <Route path="/sobre-nosotros" element={<SobreNosotros />} />
           <Route path="/contactos" element={<Contactos />} />
           {/* Páginas legales */}
           <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />

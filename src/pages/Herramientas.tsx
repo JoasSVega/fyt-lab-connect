@@ -32,7 +32,7 @@ const Herramientas = () => {
 			<div className="w-full bg-background overflow-x-hidden flex flex-col">
 			<main className="flex-1 w-full pt-24">
                 <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-                  <h1 className="text-4xl sm:text-5xl font-serif font-extrabold text-slate-800 mb-8 text-center">
+                  <h1 className="text-4xl sm:text-5xl font-poppins font-bold text-slate-800 mb-8 text-center">
                     Herramientas Farmacéuticas
                   </h1>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
@@ -48,15 +48,15 @@ const Herramientas = () => {
                           >
                             {tool.icon}
                           </div>
-                          <h3 className="text-xl font-bold text-fyt-dark mb-2 text-center">
+                          <h3 className="text-xl font-raleway font-semibold text-fyt-dark mb-2 text-center">
                             {tool.title}
                           </h3>
-                          <p className="text-muted-foreground text-center text-sm mb-4">
+                          <p className="text-muted-foreground text-center text-sm mb-4 font-inter">
                             {tool.description}
                           </p>
                           <Button
                             onClick={() => navigate(tool.href)}
-                            className={`w-full rounded-full px-5 py-2 font-semibold shadow bg-fyt-blue text-white hover:bg-fyt-blue/90 transition`}
+                            className={`w-full rounded-full px-5 py-2 font-inter shadow bg-fyt-blue text-white hover:bg-fyt-blue/90 transition font-inter`}
                           >
                             {tool.buttonText}
                           </Button>

@@ -17,10 +17,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ image, title, year, area, sum
       {/* Imagen placeholder */}
       <div className="text-slate-400">Imagen</div>
     </div>
-    <h3 className="text-base font-bold text-slate-800 mb-1">{title}</h3>
-    <div className="text-xs text-slate-500 mb-1">{year} · {area}</div>
-    <span className={`mb-1 px-2 py-0.5 rounded-full text-xs font-semibold w-fit ${status === 'En curso' ? 'bg-fyt-blue/10 text-fyt-blue border border-fyt-blue/30' : 'bg-fyt-purple/10 text-fyt-purple border border-fyt-purple/30'}`}>{status}</span>
-    <p className="text-xs text-slate-600 mb-2 flex-1">{summary}</p>
+    <h3 className="text-base font-raleway font-bold text-slate-800 mb-1">{title}</h3>
+    <div className="text-xs font-inter text-slate-500 mb-1">{year} · {area}</div>
+    <span className={`mb-1 px-2 py-0.5 rounded-full text-xs font-inter font-semibold w-fit ${status === 'En curso' ? 'bg-fyt-blue/10 text-fyt-blue border border-fyt-blue/30' : 'bg-fyt-purple/10 text-fyt-purple border border-fyt-purple/30'}`}>{status}</span>
+    <p className="text-xs font-inter text-slate-600 mb-2 flex-1">{summary}</p>
     {actions && <div className="mt-auto">{actions}</div>}
   </div>
 );

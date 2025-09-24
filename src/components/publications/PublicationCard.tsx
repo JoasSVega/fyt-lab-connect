@@ -17,10 +17,10 @@ const PublicationCard: React.FC<PublicationCardProps> = ({ image, title, year, t
       {/* Imagen placeholder */}
       <div className="text-slate-400">Imagen</div>
     </div>
-    <h3 className="text-base font-bold text-slate-800 mb-1">{title}</h3>
-    <div className="text-xs text-slate-500 mb-1">{year} · {type}</div>
-    <p className="text-xs text-slate-600 mb-1">{authors}</p>
-    {link && <a href={link} target="_blank" rel="noopener noreferrer" className="text-xs text-fyt-blue underline mb-1">Ver publicación</a>}
+    <h3 className="text-base font-raleway font-bold text-slate-800 mb-1">{title}</h3>
+    <div className="text-xs font-inter text-slate-500 mb-1">{year} · {type}</div>
+    <p className="text-xs font-inter text-slate-600 mb-1">{authors}</p>
+    {link && <a href={link} target="_blank" rel="noopener noreferrer" className="text-xs font-inter text-fyt-blue underline mb-1">Ver publicación</a>}
     {actions && <div className="mt-auto">{actions}</div>}
   </div>
 );

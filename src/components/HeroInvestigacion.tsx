@@ -85,10 +85,10 @@ export default function HeroInvestigacion() {
       }}
       aria-label="Indicadores académicos"
     >
-      <h1 className="text-4xl sm:text-5xl font-serif font-extrabold text-slate-800 mb-4 text-center">
+      <h1 className="text-4xl sm:text-5xl font-poppins font-extrabold text-slate-800 mb-4 text-center">
         Investigación y Producción Académica
       </h1>
-      <p className="text-lg text-slate-500 mb-10 text-center max-w-2xl mx-auto">
+      <p className="text-lg font-inter text-slate-500 mb-10 text-center max-w-2xl mx-auto">
         Contribuciones científicas, proyectos y producción intelectual del grupo.
       </p>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">

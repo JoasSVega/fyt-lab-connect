@@ -43,12 +43,12 @@ const PublicacionesPage: React.FC = () => {
   return (
     <BaseLayout>
       <section className="max-w-6xl mx-auto px-4 py-10 sm:py-16">
-  <h1 className="text-4xl sm:text-5xl font-serif font-extrabold text-slate-800 mb-4 text-center">Publicaciones</h1>
+  <h1 className="text-4xl sm:text-5xl font-poppins font-bold text-slate-800 mb-4 text-center">Publicaciones</h1>
         <FiltersBar>
           <select
             value={year || ''}
             onChange={e => setYear(e.target.value || null)}
-            className="border rounded px-2 py-1 text-sm"
+            className="border rounded px-2 py-1 text-sm font-inter"
             aria-label="Filtrar por año"
           >
             <option value="">Año (todos)</option>
@@ -57,7 +57,7 @@ const PublicacionesPage: React.FC = () => {
           <select
             value={type || ''}
             onChange={e => setType(e.target.value || null)}
-            className="border rounded px-2 py-1 text-sm"
+            className="border rounded px-2 py-1 text-sm font-inter"
             aria-label="Filtrar por tipo"
           >
             <option value="">Tipo (todos)</option>
@@ -68,13 +68,13 @@ const PublicacionesPage: React.FC = () => {
             value={search}
             onChange={e => setSearch(e.target.value)}
             placeholder="Buscar publicación..."
-            className="border rounded px-2 py-1 text-sm"
+            className="border rounded px-2 py-1 text-sm font-inter"
             aria-label="Buscar publicación"
           />
           <button
             type="button"
             onClick={() => { setYear(null); setType(null); setSearch(""); }}
-            className="px-2 py-1 rounded text-xs border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-600"
+            className="px-2 py-1 rounded text-xs border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-600 font-inter"
             aria-label="Limpiar filtros"
           >
             Limpiar filtros

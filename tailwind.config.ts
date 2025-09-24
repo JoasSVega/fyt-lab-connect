@@ -78,7 +78,10 @@ export default {
         "large": "var(--shadow-large)",
       },
       fontFamily: {
-        "academic": "var(--font-academic)",
+        poppins: ["Poppins", "sans-serif"],
+        raleway: ["Raleway", "sans-serif"],
+        inter: ["Inter", "sans-serif"],
+        academic: "var(--font-academic)",
       },
       borderRadius: {
         lg: "var(--radius)",
