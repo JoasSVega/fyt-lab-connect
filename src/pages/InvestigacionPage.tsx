@@ -109,7 +109,7 @@ const InvestigacionPage: React.FC = () => {
       {/* Proyectos destacados */}
       <section className="mb-10">
         <div className="flex flex-col gap-2 mb-4 px-2 sm:px-8 lg:px-16">
-          <h2 className="text-xl sm:text-2xl font-poppins font-bold text-slate-800 text-center sm:text-left">Proyectos de investigación</h2>
+          <h2 className="text-xl sm:text-2xl font-poppins font-bold text-slate-800 text-center">Proyectos de investigación</h2>
           <div className="flex gap-2 overflow-x-auto pb-1 justify-center sm:justify-start">
             <button onClick={() => setProyectosTab('en-curso')} className={`px-3 py-1 rounded-full text-sm font-inter border min-w-[110px] ${proyectosTab === 'en-curso' ? 'bg-fyt-blue text-white border-fyt-blue' : 'bg-white text-fyt-blue border-fyt-blue/40'}`}>En curso</button>
             <button onClick={() => setProyectosTab('finalizados')} className={`px-3 py-1 rounded-full text-sm font-inter border min-w-[110px] ${proyectosTab === 'finalizados' ? 'bg-fyt-purple text-white border-fyt-purple' : 'bg-white text-fyt-purple border-fyt-purple/40'}`}>Completados</button>
@@ -229,10 +229,10 @@ const InvestigacionPage: React.FC = () => {
 
       {/* Eventos y cursos */}
       <section className="mb-10">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl sm:text-2xl font-poppins font-bold text-slate-800">Eventos y cursos</h2>
+        <div className="mb-4 px-2 sm:px-8 lg:px-16">
+          <h2 className="text-xl sm:text-2xl font-poppins font-bold text-slate-800 text-center">Eventos y cursos</h2>
         </div>
-        <div className="bg-white rounded-2xl shadow-md p-6">
+        <div className="bg-white rounded-2xl shadow-md p-4 sm:p-6 md:p-8 mx-1 sm:mx-2">
           <ul className="timeline list-none m-0 p-0">
             {eventsCoursesData.slice(0, 10).map((item: any, idx: number) => (
               <li key={item.id} className="relative pl-8 mb-8 last:mb-0">
@@ -255,12 +255,12 @@ const InvestigacionPage: React.FC = () => {
 
       {/* Producción tecnológica */}
       <section className="mb-10">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl sm:text-2xl font-poppins font-bold text-slate-800">Producción tecnológica</h2>
+        <div className="mb-4 px-2 sm:px-8 lg:px-16">
+          <h2 className="text-xl sm:text-2xl font-poppins font-bold text-slate-800 text-center">Producción tecnológica</h2>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
           {techProductionData.map((item: any) => (
-            <div key={item.id} className="bg-white rounded-2xl shadow-md p-5 flex flex-col group transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+            <div key={item.id} className="bg-white rounded-2xl shadow-md p-4 sm:p-6 md:p-8 flex flex-col group transition-all duration-300 hover:shadow-lg hover:-translate-y-1 mx-1 sm:mx-2">
               <div className="flex items-center gap-3 mb-2">
                 <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-fyt-green/10 group-hover:bg-fyt-green/20 transition-colors">
                   {item.type === 'Software' && <Briefcase className="w-6 h-6 text-fyt-green" />}
@@ -281,12 +281,12 @@ const InvestigacionPage: React.FC = () => {
 
       {/* Impacto académico */}
       <section className="mb-10">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl sm:text-2xl font-poppins font-bold text-slate-800">Impacto académico</h2>
+        <div className="mb-4 px-2 sm:px-8 lg:px-16">
+          <h2 className="text-xl sm:text-2xl font-poppins font-bold text-slate-800 text-center">Impacto académico</h2>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
           {academicImpactData.map((item: any) => (
-            <div key={item.id} className="bg-white rounded-2xl shadow-md p-5 flex flex-col group transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+            <div key={item.id} className="bg-white rounded-2xl shadow-md p-4 sm:p-6 md:p-8 flex flex-col group transition-all duration-300 hover:shadow-lg hover:-translate-y-1 mx-1 sm:mx-2">
               <div className="flex items-center gap-3 mb-2">
                 <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-fyt-blue/10 group-hover:bg-fyt-blue/20 transition-colors">
                   {item.type === 'Citas' && <FileText className="w-6 h-6 text-fyt-blue" />}
