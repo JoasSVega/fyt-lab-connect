@@ -37,7 +37,7 @@ const Footer = () => {
             {/* 1. Información del grupo */}
             <div className="flex flex-col min-w-[220px] max-w-lg col-span-1">
               <div className="flex items-center gap-4 mb-6 flex-wrap">
-                <img src="/logo-fyt.png" alt="Logo Grupo FyT" className="w-20 h-20 sm:w-24 sm:h-24 object-contain drop-shadow-2xl transition-all duration-300 animate-zoom-in" />
+                <img src="/logo-fyt.png" alt="Logo Grupo FyT, semillero de investigación en farmacología y terapéutica" loading="lazy" className="w-20 h-20 sm:w-24 sm:h-24 object-contain drop-shadow-2xl transition-all duration-300 animate-zoom-in" />
                 <div>
                   <h3 className="text-2xl font-bold text-[#1e293b] tracking-wide" style={{ fontFamily: 'Poppins, Inter, Montserrat, sans-serif' }}>Grupo FyT</h3>
                     <p className="text-[#334155] text-sm font-inter">Farmacología y Terapéutica</p>

@@ -150,7 +150,8 @@ const About = () => {
                     <div className="relative h-48 overflow-hidden">
                       <img 
                         src={line.image} 
-                        alt={line.title}
+                        alt={`Imagen de línea de investigación: ${line.title}`}
+                        loading="lazy"
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
@@ -185,7 +186,8 @@ const About = () => {
                     <div className="relative h-48 overflow-hidden">
                       <img 
                         src={modality.image} 
-                        alt={modality.title}
+                        alt={`Imagen de modalidad de grado: ${modality.title}`}
+                        loading="lazy"
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
@@ -220,7 +222,8 @@ const About = () => {
                     <div className="relative h-48 overflow-hidden">
                       <img 
                         src={activity.image} 
-                        alt={activity.title}
+                        alt={`Imagen de actividad o producto: ${activity.title}`}
+                        loading="lazy"
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>

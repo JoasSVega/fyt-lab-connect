@@ -37,7 +37,8 @@ const Hero = () => {
       <div className="flex flex-col items-center justify-center">
         <img
           src="/logo-fyt.png"
-          alt="Logo Grupo FyT"
+          alt="Logo Grupo FyT, semillero de investigación en farmacología y terapéutica"
+          loading="lazy"
           className="mb-6 animate-zoom-in object-contain"
           style={{ width: '120px', height: '120px', maxWidth: '30vw', maxHeight: '30vw', aspectRatio: '1 / 1', animation: 'zoomIn 1s cubic-bezier(.42,0,.58,1)' }}
         />
