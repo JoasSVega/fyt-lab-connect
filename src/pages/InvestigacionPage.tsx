@@ -134,10 +134,10 @@ const InvestigacionPage: React.FC = () => {
 
 
       {/* Publicaciones científicas y académicas */}
-      <section className="mb-10">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl sm:text-3xl font-poppins font-bold text-slate-800">Publicaciones científicas y académicas</h2>
-          <div className="flex gap-2">
+      <section className="mb-10 px-2 sm:px-6 md:px-8">
+        <div className="flex flex-col gap-2 mb-6">
+          <h2 className="text-2xl sm:text-3xl font-poppins font-bold text-slate-800 text-center">Publicaciones científicas y académicas</h2>
+          <div className="flex gap-2 overflow-x-auto pb-1 justify-center">
             {[
               { key: "articulos", label: "Artículos científicos", icon: <FileText className="w-5 h-5 text-blue-500" /> },
               { key: "libros", label: "Libros y capítulos", icon: <BookOpen className="w-5 h-5 text-green-500" /> },
@@ -145,7 +145,7 @@ const InvestigacionPage: React.FC = () => {
             ].map(tabItem => (
               <button
                 key={tabItem.key}
-                className={`px-4 py-1 rounded-full text-sm font-inter border transition-colors focus:outline-none focus:ring-2 focus:ring-blue-200 flex items-center gap-2 ${
+                className={`px-4 py-1 rounded-full text-xs sm:text-sm font-inter border transition-colors focus:outline-none focus:ring-2 focus:ring-blue-200 flex items-center gap-2 min-w-[140px] sm:min-w-[120px] ${
                   publicacionesTab === tabItem.key
                     ? "bg-blue-50 text-blue-800 border-blue-300"
                     : "bg-white text-blue-700 border-blue-100 hover:bg-blue-50"
@@ -160,22 +160,22 @@ const InvestigacionPage: React.FC = () => {
             ))}
           </div>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
           {/* Artículos científicos */}
           {publicacionesTab === "articulos" && (
             publicationsData.filter((pub: any) => pub.type === "articulo").slice(0, 6).map((pub: any, idx: number) => (
-              <div key={pub.id} className="bg-white rounded-3xl shadow-soft p-6 flex flex-col group transition-all duration-300 hover:shadow-lg hover:-translate-y-1" style={{animation: `fadeInUp 0.5s ease ${idx * 0.08}s`}}>
-                <div className="flex items-center gap-3 mb-2">
-                  <span className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-50 group-hover:bg-blue-100 transition-colors">
-                    <FileText className="w-7 h-7 text-blue-600 group-hover:scale-110 transition-transform" />
+              <div key={pub.id} className="bg-white rounded-3xl shadow-soft p-4 sm:p-6 flex flex-col group transition-all duration-300 hover:shadow-lg hover:-translate-y-1" style={{animation: `fadeInUp 0.5s ease ${idx * 0.08}s`}}>
+                <div className="flex items-center gap-2 sm:gap-3 mb-2">
+                  <span className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-blue-50 group-hover:bg-blue-100 transition-colors">
+                    <FileText className="w-6 h-6 sm:w-7 sm:h-7 text-blue-600 group-hover:scale-110 transition-transform" />
                   </span>
-                  <span className="text-xs text-slate-500 font-medium">{pub.year}</span>
+                  <span className="text-xs sm:text-sm text-slate-500 font-medium">{pub.year}</span>
                 </div>
-                <h3 className="text-base font-raleway font-medium text-blue-900 mb-1 line-clamp-2">{pub.title}</h3>
-                <p className="text-xs text-slate-600 mb-1 line-clamp-2 font-inter">{pub.summary}</p>
-                <div className="flex justify-between items-center mt-2">
-                  <span className="text-xs text-slate-500">{pub.authors}</span>
-                  <a href={pub.link || "#"} target="_blank" rel="noopener noreferrer" className="px-3 py-1 rounded-full bg-blue-50 text-blue-800 font-semibold text-xs shadow hover:bg-blue-100 transition">Ver más</a>
+                <h3 className="text-sm sm:text-base font-raleway font-medium text-blue-900 mb-1 line-clamp-2">{pub.title}</h3>
+                <p className="text-xs sm:text-sm text-slate-600 mb-1 line-clamp-2 font-inter">{pub.summary}</p>
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-2 gap-1">
+                  <span className="text-xs sm:text-sm text-slate-500">{pub.authors}</span>
+                  <a href={pub.link || "#"} target="_blank" rel="noopener noreferrer" className="px-3 py-1 rounded-full bg-blue-50 text-blue-800 font-semibold text-xs sm:text-sm shadow hover:bg-blue-100 transition mt-1 sm:mt-0">Ver más</a>
                 </div>
               </div>
             ))
