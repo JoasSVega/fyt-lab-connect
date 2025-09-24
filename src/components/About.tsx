@@ -314,27 +314,24 @@ const About = () => {
           </div>
           {/* INSCRÍBETE AHORA Card */}
           <div className="flex justify-center mt-8">
-            <Card 
-              className="max-w-2xl w-full p-8 shadow-2xl text-center animate-fade-in"
-              style={{
-                background: 'linear-gradient(120deg, #3BB9FF 0%, #ffffff 100%)'
-              }}
-            >
-              <Bell className="w-12 h-12 mx-auto mb-4 text-black animate-bounce" aria-label="Inscríbete ahora" />
-              <h3 className="text-2xl font-semibold mb-4 text-[#1e293b]">INSCRÍBETE AHORA</h3>
-              <p className="mb-6 text-[#1e293b]">
-                ¿Interesado en formar parte de nuestro semillero de investigación? 
-                Completa el formulario oficial de inscripción.
-              </p>
-              <Button 
-                variant="secondary"
-                size="lg"
-                className="bg-[#3BB9FF] text-[#1e293b] font-bold hover:bg-[#e0f2ff] hover:text-[#1e293b] shadow-lg transition-colors"
-                onClick={() => window.open('https://forms.gle/3fbXVW7b4Db6Q9dWA', '_blank')}
+              <Card 
+                className="max-w-2xl w-full p-8 shadow-2xl text-center animate-fade-in bg-white"
               >
-                Inscribirse Ahora
-              </Button>
-            </Card>
+                <Bell className="w-12 h-12 mx-auto mb-4 text-black animate-bounce" aria-label="Inscríbete ahora" />
+                <h3 className="text-2xl font-semibold mb-4 text-[#1e293b]">INSCRÍBETE AHORA</h3>
+                <p className="mb-6 text-[#1e293b]">
+                  ¿Interesado en formar parte de nuestro semillero de investigación? 
+                  Completa el formulario oficial de inscripción.
+                </p>
+                <Button 
+                  variant="outline"
+                  size="lg"
+                  className="bg-white text-[#3BB9FF] border-2 border-[#3BB9FF] hover:bg-[#3BB9FF] hover:text-white transition-colors duration-300 px-8 py-3 font-semibold shadow-lg"
+                  onClick={() => window.open('https://forms.gle/3fbXVW7b4Db6Q9dWA', '_blank')}
+                >
+                  Inscribirse Ahora
+                </Button>
+              </Card>
           </div>
       {/* Animaciones CSS */}
       <style>{`

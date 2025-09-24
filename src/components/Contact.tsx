@@ -51,10 +51,8 @@ const Contact = () => {
     return emailRegex.test(email);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Basic validation
     if (!formData.name || !formData.email || !formData.subject || !formData.message) {
       toast({
         title: "Error",
@@ -63,7 +61,6 @@ const Contact = () => {
       });
       return;
     }
-
     if (!validateEmail(formData.email)) {
       toast({
         title: "Error",
@@ -72,57 +69,35 @@ const Contact = () => {
       });
       return;
     }
-
-    setIsSubmitting(true);
-
-    // Simulate form submission
-    try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      toast({
-        title: "¡Mensaje enviado!",
-        description: "Gracias por contactarnos. Te responderemos pronto.",
-      });
-
-      // Reset form
-      setFormData({
-        name: "",
-        email: "",
-        subject: "",
-        message: ""
-      });
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Hubo un problema al enviar tu mensaje. Inténtalo de nuevo.",
-        variant: "destructive"
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
+    const mailto = `mailto:farmacologiayterapeutica.gi@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Nombre: ${formData.name}\nCorreo: ${formData.email}\n\nMensaje:\n${formData.message}`)}`;
+    window.open(mailto, '_blank');
+    toast({
+      title: "Redirigiendo a tu correo",
+      description: "Completa el envío desde tu cliente de correo.",
+    });
   };
 
   return (
-  <section id="contacto" className="py-10 sm:py-16 md:py-20 min-h-screen bg-[#f8fafc]">
-  <div className="container mx-auto px-2 sm:px-4 md:px-6 lg:px-8">
-        {/* Header eliminado para evitar duplicidad de título principal. */}
+    <section id="contacto" className="py-10 sm:py-16 md:py-20 min-h-screen bg-[#f8fafc]">
+      <div className="container mx-auto px-2 sm:px-4 md:px-6 lg:px-8">
+        {/* Mapa Google Maps embebido */}
+        <div className="w-full mb-10 rounded-2xl shadow-2xl overflow-hidden animate-fade-in" style={{height: '350px'}}>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.573964624252!2d-75.5038549!3d10.3994434!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ef625bfe9eac921%3A0xa752ed6a0af4fe9b!2sCartagena%20University%20Campus%20Zaragocilla!5e0!3m2!1ses!2sco!4v1695660000000!5m2!1ses!2sco"
+            width="100%"
+            height="100%"
+            style={{border:0}}
+            allowFullScreen={true}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Mapa Universidad de Cartagena"
+          ></iframe>
+        </div>
 
-  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
-          {/* Contact Information */}
+        {/* Grid principal de 2 columnas */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
+          {/* Columna Izquierda: Información y redes */}
           <div className="space-y-6 sm:space-y-8">
-            {/* Información Institucional */}
-            <Card className="p-4 sm:p-6 bg-white text-fyt-dark shadow-2xl w-full max-w-full animate-fade-in">
-              <h3 className="text-xl font-semibold mb-3 drop-shadow-lg">
-                Grupo de Investigación en Farmacología y Terapéutica
-              </h3>
-              <p className="text-fyt-dark/90 mb-2">
-                Universidad de Cartagena
-              </p>
-              <p className="text-fyt-dark/90">
-                Facultad de Ciencias Farmacéuticas
-              </p>
-            </Card>
-
             <div>
               <h3 className="text-2xl font-semibold text-fyt-dark mb-6 drop-shadow-lg">
                 Información de Contacto
@@ -160,7 +135,6 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Social Media & Additional Info */}
             <Card className="p-4 sm:p-6 bg-white border-2 border-[#9B59B6]/20 shadow-xl w-full max-w-full animate-fade-in">
               <h4 className="text-base sm:text-lg font-semibold text-[#9B59B6] mb-4">
                 Síguenos en Redes Sociales
@@ -178,43 +152,40 @@ const Contact = () => {
             </Card>
           </div>
 
-          {/* Contact Form */}
-          <div>
-            <Card className="p-4 sm:p-6 md:p-8 bg-white border-2 border-[#FF4C4C]/20 shadow-xl w-full max-w-full animate-fade-in">
+          {/* Columna Derecha: Envíanos un mensaje */}
+          <div className="flex flex-col justify-center h-full">
+            <Card className="p-6 md:p-8 bg-white border-2 border-[#FF4C4C]/20 shadow-xl w-full max-w-full animate-fade-in flex flex-col justify-center">
               <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-[#FF4C4C] mb-4 sm:mb-6">
                 Envíanos un Mensaje
               </h3>
-              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
-                  <div className="space-y-1 sm:space-y-2">
-                    <Label htmlFor="name">Nombre completo *</Label>
-                    <Input
-                      id="name"
-                      name="name"
-                      type="text"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      placeholder="Tu nombre completo"
-                      required
-                      className="text-sm sm:text-base"
-                    />
-                  </div>
-                  <div className="space-y-1 sm:space-y-2">
-                    <Label htmlFor="email">Correo electrónico *</Label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      placeholder="tu@email.com"
-                      required
-                      className="text-sm sm:text-base"
-                    />
-                  </div>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="space-y-1">
+                  <Label htmlFor="name">Nombre completo *</Label>
+                  <Input
+                    id="name"
+                    name="name"
+                    type="text"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    placeholder="Tu nombre completo"
+                    required
+                    className="text-sm sm:text-base"
+                  />
                 </div>
-
-                <div className="space-y-1 sm:space-y-2">
+                <div className="space-y-1">
+                  <Label htmlFor="email">Correo electrónico *</Label>
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    placeholder="tu@email.com"
+                    required
+                    className="text-sm sm:text-base"
+                  />
+                </div>
+                <div className="space-y-1">
                   <Label htmlFor="subject">Asunto *</Label>
                   <Input
                     id="subject"
@@ -227,8 +198,7 @@ const Contact = () => {
                     className="text-sm sm:text-base"
                   />
                 </div>
-
-                <div className="space-y-1 sm:space-y-2">
+                <div className="space-y-1">
                   <Label htmlFor="message">Mensaje *</Label>
                   <Textarea
                     id="message"
@@ -236,31 +206,19 @@ const Contact = () => {
                     value={formData.message}
                     onChange={handleInputChange}
                     placeholder="Escribe tu mensaje aquí..."
-                    rows={5}
+                    rows={7}
                     required
-                    className="text-sm sm:text-base"
+                    className="text-sm sm:text-base min-h-[120px]"
                   />
                 </div>
-
                 <Button 
                   type="submit" 
-                  className="w-full bg-[#3BB9FF] text-[#1e293b] text-base sm:text-lg font-bold shadow-lg hover:bg-[#e0f2ff]"
-                  disabled={isSubmitting}
+                  className="mt-4 w-full bg-white text-[#FF4C4C] border-2 border-[#FF4C4C] text-base sm:text-lg font-bold shadow-lg hover:bg-[#FF4C4C] hover:text-white transition-colors duration-300"
                 >
-                  {isSubmitting ? (
-                    <>
-                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                      Enviando...
-                    </>
-                  ) : (
-                    <>
-                      <Send className="h-4 w-4 mr-2" />
-                      Enviar Mensaje
-                    </>
-                  )}
+                  <Send className="h-4 w-4 mr-2" />
+                  Enviar Mensaje
                 </Button>
-
-                <p className="text-xs text-muted-foreground text-center">
+                <p className="text-xs text-muted-foreground text-center mt-2">
                   * Campos obligatorios. Tu información será tratada de forma confidencial.
                 </p>
               </form>
@@ -268,7 +226,7 @@ const Contact = () => {
           </div>
         </div>
 
-        {/* Map or Additional CTA */}
+        {/* CTA Colaboración */}
         <div className="mt-10 sm:mt-14 md:mt-16">
           <Card className="p-4 sm:p-6 md:p-8 bg-white text-fyt-dark shadow-2xl text-center w-full max-w-full animate-fade-in">
             <h3 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2 sm:mb-4 break-words drop-shadow-lg">¿Interesado en Colaborar?</h3>
@@ -277,25 +235,25 @@ const Contact = () => {
               colaboraciones académicas o de investigación, estaremos encantados de conocer 
               más sobre tus propuestas.
             </p>
-            <Button 
-              variant="secondary"
-              size="lg"
-              className="bg-white text-fyt-purple font-bold hover:bg-white/90 text-base sm:text-lg shadow-lg"
-              onClick={() => window.open('mailto:farmacologiayterapeutica.gi@gmail.com?subject=Propuesta de Colaboración', '_blank')}
-            >
-              <Mail className="w-5 h-5 mr-2 text-fyt-blue" aria-label="Proponer Colaboración" />
-              Proponer Colaboración
-            </Button>
+             <Button 
+               variant="outline"
+               size="lg"
+               className="bg-white text-[#9B59B6] border-2 border-[#9B59B6] hover:bg-[#9B59B6] hover:text-white transition-colors duration-300 px-8 py-3 font-semibold shadow-lg"
+               onClick={() => window.open('mailto:farmacologiayterapeutica.gi@gmail.com?subject=Propuesta de Colaboración', '_blank')}
+             >
+               <Mail className="w-5 h-5 mr-2 text-[#9B59B6]" aria-label="Proponer Colaboración" />
+               Proponer Colaboración
+             </Button>
           </Card>
         </div>
-      {/* Animaciones CSS */}
-      <style>{`
-        @keyframes fadeIn {
-          0% { opacity: 0; transform: translateY(30px); }
-          100% { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in { animation: fadeIn 1.2s cubic-bezier(.42,0,.58,1); }
-      `}</style>
+        {/* Animaciones CSS */}
+        <style>{`
+          @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+          }
+          .animate-fade-in { animation: fadeIn 1.2s cubic-bezier(.42,0,.58,1); }
+        `}</style>
       </div>
     </section>
   );

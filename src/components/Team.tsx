@@ -6,13 +6,13 @@ import { Mail } from "lucide-react";
 const Team = () => {
   // Imágenes disponibles en /public/images/equipo/
   const imageFiles = [
-    "Sergio Uribe.png",
-    "Roger Caraballo.png",
-    "Mariana mercado.png",
-    "Antistio Alviz.png",
-    "Luis Utria.png",
-    "Julian Martinez.png",
-    "Yaneth Garcia.png"
+    "Sergio-Uribe.png",
+    "Roger-Caraballo.png",
+    "Mariana-Mercado.png",
+    "Antistio-Alviz.png",
+    "Luis-Utria.png",
+    "Julian-Martinez.png",
+    "Yaneth-Garcia.png"
   ];
 
   // Función para normalizar nombres (sin tildes, minúsculas, sin espacios extras)
@@ -40,12 +40,12 @@ const Team = () => {
       const normBase = normalize(base);
       // Coincidencia exacta
       if (normBase === normName) {
-        exactMatch = `/images/equipo/${file}`;
+        exactMatch = `images/equipo/${file}`;
         break;
       }
       // Coincidencia parcial flexible: nombre del archivo está en el nombre del miembro o viceversa
       if (!partialMatch && (normName.includes(normBase) || normBase.includes(normName))) {
-        partialMatch = `/images/equipo/${file}`;
+        partialMatch = `images/equipo/${file}`;
       }
     }
     return exactMatch || partialMatch || null;
@@ -146,7 +146,7 @@ const Team = () => {
       name: "Mariana Mercado Imitola",
       role: "Estudiante Coordinadora (VII semestre)",
       specialty: "Estudiante de Química Farmacéutica",
-      description: "Estudiante coordinadora del semillero FyT, cursando séptimo semestre.",
+      description: "Estudiante coordinadora del semillero FyT.",
       
       links: {
         orcid: "0000-0000-0000-0007",
@@ -189,6 +189,9 @@ const Team = () => {
                   <div className="flex flex-col items-center w-full">
                     <h3 className="text-lg font-bold text-fyt-blue mb-1 text-center">{member.name}</h3>
                     <p className="text-sm text-fyt-purple font-semibold mb-1 text-center">{member.role}</p>
+                    {member.specialty && (
+                      <p className="text-sm text-[#3BB9FF] font-medium mb-1 text-center">{member.specialty}</p>
+                    )}
                     {member.description && (
                       <p className="text-xs text-[#334155] mb-4 text-center max-w-xs">{member.description}</p>
                     )}
