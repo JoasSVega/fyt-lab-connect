@@ -138,7 +138,7 @@ const About = () => {
         <h3 className="text-2xl font-poppins font-bold text-center text-fyt-dark mb-8 drop-shadow-lg">
           Líneas de Investigación
         </h3>
-  <div className="relative px-2 sm:px-12 lg:px-24 xl:px-32 2xl:px-48">
+  <div className="relative px-4 sm:px-16 lg:px-32 xl:px-48 2xl:px-64 py-6">
           <Carousel
             opts={{ align: "start", loop: true }}
             className="w-full"
@@ -173,7 +173,7 @@ const About = () => {
         <h3 className="text-2xl font-poppins font-bold text-center text-fyt-dark mb-8 drop-shadow-lg">
           Modalidades de Grado
         </h3>
-  <div className="relative px-2 sm:px-12 lg:px-24 xl:px-32 2xl:px-48">
+  <div className="relative px-4 sm:px-16 lg:px-32 xl:px-48 2xl:px-64 py-6">
           <Carousel
             opts={{ align: "start", loop: true }}
             className="w-full"
@@ -208,7 +208,7 @@ const About = () => {
         <h3 className="text-2xl font-poppins font-bold text-center text-fyt-dark mb-8 drop-shadow-lg">
           Actividades y Productos
         </h3>
-  <div className="relative px-2 sm:px-12 lg:px-24 xl:px-32 2xl:px-48 mb-12">
+  <div className="relative px-4 sm:px-16 lg:px-32 xl:px-48 2xl:px-64 py-6 mb-12">
           <Carousel
             opts={{ align: "start", loop: true }}
             className="w-full"

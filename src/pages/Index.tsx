@@ -11,11 +11,11 @@ import FloatingContact from "@/components/FloatingContact";
 const Index = () => {
   const navigate = useNavigate();
   return (
-  <div className="w-full min-h-screen overflow-x-hidden" style={{background: "linear-gradient(120deg, #e0f2ff 0%, #f8fafc 60%, #f3f4f6 100%)"}}>
+  <div className="w-full min-h-screen overflow-x-hidden px-2 sm:px-6 md:px-12 lg:px-24 xl:px-32 2xl:px-48" style={{background: "linear-gradient(120deg, #e0f2ff 0%, #f8fafc 60%, #f3f4f6 100%)"}}>
       {/* Fixed Navigation */}
       <Navbar />
       {/* Main Content */}
-      <main className="w-full pt-24">
+  <main className="w-full pt-24">
         {/* Título principal eliminado para evitar duplicidad. */}
         {/* Hero Section (sin ScrollReveal para evitar scroll interno y problemas de visualización) */}
         <Hero />

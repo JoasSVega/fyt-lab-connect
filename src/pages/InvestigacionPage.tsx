@@ -103,11 +103,12 @@ const InvestigacionPage: React.FC = () => {
   return (
     <BaseLayout>
   {/* HeroInvestigacion: Hero moderno con KPIs animados y accesibles */}
-  <HeroInvestigacion />
+  <div className="px-2 sm:px-6 md:px-12 lg:px-24 xl:px-32 2xl:px-48">
+    <HeroInvestigacion />
 
       {/* Proyectos destacados */}
       <section className="mb-10">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-2">
+        <div className="flex flex-col gap-2 mb-4 px-2 sm:px-8 lg:px-16">
           <h2 className="text-xl sm:text-2xl font-poppins font-bold text-slate-800 text-center sm:text-left">Proyectos de investigación</h2>
           <div className="flex gap-2 overflow-x-auto pb-1 justify-center sm:justify-start">
             <button onClick={() => setProyectosTab('en-curso')} className={`px-3 py-1 rounded-full text-sm font-inter border min-w-[110px] ${proyectosTab === 'en-curso' ? 'bg-fyt-blue text-white border-fyt-blue' : 'bg-white text-fyt-blue border-fyt-blue/40'}`}>En curso</button>
@@ -116,7 +117,7 @@ const InvestigacionPage: React.FC = () => {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {(proyectosTab === 'en-curso' ? proyectosEnCurso : proyectosFinalizados).map((proj: any) => (
-            <div key={proj.id} className="bg-white rounded-lg shadow p-4 flex flex-col h-full">
+            <div key={proj.id} className="bg-white rounded-lg shadow p-4 sm:p-6 flex flex-col h-full mx-1 sm:mx-2">
               <div className="flex items-center gap-2 mb-2">
                 <Microscope className="w-5 h-5 text-fyt-blue" aria-hidden="true" />
                 <span className="text-xs text-slate-500">{proj.year}</span>
@@ -134,7 +135,7 @@ const InvestigacionPage: React.FC = () => {
 
 
       {/* Publicaciones científicas y académicas */}
-      <section className="mb-10 px-2 sm:px-6 md:px-8">
+  <section className="mb-10">
         <div className="flex flex-col gap-2 mb-6">
           <h2 className="text-2xl sm:text-3xl font-poppins font-bold text-slate-800 text-center">Publicaciones científicas y académicas</h2>
           <div className="flex gap-2 overflow-x-auto pb-1 justify-center">
@@ -164,7 +165,7 @@ const InvestigacionPage: React.FC = () => {
           {/* Artículos científicos */}
           {publicacionesTab === "articulos" && (
             publicationsData.filter((pub: any) => pub.type === "articulo").slice(0, 6).map((pub: any, idx: number) => (
-              <div key={pub.id} className="bg-white rounded-3xl shadow-soft p-4 sm:p-6 flex flex-col group transition-all duration-300 hover:shadow-lg hover:-translate-y-1" style={{animation: `fadeInUp 0.5s ease ${idx * 0.08}s`}}>
+              <div key={pub.id} className="bg-white rounded-3xl shadow-soft p-4 sm:p-6 flex flex-col group transition-all duration-300 hover:shadow-lg hover:-translate-y-1 mx-1 sm:mx-2" style={{animation: `fadeInUp 0.5s ease ${idx * 0.08}s`}}>
                 <div className="flex items-center gap-2 sm:gap-3 mb-2">
                   <span className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-blue-50 group-hover:bg-blue-100 transition-colors">
                     <FileText className="w-6 h-6 sm:w-7 sm:h-7 text-blue-600 group-hover:scale-110 transition-transform" />
@@ -222,7 +223,8 @@ const InvestigacionPage: React.FC = () => {
         <div className="flex justify-end mt-8">
           <a href="/investigacion/publicaciones" className="inline-block px-5 py-2 rounded-full bg-blue-50 text-blue-800 font-semibold shadow hover:bg-blue-100 transition">Ver todas las publicaciones</a>
         </div>
-      </section>
+    </section>
+  </div>
 
 
       {/* Eventos y cursos */}

@@ -43,7 +43,9 @@ const Hero = () => {
         />
         {/* Frase institucional con fade-in */}
         <h1 className="text-[#1e293b] text-3xl sm:text-5xl font-bold text-center mb-8 animate-fade-in" style={{ fontFamily: 'Poppins, Inter, Montserrat, sans-serif', animation: "fadeIn 1.2s ease" }}>
-          Formando investigadores, mejorando la terapéutica
+          <span className="break-words whitespace-pre-line leading-tight px-2 sm:px-8 lg:px-16 block">
+            Formando investigadores, mejorando la terapéutica
+          </span>
         </h1>
         {/* Botones CTA */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in" style={{ animation: "fadeIn 1.5s ease" }}>

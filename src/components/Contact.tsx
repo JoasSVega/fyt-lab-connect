@@ -79,7 +79,7 @@ const Contact = () => {
 
   return (
     <section id="contacto" className="py-10 sm:py-16 md:py-20 min-h-screen bg-[#f8fafc]">
-      <div className="container mx-auto px-2 sm:px-4 md:px-6 lg:px-8">
+  <div className="container mx-auto px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-48">
         {/* Mapa Google Maps embebido */}
         <div className="w-full mb-10 rounded-2xl shadow-2xl overflow-hidden animate-fade-in" style={{height: '350px'}}>
           <iframe
@@ -104,7 +104,7 @@ const Contact = () => {
               </h3>
               <div className="space-y-6">
                 {contactInfo.map((item, index) => (
-                  <Card key={index} className="p-4 sm:p-6 bg-white border-2 border-[#3BB9FF]/20 shadow-xl hover:shadow-2xl hover:scale-[1.03] transition-all duration-300 w-full max-w-full animate-fade-in">
+                  <Card key={index} className="p-4 sm:p-6 md:p-8 bg-white border-2 border-[#3BB9FF]/20 shadow-xl hover:shadow-2xl hover:scale-[1.03] transition-all duration-300 w-full max-w-full animate-fade-in mx-1 sm:mx-2">
                     <div className="flex items-start space-x-4">
                       <div className="flex items-center justify-center shrink-0">
                         {item.icon}
