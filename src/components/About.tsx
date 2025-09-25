@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Target, Eye, Microscope, Heart, Users, BookOpen, ChevronLeft, ChevronRight, Bell } from "lucide-react";
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "./ui/carousel";
+import Carrusel from "./ui/Carrusel";
 import researchPharmacology from "@/assets/research-pharmacology.jpg";
 import researchPharmacovigilance from "@/assets/research-pharmacovigilance.jpg";
 import researchClinicalPharmacy from "@/assets/research-clinical-pharmacy.jpg";
@@ -46,32 +46,22 @@ const About = () => {
     {
       title: "Farmacología y Terapéutica",
       description: "Estudio de los efectos de los medicamentos en el organismo y desarrollo de terapias farmacológicas optimizadas para mejorar la eficacia y seguridad en el tratamiento de enfermedades.",
-      image: researchPharmacology
+      image: "/images/Carrusel/Farmacologia.png"
     },
     {
       title: "Farmacovigilancia",
       description: "Monitoreo y evaluación continua de la seguridad de los medicamentos, identificación de reacciones adversas y desarrollo de estrategias para minimizar riesgos.",
-      image: researchPharmacovigilance
+      image: "/images/Carrusel/Farmacovigilancia.png"
     },
     {
       title: "Farmacia Asistencial y Atención Farmacéutica",
       description: "Optimización del uso de medicamentos a través de la atención farmacéutica directa al paciente, educación sanitaria y seguimiento farmacoterapéutico.",
-      image: researchClinicalPharmacy
+      image: "/images/Carrusel/Farmacia-Asistencial.png"
     },
     {
       title: "Farmacoepidemiología",
       description: "Análisis del uso, efectividad y seguridad de los medicamentos en poblaciones reales, proporcionando evidencia para la toma de decisiones en salud pública.",
-      image: researchPharmacoepidemiology
-    },
-    {
-      title: "Farmacoeconomía",
-      description: "Evaluación económica de las terapias farmacológicas, análisis de costo-efectividad y desarrollo de modelos para optimizar la asignación de recursos en salud.",
-      image: researchPharmacoeconomics
-    },
-    {
-      title: "Estudios in sílico y modelización molecular",
-      description: "Diseño computacional de nuevos fármacos utilizando técnicas de modelado molecular, simulaciones y algoritmos para acelerar el desarrollo farmacéutico.",
-      image: researchMolecularModeling
+      image: "/images/Carrusel/Farmacoepidemiologia.png"
     }
   ];
 
@@ -79,32 +69,32 @@ const About = () => {
     {
       title: "Proyecto de investigación",
       description: "Desarrollo de investigaciones originales en las líneas del grupo, con metodología científica rigurosa y contribución al conocimiento farmacológico.",
-      image: researchPharmacology
+  image: "/images/Carrusel/Proyecto-de-Investigacion.png"
     },
     {
       title: "Monografías",
       description: "Revisiones sistemáticas y análisis críticos de temas específicos en farmacología y terapéutica, con enfoque en evidencia científica actualizada.",
-      image: researchClinicalPharmacy
+  image: "/images/Carrusel/Monografia.png"
     },
     {
       title: "Pasantías",
       description: "Experiencias prácticas en centros de investigación, hospitales o industria farmacéutica para aplicar conocimientos teóricos en entornos reales.",
-      image: researchPharmacovigilance
+  image: "/images/Carrusel/Pasantia.png"
     },
     {
       title: "Asignaturas de postgrado",
       description: "Cursos especializados de nivel avanzado que complementan la formación en áreas específicas de farmacología y terapéutica.",
-      image: researchPharmacoepidemiology
+  image: "/images/Carrusel/Asignatura-de-Postgrado.png"
     },
     {
       title: "Diplomados",
       description: "Programas de educación continua en áreas especializadas como farmacovigilancia, farmacia clínica y desarrollo de medicamentos.",
-      image: researchPharmacoeconomics
+  image: "/images/Carrusel/Diplomado.png"
     },
     {
       title: "Publicación de artículo científico",
       description: "Contribución al conocimiento científico a través de la publicación de resultados de investigación en revistas indexadas o capítulos de libro.",
-      image: researchMolecularModeling
+  image: "/images/Carrusel/Articulo-Cientifico.png"
     }
   ];
 
@@ -112,22 +102,22 @@ const About = () => {
     {
       title: "Participación de semilleristas y tesistas",
       description: "Formación integral de estudiantes a través de su participación activa en proyectos de investigación y desarrollo de productos científicos del grupo.",
-      image: researchPharmacology
+  image: "/images/Carrusel/Semilleristas.png"
     },
     {
       title: "Ponencias y posters",
       description: "Presentación de resultados de investigación en congresos nacionales e internacionales, promoviendo el intercambio científico y la visibilidad del grupo.",
-      image: researchClinicalPharmacy
+  image: "/images/Carrusel/Ponencias.png"
     },
     {
       title: "Comunidad de aprendizaje",
       description: "Creación de espacios de intercambio académico entre estudiantes y docentes para fomentar el pensamiento crítico y la investigación colaborativa.",
-      image: researchPharmacovigilance
+  image: "/images/Carrusel/Comunidad.png"
     },
     {
       title: "Cursos y actividades académicas",
       description: "Desarrollo de programas educativos especializados, talleres y seminarios para fortalecer las competencias investigativas en la comunidad académica.",
-      image: researchPharmacoepidemiology
+  image: "/images/Carrusel/Cursos.png"
     }
   ];
 
@@ -138,35 +128,15 @@ const About = () => {
         <h3 className="text-2xl font-poppins font-bold text-center text-fyt-dark mb-8 drop-shadow-lg">
           Líneas de Investigación
         </h3>
-  <div className="relative px-4 sm:px-16 lg:px-32 xl:px-48 2xl:px-64 py-6">
-          <Carousel
-            opts={{ align: "start", loop: true }}
+        <div className="relative px-4 sm:px-16 lg:px-32 xl:px-48 2xl:px-64 py-6">
+          <Carrusel
+            items={researchLines}
+            color="#9B59B6"
+            height={240}
+            showDescription={true}
             className="w-full"
-          >
-            <CarouselContent className="-ml-2 md:-ml-4">
-              {researchLines.map((line, index) => (
-                <CarouselItem key={index} className="pl-2 md:pl-4 basis-full md:basis-1/2 lg:basis-1/3">
-                  <Card className="bg-white/90 border-2 border-[#9B59B6]/20 shadow-xl hover:shadow-2xl hover:scale-[1.03] transition-all duration-300 overflow-hidden group h-full">
-                    <div className="relative h-48 overflow-hidden">
-                      <img 
-                        src={line.image} 
-                        alt={`Imagen de línea de investigación: ${line.title}`}
-                        loading="lazy"
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                    </div>
-                    <div className="p-6">
-                      <h4 className="text-lg font-raleway font-semibold text-[#9B59B6] mb-3">{line.title}</h4>
-                      <p className="text-sm font-inter text-gray-700 leading-relaxed text-justify">{line.description}</p>
-                    </div>
-                  </Card>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious className="hidden md:flex -left-12" />
-            <CarouselNext className="hidden md:flex -right-12" />
-          </Carousel>
+            imageClassName="w-full h-60 object-cover rounded-t-2xl"
+          />
         </div>
       </section>
       {/* Modalidades de Grado */}
@@ -174,35 +144,8 @@ const About = () => {
         <h3 className="text-2xl font-poppins font-bold text-center text-fyt-dark mb-8 drop-shadow-lg">
           Modalidades de Grado
         </h3>
-  <div className="relative px-4 sm:px-16 lg:px-32 xl:px-48 2xl:px-64 py-6">
-          <Carousel
-            opts={{ align: "start", loop: true }}
-            className="w-full"
-          >
-            <CarouselContent className="-ml-2 md:-ml-4">
-              {graduationModalities.map((modality, index) => (
-                <CarouselItem key={index} className="pl-2 md:pl-4 basis-full md:basis-1/2 lg:basis-1/3">
-                  <Card className="bg-white/90 border-2 border-[#3BB9FF]/20 shadow-xl hover:shadow-2xl hover:scale-[1.03] transition-all duration-300 overflow-hidden group h-full">
-                    <div className="relative h-48 overflow-hidden">
-                      <img 
-                        src={modality.image} 
-                        alt={`Imagen de modalidad de grado: ${modality.title}`}
-                        loading="lazy"
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                    </div>
-                    <div className="p-6">
-                      <h4 className="text-lg font-raleway font-semibold text-[#3BB9FF] mb-3">{modality.title}</h4>
-                      <p className="text-sm font-inter text-gray-700 leading-relaxed text-justify">{modality.description}</p>
-                    </div>
-                  </Card>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious className="hidden md:flex -left-12" />
-            <CarouselNext className="hidden md:flex -right-12" />
-          </Carousel>
+        <div className="relative px-4 sm:px-16 lg:px-32 xl:px-48 2xl:px-64 py-6">
+          <Carrusel items={graduationModalities} color="#3BB9FF" height={240} showDescription={true} className="w-full" imageClassName="w-full h-60 object-cover rounded-t-2xl" />
         </div>
       </section>
       {/* Actividades y Productos */}
@@ -210,35 +153,8 @@ const About = () => {
         <h3 className="text-2xl font-poppins font-bold text-center text-fyt-dark mb-8 drop-shadow-lg">
           Actividades y Productos
         </h3>
-  <div className="relative px-4 sm:px-16 lg:px-32 xl:px-48 2xl:px-64 py-6 mb-12">
-          <Carousel
-            opts={{ align: "start", loop: true }}
-            className="w-full"
-          >
-            <CarouselContent className="-ml-2 md:-ml-4">
-              {activitiesProducts.map((activity, index) => (
-                <CarouselItem key={index} className="pl-2 md:pl-4 basis-full md:basis-1/2">
-                  <Card className="bg-white/90 border-2 border-[#FF4C4C]/20 shadow-xl hover:shadow-2xl hover:scale-[1.03] transition-all duration-300 overflow-hidden group h-full">
-                    <div className="relative h-48 overflow-hidden">
-                      <img 
-                        src={activity.image} 
-                        alt={`Imagen de actividad o producto: ${activity.title}`}
-                        loading="lazy"
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                    </div>
-                    <div className="p-6">
-                      <h4 className="text-lg font-raleway font-semibold text-[#FF4C4C] mb-3">{activity.title}</h4>
-                      <p className="text-sm font-inter text-gray-700 leading-relaxed text-justify">{activity.description}</p>
-                    </div>
-                  </Card>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious className="hidden md:flex -left-12" />
-            <CarouselNext className="hidden md:flex -right-12" />
-          </Carousel>
+        <div className="relative px-4 sm:px-16 lg:px-32 xl:px-48 2xl:px-64 py-6 mb-12">
+          <Carrusel items={activitiesProducts} color="#FF4C4C" height={240} showDescription={true} className="w-full" imageClassName="w-full h-60 object-cover rounded-t-2xl" />
         </div>
         {/* INSCRÍBETE AHORA Card */}
         <div className="flex justify-center mt-8">

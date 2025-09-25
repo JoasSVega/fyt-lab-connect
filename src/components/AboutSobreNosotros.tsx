@@ -38,8 +38,15 @@ const AboutSobreNosotros = () => (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
       <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
         {/* Imagen decorativa */}
-        <div className="relative">
-          <div className="h-[400px] bg-gradient-to-tr from-[#3BB9FF]/80 via-[#9B59B6]/60 to-[#FF4C4C]/70 rounded-xl flex items-center justify-center shadow-2xl animate-fade-in"></div>
+        <div className="relative h-[400px] w-full flex items-center justify-center">
+          <img
+            src="/images/Objetivo.jpeg"
+            alt="Imagen objetivo del grupo FyT"
+            className="w-full h-full object-cover rounded-xl shadow-2xl animate-fade-in"
+            loading="lazy"
+            style={{ minHeight: 400, maxHeight: 400 }}
+          />
+          <div className="absolute inset-0 bg-black/20 rounded-xl"></div>
         </div>
         {/* Objetivo, Misión y Visión */}
         <div className="space-y-8">
