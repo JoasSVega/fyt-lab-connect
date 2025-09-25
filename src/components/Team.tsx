@@ -43,12 +43,12 @@ const Team = () => {
       const normBase = normalize(base.replace(/-/g, " "));
       // Coincidencia exacta con nombre y primer apellido
       if (normBase === nameAndSurname.replace(/-/g, " ")) {
-        match = `/images/equipo/${file}`;
+        match = `images/equipo/${file}`;
         break;
       }
       // Coincidencia parcial: nombre o apellido incluido
       if (!match && (normName.includes(normBase) || normBase.includes(normName))) {
-        match = `/images/equipo/${file}`;
+        match = `images/equipo/${file}`;
       }
     }
     return match;
