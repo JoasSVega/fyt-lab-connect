@@ -6,13 +6,14 @@ import { Mail } from "lucide-react";
 const Team = () => {
   // Imágenes disponibles en /public/images/equipo/
   const imageFiles = [
-    "Sergio-Uribe.png",
-    "Roger-Caraballo.png",
-    "Mariana-Mercado.png",
     "Antistio-Alviz.png",
-    "Luis-Utria.png",
+    "Yaneth-Garcia.png",
+    "Shirley-Cavadia.png",
     "Julian-Martinez.png",
-    "Yaneth-Garcia.png"
+    "Roger-Caraballo.png",
+    "Luis-Utria.png",
+    "Sergio-Uribe.png",
+    "Mariana-Mercado.png"
   ];
 
   // Función para normalizar nombres (sin tildes, minúsculas, sin espacios extras)
@@ -33,22 +34,24 @@ const Team = () => {
   // 3. Si no hay coincidencia, retorna null
   function getImageForMember(name) {
     const normName = normalize(name);
-    let exactMatch = null;
-    let partialMatch = null;
+    // Extraer nombre y primer apellido
+    const nameParts = normName.split(" ");
+    const nameAndSurname = nameParts.length > 1 ? `${nameParts[0]}-${nameParts[1]}` : nameParts[0];
+    let match = null;
     for (const file of imageFiles) {
       const base = file.replace(/\.(png|webp)$/i, "");
-      const normBase = normalize(base);
-      // Coincidencia exacta
-      if (normBase === normName) {
-        exactMatch = `images/equipo/${file}`;
+      const normBase = normalize(base.replace(/-/g, " "));
+      // Coincidencia exacta con nombre y primer apellido
+      if (normBase === nameAndSurname.replace(/-/g, " ")) {
+        match = `/images/equipo/${file}`;
         break;
       }
-      // Coincidencia parcial flexible: nombre del archivo está en el nombre del miembro o viceversa
-      if (!partialMatch && (normName.includes(normBase) || normBase.includes(normName))) {
-        partialMatch = `images/equipo/${file}`;
+      // Coincidencia parcial: nombre o apellido incluido
+      if (!match && (normName.includes(normBase) || normBase.includes(normName))) {
+        match = `/images/equipo/${file}`;
       }
     }
-    return exactMatch || partialMatch || null;
+    return match;
   }
 
   // Placeholder con iniciales
