@@ -75,7 +75,7 @@ const Team = () => {
     },
     {
       name: "Yaneth García",
-      role: "Coordinadora del grupo FyT",
+      role: "Coordinadora de semillero del grupo FyT",
       specialty: "QF, esp. en Administración Educativa",
       description: "Docente de planta.",
       
@@ -87,7 +87,7 @@ const Team = () => {
     },
     {
       name: "Shirley Cavadia",
-      role: "Investigadora principal",
+      role: "Líder de linea de investigación en Atención Farmacéutica y Farmacia Asistencial",
       specialty: "QF, MSc. Farmacia Clínica, esp. Gestión administartiva de Servicios Farmacéuticos",
       description: "Docente de Planta y Jefe del departamento académico.",
       
@@ -99,7 +99,7 @@ const Team = () => {
     },
     {
       name: "Julian Martinez",
-      role: "Investigador Principal",
+      role: "Líder de linea de investigación en Farmacología y Terapéutica",
       specialty: "QF, MSc. Farmacología",
       description: "Docente de planta.",
       
@@ -111,7 +111,7 @@ const Team = () => {
     },
     {
       name: "Roger Caraballo",
-      role: "Investigador Principal",
+      role: "Líder de linea de investigación en Farmacoecoeconomía",
       specialty: "QF, MSc. Farmacología",
       description: "Docente de planta y subgerente del Hospital Universitario del Caribe.",
       
@@ -123,7 +123,7 @@ const Team = () => {
     },
     {
       name: "Luis Utria",
-      role: "Investigador Principal",
+      role: "Líder de linea de investigación en Farmacología y Toxicología",
       specialty: "QF, M.Sc. Farmacología",
       description: "Docente de cátedra.",
       
@@ -135,7 +135,7 @@ const Team = () => {
     },
     {
       name: "Sergio Uribe",
-      role: "Investigador Principal",
+      role: "Líder de linea de investigación en Farmacoepidemiología y PROA",
       specialty: "QF, MSc. Farmacología, PhD(c) Ciencias Biomédicas",
       description: "Docente de Catedra y Químico Farmacéutico asistencial.",
       
