@@ -123,7 +123,7 @@ const Team = () => {
     },
     {
       name: "Luis Utria",
-      role: "Líder de linea de investigación en Farmacología y Toxicología",
+      role: "Líder de linea de investigación en Farmacovigilancia y Toxicología",
       specialty: "QF, M.Sc. Farmacología",
       description: "Docente de cátedra.",
       
