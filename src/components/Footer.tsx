@@ -58,7 +58,7 @@ const Footer = () => {
                 </div>
                 <div className="flex items-center gap-2 text-sm text-[#334155] flex-wrap font-inter">
                   <Phone className="w-6 h-6 text-fyt-purple flex-shrink-0" aria-label="Teléfono" />
-                  <span>Universidad de Cartagena</span>
+                  <span>+57 313 7375217</span>
                 </div>
                 <div className="flex items-start gap-2 text-sm text-[#334155] font-inter">
                   <MapPin className="w-6 h-6 text-fyt-red flex-shrink-0 mt-0.5" aria-label="Dirección" />

@@ -62,10 +62,10 @@ const Team = () => {
   }
   const teamMembers = [
     {
-      name: "Antistio Alviz Amador",
-      role: "Director del grupo",
-      specialty: "QF, M.Sc. Farmacología, PhD en Ciencias Biomédicas",
-      description: "Docente y Director del programa de Química Farmacéutica, líder del grupo de investigación FyT.",
+      name: "Antistio Alviz",
+      role: "Director del grupo FyT",
+      specialty: "QF, MSc. Farmacología, PhD. Ciencias Biomédicas",
+      description: "Docente de planta y Director del programa de Química Farmacéutica.",
       
       links: {
         orcid: "0000-0000-0000-0000",
@@ -74,10 +74,10 @@ const Team = () => {
       }
     },
     {
-      name: "Yaneth García Milano",
-      role: "Coordinadora del Semillero FyT",
-      specialty: "QF, Esp. en Administración Educativa",
-      description: "Docente de planta y coordinadora del semillero de investigación FyT.",
+      name: "Yaneth García",
+      role: "Coordinadora del grupo FyT",
+      specialty: "QF, esp. en Administración Educativa",
+      description: "Docente de planta.",
       
       links: {
         orcid: "0000-0000-0000-0001",
@@ -86,10 +86,10 @@ const Team = () => {
       }
     },
     {
-      name: "Shirley Cavadia Puello",
-      role: "Jefe del departamento académico",
-      specialty: "QF, M.Sc. Farmacia Clínica Universitaria",
-      description: "Jefe del departamento académico con especialización en farmacia clínica.",
+      name: "Shirley Cavadia",
+      role: "Investigadora principal",
+      specialty: "QF, MSc. Farmacia Clínica, esp. Gestión administartiva de Servicios Farmacéuticos",
+      description: "Docente de Planta y Jefe del departamento académico.",
       
       links: {
         orcid: "0000-0000-0000-0002",
@@ -99,9 +99,9 @@ const Team = () => {
     },
     {
       name: "Julian Martinez",
-      role: "Docente de planta",
-      specialty: "QF, M.Sc. Farmacología",
-      description: "Docente de planta especializado en farmacología.",
+      role: "Investigador Principal",
+      specialty: "QF, MSc. Farmacología",
+      description: "Docente de planta.",
       
       links: {
         orcid: "0000-0000-0000-0003",
@@ -111,8 +111,8 @@ const Team = () => {
     },
     {
       name: "Roger Caraballo",
-      role: "Docente de planta, subgerente HUC",
-      specialty: "QF, M.Sc. Farmacología",
+      role: "Investigador Principal",
+      specialty: "QF, MSc. Farmacología",
       description: "Docente de planta y subgerente del Hospital Universitario del Caribe.",
       
       links: {
@@ -123,9 +123,9 @@ const Team = () => {
     },
     {
       name: "Luis Utria",
-      role: "Docente de cátedra",
+      role: "Investigador Principal",
       specialty: "QF, M.Sc. Farmacología",
-      description: "Docente de cátedra especializado en farmacología.",
+      description: "Docente de cátedra.",
       
       links: {
         orcid: "0000-0000-0000-0005",
@@ -135,9 +135,9 @@ const Team = () => {
     },
     {
       name: "Sergio Uribe",
-      role: "Químico Farmacéutico asistencial",
-      specialty: "QF, M.Sc. Farmacología, PhD(c) Ciencias Biomédicas",
-      description: "Químico Farmacéutico asistencial, candidato a PhD en Ciencias Biomédicas.",
+      role: "Investigador Principal",
+      specialty: "QF, MSc. Farmacología, PhD(c) Ciencias Biomédicas",
+      description: "Docente de Catedra y Químico Farmacéutico asistencial.",
       
       links: {
         orcid: "0000-0000-0000-0006",
@@ -146,10 +146,10 @@ const Team = () => {
       }
     },
     {
-      name: "Mariana Mercado Imitola",
-      role: "Estudiante Coordinadora (VII semestre)",
+      name: "Mariana Mercado",
+      role: "Estudiante Coordinadora del grupo FyT",
       specialty: "Estudiante de Química Farmacéutica",
-      description: "Estudiante coordinadora del semillero FyT.",
+      description: "Estudiante de pregrado.",
       
       links: {
         orcid: "0000-0000-0000-0007",
