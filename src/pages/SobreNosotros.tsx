@@ -1,7 +1,10 @@
 import Navbar from "../components/Navbar";
-import FloatingContact from "@/components/FloatingContact";
 import AboutSobreNosotros from "@/components/AboutSobreNosotros";
 import Team from "@/components/Team";
+import { lazy, Suspense } from "react";
+
+// Carga perezosa del botón flotante de contacto para reducir el bundle inicial
+const FloatingContact = lazy(() => import("@/components/FloatingContact"));
 
 const SobreNosotros = () => (
   <div className="w-full bg-background overflow-x-hidden flex flex-col">
@@ -17,7 +20,9 @@ const SobreNosotros = () => (
         </div>
       </section>
     </main>
-    <FloatingContact />
+      <Suspense fallback={null}>
+        <FloatingContact />
+      </Suspense>
   </div>
 );
 

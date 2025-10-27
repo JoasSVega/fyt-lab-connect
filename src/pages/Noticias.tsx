@@ -1,6 +1,9 @@
 import News from "@/components/News";
 import Navbar from "@/components/Navbar";
-import FloatingContact from "@/components/FloatingContact";
+import { lazy, Suspense } from "react";
+
+// Carga perezosa del botón flotante de contacto para reducir el bundle inicial
+const FloatingContact = lazy(() => import("@/components/FloatingContact"));
 
 const Noticias = () => (
   <div className="w-full bg-background overflow-x-hidden flex flex-col">
@@ -9,7 +12,9 @@ const Noticias = () => (
       {/* Título principal eliminado para evitar duplicado, el componente News lo incluye */}
       <News />
     </main>
-    <FloatingContact />
+    <Suspense fallback={null}>
+      <FloatingContact />
+    </Suspense>
   </div>
 );
 
