@@ -44,12 +44,22 @@ const Carrusel: React.FC<CarruselProps> = ({ items, color = "#9B59B6", height = 
     }
   }, [emblaApi, items.length]);
 
-  // Autoplay: advance every 4s, pause on hover
+  // Autoplay: advance every 4s, pause on hover and when tab is hidden
   React.useEffect(() => {
     if (!emblaApi) return;
-    const interval = setInterval(() => {
-      if (!isHovered) emblaApi.scrollNext();
-    }, 4000);
+    const tick = () => {
+      if (isHovered) return;
+      if (typeof document !== 'undefined' && document.hidden) return;
+      try {
+        // Avoid calling when only one slide or cannot scroll
+        if (emblaApi.canScrollNext()) {
+          emblaApi.scrollNext();
+        }
+      } catch {
+        // noop
+      }
+    };
+    const interval = setInterval(tick, 4000);
     return () => clearInterval(interval);
   }, [emblaApi, isHovered]);
 
