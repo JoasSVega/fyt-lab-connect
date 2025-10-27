@@ -44,9 +44,11 @@ const Carrusel: React.FC<CarruselProps> = ({ items, color = "#9B59B6", height = 
     }
   }, [emblaApi, items.length]);
 
-  // Autoplay: advance every 4s, pause on hover and when tab is hidden
+  // Autoplay: advance every 4s, pause on hover, tab hidden, or reduced motion preference
   React.useEffect(() => {
     if (!emblaApi) return;
+    const prefersReduced = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) return;
     const tick = () => {
       if (isHovered) return;
       if (typeof document !== 'undefined' && document.hidden) return;
