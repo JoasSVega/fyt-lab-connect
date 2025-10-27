@@ -35,6 +35,20 @@ Cambios realizados
 4. Otros
    - Se creó este `OPTIMIZATION_REPORT.md` con el detalle de cambios y justificaciones.
 
+5. Code-splitting de vendors con manualChunks (Vite/Rollup)
+   - Archivo: `vite.config.ts`
+   - Acción: Se añadió `build.rollupOptions.output.manualChunks` para extraer vendors pesados en chunks separados: `vendor-react`, `vendor-framer-motion`, `vendor-embla`, `vendor-icons` y un `vendor` general.
+   - Justificación: Reduce el tamaño del chunk principal y mejora el cacheo entre páginas.
+
+6. Lazy-load consistente de FloatingContact en todas las páginas
+   - Archivos: `src/pages/Index.tsx`, `src/pages/Noticias.tsx`, `src/pages/Equipo.tsx`, `src/pages/SobreNosotros.tsx`, y limpieza de import no usado en `src/pages/Contactos.tsx` y `src/pages/Herramientas.tsx`.
+   - Acción: Reemplazo de import estático por `React.lazy` + `<Suspense fallback={null}>` (donde aplica). Se eliminaron imports no usados.
+   - Resultado del build (referencia rápida):
+       - Chunk separado emitido: `dist/assets/FloatingContact-*.js` ≈ 2.6 kB (gzip ≈ 1.2 kB).
+       - Chunks de vendors: `vendor-react` ≈ 188 kB (gzip ≈ 60.8 kB), `vendor-framer-motion` ≈ 156 kB (gzip ≈ 52.7 kB), `vendor-embla` ≈ 19.8 kB (gzip ≈ 8.1 kB), `vendor-icons` ≈ 11.7 kB (gzip ≈ 2.9 kB).
+       - Chunk de aplicación principal `index-*.js` ≈ 132 kB (gzip ≈ 32–33 kB).
+   - Justificación: Evita la advertencia de mezcla de import estático/dinámico y reduce el trabajo del bundle inicial.
+
 Siguientes pasos recomendados (priorizados)
 -------------------------------------------
 1. Asset optimizations
@@ -76,8 +90,8 @@ Siguientes pasos recomendados (priorizados)
     - Recomendación: no remover dependencias automáticamente. Crear una rama con cambios propuestos (mover paquetes a devDependencies o remover), ejecutar `npm ci` y `npm run build` en CI, y validar visualmente.
 
 4. CI / Build
-   - Añadir workflow de GitHub Actions para `lint` y `build` en PRs.
-   - Añadir `vite` build optimizado y revisar opciones de minificación y target.
+   - Workflow de GitHub Actions añadido: `.github/workflows/ci.yml` ejecuta `npm ci`, `npm run lint`, `npm run build` y sube `dist` como artifact.
+   - `preview` disponible vía `npm run preview`. Se añadió análisis con visualizer bajo variable de entorno `ANALYZE` desde `vite.config.ts`.
 
 5. Medición
    - Ejecutar auditoría con Lighthouse / WebPageTest antes y después de los cambios para cuantificar mejoras (TTI, LCP, CLS, bundle size).
