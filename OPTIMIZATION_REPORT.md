@@ -49,6 +49,16 @@ Cambios realizados
        - Chunk de aplicación principal `index-*.js` ≈ 132 kB (gzip ≈ 32–33 kB).
    - Justificación: Evita la advertencia de mezcla de import estático/dinámico y reduce el trabajo del bundle inicial.
 
+7. Carrusel: mejoras de rendimiento y accesibilidad
+   - Archivo: `src/components/ui/Carrusel.tsx`
+   - Cambios: autoplay se detiene si la pestaña está oculta, evita avanzar cuando no puede desplazarse y respeta `prefers-reduced-motion`.
+   - Beneficio: menos trabajo innecesario, mejor UX y cumplimiento de preferencias de accesibilidad.
+
+8. Limpieza de dependencias no utilizadas
+   - Archivo: `package.json`
+   - Acciones: se removieron `cmdk`, `input-otp`, `react-resizable-panels`, `vaul` (no referenciadas en la app) y se añadieron stubs livianos en `src/components/ui/{command, input-otp, resizable, drawer}.tsx` para evitar importaciones accidentales de librerías grandes.
+   - Beneficio: instalación más rápida, menos superficie de mantenimiento, sin impacto en build ya que no se usan.
+
 Siguientes pasos recomendados (priorizados)
 -------------------------------------------
 1. Asset optimizations
