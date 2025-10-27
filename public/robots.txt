@@ -12,3 +12,6 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+# Sitemap reference
+Sitemap: https://fyt-lab-connect.lovable.app/sitemap.xml
