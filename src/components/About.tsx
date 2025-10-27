@@ -125,7 +125,7 @@ const About = () => {
     <>
       {/* Líneas de Investigación */}
       <section className="mb-16">
-        <h3 className="text-2xl font-poppins font-bold text-center text-fyt-dark mb-8 drop-shadow-lg">
+        <h3 className="text-4xl font-poppins font-bold text-center text-fyt-dark mb-8 drop-shadow-lg">
           Líneas de Investigación
         </h3>
         <div className="relative px-4 sm:px-16 lg:px-32 xl:px-48 2xl:px-64 py-6">
@@ -141,7 +141,7 @@ const About = () => {
       </section>
       {/* Modalidades de Grado */}
       <section className="mb-16">
-        <h3 className="text-2xl font-poppins font-bold text-center text-fyt-dark mb-8 drop-shadow-lg">
+        <h3 className="text-4xl font-poppins font-bold text-center text-fyt-dark mb-8 drop-shadow-lg">
           Modalidades de Grado
         </h3>
         <div className="relative px-4 sm:px-16 lg:px-32 xl:px-48 2xl:px-64 py-6">
@@ -150,7 +150,7 @@ const About = () => {
       </section>
       {/* Actividades y Productos */}
       <section>
-        <h3 className="text-2xl font-poppins font-bold text-center text-fyt-dark mb-8 drop-shadow-lg">
+        <h3 className="text-4xl font-poppins font-bold text-center text-fyt-dark mb-8 drop-shadow-lg">
           Actividades y Productos
         </h3>
         <div className="relative px-4 sm:px-16 lg:px-32 xl:px-48 2xl:px-64 py-6 mb-12">
@@ -162,7 +162,7 @@ const About = () => {
               className="max-w-2xl w-full p-8 shadow-2xl text-center animate-fade-in bg-white"
             >
               <Bell className="w-12 h-12 mx-auto mb-4 text-black animate-bounce" aria-label="Inscríbete ahora" />
-              <h3 className="text-2xl font-poppins font-bold mb-4 text-[#1e293b]">INSCRÍBETE AHORA</h3>
+              <h3 className="text-4xl font-poppins font-bold mb-4 text-[#1e293b]">INSCRÍBETE AHORA</h3>
               <p className="mb-6 font-inter text-[#1e293b]">
                 ¿Interesado en formar parte de nuestro semillero de investigación? 
                 Completa el formulario oficial de inscripción.

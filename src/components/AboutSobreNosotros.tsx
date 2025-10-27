@@ -34,9 +34,9 @@ const values = [
 ];
 
 const AboutSobreNosotros = () => (
-  <section id="sobre" className="py-20 min-h-[80vh] bg-[#f8fafc]">
+  <section id="sobre" className="py-12 min-h-[80vh] bg-[#f8fafc]">
     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
+  <div className="grid lg:grid-cols-2 gap-12 items-center mb-12">
         {/* Imagen decorativa */}
         <div className="relative h-[400px] w-full flex items-center justify-center">
           <img
@@ -51,8 +51,8 @@ const AboutSobreNosotros = () => (
         {/* Objetivo, Misión y Visión */}
         <div className="space-y-8">
           <div>
-            <h3 className="text-2xl font-poppins font-bold text-fyt-dark mb-4 drop-shadow-lg">Nuestro Objetivo</h3>
-            <p className="text-fyt-dark/90 font-inter leading-relaxed text-justify">
+            <h3 className="text-4xl font-poppins font-bold text-fyt-dark mb-4 drop-shadow-lg">Nuestro Objetivo</h3>
+            <p className="text-fyt-dark/90 font-inter leading-relaxed text-left">
               El objetivo principal del grupo es desarrollar investigaciones en Farmacología, Terapéutica, 
               Farmacia Asistencial, Farmacovigilancia, Farmacoepidemiología, Farmacoeconomía, estudios in 
               sílico y modelización molecular para el diseño de nuevos fármacos. Busca que los estudiantes 
@@ -66,7 +66,7 @@ const AboutSobreNosotros = () => (
                 <Target className="w-8 h-8 text-fyt-blue mb-3" aria-label="Misión" />
                 <h4 className="text-lg font-raleway font-semibold text-fyt-blue">Misión</h4>
               </div>
-              <p className="text-sm font-inter text-gray-700 text-justify">
+                <p className="text-sm font-inter text-gray-700 text-left">
                 Desarrollar trabajos de investigación en Farmacología, Terapéutica, Farmacia Asistencial, 
                 Farmacovigilancia, Farmacoepidemiología, Farmacoeconomía y estudios in sílico/modelización 
                 molecular, para apoyar programas de pregrado y postgrado.
@@ -77,7 +77,7 @@ const AboutSobreNosotros = () => (
                 <Eye className="w-8 h-8 text-fyt-purple mb-3" aria-label="Visión" />
                 <h4 className="text-lg font-raleway font-semibold text-fyt-purple">Visión</h4>
               </div>
-              <p className="text-sm font-inter text-gray-700 text-justify">
+              <p className="text-sm font-inter text-gray-700 text-left">
                 Posicionarse entre los mejores grupos de investigación en Farmacología y Terapéutica 
                 a nivel nacional en 2030 e internacional en 2035, desarrollando trabajos de alto nivel 
                 científico que respondan a necesidades locales, nacionales e internacionales, y formando 
@@ -88,8 +88,8 @@ const AboutSobreNosotros = () => (
         </div>
       </div>
       {/* Valores */}
-      <div className="mb-16">
-        <h3 className="text-2xl font-poppins font-bold text-center text-fyt-dark mb-8 drop-shadow-lg">
+  <div className="mb-12">
+        <h3 className="text-4xl font-poppins font-bold text-center text-fyt-dark mb-8 drop-shadow-lg">
           Nuestros Valores
         </h3>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">

@@ -65,8 +65,11 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo y nombre */}
           <Link to="/" className="flex items-center space-x-3 group focus:outline-none">
-            <div className="flex-shrink-0">
-              <img src="/logo-fyt.png" alt="Logo Grupo FyT, semillero de investigación en farmacología y terapéutica" loading="lazy" className="h-12 w-auto transition-all duration-300 group-hover:scale-105" />
+              <div className="flex-shrink-0">
+              <picture>
+                <source srcSet="/logo-fyt.webp" type="image/webp" />
+                <img src="/logo-fyt.png" alt="Logo Grupo FyT, semillero de investigación en farmacología y terapéutica" loading="lazy" className="h-12 w-auto transition-all duration-300 group-hover:scale-105" />
+              </picture>
             </div>
               <div className="text-lg font-poppins font-bold text-gray-800 group-hover:text-fyt-blue transition-colors">
                 Grupo FyT

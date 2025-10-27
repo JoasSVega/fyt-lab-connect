@@ -26,7 +26,7 @@ const Index = () => {
               <span className="w-14 h-14 flex items-center justify-center rounded-full bg-blue-100 mb-2">
                 <Users className="w-8 h-8 text-blue-600" aria-label="Sobre Nosotros" />
               </span>
-              <h3 className="text-xl font-poppins font-semibold text-fyt-dark mb-2">Sobre Nosotros</h3>
+              <h3 className="text-lg font-raleway font-bold text-fyt-dark mb-2">Sobre Nosotros</h3>
               <p className="text-muted-foreground text-center text-sm mb-4 font-inter">Conoce el objetivo, valores y equipo del grupo FyT.</p>
               <Button onClick={() => navigate('/sobre-nosotros')} className="w-full rounded-full px-5 py-2 font-inter shadow bg-fyt-blue text-white hover:bg-fyt-blue/90 transition">Ver Más</Button>
             </div>
@@ -35,7 +35,7 @@ const Index = () => {
             <span className="w-14 h-14 flex items-center justify-center rounded-full bg-purple-100 mb-2">
               <Microscope className="w-8 h-8 text-purple-600" aria-label="Investigación" />
             </span>
-            <h3 className="text-xl font-poppins font-semibold text-fyt-dark mb-2">Investigación</h3>
+            <h3 className="text-lg font-raleway font-bold text-fyt-dark mb-2">Investigación</h3>
             <p className="text-muted-foreground text-center text-sm mb-4 font-inter">Conoce nuestras investigaciones actuales y resultados científicos.</p>
             <Button onClick={() => navigate('/investigacion')} className="w-full rounded-full px-5 py-2 font-inter shadow bg-fyt-purple text-white hover:bg-fyt-purple/90 transition">Ver Investigación</Button>
           </div>
@@ -44,7 +44,7 @@ const Index = () => {
             <span className="w-14 h-14 flex items-center justify-center rounded-full bg-red-100 mb-2">
               <BookOpen className="w-8 h-8 text-red-600" aria-label="Noticias" />
             </span>
-            <h3 className="text-xl font-poppins font-semibold text-fyt-dark mb-2">Noticias</h3>
+            <h3 className="text-lg font-raleway font-bold text-fyt-dark mb-2">Noticias</h3>
             <p className="text-muted-foreground text-center text-sm mb-4 font-inter">Mantente informado sobre nuestras actividades y logros recientes.</p>
             <Button onClick={() => navigate('/noticias')} className="w-full rounded-full px-5 py-2 font-inter shadow bg-fyt-red text-white hover:bg-fyt-red/90 transition">Ver Noticias</Button>
           </div>

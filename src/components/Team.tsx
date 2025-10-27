@@ -3,7 +3,7 @@ import { Card } from "./ui/card";
 import { Button } from "./ui/button";
 import { Mail } from "lucide-react";
 
-const Team = () => {
+const Team = ({ compact = false }: { compact?: boolean }) => {
   // Imágenes disponibles en /public/images/equipo/
   const imageFiles = [
     "Antistio-Alviz.png",
@@ -86,6 +86,18 @@ const Team = () => {
       }
     },
     {
+      name: "Mariana Mercado",
+      role: "Estudiante Coordinadora del grupo FyT",
+      specialty: "Estudiante de Química Farmacéutica",
+      description: "Estudiante de pregrado.",
+      
+      links: {
+        orcid: "0000-0000-0000-0007",
+        scholar: "scholar-profile-8",
+        email: "mmercadoi1@unicartagena.edu.co"
+      }
+    },
+    {
       name: "Shirley Cavadia",
       role: "Líder de linea de investigación en Atención Farmacéutica y Farmacia Asistencial",
       specialty: "QF, MSc. Farmacia Clínica, esp. Gestión administartiva de Servicios Farmacéuticos",
@@ -145,23 +157,14 @@ const Team = () => {
         email: "suribem@unicartagena.edu.co"
       }
     },
-    {
-      name: "Mariana Mercado",
-      role: "Estudiante Coordinadora del grupo FyT",
-      specialty: "Estudiante de Química Farmacéutica",
-      description: "Estudiante de pregrado.",
-      
-      links: {
-        orcid: "0000-0000-0000-0007",
-        scholar: "scholar-profile-8",
-        email: "mmercadoi1@unicartagena.edu.co"
-      }
-    }
+    
   ];
 
 
+  const wrapperClass = `${compact ? 'py-12 min-h-[0]' : 'py-20 min-h-[80vh]'} bg-[#f8fafc]`;
+
   return (
-  <section id="equipo" className="py-20 min-h-[80vh] bg-[#f8fafc]">
+  <section id="equipo" className={wrapperClass}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {teamMembers.map((member) => {
@@ -177,13 +180,21 @@ const Team = () => {
                 {/* Foto o placeholder, sin tarjeta extra */}
                 <>
                   {imgSrc ? (
-                    <img
-                      src={imgSrc}
-                      alt={`Retrato de ${member.name}, ${member.role}`}
-                      className="mb-5 shadow-lg border-2 border-[#3BB9FF]/30"
-                      style={{ width: 220, height: 220, objectFit: "cover", borderRadius: 16 }}
-                      loading="lazy"
-                    />
+                    (() => {
+                      const webp = imgSrc.replace(/\.png$/i, '.webp');
+                      return (
+                        <picture>
+                          <source srcSet={webp} type="image/webp" />
+                          <img
+                            src={imgSrc}
+                            alt={`Retrato de ${member.name}, ${member.role}`}
+                            className="mb-5 shadow-lg border-2 border-[#3BB9FF]/30"
+                            style={{ width: 220, height: 220, objectFit: "cover", borderRadius: 16 }}
+                            loading="lazy"
+                          />
+                        </picture>
+                      );
+                    })()
                   ) : (
                     <div className="mb-5 flex items-center justify-center bg-[#f1f5f9] border-2 border-[#3BB9FF]/30 shadow-lg" style={{ width: 220, height: 220, borderRadius: 16 }}>
                       <span className="text-5xl font-bold text-fyt-blue select-none">{getInitials(member.name)}</span>
@@ -199,15 +210,15 @@ const Team = () => {
                       <p className="text-xs text-[#334155] mb-4 text-center max-w-xs">{member.description}</p>
                     )}
                     <div className="w-full flex justify-center">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="rounded-lg border-2 border-[#FF4C4C]/40 text-fyt-blue hover:bg-[#FF4C4C]/10 px-6 py-2 font-medium shadow"
-                        onClick={() => window.open(`mailto:${member.links.email}`, '_blank')}
-                      >
-                        <Mail className="w-6 h-6 mr-2 text-fyt-blue" aria-label="Contactar" />
-                        Contactar
-                      </Button>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="group rounded-lg border-2 border-[#FF4C4C] bg-white text-[#FF4C4C] hover:bg-[#FF4C4C] hover:text-white px-6 py-2 font-medium shadow transition-colors"
+                          onClick={() => window.open(`mailto:${member.links.email}`, '_blank')}
+                        >
+                          <Mail className="w-6 h-6 mr-2 text-[#FF4C4C] group-hover:text-white transition-colors" aria-label="Contactar" />
+                          Contactar
+                        </Button>
                     </div>
                   </div>
                 </>
@@ -229,7 +240,7 @@ const Team = () => {
               asChild
               variant="outline"
               size="lg"
-              className="rounded-lg border-2 border-fyt-blue text-fyt-blue hover:bg-fyt-blue hover:text-white px-8 py-3 font-medium shadow-lg"
+              className="group rounded-lg border-2 border-fyt-blue text-fyt-blue bg-white hover:bg-fyt-blue hover:text-white px-8 py-3 font-medium shadow-lg transition-colors"
             >
               <a
                 href="mailto:grupoinvestigacion@gmail.com?subject=Unirse%20al%20grupo%20de%20investigaci%C3%B3n"
