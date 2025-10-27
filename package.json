@@ -9,6 +9,7 @@
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "analyze": "vite build --sourcemap && npx source-map-explorer \"dist/assets/*.js\" || true",
+    "analyze:viz": "cross-env ANALYZE=true vite build",
     "preview": "vite preview",
     "convert:images": "node ./scripts/convert-images.js"
   },
@@ -78,8 +79,9 @@
     "globals": "^15.15.0",
     "lovable-tagger": "^1.1.9",
     "postcss": "^8.5.6",
+    "cross-env": "^7.0.3",
   "rollup-plugin-visualizer": "^6.0.5",
-  "sharp": "^0.33.4",
+    "sharp": "^0.33.4",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.38.0",

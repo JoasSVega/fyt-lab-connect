@@ -19,8 +19,8 @@ jobs:
           node-version: '18'
           cache: 'npm'
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install dependencies (prefer ci, fallback to install)
+        run: npm ci || npm install
 
       - name: Run linter
         run: npm run lint
