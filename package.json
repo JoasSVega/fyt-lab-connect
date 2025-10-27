@@ -8,6 +8,7 @@
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
+    "analyze": "vite build --sourcemap && npx source-map-explorer \"dist/assets/*.js\" || true",
   "preview": "vite preview",
   "convert:images": "node ./scripts/convert-images.js"
   },

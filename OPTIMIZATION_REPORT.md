@@ -49,6 +49,25 @@ Siguientes pasos recomendados (priorizados)
 3. Dependencias y package.json
    - Auditar `package.json` para detectar dependencias no usadas (por ejemplo `vaul`, `lovable-tagger` si no se usan en producción) y moverlas a `devDependencies` o removerlas.
 
+    Auditoría rápida de dependencias (resultados):
+
+    - Usadas claramente en el código:
+       - `recharts` — usado en `src/components/ui/chart.tsx` (ahora cargado dinámicamente).
+       - `react-day-picker` — usado en `src/components/ui/calendar.tsx` (ahora lazy-loaded).
+       - `framer-motion` — usado en varias páginas; se difirió su carga en `src/App.tsx`.
+       - `lucide-react` — icon set ampliamente utilizado en componentes.
+       - `embla-carousel-react` — usado por los carousels.
+       - `@tanstack/react-query` — usado para manejo de datos.
+       - `sonner` y `next-themes` — usados por el toaster (`src/components/ui/sonner.tsx`).
+       - `vaul` — usado por `src/components/ui/drawer.tsx`.
+       - `input-otp` — usado por `src/components/ui/input-otp.tsx`.
+
+    - Posibles candidatas para revisión (usar `git grep <pkg>` y pruebas antes de remover):
+       - `lovable-tagger` — se utiliza en `vite.config.ts` como plugin de desarrollo; mover a `devDependencies` es apropiado si no se usa en producción.
+       - `vaul` / `input-otp` — revisar si estas utilidades se usan en rutas de producción; si son solo para demos, considerar mover o eliminar.
+
+    - Recomendación: no remover dependencias automáticamente. Crear una rama con cambios propuestos (mover paquetes a devDependencies o remover), ejecutar `npm ci` y `npm run build` en CI, y validar visualmente.
+
 4. CI / Build
    - Añadir workflow de GitHub Actions para `lint` y `build` en PRs.
    - Añadir `vite` build optimizado y revisar opciones de minificación y target.
