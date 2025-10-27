@@ -44,6 +44,8 @@ const AboutSobreNosotros = () => (
             alt="Imagen objetivo del grupo FyT"
             className="w-full h-full object-cover rounded-xl shadow-2xl animate-fade-in"
             loading="lazy"
+            decoding="async"
+            fetchPriority="low"
             style={{ minHeight: 400, maxHeight: 400 }}
           />
           <div className="absolute inset-0 bg-black/20 rounded-xl"></div>
