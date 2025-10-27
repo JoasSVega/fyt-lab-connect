@@ -8,14 +8,14 @@ const roots = [
   path.resolve(process.cwd(), 'src', 'assets')
 ];
 
-async function findPngFiles(dir) {
+async function findImageFiles(dir) {
   let results = [];
   const entries = await fs.readdir(dir, { withFileTypes: true });
   for (const entry of entries) {
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) {
-      results = results.concat(await findPngFiles(full));
-    } else if (/\.png$/i.test(entry.name)) {
+      results = results.concat(await findImageFiles(full));
+    } else if (/\.(png|jpe?g)$/i.test(entry.name)) {
       results.push(full);
     }
   }
@@ -24,7 +24,7 @@ async function findPngFiles(dir) {
 
 async function convertFile(filePath) {
   try {
-    const outPath = filePath.replace(/\.png$/i, '.webp');
+    const outPath = filePath.replace(/\.(png|jpe?g)$/i, '.webp');
     // Use sharp to convert to webp with quality 80 and keep alpha
     await sharp(filePath)
       .webp({ quality: 80, alphaQuality: 80 })
@@ -44,9 +44,9 @@ async function convertFile(filePath) {
       } catch (err) {
         continue;
       }
-      const pngs = await findPngFiles(root);
-      console.log(`Found ${pngs.length} PNGs under ${root}`);
-      for (const file of pngs) {
+      const imgs = await findImageFiles(root);
+      console.log(`Found ${imgs.length} images (png/jpg/jpeg) under ${root}`);
+      for (const file of imgs) {
         await convertFile(file);
       }
     }
