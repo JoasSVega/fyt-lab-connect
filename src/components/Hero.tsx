@@ -29,9 +29,10 @@ export default function Hero() {
               lineHeight: 1.15,
               // Tipografía fluida: entre ~28px y ~56px según ancho de viewport
               fontSize: 'clamp(1.75rem, 5.5vw, 3.5rem)',
-              wordBreak: 'normal',
-              overflowWrap: 'break-word',
-              hyphens: 'auto',
+              // No cortar palabras: solo saltos en espacios
+              wordBreak: 'keep-all',
+              overflowWrap: 'normal',
+              hyphens: 'none',
             }}
           >
             {"Investigación rigurosa, impacto real en la "}
@@ -46,7 +47,11 @@ export default function Hero() {
               lineHeight: 1.6,
               maxWidth: 700,
               // Tipografía fluida secundaria: ~16px a ~22px
-              fontSize: 'clamp(1rem, 2.5vw, 1.375rem)'
+              fontSize: 'clamp(1rem, 2.5vw, 1.375rem)',
+              // No cortar palabras
+              wordBreak: 'keep-all',
+              overflowWrap: 'normal',
+              hyphens: 'none',
             }}
           >
             Unimos ciencia, formación y compromiso para avanzar en la farmacología y la terapéutica.
@@ -84,9 +89,9 @@ export default function Hero() {
         /* Ajustes móviles adicionales: asegurar envoltura de palabras y evitar recortes */
         @media (max-width: 640px) {
           h1, h2 { 
-            overflow-wrap: break-word; 
-            word-break: normal; 
-            hyphens: auto; 
+            overflow-wrap: normal; 
+            word-break: keep-all; 
+            hyphens: none; 
           }
         }
       `}</style>
