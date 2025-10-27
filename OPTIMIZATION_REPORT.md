@@ -42,6 +42,13 @@ Siguientes pasos recomendados (priorizados)
    - Asegurar que todas las imágenes tengan `loading="lazy"` cuando no sean críticas.
    - Comprimir y servir WebP cuando sea posible (script `scripts/convert-images.js` ya incluido).
 
+      Acciones realizadas (imagen):
+
+      - Ejecuté el script `scripts/convert-images.js` localmente para convertir PNG/JPG/JPEG a WebP.
+      - Resultado: se generaron 27 imágenes WebP en `public/images/` (incluye `Hero-Index.webp`, `Objetivo.webp`, `logo-fyt.webp` y varias imágenes de `Carrusel/` y `equipo/`).
+      - Componentes actualizados: `src/components/AboutSobreNosotros.tsx` ahora usa un elemento `<picture>` que prioriza `/images/Objetivo.webp` con fallback a `Objetivo.jpeg`. También se añadió `loading="lazy"`, `decoding="async"` y `fetchPriority="low"`.
+      - Nota: los archivos WebP se crearon localmente en tu workspace. Decide si quieres que los incluya en el repositorio (commit) o que los generes en tu entorno de despliegue/CI.
+
 2. Lazy-load adicional
    - Cargar `recharts` solo cuando se usen gráficos (actualmente `src/components/ui/chart.tsx` incluye `recharts` en el bundle; considerar carga dinámica si los gráficos no están en la página principal).
    - Revisar `framer-motion` en componentes secundarios que todavía lo importen estáticamente.
