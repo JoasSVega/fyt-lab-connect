@@ -181,7 +181,7 @@ const CarouselPrevious = React.forwardRef<HTMLButtonElement, React.ComponentProp
             : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
           className,
         )}
-        disabled={!canScrollPrev && !(opts && (opts as any).loop)}
+  disabled={!canScrollPrev && !opts?.loop}
         onClick={scrollPrev}
         {...props}
       >
@@ -209,7 +209,7 @@ const CarouselNext = React.forwardRef<HTMLButtonElement, React.ComponentProps<ty
             : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
           className,
         )}
-        disabled={!canScrollNext && !(opts && (opts as any).loop)}
+  disabled={!canScrollNext && !opts?.loop}
         onClick={scrollNext}
         {...props}
       >

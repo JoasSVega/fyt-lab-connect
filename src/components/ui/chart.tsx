@@ -1,10 +1,11 @@
 import * as React from "react";
 // Importar tipos de recharts para mantener las firmas de tipos sin cargar la librería en tiempo de ejecución
 import type * as RechartsPrimitive from "recharts";
+type RechartsModule = typeof import("recharts");
 
 // Cargador dinámico para recharts: evita incluir la librería en el bundle inicial.
-let _rechartsModule: any = null;
-function ensureRecharts() {
+let _rechartsModule: RechartsModule | null = null;
+function ensureRecharts(): Promise<RechartsModule> {
   if (_rechartsModule) return Promise.resolve(_rechartsModule);
   return import("recharts").then((m) => {
     _rechartsModule = m;
@@ -49,7 +50,7 @@ const ChartContainer = React.forwardRef<
 >(({ id, className, children, config, ...props }, ref) => {
   const uniqueId = React.useId();
   const chartId = `chart-${id || uniqueId.replace(/:/g, "")}`;
-  const [R, setR] = React.useState<any | null>(null);
+  const [R, setR] = React.useState<RechartsModule | null>(null);
 
   React.useEffect(() => {
     let mounted = true;
@@ -117,9 +118,9 @@ ${colorConfig
 // Wrappers ligeros que renderizan los componentes de recharts cuando la librería
 // esté disponible. Se usan wrappers para evitar importar recharts en el bundle inicial.
 // Tipado simplificado para evitar acoplamiento a las firmas genéricas de recharts
-type TooltipProps = any;
+type TooltipProps = React.ComponentProps<typeof RechartsPrimitive.Tooltip>;
 const ChartTooltip: React.FC<TooltipProps> = (props) => {
-  const [R, setR] = React.useState<any | null>(null);
+  const [R, setR] = React.useState<RechartsModule | null>(null);
   React.useEffect(() => {
     let mounted = true;
     ensureRecharts().then((mod) => {
@@ -269,9 +270,9 @@ const ChartTooltipContent = React.forwardRef<
 );
 ChartTooltipContent.displayName = "ChartTooltip";
 
-type LegendProps = any;
+type LegendProps = React.ComponentProps<typeof RechartsPrimitive.Legend>;
 const ChartLegend: React.FC<LegendProps> = (props) => {
-  const [R, setR] = React.useState<any | null>(null);
+  const [R, setR] = React.useState<RechartsModule | null>(null);
   React.useEffect(() => {
     let mounted = true;
     ensureRecharts().then((mod) => {

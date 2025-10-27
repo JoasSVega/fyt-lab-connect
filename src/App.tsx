@@ -38,10 +38,12 @@ const queryClient = new QueryClient();
 
 
 
+type FramerMotionModule = typeof import('framer-motion');
+
 function AnimatedRoutes() {
   const location = useLocation();
   // Carga dinámica de framer-motion para reducir el bundle inicial.
-  const [FM, setFM] = useState<any>(null);
+  const [FM, setFM] = useState<FramerMotionModule | null>(null);
   useEffect(() => {
     let mounted = true;
     import('framer-motion')

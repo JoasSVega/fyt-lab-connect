@@ -32,7 +32,6 @@ const KPICard: React.FC<KPICardProps> = ({
   const ref = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    let start = 0;
     const animDuration = duration;
     const startTime = performance.now() + delay * 1000;
     function animate(now: number) {
