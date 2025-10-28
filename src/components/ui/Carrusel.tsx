@@ -119,6 +119,9 @@ const Carrusel: React.FC<CarruselProps> = ({
                   const avifSet = `${base}-400.avif 400w, ${base}-800.avif 800w, ${base}-1200.avif 1200w`;
                   const webpSet = `${base}-400.webp 400w, ${base}-800.webp 800w, ${base}-1200.webp 1200w`;
                   const sizes = "(max-width: 767px) 96vw, (max-width: 1279px) 48vw, 32vw";
+                  // Evitar fallos de lazy-loading en móviles/iOS dentro de contenedores con overflow/transform
+                  // Cargamos con prioridad 'eager' las primeras diapositivas visibles para asegurar render.
+                  const loadingMode: 'eager' | 'lazy' = index < 3 ? 'eager' : 'lazy';
                   return (
                     <picture>
                       <source type="image/avif" srcSet={avifSet} sizes={sizes} />
@@ -126,7 +129,7 @@ const Carrusel: React.FC<CarruselProps> = ({
                       <img
                         src={item.image}
                         alt={item.title}
-                        loading="lazy"
+                        loading={loadingMode}
                         decoding="async"
                         className={defaultImageClass}
                         style={{ height: '100%', maxHeight: heightCss, minHeight: heightCss }}
