@@ -132,10 +132,10 @@ const About = () => {
           <Carrusel
             items={researchLines}
             color="#9B59B6"
-            height={240}
+            height="clamp(14rem, 28vw, 18rem)"
             showDescription={true}
             className="w-full"
-            imageClassName="w-full h-60 object-cover rounded-t-2xl"
+            imageClassName="w-full h-full object-cover rounded-t-2xl"
           />
         </div>
       </section>
@@ -145,7 +145,7 @@ const About = () => {
           Modalidades de Grado
         </h3>
         <div className="relative px-4 sm:px-16 lg:px-32 xl:px-48 2xl:px-64 py-6">
-          <Carrusel items={graduationModalities} color="#3BB9FF" height={240} showDescription={true} className="w-full" imageClassName="w-full h-60 object-cover rounded-t-2xl" />
+          <Carrusel items={graduationModalities} color="#3BB9FF" height="clamp(14rem, 28vw, 18rem)" showDescription={true} className="w-full" imageClassName="w-full h-full object-cover rounded-t-2xl" />
         </div>
       </section>
       {/* Actividades y Productos */}
@@ -154,7 +154,7 @@ const About = () => {
           Actividades y Productos
         </h3>
         <div className="relative px-4 sm:px-16 lg:px-32 xl:px-48 2xl:px-64 py-6 mb-12">
-          <Carrusel items={activitiesProducts} color="#FF4C4C" height={240} showDescription={true} className="w-full" imageClassName="w-full h-60 object-cover rounded-t-2xl" />
+          <Carrusel items={activitiesProducts} color="#FF4C4C" height="clamp(14rem, 28vw, 18rem)" showDescription={true} className="w-full" imageClassName="w-full h-full object-cover rounded-t-2xl" />
         </div>
         {/* INSCRÍBETE AHORA Card */}
         <div className="flex justify-center mt-8">

@@ -9,7 +9,7 @@ export default function Hero() {
   return (
     <section
       id="inicio"
-      className="relative left-1/2 -translate-x-1/2 w-screen h-[70vh] min-h-[520px] flex items-center justify-center"
+      className="relative left-1/2 -translate-x-1/2 w-screen h-[68vh] min-h-[460px] flex items-center justify-center"
       style={{
         backgroundImage: "url('/images/Hero-Index.jpg')",
         backgroundSize: "cover",
@@ -21,7 +21,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-black/50 pointer-events-none" />
       {/* Contenido centrado */}
       <div className="relative z-10 w-full flex items-center justify-center px-4 py-8">
-        <div className="mx-auto max-w-4xl rounded-xl p-6 md:p-10 shadow-lg flex flex-col items-center text-white">
+  <div className="mx-auto max-w-4xl rounded-xl p-5 md:p-10 shadow-lg flex flex-col items-center text-white">
           <h1
             className="text-white font-bold text-center mb-6 tracking-tight"
             style={{
@@ -58,13 +58,13 @@ export default function Hero() {
           </h2>
           <a
             href="/herramientas"
-            className="bg-[#9333ea] text-white font-semibold py-3 px-8 rounded-full shadow-lg transition-colors focus:outline-none focus:ring-2 focus:ring-[#9333ea] focus:ring-offset-2 font-poppins inline-flex items-center justify-center text-center w-full sm:w-auto border-2 border-transparent hover:bg-white hover:text-[#9333ea] hover:border-[#9333ea]"
+            className="bg-[#9333ea] text-white font-semibold py-2.5 px-6 rounded-full shadow-lg transition-colors focus:outline-none focus:ring-2 focus:ring-[#9333ea] focus:ring-offset-2 font-poppins inline-flex items-center justify-center text-center w-auto max-w-[92vw] border-2 border-transparent hover:bg-white hover:text-[#9333ea] hover:border-[#9333ea]"
             style={{
               fontFamily: 'Poppins, Montserrat, Arial, sans-serif',
               marginTop: '1rem',
-              minWidth: '180px',
-              // Texto del botón fluido y centrado
-              fontSize: 'clamp(0.95rem, 2.4vw, 1.125rem)'
+              minWidth: '10rem',
+              // Texto del botón fluido y centrado; menos agresivo en móviles
+              fontSize: 'clamp(0.95rem, 2.1vw, 1.125rem)'
             }}
             aria-label="Accede a nuestras herramientas científicas"
           >
