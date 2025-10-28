@@ -118,7 +118,8 @@ ${colorConfig
 // Wrappers ligeros que renderizan los componentes de recharts cuando la librería
 // esté disponible. Se usan wrappers para evitar importar recharts en el bundle inicial.
 // Tipado simplificado para evitar acoplamiento a las firmas genéricas de recharts
-type TooltipProps = React.ComponentProps<typeof RechartsPrimitive.Tooltip>;
+// Exclude `ref` to avoid mismatches when spreading into the dynamically imported component
+type TooltipProps = React.ComponentPropsWithoutRef<typeof RechartsPrimitive.Tooltip>;
 const ChartTooltip: React.FC<TooltipProps> = (props) => {
   const [R, setR] = React.useState<RechartsModule | null>(null);
   React.useEffect(() => {
@@ -270,7 +271,8 @@ const ChartTooltipContent = React.forwardRef<
 );
 ChartTooltipContent.displayName = "ChartTooltip";
 
-type LegendProps = React.ComponentProps<typeof RechartsPrimitive.Legend>;
+// Exclude `ref` here as well; dynamic import wrappers shouldn't forward refs to unknown underlying impls
+type LegendProps = React.ComponentPropsWithoutRef<typeof RechartsPrimitive.Legend>;
 const ChartLegend: React.FC<LegendProps> = (props) => {
   const [R, setR] = React.useState<RechartsModule | null>(null);
   React.useEffect(() => {
