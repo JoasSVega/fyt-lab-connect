@@ -125,7 +125,6 @@ const Carrusel: React.FC<CarruselProps> = ({
                         alt={item.title}
                         loading="lazy"
                         decoding="async"
-                        fetchpriority="low"
                         className={defaultImageClass}
                         style={{ height: '100%', maxHeight: heightCss, minHeight: heightCss }}
                       />

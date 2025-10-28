@@ -1,4 +1,5 @@
 // src/components/Hero.tsx
+import { useEffect, useRef } from "react";
 const keywords = [
   { word: "Salud", color: "#9333ea" },
   { word: "Ciencia", color: "#9333ea" },
@@ -6,6 +7,13 @@ const keywords = [
 ];
 
 export default function Hero() {
+  const bgRef = useRef<HTMLImageElement | null>(null);
+
+  useEffect(() => {
+    // Apply fetchpriority via DOM to avoid React 18 type gaps
+    bgRef.current?.setAttribute("fetchpriority", "high");
+  }, []);
+
   return (
     <section
       id="inicio"
@@ -15,8 +23,8 @@ export default function Hero() {
       <img
         src="/images/Hero-Index.jpg"
         alt="Fondo del hero"
-        fetchpriority="high"
         decoding="async"
+        ref={bgRef}
         className="absolute inset-0 w-full h-full object-cover"
         aria-hidden="true"
       />
