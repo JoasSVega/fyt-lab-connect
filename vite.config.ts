@@ -25,45 +25,9 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  // Conservative manualChunks to separate very large third-party libraries
-  // This reduces the size of the main chunk and makes heavy libs cacheable.
+  // Build settings. Avoid custom manualChunks to prevent circular chunk execution
+  // that can cause React to be undefined in some hosts. Let Rollup handle chunking.
   build: {
-    // Asegura limpieza del directorio de salida antes de cada build
     emptyOutDir: true,
-    rollupOptions: {
-      output: {
-        manualChunks(id: string) {
-          if (!id || !id.includes('node_modules')) return undefined;
-
-          // Group framer-motion and its internals (motion-dom) together
-          if (id.includes('framer-motion') || id.includes('motion-dom')) {
-            return 'vendor-framer-motion';
-          }
-
-          // Charts (recharts) are large and not needed on first paint for many pages
-          if (id.includes('recharts')) {
-            return 'vendor-recharts';
-          }
-
-          // Carousel / embla
-          if (id.includes('embla-carousel')) {
-            return 'vendor-embla';
-          }
-
-          // Icon libraries
-          if (id.includes('lucide-react') || id.includes('@heroicons') || id.includes('react-icons')) {
-            return 'vendor-icons';
-          }
-
-          // React & react-dom (small split to enable long-term caching)
-          if (id.includes('react') || id.includes('react-dom')) {
-            return 'vendor-react';
-          }
-
-          // Fallback: group remaining node_modules into a vendors chunk
-          return 'vendor';
-        }
-      }
-    }
   },
 }));
