@@ -113,13 +113,16 @@ const Carrusel: React.FC<CarruselProps> = ({
           <CarouselItem key={index} className="px-2 md:px-4 basis-full md:basis-1/2 xl:basis-1/3">
             <Card style={{ borderColor: color }} className={`bg-white/90 border-2 shadow-xl hover:shadow-2xl hover:scale-[1.03] transition-all duration-300 overflow-hidden group h-full`}>
               <div className="relative" style={{ height: heightCss }}>
-                {/* Use <picture> to prefer WebP and fall back to original format */}
+                {/* Responsive <picture> with AVIF/WebP sources and fallback to original */}
                 {(() => {
-                  const isPng = /\.png$/i.test(item.image);
-                  const webpSrc = isPng ? item.image.replace(/\.png$/i, '.webp') : item.image.replace(/\.(jpg|jpeg)$/i, '.webp');
+                  const base = item.image.replace(/\.(png|jpe?g|webp)$/i, '');
+                  const avifSet = `${base}-400.avif 400w, ${base}-800.avif 800w, ${base}-1200.avif 1200w`;
+                  const webpSet = `${base}-400.webp 400w, ${base}-800.webp 800w, ${base}-1200.webp 1200w`;
+                  const sizes = "(max-width: 767px) 96vw, (max-width: 1279px) 48vw, 32vw";
                   return (
                     <picture>
-                      <source srcSet={webpSrc} type="image/webp" />
+                      <source type="image/avif" srcSet={avifSet} sizes={sizes} />
+                      <source type="image/webp" srcSet={webpSet} sizes={sizes} />
                       <img
                         src={item.image}
                         alt={item.title}

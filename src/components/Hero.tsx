@@ -19,15 +19,27 @@ export default function Hero() {
       id="inicio"
       className="relative left-1/2 -translate-x-1/2 w-screen h-[68vh] min-h-[460px] flex items-center justify-center overflow-hidden"
     >
-      {/* LCP image as real <img> so the browser can prioritize it properly */}
-      <img
-        src="/images/Hero-Index.jpg"
-        alt="Fondo del hero"
-        decoding="async"
-        ref={bgRef}
-        className="absolute inset-0 w-full h-full object-cover"
-        aria-hidden="true"
-      />
+      {/* LCP image with responsive sources; fetchpriority set via ref on img */}
+      <picture>
+        <source
+          type="image/avif"
+          srcSet="/images/Hero-Index-400.avif 400w, /images/Hero-Index-800.avif 800w, /images/Hero-Index-1200.avif 1200w"
+          sizes="100vw"
+        />
+        <source
+          type="image/webp"
+          srcSet="/images/Hero-Index-400.webp 400w, /images/Hero-Index-800.webp 800w, /images/Hero-Index-1200.webp 1200w"
+          sizes="100vw"
+        />
+        <img
+          src="/images/Hero-Index.jpg"
+          alt="Fondo del hero"
+          decoding="async"
+          ref={bgRef}
+          className="absolute inset-0 w-full h-full object-cover"
+          aria-hidden="true"
+        />
+      </picture>
       {/* Overlay oscuro opaco al 50% sobre toda el área */}
       <div className="absolute inset-0 bg-black/50 pointer-events-none" />
       {/* Contenido centrado */}
