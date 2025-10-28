@@ -13,11 +13,21 @@ const Footer: React.FC = () => {
           <div className="flex flex-col min-w-[220px] col-span-1">
             <div className="flex items-center gap-4 mb-4">
               <picture>
-                <source srcSet="/logo-fyt.webp" type="image/webp" />
+                <source
+                  type="image/avif"
+                  srcSet="/logo-fyt-128.avif 128w, /logo-fyt-256.avif 256w"
+                  sizes="(max-width: 640px) 80px, 96px"
+                />
+                <source
+                  type="image/webp"
+                  srcSet="/logo-fyt-128.webp 128w, /logo-fyt-256.webp 256w"
+                  sizes="(max-width: 640px) 80px, 96px"
+                />
                 <img
                   src="/logo-fyt.png"
                   alt="Logo Grupo FyT"
                   loading="lazy"
+                  decoding="async"
                   className="w-20 h-20 sm:w-24 sm:h-24 object-contain drop-shadow-2xl transition-all duration-300"
                 />
               </picture>

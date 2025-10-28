@@ -183,16 +183,22 @@ const Team = ({ compact = false }: { compact?: boolean }) => {
                 <>
                   {imgSrc ? (
                     (() => {
-                      const webp = imgSrc.replace(/\.png$/i, '.webp');
+                      const base = imgSrc.replace(/\.(png|jpg|jpeg|webp)$/i, '');
+                      const avifSet = `${base.replace('/images/equipo/', '/images/equipo/').replace(/\.png$/i, '')}-128.avif 128w, ${base}-256.avif 256w, ${base}-400.avif 400w, ${base}-800.avif 800w, ${base}-1200.avif 1200w`;
+                      const webpSet = `${base}-128.webp 128w, ${base}-256.webp 256w, ${base}-400.webp 400w, ${base}-800.webp 800w, ${base}-1200.webp 1200w`;
+                      const sizes = "220px"; // la imagen se muestra a 220px de ancho
+                      const webpFallback = imgSrc.replace(/\.png$/i, '.webp');
                       return (
                         <picture>
-                          <source srcSet={webp} type="image/webp" />
+                          <source type="image/avif" srcSet={avifSet} sizes={sizes} />
+                          <source type="image/webp" srcSet={webpSet} sizes={sizes} />
                           <img
                             src={imgSrc}
                             alt={`Retrato de ${member.name}, ${member.role}`}
                             className="mb-5 shadow-lg border-2 border-[#3BB9FF]/30"
                             style={{ width: 220, height: 220, objectFit: "cover", borderRadius: 16 }}
                             loading="lazy"
+                            decoding="async"
                           />
                         </picture>
                       );
