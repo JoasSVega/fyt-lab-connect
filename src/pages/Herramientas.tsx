@@ -1,4 +1,3 @@
-import FloatingContact from "@/components/FloatingContact";
 // import ScrollReveal from "@/components/ScrollReveal";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";

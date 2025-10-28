@@ -1,6 +1,5 @@
 import Contact from "@/components/Contact";
 import Navbar from "../components/Navbar";
-import FloatingContact from "@/components/FloatingContact";
 // import ScrollReveal from "@/components/ScrollReveal";
 
 const Contactos = () => (

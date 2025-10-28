@@ -16,6 +16,12 @@ import eventsCoursesData from "@/data/events_courses.json";
 import techProductionData from "@/data/tech_production.json";
 import academicImpactData from "@/data/academic_impact.json";
 
+type Project = { id: number; title: string; summary: string; meta: string; image: string; status: "En curso" | "Finalizado"; year: number; area: string };
+type Publication = { id: number; title: string; authors: string; journal: string; year: number; summary: string; image: string; type: "articulo" | "libro" | "capitulo" | "divulgacion" | "reporte" | "conferencia" | "memoria"; link?: string };
+type EventCourse = { id: number; title: string; year: number; type: string };
+type TechProduction = { id: number; title: string; type: string; year: number; description: string };
+type AcademicImpact = { id: number; title: string; value: number; type: string; description: string };
+
 
 
 // KPIs académicos personalizados y visualmente sobrios
@@ -97,8 +103,8 @@ const publicationIcons = {
 const InvestigacionPage: React.FC = () => {
   const [proyectosTab, setProyectosTab] = useState<'en-curso' | 'finalizados'>("en-curso");
   const [publicacionesTab, setPublicacionesTab] = useState<'articulos' | 'libros' | 'otras'>("articulos");
-  const proyectosEnCurso = projectsData.filter((p: any) => p.status === "En curso").slice(0, 3);
-  const proyectosFinalizados = projectsData.filter((p: any) => p.status === "Finalizado").slice(0, 3);
+  const proyectosEnCurso = (projectsData as unknown as Project[]).filter((p) => p.status === "En curso").slice(0, 3);
+  const proyectosFinalizados = (projectsData as unknown as Project[]).filter((p) => p.status === "Finalizado").slice(0, 3);
 
   return (
     <BaseLayout>
@@ -116,7 +122,7 @@ const InvestigacionPage: React.FC = () => {
           </div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {(proyectosTab === 'en-curso' ? proyectosEnCurso : proyectosFinalizados).map((proj: any) => (
+          {(proyectosTab === 'en-curso' ? proyectosEnCurso : proyectosFinalizados).map((proj) => (
             <div key={proj.id} className="bg-white rounded-lg shadow p-4 sm:p-6 flex flex-col h-full mx-1 sm:mx-2">
               <div className="flex items-center gap-2 mb-2">
                 <Microscope className="w-5 h-5 text-fyt-blue" aria-hidden="true" />
@@ -139,7 +145,7 @@ const InvestigacionPage: React.FC = () => {
         <div className="flex flex-col gap-2 mb-6">
           <h2 className="text-2xl sm:text-3xl font-poppins font-bold text-slate-800 text-center">Publicaciones científicas y académicas</h2>
           <div className="flex gap-2 overflow-x-auto pb-1 justify-center">
-            {[
+            {[ 
               { key: "articulos", label: "Artículos científicos", icon: <FileText className="w-5 h-5 text-blue-500" /> },
               { key: "libros", label: "Libros y capítulos", icon: <BookOpen className="w-5 h-5 text-green-500" /> },
               { key: "otras", label: "Divulgación", icon: <Award className="w-5 h-5 text-gray-500" /> }
@@ -151,7 +157,7 @@ const InvestigacionPage: React.FC = () => {
                     ? "bg-blue-50 text-blue-800 border-blue-300"
                     : "bg-white text-blue-700 border-blue-100 hover:bg-blue-50"
                 }`}
-                onClick={() => setPublicacionesTab(tabItem.key as any)}
+                onClick={() => setPublicacionesTab(tabItem.key as 'articulos' | 'libros' | 'otras')}
                 aria-current={publicacionesTab === tabItem.key ? "page" : undefined}
                 type="button"
               >
@@ -164,7 +170,7 @@ const InvestigacionPage: React.FC = () => {
   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
           {/* Artículos científicos */}
           {publicacionesTab === "articulos" && (
-            publicationsData.filter((pub: any) => pub.type === "articulo").slice(0, 6).map((pub: any, idx: number) => (
+            (publicationsData as unknown as Publication[]).filter((pub) => pub.type === "articulo").slice(0, 6).map((pub, idx: number) => (
               <div key={pub.id} className="bg-white rounded-3xl shadow-soft p-4 sm:p-6 flex flex-col group transition-all duration-300 hover:shadow-lg hover:-translate-y-1 mx-1 sm:mx-2" style={{animation: `fadeInUp 0.5s ease ${idx * 0.08}s`}}>
                 <div className="flex items-center gap-2 sm:gap-3 mb-2">
                   <span className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-blue-50 group-hover:bg-blue-100 transition-colors">
@@ -183,7 +189,7 @@ const InvestigacionPage: React.FC = () => {
           )}
           {/* Libros y capítulos */}
           {publicacionesTab === "libros" && (
-            publicationsData.filter((pub: any) => pub.type === "libro" || pub.type === "capitulo").slice(0, 6).map((pub: any, idx: number) => (
+            (publicationsData as unknown as Publication[]).filter((pub) => pub.type === "libro" || pub.type === "capitulo").slice(0, 6).map((pub, idx: number) => (
               <div key={pub.id} className="bg-white rounded-3xl shadow-soft p-6 flex flex-col group transition-all duration-300 hover:shadow-lg hover:-translate-y-1" style={{animation: `fadeInUp 0.5s ease ${idx * 0.08}s`}}>
                 <div className="flex items-center gap-3 mb-2">
                   <span className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-green-50 group-hover:bg-green-100 transition-colors">
@@ -202,7 +208,7 @@ const InvestigacionPage: React.FC = () => {
           )}
           {/* Divulgación */}
           {publicacionesTab === "otras" && (
-            publicationsData.filter((pub: any) => pub.type === "divulgacion" || pub.type === "reporte" || pub.type === "conferencia" || pub.type === "memoria").slice(0, 6).map((pub: any, idx: number) => (
+            (publicationsData as unknown as Publication[]).filter((pub) => pub.type === "divulgacion" || pub.type === "reporte" || pub.type === "conferencia" || pub.type === "memoria").slice(0, 6).map((pub, idx: number) => (
               <div key={pub.id} className="bg-white rounded-3xl shadow-soft p-6 flex flex-col group transition-all duration-300 hover:shadow-lg hover:-translate-y-1" style={{animation: `fadeInUp 0.5s ease ${idx * 0.08}s`}}>
                 <div className="flex items-center gap-3 mb-2">
                   <span className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gray-50 group-hover:bg-gray-100 transition-colors">
@@ -234,7 +240,7 @@ const InvestigacionPage: React.FC = () => {
         </div>
         <div className="bg-white rounded-2xl shadow-md p-4 sm:p-6 md:p-8 mx-1 sm:mx-2">
           <ul className="timeline list-none m-0 p-0">
-            {eventsCoursesData.slice(0, 10).map((item: any, idx: number) => (
+            {(eventsCoursesData as unknown as EventCourse[]).slice(0, 10).map((item, idx: number) => (
               <li key={item.id} className="relative pl-8 mb-8 last:mb-0">
                 <span className={`absolute left-0 top-1 w-6 h-6 rounded-full flex items-center justify-center shadow ${item.type.includes('Curso') ? 'bg-teal-100 text-teal-700' : 'bg-blue-100 text-blue-700'}`}>
                   {item.type.includes('Curso') ? <BookOpen className="w-4 h-4" /> : <Award className="w-4 h-4" />}
@@ -259,7 +265,7 @@ const InvestigacionPage: React.FC = () => {
           <h2 className="text-xl sm:text-2xl font-poppins font-bold text-slate-800 text-center">Producción tecnológica</h2>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
-          {techProductionData.map((item: any) => (
+          {(techProductionData as unknown as TechProduction[]).map((item) => (
             <div key={item.id} className="bg-white rounded-2xl shadow-md p-4 sm:p-6 md:p-8 flex flex-col group transition-all duration-300 hover:shadow-lg hover:-translate-y-1 mx-1 sm:mx-2">
               <div className="flex items-center gap-3 mb-2">
                 <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-fyt-green/10 group-hover:bg-fyt-green/20 transition-colors">
@@ -285,7 +291,7 @@ const InvestigacionPage: React.FC = () => {
           <h2 className="text-xl sm:text-2xl font-poppins font-bold text-slate-800 text-center">Impacto académico</h2>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
-          {academicImpactData.map((item: any) => (
+          {(academicImpactData as unknown as AcademicImpact[]).map((item) => (
             <div key={item.id} className="bg-white rounded-2xl shadow-md p-4 sm:p-6 md:p-8 flex flex-col group transition-all duration-300 hover:shadow-lg hover:-translate-y-1 mx-1 sm:mx-2">
               <div className="flex items-center gap-3 mb-2">
                 <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-fyt-blue/10 group-hover:bg-fyt-blue/20 transition-colors">

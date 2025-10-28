@@ -39,13 +39,18 @@ const AboutSobreNosotros = () => (
   <div className="grid lg:grid-cols-2 gap-12 items-center mb-12">
         {/* Imagen decorativa */}
         <div className="relative h-[400px] w-full flex items-center justify-center">
-          <img
-            src="/images/Objetivo.jpeg"
-            alt="Imagen objetivo del grupo FyT"
-            className="w-full h-full object-cover rounded-xl shadow-2xl animate-fade-in"
-            loading="lazy"
-            style={{ minHeight: 400, maxHeight: 400 }}
-          />
+          <picture>
+            <source srcSet="/images/Objetivo.webp" type="image/webp" />
+            <img
+              src="/images/Objetivo.jpeg"
+              alt="Imagen objetivo del grupo FyT"
+              className="w-full h-full object-cover rounded-xl shadow-2xl animate-fade-in"
+              loading="lazy"
+              decoding="async"
+              fetchPriority="low"
+              style={{ minHeight: 400, maxHeight: 400 }}
+            />
+          </picture>
           <div className="absolute inset-0 bg-black/20 rounded-xl"></div>
         </div>
         {/* Objetivo, Misión y Visión */}

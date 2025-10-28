@@ -2,6 +2,17 @@
 import React, { useState } from "react";
 import BaseLayout from "@/components/BaseLayout";
 import projectsData from "@/data/projects.json";
+
+type Project = {
+  id: number;
+  title: string;
+  summary: string;
+  meta: string;
+  image: string;
+  status: "En curso" | "Finalizado";
+  year: number;
+  area: string;
+};
 import ProjectCard from "@/components/projects/ProjectCard";
 
 const TABS = [
@@ -11,7 +22,7 @@ const TABS = [
 
 const ProyectosPage: React.FC = () => {
   const [tab, setTab] = useState<'en-curso' | 'finalizados'>('en-curso');
-  const proyectosFiltrados = projectsData.filter((p: any) =>
+  const proyectosFiltrados = (projectsData as unknown as Project[]).filter((p) =>
     tab === 'en-curso' ? p.status === 'En curso' : p.status === 'Finalizado'
   );
 
@@ -30,7 +41,7 @@ const ProyectosPage: React.FC = () => {
                   ? "bg-blue-100 text-blue-800 border-blue-300"
                   : "bg-white text-blue-700 border-blue-100 hover:bg-blue-50"
               }`}
-              onClick={() => setTab(t.key as any)}
+              onClick={() => setTab(t.key as 'en-curso' | 'finalizados')}
               aria-current={tab === t.key ? "page" : undefined}
               type="button"
             >
@@ -39,7 +50,7 @@ const ProyectosPage: React.FC = () => {
           ))}
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          {proyectosFiltrados.map((proj: any) => (
+          {proyectosFiltrados.map((proj) => (
             <ProjectCard key={proj.id} {...proj} />
           ))}
         </div>

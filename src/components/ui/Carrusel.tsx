@@ -1,4 +1,5 @@
 import React from "react";
+import type { CarouselApi } from "./carousel";
 import { Card } from "./card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "./carousel";
 
@@ -18,7 +19,7 @@ interface CarruselProps {
 }
 
 const Carrusel: React.FC<CarruselProps> = ({ items, color = "#9B59B6", height = 320, showDescription = true, className, imageClassName }) => {
-  const [emblaApi, setEmblaApi] = React.useState<any>(null);
+  const [emblaApi, setEmblaApi] = React.useState<CarouselApi | null>(null);
   const [selected, setSelected] = React.useState(0);
   const [isHovered, setIsHovered] = React.useState(false);
 
@@ -44,12 +45,24 @@ const Carrusel: React.FC<CarruselProps> = ({ items, color = "#9B59B6", height = 
     }
   }, [emblaApi, items.length]);
 
-  // Autoplay: advance every 4s, pause on hover
+  // Autoplay: advance every 4s, pause on hover, tab hidden, or reduced motion preference
   React.useEffect(() => {
     if (!emblaApi) return;
-    const interval = setInterval(() => {
-      if (!isHovered) emblaApi.scrollNext();
-    }, 4000);
+    const prefersReduced = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) return;
+    const tick = () => {
+      if (isHovered) return;
+      if (typeof document !== 'undefined' && document.hidden) return;
+      try {
+        // Avoid calling when only one slide or cannot scroll
+        if (emblaApi.canScrollNext()) {
+          emblaApi.scrollNext();
+        }
+      } catch {
+        // noop
+      }
+    };
+    const interval = setInterval(tick, 4000);
     return () => clearInterval(interval);
   }, [emblaApi, isHovered]);
 
@@ -57,10 +70,10 @@ const Carrusel: React.FC<CarruselProps> = ({ items, color = "#9B59B6", height = 
 
   React.useEffect(() => {
     if (!emblaApi) return;
-    let timeout: any = null;
+    let timeout: number | null = null;
     const handleResize = () => {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => {
+      if (timeout) window.clearTimeout(timeout);
+      timeout = window.setTimeout(() => {
         try {
           emblaApi.reInit();
         } catch (e) {
@@ -71,7 +84,7 @@ const Carrusel: React.FC<CarruselProps> = ({ items, color = "#9B59B6", height = 
     window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);
-      clearTimeout(timeout);
+      if (timeout) window.clearTimeout(timeout);
     };
   }, [emblaApi]);
 

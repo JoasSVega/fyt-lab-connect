@@ -170,7 +170,9 @@ const Team = ({ compact = false }: { compact?: boolean }) => {
           {teamMembers.map((member) => {
             const imgSrc = getImageForMember(member.name);
             if (!imgSrc) {
-              console.log(`Sin foto: ${member.name}`);
+              // Imagen no encontrada para este miembro; se omite el console.log
+              // Se mantiene el placeholder con iniciales para evitar errores de render.
+              // (Limpieza: eliminación de logs de depuración para mejorar rendimiento y limpiar la salida)
             }
             return (
               <Card
@@ -247,7 +249,7 @@ const Team = ({ compact = false }: { compact?: boolean }) => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Contactar
+                Contáctanos
               </a>
             </Button>
           </Card>

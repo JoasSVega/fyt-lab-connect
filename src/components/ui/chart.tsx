@@ -1,5 +1,17 @@
 import * as React from "react";
-import * as RechartsPrimitive from "recharts";
+// Importar tipos de recharts para mantener las firmas de tipos sin cargar la librería en tiempo de ejecución
+import type * as RechartsPrimitive from "recharts";
+type RechartsModule = typeof import("recharts");
+
+// Cargador dinámico para recharts: evita incluir la librería en el bundle inicial.
+let _rechartsModule: RechartsModule | null = null;
+function ensureRecharts(): Promise<RechartsModule> {
+  if (_rechartsModule) return Promise.resolve(_rechartsModule);
+  return import("recharts").then((m) => {
+    _rechartsModule = m;
+    return m;
+  });
+}
 
 import { cn } from "@/lib/utils";
 
@@ -38,6 +50,17 @@ const ChartContainer = React.forwardRef<
 >(({ id, className, children, config, ...props }, ref) => {
   const uniqueId = React.useId();
   const chartId = `chart-${id || uniqueId.replace(/:/g, "")}`;
+  const [R, setR] = React.useState<RechartsModule | null>(null);
+
+  React.useEffect(() => {
+    let mounted = true;
+    ensureRecharts().then((mod) => {
+      if (mounted) setR(mod);
+    });
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   return (
     <ChartContext.Provider value={{ config }}>
@@ -51,7 +74,12 @@ const ChartContainer = React.forwardRef<
         {...props}
       >
         <ChartStyle id={chartId} config={config} />
-        <RechartsPrimitive.ResponsiveContainer>{children}</RechartsPrimitive.ResponsiveContainer>
+        {R ? (
+          <R.ResponsiveContainer>{children}</R.ResponsiveContainer>
+        ) : (
+          // Fallback ligero mientras se carga recharts: mantiene el layout sin funcionalidades interactivas
+          <div className="w-full h-full" aria-hidden />
+        )}
       </div>
     </ChartContext.Provider>
   );
@@ -87,7 +115,24 @@ ${colorConfig
   );
 };
 
-const ChartTooltip = RechartsPrimitive.Tooltip;
+// Wrappers ligeros que renderizan los componentes de recharts cuando la librería
+// esté disponible. Se usan wrappers para evitar importar recharts en el bundle inicial.
+// Tipado simplificado para evitar acoplamiento a las firmas genéricas de recharts
+type TooltipProps = React.ComponentProps<typeof RechartsPrimitive.Tooltip>;
+const ChartTooltip: React.FC<TooltipProps> = (props) => {
+  const [R, setR] = React.useState<RechartsModule | null>(null);
+  React.useEffect(() => {
+    let mounted = true;
+    ensureRecharts().then((mod) => {
+      if (mounted) setR(mod);
+    });
+    return () => {
+      mounted = false;
+    };
+  }, []);
+  if (!R) return null;
+  return <R.Tooltip {...props} />;
+};
 
 const ChartTooltipContent = React.forwardRef<
   HTMLDivElement,
@@ -225,7 +270,21 @@ const ChartTooltipContent = React.forwardRef<
 );
 ChartTooltipContent.displayName = "ChartTooltip";
 
-const ChartLegend = RechartsPrimitive.Legend;
+type LegendProps = React.ComponentProps<typeof RechartsPrimitive.Legend>;
+const ChartLegend: React.FC<LegendProps> = (props) => {
+  const [R, setR] = React.useState<RechartsModule | null>(null);
+  React.useEffect(() => {
+    let mounted = true;
+    ensureRecharts().then((mod) => {
+      if (mounted) setR(mod);
+    });
+    return () => {
+      mounted = false;
+    };
+  }, []);
+  if (!R) return null;
+  return <R.Legend {...props} />;
+};
 
 const ChartLegendContent = React.forwardRef<
   HTMLDivElement,

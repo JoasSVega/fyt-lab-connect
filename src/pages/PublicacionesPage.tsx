@@ -8,13 +8,30 @@ import PublicationCard from "@/components/publications/PublicationCard";
 import FiltersBar from "@/components/search/FiltersBar";
 
 
-const TYPE_LABELS: Record<string, string> = {
+type PubType = "articulo" | "libro" | "capitulo" | "divulgacion" | "reporte" | "conferencia" | "memoria";
+type Publication = {
+  id: number;
+  title: string;
+  authors: string;
+  journal: string;
+  year: number;
+  summary: string;
+  image: string;
+  type: PubType;
+  link?: string;
+};
+
+const TYPE_LABELS: Record<PubType, string> = {
   articulo: "Artículo",
   libro: "Libro",
-  capitulo: "Capítulo"
+  capitulo: "Capítulo",
+  divulgacion: "Divulgación",
+  reporte: "Reporte",
+  conferencia: "Conferencia",
+  memoria: "Memoria",
 };
-const AÑOS = Array.from(new Set(publicationsData.map((p: any) => p.year))).sort((a, b) => b - a);
-const TIPOS = Array.from(new Set(publicationsData.map((p: any) => p.type)));
+const AÑOS = Array.from(new Set((publicationsData as unknown as Publication[]).map((p) => p.year))).sort((a, b) => b - a);
+const TIPOS = Array.from(new Set((publicationsData as unknown as Publication[]).map((p) => p.type)));
 const PAGE_SIZE = 6;
 
 const PublicacionesPage: React.FC = () => {
@@ -24,7 +41,7 @@ const PublicacionesPage: React.FC = () => {
   const [page, setPage] = useState(1);
 
   const filtered = useMemo(() => {
-    return publicationsData.filter((p: any) =>
+    return (publicationsData as unknown as Publication[]).filter((p) =>
       (!year || p.year === Number(year)) &&
       (!type || p.type === type) &&
       (
@@ -81,7 +98,7 @@ const PublicacionesPage: React.FC = () => {
           </button>
         </FiltersBar>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {paginated.map((pub: any) => (
+          {paginated.map((pub) => (
             <PublicationCard
               key={pub.id}
               image={pub.image}

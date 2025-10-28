@@ -5,7 +5,9 @@ import Tools from "@/components/Tools";
 import { Button } from "@/components/ui/button";
 import { Users, Microscope, BookOpen } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import FloatingContact from "@/components/FloatingContact";
+import React, { Suspense, lazy } from "react";
+// Carga perezosa del componente FloatingContact para reducir el bundle inicial.
+const FloatingContact = lazy(() => import('@/components/FloatingContact'));
 // Animaciones eliminadas
 
 const Index = () => {
@@ -53,8 +55,10 @@ const Index = () => {
       <About />
         {/* Pharmaceutical Tools Section removida: ahora solo en la página Herramientas */}
       </main>
-      {/* Floating Contact Button */}
-      <FloatingContact />
+      {/* Floating Contact Button (cargado perezosamente) */}
+      <Suspense fallback={null}>
+        <FloatingContact />
+      </Suspense>
     </div>
   );
 };

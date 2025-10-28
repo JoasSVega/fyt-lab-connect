@@ -5,14 +5,24 @@ import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import { useState } from "react";
 
+// Tipos para los datos del buscador de fármacos
+type AlertType = 'high-risk' | 'lasa' | 'controlled' | 'hepatotoxic' | 'safe';
+interface AlertTag { type: AlertType; text: string; icon: React.ReactNode }
+interface RouteInfo { name: string; icon: string; doses: string[]; notes?: string }
+interface DrugInfo { name: string; alerts: AlertTag[]; routes: RouteInfo[]; precautions?: string }
+
+// Tipos para tarjetas de herramientas
+interface ToolInfo { title: string; description: string; icon: React.ReactNode; href?: string; comingSoon?: boolean }
+type ToolCategory = 'renal' | 'anthropometric' | 'other' | 'analysis' | 'future';
+
 const Tools = () => {
   // Estado para el buscador de fármacos
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchResults, setSearchResults] = useState<any>(null);
+  const [searchResults, setSearchResults] = useState<DrugInfo | null>(null);
   const [isSearching, setIsSearching] = useState(false);
 
   // Datos de demostración para el buscador
-  const mockDrugData = {
+  const mockDrugData: Record<string, DrugInfo> = {
     "morfina": {
       name: "Morfina",
       alerts: [
@@ -91,7 +101,7 @@ const Tools = () => {
     }
   };
 
-  const getBadgeVariant = (type: string) => {
+  const getBadgeVariant = (type: AlertType) => {
     switch (type) {
       case 'high-risk': return 'destructive';
       case 'lasa': return 'secondary';
@@ -103,7 +113,7 @@ const Tools = () => {
   };
 
   // Calculadoras de Función Renal
-  const renalCalculators = [
+  const renalCalculators: ToolInfo[] = [
     {
       title: "Tasa de Filtrado Glomerular (TFG)",
       description: "Cálculo de TFG usando fórmulas CKD-EPI, MDRD y Cockcroft-Gault",
@@ -114,7 +124,7 @@ const Tools = () => {
   ];
 
   // Calculadoras Antropométricas
-  const anthropometricCalculators = [
+  const anthropometricCalculators: ToolInfo[] = [
     {
       title: "Calculadora de IMC",
       description: "Índice de masa corporal y clasificación según estándares internacionales",
@@ -132,7 +142,7 @@ const Tools = () => {
   ];
 
   // Otras calculadoras clínicas
-  const otherCalculators = [
+  const otherCalculators: ToolInfo[] = [
     {
       title: "Calculadora de Dosificación",
       description: "Cálculo de dosis farmacológicas personalizadas según parámetros del paciente",
@@ -143,7 +153,7 @@ const Tools = () => {
   ];
 
   // Herramientas de análisis farmacológico
-  const analysisTools = [
+  const analysisTools: ToolInfo[] = [
     {
       title: "Consultor Farmacológico",
       description: "Sistema inteligente de consulta para información farmacológica",
@@ -161,7 +171,7 @@ const Tools = () => {
   ];
 
   // Herramientas futuras
-  const futureTools = [
+  const futureTools: ToolInfo[] = [
     {
       title: "Farmacocinética Clínica",
       description: "Modelos PK/PD para optimización terapéutica",
@@ -176,7 +186,7 @@ const Tools = () => {
     }
   ];
 
-  const ToolCard = ({ tool, category }: { tool: any, category: string }) => (
+  const ToolCard = ({ tool, category }: { tool: ToolInfo; category: ToolCategory }) => (
     <Card className="group hover:shadow-2xl transition-all duration-300 border-2 border-[#3BB9FF]/20 bg-white/90 backdrop-blur-sm animate-fade-in-card">
       {/* Animaciones CSS */}
       <style>{`
@@ -364,7 +374,7 @@ const Tools = () => {
                 
                 {/* Etiquetas de alerta */}
                 <div className="flex flex-wrap gap-2">
-                  {searchResults.alerts.map((alert: any, index: number) => (
+                  {searchResults.alerts.map((alert: AlertTag, index: number) => (
                     <Badge 
                       key={index} 
                       variant={getBadgeVariant(alert.type)}
@@ -381,7 +391,7 @@ const Tools = () => {
                 {/* Vías de administración */}
                 <h4 className="text-xl font-bold text-fyt-dark mb-4">Vías de Administración</h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-                  {searchResults.routes.map((route: any, index: number) => (
+                  {searchResults.routes.map((route: RouteInfo, index: number) => (
                     <Card key={index} className="border border-card-border bg-background/50">
                       <CardHeader className="pb-3">
                         <div className="flex items-center space-x-2">

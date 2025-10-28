@@ -56,7 +56,7 @@ const kpis = [
 function AnimatedCounter({ value }: { value: number }) {
   const [display, setDisplay] = React.useState(0);
   React.useEffect(() => {
-    let start = 0;
+    const start = 0;
     let startTimestamp: number | null = null;
     const duration = 1400;
     const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
