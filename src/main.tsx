@@ -8,9 +8,10 @@ createRoot(document.getElementById("root")!).render(<App />);
 // Safe and reversible; it won't interfere with Lovable deployments.
 if ('serviceWorker' in navigator) {
 	window.addEventListener('load', () => {
-		// Use relative path so it works with any base
-		navigator.serviceWorker.register('/sw.js').catch(() => {
-			// ignore failures; app still works normally
+		// Registrar con ruta relativa para funcionar con base './' y subrutas
+		const swUrl = './sw.js';
+		navigator.serviceWorker.register(swUrl).catch(() => {
+			// Ignorar fallos; la app funciona igual
 		});
 	});
 }

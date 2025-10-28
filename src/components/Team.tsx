@@ -43,12 +43,12 @@ const Team = ({ compact = false }: { compact?: boolean }) => {
       const normBase = normalize(base.replace(/-/g, " "));
       // Coincidencia exacta con nombre y primer apellido
       if (normBase === nameAndSurname.replace(/-/g, " ")) {
-        match = `images/equipo/${file}`;
+        match = `/images/equipo/${file}`;
         break;
       }
       // Coincidencia parcial: nombre o apellido incluido
       if (!match && (normName.includes(normBase) || normBase.includes(normName))) {
-        match = `images/equipo/${file}`;
+        match = `/images/equipo/${file}`;
       }
     }
     return match;
@@ -184,10 +184,9 @@ const Team = ({ compact = false }: { compact?: boolean }) => {
                   {imgSrc ? (
                     (() => {
                       const base = imgSrc.replace(/\.(png|jpg|jpeg|webp)$/i, '');
-                      const avifSet = `${base.replace('/images/equipo/', '/images/equipo/').replace(/\.png$/i, '')}-128.avif 128w, ${base}-256.avif 256w, ${base}-400.avif 400w, ${base}-800.avif 800w, ${base}-1200.avif 1200w`;
+                      const avifSet = `${base}-128.avif 128w, ${base}-256.avif 256w, ${base}-400.avif 400w, ${base}-800.avif 800w, ${base}-1200.avif 1200w`;
                       const webpSet = `${base}-128.webp 128w, ${base}-256.webp 256w, ${base}-400.webp 400w, ${base}-800.webp 800w, ${base}-1200.webp 1200w`;
-                      const sizes = "220px"; // la imagen se muestra a 220px de ancho
-                      const webpFallback = imgSrc.replace(/\.png$/i, '.webp');
+                      const sizes = "260px"; // fuerza una variante ligeramente mayor para más nitidez en desktop
                       return (
                         <picture>
                           <source type="image/avif" srcSet={avifSet} sizes={sizes} />

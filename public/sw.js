@@ -3,11 +3,38 @@
   - Runtime caching with stale-while-revalidate for images, CSS and JS.
   - No precache list to avoid deployment coupling; safe and reversible.
 */
-const CACHE_VERSION = 'static-v1';
+const CACHE_VERSION = 'static-v2';
 const RUNTIME_CACHE = `${CACHE_VERSION}`;
 
 self.addEventListener('install', (event) => {
-  self.skipWaiting();
+  // Precache usando manifest.json de Vite (si está disponible)
+  event.waitUntil((async () => {
+    try {
+      const cache = await caches.open(RUNTIME_CACHE);
+      const urls = new Set([
+        './',
+        './index.html',
+        './images/Hero-Index.jpg',
+        './logo-fyt.png',
+        './logo-fyt.webp',
+      ]);
+      // Intentar cargar manifest.json para detectar assets con hash
+      try {
+        const res = await fetch('./manifest.json', { cache: 'no-store' });
+        if (res.ok) {
+          const manifest = await res.json();
+          for (const key of Object.keys(manifest)) {
+            const item = manifest[key];
+            if (item && item.file) urls.add(`./${item.file}`);
+            if (item && Array.isArray(item.css)) item.css.forEach((p) => urls.add(`./${p}`));
+            if (item && Array.isArray(item.assets)) item.assets.forEach((p) => urls.add(`./${p}`));
+          }
+        }
+      } catch {}
+      await cache.addAll(Array.from(urls));
+    } catch {}
+    self.skipWaiting();
+  })());
 });
 
 self.addEventListener('activate', (event) => {
@@ -41,8 +68,9 @@ self.addEventListener('fetch', (event) => {
           }
           return res;
         }).catch(() => cached);
-        // Serve cached immediately if present; otherwise wait for network
-        return cached || networkFetch;
+        // Estrategia: cache-first para precache; SWR para el resto
+        if (cached) return cached;
+        return networkFetch;
       })
     );
   }

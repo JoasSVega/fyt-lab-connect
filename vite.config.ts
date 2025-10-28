@@ -29,5 +29,6 @@ export default defineConfig(({ mode }) => ({
   // that can cause React to be undefined in some hosts. Let Rollup handle chunking.
   build: {
     emptyOutDir: true,
+    manifest: true,
   },
 }));
