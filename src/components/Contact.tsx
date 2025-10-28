@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Mail, Phone, MapPin, Send, CheckCircle } from "lucide-react";
+import { Mail, Phone, MapPin, Send, CheckCircle, Instagram } from "lucide-react";
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
@@ -144,10 +144,11 @@ const Contact = () => {
                 <Button 
                   variant="outline" 
                   size="sm"
-                  className="border-[#9B59B6]/40 hover:bg-[#ede9fe] hover:text-fyt-dark"
+                  className="group border-[#9B59B6]/40 hover:bg-[#ede9fe] hover:text-fyt-dark"
                   onClick={() => window.open('https://www.instagram.com/grupo_fyt?igsh=MXNxbXo3eHM2MHRweA==', '_blank')}
+                  aria-label="Instagram Grupo FyT"
                 >
-                  Instagram
+                  <Instagram className="w-5 h-5 text-[#9B59B6] group-hover:text-fyt-dark" />
                 </Button>
               </div>
             </Card>
@@ -239,10 +240,10 @@ const Contact = () => {
              <Button 
                variant="outline"
                size="lg"
-               className="bg-white text-[#9B59B6] border-2 border-[#9B59B6] hover:bg-[#9B59B6] hover:text-white transition-colors duration-300 px-8 py-3 font-semibold shadow-lg"
+               className="group bg-[#9B59B6] text-white border-2 border-[#9B59B6] hover:bg-white hover:text-[#9B59B6] transition-colors duration-300 px-8 py-3 font-semibold shadow-lg"
                onClick={() => window.open('mailto:farmacologiayterapeutica.gi@gmail.com?subject=Propuesta de Colaboración', '_blank')}
              >
-               <Mail className="w-5 h-5 mr-2 text-[#9B59B6]" aria-label="Proponer Colaboración" />
+               <Mail className="w-5 h-5 mr-2 text-white group-hover:text-[#9B59B6]" aria-label="Proponer Colaboración" />
                Proponer Colaboración
              </Button>
           </Card>

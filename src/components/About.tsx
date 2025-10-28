@@ -159,11 +159,11 @@ const About = () => {
         {/* INSCRÍBETE AHORA Card */}
         <div className="flex justify-center mt-8">
             <Card 
-              className="max-w-2xl w-full p-8 shadow-2xl text-center animate-fade-in bg-white"
+              className="group max-w-2xl w-full p-8 shadow-2xl text-center animate-fade-in bg-fyt-blue text-white border-2 border-fyt-blue hover:bg-white transition-colors"
             >
-              <Bell className="w-12 h-12 mx-auto mb-4 text-black animate-bounce" aria-label="Inscríbete ahora" />
-              <h3 className="text-4xl font-poppins font-bold mb-4 text-[#1e293b]">INSCRÍBETE AHORA</h3>
-              <p className="mb-6 font-inter text-[#1e293b]">
+              <Bell className="w-12 h-12 mx-auto mb-4 text-white group-hover:text-fyt-blue animate-bounce" aria-label="Inscríbete ahora" />
+              <h3 className="text-4xl font-poppins font-bold mb-4 text-white group-hover:text-fyt-blue">INSCRÍBETE AHORA</h3>
+              <p className="mb-6 font-inter text-white/95 group-hover:text-fyt-blue">
                 ¿Interesado en formar parte de nuestro semillero de investigación? 
                 Completa el formulario oficial de inscripción.
               </p>

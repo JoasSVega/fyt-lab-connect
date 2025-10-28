@@ -220,10 +220,10 @@ const Team = ({ compact = false }: { compact?: boolean }) => {
                         <Button
                           variant="outline"
                           size="sm"
-                          className="group rounded-lg border-2 border-[#FF4C4C] bg-white text-[#FF4C4C] hover:bg-[#FF4C4C] hover:text-white px-6 py-2 font-medium shadow transition-colors"
+                          className="group rounded-lg border-2 border-[#FF4C4C] bg-[#FF4C4C] text-white hover:bg-white hover:text-[#FF4C4C] px-6 py-2 font-medium shadow transition-colors"
                           onClick={() => window.open(`mailto:${member.links.email}`, '_blank')}
                         >
-                          <Mail className="w-6 h-6 mr-2 text-[#FF4C4C] group-hover:text-white transition-colors" aria-label="Contactar" />
+                          <Mail className="w-6 h-6 mr-2 text-white group-hover:text-[#FF4C4C] transition-colors" aria-label="Contactar" />
                           Contactar
                         </Button>
                     </div>
@@ -247,7 +247,7 @@ const Team = ({ compact = false }: { compact?: boolean }) => {
               asChild
               variant="outline"
               size="lg"
-              className="group rounded-lg border-2 border-fyt-blue text-fyt-blue bg-white hover:bg-fyt-blue hover:text-white px-8 py-3 font-medium shadow-lg transition-colors"
+              className="group rounded-lg border-2 border-fyt-blue bg-fyt-blue text-white hover:bg-white hover:text-fyt-blue px-8 py-3 font-medium shadow-lg transition-colors"
             >
               <a
                 href="mailto:grupoinvestigacion@gmail.com?subject=Unirse%20al%20grupo%20de%20investigaci%C3%B3n"

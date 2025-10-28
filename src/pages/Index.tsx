@@ -30,7 +30,12 @@ const Index = () => {
               </span>
               <h3 className="text-[clamp(1rem,1.6vw,1.125rem)] font-raleway font-bold text-fyt-dark mb-1 text-center">Sobre Nosotros</h3>
               <p className="text-muted-foreground text-center text-[clamp(0.9rem,1.4vw,1rem)] mb-4 font-inter">Conoce el objetivo, valores y equipo del grupo FyT.</p>
-              <Button onClick={() => navigate('/sobre-nosotros')} className="mt-auto w-full md:w-auto rounded-full px-5 py-2 font-inter shadow bg-fyt-blue text-white hover:bg-fyt-blue/90 transition">Ver Más</Button>
+              <Button
+                onClick={() => navigate('/sobre-nosotros')}
+                className="mt-auto w-full md:w-auto rounded-full px-5 py-2 font-inter shadow bg-fyt-blue text-white border-2 border-fyt-blue hover:bg-white hover:text-fyt-blue transition"
+              >
+                Ver Más
+              </Button>
             </div>
           {/* Investigación */}
           <div className="flex flex-col h-full items-center gap-4 bg-white rounded-xl shadow-soft p-6 md:p-8 w-full border border-purple-100">
@@ -39,7 +44,12 @@ const Index = () => {
             </span>
             <h3 className="text-[clamp(1rem,1.6vw,1.125rem)] font-raleway font-bold text-fyt-dark mb-1 text-center">Investigación</h3>
             <p className="text-muted-foreground text-center text-[clamp(0.9rem,1.4vw,1rem)] mb-4 font-inter">Conoce nuestras investigaciones actuales y resultados científicos.</p>
-            <Button onClick={() => navigate('/investigacion')} className="mt-auto w-full md:w-auto rounded-full px-5 py-2 font-inter shadow bg-fyt-purple text-white hover:bg-fyt-purple/90 transition">Ver Investigación</Button>
+            <Button
+              onClick={() => navigate('/investigacion')}
+              className="mt-auto w-full md:w-auto rounded-full px-5 py-2 font-inter shadow bg-fyt-purple text-white border-2 border-fyt-purple hover:bg-white hover:text-fyt-purple transition"
+            >
+              Ver Investigación
+            </Button>
           </div>
           {/* Noticias */}
           <div className="flex flex-col h-full items-center gap-4 bg-white rounded-xl shadow-soft p-6 md:p-8 w-full border border-red-100">
@@ -48,7 +58,12 @@ const Index = () => {
             </span>
             <h3 className="text-[clamp(1rem,1.6vw,1.125rem)] font-raleway font-bold text-fyt-dark mb-1 text-center">Noticias</h3>
             <p className="text-muted-foreground text-center text-[clamp(0.9rem,1.4vw,1rem)] mb-4 font-inter">Mantente informado sobre nuestras actividades y logros recientes.</p>
-            <Button onClick={() => navigate('/noticias')} className="mt-auto w-full md:w-auto rounded-full px-5 py-2 font-inter shadow bg-fyt-red text-white hover:bg-fyt-red/90 transition">Ver Noticias</Button>
+            <Button
+              onClick={() => navigate('/noticias')}
+              className="mt-auto w-full md:w-auto rounded-full px-5 py-2 font-inter shadow bg-fyt-red text-white border-2 border-fyt-red hover:bg-white hover:text-fyt-red transition"
+            >
+              Ver Noticias
+            </Button>
           </div>
         </section>
       {/* Secciones de investigación, modalidades, actividades y productos, y la tarjeta de inscripción */}

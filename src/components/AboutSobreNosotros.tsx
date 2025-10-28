@@ -38,7 +38,7 @@ const AboutSobreNosotros = () => (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
   <div className="grid lg:grid-cols-2 gap-12 items-center mb-12">
         {/* Imagen decorativa */}
-        <div className="relative h-[400px] w-full flex items-center justify-center">
+  <div className="relative h-[400px] w-full flex items-center justify-center">
           <picture>
             {/* Prefer AVIF, then WebP, with responsive variants */}
             <source
@@ -60,7 +60,7 @@ const AboutSobreNosotros = () => (
               style={{ minHeight: 400, maxHeight: 400 }}
             />
           </picture>
-          <div className="absolute inset-0 bg-black/20 rounded-xl"></div>
+          {/* Eliminado el overlay gris para que la imagen se vea sin oscurecer */}
         </div>
         {/* Objetivo, Misión y Visión */}
         <div className="space-y-8">

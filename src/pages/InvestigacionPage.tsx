@@ -314,7 +314,7 @@ const InvestigacionPage: React.FC = () => {
       <section className="py-10 px-4 sm:px-8 rounded-3xl mb-8 bg-gradient-to-r from-fyt-blue/10 to-fyt-green/10 flex flex-col items-center justify-center">
     <h2 className="text-2xl sm:text-3xl font-poppins font-bold text-slate-800 mb-4 text-center">¿Quieres colaborar o conocer más?</h2>
     <p className="text-lg text-slate-600 mb-6 text-center max-w-xl font-inter">Contáctanos para sumar esfuerzos, compartir ideas o recibir información sobre nuestras líneas de investigación y producción académica.</p>
-  <a href="/contactos" className="inline-block px-6 py-3 rounded-full bg-white text-fyt-blue border-2 border-fyt-blue font-inter font-semibold shadow hover:bg-fyt-blue hover:text-white transition text-lg">Contactar al equipo</a>
+  <a href="/contactos" className="inline-block px-6 py-3 rounded-full bg-fyt-blue text-white border-2 border-fyt-blue font-inter font-semibold shadow hover:bg-white hover:text-fyt-blue transition text-lg">Contactar al equipo</a>
       </section>
 
       {/* Frase motivadora */}
