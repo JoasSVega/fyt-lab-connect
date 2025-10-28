@@ -1,0 +1,14 @@
+# Static caching rules (best-effort; some hosts may ignore this file)
+# Cache hashed build assets aggressively
+/ assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cache public images for a long time (update filenames if images change)
+/ images/*
+  Cache-Control: public, max-age=2592000
+
+# Favicons and logos
+/ logo-fyt.png
+  Cache-Control: public, max-age=2592000
+/ logo-fyt.webp
+  Cache-Control: public, max-age=2592000

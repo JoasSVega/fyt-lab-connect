@@ -4,8 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Grupo FyT - Farmacología y Terapéutica</title>
-    <!-- Google Fonts: Poppins, Raleway, Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Raleway:wght@400;500;600&family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+  <!-- Performance: Preconnect to Google Fonts to shorten the critical chain -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+  <!-- Google Fonts: Poppins, Raleway, Inter (display=swap to avoid FOIT) -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Raleway:wght@400;500;600&family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
   <meta name="description" content="Semillero de Investigación FYT en Farmacología y Terapéutica. Innovación científica, formación académica y excelencia en investigación farmacológica." />
   <!-- Señales de idioma para motores de búsqueda -->
   <meta http-equiv="Content-Language" content="es" />
@@ -16,6 +21,9 @@
   <link rel="icon" href="/logo-fyt.png" type="image/png" />
   <!-- Optional WebP favicon for browsers that support it -->
   <link rel="icon" href="/logo-fyt.webp" type="image/webp" />
+  
+  <!-- Preload LCP image (hero) to reduce LCP; fetchpriority=high applied in component too -->
+  <link rel="preload" as="image" href="/images/Hero-Index.jpg" imagesrcset="/images/Hero-Index.jpg" />
   <!-- Canonical domain -->
   <link rel="canonical" href="https://fyt-lab-connect.lovable.app/" />
 

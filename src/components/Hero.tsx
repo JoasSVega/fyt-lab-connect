@@ -9,14 +9,17 @@ export default function Hero() {
   return (
     <section
       id="inicio"
-      className="relative left-1/2 -translate-x-1/2 w-screen h-[68vh] min-h-[460px] flex items-center justify-center"
-      style={{
-        backgroundImage: "url('/images/Hero-Index.jpg')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
+      className="relative left-1/2 -translate-x-1/2 w-screen h-[68vh] min-h-[460px] flex items-center justify-center overflow-hidden"
     >
+      {/* LCP image as real <img> so the browser can prioritize it properly */}
+      <img
+        src="/images/Hero-Index.jpg"
+        alt="Fondo del hero"
+        fetchpriority="high"
+        decoding="async"
+        className="absolute inset-0 w-full h-full object-cover"
+        aria-hidden="true"
+      />
       {/* Overlay oscuro opaco al 50% sobre toda el área */}
       <div className="absolute inset-0 bg-black/50 pointer-events-none" />
       {/* Contenido centrado */}
