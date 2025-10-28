@@ -7,7 +7,9 @@ import { visualizer } from 'rollup-plugin-visualizer';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: process.env.NODE_ENV === 'production' ? '/' : '/',
+  // Usar rutas relativas en producción para evitar 404 de assets en previews o subrutas (Lovable)
+  // En dev mantenemos '/'
+  base: mode === 'production' ? './' : '/',
   server: {
     host: "::",
     port: 8080,
@@ -26,6 +28,8 @@ export default defineConfig(({ mode }) => ({
   // Conservative manualChunks to separate very large third-party libraries
   // This reduces the size of the main chunk and makes heavy libs cacheable.
   build: {
+    // Asegura limpieza del directorio de salida antes de cada build
+    emptyOutDir: true,
     rollupOptions: {
       output: {
         manualChunks(id: string) {

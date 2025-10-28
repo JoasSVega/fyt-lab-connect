@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/postbuild-spa.js",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "analyze": "vite build --sourcemap && npx source-map-explorer \"dist/assets/*.js\" || true",
