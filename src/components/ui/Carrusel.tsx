@@ -102,7 +102,11 @@ const Carrusel: React.FC<CarruselProps> = ({
   }, [emblaApi]);
 
   return (
-    <div onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} className={className || "w-full"}>
+    <div
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className={className || "w-full px-2 sm:px-3"}
+    >
   <Carousel
         opts={{ align: "center", loop: true, containScroll: 'keepSnaps', slidesToScroll: 1 }}
         setApi={setEmblaApi}
@@ -110,8 +114,14 @@ const Carrusel: React.FC<CarruselProps> = ({
       >
       <CarouselContent className="gap-x-4">
         {items.map((item, index) => (
-          <CarouselItem key={index} className="px-2 md:px-4 basis-full md:basis-1/2 xl:basis-1/3">
-            <Card style={{ borderColor: color }} className={`bg-white/90 border-2 shadow-xl hover:shadow-2xl hover:scale-[1.03] transition-all duration-300 overflow-hidden group h-full`}>
+          <CarouselItem
+            key={index}
+            className="px-2 md:px-4 basis-[92%] sm:basis-[85%] md:basis-1/2 xl:basis-1/3"
+          >
+            <Card
+              style={{ borderColor: color }}
+              className={`bg-white/90 border-2 shadow-xl md:hover:shadow-2xl md:hover:scale-[1.03] transition-all duration-300 overflow-hidden group h-full will-change-transform`}
+            >
               <div className="relative" style={{ height: heightCss }}>
                 {/* Responsive <picture> with AVIF/WebP sources and fallback to original */}
                 {(() => {
@@ -139,9 +149,19 @@ const Carrusel: React.FC<CarruselProps> = ({
                 })()}
               </div>
               <div className="p-6">
-                <h4 className="text-[clamp(1rem,1.6vw,1.125rem)] md:text-[clamp(1.05rem,1.3vw,1.25rem)] font-raleway font-semibold mb-3" style={{ color }}>{item.title}</h4>
+                <h4
+                  className="text-[clamp(1rem,1.4vw,1.125rem)] md:text-[clamp(1.05rem,1.2vw,1.25rem)] font-raleway font-semibold mb-3 leading-snug break-words"
+                  style={{ color, hyphens: 'auto', overflowWrap: 'anywhere' }}
+                >
+                  {item.title}
+                </h4>
                 {showDescription && item.description && (
-                  <p className="text-[clamp(0.9rem,1.4vw,1rem)] font-inter text-gray-700 leading-relaxed text-left">{item.description}</p>
+                  <p
+                    className="text-[clamp(0.92rem,1.2vw,1rem)] font-inter text-gray-700 leading-relaxed text-left break-words"
+                    style={{ hyphens: 'auto', overflowWrap: 'anywhere' }}
+                  >
+                    {item.description}
+                  </p>
                 )}
               </div>
             </Card>
