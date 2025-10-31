@@ -159,15 +159,15 @@ const Carrusel: React.FC<CarruselProps> = ({
               </div>
               <div className="p-6">
                 <h4
-                  className="text-[clamp(1rem,1.4vw,1.125rem)] md:text-[clamp(1.05rem,1.2vw,1.25rem)] font-raleway font-semibold mb-3 leading-snug break-words"
-                  style={{ color, hyphens: 'auto', overflowWrap: 'anywhere' }}
+                  className="text-[clamp(1rem,1.4vw,1.125rem)] md:text-[clamp(1.05rem,1.2vw,1.25rem)] font-raleway font-semibold mb-3 leading-snug break-normal whitespace-normal"
+                  style={{ color, hyphens: 'none', overflowWrap: 'normal', wordBreak: 'normal' }}
                 >
                   {item.title}
                 </h4>
                 {showDescription && item.description && (
                   <p
-                    className="text-[clamp(0.92rem,1.2vw,1rem)] font-inter text-gray-700 leading-relaxed text-left break-words"
-                    style={{ hyphens: 'auto', overflowWrap: 'anywhere' }}
+                    className="text-[clamp(0.92rem,1.2vw,1rem)] font-inter text-gray-700 leading-relaxed text-left break-normal whitespace-normal"
+                    style={{ hyphens: 'none', overflowWrap: 'normal', wordBreak: 'normal' }}
                   >
                     {item.description}
                   </p>
