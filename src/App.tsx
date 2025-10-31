@@ -29,6 +29,11 @@ import RenalFunctionPage from "./pages/RenalFunctionPage";
 import { pathRenal } from "./pages/RenalFunctionPage";
 import Noticias from "./pages/Noticias";
 import Herramientas from "./pages/Herramientas";
+// Nuevas páginas de la plataforma de herramientas
+import ToolsIndex from "./pages/tools/IndexTools";
+import ToolsClinicos from "./pages/tools/Clinicos";
+import ToolsAntropometricos from "./pages/tools/Antropometricos";
+import ToolsAvanzados from "./pages/tools/Avanzados";
 import Footer from "./components/Footer";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfUse from "./pages/TermsOfUse";
@@ -68,7 +73,11 @@ function AnimatedRoutes() {
       <Route path="/" element={<Index />} />
       {/* Noticias y Herramientas */}
       <Route path="/noticias" element={<Noticias />} />
-      <Route path="/herramientas" element={<Herramientas />} />
+  {/* Nueva arquitectura de Herramientas: */}
+  <Route path="/herramientas" element={<ToolsIndex />} />
+  <Route path="/herramientas/clinicos" element={<ToolsClinicos />} />
+  <Route path="/herramientas/antropometricos" element={<ToolsAntropometricos />} />
+  <Route path="/herramientas/avanzados" element={<ToolsAvanzados />} />
       <Route path="/sobre-nosotros" element={<SobreNosotros />} />
       <Route path="/contactos" element={<Contactos />} />
       {/* Páginas legales */}
