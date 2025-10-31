@@ -1,6 +1,5 @@
 import * as React from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogClose } from "@/components/ui/dialog";
-import { X } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 
 // ModalCalculator: modal con fondo borroso y tarjeta con animación flip 3D para mostrar resultados.
 // Uso:
@@ -30,16 +29,14 @@ const ModalCalculatorBase: React.FC<React.PropsWithChildren<ModalCalculatorProps
             <DialogDescription className="text-muted-foreground">{description}</DialogDescription>
           ) : null}
         </DialogHeader>
-        <DialogClose className="absolute right-4 top-4 opacity-80 hover:opacity-100">
-          <X className="w-5 h-5" />
-          <span className="sr-only">Cerrar</span>
-        </DialogClose>
         <ModalCalculatorContext.Provider value={{ flipped }}>
+          {/* Contenedor con perspectiva y caras solapadas para flip de tarjeta */}
           <div className={`relative perspective-[1200px] ${className || ""}`}>
             <div
-              className={`transform-style-preserve-3d transition-transform duration-500 ${
+              className={`relative transform-style-preserve-3d transition-transform duration-500 ${
                 flipped ? "rotate-y-180" : ""
               }`}
+              style={{ minHeight: 180 }}
             >
               {children}
             </div>
@@ -58,14 +55,18 @@ const ModalCalculatorBase: React.FC<React.PropsWithChildren<ModalCalculatorProps
 const Front: React.FC<React.PropsWithChildren> = ({ children }) => {
   const { flipped } = React.useContext(ModalCalculatorContext);
   return (
-    <div className={`backface-hidden ${flipped ? "rotate-y-180 hidden" : ""}`}>{children}</div>
+    <div
+      className={"backface-hidden absolute inset-0"}
+    >
+      {children}
+    </div>
   );
 };
 
 const Back: React.FC<React.PropsWithChildren> = ({ children }) => {
   const { flipped } = React.useContext(ModalCalculatorContext);
   return (
-    <div className={`backface-hidden rotate-y-180 ${flipped ? "block" : "hidden"}`}>{children}</div>
+    <div className={"backface-hidden rotate-y-180 absolute inset-0"}>{children}</div>
   );
 };
 

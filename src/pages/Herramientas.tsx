@@ -18,7 +18,7 @@ const tools = [
     title: "Calculadoras Antropométricas",
     description: "Herramienta farmacéutica para cálculos clínicos antropométricos.",
     color: "bg-green-50",
-    href: "/herramientas/antropometricas",
+  href: "/herramientas/antropometricos",
     buttonText: "Ir a Calculadoras Antropométricas",
     icon: <Ruler className="w-8 h-8 text-green-600" aria-label="Antropométricas" />,
   },

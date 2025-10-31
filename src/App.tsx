@@ -9,13 +9,13 @@ export const pathProyectos = "/investigacion/proyectos";
 export const pathPublicaciones = "/investigacion/publicaciones";
 //
 // Using standardized logo from public folder
-import AnthropometricCalculatorsPage from "./pages/AnthropometricCalculatorsPage";
+// Página antigua de antropometría eliminada; se redirige a la nueva plataforma
 import SobreNosotros from "./pages/SobreNosotros";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster as ToasterShadcn } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 
 import Index from "./pages/Index";
@@ -97,8 +97,8 @@ function AnimatedRoutes() {
       {/* Rutas de calculadoras eliminadas: BMI, BSA */}
       {/* Función Renal */}
       <Route path={pathRenal} element={<RenalFunctionPage />} />
-      {/* Antropometría */}
-      <Route path="/herramientas/antropometricas" element={<AnthropometricCalculatorsPage />} />
+  {/* Antropometría (ruta antigua -> redirección) */}
+  <Route path="/herramientas/antropometricas" element={<Navigate to="/herramientas/antropometricos" replace />} />
       {/* Página no encontrada */}
       <Route path="*" element={<NotFound />} />
     </Routes>

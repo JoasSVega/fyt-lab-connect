@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Stethoscope, Ruler, FlaskConical, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 
 const Card = ({ icon, title, desc, to, color }: { icon: React.ReactNode; title: string; desc: string; to: string; color: string; }) => {
@@ -13,9 +14,13 @@ const Card = ({ icon, title, desc, to, color }: { icon: React.ReactNode; title: 
         <h3 className="text-xl font-raleway font-bold">{title}</h3>
       </div>
       <p className="text-muted-foreground flex-1">{desc}</p>
-      <button onClick={()=>navigate(to)} className="mt-6 inline-flex items-center gap-2 text-blue-700 font-semibold hover:underline">
+      <Button
+        onClick={()=>navigate(to)}
+        className="mt-6 inline-flex items-center gap-2 rounded-full px-4 py-2 text-white shadow"
+        style={{ backgroundColor: color }}
+      >
         Explorar <ArrowRight className="w-4 h-4" />
-      </button>
+      </Button>
     </div>
   );
 };
