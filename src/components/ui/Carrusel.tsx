@@ -135,8 +135,9 @@ const Carrusel: React.FC<CarruselProps> = ({
                 {/* Responsive <picture> with AVIF/WebP sources and fallback to original */}
                 {(() => {
                   const base = item.image.replace(/\.(png|jpe?g|webp)$/i, '');
-                  const avifSet = `${base}-400.avif 400w, ${base}-800.avif 800w, ${base}-1200.avif 1200w`;
-                  const webpSet = `${base}-400.webp 400w, ${base}-800.webp 800w, ${base}-1200.webp 1200w`;
+                  // Usar únicamente tamaños garantizados en /public/images/Carrusel (evita 404 -> imagen en blanco en móviles)
+                  const avifSet = `${base}-128.avif 128w, ${base}-256.avif 256w, ${base}-400.avif 400w, ${base}-800.avif 800w`;
+                  const webpSet = `${base}-128.webp 128w, ${base}-256.webp 256w, ${base}-400.webp 400w, ${base}-800.webp 800w`;
                   const sizes = "(max-width: 639px) 92vw, (max-width: 1023px) 85vw, (max-width: 1279px) 50vw, 33vw";
                   // Evitar fallos de lazy-loading en móviles/iOS dentro de contenedores con overflow/transform
                   // Cargamos con prioridad 'eager' las primeras diapositivas visibles para asegurar render.
