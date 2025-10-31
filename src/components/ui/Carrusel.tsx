@@ -18,6 +18,11 @@ interface CarruselProps {
    * o un número (px) para compatibilidad retro.
    */
   height?: string | number;
+  /**
+   * Relación de aspecto de la imagen cuando no se proporcione `height`.
+   * Ejemplos válidos: '16 / 9', '4 / 3', '3 / 2'.
+   */
+  imageAspect?: string;
   showDescription?: boolean;
   className?: string;
   imageClassName?: string; // clase personalizada para la imagen
@@ -26,7 +31,8 @@ interface CarruselProps {
 const Carrusel: React.FC<CarruselProps> = ({
   items,
   color = "#9B59B6",
-  height = "clamp(14rem, 28vw, 18rem)",
+  height = "",
+  imageAspect = "4 / 3",
   showDescription = true,
   className,
   imageClassName,
@@ -78,7 +84,7 @@ const Carrusel: React.FC<CarruselProps> = ({
     return () => clearInterval(interval);
   }, [emblaApi, isHovered]);
 
-  const heightCss = typeof height === "number" ? `${height}px` : height;
+  const heightCss = height ? (typeof height === "number" ? `${height}px` : height) : "";
   const defaultImageClass = imageClassName ? imageClassName : `w-full h-full object-cover`;
 
   React.useEffect(() => {
@@ -116,19 +122,22 @@ const Carrusel: React.FC<CarruselProps> = ({
         {items.map((item, index) => (
           <CarouselItem
             key={index}
-            className="px-2 md:px-4 basis-[92%] sm:basis-[85%] md:basis-1/2 xl:basis-1/3"
+            className="px-2 md:px-4 basis-[92%] sm:basis-[85%] md:basis-1/2 xl:basis-1/3 min-w-[280px] md:min-w-[320px] max-w-[520px]"
           >
             <Card
               style={{ borderColor: color }}
               className={`bg-white/90 border-2 shadow-xl md:hover:shadow-2xl md:hover:scale-[1.03] transition-all duration-300 overflow-hidden group h-full will-change-transform`}
             >
-              <div className="relative" style={{ height: heightCss }}>
+              <div
+                className="relative"
+                style={heightCss ? ({ height: heightCss } as React.CSSProperties) : ({ aspectRatio: imageAspect } as React.CSSProperties)}
+              >
                 {/* Responsive <picture> with AVIF/WebP sources and fallback to original */}
                 {(() => {
                   const base = item.image.replace(/\.(png|jpe?g|webp)$/i, '');
                   const avifSet = `${base}-400.avif 400w, ${base}-800.avif 800w, ${base}-1200.avif 1200w`;
                   const webpSet = `${base}-400.webp 400w, ${base}-800.webp 800w, ${base}-1200.webp 1200w`;
-                  const sizes = "(max-width: 767px) 96vw, (max-width: 1279px) 48vw, 32vw";
+                  const sizes = "(max-width: 639px) 92vw, (max-width: 1023px) 85vw, (max-width: 1279px) 50vw, 33vw";
                   // Evitar fallos de lazy-loading en móviles/iOS dentro de contenedores con overflow/transform
                   // Cargamos con prioridad 'eager' las primeras diapositivas visibles para asegurar render.
                   const loadingMode: 'eager' | 'lazy' = index < 3 ? 'eager' : 'lazy';
@@ -142,7 +151,7 @@ const Carrusel: React.FC<CarruselProps> = ({
                         loading={loadingMode}
                         decoding="async"
                         className={defaultImageClass}
-                        style={{ height: '100%', maxHeight: heightCss, minHeight: heightCss }}
+                        style={heightCss ? ({ height: '100%', maxHeight: heightCss, minHeight: heightCss } as React.CSSProperties) : ({ height: '100%' } as React.CSSProperties)}
                       />
                     </picture>
                   );
