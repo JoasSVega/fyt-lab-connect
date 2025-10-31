@@ -1,7 +1,8 @@
 import * as React from "react";
+import { Suspense, lazy } from "react";
 import { Ruler } from "lucide-react";
-import IMCCalculator from "@/components/tools/antropometricos/IMCCalculator";
-import SuperficieCorporal from "@/components/tools/antropometricos/SuperficieCorporal";
+const IMCCalculator = lazy(() => import("@/components/tools/antropometricos/IMCCalculator"));
+const SuperficieCorporal = lazy(() => import("@/components/tools/antropometricos/SuperficieCorporal"));
 
 const Antropometricos: React.FC = () => {
   const [openIMC, setOpenIMC] = React.useState(false);
@@ -21,7 +22,9 @@ const Antropometricos: React.FC = () => {
           <div className="mt-auto">
             <button onClick={()=>setOpenIMC(true)} className="px-4 py-2 rounded-md bg-sky-600 text-white font-semibold hover:bg-sky-700">Abrir calculadora</button>
           </div>
-          <IMCCalculator open={openIMC} onOpenChange={setOpenIMC} />
+          <Suspense fallback={<div className="h-10 w-28 rounded-md bg-sky-100 animate-pulse mt-3" aria-hidden /> }>
+            <IMCCalculator open={openIMC} onOpenChange={setOpenIMC} />
+          </Suspense>
         </div>
 
         <div className="rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col">
@@ -30,7 +33,9 @@ const Antropometricos: React.FC = () => {
           <div className="mt-auto">
             <button onClick={()=>setOpenBSA(true)} className="px-4 py-2 rounded-md bg-emerald-600 text-white font-semibold hover:bg-emerald-700">Abrir calculadora</button>
           </div>
-          <SuperficieCorporal open={openBSA} onOpenChange={setOpenBSA} />
+          <Suspense fallback={<div className="h-10 w-28 rounded-md bg-emerald-100 animate-pulse mt-3" aria-hidden /> }>
+            <SuperficieCorporal open={openBSA} onOpenChange={setOpenBSA} />
+          </Suspense>
         </div>
 
         <div className="rounded-2xl border-2 bg-white/60 p-6">
