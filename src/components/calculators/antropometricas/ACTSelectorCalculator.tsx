@@ -43,7 +43,7 @@ const ACTSelectorCalculator: React.FC<{ open: boolean; onOpenChange: (v:boolean)
       onClear={reset}
       primaryButtonClass="bg-green-600 hover:bg-green-700"
       formulaSelector={
-        <select id="act-formula" value={formula} onChange={(e)=>setFormula(e.target.value as any)} className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-400">
+        <select id="act-formula" value={formula} onChange={(e)=>setFormula(e.target.value as 'watson'|'chumlea')} className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-400">
           <option value="watson">Watson</option>
           <option value="chumlea">Chumlea</option>
         </select>

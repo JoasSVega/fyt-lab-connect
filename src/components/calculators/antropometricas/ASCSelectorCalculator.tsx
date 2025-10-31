@@ -40,7 +40,7 @@ const ASCSelectorCalculator: React.FC<{ open: boolean; onOpenChange: (v:boolean)
       onClear={reset}
       primaryButtonClass="bg-emerald-600 hover:bg-emerald-700"
       formulaSelector={
-        <select id="asc-formula" value={formula} onChange={(e)=>setFormula(e.target.value as any)} className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-400">
+        <select id="asc-formula" value={formula} onChange={(e)=>setFormula(e.target.value as 'dubois'|'gehan'|'haycock')} className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-400">
           <option value="dubois">Dubois & Dubois (1916)</option>
           <option value="gehan">Gehan & George (1970)</option>
           <option value="haycock">Haycock (1978, pediátrica)</option>

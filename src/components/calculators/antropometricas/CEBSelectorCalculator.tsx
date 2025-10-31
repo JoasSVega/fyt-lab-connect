@@ -43,7 +43,7 @@ const CEBSelectorCalculator: React.FC<{ open: boolean; onOpenChange: (v:boolean)
       onClear={reset}
       primaryButtonClass="bg-orange-600 hover:bg-orange-700"
       formulaSelector={
-        <select id="ceb-formula" value={formula} onChange={(e)=>setFormula(e.target.value as any)} className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-400">
+        <select id="ceb-formula" value={formula} onChange={(e)=>setFormula(e.target.value as 'harris'|'mifflin')} className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-400">
           <option value="harris">Harris-Benedict</option>
           <option value="mifflin">Mifflin–St Jeor</option>
         </select>
