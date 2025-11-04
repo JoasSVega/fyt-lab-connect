@@ -34,6 +34,7 @@ import ToolsIndex from "./pages/tools/IndexTools";
 import ToolsClinicos from "./pages/tools/Clinicos";
 import ToolsAntropometricos from "./pages/tools/Antropometricos";
 import ToolsAvanzados from "./pages/tools/Avanzados";
+import ToolsEscalas from "./pages/tools/Escalas";
 import Footer from "./components/Footer";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfUse from "./pages/TermsOfUse";
@@ -78,6 +79,7 @@ function AnimatedRoutes() {
   <Route path="/herramientas/clinicos" element={<ToolsClinicos />} />
   <Route path="/herramientas/antropometricos" element={<ToolsAntropometricos />} />
   <Route path="/herramientas/avanzados" element={<ToolsAvanzados />} />
+  <Route path="/herramientas/escalas" element={<ToolsEscalas />} />
       <Route path="/sobre-nosotros" element={<SobreNosotros />} />
       <Route path="/contactos" element={<Contactos />} />
       {/* Páginas legales */}
