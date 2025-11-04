@@ -67,6 +67,9 @@ const Antropometricos: React.FC = () => {
           <div className="mt-auto">
             <button onClick={()=>{ setMmcDefaultFormula('lean'); setOpenMMC(true); }} className="px-4 py-2 rounded-md bg-cyan-700 text-white font-semibold hover:bg-cyan-800">Abrir calculadora</button>
           </div>
+          <Suspense fallback={<div className="h-10 w-28 rounded-md bg-cyan-100 animate-pulse mt-3" aria-hidden /> }>
+            <MMCCalculator open={openMMC} onOpenChange={setOpenMMC} defaultFormula={mmcDefaultFormula} />
+          </Suspense>
         </div>
 
         <div className="rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col">
@@ -102,16 +105,7 @@ const Antropometricos: React.FC = () => {
           </Suspense>
         </div>
 
-        <div className="rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col">
-          <h3 className="text-xl font-raleway font-bold mb-1" style={{ color: '#0891b2' }}>MMC</h3>
-          <p className="text-sm text-muted-foreground mb-4">Masa magra corporal: James u Hume (incluye "Lean mass" por % grasa).</p>
-          <div className="mt-auto">
-            <button onClick={()=>{ setMmcDefaultFormula('james'); setOpenMMC(true); }} className="px-4 py-2 rounded-md bg-cyan-700 text-white font-semibold hover:bg-cyan-800">Abrir calculadora</button>
-          </div>
-          <Suspense fallback={<div className="h-10 w-28 rounded-md bg-cyan-100 animate-pulse mt-3" aria-hidden /> }>
-            <MMCCalculator open={openMMC} onOpenChange={setOpenMMC} defaultFormula={mmcDefaultFormula} />
-          </Suspense>
-        </div>
+        {/* Tarjeta MMC eliminada para evitar duplicidad: toda la funcionalidad está incluida en 'Masa magra' */}
       </div>
     </div>
   );
