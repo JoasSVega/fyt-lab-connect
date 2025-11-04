@@ -9,6 +9,7 @@ const IdealWeightSelectorCalculator = lazy(() => import("@/components/calculator
 const CEBSelectorCalculator = lazy(() => import("@/components/calculators/antropometricas/CEBSelectorCalculator"));
 const ACTSelectorCalculator = lazy(() => import("@/components/calculators/antropometricas/ACTSelectorCalculator"));
 const MMCCalculator = lazy(() => import("@/components/calculators/antropometricas/MMCCalculator"));
+import Seo from "@/components/Seo";
 
 const Antropometricos: React.FC = () => {
   const [openIMC, setOpenIMC] = React.useState(false);
@@ -22,9 +23,13 @@ const Antropometricos: React.FC = () => {
 
   return (
     <div className="w-full max-w-6xl mx-auto px-3 sm:px-6 py-10">
+      <Seo
+        title="Cálculos fisiológicos y antropométricos | Herramientas"
+        description="IMC, superficie corporal, masa magra, peso ideal y consumo energético basal. Calculadoras con diseño unificado."
+      />
       <div className="flex items-center gap-3 mb-6">
         <Ruler className="w-6 h-6 text-sky-600" />
-        <h1 className="text-3xl sm:text-4xl font-poppins font-bold text-slate-900">Fisiológicos y antropométricos</h1>
+        <h1 className="text-3xl sm:text-4xl font-poppins font-bold text-slate-900">Cálculos fisiológicos y antropométricos</h1>
       </div>
 
   <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">

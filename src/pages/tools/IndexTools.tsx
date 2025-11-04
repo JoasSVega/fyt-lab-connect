@@ -2,6 +2,7 @@ import * as React from "react";
 import { Stethoscope, Ruler, FlaskConical, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import Seo from "@/components/Seo";
 
 const Card = ({ icon, title, desc, to, color }: { icon: React.ReactNode; title: string; desc: string; to: string; color: string; }) => {
   const navigate = useNavigate();
@@ -28,26 +29,30 @@ const Card = ({ icon, title, desc, to, color }: { icon: React.ReactNode; title: 
 const IndexTools: React.FC = () => {
   return (
     <div className="w-full max-w-6xl mx-auto px-3 sm:px-6 py-10">
+      <Seo
+        title="Herramientas farmacéuticas | Índice"
+        description="Accede a cálculos clínicos farmacéuticos, cálculos fisiológicos y antropométricos, y herramientas farmacéuticas avanzadas."
+      />
       <h1 className="text-4xl sm:text-5xl font-poppins font-bold text-slate-900 text-center mb-10">Herramientas</h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Card
           icon={<Stethoscope className="w-7 h-7" />}
-          title="Cálculos clínicos"
-          desc="Nefrológicos, respiratorios, digestivos y más. Ajustes posológicos y soporte diagnóstico."
+          title="Cálculos clínicos farmacéuticos"
+          desc="Función renal (Cockcroft-Gault, MDRD, CKD-EPI), dosis e infusión, reconstitución."
           to="/herramientas/clinicos"
           color="#3B82F6"
         />
         <Card
           icon={<Ruler className="w-7 h-7" />}
-          title="Fisiológicos y antropométricos"
-          desc="IMC, superficie corporal, relación cintura-cadera, metabolismo basal."
+          title="Cálculos fisiológicos y antropométricos"
+          desc="IMC, superficie corporal, masa magra, peso ideal y metabolismo basal."
           to="/herramientas/antropometricos"
           color="#0ea5e9"
         />
         <Card
           icon={<FlaskConical className="w-7 h-7" />}
-          title="Herramientas avanzadas"
-          desc="Conversores farmacéuticos y soporte clínico automatizado."
+          title="Herramientas farmacéuticas avanzadas"
+          desc="Compatibilidad IV, osmolaridad, dilución y nutrición parenteral."
           to="/herramientas/avanzados"
           color="#10b981"
         />

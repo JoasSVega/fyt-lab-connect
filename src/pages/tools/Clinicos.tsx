@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Stethoscope } from "lucide-react";
 const TFGCalculator = lazy(() => import("@/components/tools/clinicos/TFGCalculator"));
 import { pathRenal } from "@/pages/RenalFunctionPage";
+import Seo from "@/components/Seo";
 
 const Clinicos: React.FC = () => {
   const [openTFG, setOpenTFG] = React.useState(false);
@@ -11,9 +12,13 @@ const Clinicos: React.FC = () => {
 
   return (
     <div className="w-full max-w-6xl mx-auto px-3 sm:px-6 py-10">
+      <Seo
+        title="Cálculos clínicos farmacéuticos | Herramientas"
+        description="Suite de cálculos clínicos farmacéuticos: función renal (Cockcroft-Gault, MDRD, CKD-EPI), dosis de carga/mantenimiento, velocidad de infusión y reconstitución de antibióticos."
+      />
       <div className="flex items-center gap-3 mb-6">
         <Stethoscope className="w-6 h-6 text-blue-600" />
-        <h1 className="text-3xl sm:text-4xl font-poppins font-bold text-slate-900">Cálculos clínicos</h1>
+        <h1 className="text-3xl sm:text-4xl font-poppins font-bold text-slate-900">Cálculos clínicos farmacéuticos</h1>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
@@ -30,13 +35,19 @@ const Clinicos: React.FC = () => {
           </Suspense>
         </div>
 
-        {/* Placeholders para futuras clínicas */}
+        {/* Dosis de carga / mantenimiento */}
         <div className="rounded-2xl border-2 bg-white/60 p-6">
-          <h3 className="text-lg font-semibold">Balance hídrico</h3>
+          <h3 className="text-lg font-semibold">Dosis de carga / mantenimiento</h3>
           <p className="text-sm text-muted-foreground">Próximamente.</p>
         </div>
+        {/* Velocidad de infusión */}
         <div className="rounded-2xl border-2 bg-white/60 p-6">
-          <h3 className="text-lg font-semibold">Conversión de electrolitos</h3>
+          <h3 className="text-lg font-semibold">Velocidad de infusión</h3>
+          <p className="text-sm text-muted-foreground">Próximamente.</p>
+        </div>
+        {/* Reconstitución de antibióticos */}
+        <div className="rounded-2xl border-2 bg-white/60 p-6">
+          <h3 className="text-lg font-semibold">Reconstitución de antibióticos</h3>
           <p className="text-sm text-muted-foreground">Próximamente.</p>
         </div>
       </div>
