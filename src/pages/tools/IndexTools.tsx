@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Stethoscope, Ruler, FlaskConical, ArrowRight } from "lucide-react";
+import { Stethoscope, Ruler, FlaskConical, ClipboardCheck, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import Seo from "@/components/Seo";
@@ -30,29 +30,36 @@ const IndexTools: React.FC = () => {
   return (
     <div className="w-full max-w-6xl mx-auto px-3 sm:px-6 py-10">
       <Seo
-        title="Herramientas farmacéuticas | Índice"
-        description="Accede a cálculos clínicos farmacéuticos, cálculos fisiológicos y antropométricos, y herramientas farmacéuticas avanzadas."
+        title="Herramientas farmacéuticas clínicas y asistenciales"
+        description="Explora cálculos clínicos y farmacéuticos, cálculos fisiológicos y antropométricos, escalas clínicas y validación farmacoterapéutica, y herramientas avanzadas y conversores."
       />
       <h1 className="text-4xl sm:text-5xl font-poppins font-bold text-slate-900 text-center mb-10">Herramientas</h1>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <Card
           icon={<Stethoscope className="w-7 h-7" />}
-          title="Cálculos clínicos farmacéuticos"
-          desc="Función renal (Cockcroft-Gault, MDRD, CKD-EPI), dosis e infusión, reconstitución."
+          title="Cálculos Clínicos y Farmacéuticos"
+          desc="Evalúa función renal, hepática y ajusta dosis con precisión."
           to="/herramientas/clinicos"
           color="#3B82F6"
         />
         <Card
           icon={<Ruler className="w-7 h-7" />}
-          title="Cálculos fisiológicos y antropométricos"
-          desc="IMC, superficie corporal, masa magra, peso ideal y metabolismo basal."
+          title="Cálculos Fisiológicos y Antropométricos"
+          desc="Determina parámetros corporales clave para farmacocinética."
           to="/herramientas/antropometricos"
           color="#0ea5e9"
         />
         <Card
+          icon={<ClipboardCheck className="w-7 h-7" />}
+          title="Escalas Clínicas y Validación Farmacoterapéutica"
+          desc="Evalúa riesgo, seguridad y efectividad del tratamiento."
+          to="/herramientas/escalas"
+          color="#a855f7"
+        />
+        <Card
           icon={<FlaskConical className="w-7 h-7" />}
-          title="Herramientas farmacéuticas avanzadas"
-          desc="Compatibilidad IV, osmolaridad, dilución y nutrición parenteral."
+          title="Herramientas Avanzadas y Conversores Farmacéuticos"
+          desc="Convierte, compara y analiza compatibilidades y estabilidad."
           to="/herramientas/avanzados"
           color="#10b981"
         />
