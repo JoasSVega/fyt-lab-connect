@@ -36,6 +36,10 @@ const IMCCalculator: React.FC<{ open: boolean; onOpenChange: (v:boolean)=>void; 
       onCalculate={calc}
       onClear={reset}
       primaryButtonClass="bg-orange-600 hover:bg-orange-700"
+      // Añadimos un placeholder invisible para usar la misma franja/divisor
+      // de 'selector de fórmula' que en CEB y así igualar la distribución
+      // vertical de secciones (inputs → divisor → acciones → resultado).
+      formulaSelector={<div className="h-0" aria-hidden />}
       errorMessage={error}
       result={res != null ? (
         <>
