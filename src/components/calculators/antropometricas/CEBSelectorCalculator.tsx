@@ -1,6 +1,7 @@
 import * as React from "react";
 import CalculatorPanel from "@/components/tools/common/CalculatorPanel";
 import NumberField from "@/components/inputs/NumberField";
+import SelectField from "@/components/inputs/SelectField";
 import { cebHarrisBenedict, cebMifflin, Sex } from "./formulas";
 
 const CEBSelectorCalculator: React.FC<{ open: boolean; onOpenChange: (v:boolean)=>void; color?: string; }>
@@ -43,10 +44,13 @@ const CEBSelectorCalculator: React.FC<{ open: boolean; onOpenChange: (v:boolean)
       onClear={reset}
       primaryButtonClass="bg-orange-600 hover:bg-orange-700"
       formulaSelector={
-        <select id="ceb-formula" value={formula} onChange={(e)=>setFormula(e.target.value as 'harris'|'mifflin')} className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-400">
-          <option value="harris">Harris-Benedict</option>
-          <option value="mifflin">Mifflin–St Jeor</option>
-        </select>
+        <SelectField
+          id="ceb-formula"
+          ariaLabel="Fórmula CEB"
+          value={formula}
+          onChange={(e)=>setFormula(e.target.value as 'harris'|'mifflin')}
+          options={[{ value: 'harris', label: 'Harris-Benedict' }, { value: 'mifflin', label: 'Mifflin–St Jeor' }]}
+        />
       }
       errorMessage={error}
       result={res != null ? <div className="text-3xl font-mono">{Math.round(res)} kcal/día</div> : undefined}
@@ -54,13 +58,13 @@ const CEBSelectorCalculator: React.FC<{ open: boolean; onOpenChange: (v:boolean)
       <NumberField id="ceb-w" label="Peso" name="w" value={w===""?"":String(w)} onChange={(e)=>setW(e.target.value===""?"":Number(e.target.value))} min={20} max={300} unit="kg" required />
       <NumberField id="ceb-h" label="Talla" name="h" value={h===""?"":String(h)} onChange={(e)=>setH(e.target.value===""?"":Number(e.target.value))} min={120} max={230} unit="cm" required />
       <NumberField id="ceb-age" label="Edad" name="age" value={age===""?"":String(age)} onChange={(e)=>setAge(e.target.value===""?"":Number(e.target.value))} min={14} max={100} unit="años" required />
-      <div>
-        <label className="block text-sm font-medium mb-1" htmlFor="ceb-sex">Sexo</label>
-        <select id="ceb-sex" value={sex} onChange={(e)=>setSex(e.target.value as Sex)} className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-400">
-          <option value="male">Masculino</option>
-          <option value="female">Femenino</option>
-        </select>
-      </div>
+      <SelectField
+        id="ceb-sex"
+        label="Sexo"
+        value={sex}
+        onChange={(e)=>setSex(e.target.value as Sex)}
+        options={[{ value: 'male', label: 'Masculino' }, { value: 'female', label: 'Femenino' }]}
+      />
     </CalculatorPanel>
   );
 };

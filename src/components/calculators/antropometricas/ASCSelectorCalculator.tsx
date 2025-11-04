@@ -1,6 +1,7 @@
 import * as React from "react";
 import CalculatorPanel from "@/components/tools/common/CalculatorPanel";
 import NumberField from "@/components/inputs/NumberField";
+import SelectField from "@/components/inputs/SelectField";
 import { bsaDuBois, bsaGehanGeorge, bsaHaycock } from "./formulas";
 
 const ASCSelectorCalculator: React.FC<{ open: boolean; onOpenChange: (v:boolean)=>void; color?: string; }>
@@ -40,11 +41,17 @@ const ASCSelectorCalculator: React.FC<{ open: boolean; onOpenChange: (v:boolean)
       onClear={reset}
       primaryButtonClass="bg-emerald-600 hover:bg-emerald-700"
       formulaSelector={
-        <select id="asc-formula" value={formula} onChange={(e)=>setFormula(e.target.value as 'dubois'|'gehan'|'haycock')} className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-400">
-          <option value="dubois">Dubois & Dubois (1916)</option>
-          <option value="gehan">Gehan & George (1970)</option>
-          <option value="haycock">Haycock (1978, pediátrica)</option>
-        </select>
+        <SelectField
+          id="asc-formula"
+          ariaLabel="Fórmula de superficie corporal"
+          value={formula}
+          onChange={(e)=>setFormula(e.target.value as 'dubois'|'gehan'|'haycock')}
+          options={[
+            { value: 'dubois', label: 'Dubois & Dubois (1916)' },
+            { value: 'gehan', label: 'Gehan & George (1970)' },
+            { value: 'haycock', label: 'Haycock (1978, pediátrica)' },
+          ]}
+        />
       }
       errorMessage={error}
       result={res != null ? <div className="text-3xl font-mono">{res.toFixed(2)} m²</div> : undefined}

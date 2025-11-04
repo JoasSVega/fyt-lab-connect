@@ -1,6 +1,7 @@
 import * as React from "react";
 import CalculatorPanel from "@/components/tools/common/CalculatorPanel";
 import NumberField from "@/components/inputs/NumberField";
+import SelectField from "@/components/inputs/SelectField";
 import { cockcroftGault } from "@/utils/renal";
 
 // Calculadora breve de Cockcroft-Gault para TFG aproximada (ClCr)
@@ -60,13 +61,13 @@ const TFGCalculator: React.FC<{ open: boolean; onOpenChange: (v: boolean) => voi
       <NumberField id="tfg-age" label="Edad" name="age" value={String(age)} onChange={(e)=>setAge(Number(e.target.value))} min={18} max={120} required />
       <NumberField id="tfg-weight" label="Peso" name="weight" value={String(weight)} onChange={(e)=>setWeight(Number(e.target.value))} min={20} max={300} unit="kg" required />
       <NumberField id="tfg-scr" label="Creatinina sérica" name="scr" value={String(scr)} onChange={(e)=>setScr(Number(e.target.value))} min={0.1} unit="mg/dL" required />
-      <div>
-        <label className="block font-medium mb-1">Sexo</label>
-        <select value={sex} onChange={(e)=>setSex(e.target.value as Sex)} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400">
-          <option value="male">Masculino</option>
-          <option value="female">Femenino</option>
-        </select>
-      </div>
+      <SelectField
+        id="tfg-sex"
+        label="Sexo"
+        value={sex}
+        onChange={(e)=>setSex(e.target.value as Sex)}
+        options={[{ value: 'male', label: 'Masculino' }, { value: 'female', label: 'Femenino' }]}
+      />
     </CalculatorPanel>
   );
 };

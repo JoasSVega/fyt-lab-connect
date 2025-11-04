@@ -1,6 +1,7 @@
 import * as React from "react";
 import CalculatorPanel from "@/components/tools/common/CalculatorPanel";
 import NumberField from "@/components/inputs/NumberField";
+import SelectField from "@/components/inputs/SelectField";
 
 type Sex = "male" | "female";
 
@@ -71,13 +72,13 @@ const BodyFatCalculator: React.FC<{ open: boolean; onOpenChange: (v:boolean)=>vo
       <NumberField id="bf-w" label="Peso" name="w" value={w === "" ? "" : String(w)} onChange={(e)=>setW(e.target.value === "" ? "" : Number(e.target.value))} min={20} max={300} unit="kg" required />
       <NumberField id="bf-h" label="Talla" name="h" value={h === "" ? "" : String(h)} onChange={(e)=>setH(e.target.value === "" ? "" : Number(e.target.value))} min={100} max={250} unit="cm" required />
       <NumberField id="bf-age" label="Edad" name="age" value={age === "" ? "" : String(age)} onChange={(e)=>setAge(e.target.value === "" ? "" : Number(e.target.value))} min={5} max={120} unit="años" required />
-      <div>
-        <label htmlFor="bf-sex" className="block text-sm font-medium mb-1">Sexo</label>
-        <select id="bf-sex" value={sex} onChange={(e)=>setSex(e.target.value as Sex)} className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-violet-400">
-          <option value="male">Masculino</option>
-          <option value="female">Femenino</option>
-        </select>
-      </div>
+      <SelectField
+        id="bf-sex"
+        label="Sexo"
+        value={sex}
+        onChange={(e)=>setSex(e.target.value as Sex)}
+        options={[{ value: "male", label: "Masculino" }, { value: "female", label: "Femenino" }]}
+      />
     </CalculatorPanel>
   );
 };

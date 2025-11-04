@@ -1,6 +1,7 @@
 import * as React from "react";
 import CalculatorPanel from "@/components/tools/common/CalculatorPanel";
 import NumberField from "@/components/inputs/NumberField";
+import SelectField from "@/components/inputs/SelectField";
 import { mmcJames, mmcHume, Sex } from "./formulas";
 
 type Props = { open: boolean; onOpenChange: (v: boolean) => void; color?: string };
@@ -45,15 +46,13 @@ const MMCCalculator: React.FC<Props> = ({ open, onOpenChange, color = "#0891b2" 
       onClear={reset}
       primaryButtonClass="bg-cyan-700 hover:bg-cyan-800"
       formulaSelector={
-        <select
+        <SelectField
           id="mmc-formula"
+          ariaLabel="Fórmula MMC"
           value={formula}
-          onChange={(e) => setFormula(e.target.value as 'james'|'hume')}
-          className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-400"
-        >
-          <option value="james">James (1980)</option>
-          <option value="hume">Hume (1966)</option>
-        </select>
+          onChange={(e)=>setFormula(e.target.value as 'james'|'hume')}
+          options={[{ value: 'james', label: 'James (1980)' }, { value: 'hume', label: 'Hume (1966)' }]}
+        />
       }
       errorMessage={error}
       result={res != null ? <div className="text-3xl font-mono">{res.toFixed(2)} kg</div> : undefined}
@@ -80,20 +79,13 @@ const MMCCalculator: React.FC<Props> = ({ open, onOpenChange, color = "#0891b2" 
         unit="cm"
         required
       />
-      <div>
-        <label className="block text-sm font-medium mb-1" htmlFor="mmc-sex">
-          Sexo
-        </label>
-        <select
-          id="mmc-sex"
-          value={sex}
-          onChange={(e) => setSex(e.target.value as Sex)}
-          className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-400"
-        >
-          <option value="male">Masculino</option>
-          <option value="female">Femenino</option>
-        </select>
-      </div>
+      <SelectField
+        id="mmc-sex"
+        label="Sexo"
+        value={sex}
+        onChange={(e)=>setSex(e.target.value as Sex)}
+        options={[{ value: 'male', label: 'Masculino' }, { value: 'female', label: 'Femenino' }]}
+      />
     </CalculatorPanel>
   );
 };
