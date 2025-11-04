@@ -34,7 +34,7 @@ const IndexTools: React.FC = () => {
         description="Explora cálculos clínicos y farmacéuticos, cálculos fisiológicos y antropométricos, escalas clínicas y validación farmacoterapéutica, y herramientas avanzadas y conversores."
       />
       <h1 className="text-4xl sm:text-5xl font-poppins font-bold text-slate-900 text-center mb-10">Herramientas</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Card
           icon={<Stethoscope className="w-7 h-7" />}
           title="Cálculos Clínicos y Farmacéuticos"
