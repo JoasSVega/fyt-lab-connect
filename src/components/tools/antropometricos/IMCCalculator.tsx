@@ -5,7 +5,7 @@ import NumberField from "@/components/inputs/NumberField";
 const bmi = (w: number, hCm: number) => w / Math.pow(hCm/100, 2);
 
 const IMCCalculator: React.FC<{ open: boolean; onOpenChange: (v:boolean)=>void; color?: string; }>
-= ({ open, onOpenChange, color = '#0ea5e9' }) => {
+= ({ open, onOpenChange, color = '#f97316' }) => {
   const [w, setW] = React.useState<number | "">("");
   const [h, setH] = React.useState<number | "">("");
   const [res, setRes] = React.useState<number | null>(null);
@@ -35,7 +35,7 @@ const IMCCalculator: React.FC<{ open: boolean; onOpenChange: (v:boolean)=>void; 
       description="Índice de masa corporal (kg/m²) con categorización clínica."
       onCalculate={calc}
       onClear={reset}
-  primaryButtonClass="bg-sky-600 hover:bg-sky-700"
+      primaryButtonClass="bg-orange-600 hover:bg-orange-700"
       errorMessage={error}
       result={res != null ? (
         <>
