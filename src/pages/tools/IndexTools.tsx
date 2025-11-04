@@ -34,7 +34,7 @@ const IndexTools: React.FC = () => {
         description="Explora cálculos clínicos y farmacéuticos, cálculos fisiológicos y antropométricos, escalas clínicas y validación farmacoterapéutica, y herramientas avanzadas y conversores."
       />
       <h1 className="text-4xl sm:text-5xl font-poppins font-bold text-slate-900 text-center mb-10">Herramientas</h1>
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Card
           icon={<Stethoscope className="w-7 h-7" />}
           title="Cálculos Clínicos y Farmacéuticos"
@@ -64,6 +64,11 @@ const IndexTools: React.FC = () => {
           color="#10b981"
         />
       </div>
+
+      {/* Disclaimer (plain text, centered, outside of cards) */}
+      <p className="text-center font-bold mt-10 text-gray-800 dark:text-gray-200">
+        Estas herramientas son de uso académico e informativo. No reemplazan el juicio clínico ni las decisiones de un profesional de la salud.
+      </p>
     </div>
   );
 };

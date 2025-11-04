@@ -71,10 +71,10 @@ const Clinicos: React.FC = () => {
         </div>
       </section>
 
-      {/* Disclaimer footer */}
-      <footer className="mt-10 rounded-2xl border-2 bg-white/80 p-6">
-        <p className="text-sm sm:text-base text-slate-700">Estas herramientas son de uso académico e informativo. No reemplazan el juicio clínico ni las decisiones de un profesional de la salud.</p>
-      </footer>
+      {/* Disclaimer (plain text, centered, outside of cards) */}
+      <p className="text-center font-bold mt-10 text-gray-800 dark:text-gray-200">
+        Estas herramientas son de uso académico e informativo. No reemplazan el juicio clínico ni las decisiones de un profesional de la salud.
+      </p>
     </main>
   );
 };
