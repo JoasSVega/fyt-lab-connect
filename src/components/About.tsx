@@ -43,9 +43,9 @@ const About = () => {
   ];
 
   const researchLines = [
-    // Orden según CVLAC del grupo
+    // Títulos alineados EXACTAMENTE con CVLAC (ver captura adjunta del usuario)
     {
-      title: "Farmacia Asistencial y Atención Farmacéutica",
+      title: "Atención Farmacéutica y Farmacia Asistencial",
       description:
         "Optimización del uso de medicamentos a través de la atención farmacéutica directa al paciente, educación sanitaria y seguimiento farmacoterapéutico.",
       image: "/images/Carrusel/Farmacia-Asistencial.png",
@@ -58,19 +58,19 @@ const About = () => {
       image: "/images/Carrusel/Estudios-In-silico.png",
     },
     {
-      title: "Farmacoeconomía",
+      title: "Farmacoeconomia",
       description:
         "Evaluación comparativa del costo, efectividad y eficiencia de tratamientos y tecnologías farmacéuticas. Se generan análisis costo-beneficio, costo-efectividad y costo-utilidad para optimizar la toma de decisiones en salud.",
       image: "/images/Carrusel/Farmacoeconomia.png",
     },
     {
-      title: "Farmacoepidemiología",
+      title: "Farmacoepidemiologia",
       description:
         "Análisis del uso, efectividad y seguridad de los medicamentos en poblaciones reales, proporcionando evidencia para la toma de decisiones en salud pública.",
       image: "/images/Carrusel/Farmacoepidemiologia.png",
     },
     {
-      title: "Farmacología y Terapéutica",
+      title: "Farmacologia y Terapeutica",
       description:
         "Estudio de los efectos de los medicamentos en el organismo y desarrollo de terapias farmacológicas optimizadas para mejorar la eficacia y seguridad en el tratamiento de enfermedades.",
       image: "/images/Carrusel/Farmacologia.png",
