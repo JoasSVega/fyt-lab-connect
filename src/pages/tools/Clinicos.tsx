@@ -6,11 +6,13 @@ import Seo from "@/components/Seo";
 import FuncionRenalCalculator from "@/components/tools/clinicos/FuncionRenalCalculator";
 import HepaticFunctionCalculator from "@/components/tools/clinicos/HepaticFunctionCalculator";
 import DoseByWeightCalculator from "@/components/tools/clinicos/DoseByWeightCalculator";
+import ReconstitutionDilutionCalculator from "@/components/tools/clinicos/ReconstitutionDilutionCalculator";
 
 const Clinicos: React.FC = () => {
   const [showRenal, setShowRenal] = React.useState(false);
   const [showHepatic, setShowHepatic] = React.useState(false);
   const [showDose, setShowDose] = React.useState(false);
+  const [showReconst, setShowReconst] = React.useState(false);
   const navigate = useNavigate();
 
   return (
@@ -99,10 +101,19 @@ const Clinicos: React.FC = () => {
           <h3 className="text-lg font-semibold">Velocidad de infusión</h3>
           <p className="text-sm text-muted-foreground">Próximamente.</p>
         </div>
-        {/* Reconstitución de antibióticos */}
-        <div className="rounded-2xl border-2 bg-white/60 p-6">
-          <h3 className="text-lg font-semibold">Reconstitución de antibióticos</h3>
-          <p className="text-sm text-muted-foreground">Próximamente.</p>
+        {/* Reconstitución y dilución de antibióticos */}
+        <div className="rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col">
+          <h3 className="text-xl font-raleway font-bold mb-1" style={{ color: '#64748B' }}>Reconstitución y dilución de antibióticos</h3>
+          <p className="text-sm text-muted-foreground mb-4">Calcula concentración tras reconstitución, volumen para la dosis y dilución final.</p>
+          {!showReconst ? (
+            <div className="mt-auto">
+              <button onClick={()=>setShowReconst(true)} className="px-4 py-2 rounded-md bg-slate-700 text-white font-semibold transition-transform duration-150 hover:scale-105 hover:bg-slate-800">Abrir calculadora</button>
+            </div>
+          ) : (
+            <div className="mt-2">
+              <ReconstitutionDilutionCalculator embedded />
+            </div>
+          )}
         </div>
       </section>
 
