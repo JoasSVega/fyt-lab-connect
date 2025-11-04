@@ -4,9 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { Stethoscope } from "lucide-react";
 import Seo from "@/components/Seo";
 import FuncionRenalCalculator from "@/components/tools/clinicos/FuncionRenalCalculator";
+import HepaticFunctionCalculator from "@/components/tools/clinicos/HepaticFunctionCalculator";
 
 const Clinicos: React.FC = () => {
   const [showRenal, setShowRenal] = React.useState(false);
+  const [showHepatic, setShowHepatic] = React.useState(false);
   const navigate = useNavigate();
 
   return (
@@ -51,6 +53,21 @@ const Clinicos: React.FC = () => {
           ) : (
             <div className="mt-2">
               <FuncionRenalCalculator embedded />
+            </div>
+          )}
+        </div>
+
+        {/* Función hepática */}
+        <div className="rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col">
+          <h3 className="text-xl font-raleway font-bold mb-1" style={{ color: '#F59E0B' }}>Función hepática</h3>
+          <p className="text-sm text-muted-foreground mb-4">Child‑Pugh, MELD/MELD‑Na, APRI y FIB‑4 para evaluar severidad y fibrosis.</p>
+          {!showHepatic ? (
+            <div className="mt-auto">
+              <button onClick={()=>setShowHepatic(true)} className="px-4 py-2 rounded-md bg-amber-600 text-white font-semibold hover:bg-amber-700">Abrir calculadora</button>
+            </div>
+          ) : (
+            <div className="mt-2">
+              <HepaticFunctionCalculator embedded />
             </div>
           )}
         </div>
