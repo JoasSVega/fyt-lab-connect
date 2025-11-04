@@ -25,7 +25,7 @@ const OK = "#10b981";
 type DoseUnit = "mg" | "g";
 
 const ReconstitutionDilutionCalculator: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
-  const options = (antibiotics as AntibioticDef[]) ?? [];
+  const options = React.useMemo<AntibioticDef[]>(() => (antibiotics as AntibioticDef[]) ?? [], []);
   const [abId, setAbId] = React.useState<string>(options[0]?.id ?? "");
   const ab = React.useMemo(() => options.find(o => o.id === abId) ?? options[0], [options, abId]);
 
@@ -45,7 +45,7 @@ const ReconstitutionDilutionCalculator: React.FC<{ embedded?: boolean }> = ({ em
   React.useEffect(() => {
     setReconstMl(ab?.defaultReconstitutionMl ?? 10);
     setWarnings([]);
-  }, [abId]);
+  }, [ab]);
 
   // Derived calculations performed on each change
   const values = React.useMemo(() => {

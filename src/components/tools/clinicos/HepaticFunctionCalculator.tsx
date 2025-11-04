@@ -217,7 +217,7 @@ const HepaticFunctionCalculator: React.FC<{ embedded?: boolean }> = ({ embedded 
         <div className="grid grid-cols-3 gap-2">
           <Input id="bili" className="col-span-2" type="number" step="0.1" min={0}
             value={bili} onChange={(e)=>setBili(e.target.value===""?"":Number(e.target.value))} aria-label="Bilirrubina" />
-          <Select value={biliUnit} onValueChange={(v)=>handleBiliUnitChange(v as any)}>
+          <Select value={biliUnit} onValueChange={(v)=>handleBiliUnitChange(v as "mgdl" | "umol")}>
             <SelectTrigger aria-label="Unidad de bilirrubina"><SelectValue /></SelectTrigger>
             <SelectContent>
               <SelectItem value="mgdl">mg/dL</SelectItem>
