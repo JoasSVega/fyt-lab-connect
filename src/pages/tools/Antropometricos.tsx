@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Suspense, lazy } from "react";
+import { useNavigate } from "react-router-dom";
 import { Ruler } from "lucide-react";
 const IMCCalculator = lazy(() => import("@/components/tools/antropometricos/IMCCalculator"));
 const BodyFatCalculator = lazy(() => import("@/components/tools/antropometricos/BodyFatCalculator"));
@@ -21,18 +22,39 @@ const Antropometricos: React.FC = () => {
   const [openACT, setOpenACT] = React.useState(false);
   const [openMMC, setOpenMMC] = React.useState(false);
 
-  return (
-    <div className="w-full max-w-6xl mx-auto px-3 sm:px-6 py-10">
-      <Seo
-        title="Cálculos fisiológicos y antropométricos | Herramientas"
-        description="IMC, superficie corporal, masa magra, peso ideal y consumo energético basal. Calculadoras con diseño unificado."
-      />
-      <div className="flex items-center gap-3 mb-6">
-        <Ruler className="w-6 h-6 text-sky-600" />
-        <h1 className="text-3xl sm:text-4xl font-poppins font-bold text-slate-900">Cálculos fisiológicos y antropométricos</h1>
-      </div>
+  const navigate = useNavigate();
 
-  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+  return (
+    <main className="w-full max-w-6xl mx-auto px-3 sm:px-6 py-10" aria-labelledby="page-title">
+      {/* SEO meta */}
+      <Seo
+        title="Cálculos Fisiológicos y Antropométricos | Herramientas para profesionales de la salud"
+        description="IMC, superficie corporal, masa magra, peso ideal y consumo energético basal en una interfaz unificada."
+        keywords={["IMC", "ASC", "masa magra", "peso ideal", "metabolismo basal", "cálculos fisiológicos", "antropometría"]}
+        author="FYT Lab Connect"
+        robots="index, follow"
+      />
+
+      {/* Breadcrumbs */}
+      <nav className="text-sm text-slate-600 mb-4" aria-label="Breadcrumb">
+        <ol className="flex items-center gap-2">
+          <li><button onClick={()=>navigate("/")} className="underline-offset-2 hover:underline">Inicio</button></li>
+          <li className="opacity-60" aria-hidden="true">/</li>
+          <li><button onClick={()=>navigate("/herramientas")} className="underline-offset-2 hover:underline">Herramientas</button></li>
+          <li className="opacity-60" aria-hidden="true">/</li>
+          <li className="font-medium">Cálculos fisiológicos y antropométricos</li>
+        </ol>
+      </nav>
+
+      {/* Header */}
+      <header className="flex items-center gap-3 mb-2">
+        <Ruler className="w-6 h-6 text-sky-600" aria-hidden="true" />
+        <h1 id="page-title" className="text-3xl sm:text-4xl font-poppins font-bold text-slate-900">Cálculos fisiológicos y antropométricos</h1>
+      </header>
+      <p className="text-base text-muted-foreground mb-2">Determina parámetros corporales clave para farmacocinética.</p>
+      <p className="text-sm text-muted-foreground mb-6">Accede a una suite de herramientas antropométricas con diseño unificado para análisis rápido y comparables.</p>
+
+  <section className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6" aria-label="Herramientas fisiológicas y antropométricas">
         <div className="rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col">
           <h3 className="text-xl font-raleway font-bold mb-1" style={{ color: '#0ea5e9' }}>IMC</h3>
           <p className="text-sm text-muted-foreground mb-4">Índice de masa corporal (kg/m²) con categorización básica.</p>
@@ -111,8 +133,13 @@ const Antropometricos: React.FC = () => {
         </div>
 
         {/* Tarjeta MMC eliminada para evitar duplicidad: toda la funcionalidad está incluida en 'Masa magra' */}
-      </div>
-    </div>
+      </section>
+
+      {/* Disclaimer footer */}
+      <footer className="mt-10 rounded-2xl border-2 bg-white/80 p-6">
+        <p className="text-sm sm:text-base text-slate-700">Estas herramientas son de uso académico e informativo. No reemplazan el juicio clínico ni las decisiones de un profesional de la salud.</p>
+      </footer>
+    </main>
   );
 };
 

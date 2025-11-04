@@ -7,10 +7,11 @@ const Escalas: React.FC = () => {
   const navigate = useNavigate();
 
   const Card = ({ icon, title, desc, color = "#a855f7" }: { icon: React.ReactNode; title: string; desc: string; color?: string; }) => (
-    <div className="rounded-2xl border-2 bg-white/90 shadow-lg hover:shadow-xl transition-all p-6 flex flex-col">
+    <div className="rounded-2xl border-2 bg-white/90 shadow-lg hover:shadow-xl transition-all p-6 flex flex-col" role="article" aria-label={title}>
       <div className="flex items-center gap-3 mb-3">
         <div className="p-2 rounded-lg" style={{ backgroundColor: color + "22", color }}>
           {icon}
+          <span className="sr-only">Icono de {title}</span>
         </div>
         <h3 className="text-xl font-raleway font-bold">{title}</h3>
       </div>
@@ -18,6 +19,7 @@ const Escalas: React.FC = () => {
       <button
         type="button"
         className="mt-auto px-4 py-2 rounded-md bg-violet-600 text-white font-semibold hover:bg-violet-700 inline-flex items-center gap-2"
+        aria-label={`Explorar ${title}`}
       >
         Explorar
       </button>
@@ -25,33 +27,37 @@ const Escalas: React.FC = () => {
   );
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-3 sm:px-6 py-10">
+    <main className="w-full max-w-6xl mx-auto px-3 sm:px-6 py-10" aria-labelledby="page-title">
+      {/* SEO meta */}
       <Seo
         title="Escalas Clínicas y Validación Farmacoterapéutica | Herramientas Farmacéuticas"
         description="Evalúa la seguridad, riesgo y efectividad del tratamiento farmacológico mediante escalas clínicas validadas como Child-Pugh, HAS-BLED y CHA₂DS₂-VASc."
+        keywords={["escalas clínicas", "Child-Pugh", "HAS-BLED", "CHA2DS2-VASc", "CURB-65", "Glasgow", "validación farmacoterapéutica"]}
+        author="FYT Lab Connect"
+        robots="index, follow"
       />
 
       {/* Breadcrumbs */}
       <nav className="text-sm text-slate-600 mb-4" aria-label="Breadcrumb">
         <ol className="flex items-center gap-2">
           <li><button onClick={()=>navigate("/")} className="underline-offset-2 hover:underline">Inicio</button></li>
-          <li className="opacity-60">/</li>
+          <li className="opacity-60" aria-hidden="true">/</li>
           <li><button onClick={()=>navigate("/herramientas")} className="underline-offset-2 hover:underline">Herramientas</button></li>
-          <li className="opacity-60">/</li>
+          <li className="opacity-60" aria-hidden="true">/</li>
           <li className="font-medium">Escalas Clínicas</li>
         </ol>
       </nav>
 
       {/* Header */}
-      <div className="flex items-center gap-3 mb-2">
-        <ClipboardCheck className="w-6 h-6 text-violet-600" />
-        <h1 className="text-3xl sm:text-4xl font-poppins font-bold text-slate-900">Escalas Clínicas y Validación Farmacoterapéutica</h1>
-      </div>
+      <header className="flex items-center gap-3 mb-2">
+        <ClipboardCheck className="w-6 h-6 text-violet-600" aria-hidden="true" />
+        <h1 id="page-title" className="text-3xl sm:text-4xl font-poppins font-bold text-slate-900">Escalas Clínicas y Validación Farmacoterapéutica</h1>
+      </header>
       <p className="text-base text-muted-foreground mb-2">Evalúa riesgo, seguridad y efectividad terapéutica con escalas validadas clínicamente.</p>
       <p className="text-sm text-muted-foreground mb-6">Esta sección reúne herramientas para apoyar la toma de decisiones farmacoterapéuticas, estandarizando la valoración clínica y facilitando la comunicación interdisciplinaria.</p>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+      <section className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6" aria-label="Escalas clínicas disponibles">
         <Card
           icon={<Stethoscope className="w-7 h-7" />}
           title="Child-Pugh"
@@ -82,15 +88,13 @@ const Escalas: React.FC = () => {
           desc="Evaluación del estado neurológico del paciente."
           color="#6366f1"
         />
-      </div>
-
-      {/* CTA */}
-      <section className="mt-10 rounded-2xl border-2 bg-white/80 p-6 text-center">
-        <p className="text-sm sm:text-base text-slate-700">
-          💊 Desarrollado por el Grupo de Investigación en Farmacología y Terapéutica — ACEQF
-        </p>
       </section>
-    </div>
+
+      {/* Disclaimer footer */}
+      <footer className="mt-10 rounded-2xl border-2 bg-white/80 p-6">
+        <p className="text-sm sm:text-base text-slate-700">Estas herramientas son de uso académico e informativo. No reemplazan el juicio clínico ni las decisiones de un profesional de la salud.</p>
+      </footer>
+    </main>
   );
 };
 
