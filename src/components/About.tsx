@@ -43,26 +43,44 @@ const About = () => {
   ];
 
   const researchLines = [
-    {
-      title: "Farmacología y Terapéutica",
-      description: "Estudio de los efectos de los medicamentos en el organismo y desarrollo de terapias farmacológicas optimizadas para mejorar la eficacia y seguridad en el tratamiento de enfermedades.",
-      image: "/images/Carrusel/Farmacologia.png"
-    },
-    {
-      title: "Farmacovigilancia",
-      description: "Monitoreo y evaluación continua de la seguridad de los medicamentos, identificación de reacciones adversas y desarrollo de estrategias para minimizar riesgos.",
-      image: "/images/Carrusel/Farmacovigilancia.png"
-    },
+    // Orden según CVLAC del grupo
     {
       title: "Farmacia Asistencial y Atención Farmacéutica",
-      description: "Optimización del uso de medicamentos a través de la atención farmacéutica directa al paciente, educación sanitaria y seguimiento farmacoterapéutico.",
-      image: "/images/Carrusel/Farmacia-Asistencial.png"
+      description:
+        "Optimización del uso de medicamentos a través de la atención farmacéutica directa al paciente, educación sanitaria y seguimiento farmacoterapéutico.",
+      image: "/images/Carrusel/Farmacia-Asistencial.png",
+    },
+    {
+      title: "Diseño de Fármacos por Simulación y Modelización Molecular",
+      description:
+        "Aplicación de métodos computacionales y modelos moleculares para el diseño racional de nuevos fármacos. Se estudian interacciones ligando-receptor, optimización de estructuras químicas y simulaciones dinámicas para predecir propiedades biológicas y farmacocinéticas.",
+      // Usamos el set de imágenes 'Estudios-In-silico' que ya existe optimizado (avif/webp/png)
+      image: "/images/Carrusel/Estudios-In-silico.png",
+    },
+    {
+      title: "Farmacoeconomía",
+      description:
+        "Evaluación comparativa del costo, efectividad y eficiencia de tratamientos y tecnologías farmacéuticas. Se generan análisis costo-beneficio, costo-efectividad y costo-utilidad para optimizar la toma de decisiones en salud.",
+      image: "/images/Carrusel/Farmacoeconomia.png",
     },
     {
       title: "Farmacoepidemiología",
-      description: "Análisis del uso, efectividad y seguridad de los medicamentos en poblaciones reales, proporcionando evidencia para la toma de decisiones en salud pública.",
-      image: "/images/Carrusel/Farmacoepidemiologia.png"
-    }
+      description:
+        "Análisis del uso, efectividad y seguridad de los medicamentos en poblaciones reales, proporcionando evidencia para la toma de decisiones en salud pública.",
+      image: "/images/Carrusel/Farmacoepidemiologia.png",
+    },
+    {
+      title: "Farmacología y Terapéutica",
+      description:
+        "Estudio de los efectos de los medicamentos en el organismo y desarrollo de terapias farmacológicas optimizadas para mejorar la eficacia y seguridad en el tratamiento de enfermedades.",
+      image: "/images/Carrusel/Farmacologia.png",
+    },
+    {
+      title: "Farmacovigilancia y Toxicología",
+      description:
+        "Monitoreo y evaluación continua de la seguridad de los medicamentos, identificación de reacciones adversas y desarrollo de estrategias para minimizar riesgos.",
+      image: "/images/Carrusel/Farmacovigilancia.png",
+    },
   ];
 
   const graduationModalities = [
