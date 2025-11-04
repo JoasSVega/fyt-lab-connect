@@ -5,10 +5,12 @@ import { Stethoscope } from "lucide-react";
 import Seo from "@/components/Seo";
 import FuncionRenalCalculator from "@/components/tools/clinicos/FuncionRenalCalculator";
 import HepaticFunctionCalculator from "@/components/tools/clinicos/HepaticFunctionCalculator";
+import DoseByWeightCalculator from "@/components/tools/clinicos/DoseByWeightCalculator";
 
 const Clinicos: React.FC = () => {
   const [showRenal, setShowRenal] = React.useState(false);
   const [showHepatic, setShowHepatic] = React.useState(false);
+  const [showDose, setShowDose] = React.useState(false);
   const navigate = useNavigate();
 
   return (
@@ -68,6 +70,21 @@ const Clinicos: React.FC = () => {
           ) : (
             <div className="mt-2">
               <HepaticFunctionCalculator embedded />
+            </div>
+          )}
+        </div>
+
+        {/* Dosis por peso y superficie corporal */}
+        <div className="rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col">
+          <h3 className="text-xl font-raleway font-bold mb-1" style={{ color: '#0EA5E9' }}>Dosis por peso y SC</h3>
+          <p className="text-sm text-muted-foreground mb-4">Calcula la dosis total según peso (mg/kg o µg/kg) o superficie corporal (mg/m² o µg/m²).</p>
+          {!showDose ? (
+            <div className="mt-auto">
+              <button onClick={()=>setShowDose(true)} className="px-4 py-2 rounded-md bg-cyan-600 text-white font-semibold hover:bg-cyan-700">Abrir calculadora</button>
+            </div>
+          ) : (
+            <div className="mt-2">
+              <DoseByWeightCalculator embedded />
             </div>
           )}
         </div>
