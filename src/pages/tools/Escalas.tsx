@@ -91,7 +91,7 @@ const Escalas: React.FC = () => {
       </section>
 
       {/* Disclaimer (plain text, centered, outside of cards) */}
-      <p className="text-center font-bold mt-10 text-gray-800 dark:text-gray-200">
+      <p className="text-center font-bold mt-12 text-sm text-gray-800 dark:text-gray-200">
         Estas herramientas son de uso académico e informativo. No reemplazan el juicio clínico ni las decisiones de un profesional de la salud.
       </p>
     </main>
