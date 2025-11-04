@@ -3,7 +3,6 @@ import { Suspense, lazy } from "react";
 import { Ruler } from "lucide-react";
 const IMCCalculator = lazy(() => import("@/components/tools/antropometricos/IMCCalculator"));
 const BodyFatCalculator = lazy(() => import("@/components/tools/antropometricos/BodyFatCalculator"));
-const LeanMassCalculator = lazy(() => import("@/components/tools/antropometricos/LeanMassCalculator"));
 // Selector-based calculators centralizados
 const ASCSelectorCalculator = lazy(() => import("@/components/calculators/antropometricas/ASCSelectorCalculator"));
 const IdealWeightSelectorCalculator = lazy(() => import("@/components/calculators/antropometricas/IdealWeightSelectorCalculator"));
@@ -15,7 +14,7 @@ const Antropometricos: React.FC = () => {
   const [openIMC, setOpenIMC] = React.useState(false);
   const [openBSA, setOpenBSA] = React.useState(false);
   const [openBF, setOpenBF] = React.useState(false);
-  const [openLM, setOpenLM] = React.useState(false);
+  const [mmcDefaultFormula, setMmcDefaultFormula] = React.useState<'james'|'hume'|'lean'>('james');
   const [openPI, setOpenPI] = React.useState(false);
   const [openBMR, setOpenBMR] = React.useState(false);
   const [openACT, setOpenACT] = React.useState(false);
@@ -64,13 +63,10 @@ const Antropometricos: React.FC = () => {
 
         <div className="rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col">
           <h3 className="text-xl font-raleway font-bold mb-1" style={{ color: '#0891b2' }}>Masa magra</h3>
-          <p className="text-sm text-muted-foreground mb-4">Estimación a partir de peso y %GC.</p>
+          <p className="text-sm text-muted-foreground mb-4">Incluida en MMC como "Lean mass (% grasa)".</p>
           <div className="mt-auto">
-            <button onClick={()=>setOpenLM(true)} className="px-4 py-2 rounded-md bg-cyan-700 text-white font-semibold hover:bg-cyan-800">Abrir calculadora</button>
+            <button onClick={()=>{ setMmcDefaultFormula('lean'); setOpenMMC(true); }} className="px-4 py-2 rounded-md bg-cyan-700 text-white font-semibold hover:bg-cyan-800">Abrir calculadora</button>
           </div>
-          <Suspense fallback={<div className="h-10 w-28 rounded-md bg-cyan-100 animate-pulse mt-3" aria-hidden /> }>
-            <LeanMassCalculator open={openLM} onOpenChange={setOpenLM} />
-          </Suspense>
         </div>
 
         <div className="rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col">
@@ -108,12 +104,12 @@ const Antropometricos: React.FC = () => {
 
         <div className="rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col">
           <h3 className="text-xl font-raleway font-bold mb-1" style={{ color: '#0891b2' }}>MMC</h3>
-          <p className="text-sm text-muted-foreground mb-4">Masa magra corporal: James u Hume.</p>
+          <p className="text-sm text-muted-foreground mb-4">Masa magra corporal: James u Hume (incluye "Lean mass" por % grasa).</p>
           <div className="mt-auto">
-            <button onClick={()=>setOpenMMC(true)} className="px-4 py-2 rounded-md bg-cyan-700 text-white font-semibold hover:bg-cyan-800">Abrir calculadora</button>
+            <button onClick={()=>{ setMmcDefaultFormula('james'); setOpenMMC(true); }} className="px-4 py-2 rounded-md bg-cyan-700 text-white font-semibold hover:bg-cyan-800">Abrir calculadora</button>
           </div>
           <Suspense fallback={<div className="h-10 w-28 rounded-md bg-cyan-100 animate-pulse mt-3" aria-hidden /> }>
-            <MMCCalculator open={openMMC} onOpenChange={setOpenMMC} />
+            <MMCCalculator open={openMMC} onOpenChange={setOpenMMC} defaultFormula={mmcDefaultFormula} />
           </Suspense>
         </div>
       </div>

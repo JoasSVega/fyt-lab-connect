@@ -67,3 +67,8 @@ export const actChumlea = (sex: Sex, weightKg: number, heightCm: number) => {
   if (sex === "male") return 0.3669 * heightCm + 0.1833 * weightKg - 35.270;
   return 0.3561 * heightCm + 0.1833 * weightKg - 33.947;
 };
+
+// Masa magra a partir de % de grasa corporal
+export const leanMassFromBf = (weightKg: number, bodyFatPct: number) => {
+  return weightKg * (1 - bodyFatPct / 100);
+};

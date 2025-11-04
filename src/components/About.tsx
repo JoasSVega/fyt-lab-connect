@@ -53,7 +53,7 @@ const About = () => {
     {
       title: "Diseño de Fármacos por Simulación y Modelización Molecular",
       description:
-        "Aplicación de métodos computacionales y modelos moleculares para el diseño racional de nuevos fármacos. Se estudian interacciones ligando-receptor, optimización de estructuras químicas y simulaciones dinámicas para predecir propiedades biológicas y farmacocinéticas.",
+        "Aplicación de métodos computacionales y modelos moleculares para el diseño racional de nuevos fármacos.",
       // Usamos el set de imágenes 'Estudios-In-silico' que ya existe optimizado (avif/webp/png)
       image: "/images/Carrusel/Estudios-In-silico.png",
     },
