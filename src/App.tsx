@@ -25,8 +25,6 @@ import NotFound from "./pages/NotFound";
 import DosageCalculator from "./components/DosageCalculator";
 import Navbar from "./components/Navbar";
 import ScrollToTop from "./components/ScrollToTop";
-import RenalFunctionPage from "./pages/RenalFunctionPage";
-import { pathRenal } from "./pages/RenalFunctionPage";
 import Noticias from "./pages/Noticias";
 import Herramientas from "./pages/Herramientas";
 // Nuevas páginas de la plataforma de herramientas
@@ -97,8 +95,7 @@ function AnimatedRoutes() {
         }
       />
       {/* Rutas de calculadoras eliminadas: BMI, BSA */}
-      {/* Función Renal */}
-      <Route path={pathRenal} element={<RenalFunctionPage />} />
+  {/* Función Renal eliminada: calculadora integrada en Herramientas / Clínicos */}
   {/* Antropometría (ruta antigua -> redirección) */}
   <Route path="/herramientas/antropometricas" element={<Navigate to="/herramientas/antropometricos" replace />} />
       {/* Página no encontrada */}

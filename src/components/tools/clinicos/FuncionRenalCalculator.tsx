@@ -41,7 +41,7 @@ function interpretGFR(gfr: number): string {
 }
 
 // Calculadora principal
-const FuncionRenalCalculator: React.FC = () => {
+const FuncionRenalCalculator: React.FC<{ embedded?: boolean }> = ({ embedded = false }) => {
   // Estado del formulario
   const [age, setAge] = React.useState<number | "">(65);
   const [weight, setWeight] = React.useState<number | "">(70);
@@ -101,35 +101,8 @@ const FuncionRenalCalculator: React.FC = () => {
   // Etiqueta de unidad de salida
   const outputUnit = formula === "cg" ? "ml/min" : "ml/min/1.73m²";
 
-  return (
-    <section className="w-full flex justify-center px-3 sm:px-0" aria-label="Calculadora de función renal">
-      {/* SEO opcional para esta sección (no imprescindible si la página ya define SEO) */}
-      <Seo
-        title="Calculadora de Función Renal (TFG Estimada)"
-        description="Estima la TFG/aclaramiento renal con fórmulas Cockcroft–Gault, MDRD y CKD–EPI (2009/2021). Conversión automática de unidades y resultado interpretado."
-      />
-      <Card className="w-full max-w-2xl">
-        <CardHeader>
-          <div className="flex items-start justify-between gap-3">
-            <div>
-              <CardTitle className="text-2xl">Calculadora de Función Renal (TFG Estimada)</CardTitle>
-              <CardDescription>
-                Estima la función renal mediante diferentes fórmulas (Cockcroft–Gault, MDRD y CKD–EPI)
-              </CardDescription>
-            </div>
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger aria-label="Información de fórmula">
-                  <Info className="w-5 h-5 text-slate-500" />
-                </TooltipTrigger>
-                <TooltipContent className="max-w-xs text-xs leading-snug">
-                  <p>{FORMULA_INFO[formula]}</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-          </div>
-        </CardHeader>
-        <CardContent className="space-y-4">
+  const content = (
+        <div className="space-y-4">
           {/* Fila 1: edad y sexo */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
@@ -214,7 +187,59 @@ const FuncionRenalCalculator: React.FC = () => {
               <p className="text-lg font-semibold">{interpretGFR(gfr)}</p>
             </div>
           </div>
-        </CardContent>
+        </div>
+  );
+
+  if (embedded) {
+    return (
+      <div>
+        {/* Tooltip inline for formula info */}
+        <div className="flex justify-end">
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger aria-label="Información de fórmula">
+                <Info className="w-5 h-5 text-slate-500" />
+              </TooltipTrigger>
+              <TooltipContent className="max-w-xs text-xs leading-snug">
+                <p>{FORMULA_INFO[formula]}</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </div>
+        {content}
+      </div>
+    );
+  }
+
+  return (
+    <section className="w-full flex justify-center px-3 sm:px-0" aria-label="Calculadora de función renal">
+      {/* SEO opcional para esta sección (no imprescindible si la página ya define SEO) */}
+      <Seo
+        title="Calculadora de Función Renal (TFG Estimada)"
+        description="Estima la TFG/aclaramiento renal con fórmulas Cockcroft–Gault, MDRD y CKD–EPI (2009/2021). Conversión automática de unidades y resultado interpretado."
+      />
+      <Card className="w-full max-w-2xl">
+        <CardHeader>
+          <div className="flex items-start justify-between gap-3">
+            <div>
+              <CardTitle className="text-2xl">Calculadora de Función Renal (TFG Estimada)</CardTitle>
+              <CardDescription>
+                Estima la función renal mediante diferentes fórmulas (Cockcroft–Gault, MDRD y CKD–EPI)
+              </CardDescription>
+            </div>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger aria-label="Información de fórmula">
+                  <Info className="w-5 h-5 text-slate-500" />
+                </TooltipTrigger>
+                <TooltipContent className="max-w-xs text-xs leading-snug">
+                  <p>{FORMULA_INFO[formula]}</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          </div>
+        </CardHeader>
+        <CardContent className="space-y-4">{content}</CardContent>
         <CardFooter className="block">
           <p className="text-center font-bold mt-6 text-sm text-gray-800 dark:text-gray-200">
             Estas herramientas son de uso académico e informativo. No reemplazan el juicio clínico ni las decisiones de un profesional de la salud.

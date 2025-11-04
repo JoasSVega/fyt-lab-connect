@@ -1,13 +1,12 @@
 import * as React from "react";
-import { Suspense, lazy } from "react";
+import { Suspense } from "react";
 import { useNavigate } from "react-router-dom";
 import { Stethoscope } from "lucide-react";
-const TFGCalculator = lazy(() => import("@/components/tools/clinicos/TFGCalculator"));
-import { pathRenal } from "@/pages/RenalFunctionPage";
 import Seo from "@/components/Seo";
+import FuncionRenalCalculator from "@/components/tools/clinicos/FuncionRenalCalculator";
 
 const Clinicos: React.FC = () => {
-  const [openTFG, setOpenTFG] = React.useState(false);
+  const [showRenal, setShowRenal] = React.useState(false);
   const navigate = useNavigate();
 
   return (
@@ -44,14 +43,16 @@ const Clinicos: React.FC = () => {
         {/* Función renal */}
         <div className="rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col">
           <h3 className="text-xl font-raleway font-bold mb-1" style={{ color: '#3B82F6' }}>Función renal</h3>
-          <p className="text-sm text-muted-foreground mb-4">Estimación rápida de aclaramiento de creatinina (Cockcroft-Gault). Incluye acceso a versión avanzada con múltiples fórmulas.</p>
-          <div className="mt-auto flex gap-3">
-            <button onClick={()=>setOpenTFG(true)} className="px-4 py-2 rounded-md bg-blue-600 text-white font-semibold hover:bg-blue-700">Abrir calculadora</button>
-            <button onClick={()=>navigate(pathRenal)} className="px-4 py-2 rounded-md border font-semibold hover:bg-blue-50">Versión avanzada</button>
-          </div>
-          <Suspense fallback={<div className="h-10 w-28 rounded-md bg-blue-100 animate-pulse mt-3" aria-hidden /> }>
-            <TFGCalculator open={openTFG} onOpenChange={setOpenTFG} onOpenAdvanced={()=>navigate(pathRenal)} />
-          </Suspense>
+          <p className="text-sm text-muted-foreground mb-4">Estima TFG/aclaramiento con Cockcroft–Gault, MDRD y CKD‑EPI.</p>
+          {!showRenal ? (
+            <div className="mt-auto">
+              <button onClick={()=>setShowRenal(true)} className="px-4 py-2 rounded-md bg-blue-600 text-white font-semibold hover:bg-blue-700">Abrir calculadora</button>
+            </div>
+          ) : (
+            <div className="mt-2">
+              <FuncionRenalCalculator embedded />
+            </div>
+          )}
         </div>
 
         {/* Dosis de carga / mantenimiento */}
