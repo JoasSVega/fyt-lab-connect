@@ -30,6 +30,8 @@ export type FormulaSpec = {
   description?: string;
   formulaLatex?: string;
   compute?: (values: Record<string, unknown>) => CalculationResult;
+  // Optional subset of fields specific to this formula; when present, UI will show these instead of the base fields
+  fields?: ReadonlyArray<FieldSpec>;
 };
 
 type Props = {
@@ -89,6 +91,7 @@ const CalculatorModal: React.FC<Props> = ({
   const [result, setResult] = React.useState<CalculationResult | null>(null);
   const [flipped, setFlipped] = React.useState(false);
   const [error, setError] = React.useState<string>("");
+  const [infoOpen, setInfoOpen] = React.useState(false);
 
   React.useEffect(() => {
     // reset on open
@@ -161,6 +164,33 @@ const CalculatorModal: React.FC<Props> = ({
     setFlipped(true);
   };
 
+  const handleReturn = () => {
+    setResult(null);
+    setFlipped(false);
+  };
+
+  // Derive effective fields per formula (if provided)
+  const effectiveFields = React.useMemo(() => {
+    if (!formulas || !selectedFormula) return fields;
+    const f = formulas.find((x) => x.id === selectedFormula);
+    return f?.fields && f.fields.length > 0 ? f.fields : fields;
+  }, [fields, formulas, selectedFormula]);
+
+  // When selected formula changes, trim values to visible fields and clear errors/result to prevent stale UI
+  React.useEffect(() => {
+    const allowed = new Set(effectiveFields.map((f) => f.name));
+    setValues((prev) => {
+      const next: Record<string, unknown> = {};
+      for (const k of Object.keys(prev)) {
+        if (allowed.has(k)) next[k] = prev[k];
+      }
+      return next;
+    });
+    setError("");
+    setResult(null);
+    setFlipped(false);
+  }, [effectiveFields]);
+
   // Public trigger button if used uncontrolled
   if (!isControlled) {
     return (
@@ -172,7 +202,7 @@ const CalculatorModal: React.FC<Props> = ({
           onClose={close}
           title={title}
           subtitle={subtitle}
-          fields={fields}
+          fields={effectiveFields}
           values={values}
           onInput={handleInput}
           formulas={formulas}
@@ -180,10 +210,13 @@ const CalculatorModal: React.FC<Props> = ({
           onSelectFormula={setSelectedFormula}
           onCalculate={handleCalculate}
           onClear={handleClear}
+          onReturn={handleReturn}
           result={result}
           flipped={flipped}
           error={error}
           categoryColor={categoryColor}
+          infoOpen={infoOpen}
+          setInfoOpen={setInfoOpen}
         />
       </div>
     );
@@ -197,7 +230,7 @@ const CalculatorModal: React.FC<Props> = ({
       onClose={close}
       title={title}
       subtitle={subtitle}
-      fields={fields}
+      fields={effectiveFields}
       values={values}
       onInput={handleInput}
       formulas={formulas}
@@ -205,10 +238,13 @@ const CalculatorModal: React.FC<Props> = ({
       onSelectFormula={setSelectedFormula}
       onCalculate={handleCalculate}
       onClear={handleClear}
+      onReturn={handleReturn}
       result={result}
       flipped={flipped}
       error={error}
       categoryColor={categoryColor}
+      infoOpen={infoOpen}
+      setInfoOpen={setInfoOpen}
     />
   );
 };
@@ -230,11 +266,14 @@ const CalculatorModalContent: React.FC<{
   onSelectFormula: (id?: string) => void;
   onCalculate: () => void;
   onClear: () => void;
+  onReturn: () => void;
   result: CalculationResult | null;
   flipped: boolean;
   error?: string;
   categoryColor: string;
-}> = ({ id, open, onClose, title, subtitle, fields, values, onInput, formulas, selectedFormula, onSelectFormula, onCalculate, onClear, result, flipped, error, categoryColor }) => {
+  infoOpen: boolean;
+  setInfoOpen: (open: boolean) => void;
+}> = ({ id, open, onClose, title, subtitle, fields, values, onInput, formulas, selectedFormula, onSelectFormula, onCalculate, onClear, onReturn, result, flipped, error, categoryColor, infoOpen, setInfoOpen }) => {
   return (
     <AnimatePresence>
       {open && (
@@ -243,8 +282,8 @@ const CalculatorModalContent: React.FC<{
           <motion.div className="absolute inset-0 bg-black/50" variants={defaultOverlay} initial="hidden" animate="visible" exit="exit" />
 
           {/* Card */}
-          <motion.div className="relative mx-auto mt-8 md:mt-16 w-[94vw] sm:w-[85vw] md:w-[70vw] lg:w-[60vw] xl:w-[50vw]" variants={defaultCard} initial="hidden" animate="visible" exit="exit">
-            <div className="relative rounded-2xl bg-white shadow-xl ring-1 ring-black/5 overflow-hidden">
+          <motion.div className="relative mx-auto mt-8 md:mt-16 w-[94vw] sm:w-[85vw] md:w-[70vw] lg:w-[60vw] xl:w-[50vw] max-h-[90vh]" variants={defaultCard} initial="hidden" animate="visible" exit="exit">
+            <div className="relative rounded-2xl bg-white shadow-xl ring-1 ring-black/5 overflow-hidden flex flex-col max-h-[90vh]">
               <div className="px-5 py-4 border-b flex items-start justify-between" style={{ background: `linear-gradient(to right, ${categoryColor}15, transparent)` }}>
                 <div>
                   <h2 id={`${id}-title`} className="text-xl sm:text-2xl font-raleway font-bold text-slate-900">{title}</h2>
@@ -267,14 +306,17 @@ const CalculatorModalContent: React.FC<{
                       </select>
                     </div>
                   ) : null}
-                  {/* Info tooltip simple */}
+                  {/* Info button opens a responsive modal */}
                   {!!formulas?.length && (
-                    <div className="group relative">
-                      <Info className="w-5 h-5 text-slate-500" aria-hidden="true" />
-                      <div role="tooltip" className="absolute right-0 top-6 hidden group-hover:block z-10 max-w-xs rounded-md border bg-white p-2 text-xs shadow">
-                        <p>{formulas.find((f) => f.id === selectedFormula)?.description || formulas.find((f) => f.id === selectedFormula)?.formulaLatex}</p>
-                      </div>
-                    </div>
+                    <button
+                      type="button"
+                      aria-label="Ver fórmulas"
+                      className="p-1 rounded-md hover:bg-slate-100"
+                      onClick={() => setInfoOpen(true)}
+                      title="Ver fórmulas"
+                    >
+                      <Info className="w-5 h-5 text-slate-600" />
+                    </button>
                   )}
                   <button onClick={onClose} aria-label="Cerrar" className="p-1 rounded-md hover:bg-slate-100">
                     <X className="w-5 h-5" />
@@ -283,7 +325,7 @@ const CalculatorModalContent: React.FC<{
               </div>
 
               {/* Body with 3D flip container */}
-              <div className="relative p-5 min-h-[220px]">
+              <div className="relative p-5 min-h-[220px] overflow-y-auto">
                 <div className={`relative transition-transform duration-500 [transform-style:preserve-3d] ${flipped ? "[transform:rotateY(180deg)]" : ""}`}>
                   {/* Front: form */}
                   <div className="[backface-visibility:hidden] absolute inset-0">
@@ -356,13 +398,45 @@ const CalculatorModalContent: React.FC<{
                       )}
                     </div>
                     <div className="mt-4 flex justify-center">
-                      <button type="button" onClick={()=>{ /* regresar */ }} className="px-4 py-2 rounded-md border">Volver</button>
+                      <button type="button" onClick={onReturn} className="px-4 py-2 rounded-md border">Volver</button>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </motion.div>
+
+          {/* Info modal for formulas */}
+          {infoOpen && (
+            <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
+              <div className="absolute inset-0 bg-black/50" onClick={() => setInfoOpen(false)} />
+              <div className="relative z-10 w-[90vw] max-w-[600px] max-h-[85vh] overflow-y-auto rounded-2xl bg-white shadow-lg ring-1 ring-slate-200 p-5">
+                <div className="flex items-start justify-between mb-2">
+                  <h4 className="text-lg font-semibold text-slate-900">Fórmulas</h4>
+                  <button onClick={() => setInfoOpen(false)} aria-label="Cerrar" className="p-1 rounded-md hover:bg-slate-100">
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+                <div className="space-y-3">
+                  {formulas && formulas.length > 0 ? (
+                    formulas.map((f) => (
+                      <div key={f.id} className="rounded-xl bg-slate-50 p-3">
+                        <div className="text-sm font-semibold text-slate-800">{f.label}</div>
+                        {f.formulaLatex ? (
+                          <div className="mt-1 text-sky-700 font-mono text-sm overflow-x-auto">{f.formulaLatex}</div>
+                        ) : null}
+                        {f.description ? (
+                          <div className="mt-1 text-xs text-slate-600 leading-relaxed">{f.description}</div>
+                        ) : null}
+                      </div>
+                    ))
+                  ) : (
+                    <div className="text-sm text-slate-600">No hay fórmulas disponibles.</div>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
         </motion.div>
       )}
     </AnimatePresence>

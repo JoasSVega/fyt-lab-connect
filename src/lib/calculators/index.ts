@@ -180,10 +180,31 @@ export const CalculatorsRegistry = {
       { name: "age", label: "Edad", type: "number", unit: "años" },
     ],
     formulas: [
-      { id: "child", label: "Child‑Pugh", compute: computeChildPugh },
-      { id: "meld", label: "MELD / MELD‑Na", compute: computeMELD },
-      { id: "apri", label: "APRI", compute: computeAPRI },
-      { id: "fib4", label: "FIB‑4", compute: computeFIB4 },
+      { id: "child", label: "Child‑Pugh", compute: computeChildPugh, fields: [
+        { name: "bili", label: "Bilirrubina total", type: "number", unit: "mg/dL o µmol/L" },
+        { name: "biliUnit", label: "Unidad de bilirrubina", type: "select", options: [ { value: "mgdl", label: "mg/dL" }, { value: "umol", label: "µmol/L" } ], placeholder: "Unidad" },
+        { name: "albumin", label: "Albúmina", type: "number", unit: "g/dL" },
+        { name: "inr", label: "INR", type: "number" },
+        { name: "ascites", label: "Ascitis", type: "select", options: [ { value: "none", label: "Ninguna" }, { value: "mild", label: "Leve" }, { value: "moderate", label: "Moderada" }, { value: "severe", label: "Severa" } ] },
+        { name: "enceph", label: "Encefalopatía", type: "select", options: [ { value: "none", label: "Ninguna" }, { value: "mild", label: "Leve (I–II)" }, { value: "moderate", label: "Moderada" }, { value: "severe", label: "Severa (III–IV)" } ] },
+      ] },
+      { id: "meld", label: "MELD / MELD‑Na", compute: computeMELD, fields: [
+        { name: "inr", label: "INR", type: "number" },
+        { name: "bili", label: "Bilirrubina total", type: "number", unit: "mg/dL" },
+        { name: "creat", label: "Creatinina", type: "number", unit: "mg/dL" },
+        { name: "sodium", label: "Sodio sérico (opcional)", type: "number", unit: "mmol/L" },
+      ] },
+      { id: "apri", label: "APRI", compute: computeAPRI, fields: [
+        { name: "ast", label: "AST", type: "number", unit: "UI/L" },
+        { name: "astULN", label: "LSN AST", type: "number", unit: "UI/L" },
+        { name: "platelets", label: "Plaquetas", type: "number", unit: "10^9/L" },
+      ] },
+      { id: "fib4", label: "FIB‑4", compute: computeFIB4, fields: [
+        { name: "age", label: "Edad", type: "number", unit: "años" },
+        { name: "ast", label: "AST", type: "number", unit: "UI/L" },
+        { name: "alt", label: "ALT", type: "number", unit: "UI/L" },
+        { name: "platelets", label: "Plaquetas", type: "number", unit: "10^9/L" },
+      ] },
     ],
   },
   dose: {
@@ -206,8 +227,26 @@ export const CalculatorsRegistry = {
       { name: "drug", label: "Nombre del fármaco (opcional)", type: "text" },
     ],
     formulas: [
-      { id: "perWeight", label: "Por peso (kg)", compute: (v) => computeDoseByWeight(v, "weight") },
-      { id: "perBSA", label: "Por SC (m²)", compute: (v) => computeDoseByWeight(v, "bsa") },
+      { id: "perWeight", label: "Por peso (kg)", compute: (v) => computeDoseByWeight(v, "weight"), fields: [
+        { name: "weight", label: "Peso corporal", type: "number", unit: "kg", validation: { min: 1 } },
+        { name: "dosePer", label: "Dosis recomendada", type: "number" },
+        { name: "unit", label: "Unidad", type: "select", options: [
+          { value: "mg/kg", label: "mg/kg" },
+          { value: "µg/kg", label: "µg/kg" },
+        ] },
+        { name: "frequency", label: "Frecuencia / intervalo (opcional)", type: "text" },
+        { name: "drug", label: "Nombre del fármaco (opcional)", type: "text" },
+      ] },
+      { id: "perBSA", label: "Por SC (m²)", compute: (v) => computeDoseByWeight(v, "bsa"), fields: [
+        { name: "bsa", label: "Superficie corporal", type: "number", unit: "m²", validation: { min: 0 } },
+        { name: "dosePer", label: "Dosis recomendada", type: "number" },
+        { name: "unit", label: "Unidad", type: "select", options: [
+          { value: "mg/m²", label: "mg/m²" },
+          { value: "µg/m²", label: "µg/m²" },
+        ] },
+        { name: "frequency", label: "Frecuencia / intervalo (opcional)", type: "text" },
+        { name: "drug", label: "Nombre del fármaco (opcional)", type: "text" },
+      ] },
     ],
   },
   reconstitution: {
@@ -226,7 +265,16 @@ export const CalculatorsRegistry = {
       { name: "addDiluent", label: "Agregar diluyente adicional", type: "toggle" },
       { name: "weight", label: "Peso del paciente (opcional)", type: "number", unit: "kg" },
     ],
-    formulas: [ { id: "reconst", label: "Calcular", compute: (v) => computeReconstitution(v) } ],
+    formulas: [ { id: "reconst", label: "Calcular", compute: (v) => computeReconstitution(v), fields: [
+      { name: "abId", label: "Antibiótico", type: "select", options: (antibiotics as Array<{id:string; name:string}>).map((a) => ({ value: a.id, label: a.name })) },
+      { name: "reconstMl", label: "Volumen de reconstitución", type: "number", unit: "mL", validation: { min: 0 } },
+      { name: "dose", label: "Dosis a administrar", type: "number" },
+      { name: "doseUnit", label: "Unidad de dosis", type: "select", options: [ { value: "mg", label: "mg" }, { value: "g", label: "g" } ] },
+      { name: "desiredConc", label: "Concentración final (opcional)", type: "number", unit: "mg/mL" },
+      { name: "finalVolume", label: "Volumen final (opcional)", type: "number", unit: "mL" },
+      { name: "addDiluent", label: "Agregar diluyente adicional", type: "toggle" },
+      { name: "weight", label: "Peso del paciente (opcional)", type: "number", unit: "kg" },
+    ] } ],
   },
 } as const;
 
