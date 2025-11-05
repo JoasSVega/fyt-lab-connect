@@ -36,6 +36,14 @@ export type FormulaSpec = {
   compute?: (values: Record<string, unknown>) => CalculationResult;
   // Optional subset of fields specific to this formula; when present, UI will show these instead of the base fields
   fields?: ReadonlyArray<FieldSpec>;
+  // Optional scoring definition for categorical/weighted systems (e.g., Child-Pugh)
+  scoring?: {
+    title?: string;
+    rows: Array<{
+      label: string;
+      options: Array<{ label: string; points: number }>;
+    }>;
+  };
 };
 
 type Props = {
@@ -477,6 +485,12 @@ const CalculatorModalContent: React.FC<{
                   {formulas && formulas.length > 0 ? (
                     formulas.map((f, idx) => {
                       const exprLatex = ensureLatexForFormula(f);
+                      const hasScoring = !!f.scoring && f.scoring.rows?.length;
+                      if (!exprLatex && !hasScoring) {
+                        // Soft warning for audit purposes
+                        // eslint-disable-next-line no-console
+                        console.warn(`[calculators] Fórmula sin expresión ni scoring: ${f.id} (${f.label})`);
+                      }
                       return (
                         <div data-testid={`formula-item-${idx+1}`} key={f.id} className="rounded-xl bg-slate-50 p-3">
                           <div className="text-sm font-semibold text-slate-800">{idx + 1}. {f.label}</div>
@@ -484,8 +498,29 @@ const CalculatorModalContent: React.FC<{
                             <div className="mt-1 overflow-x-auto" data-testid="formula-latex">
                               <Latex expression={exprLatex} display className="block text-sky-700 dark:text-sky-300 text-base" />
                             </div>
+                          ) : hasScoring ? (
+                            <div className="mt-2 space-y-2">
+                              <div data-testid="formula-latex" className="overflow-x-auto">
+                                <Latex expression={String.raw`\\mathrm{Puntuaci\\'on}=\\sum_{i=1}^{n}\\text{Puntos}(i)`} display className="block text-sky-700 dark:text-sky-300 text-base" />
+                              </div>
+                              <div className="space-y-2">
+                                {f.scoring!.rows.map((row, i2) => (
+                                  <div key={i2} className="rounded-lg bg-white border border-slate-200 p-2">
+                                    <div className="text-xs font-semibold text-slate-700">{row.label}</div>
+                                    <ul className="mt-1 space-y-1">
+                                      {row.options.map((op, j2) => (
+                                        <li key={j2} className="text-xs text-slate-600 flex items-start gap-2">
+                                          <span className="inline-block min-w-12 rounded border border-slate-200 px-1 py-0.5 text-[11px] text-slate-700">{op.points} pt</span>
+                                          <span className="flex-1">{op.label}</span>
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
                           ) : (
-                            <div className="mt-1 text-xs italic text-slate-500">Fórmula no disponible</div>
+                            <div className="mt-1 text-xs italic text-slate-500">Fórmula o sistema de puntuación no disponible</div>
                           )}
                         </div>
                       );

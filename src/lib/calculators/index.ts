@@ -46,9 +46,9 @@ export const CalculatorsRegistry = {
     ] as FieldSpec[],
     formulas: [
       { id: "cg", label: "Cockcroft–Gault", description: "CrCl en mL/min", expressionLatex: String.raw`\mathrm{CrCl}=\frac{(140-\text{edad})\times \text{peso}\times (0.85\;\text{si mujer})}{72\times SCr_{mg/dL}}`, compute: computeCockcroft },
-      { id: "mdrd", label: "MDRD (4v)", description: "TFG en mL/min/1.73m²", expressionLatex: String.raw`\mathrm{TFG}=175\times (SCr)^{-1.154}\times (\text{edad})^{-0.203}\times (0.742^{[\text{mujer}]})\times (1.212^{[\text{afro}]})`, compute: computeMDRD4 },
-      { id: "ckd2009", label: "CKD‑EPI 2009", expressionLatex: String.raw`\mathrm{TFG}=141\times \min\left(\tfrac{SCr}{\kappa},1\right)^{\alpha}\times \max\left(\tfrac{SCr}{\kappa},1\right)^{-1.209}\times 0.993^{\text{edad}}\times 1.018^{[\text{mujer}]}\times 1.159^{[\text{afro}]}`, compute: computeCKDEPI2009 },
-      { id: "ckd2021", label: "CKD‑EPI 2021", expressionLatex: String.raw`\mathrm{TFG}=142\times \min\left(\tfrac{SCr}{\kappa},1\right)^{\alpha}\times \max\left(\tfrac{SCr}{\kappa},1\right)^{-1.200}\times 0.9938^{\text{edad}}\times 1.012^{[\text{mujer}]}`, compute: computeCKDEPI2021 },
+  { id: "mdrd", label: "MDRD (4v)", description: "TFG en mL/min/1.73m²", expressionLatex: String.raw`\mathrm{TFG}=175\times (SCr)^{-1.154}\times (\text{edad})^{-0.203}\times (0.742^{[\text{femenino}]})\times (1.212^{[\text{afro}]})`, compute: computeMDRD4 },
+  { id: "ckd2009", label: "CKD‑EPI 2009", expressionLatex: String.raw`\mathrm{TFG}=141\times \min\left(\tfrac{SCr}{\kappa},1\right)^{\alpha}\times \max\left(\tfrac{SCr}{\kappa},1\right)^{-1.209}\times 0.993^{\text{edad}}\times 1.018^{[\text{femenino}]}\times 1.159^{[\text{afro}]}`, compute: computeCKDEPI2009 },
+  { id: "ckd2021", label: "CKD‑EPI 2021", expressionLatex: String.raw`\mathrm{TFG}=142\times \min\left(\tfrac{SCr}{\kappa},1\right)^{\alpha}\times \max\left(\tfrac{SCr}{\kappa},1\right)^{-1.200}\times 0.9938^{\text{edad}}\times 1.012^{[\text{femenino}]}`, compute: computeCKDEPI2021 },
     ] as FormulaSpec[],
   },
   bmi: {
@@ -87,7 +87,7 @@ export const CalculatorsRegistry = {
       { name: "age", label: "Edad", type: "number", unit: "años", validation: { required: true, min: 5, max: 120 } },
       { name: "sex", label: "Sexo", type: "select", options: [ { value: "male", label: "Masculino" }, { value: "female", label: "Femenino" } ], placeholder: "Seleccione…", validation: { required: true } },
     ],
-  formulas: [ { id: "deurenberg", label: "Deurenberg", description: "% Grasa corporal", expressionLatex: String.raw`\%\,\mathrm{Grasa}=1.2\times \mathrm{IMC}+0.23\times \text{edad}-10.8\times [\text{varón}]-5.4`, compute: computeBodyFat } ],
+  formulas: [ { id: "deurenberg", label: "Deurenberg", description: "% Grasa corporal", expressionLatex: String.raw`\%\,\mathrm{Grasa}=1.2\times \mathrm{IMC}+0.23\times \text{edad}-10.8\times [\text{masculino}]-5.4`, compute: computeBodyFat } ],
   },
   bmr: {
     id: "bmr",
@@ -102,8 +102,8 @@ export const CalculatorsRegistry = {
       { name: "sex", label: "Sexo", type: "select", options: [ { value: "male", label: "Masculino" }, { value: "female", label: "Femenino" } ], placeholder: "Seleccione…", validation: { required: true } },
     ],
     formulas: [
-  { id: "mifflin", label: "Mifflin–St Jeor", description: "kcal/día", expressionLatex: String.raw`\mathrm{CEB}=10\,\text{peso}+6.25\,\text{talla}-5\,\text{edad}+\beta\quad (\beta=5\;\text{varón},\;-161\;\text{mujer})`, compute: computeBMRMifflin },
-  { id: "harris", label: "Harris–Benedict", description: "kcal/día", expressionLatex: String.raw`\mathrm{CEB}=\alpha+13.75\,\text{peso}+5.003\,\text{talla}-6.755\,\text{edad}\; (\alpha=66.5\;\text{varón})\\ \mathrm{CEB}=\alpha+9.563\,\text{peso}+1.850\,\text{talla}-4.676\,\text{edad}\; (\alpha=655.1\;\text{mujer})`, compute: computeBMRHarris },
+  { id: "mifflin", label: "Mifflin–St Jeor", description: "kcal/día", expressionLatex: String.raw`\mathrm{CEB}=10\,\text{peso}+6.25\,\text{talla}-5\,\text{edad}+\beta\quad (\beta=5\;\text{masculino},\;-161\;\text{femenino})`, compute: computeBMRMifflin },
+  { id: "harris", label: "Harris–Benedict", description: "kcal/día", expressionLatex: String.raw`\mathrm{CEB}=\alpha+13.75\,\text{peso}+5.003\,\text{talla}-6.755\,\text{edad}\; (\alpha=66.5\;\text{masculino})\\ \mathrm{CEB}=\alpha+9.563\,\text{peso}+1.850\,\text{talla}-4.676\,\text{edad}\; (\alpha=655.1\;\text{femenino})`, compute: computeBMRHarris },
     ],
   },
   idealWeight: {
@@ -117,9 +117,9 @@ export const CalculatorsRegistry = {
       { name: "sex", label: "Sexo", type: "select", options: [ { value: "male", label: "Masculino" }, { value: "female", label: "Femenino" } ], placeholder: "Seleccione…", validation: { required: true } },
     ],
     formulas: [
-      { id: "devine", label: "Devine (1974)", expressionLatex: String.raw`\mathrm{PI}_{\text{varón}}=50+2.3\,(\tfrac{\text{talla\,(in)}}{1}-60)\\ \mathrm{PI}_{\text{mujer}}=45.5+2.3\,(\tfrac{\text{talla\,(in)}}{1}-60)`, compute: computeIdealDevine },
-      { id: "robinson", label: "Robinson (1983)", expressionLatex: String.raw`\mathrm{PI}_{\text{varón}}=52+1.9\,(\text{in}-60)\\ \mathrm{PI}_{\text{mujer}}=49+1.7\,(\text{in}-60)`, compute: computeIdealRobinson },
-      { id: "miller", label: "Miller (1983)", expressionLatex: String.raw`\mathrm{PI}_{\text{varón}}=56.2+1.41\,(\text{in}-60)\\ \mathrm{PI}_{\text{mujer}}=53.1+1.36\,(\text{in}-60)`, compute: computeIdealMiller },
+  { id: "devine", label: "Devine (1974)", expressionLatex: String.raw`\mathrm{PI}_{\text{masculino}}=50+2.3\,(\tfrac{\text{talla\,(in)}}{1}-60)\\ \mathrm{PI}_{\text{femenino}}=45.5+2.3\,(\tfrac{\text{talla\,(in)}}{1}-60)`, compute: computeIdealDevine },
+  { id: "robinson", label: "Robinson (1983)", expressionLatex: String.raw`\mathrm{PI}_{\text{masculino}}=52+1.9\,(\text{in}-60)\\ \mathrm{PI}_{\text{femenino}}=49+1.7\,(\text{in}-60)`, compute: computeIdealRobinson },
+  { id: "miller", label: "Miller (1983)", expressionLatex: String.raw`\mathrm{PI}_{\text{masculino}}=56.2+1.41\,(\text{in}-60)\\ \mathrm{PI}_{\text{femenino}}=53.1+1.36\,(\text{in}-60)`, compute: computeIdealMiller },
     ],
   },
   act: {
@@ -135,7 +135,7 @@ export const CalculatorsRegistry = {
       { name: "sex", label: "Sexo", type: "select", options: [ { value: "male", label: "Masculino" }, { value: "female", label: "Femenino" } ], placeholder: "Seleccione…", validation: { required: true } },
     ],
     formulas: [
-      { id: "watson", label: "Watson", expressionLatex: String.raw`\mathrm{ACT}_{\text{varón}}=2.447-0.09516\,\text{edad}+0.1074\,\text{talla}+0.3362\,\text{peso}\\ \mathrm{ACT}_{\text{mujer}}=-2.097+0.1069\,\text{talla}+0.2466\,\text{peso}` , compute: computeACTWatson },
+  { id: "watson", label: "Watson", expressionLatex: String.raw`\mathrm{ACT}_{\text{masculino}}=2.447-0.09516\,\text{edad}+0.1074\,\text{talla}+0.3362\,\text{peso}\\ \mathrm{ACT}_{\text{femenino}}=-2.097+0.1069\,\text{talla}+0.2466\,\text{peso}` , compute: computeACTWatson },
       { id: "chumlea", label: "Chumlea", expressionLatex: String.raw`\mathrm{ACT}_{\text{mujer}}=0.34454\,\text{talla}+0.183809\,\text{peso}-35.270121`, compute: computeACTChumlea },
     ],
   },
@@ -152,9 +152,20 @@ export const CalculatorsRegistry = {
       { name: "sex", label: "Sexo", type: "select", options: [ { value: "male", label: "Masculino" }, { value: "female", label: "Femenino" } ], placeholder: "Seleccione…", validation: { required: true } },
     ],
     formulas: [
-      { id: "james", label: "James", expressionLatex: String.raw`\mathrm{MM}_{\text{varón}}=1.1\,\text{peso}-128\,\Big(\tfrac{\text{peso}}{\text{talla}}\Big)^{2}\\ \mathrm{MM}_{\text{mujer}}=1.07\,\text{peso}-148\,\Big(\tfrac{\text{peso}}{\text{talla}}\Big)^{2}`, compute: computeMMCJames },
-      { id: "hume", label: "Hume", expressionLatex: String.raw`\mathrm{MM}_{\text{varón}}=0.32810\,\text{peso}+0.33929\,\text{talla}-29.5336\\ \mathrm{MM}_{\text{mujer}}=0.29569\,\text{peso}+0.41813\,\text{talla}-43.2933`, compute: computeMMCHume },
-      { id: "lean", label: "Lean (% grasa)", description: "Masa magra a partir de % grasa", expressionLatex: String.raw`\mathrm{MM}=\text{peso}\times (1-\tfrac{\%\,\text{grasa}}{100})`, compute: computeLeanMassFromBF },
+      { id: "james", label: "James", expressionLatex: String.raw`\mathrm{MM}_{\text{masculino}}=1.1\,\text{peso}-128\,\Big(\tfrac{\text{peso}}{\text{talla}}\Big)^{2}\\ \mathrm{MM}_{\text{femenino}}=1.07\,\text{peso}-148\,\Big(\tfrac{\text{peso}}{\text{talla}}\Big)^{2}`, compute: computeMMCJames, fields: [
+        { name: "weight", label: "Peso", type: "number", unit: "kg", validation: { required: true, min: 20, max: 300 } },
+        { name: "height", label: "Talla", type: "number", unit: "cm", validation: { required: true, min: 100, max: 250 } },
+        { name: "sex", label: "Sexo", type: "select", options: [ { value: "male", label: "Masculino" }, { value: "female", label: "Femenino" } ], placeholder: "Seleccione…", validation: { required: true } },
+      ] },
+      { id: "hume", label: "Hume", expressionLatex: String.raw`\mathrm{MM}_{\text{masculino}}=0.32810\,\text{peso}+0.33929\,\text{talla}-29.5336\\ \mathrm{MM}_{\text{femenino}}=0.29569\,\text{peso}+0.41813\,\text{talla}-43.2933`, compute: computeMMCHume, fields: [
+        { name: "weight", label: "Peso", type: "number", unit: "kg", validation: { required: true, min: 20, max: 300 } },
+        { name: "height", label: "Talla", type: "number", unit: "cm", validation: { required: true, min: 100, max: 250 } },
+        { name: "sex", label: "Sexo", type: "select", options: [ { value: "male", label: "Masculino" }, { value: "female", label: "Femenino" } ], placeholder: "Seleccione…", validation: { required: true } },
+      ] },
+      { id: "lean", label: "Lean (% grasa)", description: "Masa magra a partir de % grasa", expressionLatex: String.raw`\mathrm{MM}=\text{peso}\times (1-\tfrac{\%\,\text{grasa}}{100})`, compute: computeLeanMassFromBF, fields: [
+        { name: "weight", label: "Peso", type: "number", unit: "kg", validation: { required: true, min: 20, max: 300 } },
+        { name: "bf", label: "% Grasa corporal", type: "number", unit: "%", validation: { required: true, min: 0, max: 100 } },
+      ] },
     ],
   },
   hepatic: {
@@ -187,7 +198,16 @@ export const CalculatorsRegistry = {
         { name: "inr", label: "INR", type: "number" },
         { name: "ascites", label: "Ascitis", type: "select", options: [ { value: "none", label: "Ninguna" }, { value: "mild", label: "Leve" }, { value: "moderate", label: "Moderada" }, { value: "severe", label: "Severa" } ] },
         { name: "enceph", label: "Encefalopatía", type: "select", options: [ { value: "none", label: "Ninguna" }, { value: "mild", label: "Leve (I–II)" }, { value: "moderate", label: "Moderada" }, { value: "severe", label: "Severa (III–IV)" } ] },
-      ] },
+      ], scoring: {
+        title: "Child‑Pugh",
+        rows: [
+          { label: "Bilirrubina (mg/dL)", options: [ { label: "< 2", points: 1 }, { label: "2–3", points: 2 }, { label: "> 3", points: 3 } ] },
+          { label: "Albúmina (g/dL)", options: [ { label: "> 3.5", points: 1 }, { label: "2.8–3.5", points: 2 }, { label: "< 2.8", points: 3 } ] },
+          { label: "INR", options: [ { label: "< 1.7", points: 1 }, { label: "1.7–2.3", points: 2 }, { label: "> 2.3", points: 3 } ] },
+          { label: "Ascitis", options: [ { label: "Ausente", points: 1 }, { label: "Leve/Controlada", points: 2 }, { label: "Moderada/Severa", points: 3 } ] },
+          { label: "Encefalopatía", options: [ { label: "Ausente", points: 1 }, { label: "Grado I–II", points: 2 }, { label: "Grado III–IV", points: 3 } ] },
+        ]
+      } },
   { id: "meld", label: "MELD / MELD‑Na", description: "Modelo de enfermedad hepática terminal", expressionLatex: String.raw`\mathrm{MELD}=3.78\ln(\text{bili})+11.2\ln(\text{INR})+9.57\ln(\text{creat})+6.43\\ \mathrm{MELD\mbox{-}Na}=\mathrm{MELD}+1.59\,(135-\text{Na})`, compute: computeMELD, fields: [
         { name: "inr", label: "INR", type: "number" },
         { name: "bili", label: "Bilirrubina total", type: "number", unit: "mg/dL" },
