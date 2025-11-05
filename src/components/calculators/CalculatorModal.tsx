@@ -333,24 +333,30 @@ const CalculatorModalContent: React.FC<{
                     <button
                       type="button"
                       aria-label="Ver fórmulas"
-                      className="p-1 rounded-md hover:bg-slate-100 touch-manipulation"
+                      className="inline-flex h-10 w-10 items-center justify-center rounded-lg hover:bg-slate-100 touch-manipulation"
                       onClick={() => setInfoOpen(true)}
                       title="Ver fórmulas"
                     >
                       <Info className="w-5 h-5 text-slate-600" />
                     </button>
                   )}
-                  <button onClick={onClose} aria-label="Cerrar" className="p-1 rounded-md hover:bg-slate-100 touch-manipulation">
+                  <button onClick={onClose} aria-label="Cerrar" className="inline-flex h-10 w-10 items-center justify-center rounded-lg hover:bg-slate-100 touch-manipulation">
                     <X className="w-5 h-5" />
                   </button>
                 </div>
               </div>
 
-              {/* Body with 3D flip container */}
-              <div className="relative p-5 min-h-[220px]">
-                <div className={`relative transition-transform duration-500 [transform-style:preserve-3d] ${flipped ? "[transform:rotateY(180deg)]" : ""}`}>
-                  {/* Front: form */}
-                  <div className={`[backface-visibility:hidden] absolute inset-0 ${flipped ? "pointer-events-none" : ""}`} aria-hidden={flipped}>
+              {/* Body with conditional sides (no overlapping layers) */}
+              <div className="relative p-5">
+                <AnimatePresence mode="wait" initial={false}>
+                  {!flipped ? (
+                    <motion.div
+                      key="front"
+                      initial={{ rotateY: 90, opacity: 0 }}
+                      animate={{ rotateY: 0, opacity: 1 }}
+                      exit={{ rotateY: -90, opacity: 0 }}
+                      transition={{ duration: 0.35, ease: "easeInOut" }}
+                    >
                     <form className="grid grid-cols-1 md:grid-cols-2 gap-4" onSubmit={(e)=>{ e.preventDefault(); onCalculate(); }}>
                       {fields.map((f, idx) => (
                         <div key={f.name} className="flex flex-col gap-1">
@@ -401,30 +407,36 @@ const CalculatorModalContent: React.FC<{
                         <button type="button" onClick={onClear} className="px-4 py-2 rounded-md border">Limpiar</button>
                       </div>
                     </form>
-                  </div>
-
-                  {/* Back: result */}
-                  <div className="[backface-visibility:hidden] [transform:rotateY(180deg)] absolute inset-0" aria-hidden={!flipped}>
-                    <div className={`rounded-xl border p-6 text-center ${getSeverityClasses(result?.severity)}`}>
-                      {result ? (
-                        <>
-                          <div className="text-sm uppercase tracking-wide opacity-70 mb-1">Resultado</div>
-                          <div className="text-3xl font-mono font-bold">
-                            {typeof result.value === "number" ? result.value.toString() : result.value}
-                            {result.unit ? <span className="ml-1 text-base font-sans">{result.unit}</span> : null}
-                          </div>
-                          {result.interpretation ? <div className="mt-2 text-base font-semibold">{result.interpretation}</div> : null}
-                          {result.detailsHtml ? <div className="mt-3 text-sm leading-relaxed">{result.detailsHtml}</div> : null}
-                        </>
-                      ) : (
-                        <div className="text-slate-600">Complete los campos y presione Calcular.</div>
-                      )}
-                    </div>
-                    <div className="mt-4 flex justify-center">
-                      <button type="button" onClick={onReturn} className="px-4 py-2 rounded-md border">Volver</button>
-                    </div>
-                  </div>
-                </div>
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="back"
+                      initial={{ rotateY: -90, opacity: 0 }}
+                      animate={{ rotateY: 0, opacity: 1 }}
+                      exit={{ rotateY: 90, opacity: 0 }}
+                      transition={{ duration: 0.35, ease: "easeInOut" }}
+                    >
+                      <div className={`rounded-xl border p-6 text-center ${getSeverityClasses(result?.severity)}`}>
+                        {result ? (
+                          <>
+                            <div className="text-sm uppercase tracking-wide opacity-70 mb-1">Resultado</div>
+                            <div className="text-3xl font-mono font-bold">
+                              {typeof result.value === "number" ? result.value.toString() : result.value}
+                              {result.unit ? <span className="ml-1 text-base font-sans">{result.unit}</span> : null}
+                            </div>
+                            {result.interpretation ? <div className="mt-2 text-base font-semibold">{result.interpretation}</div> : null}
+                            {result.detailsHtml ? <div className="mt-3 text-sm leading-relaxed">{result.detailsHtml}</div> : null}
+                          </>
+                        ) : (
+                          <div className="text-slate-600">Complete los campos y presione Calcular.</div>
+                        )}
+                      </div>
+                      <div className="mt-4 flex justify-center">
+                        <button type="button" onClick={onReturn} className="px-4 py-2 rounded-md border">Volver</button>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             </div>
           </motion.div>
