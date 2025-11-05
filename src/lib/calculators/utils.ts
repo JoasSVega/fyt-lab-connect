@@ -26,7 +26,7 @@ export function resetValuesForFields(_prev: Record<string, unknown>, _fields: Re
  */
 export function ensureLatexForFormula(f: FormulaSpec): string | null {
   if (f.expressionLatex) return f.expressionLatex;
-  if ((f as any).formulaLatex) return (f as any).formulaLatex as string;
+  if (f.formulaLatex) return f.formulaLatex;
   const alt = f.expressionText || f.description;
   if (!alt) return null;
   return textToLatex(alt);

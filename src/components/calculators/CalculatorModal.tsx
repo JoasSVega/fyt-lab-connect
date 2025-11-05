@@ -488,7 +488,6 @@ const CalculatorModalContent: React.FC<{
                       const hasScoring = !!f.scoring && f.scoring.rows?.length;
                       if (!exprLatex && !hasScoring) {
                         // Soft warning for audit purposes
-                        // eslint-disable-next-line no-console
                         console.warn(`[calculators] Fórmula sin expresión ni scoring: ${f.id} (${f.label})`);
                       }
                       return (
