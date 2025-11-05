@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import React from 'react';
-import CalculatorModal, { FieldSpec, FormulaSpec, CalculationResult } from '@/components/calculators/CalculatorModal';
+import CalculatorModal, { FieldSpec, FormulaSpec } from '@/components/calculators/CalculatorModal';
 
 const fields: ReadonlyArray<FieldSpec> = [
   { name: 'weight', label: 'Peso', type: 'number', unit: 'kg', validation: { required: true, min: 20, max: 300 } },
@@ -15,7 +15,7 @@ const formulas: ReadonlyArray<FormulaSpec> = [
       const w = Number(values.weight);
       const h = Number(values.height) / 100;
       const v = w / (h * h);
-      return { value: Number(v.toFixed(2)), unit: 'kg/m²' } as CalculationResult;
+      return { value: Number(v.toFixed(2)), unit: 'kg/m²' };
     },
   },
 ];
