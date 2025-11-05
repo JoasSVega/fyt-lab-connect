@@ -1,7 +1,7 @@
 import { CalculationResult } from "@/components/calculators/CalculatorModal";
 import { cockcroftGault, mdrd4, ckdEpi2009, ckdEpi2021 } from "@/utils/renal";
 
-type Values = Record<string, any>;
+type Values = Record<string, unknown>;
 
 export function computeCockcroft(values: Values): CalculationResult {
   const age = Number(values.age);

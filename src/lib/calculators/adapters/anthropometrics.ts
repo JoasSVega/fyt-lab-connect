@@ -1,7 +1,7 @@
 import { CalculationResult } from "@/components/calculators/CalculatorModal";
 import { bmi, bsaDuBois } from "@/components/calculators/antropometricas/formulas";
 
-type Values = Record<string, any>;
+type Values = Record<string, unknown>;
 
 export function computeBMI(values: Values): CalculationResult {
   const weight = Number(values.weight);

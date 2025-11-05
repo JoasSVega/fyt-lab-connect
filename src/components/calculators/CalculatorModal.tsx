@@ -29,7 +29,7 @@ export type FormulaSpec = {
   label: string;
   description?: string;
   formulaLatex?: string;
-  compute?: (values: Record<string, any>) => CalculationResult;
+  compute?: (values: Record<string, unknown>) => CalculationResult;
 };
 
 type Props = {
@@ -38,7 +38,7 @@ type Props = {
   subtitle?: string;
   fields: ReadonlyArray<FieldSpec>;
   formulas?: ReadonlyArray<FormulaSpec>;
-  onCalculate?: (values: Record<string, any>, selectedFormula?: string) => CalculationResult;
+  onCalculate?: (values: Record<string, unknown>, selectedFormula?: string) => CalculationResult;
   categoryColor?: string; // hex or tailwind variable
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
@@ -84,7 +84,7 @@ const CalculatorModal: React.FC<Props> = ({
   const [internalOpen, setInternalOpen] = React.useState<boolean>(false);
   const actuallyOpen = isControlled ? (open as boolean) : internalOpen;
 
-  const [values, setValues] = React.useState<Record<string, any>>(() => ({}));
+  const [values, setValues] = React.useState<Record<string, unknown>>(() => ({}));
   const [selectedFormula, setSelectedFormula] = React.useState<string | undefined>(() => formulas?.[0]?.id);
   const [result, setResult] = React.useState<CalculationResult | null>(null);
   const [flipped, setFlipped] = React.useState(false);
@@ -108,7 +108,7 @@ const CalculatorModal: React.FC<Props> = ({
     if (!isControlled) setInternalOpen(true);
   };
 
-  const handleInput = (name: string, v: any) => {
+  const handleInput = (name: string, v: unknown) => {
     setValues((prev) => ({ ...prev, [name]: v }));
   };
 
@@ -223,8 +223,8 @@ const CalculatorModalContent: React.FC<{
   title: string;
   subtitle?: string;
   fields: ReadonlyArray<FieldSpec>;
-  values: Record<string, any>;
-  onInput: (name: string, v: any) => void;
+  values: Record<string, unknown>;
+  onInput: (name: string, v: unknown) => void;
   formulas?: ReadonlyArray<FormulaSpec>;
   selectedFormula?: string;
   onSelectFormula: (id?: string) => void;
@@ -300,9 +300,9 @@ const CalculatorModalContent: React.FC<{
                                 inputMode="decimal"
                                 className="w-full rounded-md border px-3 py-2"
                                 placeholder={f.placeholder}
-                                value={values[f.name] ?? ""}
+                                value={(typeof values[f.name] === 'number' || typeof values[f.name] === 'string') ? (values[f.name] as string | number) : ""}
                                 onChange={(e) => onInput(f.name, e.target.value === "" ? "" : Number(e.target.value))}
-                                aria-invalid={!!error && (!values[f.name] && f.validation?.required) ? true : undefined}
+                                aria-invalid={!!error && ((values[f.name] === undefined || values[f.name] === "") && f.validation?.required) ? true : undefined}
                                 min={f.validation?.min}
                                 max={f.validation?.max}
                               />
@@ -310,10 +310,10 @@ const CalculatorModalContent: React.FC<{
                             </div>
                           )}
                           {f.type === "text" && (
-                            <input id={`${id}-${f.name}`} name={f.name} type="text" className="w-full rounded-md border px-3 py-2" placeholder={f.placeholder} value={values[f.name] ?? ""} onChange={(e)=>onInput(f.name, e.target.value)} />
+                            <input id={`${id}-${f.name}`} name={f.name} type="text" className="w-full rounded-md border px-3 py-2" placeholder={f.placeholder} value={(typeof values[f.name] === 'string') ? (values[f.name] as string) : ""} onChange={(e)=>onInput(f.name, e.target.value)} />
                           )}
                           {f.type === "select" && (
-                            <select id={`${id}-${f.name}`} name={f.name} className="w-full rounded-md border px-3 py-2" value={values[f.name] ?? ""} onChange={(e)=>onInput(f.name, e.target.value)}>
+                            <select id={`${id}-${f.name}`} name={f.name} className="w-full rounded-md border px-3 py-2" value={(typeof values[f.name] === 'string') ? (values[f.name] as string) : ""} onChange={(e)=>onInput(f.name, e.target.value)}>
                               <option value="" disabled>{f.placeholder || "Seleccione..."}</option>
                               {(f.options || []).map((opt) => (
                                 <option key={opt.value} value={opt.value}>{opt.label}</option>
