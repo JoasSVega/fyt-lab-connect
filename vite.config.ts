@@ -24,6 +24,8 @@ export default defineConfig(({ mode }) => ({
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
+    // Deduplicate React to avoid multiple instances across chunks/dep graphs (prevents dispatcher=null)
+    dedupe: ["react", "react-dom"],
   },
   // Build settings. Avoid custom manualChunks to prevent circular chunk execution
   // that can cause React to be undefined in some hosts. Let Rollup handle chunking.
