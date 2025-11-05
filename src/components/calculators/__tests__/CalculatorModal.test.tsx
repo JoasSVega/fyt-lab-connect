@@ -36,10 +36,16 @@ describe('CalculatorModal', () => {
     fireEvent.change(talla, { target: { value: '170' } });
     fireEvent.click(screen.getByText('Calcular'));
 
-    expect(await screen.findByText(/kg\/m²/)).toBeInTheDocument();
+  expect(await screen.findByText(/kg\/m²/)).toBeInTheDocument();
 
-    fireEvent.click(screen.getByText('Limpiar'));
-    expect((peso as HTMLInputElement).value).toBe('');
-    expect((talla as HTMLInputElement).value).toBe('');
+  // Con render condicional, primero volvemos al frente y luego limpiamos
+  fireEvent.click(screen.getByText('Volver'));
+  const btnLimpiar = await screen.findByText('Limpiar');
+  fireEvent.click(btnLimpiar);
+  // Re-query inputs after re-render to avoid stale element references
+  const peso2 = await screen.findByLabelText('Peso');
+  const talla2 = await screen.findByLabelText('Talla');
+  expect((peso2 as HTMLInputElement).value).toBe('');
+  expect((talla2 as HTMLInputElement).value).toBe('');
   });
 });
