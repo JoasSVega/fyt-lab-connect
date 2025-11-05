@@ -1,12 +1,16 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
-import { ClipboardCheck, HeartPulse, Brain, Activity, Stethoscope, TestTube } from "lucide-react";
+import { ClipboardCheck, HeartPulse, Brain, AlertTriangle, TestTube } from "lucide-react";
 import Seo from "@/components/Seo";
+import CURB65Tool from "@/components/tools/CURB65Tool";
+import GlasgowTool from "@/components/tools/GlasgowTool";
+import HASBLEDTool from "@/components/tools/HASBLEDTool";
+import CHA2DS2VAScTool from "@/components/tools/CHA2DS2VAScTool";
 
 const Escalas: React.FC = () => {
   const navigate = useNavigate();
 
-  const Card = ({ icon, title, desc, color = "#a855f7" }: { icon: React.ReactNode; title: string; desc: string; color?: string; }) => (
+  const Card = ({ icon, title, desc, color = "#a855f7", action }: { icon: React.ReactNode; title: string; desc: string; color?: string; action?: React.ReactNode; }) => (
     <div className="rounded-2xl border-2 bg-white/90 shadow-lg hover:shadow-xl transition-all p-6 flex flex-col" role="article" aria-label={title}>
       <div className="flex items-center gap-3 mb-3">
         <div className="p-2 rounded-lg" style={{ backgroundColor: color + "22", color }}>
@@ -16,13 +20,17 @@ const Escalas: React.FC = () => {
         <h3 className="text-xl font-raleway font-bold">{title}</h3>
       </div>
       <p className="text-sm text-muted-foreground mb-4 flex-1">{desc}</p>
-      <button
-        type="button"
-        className="mt-auto px-4 py-2 rounded-md bg-violet-600 text-white font-semibold hover:bg-violet-700 inline-flex items-center gap-2"
-        aria-label={`Explorar ${title}`}
-      >
-        Explorar
-      </button>
+      {action ? (
+        <div className="mt-auto">{action}</div>
+      ) : (
+        <button
+          type="button"
+          className="mt-auto px-4 py-2 rounded-md bg-violet-600 text-white font-semibold hover:bg-violet-700 inline-flex items-center gap-2"
+          aria-label={`Explorar ${title}`}
+        >
+          Explorar
+        </button>
+      )}
     </div>
   );
 
@@ -31,8 +39,8 @@ const Escalas: React.FC = () => {
       {/* SEO meta */}
       <Seo
         title="Escalas Clínicas y Validación Farmacoterapéutica | Herramientas Farmacéuticas"
-        description="Evalúa la seguridad, riesgo y efectividad del tratamiento farmacológico mediante escalas clínicas validadas como Child-Pugh, HAS-BLED y CHA₂DS₂-VASc."
-        keywords={["escalas clínicas", "Child-Pugh", "HAS-BLED", "CHA2DS2-VASc", "CURB-65", "Glasgow", "validación farmacoterapéutica"]}
+        description="Evalúa la seguridad, riesgo y efectividad del tratamiento farmacológico mediante escalas clínicas validadas como HAS-BLED, CHA₂DS₂-VASc, CURB-65 y Glasgow."
+        keywords={["escalas clínicas", "HAS-BLED", "CHA2DS2-VASc", "CURB-65", "Glasgow", "validación farmacoterapéutica"]}
         author="FYT Lab Connect"
         robots="index, follow"
       />
@@ -59,34 +67,32 @@ const Escalas: React.FC = () => {
       {/* Grid */}
       <section className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6" aria-label="Escalas clínicas disponibles">
         <Card
-          icon={<Stethoscope className="w-7 h-7" />}
-          title="Child-Pugh"
-          desc="Evaluación de la función hepática."
-          color="#0ea5e9"
+          icon={<AlertTriangle className="w-7 h-7" />}
+          title="HAS-BLED"
+          desc="Riesgo de sangrado en anticoagulación."
+          color="#e53935"
+          action={<HASBLEDTool />}
         />
         <Card
           icon={<HeartPulse className="w-7 h-7" />}
-          title="HAS-BLED"
-          desc="Riesgo de sangrado en anticoagulación."
-          color="#ef4444"
-        />
-        <Card
-          icon={<Activity className="w-7 h-7" />}
           title="CHA₂DS₂-VASc"
           desc="Riesgo de eventos tromboembólicos."
-          color="#10b981"
+          color="#43a047"
+          action={<CHA2DS2VAScTool />}
         />
         <Card
           icon={<TestTube className="w-7 h-7" />}
           title="CURB-65"
           desc="Severidad de la neumonía adquirida en la comunidad."
-          color="#f59e0b"
+          color="#fb8c00"
+          action={<CURB65Tool />}
         />
         <Card
           icon={<Brain className="w-7 h-7" />}
           title="Glasgow (GCS)"
           desc="Evaluación del estado neurológico del paciente."
-          color="#6366f1"
+          color="#8e24aa"
+          action={<GlasgowTool />}
         />
       </section>
 

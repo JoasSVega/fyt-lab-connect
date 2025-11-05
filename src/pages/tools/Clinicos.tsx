@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Suspense } from "react";
 import { useNavigate } from "react-router-dom";
-import { Stethoscope } from "lucide-react";
+import { Stethoscope, Droplets, FlaskRound, Pill, Syringe } from "lucide-react";
 import Seo from "@/components/Seo";
 // Unificado: modal reutilizable
 import CalculatorModal from "@/components/calculators/CalculatorModal";
@@ -49,7 +49,12 @@ const Clinicos: React.FC = () => {
       <section className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6" aria-label="Herramientas clínicas">
         {/* Función renal */}
         <div className="rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col">
-          <h3 className="text-xl font-raleway font-bold mb-1" style={{ color: '#3B82F6' }}>Función renal</h3>
+          <div className="flex items-center gap-3 mb-1">
+            <div className="p-2 rounded-lg" style={{ backgroundColor: '#3B82F622', color: '#3B82F6' }}>
+              <Droplets className="w-5 h-5" aria-hidden="true" />
+            </div>
+            <h3 className="text-xl font-raleway font-bold" style={{ color: '#3B82F6' }}>Función renal</h3>
+          </div>
           <p className="text-sm text-muted-foreground mb-4">Estima TFG/aclaramiento con Cockcroft–Gault, MDRD y CKD‑EPI.</p>
           <div className="mt-auto">
             <button onClick={()=>setOpenRenal(true)} className="px-4 py-2 rounded-md bg-blue-600 text-white font-semibold hover:bg-blue-700">Abrir calculadora</button>
@@ -63,12 +68,18 @@ const Clinicos: React.FC = () => {
             fields={CalculatorsRegistry.renal.fields}
             formulas={CalculatorsRegistry.renal.formulas}
             categoryColor={CalculatorsRegistry.renal.color}
+            icon={<Droplets className="w-5 h-5" style={{ color: CalculatorsRegistry.renal.color }} />}
           />
         </div>
 
         {/* Función hepática */}
         <div className="rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col">
-          <h3 className="text-xl font-raleway font-bold mb-1" style={{ color: '#F59E0B' }}>Función hepática</h3>
+          <div className="flex items-center gap-3 mb-1">
+            <div className="p-2 rounded-lg" style={{ backgroundColor: '#F59E0B22', color: '#F59E0B' }}>
+              <FlaskRound className="w-5 h-5" aria-hidden="true" />
+            </div>
+            <h3 className="text-xl font-raleway font-bold" style={{ color: '#F59E0B' }}>Función hepática</h3>
+          </div>
           <p className="text-sm text-muted-foreground mb-4">Child‑Pugh, MELD/MELD‑Na, APRI y FIB‑4 para evaluar severidad y fibrosis.</p>
           <div className="mt-auto">
             <button onClick={()=>setOpenHepatic(true)} className="px-4 py-2 rounded-md bg-amber-600 text-white font-semibold hover:bg-amber-700">Abrir calculadora</button>
@@ -82,12 +93,18 @@ const Clinicos: React.FC = () => {
             fields={CalculatorsRegistry.hepatic.fields}
             formulas={CalculatorsRegistry.hepatic.formulas}
             categoryColor={CalculatorsRegistry.hepatic.color}
+            icon={<FlaskRound className="w-5 h-5" style={{ color: CalculatorsRegistry.hepatic.color }} />}
           />
         </div>
 
         {/* Dosis por peso y superficie corporal */}
         <div className="rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col">
-          <h3 className="text-xl font-raleway font-bold mb-1" style={{ color: '#0EA5E9' }}>Dosis por peso y SC</h3>
+          <div className="flex items-center gap-3 mb-1">
+            <div className="p-2 rounded-lg" style={{ backgroundColor: '#0EA5E922', color: '#0EA5E9' }}>
+              <Pill className="w-5 h-5" aria-hidden="true" />
+            </div>
+            <h3 className="text-xl font-raleway font-bold" style={{ color: '#0EA5E9' }}>Dosis por peso y SC</h3>
+          </div>
           <p className="text-sm text-muted-foreground mb-4">Calcula la dosis total según peso (mg/kg o µg/kg) o superficie corporal (mg/m² o µg/m²).</p>
           <div className="mt-auto">
             <button onClick={()=>setOpenDose(true)} className="px-4 py-2 rounded-md bg-cyan-600 text-white font-semibold hover:bg-cyan-700">Abrir calculadora</button>
@@ -101,6 +118,7 @@ const Clinicos: React.FC = () => {
             fields={CalculatorsRegistry.dose.fields}
             formulas={CalculatorsRegistry.dose.formulas}
             categoryColor={CalculatorsRegistry.dose.color}
+            icon={<Pill className="w-5 h-5" style={{ color: CalculatorsRegistry.dose.color }} />}
           />
         </div>
 
@@ -116,7 +134,12 @@ const Clinicos: React.FC = () => {
         </div>
         {/* Reconstitución y dilución de antibióticos */}
         <div className="rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col">
-          <h3 className="text-xl font-raleway font-bold mb-1" style={{ color: '#64748B' }}>Reconstitución y dilución de antibióticos</h3>
+          <div className="flex items-center gap-3 mb-1">
+            <div className="p-2 rounded-lg" style={{ backgroundColor: '#64748B22', color: '#64748B' }}>
+              <Syringe className="w-5 h-5" aria-hidden="true" />
+            </div>
+            <h3 className="text-xl font-raleway font-bold" style={{ color: '#64748B' }}>Reconstitución y dilución de antibióticos</h3>
+          </div>
           <p className="text-sm text-muted-foreground mb-4">Calcula concentración tras reconstitución, volumen para la dosis y dilución final.</p>
           <div className="mt-auto">
             <button onClick={()=>setOpenReconst(true)} className="px-4 py-2 rounded-md bg-slate-700 text-white font-semibold transition-transform duration-150 hover:scale-105 hover:bg-slate-800">Abrir calculadora</button>
@@ -130,6 +153,7 @@ const Clinicos: React.FC = () => {
             fields={CalculatorsRegistry.reconstitution.fields}
             formulas={CalculatorsRegistry.reconstitution.formulas}
             categoryColor={CalculatorsRegistry.reconstitution.color}
+            icon={<Syringe className="w-5 h-5" style={{ color: CalculatorsRegistry.reconstitution.color }} />}
           />
         </div>
       </section>

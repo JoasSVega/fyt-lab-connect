@@ -39,9 +39,9 @@ export type FormulaSpec = {
   // Optional scoring definition for categorical/weighted systems (e.g., Child-Pugh)
   scoring?: {
     title?: string;
-    rows: Array<{
+    rows: ReadonlyArray<{
       label: string;
-      options: Array<{ label: string; points: number }>;
+      options: ReadonlyArray<{ label: string; points: number }>;
     }>;
   };
 };
@@ -50,12 +50,18 @@ type Props = {
   id: string;
   title: string;
   subtitle?: string;
+  icon?: React.ReactNode;
   fields: ReadonlyArray<FieldSpec>;
   formulas?: ReadonlyArray<FormulaSpec>;
   onCalculate?: (values: Record<string, unknown>, selectedFormula?: string) => CalculationResult;
   categoryColor?: string; // hex or tailwind variable
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
+  // Optional enhancements for special tools
+  autoCalculate?: boolean; // when true, compute automatically on valid input
+  actionVisibility?: "default" | "hidden" | "clear-only"; // control front-face actions
+  openButtonLabel?: string; // customize uncontrolled open button label
+  backAction?: "volver" | "limpiar"; // choose which action to show on the back face
 };
 
 const defaultOverlay = {
@@ -87,12 +93,17 @@ const CalculatorModal: React.FC<Props> = ({
   id,
   title,
   subtitle,
+  icon,
   fields,
   formulas,
   onCalculate,
   categoryColor = "#0ea5e9",
   open,
   onOpenChange,
+  autoCalculate = false,
+  actionVisibility = "default",
+  openButtonLabel = "Abrir calculadora",
+  backAction = "volver",
 }) => {
   const isControlled = typeof open === "boolean" && !!onOpenChange;
   const [internalOpen, setInternalOpen] = React.useState<boolean>(false);
@@ -207,13 +218,20 @@ const CalculatorModal: React.FC<Props> = ({
   if (!isControlled) {
     return (
       <div>
-        <button onClick={openSelf} className="px-4 py-2 rounded-md bg-sky-600 text-white font-semibold hover:bg-sky-700">Abrir calculadora</button>
+        <button
+          onClick={openSelf}
+          className="px-4 py-2 rounded-md text-white font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+          style={{ backgroundColor: categoryColor }}
+        >
+          {openButtonLabel}
+        </button>
         <CalculatorModalContent
           id={id}
           open={internalOpen}
           onClose={close}
           title={title}
           subtitle={subtitle}
+          icon={icon}
           fields={effectiveFields}
           values={values}
           onInput={handleInput}
@@ -230,6 +248,9 @@ const CalculatorModal: React.FC<Props> = ({
           infoOpen={infoOpen}
           setInfoOpen={setInfoOpen}
           firstInputRef={firstInputRef}
+          autoCalculate={autoCalculate}
+          actionVisibility={actionVisibility}
+          backAction={backAction}
         />
       </div>
     );
@@ -243,6 +264,7 @@ const CalculatorModal: React.FC<Props> = ({
       onClose={close}
       title={title}
       subtitle={subtitle}
+  icon={icon}
       fields={effectiveFields}
       values={values}
       onInput={handleInput}
@@ -259,6 +281,9 @@ const CalculatorModal: React.FC<Props> = ({
       infoOpen={infoOpen}
       setInfoOpen={setInfoOpen}
       firstInputRef={firstInputRef}
+      autoCalculate={autoCalculate}
+      actionVisibility={actionVisibility}
+      backAction={backAction}
     />
   );
 };
@@ -272,6 +297,7 @@ const CalculatorModalContent: React.FC<{
   onClose: () => void;
   title: string;
   subtitle?: string;
+  icon?: React.ReactNode;
   fields: ReadonlyArray<FieldSpec>;
   values: Record<string, unknown>;
   onInput: (name: string, v: unknown) => void;
@@ -288,7 +314,10 @@ const CalculatorModalContent: React.FC<{
   infoOpen: boolean;
   setInfoOpen: (open: boolean) => void;
   firstInputRef: React.RefObject<HTMLInputElement | HTMLSelectElement>;
-}> = ({ id, open, onClose, title, subtitle, fields, values, onInput, formulas, selectedFormula, onSelectFormula, onCalculate, onClear, onReturn, result, flipped, error, categoryColor, infoOpen, setInfoOpen, firstInputRef }) => {
+  autoCalculate?: boolean;
+  actionVisibility?: "default" | "hidden" | "clear-only";
+  backAction?: "volver" | "limpiar";
+}> = ({ id, open, onClose, title, subtitle, icon, fields, values, onInput, formulas, selectedFormula, onSelectFormula, onCalculate, onClear, onReturn, result, flipped, error, categoryColor, infoOpen, setInfoOpen, firstInputRef, autoCalculate = false, actionVisibility = "default", backAction = "volver" }) => {
   const headerRef = React.useRef<HTMLDivElement | null>(null);
   const bodyWrapRef = React.useRef<HTMLDivElement | null>(null);
   const bodyInnerRef = React.useRef<HTMLDivElement | null>(null);
@@ -323,6 +352,27 @@ const CalculatorModalContent: React.FC<{
     if (open) window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [open, onClose]);
+
+  // Auto-calc: when enabled, compute as soon as all required fields are valid
+  React.useEffect(() => {
+    if (!open || !autoCalculate) return;
+    // Validate required fields
+    for (const f of fields) {
+      const val = values[f.name];
+      if (f.validation?.required) {
+        if (val === undefined || val === "") return; // wait for completion
+      }
+      if (f.type === "number") {
+        const num = Number(val);
+        if (!Number.isFinite(num)) return;
+        if (f.validation?.min !== undefined && num < f.validation.min) return;
+        if (f.validation?.max !== undefined && num > f.validation.max) return;
+      }
+    }
+    // Inputs look valid → calculate and flip
+    onCalculate();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autoCalculate, fields, values, open, selectedFormula]);
   return (
     <AnimatePresence>
       {open && (
@@ -335,7 +385,10 @@ const CalculatorModalContent: React.FC<{
             <div className="relative rounded-2xl bg-white shadow-xl ring-1 ring-black/5 overflow-hidden flex flex-col max-h-[90vh]">
               <div ref={headerRef} className="sticky top-0 z-10 px-5 py-4 border-b flex items-start justify-between bg-white/95 backdrop-blur" style={{ background: `linear-gradient(to right, ${categoryColor}15, #ffffffEE)` }}>
                 <div>
-                  <h2 id={`${id}-title`} className="text-xl sm:text-2xl font-raleway font-bold text-slate-900">{title}</h2>
+                  <div className="flex items-center gap-2">
+                    {icon ? <span aria-hidden className="inline-flex items-center justify-center">{icon}</span> : null}
+                    <h2 id={`${id}-title`} className="text-xl sm:text-2xl font-raleway font-bold text-black">{title}</h2>
+                  </div>
                   {subtitle ? (
                     <p id={`${id}-subtitle`} className="text-sm text-slate-600">{subtitle}</p>
                   ) : null}
@@ -430,10 +483,14 @@ const CalculatorModalContent: React.FC<{
 
                       {error && <div className="md:col-span-2 text-sm text-rose-600">{error}</div>}
 
-                      <div className="md:col-span-2 mt-2 flex items-center gap-3">
-                        <button type="submit" className="px-4 py-2 rounded-md text-white font-semibold" style={{ backgroundColor: categoryColor }}>Calcular</button>
-                        <button type="button" onClick={onClear} className="px-4 py-2 rounded-md border">Limpiar</button>
-                      </div>
+                      {actionVisibility !== "hidden" && (
+                        <div className="md:col-span-2 mt-2 flex items-center gap-3">
+                          {actionVisibility === "default" && (
+                            <button type="submit" className="px-4 py-2 rounded-md text-white font-semibold" style={{ backgroundColor: categoryColor }}>Calcular</button>
+                          )}
+                          <button type="button" onClick={onClear} className="px-4 py-2 rounded-md border">Limpiar</button>
+                        </div>
+                      )}
                     </form>
                     </motion.div>
                   ) : (
@@ -460,7 +517,11 @@ const CalculatorModalContent: React.FC<{
                         )}
                       </div>
                       <div className="mt-4 flex justify-center">
-                        <button type="button" onClick={onReturn} className="px-4 py-2 rounded-md border">Volver</button>
+                            {backAction === "volver" ? (
+                              <button type="button" onClick={onReturn} className="px-4 py-2 rounded-md border">Volver</button>
+                            ) : (
+                              <button type="button" onClick={onClear} className="px-4 py-2 rounded-md border">Limpiar</button>
+                            )}
                       </div>
                     </motion.div>
                   )}

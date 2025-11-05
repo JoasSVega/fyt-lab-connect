@@ -37,6 +37,7 @@ import Footer from "./components/Footer";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfUse from "./pages/TermsOfUse";
 import CodeOfEthics from "./pages/CodeOfEthics";
+import TitleSync from "./components/TitleSync";
 
 const queryClient = new QueryClient();
 
@@ -133,6 +134,8 @@ const App: React.FC = () => {
         <Sonner />
         <BrowserRouter>
           <ScrollToTop />
+          {/* Sincroniza el título del navegador con la ruta actual */}
+          <TitleSync />
           {/* Barra superior fija */}
           <Navbar />
           {/* Contenido principal: darle padding-top para no quedar debajo del navbar */}
