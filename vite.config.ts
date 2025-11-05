@@ -31,4 +31,10 @@ export default defineConfig(({ mode }) => ({
     emptyOutDir: true,
     manifest: true,
   },
+  test: {
+    environment: 'jsdom',
+    setupFiles: './vitest.setup.ts',
+    css: true,
+    globals: true,
+  },
 }));

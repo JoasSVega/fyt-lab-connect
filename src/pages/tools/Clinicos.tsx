@@ -3,16 +3,17 @@ import { Suspense } from "react";
 import { useNavigate } from "react-router-dom";
 import { Stethoscope } from "lucide-react";
 import Seo from "@/components/Seo";
-import FuncionRenalCalculator from "@/components/tools/clinicos/FuncionRenalCalculator";
-import HepaticFunctionCalculator from "@/components/tools/clinicos/HepaticFunctionCalculator";
-import DoseByWeightCalculator from "@/components/tools/clinicos/DoseByWeightCalculator";
-import ReconstitutionDilutionCalculator from "@/components/tools/clinicos/ReconstitutionDilutionCalculator";
+// Unificado: modal reutilizable
+import CalculatorModal from "@/components/calculators/CalculatorModal";
+import { CalculatorsRegistry } from "@/lib/calculators";
+// Migrado a modal unificado
+// Migrados a modal unificado
 
 const Clinicos: React.FC = () => {
-  const [showRenal, setShowRenal] = React.useState(false);
-  const [showHepatic, setShowHepatic] = React.useState(false);
-  const [showDose, setShowDose] = React.useState(false);
-  const [showReconst, setShowReconst] = React.useState(false);
+  const [openRenal, setOpenRenal] = React.useState(false);
+  const [openHepatic, setOpenHepatic] = React.useState(false);
+  const [openDose, setOpenDose] = React.useState(false);
+  const [openReconst, setOpenReconst] = React.useState(false);
   const navigate = useNavigate();
 
   return (
@@ -50,45 +51,57 @@ const Clinicos: React.FC = () => {
         <div className="rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col">
           <h3 className="text-xl font-raleway font-bold mb-1" style={{ color: '#3B82F6' }}>Función renal</h3>
           <p className="text-sm text-muted-foreground mb-4">Estima TFG/aclaramiento con Cockcroft–Gault, MDRD y CKD‑EPI.</p>
-          {!showRenal ? (
-            <div className="mt-auto">
-              <button onClick={()=>setShowRenal(true)} className="px-4 py-2 rounded-md bg-blue-600 text-white font-semibold hover:bg-blue-700">Abrir calculadora</button>
-            </div>
-          ) : (
-            <div className="mt-2">
-              <FuncionRenalCalculator embedded />
-            </div>
-          )}
+          <div className="mt-auto">
+            <button onClick={()=>setOpenRenal(true)} className="px-4 py-2 rounded-md bg-blue-600 text-white font-semibold hover:bg-blue-700">Abrir calculadora</button>
+          </div>
+          <CalculatorModal
+            id="calc-renal"
+            open={openRenal}
+            onOpenChange={setOpenRenal}
+            title={CalculatorsRegistry.renal.title}
+            subtitle={CalculatorsRegistry.renal.subtitle}
+            fields={CalculatorsRegistry.renal.fields}
+            formulas={CalculatorsRegistry.renal.formulas}
+            categoryColor={CalculatorsRegistry.renal.color}
+          />
         </div>
 
         {/* Función hepática */}
         <div className="rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col">
           <h3 className="text-xl font-raleway font-bold mb-1" style={{ color: '#F59E0B' }}>Función hepática</h3>
           <p className="text-sm text-muted-foreground mb-4">Child‑Pugh, MELD/MELD‑Na, APRI y FIB‑4 para evaluar severidad y fibrosis.</p>
-          {!showHepatic ? (
-            <div className="mt-auto">
-              <button onClick={()=>setShowHepatic(true)} className="px-4 py-2 rounded-md bg-amber-600 text-white font-semibold hover:bg-amber-700">Abrir calculadora</button>
-            </div>
-          ) : (
-            <div className="mt-2">
-              <HepaticFunctionCalculator embedded />
-            </div>
-          )}
+          <div className="mt-auto">
+            <button onClick={()=>setOpenHepatic(true)} className="px-4 py-2 rounded-md bg-amber-600 text-white font-semibold hover:bg-amber-700">Abrir calculadora</button>
+          </div>
+          <CalculatorModal
+            id="calc-hepatic"
+            open={openHepatic}
+            onOpenChange={setOpenHepatic}
+            title={CalculatorsRegistry.hepatic.title}
+            subtitle={CalculatorsRegistry.hepatic.subtitle}
+            fields={CalculatorsRegistry.hepatic.fields}
+            formulas={CalculatorsRegistry.hepatic.formulas}
+            categoryColor={CalculatorsRegistry.hepatic.color}
+          />
         </div>
 
         {/* Dosis por peso y superficie corporal */}
         <div className="rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col">
           <h3 className="text-xl font-raleway font-bold mb-1" style={{ color: '#0EA5E9' }}>Dosis por peso y SC</h3>
           <p className="text-sm text-muted-foreground mb-4">Calcula la dosis total según peso (mg/kg o µg/kg) o superficie corporal (mg/m² o µg/m²).</p>
-          {!showDose ? (
-            <div className="mt-auto">
-              <button onClick={()=>setShowDose(true)} className="px-4 py-2 rounded-md bg-cyan-600 text-white font-semibold hover:bg-cyan-700">Abrir calculadora</button>
-            </div>
-          ) : (
-            <div className="mt-2">
-              <DoseByWeightCalculator embedded />
-            </div>
-          )}
+          <div className="mt-auto">
+            <button onClick={()=>setOpenDose(true)} className="px-4 py-2 rounded-md bg-cyan-600 text-white font-semibold hover:bg-cyan-700">Abrir calculadora</button>
+          </div>
+          <CalculatorModal
+            id="calc-dose"
+            open={openDose}
+            onOpenChange={setOpenDose}
+            title={CalculatorsRegistry.dose.title}
+            subtitle={CalculatorsRegistry.dose.subtitle}
+            fields={CalculatorsRegistry.dose.fields}
+            formulas={CalculatorsRegistry.dose.formulas}
+            categoryColor={CalculatorsRegistry.dose.color}
+          />
         </div>
 
         {/* Dosis de carga / mantenimiento */}
@@ -105,15 +118,19 @@ const Clinicos: React.FC = () => {
         <div className="rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col">
           <h3 className="text-xl font-raleway font-bold mb-1" style={{ color: '#64748B' }}>Reconstitución y dilución de antibióticos</h3>
           <p className="text-sm text-muted-foreground mb-4">Calcula concentración tras reconstitución, volumen para la dosis y dilución final.</p>
-          {!showReconst ? (
-            <div className="mt-auto">
-              <button onClick={()=>setShowReconst(true)} className="px-4 py-2 rounded-md bg-slate-700 text-white font-semibold transition-transform duration-150 hover:scale-105 hover:bg-slate-800">Abrir calculadora</button>
-            </div>
-          ) : (
-            <div className="mt-2">
-              <ReconstitutionDilutionCalculator embedded />
-            </div>
-          )}
+          <div className="mt-auto">
+            <button onClick={()=>setOpenReconst(true)} className="px-4 py-2 rounded-md bg-slate-700 text-white font-semibold transition-transform duration-150 hover:scale-105 hover:bg-slate-800">Abrir calculadora</button>
+          </div>
+          <CalculatorModal
+            id="calc-reconst"
+            open={openReconst}
+            onOpenChange={setOpenReconst}
+            title={CalculatorsRegistry.reconstitution.title}
+            subtitle={CalculatorsRegistry.reconstitution.subtitle}
+            fields={CalculatorsRegistry.reconstitution.fields}
+            formulas={CalculatorsRegistry.reconstitution.formulas}
+            categoryColor={CalculatorsRegistry.reconstitution.color}
+          />
         </div>
       </section>
 
