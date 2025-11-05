@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "node scripts/dev-check.js && vite",
     "build": "vite build && node scripts/postbuild-spa.js && node scripts/inline-css.js",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
