@@ -60,6 +60,26 @@ This project is built with:
 - shadcn-ui
 - Tailwind CSS
 
+## Math/LaTeX rendering (KaTeX)
+
+The calculators can render mathematical formulas using KaTeX. In a `FormulaSpec`, set `expressionLatex` to a LaTeX string and it will be displayed in the modal de fórmulas.
+
+- Library: `katex` (CSS included via component)
+- Where: `CalculatorModal` info modal, using the reusable `src/components/ui/Latex.tsx`
+
+Example:
+
+```ts
+// src/lib/calculators/index.ts (excerpt)
+{
+	id: "ckd-epi",
+	label: "CKD-EPI",
+	expressionLatex: "eGFR=141\n\times\n\min(\frac{S_{Cr}}{\kappa}, 1)^\alpha\n\times\n\max(\frac{S_{Cr}}{\kappa}, 1)^{-1.209}\n\times\n0.993^{\text{age}}\n\times\n1.018^{[female]}\n\times\n1.159^{[black]}",
+}
+```
+
+If `expressionLatex` isn't provided, the UI falls back to `expressionText` or `description`.
+
 ## How can I deploy this project?
 
 Simply open [Lovable](https://lovable.dev/projects/7e4f4b53-264a-46f7-bccc-4a989f7b0ced) and click on Share -> Publish.
