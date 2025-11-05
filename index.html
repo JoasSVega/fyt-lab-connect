@@ -29,12 +29,33 @@
     <meta name="author" content="Semillero FYT" />
     <meta name="keywords" content="farmacología, terapéutica, investigación, medicina, farmacología clínica, semillero investigación" />
 
-  <link rel="icon" href="./logo-fyt.png" type="image/png" />
-  <!-- Optional WebP favicon for browsers that support it -->
-  <link rel="icon" href="./logo-fyt.webp" type="image/webp" />
+  <!-- Favicons: serve available AVIF assets with sizes; use absolute root paths (public/) -->
+  <link rel="icon" type="image/avif" sizes="128x128" href="/logo-fyt-128.avif" />
+  <link rel="icon" type="image/avif" sizes="256x256" href="/logo-fyt-256.avif" />
+  <link rel="icon" type="image/avif" sizes="400x400" href="/logo-fyt-400.avif" />
+  <!-- Apple Touch Icon (fallback to AVIF available) -->
+  <link rel="apple-touch-icon" href="/logo-fyt-256.avif" />
   
-  <!-- Preload LCP image (hero) to reduce LCP; fetchpriority=high applied in component too -->
-  <link rel="preload" as="image" href="./images/Hero-Index.jpg" imagesrcset="./images/Hero-Index.jpg" />
+  <!-- Preload LCP hero image (AVIF variants) -->
+  <link
+    rel="preload"
+    as="image"
+    href="/images/Hero-Index-800.avif"
+    imagesrcset="/images/Hero-Index-400.avif 400w, /images/Hero-Index-800.avif 800w, /images/Hero-Index-1200.avif 1200w, /images/Hero-Index-1600.avif 1600w, /images/Hero-Index-1920.avif 1920w"
+    imagesizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px"
+    fetchpriority="high"
+  />
+
+  <!-- KaTeX CSS: hint early with preload from CDN; non-blocking load -->
+  <link
+    rel="preload"
+    as="style"
+    href="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.css"
+    onload="this.onload=null;this.rel='stylesheet'"
+  />
+  <noscript>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.css" />
+  </noscript>
   <!-- Canonical domain -->
   <link rel="canonical" href="https://fyt-lab-connect.lovable.app/" />
 

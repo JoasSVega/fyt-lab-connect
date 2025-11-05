@@ -69,15 +69,17 @@ const Navbar = () => {
               <picture>
                 <source
                   type="image/avif"
-                  srcSet="/logo-fyt-128.avif 128w, /logo-fyt-256.avif 256w"
-                  sizes="(max-width: 640px) 128px, 256px"
+                  srcSet="/logo-fyt-128.avif 128w, /logo-fyt-256.avif 256w, /logo-fyt-400.avif 400w"
+                  sizes="(max-width: 640px) 128px, (max-width: 1024px) 256px, 256px"
                 />
-                <source
-                  type="image/webp"
-                  srcSet="/logo-fyt-128.webp 128w, /logo-fyt-256.webp 256w"
-                  sizes="(max-width: 640px) 128px, 256px"
+                <img
+                  src="/logo-fyt-128.avif"
+                  alt="Logo Grupo FyT, semillero de investigación en farmacología y terapéutica"
+                  loading="eager"
+                  decoding="async"
+                  fetchPriority="high"
+                  className="h-12 w-auto transition-all duration-300 group-hover:scale-105"
                 />
-                <img src="/logo-fyt.png" alt="Logo Grupo FyT, semillero de investigación en farmacología y terapéutica" loading="lazy" decoding="async" className="h-12 w-auto transition-all duration-300 group-hover:scale-105" />
               </picture>
             </div>
               <div className="text-lg font-poppins font-bold text-gray-800 group-hover:text-fyt-blue transition-colors">
