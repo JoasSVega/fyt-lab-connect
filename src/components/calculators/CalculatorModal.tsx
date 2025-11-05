@@ -1,6 +1,7 @@
 import * as React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Info } from "lucide-react";
+import { Latex } from "../ui/Latex";
 
 // Unified Calculator Modal
 // Assumptions: add optional `open`/`onOpenChange` to control visibility externally.
@@ -448,7 +449,9 @@ const CalculatorModalContent: React.FC<{
                         <div key={f.id} className="rounded-xl bg-slate-50 p-3">
                           <div className="text-sm font-semibold text-slate-800">{idx + 1}. {f.label}</div>
                           {exprLatex ? (
-                            <div className="mt-1 text-sky-700 font-mono text-sm overflow-x-auto">{exprLatex}</div>
+                            <div className="mt-1 overflow-x-auto">
+                              <Latex expression={exprLatex} display className="block text-sky-700 text-base" />
+                            </div>
                           ) : null}
                           {exprText ? (
                             <div className="mt-1 text-xs text-slate-700 leading-relaxed whitespace-pre-wrap">{exprText}</div>
