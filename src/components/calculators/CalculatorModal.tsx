@@ -2,6 +2,7 @@ import * as React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Info } from "lucide-react";
 import { Latex } from "../ui/Latex";
+import { getEffectiveFields, resetValuesForFields, ensureLatexForFormula } from "@/lib/calculators/utils";
 
 // Unified Calculator Modal
 // Assumptions: add optional `open`/`onOpenChange` to control visibility externally.
@@ -179,21 +180,12 @@ const CalculatorModal: React.FC<Props> = ({
 
   // Derive effective fields per formula (if provided)
   const effectiveFields = React.useMemo(() => {
-    if (!formulas || !selectedFormula) return fields;
-    const f = formulas.find((x) => x.id === selectedFormula);
-    return f?.fields && f.fields.length > 0 ? f.fields : fields;
+    return getEffectiveFields(fields, formulas, selectedFormula);
   }, [fields, formulas, selectedFormula]);
 
   // When selected formula changes, trim values to visible fields and clear errors/result to prevent stale UI
   React.useEffect(() => {
-    const allowed = new Set(effectiveFields.map((f) => f.name));
-    setValues((prev) => {
-      const next: Record<string, unknown> = {};
-      for (const k of Object.keys(prev)) {
-        if (allowed.has(k)) next[k] = prev[k];
-      }
-      return next;
-    });
+    setValues((prev) => resetValuesForFields(prev, effectiveFields));
     setError("");
     setResult(null);
     setFlipped(false);
@@ -484,8 +476,7 @@ const CalculatorModalContent: React.FC<{
                 <div className="space-y-3">
                   {formulas && formulas.length > 0 ? (
                     formulas.map((f, idx) => {
-                      const exprLatex = f.expressionLatex || f.formulaLatex;
-                      const exprText = f.expressionText || f.description;
+                      const exprLatex = ensureLatexForFormula(f);
                       return (
                         <div data-testid={`formula-item-${idx+1}`} key={f.id} className="rounded-xl bg-slate-50 p-3">
                           <div className="text-sm font-semibold text-slate-800">{idx + 1}. {f.label}</div>
@@ -493,11 +484,8 @@ const CalculatorModalContent: React.FC<{
                             <div className="mt-1 overflow-x-auto" data-testid="formula-latex">
                               <Latex expression={exprLatex} display className="block text-sky-700 dark:text-sky-300 text-base" />
                             </div>
-                          ) : null}
-                          {exprText ? (
-                            <div className="mt-1 text-xs text-slate-700 leading-relaxed whitespace-pre-wrap">{exprText}</div>
                           ) : (
-                            <div className="mt-1 text-xs text-slate-500 italic">TODO: añadir fórmula</div>
+                            <div className="mt-1 text-xs italic text-slate-500">Fórmula no disponible</div>
                           )}
                         </div>
                       );

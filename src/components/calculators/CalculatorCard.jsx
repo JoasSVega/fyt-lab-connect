@@ -291,11 +291,12 @@ export default function CalculatorCard({
                   <div key={idx} className="rounded-xl bg-slate-50 dark:bg-slate-800/60 p-3">
                     <div className="text-sm font-semibold text-slate-800 dark:text-slate-100">{f.name}</div>
                     <div className="mt-1 text-sky-700 dark:text-sky-400 font-mono text-sm overflow-x-auto" data-testid="formula-latex">
-                      <Latex expression={f.expression} display className="block" />
+                      {f.expression ? (
+                        <Latex expression={f.expression} display className="block" />
+                      ) : (
+                        <span className="text-xs italic text-slate-500">Fórmula no disponible</span>
+                      )}
                     </div>
-                    {f.description && (
-                      <div className="mt-1 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">{f.description}</div>
-                    )}
                   </div>
                 ))
               ) : (

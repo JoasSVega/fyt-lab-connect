@@ -39,11 +39,11 @@ export const Latex: React.FC<LatexProps> = ({
     return <span className={className} dangerouslySetInnerHTML={{ __html: html }} />;
   }
 
-  // Fallback to plain text when rendering fails
+  // Minimal fallback placeholder (no plaintext duplication)
   return (
-    <code className={errorFallbackClassName || "text-xs text-rose-700"}>
-      {expression}
-    </code>
+    <span className={errorFallbackClassName || "text-xs italic text-slate-500"}>
+      Fórmula no disponible
+    </span>
   );
 };
 
