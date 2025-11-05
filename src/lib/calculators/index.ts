@@ -16,6 +16,8 @@ import {
 } from "./adapters/anthropometrics";
 import { computeChildPugh, computeMELD, computeAPRI, computeFIB4 } from "./adapters/hepatic";
 import { computeCockcroft, computeMDRD4, computeCKDEPI2009, computeCKDEPI2021 } from "./adapters/renal";
+import { computeDoseByWeight, computeReconstitution } from "./adapters/pharma";
+import antibiotics from "@/data/antibiotics.json";
 
 export type CalculatorMeta = {
   id: string;
@@ -183,6 +185,48 @@ export const CalculatorsRegistry = {
       { id: "apri", label: "APRI", compute: computeAPRI },
       { id: "fib4", label: "FIB‑4", compute: computeFIB4 },
     ],
+  },
+  dose: {
+    id: "dose",
+    title: "Dosis por peso y SC",
+    subtitle: "mg/kg · µg/kg · mg/m² · µg/m²",
+    category: "clinico",
+    color: "#0EA5E9",
+    fields: [
+      { name: "weight", label: "Peso corporal", type: "number", unit: "kg", validation: { min: 1 } },
+      { name: "bsa", label: "Superficie corporal", type: "number", unit: "m²", validation: { min: 0 } },
+      { name: "dosePer", label: "Dosis recomendada", type: "number" },
+      { name: "unit", label: "Unidad", type: "select", options: [
+        { value: "mg/kg", label: "mg/kg" },
+        { value: "µg/kg", label: "µg/kg" },
+        { value: "mg/m²", label: "mg/m²" },
+        { value: "µg/m²", label: "µg/m²" },
+      ] },
+      { name: "frequency", label: "Frecuencia / intervalo (opcional)", type: "text" },
+      { name: "drug", label: "Nombre del fármaco (opcional)", type: "text" },
+    ],
+    formulas: [
+      { id: "perWeight", label: "Por peso (kg)", compute: (v) => computeDoseByWeight(v, "weight") },
+      { id: "perBSA", label: "Por SC (m²)", compute: (v) => computeDoseByWeight(v, "bsa") },
+    ],
+  },
+  reconstitution: {
+    id: "reconstitution",
+    title: "Reconstitución y dilución de antibióticos",
+    subtitle: "Concentraciones, volúmenes y diluciones",
+    category: "clinico",
+    color: "#64748B",
+    fields: [
+      { name: "abId", label: "Antibiótico", type: "select", options: (antibiotics as Array<{id:string; name:string}>).map((a) => ({ value: a.id, label: a.name })) },
+      { name: "reconstMl", label: "Volumen de reconstitución", type: "number", unit: "mL", validation: { min: 0 } },
+      { name: "dose", label: "Dosis a administrar", type: "number" },
+      { name: "doseUnit", label: "Unidad de dosis", type: "select", options: [ { value: "mg", label: "mg" }, { value: "g", label: "g" } ] },
+      { name: "desiredConc", label: "Concentración final (opcional)", type: "number", unit: "mg/mL" },
+      { name: "finalVolume", label: "Volumen final (opcional)", type: "number", unit: "mL" },
+      { name: "addDiluent", label: "Agregar diluyente adicional", type: "toggle" },
+      { name: "weight", label: "Peso del paciente (opcional)", type: "number", unit: "kg" },
+    ],
+    formulas: [ { id: "reconst", label: "Calcular", compute: (v) => computeReconstitution(v) } ],
   },
 } as const;
 
