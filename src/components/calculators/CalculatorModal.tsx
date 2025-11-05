@@ -289,6 +289,33 @@ const CalculatorModalContent: React.FC<{
   setInfoOpen: (open: boolean) => void;
   firstInputRef: React.RefObject<HTMLInputElement | HTMLSelectElement>;
 }> = ({ id, open, onClose, title, subtitle, fields, values, onInput, formulas, selectedFormula, onSelectFormula, onCalculate, onClear, onReturn, result, flipped, error, categoryColor, infoOpen, setInfoOpen, firstInputRef }) => {
+  const headerRef = React.useRef<HTMLDivElement | null>(null);
+  const bodyWrapRef = React.useRef<HTMLDivElement | null>(null);
+  const bodyInnerRef = React.useRef<HTMLDivElement | null>(null);
+  const [bodyScrollable, setBodyScrollable] = React.useState(false);
+
+  // Conditional scroll: enable only when content exceeds available space (especially on small viewports)
+  const measureScrollNeed = React.useCallback(() => {
+    if (!open) return;
+    const headerH = headerRef.current?.getBoundingClientRect().height || 0;
+    const viewportH = window.innerHeight || 0;
+    const available = Math.max(viewportH * 0.9 - headerH - 16 /* padding safety */, 0);
+    const contentH = bodyInnerRef.current?.scrollHeight || 0;
+    setBodyScrollable(contentH > available);
+    if (bodyWrapRef.current) {
+      bodyWrapRef.current.style.maxHeight = `${available}px`;
+    }
+  }, [open]);
+
+  React.useLayoutEffect(() => {
+    measureScrollNeed();
+  }, [measureScrollNeed, flipped, values, fields, selectedFormula, infoOpen]);
+
+  React.useEffect(() => {
+    const onResize = () => measureScrollNeed();
+    if (open) window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [open, measureScrollNeed]);
   React.useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -306,7 +333,7 @@ const CalculatorModalContent: React.FC<{
           {/* Card */}
           <motion.div className="relative mx-auto mt-8 md:mt-16 w-[94vw] sm:w-[85vw] md:w-[70vw] lg:w-[60vw] xl:w-[50vw] max-h-[90vh]" variants={defaultCard} initial="hidden" animate="visible" exit="exit" onClick={(e)=>e.stopPropagation()}>
             <div className="relative rounded-2xl bg-white shadow-xl ring-1 ring-black/5 overflow-hidden flex flex-col max-h-[90vh]">
-              <div className="sticky top-0 z-10 px-5 py-4 border-b flex items-start justify-between bg-white/95 backdrop-blur" style={{ background: `linear-gradient(to right, ${categoryColor}15, #ffffffEE)` }}>
+              <div ref={headerRef} className="sticky top-0 z-10 px-5 py-4 border-b flex items-start justify-between bg-white/95 backdrop-blur" style={{ background: `linear-gradient(to right, ${categoryColor}15, #ffffffEE)` }}>
                 <div>
                   <h2 id={`${id}-title`} className="text-xl sm:text-2xl font-raleway font-bold text-slate-900">{title}</h2>
                   {subtitle ? (
@@ -346,8 +373,9 @@ const CalculatorModalContent: React.FC<{
                 </div>
               </div>
 
-              {/* Body with conditional sides (no overlapping layers) */}
-              <div className="relative p-5">
+              {/* Body with conditional sides (no overlapping layers). Scroll only if needed. */}
+              <div ref={bodyWrapRef} data-testid="calc-modal-body" className={`relative p-5 ${bodyScrollable ? "overflow-y-auto" : "overflow-visible"}`}>
+                <div ref={bodyInnerRef}>
                 <AnimatePresence mode="wait" initial={false}>
                   {!flipped ? (
                     <motion.div
@@ -437,6 +465,7 @@ const CalculatorModalContent: React.FC<{
                     </motion.div>
                   )}
                 </AnimatePresence>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -458,11 +487,11 @@ const CalculatorModalContent: React.FC<{
                       const exprLatex = f.expressionLatex || f.formulaLatex;
                       const exprText = f.expressionText || f.description;
                       return (
-                        <div key={f.id} className="rounded-xl bg-slate-50 p-3">
+                        <div data-testid={`formula-item-${idx+1}`} key={f.id} className="rounded-xl bg-slate-50 p-3">
                           <div className="text-sm font-semibold text-slate-800">{idx + 1}. {f.label}</div>
                           {exprLatex ? (
-                            <div className="mt-1 overflow-x-auto">
-                              <Latex expression={exprLatex} display className="block text-sky-700 text-base" />
+                            <div className="mt-1 overflow-x-auto" data-testid="formula-latex">
+                              <Latex expression={exprLatex} display className="block text-sky-700 dark:text-sky-300 text-base" />
                             </div>
                           ) : null}
                           {exprText ? (
