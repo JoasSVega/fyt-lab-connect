@@ -11,7 +11,7 @@ const Escalas: React.FC = () => {
   const navigate = useNavigate();
 
   const Card = ({ icon, title, desc, color = "#a855f7", action }: { icon: React.ReactNode; title: string; desc: string; color?: string; action?: React.ReactNode; }) => (
-    <div className="rounded-2xl border-2 bg-white/90 shadow-lg transition-transform transition-shadow duration-200 ease-out hover:scale-105 hover:shadow-xl p-6 flex flex-col" role="article" aria-label={title}>
+    <div className="rounded-2xl border-2 bg-white/90 shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-xl p-6 flex flex-col" role="article" aria-label={title}>
       <div className="flex items-center gap-3 mb-3">
         <div className="p-2 rounded-lg" style={{ backgroundColor: color + "22", color }}>
           {icon}
@@ -64,8 +64,8 @@ const Escalas: React.FC = () => {
       <p className="text-base text-muted-foreground mb-2">Evalúa riesgo, seguridad y efectividad terapéutica con escalas validadas clínicamente.</p>
       <p className="text-sm text-muted-foreground mb-6">Esta sección reúne herramientas para apoyar la toma de decisiones farmacoterapéuticas, estandarizando la valoración clínica y facilitando la comunicación interdisciplinaria.</p>
 
-      {/* Grid */}
-      <section className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6" aria-label="Escalas clínicas disponibles">
+  {/* Grid */}
+  <section className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 px-4 py-4 overflow-visible" aria-label="Escalas clínicas disponibles">
         <Card
           icon={<AlertTriangle className="w-7 h-7" />}
           title="Riesgo de sangrado en anticoagulación (HAS-BLED)"

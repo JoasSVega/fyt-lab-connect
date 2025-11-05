@@ -147,7 +147,8 @@ All colors MUST be HSL and based on institutional branding.
   section {
     width: 100%;
     max-width: 100%;
-    overflow-x: hidden;
+    /* Allow hover scaling of cards to render beyond the section without clipping */
+    overflow: visible;
   }
 
   /* Mobile-first responsive design */
