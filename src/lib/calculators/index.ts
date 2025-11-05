@@ -1,5 +1,19 @@
 import { FieldSpec, FormulaSpec } from "@/components/calculators/CalculatorModal";
-import { computeBMI, computeBSA } from "./adapters/anthropometrics";
+import {
+  computeBMI,
+  computeBSA,
+  computeBodyFat,
+  computeBMRMifflin,
+  computeBMRHarris,
+  computeIdealDevine,
+  computeIdealRobinson,
+  computeIdealMiller,
+  computeACTWatson,
+  computeACTChumlea,
+  computeMMCJames,
+  computeMMCHume,
+  computeLeanMassFromBF,
+} from "./adapters/anthropometrics";
 import { computeCockcroft, computeMDRD4, computeCKDEPI2009, computeCKDEPI2021 } from "./adapters/renal";
 
 export type CalculatorMeta = {
@@ -57,6 +71,88 @@ export const CalculatorsRegistry = {
       { name: "height", label: "Talla", type: "number", unit: "cm", validation: { required: true, min: 100, max: 250 } },
     ],
     formulas: [ { id: "dubois", label: "DuBois", description: "BSA = 0.007184 × peso^0.425 × talla^0.725", compute: computeBSA } ],
+  },
+  bodyFat: {
+    id: "bodyFat",
+    title: "% Grasa corporal",
+    subtitle: "Deurenberg (1991)",
+    category: "fisiologico",
+    color: "#a855f7", // violet
+    fields: [
+      { name: "weight", label: "Peso", type: "number", unit: "kg", validation: { required: true, min: 20, max: 300 } },
+      { name: "height", label: "Talla", type: "number", unit: "cm", validation: { required: true, min: 100, max: 250 } },
+      { name: "age", label: "Edad", type: "number", unit: "años", validation: { required: true, min: 5, max: 120 } },
+      { name: "sex", label: "Sexo", type: "select", options: [ { value: "male", label: "Masculino" }, { value: "female", label: "Femenino" } ], placeholder: "Seleccione…", validation: { required: true } },
+    ],
+    formulas: [ { id: "deurenberg", label: "Deurenberg", compute: computeBodyFat } ],
+  },
+  bmr: {
+    id: "bmr",
+    title: "CEB",
+    subtitle: "Consumo energético basal",
+    category: "fisiologico",
+    color: "#f97316", // orange
+    fields: [
+      { name: "weight", label: "Peso", type: "number", unit: "kg", validation: { required: true, min: 20, max: 300 } },
+      { name: "height", label: "Talla", type: "number", unit: "cm", validation: { required: true, min: 100, max: 250 } },
+      { name: "age", label: "Edad", type: "number", unit: "años", validation: { required: true, min: 5, max: 120 } },
+      { name: "sex", label: "Sexo", type: "select", options: [ { value: "male", label: "Masculino" }, { value: "female", label: "Femenino" } ], placeholder: "Seleccione…", validation: { required: true } },
+    ],
+    formulas: [
+      { id: "mifflin", label: "Mifflin–St Jeor", compute: computeBMRMifflin },
+      { id: "harris", label: "Harris–Benedict", compute: computeBMRHarris },
+    ],
+  },
+  idealWeight: {
+    id: "idealWeight",
+    title: "Peso ideal",
+    subtitle: "Devine / Robinson / Miller",
+    category: "fisiologico",
+    color: "#0d9488", // teal
+    fields: [
+      { name: "height", label: "Estatura", type: "number", unit: "cm", validation: { required: true, min: 100, max: 250 } },
+      { name: "sex", label: "Sexo", type: "select", options: [ { value: "male", label: "Masculino" }, { value: "female", label: "Femenino" } ], placeholder: "Seleccione…", validation: { required: true } },
+    ],
+    formulas: [
+      { id: "devine", label: "Devine (1974)", compute: computeIdealDevine },
+      { id: "robinson", label: "Robinson (1983)", compute: computeIdealRobinson },
+      { id: "miller", label: "Miller (1983)", compute: computeIdealMiller },
+    ],
+  },
+  act: {
+    id: "act",
+    title: "Agua corporal total (ACT)",
+    subtitle: "Watson / Chumlea",
+    category: "fisiologico",
+    color: "#16a34a", // green
+    fields: [
+      { name: "weight", label: "Peso", type: "number", unit: "kg", validation: { required: true, min: 20, max: 300 } },
+      { name: "height", label: "Talla", type: "number", unit: "cm", validation: { required: true, min: 100, max: 250 } },
+      { name: "age", label: "Edad", type: "number", unit: "años", validation: { required: true, min: 5, max: 120 } },
+      { name: "sex", label: "Sexo", type: "select", options: [ { value: "male", label: "Masculino" }, { value: "female", label: "Femenino" } ], placeholder: "Seleccione…", validation: { required: true } },
+    ],
+    formulas: [
+      { id: "watson", label: "Watson", compute: computeACTWatson },
+      { id: "chumlea", label: "Chumlea", compute: computeACTChumlea },
+    ],
+  },
+  mmc: {
+    id: "mmc",
+    title: "Masa magra corporal",
+    subtitle: "James / Hume / % grasa",
+    category: "fisiologico",
+    color: "#0891b2", // cyan
+    fields: [
+      { name: "weight", label: "Peso", type: "number", unit: "kg", validation: { required: true, min: 20, max: 300 } },
+      { name: "height", label: "Talla", type: "number", unit: "cm", validation: { min: 100, max: 250 } },
+      { name: "bf", label: "% Grasa corporal", type: "number", unit: "%", validation: { min: 0, max: 100 } },
+      { name: "sex", label: "Sexo", type: "select", options: [ { value: "male", label: "Masculino" }, { value: "female", label: "Femenino" } ], placeholder: "Seleccione…", validation: { required: true } },
+    ],
+    formulas: [
+      { id: "james", label: "James", compute: computeMMCJames },
+      { id: "hume", label: "Hume", compute: computeMMCHume },
+      { id: "lean", label: "Lean (% grasa)", compute: computeLeanMassFromBF },
+    ],
   },
 } as const;
 

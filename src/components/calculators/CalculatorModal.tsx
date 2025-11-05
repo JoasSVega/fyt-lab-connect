@@ -11,7 +11,7 @@ export type FieldSpec = {
   label: string;
   type: "number" | "text" | "select" | "toggle";
   unit?: string;
-  options?: { value: string; label: string }[];
+  options?: ReadonlyArray<{ value: string; label: string }>;
   placeholder?: string;
   validation?: { min?: number; max?: number; required?: boolean };
 };
