@@ -6,13 +6,13 @@ import Seo from "@/components/Seo";
 // Unificado: modal reutilizable
 import CalculatorModal from "@/components/calculators/CalculatorModal";
 import { CalculatorsRegistry } from "@/lib/calculators";
-import HepaticFunctionCalculator from "@/components/tools/clinicos/HepaticFunctionCalculator";
+// Migrado a modal unificado
 import DoseByWeightCalculator from "@/components/tools/clinicos/DoseByWeightCalculator";
 import ReconstitutionDilutionCalculator from "@/components/tools/clinicos/ReconstitutionDilutionCalculator";
 
 const Clinicos: React.FC = () => {
   const [openRenal, setOpenRenal] = React.useState(false);
-  const [showHepatic, setShowHepatic] = React.useState(false);
+  const [openHepatic, setOpenHepatic] = React.useState(false);
   const [showDose, setShowDose] = React.useState(false);
   const [showReconst, setShowReconst] = React.useState(false);
   const navigate = useNavigate();
@@ -71,15 +71,19 @@ const Clinicos: React.FC = () => {
         <div className="rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col">
           <h3 className="text-xl font-raleway font-bold mb-1" style={{ color: '#F59E0B' }}>Función hepática</h3>
           <p className="text-sm text-muted-foreground mb-4">Child‑Pugh, MELD/MELD‑Na, APRI y FIB‑4 para evaluar severidad y fibrosis.</p>
-          {!showHepatic ? (
-            <div className="mt-auto">
-              <button onClick={()=>setShowHepatic(true)} className="px-4 py-2 rounded-md bg-amber-600 text-white font-semibold hover:bg-amber-700">Abrir calculadora</button>
-            </div>
-          ) : (
-            <div className="mt-2">
-              <HepaticFunctionCalculator embedded />
-            </div>
-          )}
+          <div className="mt-auto">
+            <button onClick={()=>setOpenHepatic(true)} className="px-4 py-2 rounded-md bg-amber-600 text-white font-semibold hover:bg-amber-700">Abrir calculadora</button>
+          </div>
+          <CalculatorModal
+            id="calc-hepatic"
+            open={openHepatic}
+            onOpenChange={setOpenHepatic}
+            title={CalculatorsRegistry.hepatic.title}
+            subtitle={CalculatorsRegistry.hepatic.subtitle}
+            fields={CalculatorsRegistry.hepatic.fields}
+            formulas={CalculatorsRegistry.hepatic.formulas}
+            categoryColor={CalculatorsRegistry.hepatic.color}
+          />
         </div>
 
         {/* Dosis por peso y superficie corporal */}

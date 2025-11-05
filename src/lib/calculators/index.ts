@@ -14,6 +14,7 @@ import {
   computeMMCHume,
   computeLeanMassFromBF,
 } from "./adapters/anthropometrics";
+import { computeChildPugh, computeMELD, computeAPRI, computeFIB4 } from "./adapters/hepatic";
 import { computeCockcroft, computeMDRD4, computeCKDEPI2009, computeCKDEPI2021 } from "./adapters/renal";
 
 export type CalculatorMeta = {
@@ -152,6 +153,35 @@ export const CalculatorsRegistry = {
       { id: "james", label: "James", compute: computeMMCJames },
       { id: "hume", label: "Hume", compute: computeMMCHume },
       { id: "lean", label: "Lean (% grasa)", compute: computeLeanMassFromBF },
+    ],
+  },
+  hepatic: {
+    id: "hepatic",
+    title: "Función hepática",
+    subtitle: "Child‑Pugh / MELD / APRI / FIB‑4",
+    category: "clinico",
+    color: "#F59E0B", // amber
+    // Usamos un superset de campos para todas las fórmulas
+    fields: [
+      { name: "bili", label: "Bilirrubina total", type: "number", unit: "mg/dL o µmol/L" },
+      { name: "biliUnit", label: "Unidad de bilirrubina", type: "select", options: [ { value: "mgdl", label: "mg/dL" }, { value: "umol", label: "µmol/L" } ], placeholder: "Unidad" },
+      { name: "albumin", label: "Albúmina", type: "number", unit: "g/dL" },
+      { name: "inr", label: "INR", type: "number" },
+      { name: "ascites", label: "Ascitis", type: "select", options: [ { value: "none", label: "Ninguna" }, { value: "mild", label: "Leve" }, { value: "moderate", label: "Moderada" }, { value: "severe", label: "Severa" } ] },
+      { name: "enceph", label: "Encefalopatía", type: "select", options: [ { value: "none", label: "Ninguna" }, { value: "mild", label: "Leve (I–II)" }, { value: "moderate", label: "Moderada" }, { value: "severe", label: "Severa (III–IV)" } ] },
+      { name: "creat", label: "Creatinina", type: "number", unit: "mg/dL" },
+      { name: "sodium", label: "Sodio sérico (opcional)", type: "number", unit: "mmol/L" },
+      { name: "ast", label: "AST", type: "number", unit: "UI/L" },
+      { name: "alt", label: "ALT", type: "number", unit: "UI/L" },
+      { name: "astULN", label: "LSN AST", type: "number", unit: "UI/L" },
+      { name: "platelets", label: "Plaquetas", type: "number", unit: "10^9/L" },
+      { name: "age", label: "Edad", type: "number", unit: "años" },
+    ],
+    formulas: [
+      { id: "child", label: "Child‑Pugh", compute: computeChildPugh },
+      { id: "meld", label: "MELD / MELD‑Na", compute: computeMELD },
+      { id: "apri", label: "APRI", compute: computeAPRI },
+      { id: "fib4", label: "FIB‑4", compute: computeFIB4 },
     ],
   },
 } as const;
