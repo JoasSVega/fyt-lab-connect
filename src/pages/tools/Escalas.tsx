@@ -11,13 +11,13 @@ const Escalas: React.FC = () => {
   const navigate = useNavigate();
 
   const Card = ({ icon, title, desc, color = "#a855f7", action }: { icon: React.ReactNode; title: string; desc: string; color?: string; action?: React.ReactNode; }) => (
-    <div className="rounded-2xl border-2 bg-white/90 shadow-lg hover:shadow-xl transition-all p-6 flex flex-col" role="article" aria-label={title}>
+    <div className="rounded-2xl border-2 bg-white/90 shadow-lg transition-transform transition-shadow duration-200 ease-out hover:scale-105 hover:shadow-xl p-6 flex flex-col" role="article" aria-label={title}>
       <div className="flex items-center gap-3 mb-3">
         <div className="p-2 rounded-lg" style={{ backgroundColor: color + "22", color }}>
           {icon}
           <span className="sr-only">Icono de {title}</span>
         </div>
-        <h3 className="text-xl font-raleway font-bold">{title}</h3>
+        <h3 className="text-xl font-raleway font-bold text-black">{title}</h3>
       </div>
       <p className="text-sm text-muted-foreground mb-4 flex-1">{desc}</p>
       {action ? (
@@ -68,28 +68,28 @@ const Escalas: React.FC = () => {
       <section className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6" aria-label="Escalas clínicas disponibles">
         <Card
           icon={<AlertTriangle className="w-7 h-7" />}
-          title="HAS-BLED"
+          title="Riesgo de sangrado en anticoagulación (HAS-BLED)"
           desc="Riesgo de sangrado en anticoagulación."
           color="#e53935"
           action={<HASBLEDTool />}
         />
         <Card
           icon={<HeartPulse className="w-7 h-7" />}
-          title="CHA₂DS₂-VASc"
+          title="Riesgo de eventos tromboembólicos (CHA₂DS₂-VASc)"
           desc="Riesgo de eventos tromboembólicos."
           color="#43a047"
           action={<CHA2DS2VAScTool />}
         />
         <Card
           icon={<TestTube className="w-7 h-7" />}
-          title="CURB-65"
+          title="Severidad de neumonía adquirida en la comunidad (CURB-65)"
           desc="Severidad de la neumonía adquirida en la comunidad."
           color="#fb8c00"
           action={<CURB65Tool />}
         />
         <Card
           icon={<Brain className="w-7 h-7" />}
-          title="Glasgow (GCS)"
+          title="Escala de Glasgow (GCS)"
           desc="Evaluación del estado neurológico del paciente."
           color="#8e24aa"
           action={<GlasgowTool />}
