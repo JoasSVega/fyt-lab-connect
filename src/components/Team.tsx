@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
 import { Mail } from "lucide-react";
@@ -249,13 +250,7 @@ const Team = ({ compact = false }: { compact?: boolean }) => {
               size="lg"
               className="group rounded-lg border-2 border-fyt-blue bg-fyt-blue text-white hover:bg-white hover:text-fyt-blue px-8 py-3 font-medium shadow-lg transition-colors"
             >
-              <a
-                href="mailto:grupoinvestigacion@gmail.com?subject=Unirse%20al%20grupo%20de%20investigaci%C3%B3n"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Contáctanos
-              </a>
+              <Link to="/contactos">Contáctanos</Link>
             </Button>
           </Card>
         </div>
