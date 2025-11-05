@@ -29,6 +29,8 @@ export type FormulaSpec = {
   label: string;
   description?: string;
   formulaLatex?: string;
+  expressionText?: string;
+  expressionLatex?: string;
   compute?: (values: Record<string, unknown>) => CalculationResult;
   // Optional subset of fields specific to this formula; when present, UI will show these instead of the base fields
   fields?: ReadonlyArray<FieldSpec>;
@@ -92,6 +94,7 @@ const CalculatorModal: React.FC<Props> = ({
   const [flipped, setFlipped] = React.useState(false);
   const [error, setError] = React.useState<string>("");
   const [infoOpen, setInfoOpen] = React.useState(false);
+  const firstInputRef = React.useRef<HTMLInputElement | HTMLSelectElement | null>(null);
 
   React.useEffect(() => {
     // reset on open
@@ -167,6 +170,10 @@ const CalculatorModal: React.FC<Props> = ({
   const handleReturn = () => {
     setResult(null);
     setFlipped(false);
+    // restore focus to first input after flip back
+    setTimeout(() => {
+      firstInputRef.current?.focus?.();
+    }, 50);
   };
 
   // Derive effective fields per formula (if provided)
@@ -189,6 +196,10 @@ const CalculatorModal: React.FC<Props> = ({
     setError("");
     setResult(null);
     setFlipped(false);
+    // focus first input on formula change
+    setTimeout(() => {
+      firstInputRef.current?.focus?.();
+    }, 50);
   }, [effectiveFields]);
 
   // Public trigger button if used uncontrolled
@@ -217,6 +228,7 @@ const CalculatorModal: React.FC<Props> = ({
           categoryColor={categoryColor}
           infoOpen={infoOpen}
           setInfoOpen={setInfoOpen}
+          firstInputRef={firstInputRef}
         />
       </div>
     );
@@ -245,6 +257,7 @@ const CalculatorModal: React.FC<Props> = ({
       categoryColor={categoryColor}
       infoOpen={infoOpen}
       setInfoOpen={setInfoOpen}
+      firstInputRef={firstInputRef}
     />
   );
 };
@@ -273,18 +286,26 @@ const CalculatorModalContent: React.FC<{
   categoryColor: string;
   infoOpen: boolean;
   setInfoOpen: (open: boolean) => void;
-}> = ({ id, open, onClose, title, subtitle, fields, values, onInput, formulas, selectedFormula, onSelectFormula, onCalculate, onClear, onReturn, result, flipped, error, categoryColor, infoOpen, setInfoOpen }) => {
+  firstInputRef: React.RefObject<HTMLInputElement | HTMLSelectElement>;
+}> = ({ id, open, onClose, title, subtitle, fields, values, onInput, formulas, selectedFormula, onSelectFormula, onCalculate, onClear, onReturn, result, flipped, error, categoryColor, infoOpen, setInfoOpen, firstInputRef }) => {
+  React.useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    if (open) window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open, onClose]);
   return (
     <AnimatePresence>
       {open && (
         <motion.div className="fixed inset-0 z-50" role="dialog" aria-modal="true" aria-labelledby={`${id}-title`} aria-describedby={`${id}-subtitle`}>
           {/* Overlay */}
-          <motion.div className="absolute inset-0 bg-black/50" variants={defaultOverlay} initial="hidden" animate="visible" exit="exit" />
+          <motion.div className="absolute inset-0 bg-black/50 touch-manipulation" variants={defaultOverlay} initial="hidden" animate="visible" exit="exit" onClick={onClose} />
 
           {/* Card */}
-          <motion.div className="relative mx-auto mt-8 md:mt-16 w-[94vw] sm:w-[85vw] md:w-[70vw] lg:w-[60vw] xl:w-[50vw] max-h-[90vh]" variants={defaultCard} initial="hidden" animate="visible" exit="exit">
+          <motion.div className="relative mx-auto mt-8 md:mt-16 w-[94vw] sm:w-[85vw] md:w-[70vw] lg:w-[60vw] xl:w-[50vw] max-h-[90vh]" variants={defaultCard} initial="hidden" animate="visible" exit="exit" onClick={(e)=>e.stopPropagation()}>
             <div className="relative rounded-2xl bg-white shadow-xl ring-1 ring-black/5 overflow-hidden flex flex-col max-h-[90vh]">
-              <div className="px-5 py-4 border-b flex items-start justify-between" style={{ background: `linear-gradient(to right, ${categoryColor}15, transparent)` }}>
+              <div className="sticky top-0 z-10 px-5 py-4 border-b flex items-start justify-between bg-white/95 backdrop-blur" style={{ background: `linear-gradient(to right, ${categoryColor}15, #ffffffEE)` }}>
                 <div>
                   <h2 id={`${id}-title`} className="text-xl sm:text-2xl font-raleway font-bold text-slate-900">{title}</h2>
                   {subtitle ? (
@@ -311,26 +332,26 @@ const CalculatorModalContent: React.FC<{
                     <button
                       type="button"
                       aria-label="Ver fórmulas"
-                      className="p-1 rounded-md hover:bg-slate-100"
+                      className="p-1 rounded-md hover:bg-slate-100 touch-manipulation"
                       onClick={() => setInfoOpen(true)}
                       title="Ver fórmulas"
                     >
                       <Info className="w-5 h-5 text-slate-600" />
                     </button>
                   )}
-                  <button onClick={onClose} aria-label="Cerrar" className="p-1 rounded-md hover:bg-slate-100">
+                  <button onClick={onClose} aria-label="Cerrar" className="p-1 rounded-md hover:bg-slate-100 touch-manipulation">
                     <X className="w-5 h-5" />
                   </button>
                 </div>
               </div>
 
               {/* Body with 3D flip container */}
-              <div className="relative p-5 min-h-[220px] overflow-y-auto">
+              <div className="relative p-5 min-h-[220px]">
                 <div className={`relative transition-transform duration-500 [transform-style:preserve-3d] ${flipped ? "[transform:rotateY(180deg)]" : ""}`}>
                   {/* Front: form */}
-                  <div className="[backface-visibility:hidden] absolute inset-0">
+                  <div className={`[backface-visibility:hidden] absolute inset-0 ${flipped ? "pointer-events-none" : ""}`} aria-hidden={flipped}>
                     <form className="grid grid-cols-1 md:grid-cols-2 gap-4" onSubmit={(e)=>{ e.preventDefault(); onCalculate(); }}>
-                      {fields.map((f) => (
+                      {fields.map((f, idx) => (
                         <div key={f.name} className="flex flex-col gap-1">
                           <label htmlFor={`${id}-${f.name}`} className="text-sm font-medium">{f.label}</label>
                           {f.type === "number" && (
@@ -347,15 +368,16 @@ const CalculatorModalContent: React.FC<{
                                 aria-invalid={!!error && ((values[f.name] === undefined || values[f.name] === "") && f.validation?.required) ? true : undefined}
                                 min={f.validation?.min}
                                 max={f.validation?.max}
+                                ref={idx === 0 ? firstInputRef as any : undefined}
                               />
                               {f.unit ? <span className="text-sm text-slate-500">{f.unit}</span> : null}
                             </div>
                           )}
                           {f.type === "text" && (
-                            <input id={`${id}-${f.name}`} name={f.name} type="text" className="w-full rounded-md border px-3 py-2" placeholder={f.placeholder} value={(typeof values[f.name] === 'string') ? (values[f.name] as string) : ""} onChange={(e)=>onInput(f.name, e.target.value)} />
+                            <input id={`${id}-${f.name}`} name={f.name} type="text" className="w-full rounded-md border px-3 py-2" placeholder={f.placeholder} value={(typeof values[f.name] === 'string') ? (values[f.name] as string) : ""} onChange={(e)=>onInput(f.name, e.target.value)} ref={idx === 0 ? firstInputRef as any : undefined} />
                           )}
                           {f.type === "select" && (
-                            <select id={`${id}-${f.name}`} name={f.name} className="w-full rounded-md border px-3 py-2" value={(typeof values[f.name] === 'string') ? (values[f.name] as string) : ""} onChange={(e)=>onInput(f.name, e.target.value)}>
+                            <select id={`${id}-${f.name}`} name={f.name} className="w-full rounded-md border px-3 py-2" value={(typeof values[f.name] === 'string') ? (values[f.name] as string) : ""} onChange={(e)=>onInput(f.name, e.target.value)} ref={idx === 0 ? firstInputRef as any : undefined}>
                               <option value="" disabled>{f.placeholder || "Seleccione..."}</option>
                               {(f.options || []).map((opt) => (
                                 <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -381,7 +403,7 @@ const CalculatorModalContent: React.FC<{
                   </div>
 
                   {/* Back: result */}
-                  <div className="[backface-visibility:hidden] [transform:rotateY(180deg)] absolute inset-0">
+                  <div className="[backface-visibility:hidden] [transform:rotateY(180deg)] absolute inset-0" aria-hidden={!flipped}>
                     <div className={`rounded-xl border p-6 text-center ${getSeverityClasses(result?.severity)}`}>
                       {result ? (
                         <>
@@ -419,17 +441,23 @@ const CalculatorModalContent: React.FC<{
                 </div>
                 <div className="space-y-3">
                   {formulas && formulas.length > 0 ? (
-                    formulas.map((f) => (
-                      <div key={f.id} className="rounded-xl bg-slate-50 p-3">
-                        <div className="text-sm font-semibold text-slate-800">{f.label}</div>
-                        {f.formulaLatex ? (
-                          <div className="mt-1 text-sky-700 font-mono text-sm overflow-x-auto">{f.formulaLatex}</div>
-                        ) : null}
-                        {f.description ? (
-                          <div className="mt-1 text-xs text-slate-600 leading-relaxed">{f.description}</div>
-                        ) : null}
-                      </div>
-                    ))
+                    formulas.map((f, idx) => {
+                      const exprLatex = f.expressionLatex || f.formulaLatex;
+                      const exprText = f.expressionText || f.description;
+                      return (
+                        <div key={f.id} className="rounded-xl bg-slate-50 p-3">
+                          <div className="text-sm font-semibold text-slate-800">{idx + 1}. {f.label}</div>
+                          {exprLatex ? (
+                            <div className="mt-1 text-sky-700 font-mono text-sm overflow-x-auto">{exprLatex}</div>
+                          ) : null}
+                          {exprText ? (
+                            <div className="mt-1 text-xs text-slate-700 leading-relaxed whitespace-pre-wrap">{exprText}</div>
+                          ) : (
+                            <div className="mt-1 text-xs text-slate-500 italic">TODO: añadir fórmula</div>
+                          )}
+                        </div>
+                      );
+                    })
                   ) : (
                     <div className="text-sm text-slate-600">No hay fórmulas disponibles.</div>
                   )}
