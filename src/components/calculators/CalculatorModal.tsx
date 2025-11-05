@@ -369,16 +369,16 @@ const CalculatorModalContent: React.FC<{
                                 aria-invalid={!!error && ((values[f.name] === undefined || values[f.name] === "") && f.validation?.required) ? true : undefined}
                                 min={f.validation?.min}
                                 max={f.validation?.max}
-                                ref={idx === 0 ? firstInputRef as any : undefined}
+                                ref={idx === 0 ? (firstInputRef as React.RefObject<HTMLInputElement>) : undefined}
                               />
                               {f.unit ? <span className="text-sm text-slate-500">{f.unit}</span> : null}
                             </div>
                           )}
                           {f.type === "text" && (
-                            <input id={`${id}-${f.name}`} name={f.name} type="text" className="w-full rounded-md border px-3 py-2" placeholder={f.placeholder} value={(typeof values[f.name] === 'string') ? (values[f.name] as string) : ""} onChange={(e)=>onInput(f.name, e.target.value)} ref={idx === 0 ? firstInputRef as any : undefined} />
+                            <input id={`${id}-${f.name}`} name={f.name} type="text" className="w-full rounded-md border px-3 py-2" placeholder={f.placeholder} value={(typeof values[f.name] === 'string') ? (values[f.name] as string) : ""} onChange={(e)=>onInput(f.name, e.target.value)} ref={idx === 0 ? (firstInputRef as React.RefObject<HTMLInputElement>) : undefined} />
                           )}
                           {f.type === "select" && (
-                            <select id={`${id}-${f.name}`} name={f.name} className="w-full rounded-md border px-3 py-2" value={(typeof values[f.name] === 'string') ? (values[f.name] as string) : ""} onChange={(e)=>onInput(f.name, e.target.value)} ref={idx === 0 ? firstInputRef as any : undefined}>
+                            <select id={`${id}-${f.name}`} name={f.name} className="w-full rounded-md border px-3 py-2" value={(typeof values[f.name] === 'string') ? (values[f.name] as string) : ""} onChange={(e)=>onInput(f.name, e.target.value)} ref={idx === 0 ? (firstInputRef as React.RefObject<HTMLSelectElement>) : undefined}>
                               <option value="" disabled>{f.placeholder || "Seleccione..."}</option>
                               {(f.options || []).map((opt) => (
                                 <option key={opt.value} value={opt.value}>{opt.label}</option>
