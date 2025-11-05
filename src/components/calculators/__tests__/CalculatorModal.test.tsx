@@ -47,5 +47,10 @@ describe('CalculatorModal', () => {
   const talla2 = await screen.findByLabelText('Talla');
   expect((peso2 as HTMLInputElement).value).toBe('');
   expect((talla2 as HTMLInputElement).value).toBe('');
+
+    // Abre modal de fórmulas y verifica renderizado KaTeX
+    fireEvent.click(screen.getByLabelText('Ver fórmulas'));
+    const fItem = await screen.findByTestId('formula-item-1');
+    expect(fItem).toBeInTheDocument();
   });
 });

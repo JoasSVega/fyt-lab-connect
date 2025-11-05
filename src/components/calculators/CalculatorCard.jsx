@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { Latex } from "../ui/Latex";
 import { motion } from "framer-motion";
 
 /**
@@ -289,8 +290,8 @@ export default function CalculatorCard({
                 formulaInfo.map((f, idx) => (
                   <div key={idx} className="rounded-xl bg-slate-50 dark:bg-slate-800/60 p-3">
                     <div className="text-sm font-semibold text-slate-800 dark:text-slate-100">{f.name}</div>
-                    <div className="mt-1 text-sky-700 dark:text-sky-400 font-mono text-sm overflow-x-auto">
-                      {f.expression}
+                    <div className="mt-1 text-sky-700 dark:text-sky-400 font-mono text-sm overflow-x-auto" data-testid="formula-latex">
+                      <Latex expression={f.expression} display className="block" />
                     </div>
                     {f.description && (
                       <div className="mt-1 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">{f.description}</div>
