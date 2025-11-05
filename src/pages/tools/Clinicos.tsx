@@ -3,13 +3,15 @@ import { Suspense } from "react";
 import { useNavigate } from "react-router-dom";
 import { Stethoscope } from "lucide-react";
 import Seo from "@/components/Seo";
-import FuncionRenalCalculator from "@/components/tools/clinicos/FuncionRenalCalculator";
+// Unificado: modal reutilizable
+import CalculatorModal from "@/components/calculators/CalculatorModal";
+import { CalculatorsRegistry } from "@/lib/calculators";
 import HepaticFunctionCalculator from "@/components/tools/clinicos/HepaticFunctionCalculator";
 import DoseByWeightCalculator from "@/components/tools/clinicos/DoseByWeightCalculator";
 import ReconstitutionDilutionCalculator from "@/components/tools/clinicos/ReconstitutionDilutionCalculator";
 
 const Clinicos: React.FC = () => {
-  const [showRenal, setShowRenal] = React.useState(false);
+  const [openRenal, setOpenRenal] = React.useState(false);
   const [showHepatic, setShowHepatic] = React.useState(false);
   const [showDose, setShowDose] = React.useState(false);
   const [showReconst, setShowReconst] = React.useState(false);
@@ -50,15 +52,19 @@ const Clinicos: React.FC = () => {
         <div className="rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col">
           <h3 className="text-xl font-raleway font-bold mb-1" style={{ color: '#3B82F6' }}>Función renal</h3>
           <p className="text-sm text-muted-foreground mb-4">Estima TFG/aclaramiento con Cockcroft–Gault, MDRD y CKD‑EPI.</p>
-          {!showRenal ? (
-            <div className="mt-auto">
-              <button onClick={()=>setShowRenal(true)} className="px-4 py-2 rounded-md bg-blue-600 text-white font-semibold hover:bg-blue-700">Abrir calculadora</button>
-            </div>
-          ) : (
-            <div className="mt-2">
-              <FuncionRenalCalculator embedded />
-            </div>
-          )}
+          <div className="mt-auto">
+            <button onClick={()=>setOpenRenal(true)} className="px-4 py-2 rounded-md bg-blue-600 text-white font-semibold hover:bg-blue-700">Abrir calculadora</button>
+          </div>
+          <CalculatorModal
+            id="calc-renal"
+            open={openRenal}
+            onOpenChange={setOpenRenal}
+            title={CalculatorsRegistry.renal.title}
+            subtitle={CalculatorsRegistry.renal.subtitle}
+            fields={CalculatorsRegistry.renal.fields}
+            formulas={CalculatorsRegistry.renal.formulas}
+            categoryColor={CalculatorsRegistry.renal.color}
+          />
         </div>
 
         {/* Función hepática */}

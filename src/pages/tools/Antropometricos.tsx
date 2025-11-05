@@ -2,7 +2,6 @@ import * as React from "react";
 import { Suspense, lazy } from "react";
 import { useNavigate } from "react-router-dom";
 import { Ruler } from "lucide-react";
-const IMCCalculator = lazy(() => import("@/components/tools/antropometricos/IMCCalculator"));
 const BodyFatCalculator = lazy(() => import("@/components/tools/antropometricos/BodyFatCalculator"));
 // Selector-based calculators centralizados
 const ASCSelectorCalculator = lazy(() => import("@/components/calculators/antropometricas/ASCSelectorCalculator"));
@@ -11,6 +10,8 @@ const CEBSelectorCalculator = lazy(() => import("@/components/calculators/antrop
 const ACTSelectorCalculator = lazy(() => import("@/components/calculators/antropometricas/ACTSelectorCalculator"));
 const MMCCalculator = lazy(() => import("@/components/calculators/antropometricas/MMCCalculator"));
 import Seo from "@/components/Seo";
+import CalculatorModal from "@/components/calculators/CalculatorModal";
+import { CalculatorsRegistry } from "@/lib/calculators";
 
 const Antropometricos: React.FC = () => {
   const [openIMC, setOpenIMC] = React.useState(false);
@@ -61,9 +62,16 @@ const Antropometricos: React.FC = () => {
           <div className="mt-auto">
             <button onClick={()=>setOpenIMC(true)} className="px-4 py-2 rounded-md bg-sky-600 text-white font-semibold hover:bg-sky-700">Abrir calculadora</button>
           </div>
-          <Suspense fallback={<div className="h-10 w-28 rounded-md bg-sky-100 animate-pulse mt-3" aria-hidden /> }>
-            <IMCCalculator open={openIMC} onOpenChange={setOpenIMC} />
-          </Suspense>
+          <CalculatorModal
+            id="calc-bmi"
+            open={openIMC}
+            onOpenChange={setOpenIMC}
+            title={CalculatorsRegistry.bmi.title}
+            subtitle={CalculatorsRegistry.bmi.subtitle}
+            fields={CalculatorsRegistry.bmi.fields}
+            formulas={CalculatorsRegistry.bmi.formulas}
+            categoryColor={CalculatorsRegistry.bmi.color}
+          />
         </div>
 
         <div className="rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col">
@@ -72,9 +80,16 @@ const Antropometricos: React.FC = () => {
           <div className="mt-auto">
             <button onClick={()=>setOpenBSA(true)} className="px-4 py-2 rounded-md bg-emerald-600 text-white font-semibold hover:bg-emerald-700">Abrir calculadora</button>
           </div>
-          <Suspense fallback={<div className="h-10 w-28 rounded-md bg-emerald-100 animate-pulse mt-3" aria-hidden /> }>
-            <ASCSelectorCalculator open={openBSA} onOpenChange={setOpenBSA} />
-          </Suspense>
+          <CalculatorModal
+            id="calc-bsa"
+            open={openBSA}
+            onOpenChange={setOpenBSA}
+            title={CalculatorsRegistry.bsa.title}
+            subtitle={CalculatorsRegistry.bsa.subtitle}
+            fields={CalculatorsRegistry.bsa.fields}
+            formulas={CalculatorsRegistry.bsa.formulas}
+            categoryColor={CalculatorsRegistry.bsa.color}
+          />
         </div>
 
         <div className="rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col">
