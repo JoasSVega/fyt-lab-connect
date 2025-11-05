@@ -322,6 +322,7 @@ const CalculatorModalContent: React.FC<{
   const bodyWrapRef = React.useRef<HTMLDivElement | null>(null);
   const bodyInnerRef = React.useRef<HTMLDivElement | null>(null);
   const [bodyScrollable, setBodyScrollable] = React.useState(false);
+  const prevOverflowRef = React.useRef<string | null>(null);
 
   // Conditional scroll: enable only when content exceeds available space (especially on small viewports)
   const measureScrollNeed = React.useCallback(() => {
@@ -353,6 +354,17 @@ const CalculatorModalContent: React.FC<{
     return () => window.removeEventListener("keydown", onKey);
   }, [open, onClose]);
 
+  // Prevent background scroll while modal is open
+  React.useEffect(() => {
+    if (open) {
+      prevOverflowRef.current = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = prevOverflowRef.current || "";
+      };
+    }
+  }, [open]);
+
   // Auto-calc: when enabled, compute as soon as all required fields are valid
   React.useEffect(() => {
     if (!open || !autoCalculate) return;
@@ -376,12 +388,27 @@ const CalculatorModalContent: React.FC<{
   return (
     <AnimatePresence>
       {open && (
-        <motion.div className="fixed inset-0 z-50" role="dialog" aria-modal="true" aria-labelledby={`${id}-title`} aria-describedby={`${id}-subtitle`}>
+        <motion.div className="fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby={`${id}-title`} aria-describedby={`${id}-subtitle`}>
           {/* Overlay */}
-          <motion.div className="absolute inset-0 bg-black/50 touch-manipulation" variants={defaultOverlay} initial="hidden" animate="visible" exit="exit" onClick={onClose} />
+          <motion.div
+            className="absolute inset-0 bg-black/50 backdrop-blur-2xl touch-manipulation will-change-[opacity,backdrop-filter] duration-300 ease-in-out"
+            variants={defaultOverlay}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            onClick={onClose}
+          />
 
           {/* Card */}
-          <motion.div className="relative mx-auto mt-8 md:mt-16 w-[94vw] sm:w-[85vw] md:w-[70vw] lg:w-[60vw] xl:w-[50vw] max-h-[90vh]" variants={defaultCard} initial="hidden" animate="visible" exit="exit" onClick={(e)=>e.stopPropagation()}>
+          <motion.div
+            className="relative z-10 w-[94vw] sm:w-[85vw] md:w-[70vw] lg:w-[60vw] xl:w-[50vw] max-h-[90vh]"
+            variants={defaultCard}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            transition={{ duration: 0.35, ease: "easeInOut" }}
+            onClick={(e)=>e.stopPropagation()}
+          >
             <div className="relative rounded-2xl bg-white shadow-xl ring-1 ring-black/5 overflow-hidden flex flex-col max-h-[90vh]">
               <div ref={headerRef} className="sticky top-0 z-10 px-5 py-4 border-b flex items-start justify-between bg-white/95 backdrop-blur" style={{ background: `linear-gradient(to right, ${categoryColor}15, #ffffffEE)` }}>
                 <div>
@@ -534,7 +561,7 @@ const CalculatorModalContent: React.FC<{
           {/* Info modal for formulas */}
           {infoOpen && (
             <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
-              <div className="absolute inset-0 bg-black/50" onClick={() => setInfoOpen(false)} />
+              <div className="absolute inset-0 bg-black/50 backdrop-blur-2xl" onClick={() => setInfoOpen(false)} />
               <div className="relative z-10 w-[90vw] max-w-[600px] max-h-[85vh] overflow-y-auto rounded-2xl bg-white shadow-lg ring-1 ring-slate-200 p-5">
                 <div className="flex items-start justify-between mb-2">
                   <h4 className="text-lg font-semibold text-slate-900">Fórmulas</h4>
