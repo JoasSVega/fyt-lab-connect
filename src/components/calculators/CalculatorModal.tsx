@@ -390,21 +390,21 @@ const CalculatorModalContent: React.FC<{
   return (
     <AnimatePresence>
       {open && (
-        <motion.div className="fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby={`${id}-title`} aria-describedby={`${id}-subtitle`}>
+        <motion.div className="fixed inset-0 z-[999] flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby={`${id}-title`} aria-describedby={`${id}-subtitle`}>
           {/* Overlay */}
           <motion.div
-            className="absolute inset-0 bg-black/40 touch-manipulation will-change-[opacity,backdrop-filter] duration-300 ease-in-out"
+            className="absolute inset-0 z-[998] bg-black/40 touch-manipulation will-change-[opacity,backdrop-filter] duration-300 ease-in-out"
             variants={defaultOverlay}
             initial="hidden"
             animate="visible"
             exit="exit"
             onClick={onClose}
-            style={{ backdropFilter: 'blur(25px)' }}
+            style={{ backdropFilter: 'blur(10px)' }}
           />
 
           {/* Card */}
           <motion.div
-            className="relative z-10 w-[94vw] sm:w-[85vw] md:w-[70vw] lg:w-[60vw] xl:w-[50vw] max-h-[90vh]"
+            className="relative z-[999] w-[94vw] sm:w-[85vw] md:w-[70vw] lg:w-[60vw] xl:w-[50vw] max-h-[90vh]"
             variants={defaultCard}
             initial="hidden"
             animate="visible"
@@ -563,8 +563,8 @@ const CalculatorModalContent: React.FC<{
 
           {/* Info modal for formulas */}
           {infoOpen && (
-            <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
-              <div className="absolute inset-0 bg-black/50 backdrop-blur-2xl" onClick={() => setInfoOpen(false)} />
+            <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4">
+              <div className="absolute inset-0 bg-black/40" style={{ backdropFilter: 'blur(10px)' }} onClick={() => setInfoOpen(false)} />
               <div className="relative z-10 w-[90vw] max-w-[600px] max-h-[85vh] overflow-y-auto rounded-2xl bg-white shadow-lg ring-1 ring-slate-200 p-5">
                 <div className="flex items-start justify-between mb-2">
                   <h4 className="text-lg font-semibold text-slate-900">Fórmulas</h4>
