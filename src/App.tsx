@@ -127,24 +127,33 @@ function AnimatedRoutes() {
 }
 
 const App: React.FC = () => {
+  // Evita posibles discrepancias en ciertos hosts de preview que ejecutan React en modo prod durante dev.
+  // Retrasamos la inserción del TooltipProvider hasta el montaje en el cliente.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  const shell = (
+    <>
+      <ToasterShadcn />
+      <Sonner />
+      <BrowserRouter>
+        <ScrollToTop />
+        {/* Sincroniza el título del navegador con la ruta actual */}
+        <TitleSync />
+        {/* Barra superior fija */}
+        <Navbar />
+        {/* Contenido principal: darle padding-top para no quedar debajo del navbar */}
+        <main className="flex-1 bg-gray-50 w-full">
+          <AnimatedRoutes />
+        </main>
+        <Footer />
+      </BrowserRouter>
+    </>
+  );
+
   return (
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <ToasterShadcn />
-        <Sonner />
-        <BrowserRouter>
-          <ScrollToTop />
-          {/* Sincroniza el título del navegador con la ruta actual */}
-          <TitleSync />
-          {/* Barra superior fija */}
-          <Navbar />
-          {/* Contenido principal: darle padding-top para no quedar debajo del navbar */}
-          <main className="flex-1 bg-gray-50 w-full">
-            <AnimatedRoutes />
-          </main>
-          <Footer />
-        </BrowserRouter>
-      </TooltipProvider>
+      {mounted ? <TooltipProvider>{shell}</TooltipProvider> : shell}
     </QueryClientProvider>
   );
 }

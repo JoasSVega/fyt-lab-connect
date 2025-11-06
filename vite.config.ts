@@ -27,6 +27,28 @@ export default defineConfig(({ mode }) => ({
     // Deduplicate React to avoid multiple instances across chunks/dep graphs (prevents dispatcher=null)
     dedupe: ["react", "react-dom"],
   },
+  // Fuerza a que React y dependencias lean el modo correcto durante el prebundle de Vite.
+  // En algunos hosts de preview el proceso puede tener NODE_ENV=production incluso en dev,
+  // lo que hace que Vite pre-empaquete la versión de producción de React en desarrollo y
+  // provoca errores como "dispatcher is null" al ejecutar hooks.
+  define: {
+    "process.env.NODE_ENV": JSON.stringify(mode === 'production' ? 'production' : 'development'),
+  },
+  optimizeDeps: {
+    // Asegura que React y Radix usen una sola instancia de React en el grafo de dependencias
+    include: [
+      'react',
+      'react-dom',
+      '@radix-ui/react-tooltip',
+      '@radix-ui/react-primitive',
+      '@radix-ui/react-context',
+    ],
+    esbuildOptions: {
+      define: {
+        "process.env.NODE_ENV": mode === 'production' ? '"production"' : '"development"',
+      },
+    },
+  },
   // Build settings. Avoid custom manualChunks to prevent circular chunk execution
   // that can cause React to be undefined in some hosts. Let Rollup handle chunking.
   build: {
