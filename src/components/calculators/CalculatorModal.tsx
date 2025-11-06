@@ -632,8 +632,8 @@ const CalculatorModalContent: React.FC<{
                       {/* FRONT */}
                       <div
                         ref={frontFaceRef}
-                        className="absolute inset-0 [backface-visibility:hidden]"
-                        style={{ pointerEvents: flipped ? 'none' : 'auto' }}
+                        className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(0deg)]"
+                        style={{ pointerEvents: flipped ? 'none' : 'auto', willChange: 'transform' }}
                       >
                         <form
                       key={resetTick}
@@ -781,7 +781,7 @@ const CalculatorModalContent: React.FC<{
                       <div
                         ref={backFaceRef}
                         className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)]"
-                        style={{ pointerEvents: flipped ? 'auto' : 'none' }}
+                        style={{ pointerEvents: flipped ? 'auto' : 'none', willChange: 'transform' }}
                       >
                         <div className={`rounded-xl border p-6 text-center ${getSeverityClasses(result?.severity)}`}>
                           {result ? (
