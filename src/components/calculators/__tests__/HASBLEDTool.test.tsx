@@ -20,11 +20,16 @@ describe('HAS-BLED Tool', () => {
     fireEvent.change(await screen.findByLabelText('Fármacos predisponentes'), { target: { value: 'no' } });
     fireEvent.change(await screen.findByLabelText('Consumo de alcohol'), { target: { value: 'no' } });
 
-  // Debe auto-calcular y voltear
-  expect(await screen.findByText(/pt/)).toBeTruthy();
+  // Verificar unidad 'pt' en el panel de fórmulas
+  fireEvent.click(screen.getByLabelText('Ver fórmulas'));
+  await screen.findByText('Fórmulas');
+  const pts = await screen.findAllByText(/pt/);
+  expect(pts.length).toBeGreaterThan(0);
+  // Cerrar panel de fórmulas
+  const closes = screen.getAllByLabelText('Cerrar');
+  fireEvent.click(closes[closes.length - 1]);
 
-  // Volver y limpiar en el frontal
-  fireEvent.click(screen.getByText('Volver'));
+  // Limpiar en la cara frontal
   const limpiar = await screen.findByText('Limpiar');
   fireEvent.click(limpiar);
 

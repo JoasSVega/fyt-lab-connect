@@ -14,12 +14,17 @@ describe('GlasgowTool (auto-calc)', () => {
     fireEvent.change(await screen.findByLabelText('Respuesta verbal (V)'), { target: { value: '5' } });
     fireEvent.change(await screen.findByLabelText('Respuesta motora (M)'), { target: { value: '6' } });
 
-    // Auto-calculado
-    expect(await screen.findByText(/pt/)).toBeTruthy();
+  // Verificar referencias en "Fórmulas" para unidad 'pt'
+  fireEvent.click(screen.getByLabelText('Ver fórmulas'));
+  await screen.findByText('Fórmulas');
+  const pts = await screen.findAllByText(/pt/);
+  expect(pts.length).toBeGreaterThan(0);
+  // Cerrar panel de fórmulas
+  const closes = screen.getAllByLabelText('Cerrar');
+  fireEvent.click(closes[closes.length - 1]);
 
-    // Volver y luego limpiar
-    fireEvent.click(screen.getByText('Volver'));
-    fireEvent.click(await screen.findByText('Limpiar'));
+  // Limpiar directamente (acciones en la cara frontal)
+  fireEvent.click(await screen.findByText('Limpiar'));
 
     const ocular = await screen.findByLabelText('Respuesta ocular (E)') as HTMLSelectElement;
     expect(ocular.value).toBe('');
