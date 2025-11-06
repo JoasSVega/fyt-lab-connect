@@ -391,10 +391,10 @@ const CalculatorModalContent: React.FC<{
 
   return (
     <ModalPortal>
-      <div className="fixed inset-0 z-[999] p-4">
+      <div className={`fixed inset-0 z-[999] p-4 ${open ? 'pointer-events-auto' : 'pointer-events-none'}`}>
         {/* Overlay persistente para evitar parpadeos: solo cambia opacidad/blur y pointer events */}
         <div
-          className={`absolute inset-0 transition-[opacity,backdrop-filter] duration-300 ease-in-out ${open ? 'opacity-100' : 'opacity-0'} ${open ? 'pointer-events-auto' : 'pointer-events-none'}`}
+          className={`calc-overlay absolute inset-0 transition-[opacity,backdrop-filter] duration-300 ease-in-out ${open ? 'opacity-100' : 'opacity-0'}`}
           style={{ backgroundColor: open ? 'rgba(0,0,0,0.4)' : 'rgba(0,0,0,0)', backdropFilter: open ? 'blur(10px)' : 'blur(0px)' }}
           onClick={open ? onClose : undefined}
           aria-hidden={!open}

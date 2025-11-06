@@ -261,3 +261,11 @@ body.modal-open .tool-card:hover {
 .tool-card {
   will-change: transform;
 }
+
+/* Overlay safety: never block when modal is closed */
+.calc-overlay {
+  pointer-events: none;
+}
+body.modal-open .calc-overlay {
+  pointer-events: auto;
+}
