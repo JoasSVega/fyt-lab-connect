@@ -359,6 +359,12 @@ const CalculatorModalContent: React.FC<{
       document.body.classList.add("modal-open");
       // habilitar animación inicial solo una vez al abrir
       hasAnimatedRef.current = false;
+      // en el siguiente tick, marcaremos como animado para evitar re-ejecuciones por interacciones internas
+      requestAnimationFrame(() => {
+        if (open) {
+          hasAnimatedRef.current = true;
+        }
+      });
       return () => {
         document.body.style.overflow = prevOverflowRef.current || "";
         document.body.classList.remove("modal-open");
@@ -408,10 +414,11 @@ const CalculatorModalContent: React.FC<{
           {open && (
             <motion.div
               className="absolute inset-0 flex items-center justify-center"
-              initial={{ opacity: 0 }}
+              initial={hasAnimatedRef.current ? false : { opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.25, ease: 'easeInOut' }}
+              onAnimationComplete={() => { if (!hasAnimatedRef.current) hasAnimatedRef.current = true; }}
             >
               {/* Card */}
               <motion.div
