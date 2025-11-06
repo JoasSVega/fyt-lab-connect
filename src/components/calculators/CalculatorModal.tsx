@@ -319,6 +319,7 @@ const CalculatorModalContent: React.FC<{
   const bodyInnerRef = React.useRef<HTMLDivElement | null>(null);
   const [bodyScrollable, setBodyScrollable] = React.useState(false);
   const prevOverflowRef = React.useRef<string | null>(null);
+  const hasAnimatedRef = React.useRef(false);
 
   // Conditional scroll: enable only when content exceeds available space (especially on small viewports)
   const measureScrollNeed = React.useCallback(() => {
@@ -356,6 +357,8 @@ const CalculatorModalContent: React.FC<{
       prevOverflowRef.current = document.body.style.overflow;
       document.body.style.overflow = "hidden";
       document.body.classList.add("modal-open");
+      // habilitar animación inicial solo una vez al abrir
+      hasAnimatedRef.current = false;
       return () => {
         document.body.style.overflow = prevOverflowRef.current || "";
         document.body.classList.remove("modal-open");
@@ -414,7 +417,7 @@ const CalculatorModalContent: React.FC<{
               <motion.div
                 className="relative z-[999] w-[94vw] sm:w-[85vw] md:w-[70vw] lg:w-[60vw] xl:w-[50vw] max-h-[90vh]"
                 variants={defaultCard}
-                initial="hidden"
+                initial={hasAnimatedRef.current ? false : "hidden"}
                 animate="visible"
                 exit="exit"
                 transition={{ duration: 0.35, ease: "easeInOut" }}
