@@ -11,7 +11,7 @@ const Escalas: React.FC = () => {
   const navigate = useNavigate();
 
   const Card = ({ icon, title, desc, color = "#a855f7", action }: { icon: React.ReactNode; title: string; desc: string; color?: string; action?: React.ReactNode; }) => (
-    <div className="rounded-2xl border-2 bg-white/90 shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-xl p-6 flex flex-col" role="article" aria-label={title}>
+    <div className="tool-card rounded-2xl border-2 bg-white/90 shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-xl p-6 flex flex-col" role="article" aria-label={title}>
       <div className="flex items-center gap-3 mb-3">
         <div className="p-2 rounded-lg" style={{ backgroundColor: color + "22", color }}>
           {icon}

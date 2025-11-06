@@ -48,7 +48,7 @@ const Clinicos: React.FC = () => {
 
   <section className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 px-4 py-4 overflow-visible" aria-label="Herramientas clínicas">
         {/* Función renal */}
-  <div className="rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+  <div className="tool-card rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
           <div className="flex items-center gap-3 mb-1">
             <div className="p-2 rounded-lg" style={{ backgroundColor: '#3B82F622', color: '#3B82F6' }}>
               <Droplets className="w-5 h-5" aria-hidden="true" />
@@ -73,7 +73,7 @@ const Clinicos: React.FC = () => {
         </div>
 
         {/* Función hepática */}
-  <div className="rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+  <div className="tool-card rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
           <div className="flex items-center gap-3 mb-1">
             <div className="p-2 rounded-lg" style={{ backgroundColor: '#F59E0B22', color: '#F59E0B' }}>
               <FlaskRound className="w-5 h-5" aria-hidden="true" />
@@ -98,7 +98,7 @@ const Clinicos: React.FC = () => {
         </div>
 
         {/* Dosis por peso y superficie corporal */}
-  <div className="rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+  <div className="tool-card rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
           <div className="flex items-center gap-3 mb-1">
             <div className="p-2 rounded-lg" style={{ backgroundColor: '#0EA5E922', color: '#0EA5E9' }}>
               <Pill className="w-5 h-5" aria-hidden="true" />
@@ -133,7 +133,7 @@ const Clinicos: React.FC = () => {
           <p className="text-sm text-muted-foreground">Próximamente.</p>
         </div>
         {/* Reconstitución y dilución de antibióticos */}
-  <div className="rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+  <div className="tool-card rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
           <div className="flex items-center gap-3 mb-1">
             <div className="p-2 rounded-lg" style={{ backgroundColor: '#64748B22', color: '#64748B' }}>
               <Syringe className="w-5 h-5" aria-hidden="true" />

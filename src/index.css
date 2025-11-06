@@ -249,3 +249,15 @@ All colors MUST be HSL and based on institutional branding.
     }
   }
 }
+
+/* Disable card hover transforms while any calculator modal is open */
+body.modal-open .tool-card,
+body.modal-open .tool-card:hover {
+  transform: none !important;
+  box-shadow: inherit !important;
+}
+
+/* Ensure smoother transforms when enabled */
+.tool-card {
+  will-change: transform;
+}

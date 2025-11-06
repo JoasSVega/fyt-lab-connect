@@ -359,8 +359,10 @@ const CalculatorModalContent: React.FC<{
     if (open) {
       prevOverflowRef.current = document.body.style.overflow;
       document.body.style.overflow = "hidden";
+      document.body.classList.add("modal-open");
       return () => {
         document.body.style.overflow = prevOverflowRef.current || "";
+        document.body.classList.remove("modal-open");
       };
     }
   }, [open]);
@@ -391,12 +393,13 @@ const CalculatorModalContent: React.FC<{
         <motion.div className="fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby={`${id}-title`} aria-describedby={`${id}-subtitle`}>
           {/* Overlay */}
           <motion.div
-            className="absolute inset-0 bg-black/50 backdrop-blur-2xl touch-manipulation will-change-[opacity,backdrop-filter] duration-300 ease-in-out"
+            className="absolute inset-0 bg-black/40 touch-manipulation will-change-[opacity,backdrop-filter] duration-300 ease-in-out"
             variants={defaultOverlay}
             initial="hidden"
             animate="visible"
             exit="exit"
             onClick={onClose}
+            style={{ backdropFilter: 'blur(25px)' }}
           />
 
           {/* Card */}
