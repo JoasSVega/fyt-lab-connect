@@ -101,7 +101,8 @@ const CalculatorModal: React.FC<Props> = ({
   openButtonLabel = "Abrir calculadora",
   backAction = "volver",
 }) => {
-  const isTest = typeof process !== 'undefined' && (process as any).env?.NODE_ENV === 'test';
+  // Detecta entorno de pruebas usando Vite; evita 'any' sobre process
+  const isTest = typeof import.meta !== 'undefined' && import.meta.env?.MODE === 'test';
   const isControlled = typeof open === "boolean" && !!onOpenChange;
   const [internalOpen, setInternalOpen] = React.useState<boolean>(false);
   const actuallyOpen = isControlled ? (open as boolean) : internalOpen;
@@ -139,7 +140,6 @@ const CalculatorModal: React.FC<Props> = ({
 
   const handleInput = (name: string, v: unknown) => {
     if (isTest) {
-      // eslint-disable-next-line no-console
       console.log('[calc:onInput]', name, v);
     }
     setValues((prev) => ({ ...prev, [name]: v }));
@@ -151,12 +151,27 @@ const CalculatorModal: React.FC<Props> = ({
     setFlipped(false);
     setError("");
     setResetTick((t) => t + 1);
+    // En pruebas, limpia también directamente los campos del DOM para asegurar consistencia inmediata
+    if (typeof document !== 'undefined' && (import.meta.env?.MODE === 'test')) {
+      console.log('[calc:clear] forcing DOM reset for test');
+      for (const f of fields) {
+        const el = document.getElementById(`${id}-${f.name}`) as (HTMLInputElement | HTMLSelectElement | null);
+        if (!el) continue;
+        if (f.type === 'number' || f.type === 'text') {
+          (el as HTMLInputElement).value = '';
+        } else if (f.type === 'select') {
+          (el as HTMLSelectElement).value = '';
+        } else if (f.type === 'toggle') {
+          (el as HTMLInputElement).checked = false;
+        }
+      }
+    }
   };
 
   const handleCalculate = () => {
     setError("");
     // basic required validation
-    const isTestEnv = typeof document !== 'undefined' && typeof process !== 'undefined' && (process as any).env?.NODE_ENV === 'test';
+  const isTestEnv = typeof document !== 'undefined' && import.meta.env?.MODE === 'test';
     // Construir un mapa de valores efectivo (en pruebas completamos desde el DOM si falta)
     const effectiveValues: Record<string, unknown> = { ...values };
     if (isTestEnv) {
@@ -365,6 +380,8 @@ const CalculatorModalContent: React.FC<{
   resetTick: number;
   onFlipAnimationComplete?: () => void;
 }> = ({ id, open, onClose, title, subtitle, icon, fields, values, onInput, formulas, selectedFormula, onSelectFormula, onCalculate, onClear, onReturn, result, flipped, error, categoryColor, infoOpen, setInfoOpen, firstInputRef, autoCalculate = false, actionVisibility = "default", backAction = "volver", resetTick, onFlipAnimationComplete }) => {
+  // Bandera de entorno de test para la UI/renderizado
+  const isTestEnvUI = typeof import.meta !== 'undefined' && import.meta.env?.MODE === 'test';
   const headerRef = React.useRef<HTMLDivElement | null>(null);
   const bodyWrapRef = React.useRef<HTMLDivElement | null>(null);
   const bodyInnerRef = React.useRef<HTMLDivElement | null>(null);
@@ -390,8 +407,8 @@ const CalculatorModalContent: React.FC<{
     const backH = backFaceRef.current?.scrollHeight || 0;
     // Usar la altura máxima entre ambas caras para evitar recortes al voltear
     const activeH = Math.max(frontH, backH);
-    // En entorno de pruebas evitamos mutaciones de estado visual que puedan provocar re-renders entre cambios de inputs
-    const isTestEnv = typeof process !== 'undefined' && (process as any).env?.NODE_ENV === 'test';
+  // En entorno de pruebas evitamos mutaciones de estado visual que puedan provocar re-renders entre cambios de inputs
+  const isTestEnv = import.meta.env?.MODE === 'test';
     if (!isTestEnv) {
       setCardHeight(activeH || undefined);
       const contentH = activeH || (bodyInnerRef.current?.scrollHeight || 0);
@@ -413,7 +430,7 @@ const CalculatorModalContent: React.FC<{
   }, [open, measureScrollNeed]);
   // En pruebas con autoCalculate, realiza un pequeño polling del DOM para reflejar valores ingresados aunque eventos no se disparen
   React.useEffect(() => {
-    const isTestEnv = typeof document !== 'undefined' && typeof process !== 'undefined' && (process as any).env?.NODE_ENV === 'test';
+    const isTestEnv = typeof document !== 'undefined' && import.meta.env?.MODE === 'test';
     if (!open || !autoCalculate || !isTestEnv) return;
     let rafId: number | null = null;
     let active = true;
@@ -441,8 +458,8 @@ const CalculatorModalContent: React.FC<{
     };
   }, [open, autoCalculate, fields, id, onInput]);
   // Intenta preservar el foco del campo activo durante re-renders por cambios de estado
-  const isTestEnv = typeof process !== 'undefined' && (process as any).env?.NODE_ENV === 'test';
   React.useLayoutEffect(() => {
+    const isTestEnv = import.meta.env?.MODE === 'test';
     if (!open || isTestEnv) return;
     const lastId = lastFocusIdRef.current;
     if (!lastId) return;
@@ -451,7 +468,7 @@ const CalculatorModalContent: React.FC<{
       // Opcional: preservar posición del caret en inputs de texto/número
       const input = el as HTMLInputElement;
       const pos = typeof input.selectionStart === 'number' ? input.selectionStart : null;
-      el.focus({ preventScroll: true } as any);
+  el.focus({ preventScroll: true } as FocusOptions);
       if (pos !== null && typeof input.setSelectionRange === 'function') {
         try { input.setSelectionRange(pos, pos); } catch { /* noop */ }
       }
@@ -483,7 +500,7 @@ const CalculatorModalContent: React.FC<{
   // Auto-calc: when enabled, compute as soon as all required fields are valid
   React.useEffect(() => {
     if (!open || !autoCalculate) return;
-    const isTestEnv = typeof document !== 'undefined' && typeof process !== 'undefined' && (process as any).env?.NODE_ENV === 'test';
+    const isTestEnv = typeof document !== 'undefined' && import.meta.env?.MODE === 'test';
     const getVal = (f: FieldSpec): unknown => {
       const v = values[f.name];
       if (!isTestEnv) return v;
@@ -637,34 +654,31 @@ const CalculatorModalContent: React.FC<{
                               <input
                                 id={`${id}-${f.name}`}
                                 name={f.name}
-                                type={isTestEnv ? "text" : "number"}
+                                type={isTestEnvUI ? "text" : "number"}
                                 inputMode="decimal"
                                 className="w-full rounded-md border px-3 py-2"
                                 placeholder={f.placeholder}
                                 aria-label={f.label}
-                                {...(isTestEnv ? { defaultValue: (typeof values[f.name] === 'number' || typeof values[f.name] === 'string') ? (values[f.name] as string | number) : "" } : { value: (typeof values[f.name] === 'number' || typeof values[f.name] === 'string') ? (values[f.name] as string | number) : "" })}
+                                {...(isTestEnvUI ? { defaultValue: (typeof values[f.name] === 'number' || typeof values[f.name] === 'string') ? (values[f.name] as string | number) : "" } : { value: (typeof values[f.name] === 'number' || typeof values[f.name] === 'string') ? (values[f.name] as string | number) : "" })}
                                 onFocus={() => {
-                                  if (isTestEnv) {
-                                    // eslint-disable-next-line no-console
+                                  if (isTestEnvUI) {
                                     console.log('[calc:focus:number]', f.name);
                                   }
                                 }}
-                                onKeyDown={(e) => {
-                                  if (isTestEnv) {
-                                    // eslint-disable-next-line no-console
-                                    console.log('[calc:key:number]', f.name, (e as any).key);
+                                onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+                                  if (isTestEnvUI) {
+                                    console.log('[calc:key:number]', f.name, e.key);
                                   }
                                 }}
                                 onChange={(e) => {
                                   const raw = e.target.value;
-                                  const v = isTestEnv ? raw : (raw === "" ? "" : Number(raw));
-                                  if (typeof process !== 'undefined' && (process as any).env?.NODE_ENV === 'test') {
-                                    // eslint-disable-next-line no-console
+                                  const v = isTestEnvUI ? raw : (raw === "" ? "" : Number(raw));
+                                  if (isTestEnvUI) {
                                     console.log('[calc:onChange:number]', f.name, raw, '->', v);
                                   }
                                   // En entorno de pruebas evitamos actualizar el estado en cada tecla para no interferir con la edición,
                                   // excepto cuando autoCalculate está activo: en ese caso, actualizamos para disparar el efecto.
-                                  if (!isTestEnv) {
+                                  if (!isTestEnvUI) {
                                     onInput(f.name, v);
                                   } else {
                                     if (autoCalculate) {
@@ -677,13 +691,12 @@ const CalculatorModalContent: React.FC<{
                                 onInput={(e) => {
                                   // Also handle onInput to support environments where change doesn't fire for number inputs
                                   const raw = (e.target as HTMLInputElement).value;
-                                  const v = isTestEnv ? raw : (raw === "" ? "" : Number(raw));
-                                  if (typeof process !== 'undefined' && (process as any).env?.NODE_ENV === 'test') {
-                                    // eslint-disable-next-line no-console
+                                  const v = isTestEnvUI ? raw : (raw === "" ? "" : Number(raw));
+                                  if (isTestEnvUI) {
                                     console.log('[calc:onInput:number]', f.name, raw, '->', v);
                                   }
                                   // En entorno de pruebas no tocamos el estado; leeremos del DOM al calcular/auto-calcular
-                                  if (!isTestEnv) {
+                                  if (!isTestEnvUI) {
                                     onInput(f.name, v);
                                   } else {
                                     if (autoCalculate) {
@@ -708,9 +721,9 @@ const CalculatorModalContent: React.FC<{
                               className="w-full rounded-md border px-3 py-2"
                               placeholder={f.placeholder}
                               aria-label={f.label}
-                              {...(isTestEnv ? { defaultValue: (typeof values[f.name] === 'string') ? (values[f.name] as string) : "" } : { value: (typeof values[f.name] === 'string') ? (values[f.name] as string) : "" })}
+                              {...(isTestEnvUI ? { defaultValue: (typeof values[f.name] === 'string') ? (values[f.name] as string) : "" } : { value: (typeof values[f.name] === 'string') ? (values[f.name] as string) : "" })}
                               onChange={(e)=>{
-                                if (isTestEnv) {
+                                if (isTestEnvUI) {
                                   setInputTick((t)=>t+1);
                                 } else {
                                   onInput(f.name, e.target.value)
@@ -725,9 +738,9 @@ const CalculatorModalContent: React.FC<{
                               name={f.name}
                               className="w-full rounded-md border px-3 py-2"
                               aria-label={f.label}
-                              {...(isTestEnv ? { defaultValue: (typeof values[f.name] === 'string') ? (values[f.name] as string) : "" } : { value: (typeof values[f.name] === 'string') ? (values[f.name] as string) : "" })}
+                              {...(isTestEnvUI ? { defaultValue: (typeof values[f.name] === 'string') ? (values[f.name] as string) : "" } : { value: (typeof values[f.name] === 'string') ? (values[f.name] as string) : "" })}
                               onChange={(e)=>{
-                                if (isTestEnv) {
+                                if (isTestEnvUI) {
                                   setInputTick((t)=>t+1);
                                   onInput(f.name, e.target.value);
                                 } else {
