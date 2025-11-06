@@ -1,5 +1,6 @@
 import * as React from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { createPortal } from "react-dom";
 import { X, Info } from "lucide-react";
 import { Latex } from "../ui/Latex";
 import { getEffectiveFields, resetValuesForFields, ensureLatexForFormula } from "@/lib/calculators/utils";
@@ -387,10 +388,17 @@ const CalculatorModalContent: React.FC<{
     onCalculate();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [autoCalculate, fields, values, open, selectedFormula]);
+  // Render the modal in a Portal to avoid being clipped or reparented by transformed ancestors
+  const ModalPortal: React.FC<{ children: React.ReactNode }> = React.useCallback(({ children }) => {
+    if (typeof document === "undefined") return null as any;
+    return createPortal(children as React.ReactNode, document.body);
+  }, []);
+
   return (
-    <AnimatePresence>
-      {open && (
-        <motion.div className="fixed inset-0 z-[999] flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby={`${id}-title`} aria-describedby={`${id}-subtitle`}>
+    <ModalPortal>
+      <AnimatePresence>
+        {open && (
+          <motion.div className="fixed inset-0 z-[999] flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby={`${id}-title`} aria-describedby={`${id}-subtitle`}>
           {/* Overlay */}
           <motion.div
             className="absolute inset-0 z-[998] bg-black/40 touch-manipulation will-change-[opacity,backdrop-filter] duration-300 ease-in-out"
@@ -622,8 +630,9 @@ const CalculatorModalContent: React.FC<{
               </div>
             </div>
           )}
-        </motion.div>
-      )}
-    </AnimatePresence>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </ModalPortal>
   );
 };
