@@ -65,11 +65,6 @@ type Props = {
   backAction?: "volver" | "limpiar"; // choose which action to show on the back face
 };
 
-const defaultOverlay = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1 },
-  exit: { opacity: 0 },
-};
 
 const defaultCard = {
   hidden: { opacity: 0, scale: 0.96 },
@@ -396,30 +391,35 @@ const CalculatorModalContent: React.FC<{
 
   return (
     <ModalPortal>
-      <AnimatePresence>
-        {open && (
-          <motion.div className="fixed inset-0 z-[999] flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby={`${id}-title`} aria-describedby={`${id}-subtitle`}>
-          {/* Overlay */}
-          <motion.div
-            className="absolute inset-0 z-[998] bg-black/40 touch-manipulation will-change-[opacity,backdrop-filter] duration-300 ease-in-out"
-            variants={defaultOverlay}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            onClick={onClose}
-            style={{ backdropFilter: 'blur(10px)' }}
-          />
+      <div className="fixed inset-0 z-[999] p-4">
+        {/* Overlay persistente para evitar parpadeos: solo cambia opacidad/blur y pointer events */}
+        <div
+          className={`absolute inset-0 transition-[opacity,backdrop-filter] duration-300 ease-in-out ${open ? 'opacity-100' : 'opacity-0'} ${open ? 'pointer-events-auto' : 'pointer-events-none'}`}
+          style={{ backgroundColor: open ? 'rgba(0,0,0,0.4)' : 'rgba(0,0,0,0)', backdropFilter: open ? 'blur(10px)' : 'blur(0px)' }}
+          onClick={open ? onClose : undefined}
+          aria-hidden={!open}
+        />
 
-          {/* Card */}
-          <motion.div
-            className="relative z-[999] w-[94vw] sm:w-[85vw] md:w-[70vw] lg:w-[60vw] xl:w-[50vw] max-h-[90vh]"
-            variants={defaultCard}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            transition={{ duration: 0.35, ease: "easeInOut" }}
-            onClick={(e)=>e.stopPropagation()}
-          >
+        {/* Contenedor centrado del modal: se anima su presencia para sincronizar con el overlay */}
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              className="absolute inset-0 flex items-center justify-center"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25, ease: 'easeInOut' }}
+            >
+              {/* Card */}
+              <motion.div
+                className="relative z-[999] w-[94vw] sm:w-[85vw] md:w-[70vw] lg:w-[60vw] xl:w-[50vw] max-h-[90vh]"
+                variants={defaultCard}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                transition={{ duration: 0.35, ease: "easeInOut" }}
+                onClick={(e)=>e.stopPropagation()}
+              >
             <div className="relative rounded-2xl bg-white shadow-xl ring-1 ring-black/5 overflow-hidden flex flex-col max-h-[90vh]">
               <div ref={headerRef} className="sticky top-0 z-10 px-5 py-4 border-b flex items-start justify-between bg-white/95 backdrop-blur" style={{ background: `linear-gradient(to right, ${categoryColor}15, #ffffffEE)` }}>
                 <div>
@@ -630,9 +630,10 @@ const CalculatorModalContent: React.FC<{
               </div>
             </div>
           )}
-          </motion.div>
-        )}
-      </AnimatePresence>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </ModalPortal>
   );
 };
