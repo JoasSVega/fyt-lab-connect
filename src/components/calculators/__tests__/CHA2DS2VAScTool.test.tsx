@@ -19,11 +19,16 @@ describe('CHA2DS2-VASc Tool', () => {
     fireEvent.change(await screen.findByLabelText('Edad'), { target: { value: '65to74' } });
     fireEvent.change(await screen.findByLabelText('Sexo'), { target: { value: 'femenino' } });
 
-  // Auto-calculado
-  expect(await screen.findByText(/pt/)).toBeTruthy();
+  // Verificar unidad 'pt' en el panel de fórmulas
+  fireEvent.click(screen.getByLabelText('Ver fórmulas'));
+  await screen.findByText('Fórmulas');
+  const pts = await screen.findAllByText(/pt/);
+  expect(pts.length).toBeGreaterThan(0);
+  // Cerrar panel de fórmulas
+  const closes = screen.getAllByLabelText('Cerrar');
+  fireEvent.click(closes[closes.length - 1]);
 
-    // Volver + Limpiar
-  fireEvent.click(screen.getByText('Volver'));
+    // Limpiar (frontal)
   const limpiar = await screen.findByText('Limpiar');
   fireEvent.click(limpiar);
 

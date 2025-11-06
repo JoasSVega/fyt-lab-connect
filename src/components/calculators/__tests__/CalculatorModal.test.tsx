@@ -1,4 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { describe, it, expect } from 'vitest';
 import React from 'react';
 import CalculatorModal, { FieldSpec, FormulaSpec } from '@/components/calculators/CalculatorModal';
@@ -45,10 +46,10 @@ describe('CalculatorModal', () => {
     };
     render(<Wrapper />);
 
-    const peso = screen.getByLabelText('Peso');
-    const talla = screen.getByLabelText('Talla');
-    fireEvent.change(peso, { target: { value: '70' } });
-    fireEvent.change(talla, { target: { value: '170' } });
+  const peso = screen.getByLabelText('Peso');
+  await userEvent.type(peso, '70');
+  const talla = screen.getByLabelText('Talla');
+  await userEvent.type(talla, '170');
     fireEvent.click(screen.getByText('Calcular'));
 
   const unidad = await screen.findByText(/kg\/m²/);

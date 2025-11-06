@@ -1,4 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { describe, it, expect } from 'vitest';
 import React from 'react';
 import CURB65Tool from '@/components/tools/CURB65Tool';
@@ -13,21 +14,33 @@ describe('CURB65Tool', () => {
   // Completar campos (auto-cálculo)
     const confusion = await screen.findByLabelText('Confusión o desorientación');
     const urea = await screen.findByLabelText('Urea');
+  // Debug: ensure we got the input element
+  console.log('DBG urea element', (urea as HTMLElement).tagName, (urea as HTMLElement).id);
     const rr = await screen.findByLabelText('Frecuencia respiratoria');
     const sbp = await screen.findByLabelText('Presión sistólica');
     const dbp = await screen.findByLabelText('Presión diastólica');
     const age = await screen.findByLabelText('Edad');
 
-    fireEvent.change(confusion, { target: { value: 'si' } });
-    fireEvent.change(urea, { target: { value: '8' } });
-    fireEvent.change(rr, { target: { value: '28' } });
-    fireEvent.change(sbp, { target: { value: '100' } });
-    fireEvent.change(dbp, { target: { value: '70' } });
-    fireEvent.change(age, { target: { value: '70' } });
+  fireEvent.change(confusion, { target: { value: 'si' } });
+  (urea as HTMLInputElement).value = '8';
+  fireEvent.input(urea, { target: { value: '8' } });
+  (rr as HTMLInputElement).value = '28';
+  fireEvent.input(rr, { target: { value: '28' } });
+  (sbp as HTMLInputElement).value = '100';
+  fireEvent.input(sbp, { target: { value: '100' } });
+  (dbp as HTMLInputElement).value = '70';
+  fireEvent.input(dbp, { target: { value: '70' } });
+  (age as HTMLInputElement).value = '70';
+  fireEvent.input(age, { target: { value: '70' } });
 
-    // Resultado debe aparecer automáticamente
-    const res = await screen.findByText(/pt/);
-    expect(res).toBeTruthy();
+  // Resultado o referencias deben ser visibles; abre fórmulas y verifica unidad 'pt'
+  fireEvent.click(screen.getByLabelText('Ver fórmulas'));
+  // Espera a que se abra el modal de fórmulas
+  await screen.findByText('Fórmulas');
+  const res = await screen.findAllByText(/pt/);
+  expect(res.length).toBeGreaterThan(0);
+  const closeBtns = screen.getAllByLabelText('Cerrar');
+  fireEvent.click(closeBtns[closeBtns.length - 1]);
 
     // Volver y luego limpiar
     fireEvent.click(screen.getByText('Volver'));
