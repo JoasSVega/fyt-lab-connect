@@ -389,10 +389,10 @@ const CalculatorModalContent: React.FC<{
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [autoCalculate, fields, values, open, selectedFormula]);
   // Render the modal in a Portal to avoid being clipped or reparented by transformed ancestors
-  const ModalPortal: React.FC<{ children: React.ReactNode }> = React.useCallback(({ children }) => {
-    if (typeof document === "undefined") return null as any;
-    return createPortal(children as React.ReactNode, document.body);
-  }, []);
+  const ModalPortal = ({ children }: { children: React.ReactNode }) => {
+    if (typeof document === "undefined") return null;
+    return createPortal(children, document.body);
+  };
 
   return (
     <ModalPortal>
