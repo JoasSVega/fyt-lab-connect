@@ -38,10 +38,11 @@ jobs:
 
       - name: Upload build as artifact (main only)
         if: success() && github.ref == 'refs/heads/main'
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
-          name: site-build
+          name: site-build-${{ github.run_number }}
           path: |
             dist
-          retention-days: 7
-          compression-level: 6
+          retention-days: 1
+          compression-level: 9
