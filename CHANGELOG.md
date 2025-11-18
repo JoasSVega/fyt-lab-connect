@@ -1,3 +1,9 @@
+## 2025-11-18
+
+- Fixed: inputs lost focus while typing in calculators by switching to raw string storage for numeric fields, avoiding premature Number() coercion, and reducing layout thrash (height recalculation only on meaningful change).
+- Fixed: restored reliable flip animation (front ↔ back) by enforcing a single 3D scene with explicit backface visibility (including WebKit), stable perspective/transform-style, and guarding against re-entrancy during transitions.
+- Tests: added a Vitest + Testing Library spec covering focus persistence and flip transitions for `CalculatorCard`.
+
 # Changelog
 
 ## feature/unified-calculator-modal
