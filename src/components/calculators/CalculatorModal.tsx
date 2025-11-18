@@ -719,6 +719,7 @@ const CalculatorModalContent: React.FC<{
                       className="inline-flex h-10 w-10 items-center justify-center rounded-lg hover:bg-slate-100 touch-manipulation"
                       onClick={() => setInfoOpen(true)}
                       title="Ver fórmulas"
+                      aria-hidden={isMobileViewport || undefined}
                     >
                       <Info className="w-5 h-5 text-slate-600" />
                     </button>
@@ -764,6 +765,7 @@ const CalculatorModalContent: React.FC<{
                       onClick={() => setInfoOpen(true)}
                       title="Ver fórmulas"
                       style={{ zIndex: 20 }}
+                      aria-hidden={!isMobileViewport || undefined}
                     >
                       <Info className="w-6 h-6 text-slate-600" />
                     </button>
