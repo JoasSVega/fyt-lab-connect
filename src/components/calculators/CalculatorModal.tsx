@@ -63,6 +63,7 @@ type Props = {
   actionVisibility?: "default" | "hidden" | "clear-only"; // control front-face actions
   openButtonLabel?: string; // customize uncontrolled open button label
   backAction?: "volver" | "limpiar"; // choose which action to show on the back face
+  enableCalculatePredicate?: (values: Record<string, unknown>) => boolean; // optional predicate to enable Calcular button
 };
 
 
@@ -100,6 +101,7 @@ const CalculatorModal: React.FC<Props> = ({
   actionVisibility = "default",
   openButtonLabel = "Abrir calculadora",
   backAction = "volver",
+  enableCalculatePredicate,
 }) => {
   // Detecta entorno de pruebas usando Vite; evita 'any' sobre process
   const isTest = typeof import.meta !== 'undefined' && import.meta.env?.MODE === 'test';
@@ -118,6 +120,30 @@ const CalculatorModal: React.FC<Props> = ({
   const firstInputRef = React.useRef<HTMLInputElement | HTMLSelectElement | null>(null);
   // Señal para limpiar el resultado una vez termine la animación de regreso (flip back)
   const pendingClearAfterFlipRef = React.useRef(false);
+  // Helpers para validación/normalización en el flujo externo (controlado/no controlado)
+  const normalizeDecimalOuter = React.useCallback((raw: string) => raw.replace(',', '.'), []);
+  const validateValuesOuter = React.useCallback((vals: Record<string, unknown>): string | null => {
+    // Validar sólo los campos efectivos (visibles) para la fórmula seleccionada
+    const eff = getEffectiveFields(fields, formulas, selectedFormula);
+    for (const f of eff) {
+      const v = vals[f.name];
+      if (f.validation?.required && (v === undefined || v === "")) {
+        return `Complete el campo: ${f.label}`;
+      }
+      if (f.type === 'number') {
+        const num = Number(v);
+        if (v !== "" && Number.isFinite(num)) {
+          if (f.validation?.min !== undefined && num < f.validation.min) {
+            return `${f.label}: valor mínimo ${f.validation.min}`;
+          }
+          if (f.validation?.max !== undefined && num > f.validation.max) {
+            return `${f.label}: valor máximo ${f.validation.max}`;
+          }
+        }
+      }
+    }
+    return null;
+  }, [fields, formulas, selectedFormula]);
 
   React.useEffect(() => {
     // reset on open
@@ -142,7 +168,12 @@ const CalculatorModal: React.FC<Props> = ({
     if (isTest) {
       console.log('[calc:onInput]', name, v);
     }
-    setValues((prev) => ({ ...prev, [name]: v }));
+    // Evitar recrear objeto completo si el valor no cambia (reduce renders que pueden provocar pérdida de foco en algunos navegadores móviles)
+    setValues((prev) => {
+      const cur = prev[name];
+      if (cur === v) return prev;
+      return { ...prev, [name]: v };
+    });
   };
 
   const handleClear = () => {
@@ -204,15 +235,17 @@ const CalculatorModal: React.FC<Props> = ({
   const isTestEnv = typeof document !== 'undefined' && import.meta.env?.MODE === 'test';
     // Construir un mapa de valores efectivo (en pruebas completamos desde el DOM si falta)
     const effectiveValues: Record<string, unknown> = { ...values };
+    const effFields = getEffectiveFields(fields, formulas, selectedFormula);
     if (isTestEnv) {
-      for (const f of fields) {
+      for (const f of effFields) {
         const cur = effectiveValues[f.name];
         if (cur === undefined || cur === "") {
           const el = document.getElementById(`${id}-${f.name}`) as (HTMLInputElement | HTMLSelectElement | null);
           if (el) {
             if (f.type === 'number') {
               const raw = (el as HTMLInputElement).value;
-              effectiveValues[f.name] = raw === "" ? "" : Number(raw);
+              // Conservar como string, el parseo se hará antes de computar
+              effectiveValues[f.name] = raw;
             } else if (f.type === 'select') {
               effectiveValues[f.name] = (el as HTMLSelectElement).value;
             } else if (f.type === 'text') {
@@ -226,24 +259,21 @@ const CalculatorModal: React.FC<Props> = ({
       // sincrónicamente reflejar estos valores en el estado para pasos posteriores
       setValues(prev => ({ ...prev, ...effectiveValues }));
     }
-    for (const f of fields) {
-      const req = f.validation?.required;
-      const v = effectiveValues[f.name];
-      if (req && (v === undefined || v === "")) {
-        setError(`Complete el campo: ${f.label}`);
-        return;
-      }
-      if (f.type === "number") {
-        const num = Number(v);
-        if (!Number.isFinite(num)) continue;
-        if (f.validation?.min !== undefined && num < f.validation.min) {
-          setError(`${f.label}: valor mínimo ${f.validation.min}`);
-          return;
-        }
-        if (f.validation?.max !== undefined && num > f.validation.max) {
-          setError(`${f.label}: valor máximo ${f.validation.max}`);
-          return;
-        }
+    const blocking = validateValuesOuter(effectiveValues);
+    if (blocking) {
+      setError(blocking);
+      return;
+    }
+
+    // Coaccionar a número sólo los campos numéricos visibles antes del cálculo
+    const numericValues: Record<string, unknown> = { ...effectiveValues };
+    for (const f of effFields) {
+      if (f.type === 'number') {
+        const raw = effectiveValues[f.name] as string | number | undefined;
+        if (raw === undefined || raw === "") continue;
+        const norm = typeof raw === 'string' ? normalizeDecimalOuter(raw) : String(raw);
+        const num = Number(norm);
+        numericValues[f.name] = Number.isFinite(num) ? num : raw;
       }
     }
 
@@ -255,9 +285,9 @@ const CalculatorModal: React.FC<Props> = ({
         setError("Fórmula no disponible");
         return;
       }
-      res = f.compute(effectiveValues);
+      res = f.compute(numericValues);
     } else if (onCalculate) {
-      res = onCalculate(effectiveValues, sel);
+      res = onCalculate(numericValues, sel);
     } else {
       setError("No hay lógica de cálculo definida");
       return;
@@ -339,6 +369,7 @@ const CalculatorModal: React.FC<Props> = ({
           backAction={backAction}
           resetTick={resetTick}
           onFlipAnimationComplete={handleFlipAnimationComplete}
+          enableCalculatePredicate={enableCalculatePredicate}
         />
       </div>
     );
@@ -374,6 +405,7 @@ const CalculatorModal: React.FC<Props> = ({
       backAction={backAction}
       resetTick={resetTick}
       onFlipAnimationComplete={handleFlipAnimationComplete}
+      enableCalculatePredicate={enableCalculatePredicate}
     />
   );
 };
@@ -409,9 +441,33 @@ const CalculatorModalContent: React.FC<{
   backAction?: "volver" | "limpiar";
   resetTick: number;
   onFlipAnimationComplete?: () => void;
-}> = ({ id, open, onClose, title, subtitle, icon, fields, values, onInput, formulas, selectedFormula, onSelectFormula, onCalculate, onClear, onReturn, result, flipped, error, categoryColor, infoOpen, setInfoOpen, firstInputRef, autoCalculate = false, actionVisibility = "default", backAction = "volver", resetTick, onFlipAnimationComplete }) => {
+  enableCalculatePredicate?: (values: Record<string, unknown>) => boolean;
+}> = ({ id, open, onClose, title, subtitle, icon, fields, values, onInput, formulas, selectedFormula, onSelectFormula, onCalculate, onClear, onReturn, result, flipped, error, categoryColor, infoOpen, setInfoOpen, firstInputRef, autoCalculate = false, actionVisibility = "default", backAction = "volver", resetTick, onFlipAnimationComplete, enableCalculatePredicate }) => {
   // Bandera de entorno de test para la UI/renderizado
   const isTestEnvUI = typeof import.meta !== 'undefined' && import.meta.env?.MODE === 'test';
+  // Helpers de validación y mensajes unificados
+  const normalizeDecimal = React.useCallback((raw: string) => raw.replace(',', '.'), []);
+  const validateValues = React.useCallback((vals: Record<string, unknown>): string | null => {
+    for (const f of fields) {
+      const v = vals[f.name];
+      if (f.validation?.required && (v === undefined || v === "")) {
+        return `Complete el campo: ${f.label}`;
+      }
+      if (f.type === 'number') {
+        const num = Number(v);
+        if (v !== "" && Number.isFinite(num)) {
+          if (f.validation?.min !== undefined && num < f.validation.min) {
+            return `${f.label}: valor mínimo ${f.validation.min}`;
+          }
+          if (f.validation?.max !== undefined && num > f.validation.max) {
+            return `${f.label}: valor máximo ${f.validation.max}`;
+          }
+        }
+      }
+    }
+    return null;
+  }, [fields]);
+  const canCalculateDefault = React.useMemo(() => validateValues(values) === null, [values, validateValues]);
   const headerRef = React.useRef<HTMLDivElement | null>(null);
   const bodyWrapRef = React.useRef<HTMLDivElement | null>(null);
   const bodyInnerRef = React.useRef<HTMLDivElement | null>(null);
@@ -456,7 +512,12 @@ const CalculatorModalContent: React.FC<{
   // En entorno de pruebas evitamos mutaciones de estado visual que puedan provocar re-renders entre cambios de inputs
   const isTestEnv = import.meta.env?.MODE === 'test';
     if (!isTestEnv) {
-      setCardHeight(activeH || undefined);
+      setCardHeight((prev) => {
+        const next = activeH || undefined;
+        if (prev === undefined && next === undefined) return prev;
+        if (typeof prev === 'number' && typeof next === 'number' && Math.abs(prev - next) < 1) return prev;
+        return next;
+      });
       const contentH = activeH || (bodyInnerRef.current?.scrollHeight || 0);
       setBodyScrollable(contentH > available);
     }
@@ -467,7 +528,7 @@ const CalculatorModalContent: React.FC<{
 
   React.useLayoutEffect(() => {
     measureScrollNeed();
-  }, [measureScrollNeed, flipped, values, fields, selectedFormula, infoOpen]);
+  }, [measureScrollNeed, flipped, fields, selectedFormula, infoOpen]);
 
   React.useEffect(() => {
     const onResize = () => measureScrollNeed();
@@ -486,7 +547,11 @@ const CalculatorModalContent: React.FC<{
         const el = document.getElementById(`${id}-${f.name}`) as (HTMLInputElement | HTMLSelectElement | null);
         if (!el) continue;
         let next: unknown = undefined;
-        if (f.type === 'number') next = (el as HTMLInputElement).value === '' ? '' : Number((el as HTMLInputElement).value);
+        if (f.type === 'number') {
+          const rv = (el as HTMLInputElement).value;
+          const norm = rv.replace(',', '.');
+          next = rv === '' ? '' : Number(norm);
+        }
         else if (f.type === 'text') next = (el as HTMLInputElement).value;
         // Evitar sobreescribir selects/toggles desde polling para no borrar cambios del usuario en jsdom
         if (next !== undefined) {
@@ -511,15 +576,14 @@ const CalculatorModalContent: React.FC<{
     if (!lastId) return;
     const el = document.getElementById(lastId) as (HTMLInputElement | HTMLSelectElement | null);
     if (el && document.activeElement !== el) {
-      // Opcional: preservar posición del caret en inputs de texto/número
       const input = el as HTMLInputElement;
       const pos = typeof input.selectionStart === 'number' ? input.selectionStart : null;
-  el.focus({ preventScroll: true } as FocusOptions);
+      el.focus({ preventScroll: true } as FocusOptions);
       if (pos !== null && typeof input.setSelectionRange === 'function') {
         try { input.setSelectionRange(pos, pos); } catch { /* noop */ }
       }
     }
-  }, [open, values]);
+  }, [open]);
   React.useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -556,7 +620,8 @@ const CalculatorModalContent: React.FC<{
       // En pruebas: tratar vacío como 0 para no bloquear auto-cálculo por "required"
       if (f.type === 'number') {
         const raw = (el as HTMLInputElement).value;
-        return raw === "" ? 0 : Number(raw);
+        const norm = raw.replace(',', '.');
+        return raw === "" ? 0 : Number(norm);
       }
       if (f.type === 'select') return (el as HTMLSelectElement).value;
       if (f.type === 'text') return (el as HTMLInputElement).value;
@@ -619,7 +684,7 @@ const CalculatorModalContent: React.FC<{
                 onClick={(e)=>e.stopPropagation()}
                 ref={cardRootRef}
               >
-            <div className="relative rounded-2xl bg-white shadow-xl ring-1 ring-black/5 overflow-hidden flex flex-col max-h-[90vh]">
+            <div className="relative rounded-2xl bg-white shadow-xl ring-1 ring-black/5 flex flex-col max-h-[90vh] overflow-hidden calc-modal-card">
               {/* Desktop header (>=600px) unchanged */}
               <div ref={headerRef} className="calc-header-desktop sticky top-0 z-10 px-5 py-4 border-b flex items-start justify-between bg-white/95 backdrop-blur" style={{ background: `linear-gradient(to right, ${categoryColor}15, #ffffffEE)` }}>
                 <div className="min-w-0">
@@ -729,24 +794,24 @@ const CalculatorModalContent: React.FC<{
               `}</style>
 
               {/* Body with conditional sides (no overlapping layers). Scroll only if needed. */}
-              <div ref={bodyWrapRef} data-testid="calc-modal-body" className={`relative p-5 ${bodyScrollable ? "overflow-y-auto" : "overflow-visible"}`}>
+              <div ref={bodyWrapRef} data-testid="calc-modal-body" className="relative p-5 flex-1 min-h-0 overflow-y-auto overflow-x-hidden calc-modal-body overscroll-contain">
                 <div ref={bodyInnerRef}>
                   {/* Contenedor 3D para flip suave entre caras */}
-                  <div className="relative w-full" style={{ perspective: "1200px" }}>
+                  <div className="relative w-full" style={{ perspective: '1200px' }}>
                     {/* Nuevo inicio limpio: único contenedor rota, sin tarjeta interna visible ni sombras dinámicas */}
                     <motion.div
                       initial={false}
-                      className="relative w-full [transform-style:preserve-3d]"
-                      style={{ height: cardHeight ? `${cardHeight}px` : undefined, willChange: 'transform' }}
-                      animate={{ rotateY: flipped ? 180 : 0, scale: flipAnimating ? 0.995 : 1 }}
-                      transition={{ rotateY: { duration: 0.6, ease: 'easeInOut' }, scale: { duration: 0.3 } }}
-                      onAnimationStart={() => { setFlipAnimating(true); flipAnimatingRef.current = true; }}
-                      onAnimationComplete={() => { setFlipAnimating(false); flipAnimatingRef.current = false; if (!flipped) onFlipAnimationComplete?.(); }}
+                      className="relative w-full"
+                      style={{ height: cardHeight ? `${cardHeight}px` : undefined, transformStyle: 'preserve-3d', willChange: 'transform' }}
+                      animate={{ rotateY: flipped ? 180 : 0 }}
+                      transition={{ duration: 0.6, ease: 'easeInOut' }}
+                      onAnimationStart={() => { flipAnimatingRef.current = true; }}
+                      onAnimationComplete={() => { flipAnimatingRef.current = false; if (!flipped) onFlipAnimationComplete?.(); }}
                     >
                       <div
                         ref={frontFaceRef}
-                        className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(0deg)]"
-                        style={{ pointerEvents: flipped ? 'none' : 'auto', transformStyle: 'preserve-3d' }}
+                        className="absolute inset-0"
+                        style={{ pointerEvents: flipped ? 'none' : 'auto', transformStyle: 'preserve-3d', backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden', transform: 'rotateY(0deg)' }}
                         aria-hidden={flipped}
                       >
                         <form
@@ -761,130 +826,52 @@ const CalculatorModalContent: React.FC<{
                       }}
                     >
                       {fields.map((f, idx) => (
-                        <div key={f.name} className="flex flex-col gap-1">
-                          <label htmlFor={`${id}-${f.name}`} className="text-sm font-medium">{f.label}</label>
-                          {f.type === "number" && (
-                            <div className="flex items-center gap-2">
-                              <input
-                                id={`${id}-${f.name}`}
-                                name={f.name}
-                                type={isTestEnvUI ? "text" : "number"}
-                                inputMode="decimal"
-                                className="w-full rounded-md border px-3 py-2"
-                                placeholder={f.placeholder}
-                                aria-label={f.label}
-                                {...(isTestEnvUI ? { defaultValue: (typeof values[f.name] === 'number' || typeof values[f.name] === 'string') ? (values[f.name] as string | number) : "" } : { value: (typeof values[f.name] === 'number' || typeof values[f.name] === 'string') ? (values[f.name] as string | number) : "" })}
-                                onFocus={() => {
-                                  if (isTestEnvUI) {
-                                    console.log('[calc:focus:number]', f.name);
-                                  }
-                                }}
-                                onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
-                                  if (isTestEnvUI) {
-                                    console.log('[calc:key:number]', f.name, e.key);
-                                  }
-                                }}
-                                onChange={(e) => {
-                                  const raw = e.target.value;
-                                  const v = isTestEnvUI ? raw : (raw === "" ? "" : Number(raw));
-                                  if (isTestEnvUI) {
-                                    console.log('[calc:onChange:number]', f.name, raw, '->', v);
-                                  }
-                                  // En entorno de pruebas evitamos actualizar el estado en cada tecla para no interferir con la edición,
-                                  // excepto cuando autoCalculate está activo: en ese caso, actualizamos para disparar el efecto.
-                                  if (!isTestEnvUI) {
-                                    onInput(f.name, v);
-                                  } else {
-                                    if (autoCalculate) {
-                                      onInput(f.name, v);
-                                      // Dispara auto-calc effect sólo cuando está activo
-                                      setInputTick((t)=>t+1);
-                                    }
-                                  }
-                                }}
-                                onInput={(e) => {
-                                  // Also handle onInput to support environments where change doesn't fire for number inputs
-                                  const raw = (e.target as HTMLInputElement).value;
-                                  const v = isTestEnvUI ? raw : (raw === "" ? "" : Number(raw));
-                                  if (isTestEnvUI) {
-                                    console.log('[calc:onInput:number]', f.name, raw, '->', v);
-                                  }
-                                  // En entorno de pruebas no tocamos el estado; leeremos del DOM al calcular/auto-calcular
-                                  if (!isTestEnvUI) {
-                                    onInput(f.name, v);
-                                  } else {
-                                    if (autoCalculate) {
-                                      onInput(f.name, v);
-                                      setInputTick((t)=>t+1);
-                                    }
-                                  }
-                                }}
-                                aria-invalid={!!error && ((values[f.name] === undefined || values[f.name] === "") && f.validation?.required) ? true : undefined}
-                                min={f.validation?.min}
-                                max={f.validation?.max}
-                                ref={idx === 0 ? (firstInputRef as React.RefObject<HTMLInputElement>) : undefined}
-                              />
-                              {f.unit ? <span className="text-sm text-slate-500">{f.unit}</span> : null}
-                            </div>
-                          )}
-                          {f.type === "text" && (
-                            <input
-                              id={`${id}-${f.name}`}
-                              name={f.name}
-                              type="text"
-                              className="w-full rounded-md border px-3 py-2"
-                              placeholder={f.placeholder}
-                              aria-label={f.label}
-                              {...(isTestEnvUI ? { defaultValue: (typeof values[f.name] === 'string') ? (values[f.name] as string) : "" } : { value: (typeof values[f.name] === 'string') ? (values[f.name] as string) : "" })}
-                              onChange={(e)=>{
-                                if (isTestEnvUI) {
-                                  setInputTick((t)=>t+1);
-                                } else {
-                                  onInput(f.name, e.target.value)
-                                }
-                              }}
-                              ref={idx === 0 ? (firstInputRef as React.RefObject<HTMLInputElement>) : undefined}
-                            />
-                          )}
-                          {f.type === "select" && (
-                            <select
-                              id={`${id}-${f.name}`}
-                              name={f.name}
-                              className="w-full rounded-md border px-3 py-2"
-                              aria-label={f.label}
-                              {...(isTestEnvUI ? { defaultValue: (typeof values[f.name] === 'string') ? (values[f.name] as string) : "" } : { value: (typeof values[f.name] === 'string') ? (values[f.name] as string) : "" })}
-                              onChange={(e)=>{
-                                if (isTestEnvUI) {
-                                  setInputTick((t)=>t+1);
-                                  onInput(f.name, e.target.value);
-                                } else {
-                                  onInput(f.name, e.target.value)
-                                }
-                              }}
-                              ref={idx === 0 ? (firstInputRef as React.RefObject<HTMLSelectElement>) : undefined}
-                            >
-                              <option value="" disabled>{f.placeholder || "Seleccione..."}</option>
-                              {(f.options || []).map((opt) => (
-                                <option key={opt.value} value={opt.value}>{opt.label}</option>
-                              ))}
-                            </select>
-                          )}
-                          {f.type === "toggle" && (
-                            <div className="flex items-center gap-2 mt-1">
-                              <input id={`${id}-${f.name}`} name={f.name} type="checkbox" checked={!!values[f.name]} onChange={(e)=>onInput(f.name, e.target.checked)} />
-                              <label htmlFor={`${id}-${f.name}`} className="text-sm">{f.placeholder || f.label}</label>
-                            </div>
-                          )}
-                        </div>
+                        <FieldRow
+                          key={f.name}
+                          field={f}
+                          modalId={id}
+                          value={values[f.name]}
+                          onValueChange={onInput}
+                          isTestEnv={isTestEnvUI}
+                          autoCalculate={autoCalculate}
+                          setInputTick={setInputTick}
+                          firstRef={idx === 0 ? firstInputRef : undefined}
+                          error={error}
+                        />
                       ))}
 
                       {error && <div className="md:col-span-2 text-sm text-rose-600">{error}</div>}
 
                       {actionVisibility !== "hidden" && (
                         <div className="md:col-span-2 mt-2 flex items-center gap-3">
-                          {actionVisibility === "default" && (
-                            <button type="submit" className="px-4 py-2 rounded-md text-white font-semibold" style={{ backgroundColor: categoryColor }}>Calcular</button>
-                          )}
+                          {actionVisibility === "default" && (() => {
+                            const canCalc = enableCalculatePredicate !== undefined ? !!enableCalculatePredicate(values) : canCalculateDefault;
+                            if (canCalc) {
+                              return (
+                                <button
+                                  type="submit"
+                                  className="px-4 py-2 rounded-md text-white font-semibold"
+                                  style={{ backgroundColor: categoryColor }}
+                                >
+                                  Calcular
+                                </button>
+                              );
+                            }
+                            // Botón con estilo deshabilitado que muestra el primer mensaje bloqueante
+                            const msg = validateValues(values) || 'Complete los campos requeridos';
+                            return (
+                              <button
+                                type="button"
+                                onClick={() => onCalculate()}
+                                className="px-4 py-2 rounded-md text-white font-semibold opacity-50 cursor-not-allowed"
+                                style={{ backgroundColor: categoryColor }}
+                                aria-disabled
+                                title={msg}
+                              >
+                                Calcular
+                              </button>
+                            );
+                          })()}
                           <button type="button" onClick={onClear} className="px-4 py-2 rounded-md border">Limpiar</button>
                         </div>
                       )}
@@ -893,8 +880,8 @@ const CalculatorModalContent: React.FC<{
 
                       <div
                         ref={backFaceRef}
-                        className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)]"
-                        style={{ pointerEvents: flipped ? 'auto' : 'none', transformStyle: 'preserve-3d' }}
+                        className="absolute inset-0"
+                        style={{ pointerEvents: flipped ? 'auto' : 'none', transformStyle: 'preserve-3d', backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
                         aria-hidden={!flipped}
                       >
                         <div className={`rounded-xl border p-6 text-center ${getSeverityClasses(result?.severity)}`}>
@@ -1005,3 +992,126 @@ const CalculatorModalContent: React.FC<{
   </ModalPortal>
   );
 };
+
+// Memoized field row to prevent unnecessary re-renders & focus loss
+type FieldRowProps = {
+  field: FieldSpec;
+  modalId: string;
+  value: unknown;
+  onValueChange: (name: string, v: unknown) => void;
+  isTestEnv: boolean;
+  autoCalculate: boolean;
+  setInputTick: React.Dispatch<React.SetStateAction<number>>;
+  firstRef?: React.RefObject<HTMLInputElement | HTMLSelectElement>;
+  error?: string;
+};
+
+const FieldRow: React.FC<FieldRowProps> = React.memo(({ field, modalId, value, onValueChange, isTestEnv, autoCalculate, setInputTick, firstRef, error }) => {
+  const baseId = `${modalId}-${field.name}`;
+  const commonLabel = field.label;
+  if (field.type === 'number') {
+    return (
+      <div className="flex flex-col gap-1">
+        <label htmlFor={baseId} className="text-sm font-medium">{commonLabel}</label>
+        <div className="flex items-center gap-2">
+          <input
+            id={baseId}
+            name={field.name}
+            type={isTestEnv ? 'text' : 'number'}
+            inputMode="decimal"
+            step="any"
+            lang="es-ES"
+            pattern="^-?\\d*(?:[\\.,]\\d*)?$"
+            className="w-full rounded-md border px-3 py-2"
+            placeholder={field.placeholder || 'p. ej., 0'}
+            aria-label={commonLabel}
+            // Uncontrolled input to avoid focus loss; rely on onChange to sync state
+            defaultValue={(typeof value === 'number' || typeof value === 'string') ? (value as string | number) : ''}
+            onChange={(e) => {
+              const raw = e.target.value;
+              onValueChange(field.name, raw);
+              if (isTestEnv && autoCalculate) setInputTick(t => t + 1);
+            }}
+            onInput={(e) => {
+              const raw = (e.target as HTMLInputElement).value;
+              onValueChange(field.name, raw);
+              if (isTestEnv && autoCalculate) setInputTick(t => t + 1);
+            }}
+            aria-invalid={!!error && ((value === undefined || value === '') && field.validation?.required) ? true : undefined}
+            min={field.validation?.min}
+            max={field.validation?.max}
+            ref={firstRef as React.RefObject<HTMLInputElement>}
+          />
+          {field.unit ? <span className="text-sm text-slate-500">{field.unit}</span> : null}
+        </div>
+      </div>
+    );
+  }
+  if (field.type === 'text') {
+    return (
+      <div className="flex flex-col gap-1">
+        <label htmlFor={baseId} className="text-sm font-medium">{commonLabel}</label>
+        <input
+          id={baseId}
+            name={field.name}
+            type="text"
+            className="w-full rounded-md border px-3 py-2"
+            placeholder={field.placeholder}
+            aria-label={commonLabel}
+            defaultValue={(typeof value === 'string') ? (value as string) : ''}
+            onChange={(e) => {
+              if (isTestEnv) {
+                setInputTick(t => t + 1);
+              }
+              onValueChange(field.name, e.target.value);
+            }}
+            ref={firstRef as React.RefObject<HTMLInputElement>}
+        />
+      </div>
+    );
+  }
+  if (field.type === 'select') {
+    return (
+      <div className="flex flex-col gap-1">
+        <label htmlFor={baseId} className="text-sm font-medium">{commonLabel}</label>
+        <select
+          id={baseId}
+          name={field.name}
+          className="w-full rounded-md border px-3 py-2"
+          aria-label={commonLabel}
+          defaultValue={(typeof value === 'string') ? (value as string) : ''}
+          onChange={(e) => {
+            if (isTestEnv) setInputTick(t => t + 1);
+            onValueChange(field.name, e.target.value);
+          }}
+          ref={firstRef as React.RefObject<HTMLSelectElement>}
+        >
+          <option value="" disabled>{field.placeholder || 'Seleccione...'}</option>
+          {(field.options || []).map(opt => (
+            <option key={opt.value} value={opt.value}>{opt.label}</option>
+          ))}
+        </select>
+      </div>
+    );
+  }
+  if (field.type === 'toggle') {
+    return (
+      <div className="flex flex-col gap-1">
+        <label className="text-sm font-medium">{commonLabel}</label>
+        <div className="flex items-center gap-2 mt-1">
+          <input
+            id={baseId}
+            name={field.name}
+            type="checkbox"
+            checked={!!value}
+            onChange={(e) => onValueChange(field.name, e.target.checked)}
+          />
+          <label htmlFor={baseId} className="text-sm">{field.placeholder || field.label}</label>
+        </div>
+      </div>
+    );
+  }
+  return null;
+});
+
+FieldRow.displayName = 'FieldRow';

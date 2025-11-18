@@ -39,9 +39,9 @@ const BMRCalculator: React.FC<{ open: boolean; onOpenChange: (v:boolean)=>void; 
       errorMessage={error}
       result={res != null ? <div className="text-3xl font-mono">{res} kcal/día</div> : undefined}
     >
-      <NumberField id="bmr-w" label="Peso" name="w" value={w === "" ? "" : String(w)} onChange={(e)=>setW(e.target.value === "" ? "" : Number(e.target.value))} min={20} max={300} unit="kg" required />
-      <NumberField id="bmr-h" label="Talla" name="h" value={h === "" ? "" : String(h)} onChange={(e)=>setH(e.target.value === "" ? "" : Number(e.target.value))} min={100} max={250} unit="cm" required />
-      <NumberField id="bmr-age" label="Edad" name="age" value={age === "" ? "" : String(age)} onChange={(e)=>setAge(e.target.value === "" ? "" : Number(e.target.value))} min={5} max={120} unit="años" required />
+      <NumberField id="bmr-w" label="Peso" name="w" placeholder="p. ej., 70" value={w === "" ? "" : String(w)} onChange={(e)=>setW(e.target.value === "" ? "" : Number(e.target.value))} min={20} max={300} unit="kg" required />
+      <NumberField id="bmr-h" label="Talla" name="h" placeholder="p. ej., 175" value={h === "" ? "" : String(h)} onChange={(e)=>setH(e.target.value === "" ? "" : Number(e.target.value))} min={100} max={250} unit="cm" required />
+      <NumberField id="bmr-age" label="Edad" name="age" placeholder="p. ej., 40" value={age === "" ? "" : String(age)} onChange={(e)=>setAge(e.target.value === "" ? "" : Number(e.target.value))} min={5} max={120} unit="años" required />
       <div>
         <label htmlFor="bmr-sex" className="block text-sm font-medium mb-1">Sexo</label>
         <select id="bmr-sex" value={sex} onChange={(e)=>setSex(e.target.value as Sex)} className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-400">

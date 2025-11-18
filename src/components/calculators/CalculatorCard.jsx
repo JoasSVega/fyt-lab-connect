@@ -58,13 +58,17 @@ export default function CalculatorCard({
     const target = isFlipped ? backH : frontH;
     // Fallback min height to keep visual stability
     const minH = 220;
-    setContainerHeight(Math.max(target, minH));
+    const next = Math.max(target, minH);
+    setContainerHeight((prev) => {
+      if (typeof prev === 'number' && Math.abs(prev - next) < 1) return prev;
+      return next;
+    });
   }, [isFlipped]);
 
   useLayoutEffect(() => {
     measureHeights();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isFlipped, formValues, result]);
+  }, [isFlipped, result]);
 
   useEffect(() => {
     function onResize() {
@@ -87,8 +91,20 @@ export default function CalculatorCard({
   };
 
   const handleCalculate = () => {
+    if (flipAnimatingRef.current) return;
     try {
-      const out = onCalculate ? onCalculate(formValues) : null;
+      // Normalizar y parsear solo en el cálculo
+      const parsed = { ...formValues };
+      for (const v of variables) {
+        if ((v.type || 'number') === 'number') {
+          const raw = parsed[v.id];
+          if (raw === '' || raw === undefined || raw === null) continue;
+          const norm = String(raw).replace(',', '.');
+          const num = Number(norm);
+          parsed[v.id] = Number.isFinite(num) ? num : raw;
+        }
+      }
+      const out = onCalculate ? onCalculate(parsed) : null;
       setResult(out);
       setIsFlipped(true);
     } catch (e) {
@@ -137,8 +153,9 @@ export default function CalculatorCard({
       >
         {/* 3D scene container */}
         <div
-          className={`relative w-full h-full [transform-style:preserve-3d] transition-transform duration-700 ease-in-out`}
-          style={{ transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)" }}
+          data-testid="flip-scene"
+          className={`relative w-full h-full transition-transform duration-700 ease-in-out`}
+          style={{ transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)", transformStyle: 'preserve-3d', willChange: 'transform' }}
           onTransitionStart={(e) => {
             if (e.propertyName === "transform") {
               flipAnimatingRef.current = true;
@@ -163,7 +180,9 @@ export default function CalculatorCard({
             variants={appearVariants}
             initial="hidden"
             animate="visible"
-            className="absolute inset-0 [backface-visibility:hidden] rounded-2xl bg-white/90 dark:bg-slate-900/90 shadow-lg ring-1 ring-slate-200/70 dark:ring-slate-700 p-4 sm:p-6 flex flex-col gap-4"
+            data-testid="front-face"
+            className="absolute inset-0 rounded-2xl bg-white/90 dark:bg-slate-900/90 shadow-lg ring-1 ring-slate-200/70 dark:ring-slate-700 p-4 sm:p-6 flex flex-col gap-4"
+            style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
           >
             {/* Header with title and info button */}
             <div className="flex items-start justify-between gap-2 min-w-0">
@@ -206,12 +225,13 @@ export default function CalculatorCard({
                     <div className="flex items-center gap-2">
                       <input
                         id={v.id}
-                        type={v.type || "number"}
+                        type={v.type === 'text' ? 'text' : 'text'}
                         inputMode={v.type === "text" ? "text" : "decimal"}
+                        pattern={v.type === 'text' ? undefined : "^-?\\d*(?:[\\.,]\\d*)?$"}
                         className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-sky-300"
                         placeholder={v.placeholder}
                         value={String(formValues[v.id] ?? "")}
-                        onChange={(e) => handleChange(v.id, v.type === "number" ? (e.target.value === "" ? "" : Number(e.target.value)) : e.target.value)}
+                        onChange={(e) => handleChange(v.id, e.target.value)}
                         min={v.min}
                         max={v.max}
                         step={v.step}
@@ -244,7 +264,9 @@ export default function CalculatorCard({
             variants={appearVariants}
             initial="hidden"
             animate="visible"
-            className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] rounded-2xl bg-white/90 dark:bg-slate-900/90 shadow-lg ring-1 ring-slate-200/70 dark:ring-slate-700 p-4 sm:p-6 flex flex-col gap-4"
+            data-testid="back-face"
+            className="absolute inset-0 rounded-2xl bg-white/90 dark:bg-slate-900/90 shadow-lg ring-1 ring-slate-200/70 dark:ring-slate-700 p-4 sm:p-6 flex flex-col gap-4"
+            style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
           >
             <div className="flex items-start justify-between">
               <h3 className={`text-lg sm:text-xl font-semibold ${headerClasses}`}>{title}: Resultado</h3>

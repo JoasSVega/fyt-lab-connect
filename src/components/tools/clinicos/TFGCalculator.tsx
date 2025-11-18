@@ -58,9 +58,9 @@ const TFGCalculator: React.FC<{ open: boolean; onOpenChange: (v: boolean) => voi
         </>
       ) : undefined}
     >
-      <NumberField id="tfg-age" label="Edad" name="age" value={String(age)} onChange={(e)=>setAge(Number(e.target.value))} min={18} max={120} required />
-      <NumberField id="tfg-weight" label="Peso" name="weight" value={String(weight)} onChange={(e)=>setWeight(Number(e.target.value))} min={20} max={300} unit="kg" required />
-      <NumberField id="tfg-scr" label="Creatinina sérica" name="scr" value={String(scr)} onChange={(e)=>setScr(Number(e.target.value))} min={0.1} unit="mg/dL" required />
+      <NumberField id="tfg-age" label="Edad" name="age" placeholder="p. ej., 65" value={String(age)} onChange={(e)=>setAge(Number(e.target.value))} min={18} max={120} required />
+      <NumberField id="tfg-weight" label="Peso" name="weight" placeholder="p. ej., 70" value={String(weight)} onChange={(e)=>setWeight(Number(e.target.value))} min={20} max={300} unit="kg" required />
+      <NumberField id="tfg-scr" label="Creatinina sérica" name="scr" placeholder="p. ej., 1.0" value={String(scr)} onChange={(e)=>setScr(Number(e.target.value))} min={0.1} unit="mg/dL" required />
       <SelectField
         id="tfg-sex"
         label="Sexo"

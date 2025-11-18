@@ -165,6 +165,11 @@ All colors MUST be HSL and based on institutional branding.
       hyphens: auto;
       font-size: clamp(1.5rem, 4vw, 2.5rem);
     }
+    /* Ensure main section titles keep stronger hierarchy */
+    .site-section-title {
+      font-size: clamp(2.25rem, 6vw, 2.875rem); /* 36px min, up to ~46px on mid mobile */
+      hyphens: none;
+    }
     
     /* Ensure images are responsive */
     img {
@@ -215,6 +220,10 @@ All colors MUST be HSL and based on institutional branding.
     h2 {
       font-size: clamp(1.125rem, 4vw, 1.5rem) !important;
     }
+    /* Reassert hierarchy on extra small screens */
+    .site-section-title {
+      font-size: clamp(2.25rem, 7vw, 2.75rem) !important; /* Keep ≥36px; allow gentle scaling */
+    }
 
     /* Button responsive fixes */
     button {
@@ -239,6 +248,48 @@ All colors MUST be HSL and based on institutional branding.
     overflow-wrap: break-word;
     word-break: normal;
     white-space: normal;
+  }
+
+  /* Utility: force-disable hyphenation and intraword breaks for a subtree */
+  .no-hyphens, .no-hyphens * {
+    -webkit-hyphens: none !important;
+    -ms-hyphens: none !important;
+    hyphens: none !important;
+    word-break: keep-all !important; /* only break at spaces */
+    overflow-wrap: normal !important;
+    white-space: normal !important;
+  }
+
+  /* Calculator modal card & body for consistent scrolling */
+  .calc-modal-card {
+    /* Allow internal body to manage its own scroll */
+    overflow: visible;
+    contain: layout paint style; /* improve performance */
+  }
+  .calc-modal-body {
+    max-height: 100%;
+    scrollbar-gutter: stable both-edge;
+  }
+  @media (max-height: 780px) {
+    .calc-modal-body { scrollbar-gutter: stable; }
+  }
+
+  /* Unified main section/page titles */
+  .site-section-title {
+    font-family: var(--font-poppins, Poppins, sans-serif);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    /* 2.25rem (36px) minimum for stronger presence on very small screens */
+    font-size: clamp(2.25rem, 5.2vw, 3rem); /* 36px → up to 48px */
+    hyphens: none;
+    word-break: normal;
+    overflow-wrap: break-word;
+    white-space: normal;
+  }
+
+  @media (min-width: 1280px) {
+    .site-section-title { font-size: 3rem; }
   }
 
   /* Tablet optimizations */

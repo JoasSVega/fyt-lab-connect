@@ -12,7 +12,7 @@ const SobreNosotros = () => (
       {/* Sección Nuestro Equipo */}
       <section className="py-20 min-h-[60vh] bg-[#f8fafc]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-poppins font-bold text-center text-fyt-dark mb-8 drop-shadow-lg">Nuestro Equipo</h2>
+          <h2 className="site-section-title text-center text-fyt-dark mb-8 drop-shadow-lg">Nuestro Equipo</h2>
           <Team compact />
         </div>
       </section>

@@ -107,7 +107,7 @@ const FuncionRenalCalculator: React.FC<{ embedded?: boolean }> = ({ embedded = f
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
               <Label htmlFor="age">Edad (años)</Label>
-              <Input id="age" type="number" min={1} inputMode="numeric" value={age}
+              <Input id="age" type="number" min={1} inputMode="numeric" placeholder="p. ej., 65" value={age}
                 onChange={(e)=>setAge(e.target.value === "" ? "" : Number(e.target.value))}
                 aria-label="Edad en años" />
             </div>
@@ -125,7 +125,7 @@ const FuncionRenalCalculator: React.FC<{ embedded?: boolean }> = ({ embedded = f
             </div>
             <div>
               <Label htmlFor="weight">Peso (kg)</Label>
-              <Input id="weight" type="number" min={1} inputMode="decimal" value={weight}
+              <Input id="weight" type="number" min={1} inputMode="decimal" placeholder="p. ej., 70" value={weight}
                 onChange={(e)=>setWeight(e.target.value === "" ? "" : Number(e.target.value))}
                 aria-label="Peso en kilogramos" />
             </div>
@@ -135,7 +135,7 @@ const FuncionRenalCalculator: React.FC<{ embedded?: boolean }> = ({ embedded = f
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="sm:col-span-2">
               <Label htmlFor="scr">Creatinina sérica</Label>
-              <Input id="scr" type="number" min={0} step="0.01" inputMode="decimal" value={scr}
+              <Input id="scr" type="number" min={0} step="0.01" inputMode="decimal" placeholder="p. ej., 1.0" value={scr}
                 onChange={(e)=>setScr(e.target.value === "" ? "" : Number(e.target.value))}
                 aria-label="Creatinina sérica" />
             </div>

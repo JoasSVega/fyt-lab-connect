@@ -151,7 +151,7 @@ const ReconstitutionDilutionCalculator: React.FC<{ embedded?: boolean }> = ({ em
 
       <div>
         <Label htmlFor="reconst">Volumen de diluyente para reconstitución (mL)</Label>
-        <Input id="reconst" type="number" min={0} step={0.1}
+        <Input id="reconst" type="number" min={0} step={0.1} placeholder="p. ej., 10"
           value={reconstMl}
           onChange={(e)=>setReconstMl(e.target.value === "" ? "" : Number(e.target.value))}
         />
@@ -170,15 +170,15 @@ const ReconstitutionDilutionCalculator: React.FC<{ embedded?: boolean }> = ({ em
             </Select>
           </div>
         </div>
-        <Input id="dose" type="number" min={0} step={0.1}
+        <Input id="dose" type="number" min={0} step={0.1} placeholder="p. ej., 1000"
           value={dose}
           onChange={(e)=>setDose(e.target.value === "" ? "" : Number(e.target.value))}
         />
       </div>
 
       <div>
-        <Label htmlFor="weight">Peso del paciente (kg, opcional)</Label>
-        <Input id="weight" type="number" min={0} step={0.1}
+        <Label htmlFor="weight">Peso (kg, opcional)</Label>
+        <Input id="weight" type="number" min={0} step={0.1} placeholder="p. ej., 70"
           value={weight}
           onChange={(e)=>setWeight(e.target.value === "" ? "" : Number(e.target.value))}
         />
@@ -186,7 +186,7 @@ const ReconstitutionDilutionCalculator: React.FC<{ embedded?: boolean }> = ({ em
 
       <div>
         <Label htmlFor="desired">Concentración final deseada (mg/mL, opcional)</Label>
-        <Input id="desired" type="number" min={0} step={0.1}
+        <Input id="desired" type="number" min={0} step={0.1} placeholder="p. ej., 2.0"
           value={desiredConc}
           onChange={(e)=>setDesiredConc(e.target.value === "" ? "" : Number(e.target.value))}
         />
@@ -202,7 +202,7 @@ const ReconstitutionDilutionCalculator: React.FC<{ embedded?: boolean }> = ({ em
             </label>
           </div>
         </div>
-        <Input id="final" type="number" min={0} step={1}
+        <Input id="final" type="number" min={0} step={1} placeholder="p. ej., 100"
           value={finalVolume}
           onChange={(e)=>setFinalVolume(e.target.value === "" ? "" : Number(e.target.value))}
           disabled={!addDiluent}

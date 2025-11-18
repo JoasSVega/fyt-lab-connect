@@ -34,7 +34,7 @@ const Contact = () => {
       icon: <MapPin className="w-8 h-8 text-fyt-red" aria-label="Ubicación" />,
       title: "Ubicación",
       info: "Facultad de Ciencias Farmacéuticas",
-      description: "Universidad de Cartagena, Colombia"
+      description: "Cra. 50 #24120, Zaragocilla, Cartagena de Indias, Provincia de Cartagena, Bolívar"
     }
   ];
 

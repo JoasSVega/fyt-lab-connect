@@ -237,10 +237,16 @@ const Team = ({ compact = false }: { compact?: boolean }) => {
 
         {/* Call to Action */}
         <div className="mt-16 text-center">
-          <Card className="max-w-2xl mx-auto p-7 bg-white text-[#1e293b] shadow-2xl border-2 border-[#3BB9FF]/30 rounded-2xl animate-fade-in">
-            <h3 className="text-2xl font-semibold mb-4 drop-shadow-lg">
+          <Card className="max-w-2xl mx-auto p-7 bg-white text-[#1e293b] shadow-2xl border-2 border-[#3BB9FF]/30 rounded-2xl animate-fade-in no-hyphens">
+            <h3
+              className="text-2xl font-semibold mb-4 drop-shadow-lg break-normal whitespace-normal"
+              style={{ hyphens: 'none', overflowWrap: 'normal', wordBreak: 'normal' }}
+            >
 ¿Te interesa unirte a nuestro grupo de investigación?</h3>
-            <p className="mb-6 text-[#334155]">
+            <p
+              className="mb-6 text-[#334155] break-normal whitespace-normal"
+              style={{ hyphens: 'none', overflowWrap: 'normal', wordBreak: 'normal' }}
+            >
               Si eres estudiante, profesional o investigador interesado en formar parte 
               de nuestro equipo, te invitamos a contactarnos.
             </p>

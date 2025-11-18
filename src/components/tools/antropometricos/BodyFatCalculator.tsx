@@ -69,9 +69,9 @@ const BodyFatCalculator: React.FC<{ open: boolean; onOpenChange: (v:boolean)=>vo
         </>
       ) : undefined}
     >
-      <NumberField id="bf-w" label="Peso" name="w" value={w === "" ? "" : String(w)} onChange={(e)=>setW(e.target.value === "" ? "" : Number(e.target.value))} min={20} max={300} unit="kg" required />
-      <NumberField id="bf-h" label="Talla" name="h" value={h === "" ? "" : String(h)} onChange={(e)=>setH(e.target.value === "" ? "" : Number(e.target.value))} min={100} max={250} unit="cm" required />
-      <NumberField id="bf-age" label="Edad" name="age" value={age === "" ? "" : String(age)} onChange={(e)=>setAge(e.target.value === "" ? "" : Number(e.target.value))} min={5} max={120} unit="años" required />
+      <NumberField id="bf-w" label="Peso" name="w" placeholder="p. ej., 72" value={w === "" ? "" : String(w)} onChange={(e)=>setW(e.target.value === "" ? "" : Number(e.target.value))} min={20} max={300} unit="kg" required />
+      <NumberField id="bf-h" label="Talla" name="h" placeholder="p. ej., 170" value={h === "" ? "" : String(h)} onChange={(e)=>setH(e.target.value === "" ? "" : Number(e.target.value))} min={100} max={250} unit="cm" required />
+      <NumberField id="bf-age" label="Edad" name="age" placeholder="p. ej., 40" value={age === "" ? "" : String(age)} onChange={(e)=>setAge(e.target.value === "" ? "" : Number(e.target.value))} min={5} max={120} unit="años" required />
       <SelectField
         id="bf-sex"
         label="Sexo"

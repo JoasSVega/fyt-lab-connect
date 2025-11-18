@@ -177,10 +177,10 @@ const DoseByWeightCalculator: React.FC<{ embedded?: boolean }> = ({ embedded = f
 
   const inputs = (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      {mode === "weight" ? (
+        {mode === "weight" ? (
         <div>
-          <Label htmlFor="weight">Peso corporal (kg)</Label>
-          <Input id="weight" type="number" min={0} step={0.1}
+          <Label htmlFor="weight">Peso (kg)</Label>
+          <Input id="weight" type="number" min={0} step={0.1} placeholder="p. ej., 70"
             value={weight}
             onChange={(e)=>setWeight(e.target.value === "" ? "" : Number(e.target.value))}
           />
@@ -188,7 +188,7 @@ const DoseByWeightCalculator: React.FC<{ embedded?: boolean }> = ({ embedded = f
       ) : (
         <div>
           <Label htmlFor="bsa">Superficie corporal (m²)</Label>
-          <Input id="bsa" type="number" min={0} step={0.01}
+          <Input id="bsa" type="number" min={0} step={0.01} placeholder="p. ej., 1.8"
             value={bsa}
             onChange={(e)=>setBsa(e.target.value === "" ? "" : Number(e.target.value))}
           />
@@ -209,7 +209,7 @@ const DoseByWeightCalculator: React.FC<{ embedded?: boolean }> = ({ embedded = f
             </Tooltip>
           </TooltipProvider>
         </div>
-        <Input id="dosePer" type="number" min={0} step={0.01}
+        <Input id="dosePer" type="number" min={0} step={0.01} placeholder="p. ej., 15"
           value={dosePer}
           onChange={(e)=>setDosePer(e.target.value === "" ? "" : Number(e.target.value))}
         />
@@ -225,7 +225,7 @@ const DoseByWeightCalculator: React.FC<{ embedded?: boolean }> = ({ embedded = f
 
       <div>
         <Label htmlFor="drug">Nombre del fármaco (opcional)</Label>
-        <Input id="drug" placeholder="ej. amikacina"
+        <Input id="drug" placeholder="p. ej., amikacina"
           value={drug}
           onChange={(e)=>setDrug(e.target.value)}
         />
