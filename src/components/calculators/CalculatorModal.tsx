@@ -395,15 +395,8 @@ const CalculatorModalContent: React.FC<{
   const hasAnimatedRef = React.useRef(false);
   // En entorno de pruebas, usamos un tick para disparar efectos de auto-cálculo al escribir sin mutar el estado de valores
   const [inputTick, setInputTick] = React.useState(0);
-  // Estado interno para saber si la animación de giro está en curso.
-  // Evita cortes bruscos al volver: mantenemos visible la cara saliente hasta que termine el rotateY.
-  const [animatingFlip, setAnimatingFlip] = React.useState(false);
-
-  // Cuando cambia 'flipped' iniciamos fase de animación.
-  React.useEffect(() => {
-    if (!open) return;
-    setAnimatingFlip(true);
-  }, [flipped, open]);
+  // Eliminado estado adicional de animación (animatingFlip) para evitar doble render que reiniciaba el flip.
+  // Ahora sólo dependemos de 'flipped'. Esto previene reinicios de la animación y duplicados visuales.
 
   // Conditional scroll: enable only when content exceeds available space (especially on small viewports)
   const measureScrollNeed = React.useCallback(() => {
@@ -636,25 +629,14 @@ const CalculatorModalContent: React.FC<{
                       style={{ height: cardHeight ? `${cardHeight}px` : undefined }}
                       animate={{ rotateY: flipped ? 180 : 0 }}
                       transition={{ duration: 0.5, ease: "easeInOut" }}
-                      onAnimationComplete={() => {
-                        // Marcar fin de animación y luego ejecutar lógica existente (limpieza diferida, etc.)
-                        setAnimatingFlip(false);
-                        onFlipAnimationComplete?.();
-                      }}
+                      onAnimationComplete={onFlipAnimationComplete}
                     >
-                      {/* FRONT */}
+                      {/* FRONT: mantener visibles durante rotación (sin opacidad forzada) */}
                       <div
                         ref={frontFaceRef}
                         className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(0deg)]"
-                        style={{
-                          pointerEvents: flipped ? 'none' : 'auto',
-                          willChange: 'transform',
-                          // Si estamos volviendo (flipped pasa de true a false) mantenemos la cara frontal oculta
-                          // hasta que termine la animación de entrada (animatingFlip true), para evitar parpadeos.
-                          // Dirección forward (mostrar resultado): ocultamos frontal sólo tras terminar.
-                          opacity: flipped ? (animatingFlip ? 1 : 0) : 1
-                        }}
-                        aria-hidden={flipped && !animatingFlip}
+                        style={{ pointerEvents: flipped ? 'none' : 'auto', willChange: 'transform' }}
+                        aria-hidden={flipped}
                       >
                         <form
                       key={resetTick}
@@ -798,17 +780,12 @@ const CalculatorModalContent: React.FC<{
                     </form>
                       </div>
 
-                      {/* BACK */}
+                      {/* BACK: sin opacidad forzada para permitir ver el giro de retorno */}
                       <div
                         ref={backFaceRef}
                         className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)]"
-                        style={{
-                          pointerEvents: flipped ? 'auto' : 'none',
-                          willChange: 'transform',
-                          // Dirección reverse (volver): mantenemos la cara trasera visible durante animación y ocultamos después.
-                          opacity: flipped ? 1 : (animatingFlip ? 1 : 0)
-                        }}
-                        aria-hidden={!flipped && !animatingFlip}
+                        style={{ pointerEvents: flipped ? 'auto' : 'none', willChange: 'transform' }}
+                        aria-hidden={!flipped}
                       >
                         <div className={`rounded-xl border p-6 text-center ${getSeverityClasses(result?.severity)}`}>
                           {result ? (
