@@ -760,7 +760,7 @@ const CalculatorModalContent: React.FC<{
                     </select>
                     <button
                       type="button"
-                      aria-label="Ver fórmulas"
+                      aria-label="Ver fórmulas (móvil)"
                       className="absolute top-1/2 -translate-y-1/2 right-1 inline-flex h-11 w-11 items-center justify-center rounded-md border border-slate-200 bg-white/95 hover:bg-slate-100 touch-manipulation pointer-events-auto"
                       onClick={() => setInfoOpen(true)}
                       title="Ver fórmulas"
