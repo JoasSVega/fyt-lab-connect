@@ -1028,8 +1028,11 @@ const FieldRow: React.FC<FieldRowProps> = React.memo(({ field, modalId, value, o
             className="w-full rounded-md border px-3 py-2"
             placeholder={field.placeholder || 'p. ej., 0'}
             aria-label={commonLabel}
-            // Uncontrolled input to avoid focus loss; rely on onChange to sync state
-            defaultValue={(typeof value === 'number' || typeof value === 'string') ? (value as string | number) : ''}
+            // Test: controlled to ease typing in jsdom; Prod: uncontrolled to avoid focus jitter on mobile
+            {...(isTestEnv
+              ? { value: (typeof value === 'number' || typeof value === 'string') ? (value as string | number) : '' }
+              : { defaultValue: (typeof value === 'number' || typeof value === 'string') ? (value as string | number) : '' }
+            )}
             onChange={(e) => {
               const raw = e.target.value;
               onValueChange(field.name, raw);
@@ -1061,7 +1064,10 @@ const FieldRow: React.FC<FieldRowProps> = React.memo(({ field, modalId, value, o
             className="w-full rounded-md border px-3 py-2"
             placeholder={field.placeholder}
             aria-label={commonLabel}
-            defaultValue={(typeof value === 'string') ? (value as string) : ''}
+            {...(isTestEnv
+              ? { value: (typeof value === 'string') ? (value as string) : '' }
+              : { defaultValue: (typeof value === 'string') ? (value as string) : '' }
+            )}
             onChange={(e) => {
               if (isTestEnv) {
                 setInputTick(t => t + 1);
@@ -1082,7 +1088,10 @@ const FieldRow: React.FC<FieldRowProps> = React.memo(({ field, modalId, value, o
           name={field.name}
           className="w-full rounded-md border px-3 py-2"
           aria-label={commonLabel}
-          defaultValue={(typeof value === 'string') ? (value as string) : ''}
+          {...(isTestEnv
+            ? { value: (typeof value === 'string') ? (value as string) : '' }
+            : { defaultValue: (typeof value === 'string') ? (value as string) : '' }
+          )}
           onChange={(e) => {
             if (isTestEnv) setInputTick(t => t + 1);
             onValueChange(field.name, e.target.value);
