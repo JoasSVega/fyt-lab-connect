@@ -41,7 +41,7 @@ const IdealWeightCalculator: React.FC<{ open: boolean; onOpenChange: (v:boolean)
         </>
       ) : undefined}
     >
-      <NumberField id="pi-h" label="Estatura" name="h" value={h === "" ? "" : String(h)} onChange={(e)=>setH(e.target.value === "" ? "" : Number(e.target.value))} min={100} max={250} unit="cm" required />
+      <NumberField id="pi-h" label="Talla" name="h" placeholder="p. ej., 170" value={h === "" ? "" : String(h)} onChange={(e)=>setH(e.target.value === "" ? "" : Number(e.target.value))} min={100} max={250} unit="cm" required />
       <div>
         <label htmlFor="pi-sex" className="block text-sm font-medium mb-1">Sexo</label>
         <select id="pi-sex" value={sex} onChange={(e)=>setSex(e.target.value as Sex)} className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-teal-400">

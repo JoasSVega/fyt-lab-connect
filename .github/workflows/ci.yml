@@ -27,10 +27,21 @@ jobs:
 
       - name: Build
         run: npm run build
+      
+        - name: Prune artifact (remove source maps & list large assets)
+          run: |
+            # Remove source maps to cut artifact size (not needed for deployment artifacts)
+            find dist -type f -name '*.map' -delete || true
+            # List any file bigger than 10MB for awareness
+            echo 'Large files (>10MB) in dist:'
+            find dist -type f -size +10M -print || true
 
-      - name: Upload build as artifact
-        if: success()
-        uses: actions/upload-artifact@v4
-        with:
-          name: site-build
-          path: dist
+        - name: Upload build as artifact (main only)
+          if: success() && github.ref == 'refs/heads/main'
+          uses: actions/upload-artifact@v4
+          with:
+            name: site-build
+            path: |
+              dist
+            retention-days: 7
+            compression-level: 6

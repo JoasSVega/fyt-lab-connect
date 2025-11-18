@@ -7,7 +7,7 @@ const fields: ReadonlyArray<FieldSpec> = [
     name: "E",
     label: "Respuesta ocular (E)",
     type: "select",
-    placeholder: "Seleccione",
+    placeholder: "Seleccionar",
     options: [
       { value: "4", label: "4 - Espontánea" },
       { value: "3", label: "3 - A la voz" },
@@ -20,7 +20,7 @@ const fields: ReadonlyArray<FieldSpec> = [
     name: "V",
     label: "Respuesta verbal (V)",
     type: "select",
-    placeholder: "Seleccione",
+    placeholder: "Seleccionar",
     options: [
       { value: "5", label: "5 - Orientado" },
       { value: "4", label: "4 - Confuso" },
@@ -34,7 +34,7 @@ const fields: ReadonlyArray<FieldSpec> = [
     name: "M",
     label: "Respuesta motora (M)",
     type: "select",
-    placeholder: "Seleccione",
+    placeholder: "Seleccionar",
     options: [
       { value: "6", label: "6 - Obedece órdenes" },
       { value: "5", label: "5 - Localiza dolor" },

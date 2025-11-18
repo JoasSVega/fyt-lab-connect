@@ -27,8 +27,8 @@ const SuperficieCorporal: React.FC<{ open: boolean; onOpenChange: (v:boolean)=>v
       errorMessage={error}
       result={res != null ? <div className="text-3xl font-mono">{res.toFixed(2)} m²</div> : undefined}
     >
-      <NumberField id="bsa-w" label="Peso" name="w" value={w === "" ? "" : String(w)} onChange={(e)=>setW(e.target.value === "" ? "" : Number(e.target.value))} min={20} max={300} unit="kg" required />
-      <NumberField id="bsa-h" label="Talla" name="h" value={h === "" ? "" : String(h)} onChange={(e)=>setH(e.target.value === "" ? "" : Number(e.target.value))} min={100} max={250} unit="cm" required />
+      <NumberField id="bsa-w" label="Peso" name="w" placeholder="p. ej., 72" value={w === "" ? "" : String(w)} onChange={(e)=>setW(e.target.value === "" ? "" : Number(e.target.value))} min={20} max={300} unit="kg" required />
+      <NumberField id="bsa-h" label="Talla" name="h" placeholder="p. ej., 170" value={h === "" ? "" : String(h)} onChange={(e)=>setH(e.target.value === "" ? "" : Number(e.target.value))} min={100} max={250} unit="cm" required />
     </CalculatorPanel>
   );
 };

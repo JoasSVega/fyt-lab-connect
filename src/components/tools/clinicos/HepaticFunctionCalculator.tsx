@@ -215,7 +215,7 @@ const HepaticFunctionCalculator: React.FC<{ embedded?: boolean }> = ({ embedded 
       <div>
         <Label htmlFor="bili">Bilirrubina total</Label>
         <div className="grid grid-cols-3 gap-2">
-          <Input id="bili" className="col-span-2" type="number" step="0.1" min={0}
+          <Input id="bili" className="col-span-2" type="number" step="0.1" min={0} placeholder="p. ej., 1.2"
             value={bili} onChange={(e)=>setBili(e.target.value===""?"":Number(e.target.value))} aria-label="Bilirrubina" />
           <Select value={biliUnit} onValueChange={(v)=>handleBiliUnitChange(v as "mgdl" | "umol")}>
             <SelectTrigger aria-label="Unidad de bilirrubina"><SelectValue /></SelectTrigger>
@@ -228,12 +228,12 @@ const HepaticFunctionCalculator: React.FC<{ embedded?: boolean }> = ({ embedded 
       </div>
       <div>
         <Label htmlFor="alb">Albúmina (g/dL)</Label>
-        <Input id="alb" type="number" step="0.1" min={0}
+        <Input id="alb" type="number" step="0.1" min={0} placeholder="p. ej., 3.8"
           value={albumin} onChange={(e)=>setAlbumin(e.target.value===""?"":Number(e.target.value))} />
       </div>
       <div>
         <Label htmlFor="inr">INR</Label>
-        <Input id="inr" type="number" step="0.1" min={0}
+        <Input id="inr" type="number" step="0.1" min={0} placeholder="p. ej., 1.2"
           value={inr} onChange={(e)=>setINR(e.target.value===""?"":Number(e.target.value))} />
       </div>
       <div>
@@ -241,8 +241,8 @@ const HepaticFunctionCalculator: React.FC<{ embedded?: boolean }> = ({ embedded 
         <Select value={ascites} onValueChange={(v)=>setAscites(v as Ascites)}>
           <SelectTrigger id="asc"><SelectValue /></SelectTrigger>
           <SelectContent>
-            <SelectItem value="none">Ninguna</SelectItem>
-            <SelectItem value="mild">Leve</SelectItem>
+            <SelectItem value="none">Ausente</SelectItem>
+            <SelectItem value="mild">Leve o controlada</SelectItem>
             <SelectItem value="moderate">Moderada</SelectItem>
             <SelectItem value="severe">Severa</SelectItem>
           </SelectContent>
@@ -253,10 +253,10 @@ const HepaticFunctionCalculator: React.FC<{ embedded?: boolean }> = ({ embedded 
         <Select value={enceph} onValueChange={(v)=>setEnceph(v as Ascites)}>
           <SelectTrigger id="enc"><SelectValue /></SelectTrigger>
           <SelectContent>
-            <SelectItem value="none">Ninguna</SelectItem>
-            <SelectItem value="mild">Leve (I–II)</SelectItem>
-            <SelectItem value="moderate">Moderada</SelectItem>
-            <SelectItem value="severe">Severa (III–IV)</SelectItem>
+            <SelectItem value="none">Ausente</SelectItem>
+            <SelectItem value="mild">Grado I–II</SelectItem>
+            <SelectItem value="moderate">Grado III</SelectItem>
+            <SelectItem value="severe">Grado IV</SelectItem>
           </SelectContent>
         </Select>
       </div>
@@ -267,22 +267,22 @@ const HepaticFunctionCalculator: React.FC<{ embedded?: boolean }> = ({ embedded 
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
       <div>
         <Label htmlFor="bili2">Bilirrubina total (mg/dL)</Label>
-        <Input id="bili2" type="number" step="0.1" min={0}
+        <Input id="bili2" type="number" step="0.1" min={0} placeholder="p. ej., 1.2"
           value={bili} onChange={(e)=>setBili(e.target.value===""?"":Number(e.target.value))} />
       </div>
       <div>
         <Label htmlFor="creat">Creatinina (mg/dL)</Label>
-        <Input id="creat" type="number" step="0.01" min={0}
+        <Input id="creat" type="number" step="0.01" min={0} placeholder="p. ej., 1.0"
           value={creat} onChange={(e)=>setCreat(e.target.value===""?"":Number(e.target.value))} />
       </div>
       <div>
         <Label htmlFor="inr2">INR</Label>
-        <Input id="inr2" type="number" step="0.01" min={0}
+        <Input id="inr2" type="number" step="0.01" min={0} placeholder="p. ej., 1.2"
           value={inr} onChange={(e)=>setINR(e.target.value===""?"":Number(e.target.value))} />
       </div>
       <div>
         <Label htmlFor="na">Sodio sérico (mmol/L, opcional)</Label>
-        <Input id="na" type="number" step="1" min={110} max={170}
+        <Input id="na" type="number" step="1" min={110} max={170} placeholder="p. ej., 135"
           value={sodium} onChange={(e)=>setSodium(e.target.value===""?"":Number(e.target.value))} />
       </div>
     </div>
@@ -292,17 +292,17 @@ const HepaticFunctionCalculator: React.FC<{ embedded?: boolean }> = ({ embedded 
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
       <div>
         <Label htmlFor="ast">AST (UI/L)</Label>
-        <Input id="ast" type="number" min={0}
+        <Input id="ast" type="number" min={0} placeholder="p. ej., 35"
           value={ast} onChange={(e)=>setAST(e.target.value===""?"":Number(e.target.value))} />
       </div>
       <div>
         <Label htmlFor="uln">LSN AST (UI/L)</Label>
-        <Input id="uln" type="number" min={1}
+        <Input id="uln" type="number" min={1} placeholder="p. ej., 40"
           value={astULN} onChange={(e)=>setASTULN(e.target.value===""?"":Number(e.target.value))} />
       </div>
       <div>
         <Label htmlFor="plt">Plaquetas (10^9/L)</Label>
-        <Input id="plt" type="number" min={1}
+        <Input id="plt" type="number" min={1} placeholder="p. ej., 250"
           value={platelets} onChange={(e)=>setPlatelets(e.target.value===""?"":Number(e.target.value))} />
       </div>
     </div>
@@ -312,7 +312,7 @@ const HepaticFunctionCalculator: React.FC<{ embedded?: boolean }> = ({ embedded 
     <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
       <div>
         <Label htmlFor="age">Edad (años)</Label>
-        <Input id="age" type="number" min={1}
+        <Input id="age" type="number" min={1} placeholder="p. ej., 50"
           value={age} onChange={(e)=>setAge(e.target.value===""?"":Number(e.target.value))} />
       </div>
       <div>

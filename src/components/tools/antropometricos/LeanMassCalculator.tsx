@@ -31,8 +31,8 @@ const LeanMassCalculator: React.FC<{ open: boolean; onOpenChange: (v:boolean)=>v
       errorMessage={error}
       result={res != null ? <div className="text-3xl font-mono">{res.toFixed(2)} kg</div> : undefined}
     >
-      <NumberField id="lm-w" label="Peso" name="w" value={w === "" ? "" : String(w)} onChange={(e)=>setW(e.target.value === "" ? "" : Number(e.target.value))} min={20} max={300} unit="kg" required />
-      <NumberField id="lm-bf" label="% Grasa corporal" name="bf" value={bf === "" ? "" : String(bf)} onChange={(e)=>setBf(e.target.value === "" ? "" : Number(e.target.value))} min={0} max={100} unit="%" required />
+      <NumberField id="lm-w" label="Peso" name="w" placeholder="p. ej., 70" value={w === "" ? "" : String(w)} onChange={(e)=>setW(e.target.value === "" ? "" : Number(e.target.value))} min={20} max={300} unit="kg" required />
+      <NumberField id="lm-bf" label="% Grasa corporal" name="bf" placeholder="p. ej., 22" value={bf === "" ? "" : String(bf)} onChange={(e)=>setBf(e.target.value === "" ? "" : Number(e.target.value))} min={0} max={100} unit="%" required />
     </CalculatorPanel>
   );
 };

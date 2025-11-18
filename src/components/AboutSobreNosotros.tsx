@@ -65,7 +65,7 @@ const AboutSobreNosotros = () => (
         {/* Objetivo, Misión y Visión */}
         <div className="space-y-8">
           <div>
-            <h3 className="text-4xl font-poppins font-bold text-fyt-dark mb-4 drop-shadow-lg">Nuestro Objetivo</h3>
+            <h3 className="site-section-title text-fyt-dark mb-4 drop-shadow-lg">Nuestro Objetivo</h3>
             <p className="text-fyt-dark/90 font-inter leading-relaxed text-left">
               El objetivo principal del grupo es desarrollar investigaciones en Farmacología, Terapéutica, 
               Farmacia Asistencial, Farmacovigilancia, Farmacoepidemiología, Farmacoeconomía, estudios in 
@@ -103,7 +103,7 @@ const AboutSobreNosotros = () => (
       </div>
       {/* Valores */}
   <div className="mb-12">
-        <h3 className="text-4xl font-poppins font-bold text-center text-fyt-dark mb-8 drop-shadow-lg">
+        <h3 className="site-section-title text-center text-fyt-dark mb-8 drop-shadow-lg">
           Nuestros Valores
         </h3>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">

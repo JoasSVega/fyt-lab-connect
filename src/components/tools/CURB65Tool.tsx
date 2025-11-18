@@ -73,6 +73,23 @@ const formulas: ReadonlyArray<FormulaSpec> = [
 ];
 
 const CURB65Tool: React.FC = () => {
+  // Predicate: all required fields present & valid before enabling Calcular
+  const canCalculate = (values: Record<string, unknown>): boolean => {
+    for (const f of fields) {
+      const v = values[f.name];
+      if (f.validation?.required) {
+        if (v === undefined || v === "") return false;
+      }
+      if (f.type === "number") {
+        const num = Number(v);
+        if (!Number.isFinite(num)) return false;
+        if (f.validation?.min !== undefined && num < f.validation.min) return false;
+        if (f.validation?.max !== undefined && num > f.validation.max) return false;
+      }
+    }
+    return true;
+  };
+
   return (
     <CalculatorModal
       id="curb65-tool"
@@ -80,10 +97,11 @@ const CURB65Tool: React.FC = () => {
       subtitle="Adultos con neumonía adquirida en la comunidad"
       fields={fields}
       formulas={formulas}
-  categoryColor="#fb8c00"
-      autoCalculate
-      actionVisibility="clear-only"
+      categoryColor="#fb8c00"
+      autoCalculate={false}
+      actionVisibility="default"
       backAction="volver"
+      enableCalculatePredicate={canCalculate}
       icon={<TestTube className="w-5 h-5" style={{ color: "#fb8c00" }} />}
       openButtonLabel="Abrir herramienta"
     />
