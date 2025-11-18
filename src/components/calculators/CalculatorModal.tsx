@@ -542,6 +542,17 @@ const CalculatorModalContent: React.FC<{
     return () => window.removeEventListener("resize", onResize);
   }, [open, measureScrollNeed]);
 
+  // Disable UA scroll anchoring on the scrollable body to avoid jumps during value/select changes
+  React.useEffect(() => {
+    if (!open) return;
+    const wrap = bodyWrapRef.current;
+    if (!wrap) return;
+    wrap.style.setProperty('overflow-anchor', 'none');
+    return () => {
+      try { wrap.style.removeProperty('overflow-anchor'); } catch { /* noop */ }
+    };
+  }, [open]);
+
   React.useEffect(() => {
     if (!open) return;
     const wrap = bodyWrapRef.current;
@@ -821,7 +832,7 @@ const CalculatorModalContent: React.FC<{
               `}</style>
 
               {/* Body with conditional sides (no overlapping layers). Scroll only if needed. */}
-              <div ref={bodyWrapRef} data-testid="calc-modal-body" className="relative p-5 flex-1 min-h-0 overflow-y-auto overflow-x-hidden calc-modal-body overscroll-contain" style={{ ["overflowAnchor" as any]: 'none' }}>
+              <div ref={bodyWrapRef} data-testid="calc-modal-body" className="relative p-5 flex-1 min-h-0 overflow-y-auto overflow-x-hidden calc-modal-body overscroll-contain">
                 <div ref={bodyInnerRef}>
                   {/* Contenedor 3D para flip suave entre caras */}
                   <div className="relative w-full" style={{ perspective: '1200px' }}>

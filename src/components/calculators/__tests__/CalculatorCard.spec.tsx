@@ -15,9 +15,9 @@ const setup = () => {
   render(
     <CalculatorCard
       title="Prueba"
-      variables={variables as any}
+      variables={variables}
       formulaInfo={[]}
-      onCalculate={onCalculate as any}
+      onCalculate={onCalculate}
       initialValues={{}}
     />
   );
