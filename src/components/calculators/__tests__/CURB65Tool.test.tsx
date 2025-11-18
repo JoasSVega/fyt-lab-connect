@@ -14,8 +14,7 @@ describe('CURB65Tool', () => {
   // Completar campos (auto-cálculo)
     const confusion = await screen.findByLabelText('Confusión o desorientación');
     const urea = await screen.findByLabelText('Urea');
-  // Debug: ensure we got the input element
-  console.log('DBG urea element', (urea as HTMLElement).tagName, (urea as HTMLElement).id);
+  // 
     const rr = await screen.findByLabelText('Frecuencia respiratoria');
     const sbp = await screen.findByLabelText('Presión sistólica');
     const dbp = await screen.findByLabelText('Presión diastólica');

@@ -106,6 +106,8 @@ export default function CalculatorCard({
       }
       const out = onCalculate ? onCalculate(parsed) : null;
       setResult(out);
+      // Señalar animación en curso para estabilizar medidas hasta finalizar
+      flipAnimatingRef.current = true;
       setIsFlipped(true);
     } catch (e) {
       // In production, consider a toast or error boundary
@@ -116,6 +118,8 @@ export default function CalculatorCard({
   const handleReturn = () => {
     // Inicia flip inverso y limpia el resultado al finalizar la animación
     pendingClearAfterFlipRef.current = true;
+    // Señalar animación en curso antes de iniciar el giro
+    flipAnimatingRef.current = true;
     setIsFlipped(false);
   };
 
@@ -156,11 +160,6 @@ export default function CalculatorCard({
           data-testid="flip-scene"
           className={`relative w-full h-full transition-transform duration-700 ease-in-out`}
           style={{ transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)", transformStyle: 'preserve-3d', willChange: 'transform' }}
-          onTransitionStart={(e) => {
-            if (e.propertyName === "transform") {
-              flipAnimatingRef.current = true;
-            }
-          }}
           onTransitionEnd={(e) => {
             if (e.propertyName === "transform") {
               flipAnimatingRef.current = false;
@@ -227,7 +226,7 @@ export default function CalculatorCard({
                         id={v.id}
                         type={v.type === 'text' ? 'text' : 'text'}
                         inputMode={v.type === "text" ? "text" : "decimal"}
-                        pattern={v.type === 'text' ? undefined : "^-?\\d*(?:[\\.,]\\d*)?$"}
+                        // No pattern: evitamos validación nativa del navegador
                         className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-sky-300"
                         placeholder={v.placeholder}
                         value={String(formValues[v.id] ?? "")}

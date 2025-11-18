@@ -1,11 +1,17 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const logoRef = useRef<HTMLImageElement | null>(null);
+
+  useEffect(() => {
+    // Apply native fetchpriority attribute via DOM to avoid React prop warning
+    logoRef.current?.setAttribute("fetchpriority", "high");
+  }, []);
 
   const menuItems = [
     {
@@ -77,7 +83,7 @@ const Navbar = () => {
                   alt="Logo Grupo FyT, semillero de investigación en farmacología y terapéutica"
                   loading="eager"
                   decoding="async"
-                  fetchPriority="high"
+                  ref={logoRef}
                   className="h-12 w-auto transition-all duration-300 group-hover:scale-105"
                 />
               </picture>

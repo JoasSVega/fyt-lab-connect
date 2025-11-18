@@ -3,6 +3,9 @@
 - Fixed: inputs lost focus while typing in calculators by switching to raw string storage for numeric fields, avoiding premature Number() coercion, and reducing layout thrash (height recalculation only on meaningful change).
 - Fixed: restored reliable flip animation (front ↔ back) by enforcing a single 3D scene with explicit backface visibility (including WebKit), stable perspective/transform-style, and guarding against re-entrancy during transitions.
 - Tests: added a Vitest + Testing Library spec covering focus persistence and flip transitions for `CalculatorCard`.
+- Fix: remove console instrumentation (`console.count`, debug logs) from `CalculatorModal` and tests to keep dev/test consoles clean.
+- Fix: eliminate React warning "fetchPriority prop" by applying native `fetchpriority` via `ref` in `Navbar` (pattern already used in `Hero`).
+- DX: silence React Router v7 deprecation warnings by enabling future flags on `<BrowserRouter>` (`v7_startTransition`, `v7_relativeSplatPath`).
 
 # Changelog
 

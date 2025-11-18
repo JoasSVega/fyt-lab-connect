@@ -136,7 +136,7 @@ const App: React.FC = () => {
     <>
       <ToasterShadcn />
       <Sonner />
-      <BrowserRouter>
+      <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <ScrollToTop />
         {/* Sincroniza el título del navegador con la ruta actual */}
         <TitleSync />
