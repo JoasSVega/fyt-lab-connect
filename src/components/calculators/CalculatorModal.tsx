@@ -468,7 +468,13 @@ const CalculatorModalContent: React.FC<{
   const bodyWrapRef = React.useRef<HTMLDivElement | null>(null);
   const bodyInnerRef = React.useRef<HTMLDivElement | null>(null);
   const cardRootRef = React.useRef<HTMLDivElement | null>(null);
+  const lastBodyScrollTopRef = React.useRef<number>(0);
+  const captureBodyScrollTop = React.useCallback(() => {
+    const wrap = bodyWrapRef.current;
+    if (wrap) lastBodyScrollTopRef.current = wrap.scrollTop;
+  }, []);
   const lastFocusIdRef = React.useRef<string | null>(null);
+  const lastCaretPosRef = React.useRef<number | null>(null);
   const frontFaceRef = React.useRef<HTMLDivElement | null>(null);
   const backFaceRef = React.useRef<HTMLDivElement | null>(null);
   // Ref que indica si una animación de flip está en curso; evita recalcular alturas y forzar layout durante la transición.
@@ -489,6 +495,10 @@ const CalculatorModalContent: React.FC<{
   const [inputTick, setInputTick] = React.useState(0);
   // Flag de animación para evitar recalcular altura durante el giro
   const [flipAnimating, setFlipAnimating] = React.useState(false);
+    const recordCaret = React.useCallback((id: string, pos: number | null) => {
+      lastFocusIdRef.current = id;
+      lastCaretPosRef.current = pos;
+    }, []);
   // Eliminado estado adicional de animación (animatingFlip) para evitar doble render que reiniciaba el flip.
   // Ahora sólo dependemos de 'flipped'. Esto previene reinicios de la animación y duplicados visuales.
 
@@ -531,6 +541,19 @@ const CalculatorModalContent: React.FC<{
     if (open) window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, [open, measureScrollNeed]);
+
+  React.useEffect(() => {
+    if (!open) return;
+    const wrap = bodyWrapRef.current;
+    if (!wrap) return;
+    const targetTop = lastBodyScrollTopRef.current;
+    requestAnimationFrame(() => {
+      if (!wrap) return;
+      if (wrap.scrollTop !== targetTop) {
+        wrap.scrollTop = targetTop;
+      }
+    });
+  }, [open, values]);
   // En pruebas con autoCalculate, realiza un pequeño polling del DOM para reflejar valores ingresados aunque eventos no se disparen
   React.useEffect(() => {
     const isTestEnv = typeof document !== 'undefined' && import.meta.env?.MODE === 'test';
@@ -565,21 +588,26 @@ const CalculatorModalContent: React.FC<{
     };
   }, [open, autoCalculate, fields, id, onInput]);
   // Intenta preservar el foco del campo activo durante re-renders por cambios de estado
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     const isTestEnv = import.meta.env?.MODE === 'test';
     if (!open || isTestEnv) return;
     const lastId = lastFocusIdRef.current;
     if (!lastId) return;
     const el = document.getElementById(lastId) as (HTMLInputElement | HTMLSelectElement | null);
-    if (el && document.activeElement !== el) {
-      const input = el as HTMLInputElement;
-      const pos = typeof input.selectionStart === 'number' ? input.selectionStart : null;
+    if (!el) return;
+    const isActive = document.activeElement === el;
+    // Sólo restaurar foco y caret cuando recuperamos el foco (evita tocar selección en cada pulsación)
+    if (!isActive) {
       el.focus({ preventScroll: true } as FocusOptions);
-      if (pos !== null && typeof input.setSelectionRange === 'function') {
-        try { input.setSelectionRange(pos, pos); } catch { /* noop */ }
+      const input = el as HTMLInputElement;
+      const wantPos = lastCaretPosRef.current;
+      if (wantPos != null && typeof input.setSelectionRange === 'function') {
+        requestAnimationFrame(() => {
+          try { input.setSelectionRange(wantPos, wantPos); } catch { /* noop */ }
+        });
       }
     }
-  }, [open]);
+  }, [open, values]);
   React.useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -793,7 +821,7 @@ const CalculatorModalContent: React.FC<{
               `}</style>
 
               {/* Body with conditional sides (no overlapping layers). Scroll only if needed. */}
-              <div ref={bodyWrapRef} data-testid="calc-modal-body" className="relative p-5 flex-1 min-h-0 overflow-y-auto overflow-x-hidden calc-modal-body overscroll-contain">
+              <div ref={bodyWrapRef} data-testid="calc-modal-body" className="relative p-5 flex-1 min-h-0 overflow-y-auto overflow-x-hidden calc-modal-body overscroll-contain" style={{ ["overflowAnchor" as any]: 'none' }}>
                 <div ref={bodyInnerRef}>
                   {/* Contenedor 3D para flip suave entre caras */}
                   <div className="relative w-full" style={{ perspective: '1200px' }}>
@@ -801,7 +829,7 @@ const CalculatorModalContent: React.FC<{
                     <motion.div
                       initial={false}
                       className="relative w-full"
-                      style={{ height: cardHeight ? `${cardHeight}px` : undefined, transformStyle: 'preserve-3d', willChange: 'transform' }}
+                      style={{ height: cardHeight ? `${cardHeight}px` : undefined, transformStyle: 'preserve-3d' }}
                       animate={{ rotateY: flipped ? 180 : 0 }}
                       transition={{ duration: 0.6, ease: 'easeInOut' }}
                       onAnimationStart={() => { flipAnimatingRef.current = true; }}
@@ -815,13 +843,18 @@ const CalculatorModalContent: React.FC<{
                       >
                         <form
                       noValidate
-                      key={resetTick}
                       className="grid grid-cols-1 md:grid-cols-2 gap-4"
                       onSubmit={(e)=>{ e.preventDefault(); onCalculate(); }}
                       onFocusCapture={(e) => {
                         const t = e.target as HTMLElement;
                         if (t && (t.tagName === 'INPUT' || t.tagName === 'SELECT' || t.getAttribute('contenteditable') === 'true')) {
+                          captureBodyScrollTop();
                           lastFocusIdRef.current = t.id || null;
+                          // capturar caret inicial al enfocar
+                          if (t.tagName === 'INPUT') {
+                            const inp = t as HTMLInputElement;
+                            lastCaretPosRef.current = typeof inp.selectionStart === 'number' ? inp.selectionStart : null;
+                          }
                         }
                       }}
                     >
@@ -837,6 +870,8 @@ const CalculatorModalContent: React.FC<{
                           setInputTick={setInputTick}
                           firstRef={idx === 0 ? firstInputRef : undefined}
                           error={error}
+                          recordCaret={recordCaret}
+                          captureBodyScrollTop={captureBodyScrollTop}
                         />
                       ))}
 
@@ -1004,9 +1039,11 @@ type FieldRowProps = {
   setInputTick: React.Dispatch<React.SetStateAction<number>>;
   firstRef?: React.RefObject<HTMLInputElement | HTMLSelectElement>;
   error?: string;
+  recordCaret: (id: string, pos: number | null) => void;
+  captureBodyScrollTop: () => void;
 };
 
-const FieldRow: React.FC<FieldRowProps> = React.memo(({ field, modalId, value, onValueChange, isTestEnv, autoCalculate, setInputTick, firstRef, error }) => {
+const FieldRow: React.FC<FieldRowProps> = React.memo(({ field, modalId, value, onValueChange, isTestEnv, autoCalculate, setInputTick, firstRef, error, recordCaret, captureBodyScrollTop }) => {
   const baseId = `${modalId}-${field.name}`;
   const commonLabel = field.label;
   if (field.type === 'number') {
@@ -1019,21 +1056,21 @@ const FieldRow: React.FC<FieldRowProps> = React.memo(({ field, modalId, value, o
             name={field.name}
             type={'text'}
             inputMode="decimal"
-            step="any"
             lang="es-ES"
             className="w-full rounded-md border px-3 py-2"
             placeholder={field.placeholder || 'p. ej., 0'}
             aria-label={commonLabel}
+            onWheel={(e)=>{ e.stopPropagation(); }}
             // Siempre controlado: preserva el foco y evita remounts entre renders
             value={(typeof value === 'number' || typeof value === 'string') ? (value as string | number) : ''}
             onChange={(e) => {
+              captureBodyScrollTop();
               const raw = e.target.value;
+              recordCaret(baseId, typeof (e.target as HTMLInputElement).selectionStart === 'number' ? (e.target as HTMLInputElement).selectionStart : null);
               onValueChange(field.name, raw);
               if (isTestEnv && autoCalculate) setInputTick(t => t + 1);
             }}
             aria-invalid={!!error && ((value === undefined || value === '') && field.validation?.required) ? true : undefined}
-            min={field.validation?.min}
-            max={field.validation?.max}
             ref={firstRef as React.RefObject<HTMLInputElement>}
           />
           {field.unit ? <span className="text-sm text-slate-500">{field.unit}</span> : null}
@@ -1054,9 +1091,11 @@ const FieldRow: React.FC<FieldRowProps> = React.memo(({ field, modalId, value, o
             aria-label={commonLabel}
             value={(typeof value === 'string') ? (value as string) : ''}
             onChange={(e) => {
+              captureBodyScrollTop();
               if (isTestEnv) {
                 setInputTick(t => t + 1);
               }
+              recordCaret(baseId, typeof (e.target as HTMLInputElement).selectionStart === 'number' ? (e.target as HTMLInputElement).selectionStart : null);
               onValueChange(field.name, e.target.value);
             }}
             ref={firstRef as React.RefObject<HTMLInputElement>}
@@ -1075,6 +1114,7 @@ const FieldRow: React.FC<FieldRowProps> = React.memo(({ field, modalId, value, o
           aria-label={commonLabel}
           value={(typeof value === 'string') ? (value as string) : ''}
           onChange={(e) => {
+            captureBodyScrollTop();
             if (isTestEnv) setInputTick(t => t + 1);
             onValueChange(field.name, e.target.value);
           }}
@@ -1098,7 +1138,7 @@ const FieldRow: React.FC<FieldRowProps> = React.memo(({ field, modalId, value, o
             name={field.name}
             type="checkbox"
             checked={!!value}
-            onChange={(e) => onValueChange(field.name, e.target.checked)}
+            onChange={(e) => { captureBodyScrollTop(); onValueChange(field.name, e.target.checked); }}
           />
           <label htmlFor={baseId} className="text-sm">{field.placeholder || field.label}</label>
         </div>
