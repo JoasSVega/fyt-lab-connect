@@ -12,12 +12,12 @@ const Escalas: React.FC = () => {
 
   const Card = ({ icon, title, desc, color = "#a855f7", action }: { icon: React.ReactNode; title: string; desc: string; color?: string; action?: React.ReactNode; }) => (
     <div className="tool-card rounded-2xl border-2 bg-white/90 shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-xl p-6 flex flex-col" role="article" aria-label={title}>
-      <div className="flex items-center gap-3 mb-3">
-        <div className="p-2 rounded-lg" style={{ backgroundColor: color + "22", color }}>
+      <div className="flex flex-col sm:flex-row items-center sm:items-center gap-3 mb-3 min-w-0 text-center sm:text-left">
+        <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: color + "22", color }}>
           {icon}
           <span className="sr-only">Icono de {title}</span>
         </div>
-        <h3 className="text-xl font-raleway font-bold text-black">{title}</h3>
+        <h3 className="sm:flex-1 sm:min-w-0 text-xl font-raleway font-bold text-black break-words whitespace-normal leading-snug" style={{ hyphens: 'none' }}>{title}</h3>
       </div>
       <p className="text-sm text-muted-foreground mb-4 flex-1">{desc}</p>
       {action ? (
@@ -57,9 +57,9 @@ const Escalas: React.FC = () => {
       </nav>
 
       {/* Header */}
-      <header className="flex items-center gap-3 mb-2">
+      <header className="flex items-center gap-3 mb-2 min-w-0">
         <ClipboardCheck className="w-6 h-6 text-violet-600" aria-hidden="true" />
-        <h1 id="page-title" className="text-3xl sm:text-4xl font-poppins font-bold text-slate-900">Escalas Clínicas y Validación Farmacoterapéutica</h1>
+        <h1 id="page-title" className="text-3xl sm:text-4xl font-poppins font-bold text-slate-900 break-words whitespace-normal leading-snug min-w-0" style={{ hyphens: 'none' }}>Escalas Clínicas y Validación Farmacoterapéutica</h1>
       </header>
       <p className="text-base text-muted-foreground mb-2">Evalúa riesgo, seguridad y efectividad terapéutica con escalas validadas clínicamente.</p>
       <p className="text-sm text-muted-foreground mb-6">Esta sección reúne herramientas para apoyar la toma de decisiones farmacoterapéuticas, estandarizando la valoración clínica y facilitando la comunicación interdisciplinaria.</p>

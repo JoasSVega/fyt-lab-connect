@@ -39,20 +39,20 @@ const Antropometricos: React.FC = () => {
       </nav>
 
       {/* Header */}
-      <header className="flex items-center gap-3 mb-2">
+      <header className="flex items-center gap-3 mb-2 min-w-0">
         <Ruler className="w-6 h-6 text-sky-600" aria-hidden="true" />
-        <h1 id="page-title" className="text-3xl sm:text-4xl font-poppins font-bold text-slate-900">Cálculos fisiológicos y antropométricos</h1>
+        <h1 id="page-title" className="text-3xl sm:text-4xl font-poppins font-bold text-slate-900 break-words whitespace-normal leading-snug min-w-0" style={{ hyphens: 'none' }}>Cálculos fisiológicos y antropométricos</h1>
       </header>
       <p className="text-base text-muted-foreground mb-2">Determina parámetros corporales clave para farmacocinética.</p>
       <p className="text-sm text-muted-foreground mb-6">Accede a una suite de herramientas antropométricas con diseño unificado para análisis rápido y comparables.</p>
 
   <section className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 px-4 py-4 overflow-visible" aria-label="Herramientas fisiológicas y antropométricas">
   <div className="tool-card rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
-          <div className="flex items-center gap-3 mb-1">
-            <div className="p-2 rounded-lg" style={{ backgroundColor: '#0ea5e922', color: '#0ea5e9' }}>
+          <div className="flex flex-col sm:flex-row items-center sm:items-center gap-3 mb-1 min-w-0 text-center sm:text-left">
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: '#0ea5e922', color: '#0ea5e9' }}>
               <Ruler className="w-5 h-5" aria-hidden="true" />
             </div>
-            <h3 className="text-xl font-raleway font-bold text-black">Índice de Masa Corporal (IMC)</h3>
+            <h3 className="sm:flex-1 sm:min-w-0 text-xl font-raleway font-bold text-black break-words whitespace-normal leading-snug" style={{ hyphens: 'none' }}>Índice de Masa Corporal (IMC)</h3>
           </div>
           <p className="text-sm text-muted-foreground mb-4">Índice de masa corporal (kg/m²) con categorización básica.</p>
           <div className="mt-auto">
@@ -72,11 +72,11 @@ const Antropometricos: React.FC = () => {
         </div>
 
   <div className="tool-card rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
-          <div className="flex items-center gap-3 mb-1">
-            <div className="p-2 rounded-lg" style={{ backgroundColor: '#10b98122', color: '#10b981' }}>
+          <div className="flex flex-col sm:flex-row items-center sm:items-center gap-3 mb-1 min-w-0 text-center sm:text-left">
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: '#10b98122', color: '#10b981' }}>
               <Maximize2 className="w-5 h-5" aria-hidden="true" />
             </div>
-            <h3 className="text-xl font-raleway font-bold text-black">Superficie corporal (SC)</h3>
+            <h3 className="sm:flex-1 sm:min-w-0 text-xl font-raleway font-bold text-black break-words whitespace-normal leading-snug" style={{ hyphens: 'none' }}>Superficie corporal (SC)</h3>
           </div>
           <p className="text-sm text-muted-foreground mb-4">Selector de fórmula: DuBois, Gehan-George o Haycock (m²).</p>
           <div className="mt-auto">
@@ -96,11 +96,11 @@ const Antropometricos: React.FC = () => {
         </div>
 
   <div className="tool-card rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
-          <div className="flex items-center gap-3 mb-1">
-            <div className="p-2 rounded-lg" style={{ backgroundColor: '#a855f722', color: '#a855f7' }}>
+          <div className="flex flex-col sm:flex-row items-center sm:items-center gap-3 mb-1 min-w-0 text-center sm:text-left">
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: '#a855f722', color: '#a855f7' }}>
               <Percent className="w-5 h-5" aria-hidden="true" />
             </div>
-            <h3 className="text-xl font-raleway font-bold text-black">% Grasa corporal</h3>
+            <h3 className="sm:flex-1 sm:min-w-0 text-xl font-raleway font-bold text-black break-words whitespace-normal leading-snug" style={{ hyphens: 'none' }}>% Grasa corporal</h3>
           </div>
           <p className="text-sm text-muted-foreground mb-4">Ecuación de Deurenberg (IMC, edad y sexo).</p>
           <div className="mt-auto">
@@ -120,11 +120,11 @@ const Antropometricos: React.FC = () => {
         </div>
 
   <div className="tool-card rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
-          <div className="flex items-center gap-3 mb-1">
-            <div className="p-2 rounded-lg" style={{ backgroundColor: '#0891b222', color: '#0891b2' }}>
+          <div className="flex flex-col sm:flex-row items-center sm:items-center gap-3 mb-1 min-w-0 text-center sm:text-left">
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: '#0891b222', color: '#0891b2' }}>
               <Activity className="w-5 h-5" aria-hidden="true" />
             </div>
-            <h3 className="text-xl font-raleway font-bold text-black">Masa magra corporal</h3>
+            <h3 className="sm:flex-1 sm:min-w-0 text-xl font-raleway font-bold text-black break-words whitespace-normal leading-snug" style={{ hyphens: 'none' }}>Masa magra corporal</h3>
           </div>
           <p className="text-sm text-muted-foreground mb-4">James, Hume o a partir de % de grasa.</p>
           <div className="mt-auto">
@@ -144,11 +144,11 @@ const Antropometricos: React.FC = () => {
         </div>
 
   <div className="tool-card rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
-          <div className="flex items-center gap-3 mb-1">
-            <div className="p-2 rounded-lg" style={{ backgroundColor: '#0d948822', color: '#0d9488' }}>
+          <div className="flex flex-col sm:flex-row items-center sm:items-center gap-3 mb-1 min-w-0 text-center sm:text-left">
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: '#0d948822', color: '#0d9488' }}>
               <Target className="w-5 h-5" aria-hidden="true" />
             </div>
-            <h3 className="text-xl font-raleway font-bold text-black">Peso ideal</h3>
+            <h3 className="sm:flex-1 sm:min-w-0 text-xl font-raleway font-bold text-black break-words whitespace-normal leading-snug" style={{ hyphens: 'none' }}>Peso ideal</h3>
           </div>
           <p className="text-sm text-muted-foreground mb-4">Selector: Devine, Robinson o Miller.</p>
           <div className="mt-auto">
@@ -168,11 +168,11 @@ const Antropometricos: React.FC = () => {
         </div>
 
   <div className="tool-card rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
-          <div className="flex items-center gap-3 mb-1">
-            <div className="p-2 rounded-lg" style={{ backgroundColor: '#f9731622', color: '#f97316' }}>
+          <div className="flex flex-col sm:flex-row items-center sm:items-center gap-3 mb-1 min-w-0 text-center sm:text-left">
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: '#f9731622', color: '#f97316' }}>
               <Flame className="w-5 h-5" aria-hidden="true" />
             </div>
-            <h3 className="text-xl font-raleway font-bold text-black">Consumo Energético Basal (CEB)</h3>
+            <h3 className="sm:flex-1 sm:min-w-0 text-xl font-raleway font-bold text-black break-words whitespace-normal leading-snug" style={{ hyphens: 'none' }}>Consumo Energético Basal (CEB)</h3>
           </div>
           <p className="text-sm text-muted-foreground mb-4">Consumo energético basal: Harris-Benedict o Mifflin–St Jeor.</p>
           <div className="mt-auto">
@@ -192,11 +192,11 @@ const Antropometricos: React.FC = () => {
         </div>
 
         <div className="rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col transition-transform transition-shadow duration-200 ease-out hover:scale-105 hover:shadow-xl">
-          <div className="flex items-center gap-3 mb-1">
-            <div className="p-2 rounded-lg" style={{ backgroundColor: '#16a34a22', color: '#16a34a' }}>
+          <div className="flex flex-col sm:flex-row items-center sm:items-center gap-3 mb-1 min-w-0 text-center sm:text-left">
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: '#16a34a22', color: '#16a34a' }}>
               <Droplets className="w-5 h-5" aria-hidden="true" />
             </div>
-            <h3 className="text-xl font-raleway font-bold text-black">Agua corporal total (ACT)</h3>
+            <h3 className="sm:flex-1 sm:min-w-0 text-xl font-raleway font-bold text-black break-words whitespace-normal leading-snug" style={{ hyphens: 'none' }}>Agua corporal total (ACT)</h3>
           </div>
           <p className="text-sm text-muted-foreground mb-4">Agua corporal total: Watson o Chumlea.</p>
           <div className="mt-auto">

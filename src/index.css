@@ -233,6 +233,14 @@ All colors MUST be HSL and based on institutional branding.
     }
   }
 
+  /* Calculator cards: prevent word hyphenation and clipping */
+  .tool-card h3 {
+    hyphens: none !important;
+    overflow-wrap: break-word;
+    word-break: normal;
+    white-space: normal;
+  }
+
   /* Tablet optimizations */
   @media (min-width: 769px) and (max-width: 1024px) {
     .container {

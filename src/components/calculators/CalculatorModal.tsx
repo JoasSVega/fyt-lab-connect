@@ -165,6 +165,36 @@ const CalculatorModal: React.FC<Props> = ({
           (el as HTMLInputElement).checked = false;
         }
       }
+      // Segundo barrido asincrónico tras el re-mount del formulario (key resetTick) para garantizar limpieza en jsdom
+      requestAnimationFrame(() => {
+        for (const f of fields) {
+          const el = document.getElementById(`${id}-${f.name}`) as (HTMLInputElement | HTMLSelectElement | null);
+          if (!el) continue;
+          if (f.type === 'number' || f.type === 'text') {
+            (el as HTMLInputElement).value = '';
+          } else if (f.type === 'select') {
+            (el as HTMLSelectElement).value = '';
+          } else if (f.type === 'toggle') {
+            (el as HTMLInputElement).checked = false;
+          }
+        }
+      });
+      // Intentos adicionales espaciados para entornos donde el re-montaje se demora (jsdom + efectos concurrentes)
+      [25, 60].forEach(delay => {
+        setTimeout(() => {
+          for (const f of fields) {
+            const el = document.getElementById(`${id}-${f.name}`) as (HTMLInputElement | HTMLSelectElement | null);
+            if (!el) continue;
+            if (f.type === 'number' || f.type === 'text') {
+              (el as HTMLInputElement).value = '';
+            } else if (f.type === 'select') {
+              (el as HTMLSelectElement).value = '';
+            } else if (f.type === 'toggle') {
+              (el as HTMLInputElement).checked = false;
+            }
+          }
+        }, delay);
+      });
     }
   };
 
@@ -389,18 +419,32 @@ const CalculatorModalContent: React.FC<{
   const lastFocusIdRef = React.useRef<string | null>(null);
   const frontFaceRef = React.useRef<HTMLDivElement | null>(null);
   const backFaceRef = React.useRef<HTMLDivElement | null>(null);
+  // Ref que indica si una animación de flip está en curso; evita recalcular alturas y forzar layout durante la transición.
+  const flipAnimatingRef = React.useRef(false);
+  const prevFlippedRef = React.useRef(flipped);
+  React.useEffect(() => {
+    if (prevFlippedRef.current !== flipped) {
+      // Cambio de estado de flipped -> comienza animación
+      flipAnimatingRef.current = true;
+    }
+    prevFlippedRef.current = flipped;
+  }, [flipped]);
   const [cardHeight, setCardHeight] = React.useState<number | undefined>(undefined);
   const [bodyScrollable, setBodyScrollable] = React.useState(false);
   const prevOverflowRef = React.useRef<string | null>(null);
   const hasAnimatedRef = React.useRef(false);
   // En entorno de pruebas, usamos un tick para disparar efectos de auto-cálculo al escribir sin mutar el estado de valores
   const [inputTick, setInputTick] = React.useState(0);
+  // Flag de animación para evitar recalcular altura durante el giro
+  const [flipAnimating, setFlipAnimating] = React.useState(false);
   // Eliminado estado adicional de animación (animatingFlip) para evitar doble render que reiniciaba el flip.
   // Ahora sólo dependemos de 'flipped'. Esto previene reinicios de la animación y duplicados visuales.
 
   // Conditional scroll: enable only when content exceeds available space (especially on small viewports)
   const measureScrollNeed = React.useCallback(() => {
     if (!open) return;
+    // Evitar recalcular altura justo en el cambio de flipped para no forzar layout y cortar la animación inversa.
+    if (flipAnimatingRef.current) return;
     const headerH = headerRef.current?.getBoundingClientRect().height || 0;
     const viewportH = window.innerHeight || 0;
     const available = Math.max(viewportH * 0.9 - headerH - 16 /* padding safety */, 0);
@@ -576,14 +620,15 @@ const CalculatorModalContent: React.FC<{
                 ref={cardRootRef}
               >
             <div className="relative rounded-2xl bg-white shadow-xl ring-1 ring-black/5 overflow-hidden flex flex-col max-h-[90vh]">
-              <div ref={headerRef} className="sticky top-0 z-10 px-5 py-4 border-b flex items-start justify-between bg-white/95 backdrop-blur" style={{ background: `linear-gradient(to right, ${categoryColor}15, #ffffffEE)` }}>
-                <div>
-                  <div className="flex items-center gap-2">
+              {/* Desktop header (>=600px) unchanged */}
+              <div ref={headerRef} className="calc-header-desktop sticky top-0 z-10 px-5 py-4 border-b flex items-start justify-between bg-white/95 backdrop-blur" style={{ background: `linear-gradient(to right, ${categoryColor}15, #ffffffEE)` }}>
+                <div className="min-w-0">
+                  <div className="flex items-center gap-2 min-w-0">
                     {icon ? <span aria-hidden className="inline-flex items-center justify-center">{icon}</span> : null}
-                    <h2 id={`${id}-title`} className="text-xl sm:text-2xl font-raleway font-bold text-black">{title}</h2>
+                    <h2 id={`${id}-title`} className="flex-1 text-xl sm:text-2xl font-raleway font-bold text-black break-words whitespace-normal leading-snug min-w-0" style={{ hyphens: 'none' }}>{title}</h2>
                   </div>
                   {subtitle ? (
-                    <p id={`${id}-subtitle`} className="text-sm text-slate-600">{subtitle}</p>
+                    <p id={`${id}-subtitle`} className="text-sm text-slate-600 break-words whitespace-normal" style={{ hyphens: 'none' }}>{subtitle}</p>
                   ) : null}
                 </div>
                 <div className="flex items-center gap-2">
@@ -601,7 +646,6 @@ const CalculatorModalContent: React.FC<{
                       </select>
                     </div>
                   ) : null}
-                  {/* Info button opens a responsive modal */}
                   {!!formulas?.length && (
                     <button
                       type="button"
@@ -618,24 +662,91 @@ const CalculatorModalContent: React.FC<{
                   </button>
                 </div>
               </div>
+              {/* Mobile header (<600px) redesigned layout */}
+              <div className="calc-header-mobile hidden sticky top-0 z-10 px-4 pt-4 pb-3 border-b bg-white/95 backdrop-blur relative" style={{ background: `linear-gradient(to right, ${categoryColor}15, #ffffffEE)` }}>
+                {/* Line 1: Icon + Close button (close is absolute to always remain visible) */}
+                {icon ? (
+                  <span aria-hidden className="inline-flex items-center justify-center w-10 h-10 rounded-lg mb-2" style={{ minWidth: '40px' }}>
+                    {icon}
+                  </span>
+                ) : <div className="h-8 mb-2" />}
+                <button
+                  onClick={onClose}
+                  aria-label="Cerrar"
+                  className="absolute top-2 right-2 inline-flex h-11 w-11 items-center justify-center rounded-lg hover:bg-slate-100 touch-manipulation shadow-sm bg-white/90 backdrop-blur-sm pointer-events-auto"
+                  style={{ zIndex: 20 }}
+                >
+                  <X className="w-6 h-6" />
+                </button>
+                {/* Line 2: Formula select + info button (info absolute) */}
+                {formulas && formulas.length > 0 && (
+                  <div className="mb-2 relative">
+                    <select
+                      aria-label="Seleccionar fórmula"
+                      className="block w-full text-sm border rounded-md px-2 py-2 min-h-[44px] pr-14"
+                      value={selectedFormula}
+                      onChange={(e) => onSelectFormula(e.target.value)}
+                    >
+                      {formulas.map((f) => (
+                        <option key={f.id} value={f.id}>{f.label}</option>
+                      ))}
+                    </select>
+                    <button
+                      type="button"
+                      aria-label="Ver fórmulas"
+                      className="absolute top-1/2 -translate-y-1/2 right-1 inline-flex h-11 w-11 items-center justify-center rounded-md border border-slate-200 bg-white/95 hover:bg-slate-100 touch-manipulation pointer-events-auto"
+                      onClick={() => setInfoOpen(true)}
+                      title="Ver fórmulas"
+                      style={{ zIndex: 20 }}
+                    >
+                      <Info className="w-6 h-6 text-slate-600" />
+                    </button>
+                  </div>
+                )}
+                {/* Line 3: Title */}
+                <h2
+                  id={`${id}-title-mobile`}
+                  className="text-lg font-raleway font-bold text-black leading-snug mb-1 break-words whitespace-normal"
+                  style={{ wordBreak: 'break-word', overflowWrap: 'break-word', hyphens: 'none', minHeight: '24px' }}
+                >
+                  {title}
+                </h2>
+                {/* Line 4: Subtitle */}
+                {subtitle ? (
+                  <p id={`${id}-subtitle-mobile`} className="text-sm text-slate-600 leading-relaxed" style={{ hyphens: 'none' }}>{subtitle}</p>
+                ) : null}
+              </div>
+              {/* Responsive CSS injected (scoped to modal headers) */}
+              <style>{`
+                @media (max-width:600px){
+                  .calc-header-desktop { display:none; }
+                  .calc-header-mobile { display:block; }
+                }
+                @media (max-width:350px){
+                  .calc-header-mobile h2 { font-size:15px; }
+                  .calc-header-mobile select { font-size:13px; }
+                }
+              `}</style>
 
               {/* Body with conditional sides (no overlapping layers). Scroll only if needed. */}
               <div ref={bodyWrapRef} data-testid="calc-modal-body" className={`relative p-5 ${bodyScrollable ? "overflow-y-auto" : "overflow-visible"}`}>
                 <div ref={bodyInnerRef}>
                   {/* Contenedor 3D para flip suave entre caras */}
                   <div className="relative w-full" style={{ perspective: "1200px" }}>
+                    {/* Nuevo inicio limpio: único contenedor rota, sin tarjeta interna visible ni sombras dinámicas */}
                     <motion.div
+                      initial={false}
                       className="relative w-full [transform-style:preserve-3d]"
-                      style={{ height: cardHeight ? `${cardHeight}px` : undefined }}
-                      animate={{ rotateY: flipped ? 180 : 0 }}
-                      transition={{ duration: 0.5, ease: "easeInOut" }}
-                      onAnimationComplete={onFlipAnimationComplete}
+                      style={{ height: cardHeight ? `${cardHeight}px` : undefined, willChange: 'transform' }}
+                      animate={{ rotateY: flipped ? 180 : 0, scale: flipAnimating ? 0.995 : 1 }}
+                      transition={{ rotateY: { duration: 0.6, ease: 'easeInOut' }, scale: { duration: 0.3 } }}
+                      onAnimationStart={() => { setFlipAnimating(true); flipAnimatingRef.current = true; }}
+                      onAnimationComplete={() => { setFlipAnimating(false); flipAnimatingRef.current = false; if (!flipped) onFlipAnimationComplete?.(); }}
                     >
-                      {/* FRONT: mantener visibles durante rotación (sin opacidad forzada) */}
                       <div
                         ref={frontFaceRef}
                         className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(0deg)]"
-                        style={{ pointerEvents: flipped ? 'none' : 'auto', willChange: 'transform' }}
+                        style={{ pointerEvents: flipped ? 'none' : 'auto', transformStyle: 'preserve-3d' }}
                         aria-hidden={flipped}
                       >
                         <form
@@ -780,11 +891,10 @@ const CalculatorModalContent: React.FC<{
                     </form>
                       </div>
 
-                      {/* BACK: sin opacidad forzada para permitir ver el giro de retorno */}
                       <div
                         ref={backFaceRef}
                         className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)]"
-                        style={{ pointerEvents: flipped ? 'auto' : 'none', willChange: 'transform' }}
+                        style={{ pointerEvents: flipped ? 'auto' : 'none', transformStyle: 'preserve-3d' }}
                         aria-hidden={!flipped}
                       >
                         <div className={`rounded-xl border p-6 text-center ${getSeverityClasses(result?.severity)}`}>
@@ -822,11 +932,17 @@ const CalculatorModalContent: React.FC<{
             <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4">
               <div className="absolute inset-0 bg-black/40" style={{ backdropFilter: 'blur(10px)' }} onClick={() => setInfoOpen(false)} />
               <div className="relative z-10 w-[90vw] max-w-[600px] max-h-[85vh] overflow-y-auto rounded-2xl bg-white shadow-lg ring-1 ring-slate-200 p-5">
-                <div className="flex items-start justify-between mb-2">
+                {/* Close button fixed to top-right corner of the formulas card */}
+                <button
+                  onClick={() => setInfoOpen(false)}
+                  aria-label="Cerrar"
+                  className="absolute top-3 right-3 inline-flex h-10 w-10 items-center justify-center rounded-md hover:bg-slate-100 bg-white/90 shadow-sm"
+                  style={{ zIndex: 10 }}
+                >
+                  <X className="w-5 h-5" />
+                </button>
+                <div className="flex items-start justify-between mb-2 pr-10">
                   <h4 className="text-lg font-semibold text-slate-900">Fórmulas</h4>
-                  <button onClick={() => setInfoOpen(false)} aria-label="Cerrar" className="p-1 rounded-md hover:bg-slate-100">
-                    <X className="w-5 h-5" />
-                  </button>
                 </div>
                 <div className="space-y-3">
                   {formulas && formulas.length > 0 ? (
@@ -834,7 +950,6 @@ const CalculatorModalContent: React.FC<{
                       const exprLatex = ensureLatexForFormula(f);
                       const hasScoring = !!f.scoring && f.scoring.rows?.length;
                       if (!exprLatex && !hasScoring) {
-                        // Soft warning for audit purposes
                         console.warn(`[calculators] Fórmula sin expresión ni scoring: ${f.id} (${f.label})`);
                       }
                       return (
@@ -869,7 +984,9 @@ const CalculatorModalContent: React.FC<{
                               </div>
                             </div>
                           ) : (
-                            <div className="mt-1 text-xs italic text-slate-500">Fórmula o sistema de puntuación no disponible</div>
+                            !exprLatex ? (
+                              <div className="mt-1 text-xs italic text-slate-500">Fórmula o sistema de puntuación no disponible</div>
+                            ) : null
                           )}
                         </div>
                       );
@@ -881,10 +998,10 @@ const CalculatorModalContent: React.FC<{
               </div>
             </div>
           )}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-    </ModalPortal>
+        </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  </ModalPortal>
   );
 };

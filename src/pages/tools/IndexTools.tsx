@@ -8,11 +8,11 @@ const Card = ({ icon, title, desc, to, color }: { icon: React.ReactNode; title: 
   const navigate = useNavigate();
   return (
     <div className="rounded-2xl border-2 bg-white/90 shadow-xl hover:shadow-2xl transition-all p-6 flex flex-col">
-      <div className="flex items-center gap-3 mb-3">
-        <div className="p-2 rounded-lg" style={{ backgroundColor: color + '22', color }}>
+      <div className="flex flex-col sm:flex-row items-center sm:items-center gap-3 mb-3 min-w-0 text-center sm:text-left">
+        <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: color + '22', color }}>
           {icon}
         </div>
-        <h3 className="text-xl font-raleway font-bold">{title}</h3>
+        <h3 className="sm:flex-1 sm:min-w-0 text-xl font-raleway font-bold break-words whitespace-normal leading-snug" style={{ hyphens: 'none' }}>{title}</h3>
       </div>
       <p className="text-muted-foreground flex-1">{desc}</p>
       <Button
@@ -33,7 +33,7 @@ const IndexTools: React.FC = () => {
         title="Herramientas farmacéuticas clínicas y asistenciales"
         description="Explora cálculos clínicos y farmacéuticos, cálculos fisiológicos y antropométricos, escalas clínicas y validación farmacoterapéutica, y herramientas avanzadas y conversores."
       />
-      <h1 className="text-4xl sm:text-5xl font-poppins font-bold text-slate-900 text-center mb-10">Herramientas</h1>
+      <h1 className="text-4xl sm:text-5xl font-poppins font-bold text-slate-900 text-center mb-10 break-words whitespace-normal" style={{ hyphens: 'none' }}>Herramientas</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Card
           icon={<Stethoscope className="w-7 h-7" />}

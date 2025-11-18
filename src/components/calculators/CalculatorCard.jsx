@@ -40,6 +40,9 @@ export default function CalculatorCard({
   const [result, setResult] = useState(null); // { value, unit, interpretation }
   const [isFlipped, setIsFlipped] = useState(false);
   const [infoOpen, setInfoOpen] = useState(false);
+  // Señales para controlar limpieza diferida y evitar recálculos durante la animación
+  const pendingClearAfterFlipRef = useRef(false);
+  const flipAnimatingRef = useRef(false);
 
   // Refs for measuring height of front/back to adapt container height smoothly
   const containerRef = useRef(null);
@@ -48,6 +51,8 @@ export default function CalculatorCard({
   const [containerHeight, setContainerHeight] = useState(0);
 
   const measureHeights = useCallback(() => {
+    // Evitar recalcular alturas durante la animación del flip para no cortar la transición
+    if (flipAnimatingRef.current) return;
     const frontH = frontRef.current ? frontRef.current.scrollHeight : 0;
     const backH = backRef.current ? backRef.current.scrollHeight : 0;
     const target = isFlipped ? backH : frontH;
@@ -93,8 +98,8 @@ export default function CalculatorCard({
   };
 
   const handleReturn = () => {
-    // Reset result and return to front
-    setResult(null);
+    // Inicia flip inverso y limpia el resultado al finalizar la animación
+    pendingClearAfterFlipRef.current = true;
     setIsFlipped(false);
   };
 
@@ -134,6 +139,23 @@ export default function CalculatorCard({
         <div
           className={`relative w-full h-full [transform-style:preserve-3d] transition-transform duration-700 ease-in-out`}
           style={{ transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)" }}
+          onTransitionStart={(e) => {
+            if (e.propertyName === "transform") {
+              flipAnimatingRef.current = true;
+            }
+          }}
+          onTransitionEnd={(e) => {
+            if (e.propertyName === "transform") {
+              flipAnimatingRef.current = false;
+              // Si venimos de "Volver" y ya estamos en el frente, limpiar resultado recién ahora
+              if (!isFlipped && pendingClearAfterFlipRef.current) {
+                pendingClearAfterFlipRef.current = false;
+                setResult(null);
+              }
+              // Recalcular altura tras completar el giro
+              measureHeights();
+            }
+          }}
         >
           {/* FRONT: Inputs */}
           <motion.div
@@ -144,8 +166,8 @@ export default function CalculatorCard({
             className="absolute inset-0 [backface-visibility:hidden] rounded-2xl bg-white/90 dark:bg-slate-900/90 shadow-lg ring-1 ring-slate-200/70 dark:ring-slate-700 p-4 sm:p-6 flex flex-col gap-4"
           >
             {/* Header with title and info button */}
-            <div className="flex items-start justify-between">
-              <h3 className={`text-lg sm:text-xl font-semibold ${headerClasses}`}>{title}</h3>
+            <div className="flex items-start justify-between gap-2 min-w-0">
+              <h3 className={`flex-1 min-w-0 break-words whitespace-normal leading-snug text-lg sm:text-xl font-semibold ${headerClasses}`}>{title}</h3>
               <button
                 type="button"
                 aria-label="Información de fórmulas"
@@ -272,17 +294,19 @@ export default function CalculatorCard({
             exit={{ opacity: 0, scale: 0.98, y: 6 }}
             className="relative z-10 w-[90vw] max-w-[600px] rounded-2xl bg-white dark:bg-slate-900 shadow-lg ring-1 ring-slate-200/70 dark:ring-slate-700 p-5"
           >
-            <div className="flex items-start justify-between mb-2">
+            {/* Close button fixed to top-right for tiny screens */}
+            <button
+              type="button"
+              aria-label="Cerrar"
+              onClick={() => setInfoOpen(false)}
+              className="absolute top-3 right-3 inline-flex h-11 w-11 items-center justify-center rounded-lg bg-white/90 text-slate-700 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-300 shadow-sm"
+              title="Cerrar"
+              style={{ zIndex: 10 }}
+            >
+              ×
+            </button>
+            <div className="flex items-start justify-between mb-2 pr-12">
               <h4 className="text-lg font-semibold text-slate-800 dark:text-slate-100">Fórmulas</h4>
-              <button
-                type="button"
-                aria-label="Cerrar"
-                onClick={() => setInfoOpen(false)}
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-slate-300"
-                title="Cerrar"
-              >
-                ×
-              </button>
             </div>
 
             <div className="space-y-4">

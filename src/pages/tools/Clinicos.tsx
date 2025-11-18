@@ -39,9 +39,15 @@ const Clinicos: React.FC = () => {
       </nav>
 
       {/* Header */}
-      <header className="flex items-center gap-3 mb-2">
+      <header className="flex items-center gap-3 mb-2 min-w-0">
         <Stethoscope className="w-6 h-6 text-blue-600" aria-hidden="true" />
-        <h1 id="page-title" className="text-3xl sm:text-4xl font-poppins font-bold text-slate-900">Cálculos clínicos y farmacéuticos</h1>
+        <h1
+          id="page-title"
+          className="text-3xl sm:text-4xl font-poppins font-bold text-slate-900 break-words whitespace-normal leading-snug min-w-0"
+          style={{ hyphens: 'none' }}
+        >
+          Cálculos clínicos y farmacéuticos
+        </h1>
       </header>
       <p className="text-base text-muted-foreground mb-2">Optimiza tus decisiones terapéuticas con cálculos precisos y basados en evidencia.</p>
       <p className="text-sm text-muted-foreground mb-6">Accede rápidamente a herramientas para estimar función renal, calcular dosis, programar infusiones y estandarizar procesos de reconstitución.</p>
@@ -49,11 +55,11 @@ const Clinicos: React.FC = () => {
   <section className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 px-4 py-4 overflow-visible" aria-label="Herramientas clínicas">
         {/* Función renal */}
   <div className="tool-card rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
-          <div className="flex items-center gap-3 mb-1">
-            <div className="p-2 rounded-lg" style={{ backgroundColor: '#3B82F622', color: '#3B82F6' }}>
+          <div className="flex flex-col sm:flex-row items-center sm:items-center gap-3 mb-1 min-w-0 text-center sm:text-left">
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: '#3B82F622', color: '#3B82F6' }}>
               <Droplets className="w-5 h-5" aria-hidden="true" />
             </div>
-            <h3 className="text-xl font-raleway font-bold text-black">Función renal</h3>
+            <h3 className="sm:flex-1 sm:min-w-0 text-xl font-raleway font-bold text-black break-words whitespace-normal leading-snug" style={{ hyphens: 'none' }}>Función renal</h3>
           </div>
           <p className="text-sm text-muted-foreground mb-4">Estima TFG/aclaramiento con Cockcroft–Gault, MDRD y CKD‑EPI.</p>
           <div className="mt-auto">
@@ -74,11 +80,11 @@ const Clinicos: React.FC = () => {
 
         {/* Función hepática */}
   <div className="tool-card rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
-          <div className="flex items-center gap-3 mb-1">
-            <div className="p-2 rounded-lg" style={{ backgroundColor: '#F59E0B22', color: '#F59E0B' }}>
+          <div className="flex flex-col sm:flex-row items-center sm:items-center gap-3 mb-1 min-w-0 text-center sm:text-left">
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: '#F59E0B22', color: '#F59E0B' }}>
               <FlaskRound className="w-5 h-5" aria-hidden="true" />
             </div>
-            <h3 className="text-xl font-raleway font-bold text-black">Función hepática</h3>
+            <h3 className="sm:flex-1 sm:min-w-0 text-xl font-raleway font-bold text-black break-words whitespace-normal leading-snug" style={{ hyphens: 'none' }}>Función hepática</h3>
           </div>
           <p className="text-sm text-muted-foreground mb-4">Child‑Pugh, MELD/MELD‑Na, APRI y FIB‑4 para evaluar severidad y fibrosis.</p>
           <div className="mt-auto">
@@ -99,11 +105,11 @@ const Clinicos: React.FC = () => {
 
         {/* Dosis por peso y superficie corporal */}
   <div className="tool-card rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
-          <div className="flex items-center gap-3 mb-1">
-            <div className="p-2 rounded-lg" style={{ backgroundColor: '#0EA5E922', color: '#0EA5E9' }}>
+          <div className="flex flex-col sm:flex-row items-center sm:items-center gap-3 mb-1 min-w-0 text-center sm:text-left">
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: '#0EA5E922', color: '#0EA5E9' }}>
               <Pill className="w-5 h-5" aria-hidden="true" />
             </div>
-            <h3 className="text-xl font-raleway font-bold text-black">Dosis por peso y SC</h3>
+            <h3 className="sm:flex-1 sm:min-w-0 text-xl font-raleway font-bold text-black break-words whitespace-normal leading-snug" style={{ hyphens: 'none' }}>Dosis por peso y SC</h3>
           </div>
           <p className="text-sm text-muted-foreground mb-4">Calcula la dosis total según peso (mg/kg o µg/kg) o superficie corporal (mg/m² o µg/m²).</p>
           <div className="mt-auto">
@@ -134,11 +140,11 @@ const Clinicos: React.FC = () => {
         </div>
         {/* Reconstitución y dilución de antibióticos */}
   <div className="tool-card rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
-          <div className="flex items-center gap-3 mb-1">
-            <div className="p-2 rounded-lg" style={{ backgroundColor: '#64748B22', color: '#64748B' }}>
+          <div className="flex flex-col sm:flex-row items-center sm:items-center gap-3 mb-1 min-w-0 text-center sm:text-left">
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: '#64748B22', color: '#64748B' }}>
               <Syringe className="w-5 h-5" aria-hidden="true" />
             </div>
-            <h3 className="text-xl font-raleway font-bold text-black">Reconstitución y dilución de antibióticos</h3>
+            <h3 className="sm:flex-1 sm:min-w-0 text-xl font-raleway font-bold text-black break-words whitespace-normal leading-snug" style={{ hyphens: 'none' }}>Reconstitución y dilución de antibióticos</h3>
           </div>
           <p className="text-sm text-muted-foreground mb-4">Calcula concentración tras reconstitución, volumen para la dosis y dilución final.</p>
           <div className="mt-auto">
