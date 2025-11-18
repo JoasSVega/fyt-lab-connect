@@ -376,6 +376,7 @@ const CalculatorModal: React.FC<Props> = ({
   }
 
   // Controlled usage
+  const isMobileViewport = typeof window !== 'undefined' ? window.innerWidth <= 600 : false;
   return (
     <CalculatorModalContent
       id={id}
@@ -650,7 +651,7 @@ const CalculatorModalContent: React.FC<{
     if (typeof document === "undefined") return null;
     return createPortal(children, document.body);
   };
-
+  const isMobileViewport = typeof window !== 'undefined' && window.innerWidth <= 600;
   return (
     <ModalPortal>
       <div className={`fixed inset-0 z-[999] p-4 ${open ? 'pointer-events-auto' : 'pointer-events-none'}`}>
@@ -686,7 +687,7 @@ const CalculatorModalContent: React.FC<{
               >
             <div className="relative rounded-2xl bg-white shadow-xl ring-1 ring-black/5 flex flex-col max-h-[90vh] overflow-hidden calc-modal-card">
               {/* Desktop header (>=600px) unchanged */}
-              <div ref={headerRef} className="calc-header-desktop sticky top-0 z-10 px-5 py-4 border-b flex items-start justify-between bg-white/95 backdrop-blur" style={{ background: `linear-gradient(to right, ${categoryColor}15, #ffffffEE)` }}>
+              <div ref={headerRef} className="calc-header-desktop sticky top-0 z-10 px-5 py-4 border-b flex items-start justify-between bg-white/95 backdrop-blur" style={{ background: `linear-gradient(to right, ${categoryColor}15, #ffffffEE)` }} aria-hidden={isMobileViewport || undefined}>
                 <div className="min-w-0">
                   <div className="flex items-center gap-2 min-w-0">
                     {icon ? <span aria-hidden className="inline-flex items-center justify-center">{icon}</span> : null}
@@ -728,7 +729,7 @@ const CalculatorModalContent: React.FC<{
                 </div>
               </div>
               {/* Mobile header (<600px) redesigned layout */}
-              <div className="calc-header-mobile hidden sticky top-0 z-10 px-4 pt-4 pb-3 border-b bg-white/95 backdrop-blur relative" style={{ background: `linear-gradient(to right, ${categoryColor}15, #ffffffEE)` }}>
+              <div className="calc-header-mobile hidden sticky top-0 z-10 px-4 pt-4 pb-3 border-b bg-white/95 backdrop-blur relative" style={{ background: `linear-gradient(to right, ${categoryColor}15, #ffffffEE)` }} aria-hidden={!isMobileViewport || undefined}>
                 {/* Line 1: Icon + Close button (close is absolute to always remain visible) */}
                 {icon ? (
                   <span aria-hidden className="inline-flex items-center justify-center w-10 h-10 rounded-lg mb-2" style={{ minWidth: '40px' }}>
