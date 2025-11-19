@@ -1,6 +1,7 @@
 import * as React from 'react';
 import CalculatorModal, { FieldSpec, CalculationResult } from '@/components/calculators/CalculatorModal';
 import { Dumbbell } from 'lucide-react';
+import { CalculatorsRegistry } from '@/lib/calculators';
 
 // Pilot Hybrid IMC (BMI) Calculator using panelRender bridging into CalculatorModal state.
 // Fields: peso (kg), talla (cm)
@@ -56,18 +57,20 @@ const ImcPanel: React.FC<{ ctx: { fields: ReadonlyArray<FieldSpec>; values: Reco
   );
 };
 
-const ImcHybridCalculator: React.FC<{ open?: boolean; onOpenChange?: (v:boolean)=>void; }> = ({ open, onOpenChange }) => {
+const ImcHybridCalculator: React.FC<{ open?: boolean; onOpenChange?: (v:boolean)=>void; categoryColor?: string; }> = ({ open, onOpenChange, categoryColor }) => {
   return (
     <CalculatorModal
-      id="imc"
-      title="Índice de Masa Corporal"
-      subtitle="Evaluación antropométrica básica"
-      icon={<Dumbbell className="w-6 h-6 text-sky-600" />}
+      id="calc-bmi-hybrid"
+      title={CalculatorsRegistry.bmi.title}
+      subtitle={CalculatorsRegistry.bmi.subtitle}
+      icon={<Dumbbell className="w-6 h-6" style={{ color: categoryColor || CalculatorsRegistry.bmi.color }} />}
       fields={imcFields}
+      formulas={CalculatorsRegistry.bmi.formulas}
       onCalculate={(vals) => computeImc(vals)}
       open={open}
       onOpenChange={onOpenChange}
       legacyForm={false}
+      categoryColor={categoryColor || CalculatorsRegistry.bmi.color}
       panelRender={({ fields, values, onInput, error, onCalculate, onClear, flipped }) => (
         <ImcPanel ctx={{ fields, values, onInput, error, onCalculate, onClear, flipped }} />
       )}
