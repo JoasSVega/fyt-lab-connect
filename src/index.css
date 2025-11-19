@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import centralized keyframes (non-breaking; legacy definitions retained below) */
+@import './styles/keyframes.css';
+
 /* FYT Research Group Design System - Pharmacology & Therapeutics 
 All colors MUST be HSL and based on institutional branding.
 */
@@ -354,4 +357,18 @@ body.modal-open .calc-overlay {
 }
 .flip-root.is-flipped {
   transform: rotateY(180deg);
+}
+
+/* Card entrance animation (centralized) */
+@keyframes fadeInCard {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-card {
+  animation: fadeInCard 1.2s cubic-bezier(.42,0,.58,1);
+}
+
+/* Optional: slight perspective adjustment for very small screens if needed */
+@media (max-width: 480px) {
+  .perspective-1200 { perspective: 1000px; -webkit-perspective: 1000px; }
 }
