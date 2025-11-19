@@ -1,5 +1,5 @@
 import * as React from "react";
-import { motion, AnimatePresence, MotionConfig } from "framer-motion";
+import { motion, AnimatePresence, MotionConfig, useReducedMotion } from "framer-motion";
 import { makeFlip } from "@/animations";
 import { createPortal } from "react-dom";
 import { X, Info } from "lucide-react";
@@ -871,7 +871,7 @@ const CalculatorModalContent: React.FC<{
                   {/* Contenedor 3D para flip suave entre caras */}
                   <div className="relative w-full perspective-1200" style={{ perspective: '1200px', WebkitPerspective: '1200px' }}>
                     {/* Forzar animación aún con prefers-reduced-motion mediante MotionConfig */}
-                    <MotionConfig reducedMotion="never">
+                    <MotionConfig>
                       {/* Nuevo inicio limpio: único contenedor rota, sin tarjeta interna visible ni sombras dinámicas */}
                       <motion.div
                         initial={false}
@@ -883,7 +883,7 @@ const CalculatorModalContent: React.FC<{
                           willChange: 'transform',
                           transformPerspective: 1200,
                         }}
-                        variants={makeFlip(600)}
+                        variants={useReducedMotion() ? { front: { rotateY: 0 }, back: { rotateY: 0 } } : makeFlip(600)}
                         animate={flipped ? 'back' : 'front'}
                         onAnimationStart={() => { flipAnimatingRef.current = true; }}
                         onAnimationComplete={() => { flipAnimatingRef.current = false; if (!flipped) onFlipAnimationComplete?.(); }}
