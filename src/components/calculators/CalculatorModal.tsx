@@ -70,6 +70,16 @@ type Props = {
   legacyForm?: boolean; // when true, keep internal form logic even if panel provided
   onRequestFlip?: () => void; // fired right before initiating flip animation (after successful calculate)
   onCalculateComplete?: (result: CalculationResult | null) => void; // fired after result is set
+  // Render function alternative to simple panel injection; provides bridge to internal state
+  panelRender?: (ctx: {
+    fields: ReadonlyArray<FieldSpec>;
+    values: Record<string, unknown>;
+    onInput: (name: string, v: unknown) => void;
+    error: string;
+    onCalculate: () => void;
+    onClear: () => void;
+    flipped: boolean;
+  }) => React.ReactNode;
 };
 
 
@@ -112,6 +122,7 @@ const CalculatorModal: React.FC<Props> = ({
   legacyForm = false,
   onRequestFlip,
   onCalculateComplete,
+  panelRender,
 }) => {
   // Detecta entorno de pruebas usando Vite; evita 'any' sobre process
   const isTest = typeof import.meta !== 'undefined' && import.meta.env?.MODE === 'test';
@@ -381,6 +392,7 @@ const CalculatorModal: React.FC<Props> = ({
           enableCalculatePredicate={enableCalculatePredicate}
           panel={panel}
           legacyForm={legacyForm}
+          panelRender={panelRender}
         />
       </div>
     );
@@ -420,6 +432,7 @@ const CalculatorModal: React.FC<Props> = ({
       enableCalculatePredicate={enableCalculatePredicate}
       panel={panel}
       legacyForm={legacyForm}
+      panelRender={panelRender}
     />
   );
 };
@@ -458,7 +471,8 @@ const CalculatorModalContent: React.FC<{
   enableCalculatePredicate?: (values: Record<string, unknown>) => boolean;
   panel?: React.ReactNode;
   legacyForm?: boolean;
-}> = ({ id, open, onClose, title, subtitle, icon, fields, values, onInput, formulas, selectedFormula, onSelectFormula, onCalculate, onClear, onReturn, result, flipped, error, categoryColor, infoOpen, setInfoOpen, firstInputRef, autoCalculate = false, actionVisibility = "default", backAction = "volver", resetTick, onFlipAnimationComplete, enableCalculatePredicate, panel, legacyForm }) => {
+  panelRender?: (ctx: { fields: ReadonlyArray<FieldSpec>; values: Record<string, unknown>; onInput: (name: string, v: unknown) => void; error: string; onCalculate: () => void; onClear: () => void; flipped: boolean; }) => React.ReactNode;
+}> = ({ id, open, onClose, title, subtitle, icon, fields, values, onInput, formulas, selectedFormula, onSelectFormula, onCalculate, onClear, onReturn, result, flipped, error, categoryColor, infoOpen, setInfoOpen, firstInputRef, autoCalculate = false, actionVisibility = "default", backAction = "volver", resetTick, onFlipAnimationComplete, enableCalculatePredicate, panel, legacyForm, panelRender }) => {
   // Bandera de entorno de test para la UI/renderizado
   const isTestEnvUI = typeof import.meta !== 'undefined' && import.meta.env?.MODE === 'test';
   // Helpers de validación y mensajes unificados
@@ -880,7 +894,11 @@ const CalculatorModalContent: React.FC<{
                         style={{ pointerEvents: flipped ? 'none' : 'auto', transformStyle: 'preserve-3d', WebkitTransformStyle: 'preserve-3d', backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden', transform: 'rotateY(0deg)' }}
                         aria-hidden={flipped}
                       >
-                        {panel && !legacyForm ? (
+                        {panelRender ? (
+                          <div className="calc-panel-render-wrapper" aria-label="Panel de calculadora (render prop)">
+                            {panelRender({ fields, values, onInput, error: error || '', onCalculate, onClear, flipped })}
+                          </div>
+                        ) : panel && !legacyForm ? (
                           <div className="calc-panel-wrapper" aria-label="Panel de calculadora">
                             {panel}
                           </div>
