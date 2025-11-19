@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Ruler, Maximize2, Percent, Flame, Target, Droplets, Activity } from "lucide-react";
 import Seo from "@/components/Seo";
 import CalculatorModal from "@/components/calculators/CalculatorModal";
+import ImcHybridCalculator from "@/components/calculators/ImcHybrid";
 import { CalculatorsRegistry } from "@/lib/calculators";
 
 const Antropometricos: React.FC = () => {
@@ -58,16 +59,10 @@ const Antropometricos: React.FC = () => {
           <div className="mt-auto">
             <button onClick={()=>setOpenIMC(true)} className="px-4 py-2 rounded-md bg-sky-600 text-white font-semibold hover:bg-sky-700">Abrir Calculadora</button>
           </div>
-          <CalculatorModal
-            id="calc-bmi"
+          <ImcHybridCalculator
             open={openIMC}
             onOpenChange={setOpenIMC}
-            title={CalculatorsRegistry.bmi.title}
-            subtitle={CalculatorsRegistry.bmi.subtitle}
-            fields={CalculatorsRegistry.bmi.fields}
-            formulas={CalculatorsRegistry.bmi.formulas}
             categoryColor={CalculatorsRegistry.bmi.color}
-            icon={<Ruler className="w-5 h-5" style={{ color: CalculatorsRegistry.bmi.color }} />}
           />
         </div>
 

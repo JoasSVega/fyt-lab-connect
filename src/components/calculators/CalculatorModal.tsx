@@ -1,5 +1,6 @@
 import * as React from "react";
-import { motion, AnimatePresence, MotionConfig } from "framer-motion";
+import { motion, AnimatePresence, MotionConfig, useReducedMotion } from "framer-motion";
+import { makeFlip } from "@/animations";
 import { createPortal } from "react-dom";
 import { X, Info } from "lucide-react";
 const Latex = React.lazy(() => import("../ui/Latex"));
@@ -64,6 +65,21 @@ type Props = {
   openButtonLabel?: string; // customize uncontrolled open button label
   backAction?: "volver" | "limpiar"; // choose which action to show on the back face
   enableCalculatePredicate?: (values: Record<string, unknown>) => boolean; // optional predicate to enable Calcular button
+  // Hybrid architecture additions:
+  panel?: React.ReactNode; // optional external panel injected into front face (core UI layout)
+  legacyForm?: boolean; // when true, keep internal form logic even if panel provided
+  onRequestFlip?: () => void; // fired right before initiating flip animation (after successful calculate)
+  onCalculateComplete?: (result: CalculationResult | null) => void; // fired after result is set
+  // Render function alternative to simple panel injection; provides bridge to internal state
+  panelRender?: (ctx: {
+    fields: ReadonlyArray<FieldSpec>;
+    values: Record<string, unknown>;
+    onInput: (name: string, v: unknown) => void;
+    error: string;
+    onCalculate: () => void;
+    onClear: () => void;
+    flipped: boolean;
+  }) => React.ReactNode;
 };
 
 
@@ -102,6 +118,11 @@ const CalculatorModal: React.FC<Props> = ({
   openButtonLabel = "Abrir Calculadora",
   backAction = "volver",
   enableCalculatePredicate,
+  panel,
+  legacyForm = false,
+  onRequestFlip,
+  onCalculateComplete,
+  panelRender,
 }) => {
   // Detecta entorno de pruebas usando Vite; evita 'any' sobre process
   const isTest = typeof import.meta !== 'undefined' && import.meta.env?.MODE === 'test';
@@ -287,7 +308,11 @@ const CalculatorModal: React.FC<Props> = ({
       return;
     }
     setResult(res);
-    if (!flipped) setFlipped(true);
+    onCalculateComplete?.(res);
+    if (!flipped) {
+      onRequestFlip?.();
+      setFlipped(true);
+    }
   };
 
   const handleReturn = () => {
@@ -365,6 +390,9 @@ const CalculatorModal: React.FC<Props> = ({
           resetTick={resetTick}
           onFlipAnimationComplete={handleFlipAnimationComplete}
           enableCalculatePredicate={enableCalculatePredicate}
+          panel={panel}
+          legacyForm={legacyForm}
+          panelRender={panelRender}
         />
       </div>
     );
@@ -402,6 +430,9 @@ const CalculatorModal: React.FC<Props> = ({
       resetTick={resetTick}
       onFlipAnimationComplete={handleFlipAnimationComplete}
       enableCalculatePredicate={enableCalculatePredicate}
+      panel={panel}
+      legacyForm={legacyForm}
+      panelRender={panelRender}
     />
   );
 };
@@ -438,7 +469,10 @@ const CalculatorModalContent: React.FC<{
   resetTick: number;
   onFlipAnimationComplete?: () => void;
   enableCalculatePredicate?: (values: Record<string, unknown>) => boolean;
-}> = ({ id, open, onClose, title, subtitle, icon, fields, values, onInput, formulas, selectedFormula, onSelectFormula, onCalculate, onClear, onReturn, result, flipped, error, categoryColor, infoOpen, setInfoOpen, firstInputRef, autoCalculate = false, actionVisibility = "default", backAction = "volver", resetTick, onFlipAnimationComplete, enableCalculatePredicate }) => {
+  panel?: React.ReactNode;
+  legacyForm?: boolean;
+  panelRender?: (ctx: { fields: ReadonlyArray<FieldSpec>; values: Record<string, unknown>; onInput: (name: string, v: unknown) => void; error: string; onCalculate: () => void; onClear: () => void; flipped: boolean; }) => React.ReactNode;
+}> = ({ id, open, onClose, title, subtitle, icon, fields, values, onInput, formulas, selectedFormula, onSelectFormula, onCalculate, onClear, onReturn, result, flipped, error, categoryColor, infoOpen, setInfoOpen, firstInputRef, autoCalculate = false, actionVisibility = "default", backAction = "volver", resetTick, onFlipAnimationComplete, enableCalculatePredicate, panel, legacyForm, panelRender }) => {
   // Bandera de entorno de test para la UI/renderizado
   const isTestEnvUI = typeof import.meta !== 'undefined' && import.meta.env?.MODE === 'test';
   // Helpers de validación y mensajes unificados
@@ -552,7 +586,7 @@ const CalculatorModalContent: React.FC<{
       try { wrap.style.removeProperty('overflow-anchor'); } catch { /* noop */ }
     };
   }, [open]);
-
+  // panel / legacyForm handled in conditional render
   React.useEffect(() => {
     if (!open) return;
     const wrap = bodyWrapRef.current;
@@ -837,7 +871,7 @@ const CalculatorModalContent: React.FC<{
                   {/* Contenedor 3D para flip suave entre caras */}
                   <div className="relative w-full perspective-1200" style={{ perspective: '1200px', WebkitPerspective: '1200px' }}>
                     {/* Forzar animación aún con prefers-reduced-motion mediante MotionConfig */}
-                    <MotionConfig reducedMotion="never">
+                    <MotionConfig>
                       {/* Nuevo inicio limpio: único contenedor rota, sin tarjeta interna visible ni sombras dinámicas */}
                       <motion.div
                         initial={false}
@@ -848,10 +882,9 @@ const CalculatorModalContent: React.FC<{
                           WebkitTransformStyle: 'preserve-3d',
                           willChange: 'transform',
                           transformPerspective: 1200,
-                          transition: 'transform 0.6s ease',
                         }}
-                        animate={{ rotateY: flipped ? 180 : 0 }}
-                        transition={{ duration: 0.6, ease: 'easeInOut' }}
+                        variants={useReducedMotion() ? { front: { rotateY: 0 }, back: { rotateY: 0 } } : makeFlip(600)}
+                        animate={flipped ? 'back' : 'front'}
                         onAnimationStart={() => { flipAnimatingRef.current = true; }}
                         onAnimationComplete={() => { flipAnimatingRef.current = false; if (!flipped) onFlipAnimationComplete?.(); }}
                       >
@@ -861,6 +894,15 @@ const CalculatorModalContent: React.FC<{
                         style={{ pointerEvents: flipped ? 'none' : 'auto', transformStyle: 'preserve-3d', WebkitTransformStyle: 'preserve-3d', backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden', transform: 'rotateY(0deg)' }}
                         aria-hidden={flipped}
                       >
+                        {panelRender ? (
+                          <div className="calc-panel-render-wrapper" aria-label="Panel de calculadora (render prop)">
+                            {panelRender({ fields, values, onInput, error: error || '', onCalculate, onClear, flipped })}
+                          </div>
+                        ) : panel && !legacyForm ? (
+                          <div className="calc-panel-wrapper" aria-label="Panel de calculadora">
+                            {panel}
+                          </div>
+                        ) : (
                         <form
                       noValidate
                       className="grid grid-cols-1 md:grid-cols-2 gap-4"
@@ -931,6 +973,7 @@ const CalculatorModalContent: React.FC<{
                         </div>
                       )}
                     </form>
+                        )}
                       </div>
 
                       <div
