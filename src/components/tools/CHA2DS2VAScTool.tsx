@@ -90,7 +90,7 @@ const CHA2DS2VAScTool: React.FC = () => {
   return (
     <CalculatorModal
       id="cha2ds2vasc-tool"
-      title="Riesgo de eventos tromboembólicos (CHA₂DS₂-VASc)"
+      title="Riesgo de Eventos Tromboembólicos (CHA₂DS₂-VASc)"
       subtitle="Pacientes con FA"
       fields={fields}
       formulas={formulas}
@@ -99,7 +99,7 @@ const CHA2DS2VAScTool: React.FC = () => {
       actionVisibility="clear-only"
       backAction="volver"
       icon={<HeartPulse className="w-5 h-5" style={{ color: "#43a047" }} />}
-      openButtonLabel="Abrir herramienta"
+      openButtonLabel="Abrir Herramienta"
     />
   );
 };

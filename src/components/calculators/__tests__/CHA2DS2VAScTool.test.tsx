@@ -7,7 +7,7 @@ describe('CHA2DS2-VASc Tool', () => {
   it('calcula con botones y permite limpiar', async () => {
     render(<CHA2DS2VAScTool />);
 
-    fireEvent.click(screen.getByText('Abrir herramienta'));
+    fireEvent.click(screen.getByText('Abrir Herramienta'));
 
   fireEvent.change(await screen.findByLabelText('Insuficiencia cardiaca (C)'), { target: { value: 'si' } });
   fireEvent.change(await screen.findByLabelText('Hipertensión (H)'), { target: { value: 'si' } });

@@ -1,8 +1,8 @@
 import * as React from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, MotionConfig } from "framer-motion";
 import { createPortal } from "react-dom";
 import { X, Info } from "lucide-react";
-import { Latex } from "../ui/Latex";
+const Latex = React.lazy(() => import("../ui/Latex"));
 import { getEffectiveFields, resetValuesForFields, ensureLatexForFormula } from "@/lib/calculators/utils";
 
 // Unified Calculator Modal
@@ -99,7 +99,7 @@ const CalculatorModal: React.FC<Props> = ({
   onOpenChange,
   autoCalculate = false,
   actionVisibility = "default",
-  openButtonLabel = "Abrir calculadora",
+  openButtonLabel = "Abrir Calculadora",
   backAction = "volver",
   enableCalculatePredicate,
 }) => {
@@ -720,7 +720,7 @@ const CalculatorModalContent: React.FC<{
                 onClick={(e)=>e.stopPropagation()}
                 ref={cardRootRef}
               >
-            <div className="relative rounded-2xl bg-white shadow-xl ring-1 ring-black/5 flex flex-col max-h-[90vh] overflow-hidden calc-modal-card">
+                <div className="relative rounded-2xl bg-white shadow-xl ring-1 ring-black/5 flex flex-col max-h-[90vh] overflow-hidden calc-modal-card">
               {/* Desktop header (>=600px) unchanged */}
               <div ref={headerRef} className="calc-header-desktop sticky top-0 z-10 px-5 py-4 border-b flex items-start justify-between bg-white/95 backdrop-blur" style={{ background: `linear-gradient(to right, ${categoryColor}15, #ffffffEE)` }} aria-hidden={isMobileViewport || undefined}>
                 <div className="min-w-0">
@@ -835,21 +835,30 @@ const CalculatorModalContent: React.FC<{
               <div ref={bodyWrapRef} data-testid="calc-modal-body" className="relative p-5 flex-1 min-h-0 overflow-y-auto overflow-x-hidden calc-modal-body overscroll-contain">
                 <div ref={bodyInnerRef}>
                   {/* Contenedor 3D para flip suave entre caras */}
-                  <div className="relative w-full" style={{ perspective: '1200px' }}>
-                    {/* Nuevo inicio limpio: único contenedor rota, sin tarjeta interna visible ni sombras dinámicas */}
-                    <motion.div
-                      initial={false}
-                      className="relative w-full"
-                      style={{ height: cardHeight ? `${cardHeight}px` : undefined, transformStyle: 'preserve-3d' }}
-                      animate={{ rotateY: flipped ? 180 : 0 }}
-                      transition={{ duration: 0.6, ease: 'easeInOut' }}
-                      onAnimationStart={() => { flipAnimatingRef.current = true; }}
-                      onAnimationComplete={() => { flipAnimatingRef.current = false; if (!flipped) onFlipAnimationComplete?.(); }}
-                    >
+                  <div className="relative w-full perspective-1200" style={{ perspective: '1200px', WebkitPerspective: '1200px' }}>
+                    {/* Forzar animación aún con prefers-reduced-motion mediante MotionConfig */}
+                    <MotionConfig reducedMotion="never">
+                      {/* Nuevo inicio limpio: único contenedor rota, sin tarjeta interna visible ni sombras dinámicas */}
+                      <motion.div
+                        initial={false}
+                        className={`relative w-full preserve-3d flip-root ${flipped ? 'is-flipped' : ''}`}
+                        style={{
+                          height: cardHeight ? `${cardHeight}px` : undefined,
+                          transformStyle: 'preserve-3d',
+                          WebkitTransformStyle: 'preserve-3d',
+                          willChange: 'transform',
+                          transformPerspective: 1200,
+                          transition: 'transform 0.6s ease',
+                        }}
+                        animate={{ rotateY: flipped ? 180 : 0 }}
+                        transition={{ duration: 0.6, ease: 'easeInOut' }}
+                        onAnimationStart={() => { flipAnimatingRef.current = true; }}
+                        onAnimationComplete={() => { flipAnimatingRef.current = false; if (!flipped) onFlipAnimationComplete?.(); }}
+                      >
                       <div
                         ref={frontFaceRef}
-                        className="absolute inset-0"
-                        style={{ pointerEvents: flipped ? 'none' : 'auto', transformStyle: 'preserve-3d', backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden', transform: 'rotateY(0deg)' }}
+                        className="absolute inset-0 backface-hidden preserve-3d"
+                        style={{ pointerEvents: flipped ? 'none' : 'auto', transformStyle: 'preserve-3d', WebkitTransformStyle: 'preserve-3d', backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden', transform: 'rotateY(0deg)' }}
                         aria-hidden={flipped}
                       >
                         <form
@@ -926,8 +935,8 @@ const CalculatorModalContent: React.FC<{
 
                       <div
                         ref={backFaceRef}
-                        className="absolute inset-0"
-                        style={{ pointerEvents: flipped ? 'auto' : 'none', transformStyle: 'preserve-3d', backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
+                        className="absolute inset-0 backface-hidden preserve-3d rotate-y-180"
+                        style={{ pointerEvents: flipped ? 'auto' : 'none', transformStyle: 'preserve-3d', WebkitTransformStyle: 'preserve-3d', backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
                         aria-hidden={!flipped}
                       >
                         <div className={`rounded-xl border p-6 text-center ${getSeverityClasses(result?.severity)}`}>
@@ -953,7 +962,8 @@ const CalculatorModalContent: React.FC<{
                           )}
                         </div>
                       </div>
-                    </motion.div>
+                      </motion.div>
+                    </MotionConfig>
                   </div>
                 </div>
               </div>
@@ -990,14 +1000,18 @@ const CalculatorModalContent: React.FC<{
                           <div className="text-sm font-semibold text-slate-800">{idx + 1}. {f.label}</div>
                           {exprLatex ? (
                             <div className="mt-1 overflow-x-auto" data-testid="formula-latex">
-                              <Latex expression={exprLatex} display className="block text-sky-700 dark:text-sky-300 text-base" />
+                              <React.Suspense fallback={<div className="text-sm text-slate-500">Cargando fórmulas…</div>}>
+                                <Latex expression={exprLatex} display className="block text-sky-700 dark:text-sky-300 text-base" />
+                              </React.Suspense>
                             </div>
                           ) : null}
                           {hasScoring ? (
                             <div className="mt-2 space-y-2">
                               {!exprLatex && (
                                 <div data-testid="formula-latex" className="overflow-x-auto">
-                                  <Latex expression={String.raw`\\mathrm{Puntuaci\\'on}=\\sum_{i=1}^{n}\\text{Puntos}(i)`} display className="block text-sky-700 dark:text-sky-300 text-base" />
+                                  <React.Suspense fallback={<div className="text-sm text-slate-500">Cargando fórmulas…</div>}>
+                                    <Latex expression={String.raw`\\mathrm{Puntuaci\\'on}=\\sum_{i=1}^{n}\\text{Puntos}(i)`} display className="block text-sky-700 dark:text-sky-300 text-base" />
+                                  </React.Suspense>
                                 </div>
                               )}
                               <div className="space-y-2">

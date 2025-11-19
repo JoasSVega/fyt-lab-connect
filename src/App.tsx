@@ -1,7 +1,8 @@
-// Rutas de investigación
-import InvestigacionPage from "./pages/InvestigacionPage";
-import PublicacionesPage from "./pages/PublicacionesPage";
-import ProyectosPage from "./pages/ProyectosPage";
+import React, { useEffect, useState } from "react";
+// Rutas de investigación (carga diferida)
+const InvestigacionPage = React.lazy(() => import("./pages/InvestigacionPage"));
+const PublicacionesPage = React.lazy(() => import("./pages/PublicacionesPage"));
+const ProyectosPage = React.lazy(() => import("./pages/ProyectosPage"));
 
 // Exportar paths
 export const pathInvestigacion = "/investigacion";
@@ -10,33 +11,32 @@ export const pathPublicaciones = "/investigacion/publicaciones";
 //
 // Using standardized logo from public folder
 // Página antigua de antropometría eliminada; se redirige a la nueva plataforma
-import SobreNosotros from "./pages/SobreNosotros";
+const SobreNosotros = React.lazy(() => import("./pages/SobreNosotros"));
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster as ToasterShadcn } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
-import React, { useEffect, useState } from "react";
 
-import Index from "./pages/Index";
-import Equipo from "./pages/Equipo";
-import Contactos from "./pages/Contactos";
-import NotFound from "./pages/NotFound";
+const Index = React.lazy(() => import("./pages/Index"));
+const Equipo = React.lazy(() => import("./pages/Equipo"));
+const Contactos = React.lazy(() => import("./pages/Contactos"));
+const NotFound = React.lazy(() => import("./pages/NotFound"));
 import DosageCalculator from "./components/DosageCalculator";
 import Navbar from "./components/Navbar";
 import ScrollToTop from "./components/ScrollToTop";
-import Noticias from "./pages/Noticias";
-import Herramientas from "./pages/Herramientas";
+const Noticias = React.lazy(() => import("./pages/Noticias"));
+const Herramientas = React.lazy(() => import("./pages/Herramientas"));
 // Nuevas páginas de la plataforma de herramientas
-import ToolsIndex from "./pages/tools/IndexTools";
-import ToolsClinicos from "./pages/tools/Clinicos";
-import ToolsAntropometricos from "./pages/tools/Antropometricos";
-import ToolsAvanzados from "./pages/tools/Avanzados";
-import ToolsEscalas from "./pages/tools/Escalas";
+const ToolsIndex = React.lazy(() => import("./pages/tools/IndexTools"));
+const ToolsClinicos = React.lazy(() => import("./pages/tools/Clinicos"));
+const ToolsAntropometricos = React.lazy(() => import("./pages/tools/Antropometricos"));
+const ToolsAvanzados = React.lazy(() => import("./pages/tools/Avanzados"));
+const ToolsEscalas = React.lazy(() => import("./pages/tools/Escalas"));
 import Footer from "./components/Footer";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import TermsOfUse from "./pages/TermsOfUse";
-import CodeOfEthics from "./pages/CodeOfEthics";
+const PrivacyPolicy = React.lazy(() => import("./pages/PrivacyPolicy"));
+const TermsOfUse = React.lazy(() => import("./pages/TermsOfUse"));
+const CodeOfEthics = React.lazy(() => import("./pages/CodeOfEthics"));
 import TitleSync from "./components/TitleSync";
 
 const queryClient = new QueryClient();
@@ -64,6 +64,7 @@ function AnimatedRoutes() {
   }, []);
 
   const routesJSX = (
+    <React.Suspense fallback={<div className="w-full pt-16 pb-6 px-2 sm:px-4 lg:px-8 text-sm text-slate-600">Cargando…</div>}>
     <Routes location={location}>
       {/* Investigación y Producción Académica */}
       <Route path={pathInvestigacion} element={<InvestigacionPage />} />
@@ -102,6 +103,7 @@ function AnimatedRoutes() {
       {/* Página no encontrada */}
       <Route path="*" element={<NotFound />} />
     </Routes>
+    </React.Suspense>
   );
 
   // Si framer-motion aún no carga, renderizamos el contenido sin animación.

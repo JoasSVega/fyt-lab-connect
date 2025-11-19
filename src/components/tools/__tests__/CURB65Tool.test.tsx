@@ -8,7 +8,7 @@ describe('CURB65Tool (auto-calc)', () => {
     render(<CURB65Tool />);
 
     // abre modal
-    fireEvent.click(screen.getByText('Abrir herramienta'));
+    fireEvent.click(screen.getByText('Abrir Herramienta'));
 
     // Completar campos
     fireEvent.change(await screen.findByLabelText('Confusión o desorientación'), { target: { value: 'si' } });

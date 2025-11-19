@@ -110,3 +110,73 @@ export function computeReconstitution(values: Record<string, unknown>): Calculat
   const severity: CalculationResult["severity"] = msgs.length > 0 ? WARN : OK;
   return { value: Number(doseMg.toFixed(0)), unit: "mg", interpretation, detailsHtml: details, severity };
 }
+
+// Dosis de Carga y Mantenimiento
+export function computeLoadingDose(values: Record<string, unknown>): CalculationResult {
+  const weight = Number(values.weight);
+  const vdPerKg = Number(values.vd);
+  const cp = Number(values.cp);
+  const F = Number(values.F);
+
+  if (!Number.isFinite(weight) || !Number.isFinite(vdPerKg) || !Number.isFinite(cp) || !Number.isFinite(F) || F <= 0) {
+    return { value: NaN, interpretation: "Ingrese parámetros válidos (peso, Vd, Cp y F)", severity: WARN };
+  }
+  const vdTotal = vdPerKg * weight; // L
+  const dose = (cp * vdTotal) / F; // mg
+  const interpretation = `Con Cp objetivo ${cp.toFixed(2)} mg/L, Vd ${vdPerKg.toFixed(2)} L/kg y peso ${weight.toFixed(1)} kg, la dosis de carga estimada es ${(dose).toFixed(1)} mg (F=${F}).`;
+  return { value: Number(dose.toFixed(1)), unit: "mg", interpretation, severity: OK };
+}
+
+export function computeMaintenanceDose(values: Record<string, unknown>): CalculationResult {
+  const cp = Number(values.cp);
+  const F = Number(values.F);
+  const tau = Number(values.tau);
+  const cl = Number(values.cl); // L/h requerido
+
+  if (!Number.isFinite(cp) || !Number.isFinite(F) || F <= 0 || !Number.isFinite(tau) || !Number.isFinite(cl)) {
+    return { value: NaN, interpretation: "Ingrese Cp, Cl (L/h), F (>0) e intervalo (h)", severity: WARN };
+  }
+  const dose = (cp * cl * tau) / F; // mg
+  const interpretation = `Con Cp objetivo ${cp.toFixed(2)} mg/L, Cl ${cl.toFixed(2)} L/h, intervalo ${tau.toFixed(1)} h y F=${F}, la dosis de mantenimiento es ${(dose).toFixed(1)} mg.`;
+  return { value: Number(dose.toFixed(1)), unit: "mg", interpretation, severity: OK };
+}
+
+// Velocidad de infusión
+export function computeInfusionRateByVolume(values: Record<string, unknown>): CalculationResult {
+  const V = Number(values.volume);
+  const T = Number(values.time);
+  if (!Number.isFinite(V) || !Number.isFinite(T) || T <= 0) {
+    return { value: NaN, interpretation: "Ingrese volumen (mL) y tiempo (h) válidos", severity: WARN };
+  }
+  const rate = V / T; // mL/h
+  return { value: Number(rate.toFixed(2)), unit: "mL/h", interpretation: `Velocidad estándar: ${rate.toFixed(2)} mL/h para ${V} mL en ${T} h.`, severity: OK };
+}
+
+export function computeInfusionRateByDose(values: Record<string, unknown>): CalculationResult {
+  const dose = Number(values.dose);
+  const conc = Number(values.conc);
+  const T = Number(values.time);
+  const doseUnit = String(values.doseUnit || "mg"); // mg o µg
+  const concUnit = String(values.concUnit || "mg/mL");
+  if (!Number.isFinite(dose) || !Number.isFinite(conc) || !Number.isFinite(T) || conc <= 0 || T <= 0) {
+    return { value: NaN, interpretation: "Ingrese dosis, concentración (>0) y tiempo (h)", severity: WARN };
+  }
+  // Convertir a mg y mg/mL si fuera necesario
+  const doseMg = doseUnit.startsWith("µg") ? dose / 1000 : dose;
+  const concMgPerMl = concUnit.startsWith("µg") ? conc / 1000 : conc;
+  const volumeNeeded = doseMg / concMgPerMl; // mL
+  const rate = volumeNeeded / T; // mL/h
+  const interpretation = `Para ${dose} ${doseUnit} con ${conc} ${concUnit} en ${T} h: volumen ${volumeNeeded.toFixed(2)} mL → ${rate.toFixed(2)} mL/h.`;
+  return { value: Number(rate.toFixed(2)), unit: "mL/h", interpretation, severity: OK };
+}
+
+export function computeDropsPerMin(values: Record<string, unknown>): CalculationResult {
+  const V = Number(values.volume);
+  const T = Number(values.time);
+  const factor = Number(values.dropFactor) || 20; // gotas/mL
+  if (!Number.isFinite(V) || !Number.isFinite(T) || T <= 0 || !Number.isFinite(factor) || factor <= 0) {
+    return { value: NaN, interpretation: "Ingrese volumen, tiempo y factor de goteo válidos", severity: WARN };
+  }
+  const gpm = (V * factor) / (T * 60);
+  return { value: Number(gpm.toFixed(1)), unit: "gotas/min", interpretation: `Con factor ${factor} gotas/mL: ${gpm.toFixed(1)} gotas/min.`, severity: OK };
+}

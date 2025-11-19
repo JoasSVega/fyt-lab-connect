@@ -328,3 +328,30 @@ body.modal-open .tool-card:hover {
 body.modal-open .calc-overlay {
   pointer-events: auto;
 }
+
+/* 3D Flip Utilities (fallback-safe, scoped, no !important) */
+.preserve-3d {
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+}
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.perspective-1200 {
+  perspective: 1200px;
+  -webkit-perspective: 1200px;
+}
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+/* Flip root fallback: CSS-driven rotation to ensure animation even if JS animations are reduced */
+.flip-root {
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  transition: transform 0.6s ease;
+}
+.flip-root.is-flipped {
+  transform: rotateY(180deg);
+}

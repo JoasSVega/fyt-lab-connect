@@ -58,7 +58,7 @@ const HASBLEDTool: React.FC = () => {
   return (
     <CalculatorModal
       id="hasbled-tool"
-      title="Riesgo de sangrado en anticoagulación (HAS-BLED)"
+      title="Riesgo de Sangrado en Anticoagulación (HAS-BLED)"
       subtitle="Pacientes con FA bajo anticoagulación"
       fields={fields}
       formulas={formulas}
@@ -67,7 +67,7 @@ const HASBLEDTool: React.FC = () => {
       actionVisibility="clear-only"
       backAction="volver"
       icon={<AlertTriangle className="w-5 h-5" style={{ color: "#e53935" }} />}
-      openButtonLabel="Abrir herramienta"
+      openButtonLabel="Abrir Herramienta"
     />
   );
 };

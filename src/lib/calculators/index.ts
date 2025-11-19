@@ -16,7 +16,7 @@ import {
 } from "./adapters/anthropometrics";
 import { computeChildPugh, computeMELD, computeAPRI, computeFIB4 } from "./adapters/hepatic";
 import { computeCockcroft, computeMDRD4, computeCKDEPI2009, computeCKDEPI2021 } from "./adapters/renal";
-import { computeDoseByWeight, computeReconstitution } from "./adapters/pharma";
+import { computeDoseByWeight, computeReconstitution, computeLoadingDose, computeMaintenanceDose, computeInfusionRateByVolume, computeInfusionRateByDose, computeDropsPerMin } from "./adapters/pharma";
 import antibiotics from "@/data/antibiotics.json";
 
 export type CalculatorMeta = {
@@ -90,7 +90,7 @@ export const CalculatorsRegistry = {
   },
   bsa: {
     id: "bsa",
-    title: "Superficie corporal",
+    title: "SC",
     subtitle: "DuBois & DuBois (m²)",
     category: "fisiologico",
     color: "#10b981", // emerald
@@ -102,7 +102,7 @@ export const CalculatorsRegistry = {
   },
   bodyFat: {
     id: "bodyFat",
-    title: "% Grasa corporal",
+    title: "%GC",
     subtitle: "Deurenberg (1991)",
     category: "fisiologico",
     color: "#a855f7", // violet
@@ -133,7 +133,7 @@ export const CalculatorsRegistry = {
   },
   idealWeight: {
     id: "idealWeight",
-    title: "Peso ideal",
+    title: "PI",
     subtitle: "Devine / Robinson / Miller",
     category: "fisiologico",
     color: "#0d9488", // teal
@@ -149,7 +149,7 @@ export const CalculatorsRegistry = {
   },
   act: {
     id: "act",
-    title: "Agua corporal total (ACT)",
+    title: "ACT",
     subtitle: "Watson / Chumlea",
     category: "fisiologico",
     color: "#16a34a", // green
@@ -166,7 +166,7 @@ export const CalculatorsRegistry = {
   },
   mmc: {
     id: "mmc",
-    title: "Masa magra corporal",
+    title: "MMC",
     subtitle: "James / Hume / % grasa",
     category: "fisiologico",
     color: "#0891b2", // cyan
@@ -319,6 +319,54 @@ export const CalculatorsRegistry = {
       { name: "addDiluent", label: "Agregar diluyente adicional", type: "toggle", placeholder: "Agregar diluyente adicional" },
       { name: "weight", label: "Peso del paciente (opcional)", type: "number", unit: "kg", placeholder: "p. ej., 70" },
     ] } ],
+  },
+  loadingMaintenance: {
+    id: "loadingMaintenance",
+    title: "DC/DM",
+    subtitle: "Dosis de Carga y Mantenimiento",
+    category: "clinico",
+    color: "#6366F1", // indigo
+    fields: [] as FieldSpec[],
+    formulas: [
+      { id: "carga", label: "Dosis de Carga", description: "DC = (Cp × Vd × Peso) / F", compute: computeLoadingDose, fields: [
+        { name: "weight", label: "Peso", type: "number", unit: "kg", placeholder: "p. ej., 70", validation: { min: 1, required: true } },
+        { name: "vd", label: "Vd", type: "number", unit: "L/kg", placeholder: "p. ej., 0.7", validation: { min: 0, required: true } },
+        { name: "cp", label: "Cp objetivo", type: "number", unit: "mg/L", placeholder: "p. ej., 10", validation: { min: 0, required: true } },
+        { name: "F", label: "Biodisponibilidad (F)", type: "number", placeholder: "0–1", validation: { min: 0, max: 1, required: true } },
+      ] },
+      { id: "mto", label: "Dosis de Mantenimiento", description: "DM = (Cp × Cl × τ) / F", compute: computeMaintenanceDose, fields: [
+        { name: "cp", label: "Cp objetivo", type: "number", unit: "mg/L", placeholder: "p. ej., 10", validation: { min: 0, required: true } },
+        { name: "cl", label: "Cl", type: "number", unit: "L/h", placeholder: "p. ej., 4.2", validation: { min: 0, required: true } },
+        { name: "tau", label: "Intervalo", type: "number", unit: "h", placeholder: "p. ej., 12", validation: { min: 0, required: true } },
+        { name: "F", label: "Biodisponibilidad (F)", type: "number", placeholder: "0–1", validation: { min: 0, max: 1, required: true } },
+      ] },
+    ]
+  },
+  infusion: {
+    id: "infusion",
+    title: "VI",
+    subtitle: "Velocidad de Infusión",
+    category: "clinico",
+    color: "#14b8a6", // teal-500
+    fields: [] as FieldSpec[],
+    formulas: [
+      { id: "volTime", label: "Volumen/tiempo", description: "VI = V / T", compute: computeInfusionRateByVolume, fields: [
+        { name: "volume", label: "Volumen total", type: "number", unit: "mL", placeholder: "p. ej., 500", validation: { min: 0, required: true } },
+        { name: "time", label: "Tiempo total", type: "number", unit: "h", placeholder: "p. ej., 4", validation: { min: 0, required: true } },
+      ] },
+      { id: "doseConc", label: "Por dosis", description: "VI = (Dosis/Conc) / T", compute: computeInfusionRateByDose, fields: [
+        { name: "dose", label: "Dosis total", type: "number", unit: "mg | µg", placeholder: "p. ej., 200", validation: { min: 0, required: true } },
+        { name: "doseUnit", label: "Unidad de dosis", type: "select", options: [ { value: "mg", label: "mg" }, { value: "µg", label: "µg" } ], placeholder: "Seleccionar", validation: { required: true } },
+        { name: "conc", label: "Concentración", type: "number", unit: "mg/mL | µg/mL", placeholder: "p. ej., 1", validation: { min: 0, required: true } },
+        { name: "concUnit", label: "Unidad de concentración", type: "select", options: [ { value: "mg/mL", label: "mg/mL" }, { value: "µg/mL", label: "µg/mL" } ], placeholder: "Seleccionar", validation: { required: true } },
+        { name: "time", label: "Tiempo total", type: "number", unit: "h", placeholder: "p. ej., 4", validation: { min: 0, required: true } },
+      ] },
+      { id: "drops", label: "Gotas/min", description: "Gotas/min = (V × factor)/(T × 60)", compute: computeDropsPerMin, fields: [
+        { name: "volume", label: "Volumen total", type: "number", unit: "mL", placeholder: "p. ej., 500", validation: { min: 0, required: true } },
+        { name: "time", label: "Tiempo total", type: "number", unit: "h", placeholder: "p. ej., 4", validation: { min: 0, required: true } },
+        { name: "dropFactor", label: "Factor de goteo", type: "number", unit: "gotas/mL", placeholder: "p. ej., 20", validation: { min: 1, required: true } },
+      ] },
+    ]
   },
 } as const;
 

@@ -121,7 +121,7 @@ const GlasgowTool: React.FC = () => {
       actionVisibility="clear-only"
       backAction="volver"
       icon={<Brain className="w-5 h-5" style={{ color: "#8e24aa" }} />}
-      openButtonLabel="Abrir herramienta"
+      openButtonLabel="Abrir Herramienta"
     />
   );
 };

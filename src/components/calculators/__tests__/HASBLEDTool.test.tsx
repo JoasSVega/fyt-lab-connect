@@ -7,7 +7,7 @@ describe('HAS-BLED Tool', () => {
   it('calcula con botones y permite limpiar', async () => {
     render(<HASBLEDTool />);
 
-    fireEvent.click(screen.getByText('Abrir herramienta'));
+    fireEvent.click(screen.getByText('Abrir Herramienta'));
 
     // Seleccionar Sí/No en algunos ítems (auto-cálculo)
     fireEvent.change(await screen.findByLabelText('Hipertensión (PA sistólica > 160 mmHg)'), { target: { value: 'si' } });

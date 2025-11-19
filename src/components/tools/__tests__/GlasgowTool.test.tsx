@@ -7,7 +7,7 @@ describe('GlasgowTool (auto-calc)', () => {
   it('auto-calcula y permite volver y limpiar', async () => {
     render(<GlasgowTool />);
 
-    fireEvent.click(screen.getByText('Abrir herramienta'));
+    fireEvent.click(screen.getByText('Abrir Herramienta'));
 
     // Completar selects requeridos
     fireEvent.change(await screen.findByLabelText('Respuesta ocular (E)'), { target: { value: '4' } });

@@ -93,7 +93,7 @@ const CURB65Tool: React.FC = () => {
   return (
     <CalculatorModal
       id="curb65-tool"
-      title="Severidad de neumonía adquirida en la comunidad (CURB-65)"
+      title="Severidad de Neumonía Adquirida en la Comunidad (CURB-65)"
       subtitle="Adultos con neumonía adquirida en la comunidad"
       fields={fields}
       formulas={formulas}
@@ -103,7 +103,7 @@ const CURB65Tool: React.FC = () => {
       backAction="volver"
       enableCalculatePredicate={canCalculate}
       icon={<TestTube className="w-5 h-5" style={{ color: "#fb8c00" }} />}
-      openButtonLabel="Abrir herramienta"
+      openButtonLabel="Abrir Herramienta"
     />
   );
 };
