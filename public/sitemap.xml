@@ -1,86 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Home -->
   <url>
     <loc>https://fyt-lab-connect.lovable.app/</loc>
-    <lastmod>2025-10-27</lastmod>
+    <lastmod>2025-11-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+
+  <!-- Noticias -->
   <url>
     <loc>https://fyt-lab-connect.lovable.app/noticias</loc>
-    <lastmod>2025-10-27</lastmod>
+    <lastmod>2025-11-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+
+  <!-- Herramientas (índice y sub-secciones vigentes) -->
   <url>
     <loc>https://fyt-lab-connect.lovable.app/herramientas</loc>
-    <lastmod>2025-10-27</lastmod>
+    <lastmod>2025-11-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://fyt-lab-connect.lovable.app/herramientas/funcion-renal</loc>
-    <lastmod>2025-10-27</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://fyt-lab-connect.lovable.app/herramientas/clinicos</loc>
+    <lastmod>2025-11-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fyt-lab-connect.lovable.app/herramientas/antropometricos</loc>
+    <lastmod>2025-11-18</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fyt-lab-connect.lovable.app/herramientas/antropometricas</loc>
-    <lastmod>2025-10-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://fyt-lab-connect.lovable.app/sobre-nosotros</loc>
-    <lastmod>2025-10-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://fyt-lab-connect.lovable.app/contactos</loc>
-    <lastmod>2025-10-27</lastmod>
+    <loc>https://fyt-lab-connect.lovable.app/herramientas/avanzados</loc>
+    <lastmod>2025-11-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://fyt-lab-connect.lovable.app/herramientas/escalas</loc>
+    <lastmod>2025-11-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Investigación -->
+  <url>
     <loc>https://fyt-lab-connect.lovable.app/investigacion</loc>
-    <lastmod>2025-10-27</lastmod>
+    <lastmod>2025-11-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://fyt-lab-connect.lovable.app/investigacion/proyectos</loc>
-    <lastmod>2025-10-27</lastmod>
+    <lastmod>2025-11-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://fyt-lab-connect.lovable.app/investigacion/publicaciones</loc>
-    <lastmod>2025-10-27</lastmod>
+    <lastmod>2025-11-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+
+  <!-- Sobre Nosotros y Contacto -->
+  <url>
+    <loc>https://fyt-lab-connect.lovable.app/sobre-nosotros</loc>
+    <lastmod>2025-11-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fyt-lab-connect.lovable.app/contactos</loc>
+    <lastmod>2025-11-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Legales -->
   <url>
     <loc>https://fyt-lab-connect.lovable.app/PrivacyPolicy</loc>
-    <lastmod>2025-10-27</lastmod>
+    <lastmod>2025-11-18</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://fyt-lab-connect.lovable.app/TermsOfUse</loc>
-    <lastmod>2025-10-27</lastmod>
+    <lastmod>2025-11-18</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://fyt-lab-connect.lovable.app/CodeOfEthics</loc>
-    <lastmod>2025-10-27</lastmod>
+    <lastmod>2025-11-18</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
+
+  <!-- Calculadora dedicada (ruta histórica aún disponible) -->
   <url>
     <loc>https://fyt-lab-connect.lovable.app/calculator/dosage</loc>
-    <lastmod>2025-10-27</lastmod>
+    <lastmod>2025-11-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
