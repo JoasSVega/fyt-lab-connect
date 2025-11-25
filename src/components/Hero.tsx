@@ -87,12 +87,36 @@ export default function Hero() {
           letter-spacing: 0.5px;
         }
         .highlight-keyword {
-          color: #9333ea; /* morado vibrante */
+          position: relative;
           text-transform: uppercase;
           font-weight: 800;
-          display: inline-block;
-          font-size: inherit; /* usar mismo tamaño que el texto circundante */
-          text-shadow: 0 1px 6px rgba(0,0,0,0.45);
+          display: inline-inline-block;
+          font-size: inherit;
+          padding: .15rem .65rem .25rem;
+          border-radius: 0.85rem;
+          letter-spacing: 1px;
+          background: linear-gradient(135deg,#6d28d9 0%, #7e22ce 30%, #9333ea 55%, #c084fc 100%);
+          color: #ffffff;
+          box-shadow: 0 0 0 1px rgba(255,255,255,0.08), 0 4px 14px rgba(147,51,234,0.55);
+          text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+          isolation: isolate;
+        }
+        .highlight-keyword::after {
+          content: '';
+          position: absolute;
+          left: 8%;
+          bottom: 4px;
+          width: 84%;
+          height: 6px;
+          background: linear-gradient(90deg,rgba(255,255,255,0.15),rgba(255,255,255,0.5),rgba(255,255,255,0.15));
+          border-radius: 999px;
+          filter: blur(3px);
+          pointer-events: none;
+          z-index: -1;
+        }
+        .highlight-keyword:focus-visible, .highlight-keyword:hover {
+          box-shadow: 0 0 0 2px rgba(255,255,255,0.25), 0 6px 18px rgba(147,51,234,0.65);
+          outline: none;
         }
         /* Ajustes móviles adicionales: asegurar envoltura de palabras y evitar recortes */
         @media (max-width: 640px) {
