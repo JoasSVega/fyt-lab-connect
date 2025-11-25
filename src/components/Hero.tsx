@@ -44,9 +44,9 @@ export default function Hero() {
             }}
           >
             {"Investigación rigurosa, impacto real en la "}
-            <span className="highlight-keyword" data-kw="salud" style={{ fontFamily: 'Merriweather, serif' }}>SALUD</span>{", "}
-            <span className="highlight-keyword" data-kw="ciencia" style={{ fontFamily: 'Merriweather, serif' }}>CIENCIA</span>{" e "}
-            <span className="highlight-keyword" data-kw="innovacion" style={{ fontFamily: 'Merriweather, serif' }}>INNOVACIÓN</span>{"."}
+            <span className="stroke-salud" style={{ fontFamily: 'Merriweather, serif' }}>SALUD</span>{", "}
+            <span className="stroke-ciencia" style={{ fontFamily: 'Merriweather, serif' }}>CIENCIA</span>{" e "}
+            <span className="stroke-innovacion" style={{ fontFamily: 'Merriweather, serif' }}>INNOVACIÓN</span>{"."}
           </h1>
           <h2
             className="text-white font-light text-center mb-8 leading-relaxed"
@@ -82,50 +82,6 @@ export default function Hero() {
       </div>
       {/* Estilos reutilizables */}
       <style>{`
-        .highlight {
-          font-weight: 700;
-          letter-spacing: 0.5px;
-        }
-        .highlight-keyword {
-          position: relative;
-          text-transform: uppercase;
-          font-weight: 800;
-          display: inline-block;
-          font-size: 0.82em;
-          line-height: 1.05;
-          padding: .08rem .5rem .18rem;
-          border-radius: 0.65rem;
-          letter-spacing: .075em;
-          background: rgba(255,255,255,0.06);
-          backdrop-filter: blur(2px);
-          color: #ffffff;
-          text-shadow: 0 2px 6px rgba(0,0,0,0.55);
-        }
-        .highlight-keyword[data-kw='salud'] {
-          box-shadow:
-            0 0 0 1px rgba(59,130,246,0.55),
-            0 0 0 4px rgba(59,130,246,0.25),
-            0 4px 12px -2px rgba(59,130,246,0.55),
-            0 8px 32px -4px rgba(59,130,246,0.35);
-        }
-        .highlight-keyword[data-kw='ciencia'] {
-          box-shadow:
-            0 0 0 1px rgba(239,68,68,0.55),
-            0 0 0 4px rgba(239,68,68,0.25),
-            0 4px 12px -2px rgba(239,68,68,0.55),
-            0 8px 32px -4px rgba(239,68,68,0.35);
-        }
-        .highlight-keyword[data-kw='innovacion'] {
-          box-shadow:
-            0 0 0 1px rgba(147,51,234,0.6),
-            0 0 0 4px rgba(147,51,234,0.3),
-            0 4px 12px -2px rgba(147,51,234,0.6),
-            0 8px 32px -4px rgba(147,51,234,0.4);
-        }
-        .highlight-keyword:focus-visible, .highlight-keyword:hover {
-          outline: none;
-          filter: brightness(1.08);
-        }
         /* Ajustes móviles adicionales: asegurar envoltura de palabras y evitar recortes */
         @media (max-width: 640px) {
           h1, h2 { 
