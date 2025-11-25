@@ -134,6 +134,38 @@ const App: React.FC = () => {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
+  // Aplica automáticamente la clase de mejora de legibilidad a botones con texto blanco y fondo sólido.
+  useEffect(() => {
+    const applyEnhancement = () => {
+      const candidates = Array.from(document.querySelectorAll('button.text-white, a.text-white, [role="button"].text-white')) as HTMLElement[];
+      candidates.forEach(el => {
+        if (el.classList.contains('btn-text-enhanced')) return;
+        const cls = el.className;
+        // Detectar clases de fondo sólidas generadas por Tailwind (bg-*) excluyendo bg-transparent
+        const hasBgClass = /(^|\s)bg-[^\s]+/.test(cls) && !/(^|\s)bg-transparent(\s|$)/.test(cls);
+        // Detectar uso de bg arbitrario como bg-[#9333ea] (Tailwind JIT genera una clase con ese patrón)
+        const hasArbitraryBg = /bg-\[/.test(cls);
+        // O fondo inline style distinto de transparente
+        const inlineBg = el.style.backgroundColor && el.style.backgroundColor !== 'transparent';
+        if (hasBgClass || hasArbitraryBg || inlineBg) {
+          el.classList.add('btn-text-enhanced');
+        }
+      });
+    };
+    // Primera aplicación
+    applyEnhancement();
+    // Observa mutaciones para aplicar a elementos agregados dinámicamente
+    const observer = new MutationObserver(mutations => {
+      for (const m of mutations) {
+        if (m.addedNodes.length) {
+          applyEnhancement();
+        }
+      }
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+    return () => observer.disconnect();
+  }, []);
+
   const shell = (
     <>
       <ToasterShadcn />

@@ -376,6 +376,14 @@ body.modal-open .calc-overlay {
       0 0 6px rgba(0, 0, 0, 0.40),
       0 0 12px rgba(0, 0, 0, 0.35);
   }
+
+  /* Mejora global de legibilidad para botones sólidos con texto blanco */
+  .btn-text-enhanced {
+    font-weight: 600; /* equivalente a font-semibold */
+    text-shadow:
+      0 0 6px rgba(0, 0, 0, 0.40),
+      0 0 12px rgba(0, 0, 0, 0.35);
+  }
 }
 
 /* 3D Flip Utilities (fallback-safe, scoped, no !important) */
