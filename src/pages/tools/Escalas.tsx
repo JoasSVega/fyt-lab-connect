@@ -29,9 +29,9 @@ const Escalas: React.FC = () => {
           aria-label={`Explorar ${title}`}
         >
           Explorar
-        </button>
-      )}
-    </div>
+          <button
+            type="button"
+            className="mt-auto px-4 py-2 rounded-md bg-violet-600 text-white font-semibold btn-solid-interactive inline-flex items-center gap-2"
   );
 
   return (

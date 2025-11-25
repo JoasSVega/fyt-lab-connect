@@ -17,7 +17,7 @@ const Card = ({ icon, title, desc, to, color }: { icon: React.ReactNode; title: 
       <p className="text-muted-foreground flex-1">{desc}</p>
       <Button
         onClick={()=>navigate(to)}
-        className="mt-6 inline-flex items-center gap-2 rounded-full px-4 py-2 text-white shadow"
+        className="mt-6 inline-flex items-center gap-2 rounded-full px-4 py-2 text-white shadow btn-solid-interactive"
         style={{ backgroundColor: color }}
       >
         Explorar <ArrowRight className="w-4 h-4" />

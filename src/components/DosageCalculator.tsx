@@ -42,8 +42,8 @@ export default function DosageCalculator() {
         className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition font-inter"
       >
         Calcular
-      </button>
-
+      <button
+        className="bg-blue-500 text-white px-4 py-2 rounded-lg btn-solid-interactive font-inter"
       {result !== null && (
         <div className="mt-4 p-3 bg-green-100 text-green-800 rounded-lg font-inter">
           <p><strong>Resultado:</strong> {result} mg</p>
