@@ -9,13 +9,20 @@ const SobreNosotros = () => (
     <main className="flex-1 w-full pt-24">
       {/* Hero Institucional */}
       <section
-        className="w-full min-h-[50vh] flex items-center justify-center text-center py-20 px-4 sm:px-6 lg:px-8"
-        style={{
-          background: "linear-gradient(120deg, #dbeafe 0%, #f1f5f9 50%, #e5e7eb 100%)",
-        }}
+        className="relative left-1/2 -translate-x-1/2 w-screen min-h-[70vh] flex items-center justify-center text-center overflow-hidden"
         aria-label="Hero Sobre Nosotros"
       >
-        <div className="max-w-4xl mx-auto">
+        {/* Background Image */}
+        <img
+          src="/images/hero-nosotros.png"
+          alt="Fondo hero Sobre Nosotros"
+          className="absolute inset-0 w-full h-full object-cover"
+          aria-hidden="true"
+        />
+        {/* Overlay for text contrast */}
+        <div className="absolute inset-0 bg-white/65 pointer-events-none" />
+        {/* Content */}
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-poppins font-extrabold text-slate-800 mb-6 tracking-tight">
             Sobre Nosotros
           </h1>
