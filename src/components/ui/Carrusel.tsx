@@ -118,11 +118,11 @@ const Carrusel: React.FC<CarruselProps> = ({
         setApi={setEmblaApi}
         className={"w-full"}
       >
-      <CarouselContent className="gap-x-4">
+      <CarouselContent className="home-carousel-content">
         {items.map((item, index) => (
           <CarouselItem
             key={index}
-            className="px-2 md:px-4 basis-[92%] sm:basis-[85%] md:basis-1/2 xl:basis-1/3 min-w-[280px] md:min-w-[320px] max-w-[520px]"
+            className="px-2 md:px-4 home-carousel-item min-w-[280px] md:min-w-[320px] max-w-[520px]"
           >
             <Card
               style={{ borderColor: color }}
