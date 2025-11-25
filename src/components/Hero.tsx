@@ -44,9 +44,9 @@ export default function Hero() {
             }}
           >
             {"Investigación rigurosa, impacto real en la "}
-            <span className="stroke-salud" style={{ fontFamily: 'Merriweather, serif' }}>SALUD</span>{", "}
-            <span className="stroke-ciencia" style={{ fontFamily: 'Merriweather, serif' }}>CIENCIA</span>{" e "}
-            <span className="stroke-innovacion" style={{ fontFamily: 'Merriweather, serif' }}>INNOVACIÓN</span>{"."}
+            <span className="glow-salud" style={{ fontFamily: 'Merriweather, serif' }}>SALUD</span>{", "}
+            <span className="glow-ciencia" style={{ fontFamily: 'Merriweather, serif' }}>CIENCIA</span>{" e "}
+            <span className="glow-innovacion" style={{ fontFamily: 'Merriweather, serif' }}>INNOVACIÓN</span>{"."} 
           </h1>
           <h2
             className="text-white font-light text-center mb-8 leading-relaxed"
