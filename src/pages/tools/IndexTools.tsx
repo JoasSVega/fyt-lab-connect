@@ -28,12 +28,36 @@ const Card = ({ icon, title, desc, to, color }: { icon: React.ReactNode; title: 
 
 const IndexTools: React.FC = () => {
   return (
-    <div className="w-full max-w-6xl mx-auto px-3 sm:px-6 py-10">
+    <>
       <Seo
         title="Herramientas farmacéuticas clínicas y asistenciales"
         description="Explora cálculos clínicos y farmacéuticos, cálculos fisiológicos y antropométricos, escalas clínicas y validación farmacoterapéutica, y herramientas avanzadas y conversores."
       />
-      <h1 className="site-section-title text-center mb-10">Herramientas</h1>
+      {/* Hero Section con imagen de fondo */}
+      <section
+        className="relative left-1/2 -translate-x-1/2 w-screen h-[50vh] md:h-[70vh] flex items-center justify-center overflow-hidden"
+        aria-label="Hero Herramientas"
+        style={{
+          backgroundImage: "url('/images/hero-herramientas.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat"
+        }}
+      >
+        {/* Overlay oscuro sutil para mejorar legibilidad */}
+        <div className="absolute inset-0 bg-black/25 pointer-events-none" />
+        {/* Content */}
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-poppins font-bold text-white mb-6 tracking-tight drop-shadow-lg">
+            Herramientas Digitales para Profesionales Farmacéuticos
+          </h1>
+          <p className="text-base sm:text-lg md:text-xl font-inter text-white/95 leading-relaxed max-w-3xl mx-auto drop-shadow-md">
+            Soluciones inteligentes diseñadas para análisis clínico, gestión de datos y optimización de decisiones en entornos sanitarios.
+          </p>
+        </div>
+      </section>
+      {/* Contenido principal */}
+      <div className="w-full max-w-6xl mx-auto px-3 sm:px-6 py-10">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Card
           icon={<Stethoscope className="w-7 h-7" />}
@@ -69,7 +93,8 @@ const IndexTools: React.FC = () => {
       <p className="text-center font-bold mt-12 text-sm text-gray-800 dark:text-gray-200">
         Estas herramientas son de uso académico e informativo. No reemplazan el juicio clínico ni las decisiones de un profesional de la salud.
       </p>
-    </div>
+      </div>
+    </>
   );
 };
 
