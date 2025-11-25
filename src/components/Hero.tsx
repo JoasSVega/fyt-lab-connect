@@ -68,7 +68,7 @@ export default function Hero() {
           </h2>
           <a
             href="/herramientas"
-            className="bg-[#9333ea] text-white font-semibold py-2.5 px-6 rounded-full shadow-lg transition-colors focus:outline-none focus:ring-2 focus:ring-[#9333ea] focus:ring-offset-2 font-poppins inline-flex items-center justify-center text-center w-auto max-w-[92vw] border-2 border-transparent hover:bg-white hover:text-[#9333ea] hover:border-[#9333ea]"
+            className="bg-[#9333ea] text-white font-semibold py-2.5 px-6 rounded-full shadow-lg transition-colors focus:outline-none focus:ring-2 focus:ring-[#9333ea] focus:ring-offset-2 font-poppins inline-flex items-center justify-center text-center w-auto max-w-[92vw] border-2 border-transparent btn-text-enhanced"
             style={{
               fontFamily: 'Poppins, Montserrat, Arial, sans-serif',
               marginTop: '1rem',
