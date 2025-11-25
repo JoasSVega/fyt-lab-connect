@@ -35,24 +35,24 @@ const IndexTools: React.FC = () => {
       />
       {/* Hero Section con imagen de fondo */}
       <section
-        className="relative left-1/2 -translate-x-1/2 w-screen h-[50vh] md:h-[70vh] flex items-center overflow-hidden"
+        className="hero-container"
         aria-label="Hero Herramientas"
       >
-        {/* Imagen de fondo */}
+        {/* Imagen de fondo unificada */}
         <img 
           src="/images/hero-herramientas.png" 
           alt="" 
-          className="absolute inset-0 w-full h-full object-cover" 
+          className="hero-image" 
           aria-hidden="true"
         />
         {/* Overlay oscuro unificado */}
         <div className="hero-overlay" />
         {/* Content con text-shadow */}
         <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 text-center hero-text-shadow">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-poppins font-bold text-white mb-6 tracking-tight drop-shadow-lg">
+          <h1 className="hero-title font-poppins font-bold text-white mb-6 tracking-tight drop-shadow-lg">
             Herramientas Digitales para Profesionales Farmacéuticos
           </h1>
-          <p className="text-base sm:text-lg md:text-xl font-inter text-white/95 leading-relaxed max-w-3xl mx-auto drop-shadow-md">
+          <p className="hero-subtitle font-inter text-white/95 leading-relaxed max-w-3xl mx-auto drop-shadow-md">
             Soluciones inteligentes diseñadas para análisis clínico, gestión de datos y optimización de decisiones en entornos sanitarios.
           </p>
         </div>
