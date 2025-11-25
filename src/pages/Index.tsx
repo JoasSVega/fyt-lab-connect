@@ -30,7 +30,7 @@ const Index = () => {
               <p className="text-muted-foreground text-center text-[clamp(0.9rem,1.4vw,1rem)] mb-4 font-inter">Conoce el objetivo, valores y equipo del grupo FyT.</p>
               <Button
                 onClick={() => navigate('/sobre-nosotros')}
-                className="mt-auto w-full md:w-auto rounded-full px-5 py-2 font-inter shadow bg-fyt-blue text-white border-2 border-fyt-blue hover:bg-white hover:text-fyt-blue transition"
+                className="mt-auto w-full md:w-auto rounded-full px-5 py-2 font-inter shadow bg-fyt-blue text-white border-2 border-fyt-blue btn-solid-interactive"
               >
                 Ver Más
               </Button>
@@ -44,7 +44,7 @@ const Index = () => {
             <p className="text-muted-foreground text-center text-[clamp(0.9rem,1.4vw,1rem)] mb-4 font-inter">Conoce nuestras investigaciones actuales y resultados científicos.</p>
             <Button
               onClick={() => navigate('/investigacion')}
-              className="mt-auto w-full md:w-auto rounded-full px-5 py-2 font-inter shadow bg-fyt-purple text-white border-2 border-fyt-purple hover:bg-white hover:text-fyt-purple transition"
+              className="mt-auto w-full md:w-auto rounded-full px-5 py-2 font-inter shadow bg-fyt-purple text-white border-2 border-fyt-purple btn-solid-interactive"
             >
               Ver Investigación
             </Button>
@@ -58,7 +58,7 @@ const Index = () => {
             <p className="text-muted-foreground text-center text-[clamp(0.9rem,1.4vw,1rem)] mb-4 font-inter">Mantente informado sobre nuestras actividades y logros recientes.</p>
             <Button
               onClick={() => navigate('/noticias')}
-              className="mt-auto w-full md:w-auto rounded-full px-5 py-2 font-inter shadow bg-fyt-red text-white border-2 border-fyt-red hover:bg-white hover:text-fyt-red transition"
+              className="mt-auto w-full md:w-auto rounded-full px-5 py-2 font-inter shadow bg-fyt-red text-white border-2 border-fyt-red btn-solid-interactive"
             >
               Ver Noticias
             </Button>
