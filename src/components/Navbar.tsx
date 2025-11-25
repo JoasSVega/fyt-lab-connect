@@ -6,11 +6,20 @@ import { Menu, X, ChevronDown } from "lucide-react";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [isScrolled, setIsScrolled] = useState(false);
   const logoRef = useRef<HTMLImageElement | null>(null);
 
   useEffect(() => {
     // Apply native fetchpriority attribute via DOM to avoid React prop warning
     logoRef.current?.setAttribute("fetchpriority", "high");
+  }, []);
+
+  // Toggle glassmorphism on scroll (without changing layout)
+  useEffect(() => {
+    const onScroll = () => setIsScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const menuItems = [
@@ -65,8 +74,21 @@ const Navbar = () => {
     setOpenDropdown(null);
   };
 
+  const glowFor = (name: string): "blue" | "red" | "purple" => {
+    switch (name) {
+      case "Noticias":
+        return "red";
+      case "Sobre Nosotros":
+      case "Herramientas":
+      case "Investigación":
+        return "purple";
+      default:
+        return "blue";
+    }
+  };
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white shadow-lg">
+    <nav className={`nav-root fixed top-0 left-0 right-0 z-50 ${isScrolled ? "is-scrolled" : "bg-white shadow-lg"}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo y nombre */}
@@ -108,7 +130,7 @@ const Navbar = () => {
                 {item.isDropdown ? (
                   <button
                     onClick={() => handleDropdownToggle(item.name)}
-                      className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 transition-all duration-200 font-inter px-3 py-2 rounded-md"
+                      className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 transition-all duration-150 ease-out font-inter px-3 py-2 rounded-md"
                   >
                     <span>{item.name}</span>
                     <ChevronDown 
@@ -121,10 +143,11 @@ const Navbar = () => {
                   <NavLink
                     to={item.href}
                     className={({ isActive }) =>
-                      `text-gray-700 hover:text-blue-600 transition-all duration-200 font-medium px-3 py-2 rounded-md ${
-                        isActive ? 'text-blue-600 bg-blue-50' : ''
+                      `nav-link text-gray-700 hover:text-blue-600 transition-all duration-150 ease-out font-semibold px-3 py-2 rounded-md ${
+                        isActive ? 'nav-link--active text-blue-600' : ''
                       }`
                     }
+                    data-glow={glowFor(item.name)}
                   >
                     {item.name}
                   </NavLink>
@@ -156,11 +179,12 @@ const Navbar = () => {
                   <NavLink
                     to={item.href}
                     className={({ isActive }) =>
-                      `block px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all duration-200 font-inter ${
-                        isActive ? 'text-blue-600 bg-blue-50' : ''
+                      `nav-link block px-4 py-2 text-gray-700 hover:text-blue-600 transition-all duration-150 ease-out font-semibold ${
+                        isActive ? 'nav-link--active text-blue-600' : ''
                       }`
                     }
                     onClick={() => setIsMenuOpen(false)}
+                    data-glow={glowFor(item.name)}
                   >
                     {item.name}
                   </NavLink>
