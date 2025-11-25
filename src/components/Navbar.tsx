@@ -162,7 +162,7 @@ const Navbar = () => {
 
         {/* Menú móvil y tablet */}
         {isMenuOpen && (
-          <div className="mobile-menu-panel lg:hidden bg-white/95 w-full font-inter border-t border-gray-200">
+          <div className="mobile-menu-panel menu-enter lg:hidden bg-white/95 font-inter border border-gray-200">
             <div className="flex flex-col">
               {menuItems.map((item, idx) => (
                 <NavLink

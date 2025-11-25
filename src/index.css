@@ -561,11 +561,23 @@ body.modal-open .calc-overlay {
   .hamburger.is-active .hamburger-bar:nth-child(3) { top: 9px; transform: rotate(-45deg); }
 
   @keyframes slideDownNav {
-    from { opacity: 0; transform: translateY(-8px); }
+    from { opacity: 0; transform: translateY(-12px); }
     to { opacity: 1; transform: translateY(0); }
   }
+  @keyframes slideUpNav {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-12px); }
+  }
   .mobile-menu-panel {
-    animation: slideDownNav 220ms ease-out;
+    border-radius: 0.75rem; /* rounded-xl */
+    overflow: hidden;
+    margin: 0.5rem;
+  }
+  .mobile-menu-panel.menu-enter {
+    animation: slideDownNav 250ms ease-out forwards;
+  }
+  .mobile-menu-panel.menu-exit {
+    animation: slideUpNav 220ms ease-in forwards;
   }
   .nav-link-mobile {
     position: relative;
