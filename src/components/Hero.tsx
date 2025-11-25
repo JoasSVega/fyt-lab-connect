@@ -18,17 +18,19 @@ export default function Hero() {
     <section
       id="inicio"
       className="relative left-1/2 -translate-x-1/2 w-screen h-[50vh] md:h-[70vh] flex items-center justify-center overflow-hidden"
-      style={{
-        backgroundImage: "url('/images/hero-index.png')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat"
-      }}
     >
-      {/* Overlay oscuro para mejorar legibilidad */}
-      <div className="absolute inset-0 bg-black/40 pointer-events-none" />
-      {/* Contenido centrado */}
-      <div className="relative z-10 w-full flex items-center justify-center px-6 md:px-12">
+      {/* Imagen de fondo */}
+      <img 
+        ref={bgRef}
+        src="/images/hero-index.png" 
+        alt="" 
+        className="absolute inset-0 w-full h-full object-cover" 
+        aria-hidden="true"
+      />
+      {/* Overlay oscuro unificado */}
+      <div className="hero-overlay" />
+      {/* Contenido centrado con text-shadow */}
+      <div className="relative z-10 w-full flex items-center justify-center px-6 md:px-12 hero-text-shadow">
   <div className="mx-auto max-w-5xl w-full flex flex-col items-center text-white">
           <h1
             className="text-white font-bold text-center mb-6 tracking-tight"

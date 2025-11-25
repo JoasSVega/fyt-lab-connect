@@ -11,17 +11,18 @@ const SobreNosotros = () => (
       <section
         className="relative left-1/2 -translate-x-1/2 w-screen h-[50vh] md:h-[70vh] flex items-center overflow-hidden"
         aria-label="Hero Sobre Nosotros"
-        style={{
-          backgroundImage: "url('/images/hero-nosotros.png')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat"
-        }}
       >
-        {/* Overlay oscuro para mejorar legibilidad */}
-        <div className="absolute inset-0 bg-black/50 pointer-events-none" />
-        {/* Content */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12">
+        {/* Imagen de fondo */}
+        <img 
+          src="/images/hero-nosotros.png" 
+          alt="" 
+          className="absolute inset-0 w-full h-full object-cover" 
+          aria-hidden="true"
+        />
+        {/* Overlay oscuro unificado */}
+        <div className="hero-overlay" />
+        {/* Content con text-shadow */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 hero-text-shadow">
           <div className="max-w-3xl text-center lg:text-left">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-poppins font-extrabold text-white mb-6 tracking-tight drop-shadow-lg">
               Sobre Nosotros
