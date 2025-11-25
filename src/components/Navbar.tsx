@@ -1,7 +1,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -148,32 +148,35 @@ const Navbar = () => {
           <div className="lg:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-700 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 p-2 font-inter"
+              className="p-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-md"
               aria-label="Toggle menu"
             >
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              <span className={`hamburger ${isMenuOpen ? 'is-active' : ''}`}> 
+                <span className="hamburger-bar" />
+                <span className="hamburger-bar" />
+                <span className="hamburger-bar" />
+              </span>
             </button>
           </div>
         </div>
 
         {/* Menú móvil y tablet */}
         {isMenuOpen && (
-          <div className="lg:hidden border-t border-gray-200 py-4 bg-white font-inter">
-            <div className="space-y-2">
-              {menuItems.map((item) => (
-                <div key={item.name}>
-                  <NavLink
-                    to={item.href}
-                    className={({ isActive }) =>
-                      `nav-link block px-4 py-2 text-gray-700 transition-all duration-150 ease-out font-semibold ${
-                        isActive ? 'nav-link--active' : ''
-                      }`
-                    }
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.name}
-                  </NavLink>
-                </div>
+          <div className="mobile-menu-panel lg:hidden bg-white/95 w-full font-inter border-t border-gray-200">
+            <div className="flex flex-col">
+              {menuItems.map((item, idx) => (
+                <NavLink
+                  key={item.name}
+                  to={item.href}
+                  className={({ isActive }) =>
+                    `nav-link-mobile text-gray-700 text-base px-4 py-3 transition-all duration-150 ease-out ${
+                      isActive ? 'nav-link--active' : ''
+                    } ${idx < menuItems.length - 1 ? 'border-b border-gray-200' : ''}`
+                  }
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.name}
+                </NavLink>
               ))}
             </div>
           </div>
