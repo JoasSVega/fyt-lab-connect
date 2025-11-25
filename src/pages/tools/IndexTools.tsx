@@ -17,7 +17,7 @@ const Card = ({ icon, title, desc, to, color }: { icon: React.ReactNode; title: 
       <p className="text-muted-foreground flex-1">{desc}</p>
       <Button
         onClick={()=>navigate(to)}
-        className="mt-6 inline-flex items-center gap-2 rounded-full px-4 py-2 text-white shadow"
+        className="mt-6 inline-flex items-center gap-2 rounded-full px-4 py-2 text-white shadow btn-solid-interactive"
         style={{ backgroundColor: color }}
       >
         Explorar <ArrowRight className="w-4 h-4" />
@@ -28,12 +28,37 @@ const Card = ({ icon, title, desc, to, color }: { icon: React.ReactNode; title: 
 
 const IndexTools: React.FC = () => {
   return (
-    <div className="w-full max-w-6xl mx-auto px-3 sm:px-6 py-10">
+    <>
       <Seo
         title="Herramientas farmacéuticas clínicas y asistenciales"
         description="Explora cálculos clínicos y farmacéuticos, cálculos fisiológicos y antropométricos, escalas clínicas y validación farmacoterapéutica, y herramientas avanzadas y conversores."
       />
-      <h1 className="site-section-title text-center mb-10">Herramientas</h1>
+      {/* Hero Section con imagen de fondo */}
+      <section
+        className="hero-container"
+        aria-label="Hero Herramientas"
+      >
+        {/* Imagen de fondo unificada */}
+        <img 
+          src="/images/hero-herramientas.png" 
+          alt="" 
+          className="hero-image" 
+          aria-hidden="true"
+        />
+        {/* Overlay oscuro unificado */}
+        <div className="hero-overlay" />
+        {/* Content con text-shadow */}
+        <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 py-14 md:py-16 lg:py-20 text-center hero-text-shadow">
+          <h1 className="hero-title font-poppins font-bold text-white mb-6 tracking-tight drop-shadow-lg">
+            Herramientas Digitales para Profesionales Farmacéuticos
+          </h1>
+          <p className="hero-subtitle font-inter text-white/95 leading-relaxed max-w-3xl mx-auto drop-shadow-md">
+            Soluciones inteligentes diseñadas para análisis clínico, gestión de datos y optimización de decisiones en entornos sanitarios.
+          </p>
+        </div>
+      </section>
+      {/* Contenido principal */}
+      <div className="w-full max-w-6xl mx-auto px-3 sm:px-6 py-10">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Card
           icon={<Stethoscope className="w-7 h-7" />}
@@ -69,7 +94,8 @@ const IndexTools: React.FC = () => {
       <p className="text-center font-bold mt-12 text-sm text-gray-800 dark:text-gray-200">
         Estas herramientas son de uso académico e informativo. No reemplazan el juicio clínico ni las decisiones de un profesional de la salud.
       </p>
-    </div>
+      </div>
+    </>
   );
 };
 

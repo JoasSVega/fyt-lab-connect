@@ -6,9 +6,35 @@ import FloatingContact from "@/components/FloatingContact";
 const SobreNosotros = () => (
   <div className="w-full bg-background overflow-x-hidden flex flex-col">
     <Navbar />
-    <main className="flex-1 w-full pt-24">
+    <main className="flex-1 w-full">
+      {/* Hero Institucional */}
+      <section
+        className="hero-container"
+        aria-label="Hero Sobre Nosotros"
+      >
+        {/* Imagen de fondo unificada */}
+        <img 
+          src="/images/hero-nosotros.png" 
+          alt="" 
+          className="hero-image" 
+          aria-hidden="true"
+        />
+        {/* Overlay oscuro unificado */}
+        <div className="hero-overlay" />
+        {/* Content con text-shadow */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 py-14 md:py-16 lg:py-20 hero-text-shadow">
+          <div className="max-w-3xl text-center lg:text-left">
+            <h1 className="hero-title font-poppins font-extrabold text-white mb-6 tracking-tight drop-shadow-lg">
+              Sobre Nosotros
+            </h1>
+            <p className="hero-subtitle font-inter text-white/95 leading-relaxed drop-shadow-md">
+              Somos un equipo comprometido con la innovación farmacéutica, la seguridad del paciente y la excelencia científica. Nuestra misión es desarrollar soluciones inteligentes que impulsen el futuro de la salud.
+            </p>
+          </div>
+        </div>
+      </section>
       {/* Sección Nuestro Objetivo y Nuestros Valores (desde About) */}
-  <AboutSobreNosotros />
+      <AboutSobreNosotros />
       {/* Sección Nuestro Equipo */}
       <section className="py-20 min-h-[60vh] bg-[#f8fafc]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -17,7 +43,7 @@ const SobreNosotros = () => (
         </div>
       </section>
     </main>
-      <FloatingContact />
+    <FloatingContact />
   </div>
 );
 

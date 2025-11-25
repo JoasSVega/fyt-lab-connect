@@ -10,30 +10,31 @@ import CHA2DS2VAScTool from "@/components/tools/CHA2DS2VAScTool";
 const Escalas: React.FC = () => {
   const navigate = useNavigate();
 
-  const Card = ({ icon, title, desc, color = "#a855f7", action }: { icon: React.ReactNode; title: string; desc: string; color?: string; action?: React.ReactNode; }) => (
-    <div className="tool-card rounded-2xl border-2 bg-white/90 shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-xl p-6 flex flex-col" role="article" aria-label={title}>
-      <div className="flex flex-col sm:flex-row items-center sm:items-center gap-3 mb-3 min-w-0 text-center sm:text-left">
-        <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: color + "22", color }}>
-          {icon}
-          <span className="sr-only">Icono de {title}</span>
+  const Card = ({ icon, title, desc, color = "#a855f7", action }: { icon: React.ReactNode; title: string; desc: string; color?: string; action?: React.ReactNode; }) => {
+    return (
+      <div className="tool-card rounded-2xl border-2 bg-white/90 shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-xl p-6 flex flex-col" role="article" aria-label={title}>
+        <div className="flex flex-col sm:flex-row items-center sm:items-center gap-3 mb-3 min-w-0 text-center sm:text-left">
+          <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: color + "22", color }}>
+            {icon}
+            <span className="sr-only">Icono de {title}</span>
+          </div>
+          <h3 className="sm:flex-1 sm:min-w-0 text-xl font-raleway font-bold text-black break-words whitespace-normal leading-snug" style={{ hyphens: 'none' }}>{title}</h3>
         </div>
-        <h3 className="sm:flex-1 sm:min-w-0 text-xl font-raleway font-bold text-black break-words whitespace-normal leading-snug" style={{ hyphens: 'none' }}>{title}</h3>
+        <p className="text-sm text-muted-foreground mb-4 flex-1">{desc}</p>
+        {action ? (
+          <div className="mt-auto">{action}</div>
+        ) : (
+          <button
+            type="button"
+            className="mt-auto px-4 py-2 rounded-md bg-violet-600 text-white font-semibold btn-solid-interactive inline-flex items-center gap-2"
+            aria-label={`Explorar ${title}`}
+          >
+            Explorar
+          </button>
+        )}
       </div>
-      <p className="text-sm text-muted-foreground mb-4 flex-1">{desc}</p>
-      {action ? (
-        <div className="mt-auto">{action}</div>
-      ) : (
-        <button
-          type="button"
-          className="mt-auto px-4 py-2 rounded-md bg-violet-600 text-white font-semibold hover:bg-violet-700 inline-flex items-center gap-2"
-          aria-label={`Explorar ${title}`}
-        >
-          Explorar
-        </button>
-      )}
-    </div>
-  );
-
+    );
+  };
   return (
     <main className="w-full max-w-6xl mx-auto px-3 sm:px-6 py-10" aria-labelledby="page-title">
       {/* SEO meta */}

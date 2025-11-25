@@ -11,16 +11,16 @@ import FloatingContact from "@/components/FloatingContact";
 const Index = () => {
   const navigate = useNavigate();
   return (
-  <div className="w-full min-h-screen overflow-x-hidden px-2 sm:px-6 md:px-12 lg:px-24 xl:px-32 2xl:px-48" style={{background: "linear-gradient(120deg, #e0f2ff 0%, #f8fafc 60%, #f3f4f6 100%)"}}>
+  <div className="w-full min-h-screen overflow-x-hidden" style={{background: "linear-gradient(120deg, #e0f2ff 0%, #f8fafc 60%, #f3f4f6 100%)"}}>
       {/* Fixed Navigation */}
       <Navbar />
       {/* Main Content */}
-  <main className="w-full pt-24">
+  <main className="w-full">
         {/* Título principal eliminado para evitar duplicidad. */}
         {/* Hero Section (sin ScrollReveal para evitar scroll interno y problemas de visualización) */}
         <Hero />
         {/* Tarjetas principales: diseño proporcional y simétrico en todas las pantallas */}
-        <section className="w-full grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 py-12">
+        <section className="w-full grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 py-12 px-2 sm:px-6 md:px-12 lg:px-24 xl:px-32 2xl:px-48">
           {/* Sobre Nosotros */}
             <div className="flex flex-col h-full items-center gap-4 bg-white rounded-xl shadow-soft p-6 md:p-8 w-full border border-blue-100">
               <span className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-blue-100 mb-2">
@@ -30,7 +30,7 @@ const Index = () => {
               <p className="text-muted-foreground text-center text-[clamp(0.9rem,1.4vw,1rem)] mb-4 font-inter">Conoce el objetivo, valores y equipo del grupo FyT.</p>
               <Button
                 onClick={() => navigate('/sobre-nosotros')}
-                className="mt-auto w-full md:w-auto rounded-full px-5 py-2 font-inter shadow bg-fyt-blue text-white border-2 border-fyt-blue hover:bg-white hover:text-fyt-blue transition"
+                className="mt-auto w-full md:w-auto rounded-full px-5 py-2 font-inter shadow bg-fyt-blue text-white border-2 border-fyt-blue btn-solid-interactive"
               >
                 Ver Más
               </Button>
@@ -44,7 +44,7 @@ const Index = () => {
             <p className="text-muted-foreground text-center text-[clamp(0.9rem,1.4vw,1rem)] mb-4 font-inter">Conoce nuestras investigaciones actuales y resultados científicos.</p>
             <Button
               onClick={() => navigate('/investigacion')}
-              className="mt-auto w-full md:w-auto rounded-full px-5 py-2 font-inter shadow bg-fyt-purple text-white border-2 border-fyt-purple hover:bg-white hover:text-fyt-purple transition"
+              className="mt-auto w-full md:w-auto rounded-full px-5 py-2 font-inter shadow bg-fyt-purple text-white border-2 border-fyt-purple btn-solid-interactive"
             >
               Ver Investigación
             </Button>
@@ -58,14 +58,16 @@ const Index = () => {
             <p className="text-muted-foreground text-center text-[clamp(0.9rem,1.4vw,1rem)] mb-4 font-inter">Mantente informado sobre nuestras actividades y logros recientes.</p>
             <Button
               onClick={() => navigate('/noticias')}
-              className="mt-auto w-full md:w-auto rounded-full px-5 py-2 font-inter shadow bg-fyt-red text-white border-2 border-fyt-red hover:bg-white hover:text-fyt-red transition"
+              className="mt-auto w-full md:w-auto rounded-full px-5 py-2 font-inter shadow bg-fyt-red text-white border-2 border-fyt-red btn-solid-interactive"
             >
               Ver Noticias
             </Button>
           </div>
         </section>
       {/* Secciones de investigación, modalidades, actividades y productos, y la tarjeta de inscripción */}
-      <About />
+      <div className="px-2 sm:px-6 md:px-12 lg:px-24 xl:px-32 2xl:px-48">
+        <About />
+      </div>
         {/* Pharmaceutical Tools Section removida: ahora solo en la página Herramientas */}
       </main>
       {/* Floating Contact Button */}

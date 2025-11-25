@@ -30,10 +30,31 @@ const Herramientas = () => {
 	return (
 			<div className="w-full bg-background overflow-x-hidden flex flex-col">
 			<main className="flex-1 w-full pt-24">
+                {/* Hero Section con imagen de fondo */}
+                <section
+                  className="relative left-1/2 -translate-x-1/2 w-screen h-[50vh] md:h-[70vh] flex items-center justify-center overflow-hidden"
+                  aria-label="Hero Herramientas"
+                  style={{
+                    backgroundImage: "url('/images/hero-herramientas.png')",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat"
+                  }}
+                >
+                  {/* Overlay oscuro sutil para mejorar legibilidad */}
+                  <div className="absolute inset-0 bg-black/25 pointer-events-none" />
+                  {/* Content */}
+                  <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-poppins font-bold text-white mb-6 tracking-tight drop-shadow-lg">
+                      Herramientas Digitales para Profesionales Farmacéuticos
+                    </h1>
+                    <p className="text-base sm:text-lg md:text-xl font-inter text-white/95 leading-relaxed max-w-3xl mx-auto drop-shadow-md">
+                      Soluciones inteligentes diseñadas para análisis clínico, gestión de datos y optimización de decisiones en entornos sanitarios.
+                    </p>
+                  </div>
+                </section>
+                {/* Sección de tarjetas */}
                 <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-                  <h1 className="text-4xl sm:text-5xl font-poppins font-bold text-slate-800 mb-8 text-center">
-                    Herramientas Farmacéuticas
-                  </h1>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
                     {tools.map((tool, idx) => (
                       <Card
