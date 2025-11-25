@@ -440,18 +440,18 @@ body.modal-open .calc-overlay {
     left: 50%;
     transform: translateX(-50%);
     width: 100vw;
-    min-height: 80vh;
+    min-height: clamp(28rem, 50vh, 42rem);
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    padding-top: clamp(2rem, 10vh, 6rem);
-    padding-bottom: clamp(2rem, 10vh, 6rem);
+    padding-top: clamp(2rem, 8vh, 4rem);
+    padding-bottom: clamp(2rem, 8vh, 4rem);
   }
 
   @media (min-width: 768px) {
     .hero-container {
-      min-height: calc(100vh - 4rem);
+      min-height: clamp(32rem, 55vh, 48rem);
     }
   }
 
