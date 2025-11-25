@@ -149,6 +149,10 @@ const App: React.FC = () => {
         const inlineBg = el.style.backgroundColor && el.style.backgroundColor !== 'transparent';
         if (hasBgClass || hasArbitraryBg || inlineBg) {
           el.classList.add('btn-text-enhanced');
+          // Añadir clase de interacción corporativa unificada
+          if (!el.classList.contains('btn-solid-interactive')) {
+            el.classList.add('btn-solid-interactive');
+          }
         }
       });
     };
