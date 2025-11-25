@@ -35,7 +35,7 @@ const IndexTools: React.FC = () => {
       />
       {/* Hero Section con imagen de fondo */}
       <section
-        className="relative left-1/2 -translate-x-1/2 w-screen h-[50vh] md:h-[70vh] flex items-center justify-center overflow-hidden"
+        className="relative left-1/2 -translate-x-1/2 w-screen h-[50vh] md:h-[70vh] flex items-center overflow-hidden"
         aria-label="Hero Herramientas"
         style={{
           backgroundImage: "url('/images/hero-herramientas.png')",
@@ -44,10 +44,10 @@ const IndexTools: React.FC = () => {
           backgroundRepeat: "no-repeat"
         }}
       >
-        {/* Overlay oscuro sutil para mejorar legibilidad */}
-        <div className="absolute inset-0 bg-black/25 pointer-events-none" />
+        {/* Overlay oscuro para mejorar legibilidad */}
+        <div className="absolute inset-0 bg-black/50 pointer-events-none" />
         {/* Content */}
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 text-center">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-poppins font-bold text-white mb-6 tracking-tight drop-shadow-lg">
             Herramientas Digitales para Profesionales Farmacéuticos
           </h1>

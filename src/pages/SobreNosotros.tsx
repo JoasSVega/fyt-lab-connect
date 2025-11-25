@@ -6,7 +6,7 @@ import FloatingContact from "@/components/FloatingContact";
 const SobreNosotros = () => (
   <div className="w-full bg-background overflow-x-hidden flex flex-col">
     <Navbar />
-    <main className="flex-1 w-full pt-24">
+    <main className="flex-1 w-full">
       {/* Hero Institucional */}
       <section
         className="relative left-1/2 -translate-x-1/2 w-screen h-[50vh] md:h-[70vh] flex items-center overflow-hidden"
@@ -18,10 +18,10 @@ const SobreNosotros = () => (
           backgroundRepeat: "no-repeat"
         }}
       >
-        {/* Overlay oscuro suave para mejorar legibilidad */}
-        <div className="absolute inset-0 bg-black/30 pointer-events-none" />
+        {/* Overlay oscuro para mejorar legibilidad */}
+        <div className="absolute inset-0 bg-black/50 pointer-events-none" />
         {/* Content */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12">
           <div className="max-w-3xl text-center lg:text-left">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-poppins font-extrabold text-white mb-6 tracking-tight drop-shadow-lg">
               Sobre Nosotros
