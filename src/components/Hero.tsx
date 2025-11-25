@@ -17,7 +17,7 @@ export default function Hero() {
   return (
     <section
       id="inicio"
-      className="relative left-1/2 -translate-x-1/2 w-screen h-[68vh] min-h-[460px] flex items-center justify-center overflow-hidden"
+      className="relative left-1/2 -translate-x-1/2 w-screen min-h-[90vh] flex items-center justify-center overflow-hidden"
     >
       {/* LCP image with responsive sources; fetchpriority set via ref on img */}
       <picture>
@@ -44,7 +44,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-black/50 pointer-events-none" />
       {/* Contenido centrado */}
       <div className="relative z-10 w-full flex items-center justify-center px-4 py-8">
-  <div className="mx-auto max-w-4xl rounded-xl p-5 md:p-10 shadow-lg flex flex-col items-center text-white">
+  <div className="mx-auto max-w-5xl w-full p-5 md:p-10 flex flex-col items-center text-white">
           <h1
             className="text-white font-bold text-center mb-6 tracking-tight"
             style={{
