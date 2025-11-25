@@ -44,9 +44,9 @@ export default function Hero() {
             }}
           >
             {"Investigación rigurosa, impacto real en la "}
-            <span className="highlight-keyword" style={{ fontFamily: 'Merriweather, serif' }}>SALUD</span>{", "}
-            <span className="highlight-keyword" style={{ fontFamily: 'Merriweather, serif' }}>CIENCIA</span>{" e "}
-            <span className="highlight-keyword" style={{ fontFamily: 'Merriweather, serif' }}>INNOVACIÓN</span>{"."}
+            <span className="highlight-keyword" data-kw="salud" style={{ fontFamily: 'Merriweather, serif' }}>SALUD</span>{", "}
+            <span className="highlight-keyword" data-kw="ciencia" style={{ fontFamily: 'Merriweather, serif' }}>CIENCIA</span>{" e "}
+            <span className="highlight-keyword" data-kw="innovacion" style={{ fontFamily: 'Merriweather, serif' }}>INNOVACIÓN</span>{"."}
           </h1>
           <h2
             className="text-white font-light text-center mb-8 leading-relaxed"
@@ -91,34 +91,40 @@ export default function Hero() {
           text-transform: uppercase;
           font-weight: 800;
           display: inline-block;
-          font-size: 0.85em; /* ligeramente menor para evitar superposición */
+          font-size: 0.82em;
           line-height: 1.05;
-          padding: .1rem .55rem .2rem;
-          border-radius: 0.75rem;
-          letter-spacing: .08em;
-          background: linear-gradient(135deg,#6d28d9 0%, #7e22ce 35%, #9333ea 60%, #b07df8 100%);
+          padding: .08rem .5rem .18rem;
+          border-radius: 0.65rem;
+          letter-spacing: .075em;
+          background: rgba(255,255,255,0.06);
+          backdrop-filter: blur(2px);
           color: #ffffff;
-          box-shadow: 0 0 0 1px rgba(255,255,255,0.06), 0 3px 10px rgba(147,51,234,0.5);
-          text-shadow: 0 2px 8px rgba(0,0,0,0.55);
-          isolation: isolate;
-          vertical-align: baseline;
+          text-shadow: 0 2px 6px rgba(0,0,0,0.55);
         }
-        .highlight-keyword::after {
-          content: '';
-          position: absolute;
-          left: 8%;
-          bottom: 4px;
-          width: 84%;
-          height: 6px;
-          background: linear-gradient(90deg,rgba(255,255,255,0.15),rgba(255,255,255,0.5),rgba(255,255,255,0.15));
-          border-radius: 999px;
-          filter: blur(3px);
-          pointer-events: none;
-          z-index: -1;
+        .highlight-keyword[data-kw='salud'] {
+          box-shadow:
+            0 0 0 1px rgba(59,130,246,0.55),
+            0 0 0 4px rgba(59,130,246,0.25),
+            0 4px 12px -2px rgba(59,130,246,0.55),
+            0 8px 32px -4px rgba(59,130,246,0.35);
+        }
+        .highlight-keyword[data-kw='ciencia'] {
+          box-shadow:
+            0 0 0 1px rgba(239,68,68,0.55),
+            0 0 0 4px rgba(239,68,68,0.25),
+            0 4px 12px -2px rgba(239,68,68,0.55),
+            0 8px 32px -4px rgba(239,68,68,0.35);
+        }
+        .highlight-keyword[data-kw='innovacion'] {
+          box-shadow:
+            0 0 0 1px rgba(147,51,234,0.6),
+            0 0 0 4px rgba(147,51,234,0.3),
+            0 4px 12px -2px rgba(147,51,234,0.6),
+            0 8px 32px -4px rgba(147,51,234,0.4);
         }
         .highlight-keyword:focus-visible, .highlight-keyword:hover {
-          box-shadow: 0 0 0 2px rgba(255,255,255,0.25), 0 6px 18px rgba(147,51,234,0.65);
           outline: none;
+          filter: brightness(1.08);
         }
         /* Ajustes móviles adicionales: asegurar envoltura de palabras y evitar recortes */
         @media (max-width: 640px) {
