@@ -30,10 +30,29 @@ const Herramientas = () => {
 	return (
 			<div className="w-full bg-background overflow-x-hidden flex flex-col">
 			<main className="flex-1 w-full pt-24">
+                {/* Hero Section con imagen de fondo */}
+                <section
+                  className="relative left-1/2 -translate-x-1/2 w-screen min-h-[65vh] flex items-center justify-center overflow-hidden"
+                  aria-label="Hero Herramientas"
+                >
+                  {/* Background Image */}
+                  <img
+                    src="/images/hero-herramientas.png"
+                    alt="Fondo hero Herramientas"
+                    className="absolute inset-0 w-full h-full object-cover"
+                    aria-hidden="true"
+                  />
+                  {/* Overlay for text contrast */}
+                  <div className="absolute inset-0 bg-white/55 pointer-events-none" />
+                  {/* Content */}
+                  <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h1 className="text-4xl sm:text-5xl font-poppins font-bold text-slate-800 mb-8">
+                      Herramientas Farmacéuticas
+                    </h1>
+                  </div>
+                </section>
+                {/* Sección de tarjetas */}
                 <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-                  <h1 className="text-4xl sm:text-5xl font-poppins font-bold text-slate-800 mb-8 text-center">
-                    Herramientas Farmacéuticas
-                  </h1>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
                     {tools.map((tool, idx) => (
                       <Card
