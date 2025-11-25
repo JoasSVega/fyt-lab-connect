@@ -90,16 +90,18 @@ export default function Hero() {
           position: relative;
           text-transform: uppercase;
           font-weight: 800;
-          display: inline-inline-block;
-          font-size: inherit;
-          padding: .15rem .65rem .25rem;
-          border-radius: 0.85rem;
-          letter-spacing: 1px;
-          background: linear-gradient(135deg,#6d28d9 0%, #7e22ce 30%, #9333ea 55%, #c084fc 100%);
+          display: inline-block;
+          font-size: 0.85em; /* ligeramente menor para evitar superposición */
+          line-height: 1.05;
+          padding: .1rem .55rem .2rem;
+          border-radius: 0.75rem;
+          letter-spacing: .08em;
+          background: linear-gradient(135deg,#6d28d9 0%, #7e22ce 35%, #9333ea 60%, #b07df8 100%);
           color: #ffffff;
-          box-shadow: 0 0 0 1px rgba(255,255,255,0.08), 0 4px 14px rgba(147,51,234,0.55);
-          text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+          box-shadow: 0 0 0 1px rgba(255,255,255,0.06), 0 3px 10px rgba(147,51,234,0.5);
+          text-shadow: 0 2px 8px rgba(0,0,0,0.55);
           isolation: isolate;
+          vertical-align: baseline;
         }
         .highlight-keyword::after {
           content: '';
