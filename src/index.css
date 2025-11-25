@@ -483,49 +483,5 @@ body.modal-open .calc-overlay {
     object-position: center;
   }
 
-  /* ================= Home Page Carousel Image Responsive Heights ================= */
-  /* Aumenta protagonismo del carrusel en Inicio sin alterar lógica interna */
-  .home-carousel-image {
-    height: clamp(220px, 45vh, 360px);
-  }
-  @media (min-width: 768px) {
-    .home-carousel-image {
-      height: clamp(300px, 50vh, 420px);
-    }
-  }
-  @media (min-width: 1280px) {
-    .home-carousel-image {
-      height: clamp(380px, 55vh, 580px);
-    }
-  }
-
-  /* Wrapper frame controlling vertical space; applied to image container (parent of <picture>) */
-  .home-carousel-frame {
-    height: clamp(220px, 45vh, 360px);
-  }
-  @media (min-width: 768px) {
-    .home-carousel-frame { height: clamp(300px, 50vh, 420px); }
-  }
-  @media (min-width: 1280px) {
-    .home-carousel-frame { height: clamp(380px, 55vh, 580px); }
-  }
-
-  /* ================= Home Page Carousel Responsive Slides ================= */
-  /* Controla cuántas tarjetas son visibles simultáneamente sin alterar lógica Embla */
-  /* Visible cards widths (approx slidesPerView) -> 1,1.5,2,3,4,5 */
-  .home-carousel-item { flex: 0 0 85%; } /* mobile: 1 card + peek */
-  @media (min-width: 480px) { .home-carousel-item { flex-basis: 60%; } } /* small tablets: ~1.5 */
-  @media (min-width: 768px) { .home-carousel-item { flex-basis: 48%; } } /* tablets large: 2 */
-  @media (min-width: 1024px) { .home-carousel-item { flex-basis: 31%; } } /* desktop normal: 3 */
-  @media (min-width: 1440px) { .home-carousel-item { flex-basis: 24%; } } /* wide desktop: 4 */
-  @media (min-width: 1920px) { .home-carousel-item { flex-basis: 19%; } } /* extra wide: 5 */
-
-  /* Gap horizontal exacto por breakpoint (col-gap actúa sobre flex items) */
-  .home-carousel-content { column-gap: 12px; }
-  @media (min-width: 480px) { .home-carousel-content { column-gap: 12px; } }
-  @media (min-width: 640px) { .home-carousel-content { column-gap: 14px; } }
-  @media (min-width: 768px) { .home-carousel-content { column-gap: 16px; } }
-  @media (min-width: 1024px) { .home-carousel-content { column-gap: 18px; } }
-  @media (min-width: 1440px) { .home-carousel-content { column-gap: 20px; } }
-  @media (min-width: 1920px) { .home-carousel-content { column-gap: 24px; } }
+  /* (Reverted carousel enlargement utilities removed) */
 

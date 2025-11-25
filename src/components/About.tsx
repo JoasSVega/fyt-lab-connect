@@ -146,13 +146,14 @@ const About = () => {
         <h3 className="text-4xl font-poppins font-bold text-center text-fyt-dark mb-8 drop-shadow-lg">
           Líneas de Investigación
         </h3>
-        <div className="relative px-4 sm:px-16 lg:px-32 xl:px-48 2xl:px-64 py-8">
+        <div className="relative px-4 sm:px-16 lg:px-32 xl:px-48 2xl:px-64 py-6">
           <Carrusel
             items={researchLines}
             color="#9B59B6"
+            height="clamp(14rem, 28vw, 18rem)"
             showDescription={true}
             className="w-full"
-            imageClassName="home-carousel-image w-full h-full object-cover rounded-t-2xl"
+            imageClassName="w-full h-full object-cover rounded-t-2xl"
           />
         </div>
       </section>
@@ -161,8 +162,8 @@ const About = () => {
         <h3 className="text-4xl font-poppins font-bold text-center text-fyt-dark mb-8 drop-shadow-lg">
           Modalidades de Grado
         </h3>
-        <div className="relative px-4 sm:px-16 lg:px-32 xl:px-48 2xl:px-64 py-8">
-          <Carrusel items={graduationModalities} color="#3BB9FF" showDescription={true} className="w-full" imageClassName="home-carousel-image w-full h-full object-cover rounded-t-2xl" />
+        <div className="relative px-4 sm:px-16 lg:px-32 xl:px-48 2xl:px-64 py-6">
+          <Carrusel items={graduationModalities} color="#3BB9FF" height="clamp(14rem, 28vw, 18rem)" showDescription={true} className="w-full" imageClassName="w-full h-full object-cover rounded-t-2xl" />
         </div>
       </section>
       {/* Actividades y Productos */}
@@ -170,8 +171,8 @@ const About = () => {
         <h3 className="text-4xl font-poppins font-bold text-center text-fyt-dark mb-8 drop-shadow-lg">
           Actividades y Productos
         </h3>
-        <div className="relative px-4 sm:px-16 lg:px-32 xl:px-48 2xl:px-64 py-8 mb-12">
-          <Carrusel items={activitiesProducts} color="#FF4C4C" showDescription={true} className="w-full" imageClassName="home-carousel-image w-full h-full object-cover rounded-t-2xl" />
+        <div className="relative px-4 sm:px-16 lg:px-32 xl:px-48 2xl:px-64 py-6 mb-12">
+          <Carrusel items={activitiesProducts} color="#FF4C4C" height="clamp(14rem, 28vw, 18rem)" showDescription={true} className="w-full" imageClassName="w-full h-full object-cover rounded-t-2xl" />
         </div>
         {/* INSCRÍBETE AHORA Card */}
         <div className="flex justify-center mt-8">

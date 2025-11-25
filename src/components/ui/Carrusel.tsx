@@ -118,19 +118,19 @@ const Carrusel: React.FC<CarruselProps> = ({
         setApi={setEmblaApi}
         className={"w-full"}
       >
-      <CarouselContent className="home-carousel-content">
+      <CarouselContent className="gap-x-4">
         {items.map((item, index) => (
           <CarouselItem
             key={index}
-            className="px-2 md:px-4 home-carousel-item min-w-[280px] md:min-w-[320px] max-w-[520px]"
+            className="px-2 md:px-4 basis-[85%] sm:basis-[70%] md:basis-[48%] lg:basis-[31%] xl:basis-[24%] 2xl:basis-[19%] min-w-[280px] md:min-w-[320px] max-w-[520px]"
           >
             <Card
               style={{ borderColor: color }}
               className={`bg-white/90 border-2 shadow-xl md:hover:shadow-2xl md:hover:scale-[1.03] transition-all duration-300 overflow-hidden group h-full will-change-transform`}
             >
               <div
-                className="relative home-carousel-frame"
-                style={heightCss ? ({ height: heightCss } as React.CSSProperties) : ({ /* height now controlled by CSS class, ignore aspectRatio */ } as React.CSSProperties)}
+                className="relative"
+                style={heightCss ? ({ height: heightCss } as React.CSSProperties) : ({ aspectRatio: imageAspect } as React.CSSProperties)}
               >
                 {/* Responsive <picture> with AVIF/WebP sources and fallback to original */}
                 {(() => {
