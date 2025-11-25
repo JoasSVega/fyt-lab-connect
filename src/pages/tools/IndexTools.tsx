@@ -48,8 +48,8 @@ const IndexTools: React.FC = () => {
         {/* Overlay oscuro unificado */}
         <div className="hero-overlay" />
         {/* Content con text-shadow */}
-        <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 text-center hero-text-shadow" style={{ paddingTop: 'clamp(2rem, 10vh, 6rem)', paddingBottom: 'clamp(2rem, 10vh, 6rem)' }}>
-          <h1 className="hero-title font-poppins font-bold text-white mb-6 tracking-tight drop-shadow-lg">
+        <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 text-center hero-text-shadow">
+          <h1 className="hero-title font-poppins font-extrabold text-white mb-6 tracking-tight">
             Herramientas Digitales para Profesionales Farmacéuticos
           </h1>
           <p className="hero-subtitle font-inter text-white/95 leading-relaxed max-w-3xl mx-auto drop-shadow-md">

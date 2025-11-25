@@ -22,7 +22,7 @@ const SobreNosotros = () => (
         {/* Overlay oscuro unificado */}
         <div className="hero-overlay" />
         {/* Content con text-shadow */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 hero-text-shadow" style={{ paddingTop: 'clamp(2rem, 10vh, 6rem)', paddingBottom: 'clamp(2rem, 10vh, 6rem)' }}>
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 hero-text-shadow">
           <div className="max-w-3xl text-center lg:text-left">
             <h1 className="hero-title font-poppins font-extrabold text-white mb-6 tracking-tight drop-shadow-lg">
               Sobre Nosotros

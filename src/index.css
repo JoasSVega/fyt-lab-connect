@@ -445,6 +445,8 @@ body.modal-open .calc-overlay {
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    padding-top: clamp(2rem, 10vh, 6rem);
+    padding-bottom: clamp(2rem, 10vh, 6rem);
   }
 
   @media (min-width: 768px) {
