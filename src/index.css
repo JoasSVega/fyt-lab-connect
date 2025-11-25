@@ -482,3 +482,20 @@ body.modal-open .calc-overlay {
     object-fit: cover;
     object-position: center;
   }
+
+  /* ================= Home Page Carousel Image Responsive Heights ================= */
+  /* Aumenta protagonismo del carrusel en Inicio sin alterar lógica interna */
+  .home-carousel-image {
+    height: clamp(220px, 45vh, 360px);
+  }
+  @media (min-width: 768px) {
+    .home-carousel-image {
+      height: clamp(300px, 50vh, 420px);
+    }
+  }
+  @media (min-width: 1280px) {
+    .home-carousel-image {
+      height: clamp(380px, 55vh, 580px);
+    }
+  }
+
