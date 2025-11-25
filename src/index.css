@@ -499,6 +499,17 @@ body.modal-open .calc-overlay {
     }
   }
 
+  /* Wrapper frame controlling vertical space; applied to image container (parent of <picture>) */
+  .home-carousel-frame {
+    height: clamp(220px, 45vh, 360px);
+  }
+  @media (min-width: 768px) {
+    .home-carousel-frame { height: clamp(300px, 50vh, 420px); }
+  }
+  @media (min-width: 1280px) {
+    .home-carousel-frame { height: clamp(380px, 55vh, 580px); }
+  }
+
   /* ================= Home Page Carousel Responsive Slides ================= */
   /* Controla cuántas tarjetas son visibles simultáneamente sin alterar lógica Embla */
   .home-carousel-item { flex: 0 0 88%; }

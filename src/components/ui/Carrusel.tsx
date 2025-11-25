@@ -129,8 +129,8 @@ const Carrusel: React.FC<CarruselProps> = ({
               className={`bg-white/90 border-2 shadow-xl md:hover:shadow-2xl md:hover:scale-[1.03] transition-all duration-300 overflow-hidden group h-full will-change-transform`}
             >
               <div
-                className="relative"
-                style={heightCss ? ({ height: heightCss } as React.CSSProperties) : ({ aspectRatio: imageAspect } as React.CSSProperties)}
+                className="relative home-carousel-frame"
+                style={heightCss ? ({ height: heightCss } as React.CSSProperties) : ({ /* height now controlled by CSS class, ignore aspectRatio */ } as React.CSSProperties)}
               >
                 {/* Responsive <picture> with AVIF/WebP sources and fallback to original */}
                 {(() => {
