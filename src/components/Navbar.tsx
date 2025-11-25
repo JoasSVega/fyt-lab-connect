@@ -74,21 +74,8 @@ const Navbar = () => {
     setOpenDropdown(null);
   };
 
-  const glowFor = (name: string): "blue" | "red" | "purple" => {
-    switch (name) {
-      case "Noticias":
-        return "red";
-      case "Sobre Nosotros":
-      case "Herramientas":
-      case "Investigación":
-        return "purple";
-      default:
-        return "blue";
-    }
-  };
-
   return (
-    <nav className={`nav-root fixed top-0 left-0 right-0 z-50 ${isScrolled ? "is-scrolled" : "bg-white shadow-lg"}`}>
+    <nav className={`nav-root fixed top-0 left-0 right-0 z-50 ${isScrolled ? "is-scrolled" : "bg-white"}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo y nombre */}
@@ -143,11 +130,10 @@ const Navbar = () => {
                   <NavLink
                     to={item.href}
                     className={({ isActive }) =>
-                      `nav-link text-gray-700 hover:text-blue-600 transition-all duration-150 ease-out font-semibold px-3 py-2 rounded-md ${
-                        isActive ? 'nav-link--active text-blue-600' : ''
+                      `nav-link text-gray-700 transition-all duration-150 ease-out font-semibold px-3 py-2 rounded-md ${
+                        isActive ? 'nav-link--active' : ''
                       }`
                     }
-                    data-glow={glowFor(item.name)}
                   >
                     {item.name}
                   </NavLink>
@@ -179,12 +165,11 @@ const Navbar = () => {
                   <NavLink
                     to={item.href}
                     className={({ isActive }) =>
-                      `nav-link block px-4 py-2 text-gray-700 hover:text-blue-600 transition-all duration-150 ease-out font-semibold ${
-                        isActive ? 'nav-link--active text-blue-600' : ''
+                      `nav-link block px-4 py-2 text-gray-700 transition-all duration-150 ease-out font-semibold ${
+                        isActive ? 'nav-link--active' : ''
                       }`
                     }
                     onClick={() => setIsMenuOpen(false)}
-                    data-glow={glowFor(item.name)}
                   >
                     {item.name}
                   </NavLink>
