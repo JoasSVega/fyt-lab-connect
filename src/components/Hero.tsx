@@ -24,7 +24,7 @@ export default function Hero() {
       {/* Overlay oscuro unificado */}
       <div className="hero-overlay" />
       {/* Contenido centrado con text-shadow */}
-      <div className="relative z-10 w-full flex items-center justify-center px-6 md:px-12 py-14 md:py-16 lg:py-20 hero-text-shadow">
+      <div className="relative z-10 w-full flex items-center justify-center px-6 md:px-12 hero-text-shadow" style={{ paddingTop: 'clamp(2rem, 10vh, 6rem)', paddingBottom: 'clamp(2rem, 10vh, 6rem)' }}>
         <div className="mx-auto max-w-5xl w-full flex flex-col items-center text-white">
           <h1 className="hero-title text-white font-poppins font-bold text-center mb-6 tracking-tight">
             {"Investigación rigurosa, impacto real en la "}
