@@ -38,6 +38,7 @@ const PrivacyPolicy = React.lazy(() => import("./pages/PrivacyPolicy"));
 const TermsOfUse = React.lazy(() => import("./pages/TermsOfUse"));
 const CodeOfEthics = React.lazy(() => import("./pages/CodeOfEthics"));
 import TitleSync from "./components/TitleSync";
+import Loader from "./components/Loader";
 
 const queryClient = new QueryClient();
 
@@ -129,10 +130,26 @@ function AnimatedRoutes() {
 }
 
 const App: React.FC = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [showLoader, setShowLoader] = useState(true);
+  
   // Evita posibles discrepancias en ciertos hosts de preview que ejecutan React en modo prod durante dev.
   // Retrasamos la inserción del TooltipProvider hasta el montaje en el cliente.
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
+
+  // Control del loader
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1200); // Duración total de la animación
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleLoaderComplete = () => {
+    setShowLoader(false);
+  };
 
   // Aplica automáticamente la clase de mejora de legibilidad a botones con texto blanco y fondo sólido.
   useEffect(() => {
@@ -191,7 +208,8 @@ const App: React.FC = () => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {mounted ? <TooltipProvider>{shell}</TooltipProvider> : shell}
+      {showLoader && <Loader onComplete={handleLoaderComplete} />}
+      {!isLoading && (mounted ? <TooltipProvider>{shell}</TooltipProvider> : shell)}
     </QueryClientProvider>
   );
 }
