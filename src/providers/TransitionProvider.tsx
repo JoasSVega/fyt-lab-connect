@@ -10,6 +10,7 @@ interface TransitionContextValue {
 
 const TransitionContext = createContext<TransitionContextValue | null>(null);
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useTransition = (): TransitionContextValue => {
   const ctx = useContext(TransitionContext);
   if (!ctx) throw new Error('useTransition must be used within TransitionProvider');
@@ -66,7 +67,8 @@ export const TransitionProvider = ({
     // sí tengan imágenes llamarán a preloadImages y actualizarán este estado.
     setImagesPreloaded(true);
     lockBodyScroll();
-    (window as any).__routeTransitionActive = true;
+    const win = window as Window & { __routeTransitionActive?: boolean };
+    win.__routeTransitionActive = true;
 
     const timer = setTimeout(() => {
       setMinTimeElapsed(true);
@@ -88,8 +90,11 @@ export const TransitionProvider = ({
           document.body.style.overflow = '';
           document.documentElement.style.overflow = '';
           document.body.classList.remove('scroll-locked');
-        } catch {}
-        (window as any).__routeTransitionActive = false;
+        } catch (error: unknown) {
+          // Ignore cleanup errors
+        }
+        const win2 = window as Window & { __routeTransitionActive?: boolean };
+        win2.__routeTransitionActive = false;
         window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
       }, 50);
 

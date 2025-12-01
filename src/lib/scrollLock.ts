@@ -28,6 +28,8 @@ export function resetScrollLock() {
   lockCount = 0;
   try {
     document.body.classList.remove('scroll-locked');
-    delete (document.body as any).dataset.scrollLockCount;
-  } catch {}
+    delete document.body.dataset.scrollLockCount;
+  } catch (error: unknown) {
+    console.warn('Failed to reset scroll lock:', error);
+  }
 }

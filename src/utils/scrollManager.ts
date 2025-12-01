@@ -11,7 +11,9 @@ export function lockBodyScroll(): void {
       document.body.style.overflow = 'hidden';
       document.documentElement.style.overflow = 'hidden';
       document.body.classList.add('scroll-locked');
-    } catch {}
+    } catch (error: unknown) {
+      // Ignore errors changing scroll state in non-DOM environments
+    }
   }
 }
 
@@ -25,7 +27,9 @@ export function unlockBodyScroll(): void {
       document.body.classList.remove('scroll-locked');
       prevBodyOverflow = null;
       prevHtmlOverflow = null;
-    } catch {}
+    } catch (error: unknown) {
+      // Ignore errors restoring scroll state
+    }
   }
 }
 
@@ -41,5 +45,7 @@ export function _resetBodyLockForTests(): void {
     document.body.style.overflow = '';
     document.documentElement.style.overflow = '';
     document.body.classList.remove('scroll-locked');
-  } catch {}
+  } catch (error: unknown) {
+    // Ignore in test/non-DOM contexts
+  }
 }
