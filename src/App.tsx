@@ -132,19 +132,50 @@ function AnimatedRoutes() {
 const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [showLoader, setShowLoader] = useState(true);
+  const [contentReady, setContentReady] = useState(false);
   
   // Evita posibles discrepancias en ciertos hosts de preview que ejecutan React en modo prod durante dev.
   // Retrasamos la inserción del TooltipProvider hasta el montaje en el cliente.
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
-  // Control del loader
+  // Loader híbrido inteligente: mínimo 900ms visible + espera carga real
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1450); // Duración total de la animación (1.45s)
+    const minDisplayTime = 900;
+    const startTime = Date.now();
+    let minTimeReached = false;
+    let appReady = false;
 
-    return () => clearTimeout(timer);
+    // Timer del tiempo mínimo
+    const minTimer = setTimeout(() => {
+      minTimeReached = true;
+      if (appReady) {
+        setIsLoading(false);
+      }
+    }, minDisplayTime);
+
+    // Detección de carga real completa
+    const checkReady = () => {
+      // Verifica que el DOM esté listo y recursos cargados
+      if (document.readyState === 'complete') {
+        appReady = true;
+        if (minTimeReached) {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    // Listener para cuando la página termine de cargar
+    if (document.readyState === 'complete') {
+      checkReady();
+    } else {
+      window.addEventListener('load', checkReady);
+    }
+
+    return () => {
+      clearTimeout(minTimer);
+      window.removeEventListener('load', checkReady);
+    };
   }, []);
 
   const handleLoaderComplete = () => {
