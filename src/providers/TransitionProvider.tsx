@@ -69,6 +69,9 @@ export const TransitionProvider = ({
     lockBodyScroll();
     const win = window as Window & { __routeTransitionActive?: boolean };
     win.__routeTransitionActive = true;
+    try {
+      window.dispatchEvent(new CustomEvent('route-transition-start'));
+    } catch { /* noop */ }
 
     const timer = setTimeout(() => {
       setMinTimeElapsed(true);
@@ -95,6 +98,9 @@ export const TransitionProvider = ({
         }
         const win2 = window as Window & { __routeTransitionActive?: boolean };
         win2.__routeTransitionActive = false;
+        try {
+          window.dispatchEvent(new CustomEvent('route-transition-end'));
+        } catch { /* noop */ }
         window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
       }, 50);
 

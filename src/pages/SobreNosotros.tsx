@@ -2,8 +2,17 @@ import AboutSobreNosotros from "@/components/AboutSobreNosotros";
 import Team from "@/components/Team";
 import FloatingContact from "@/components/FloatingContact";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
+import { usePageReady } from "@/hooks/usePageReady";
 
-const SobreNosotros = () => (
+const SobreNosotros = () => {
+  usePageReady({
+    criticalImages: [
+      "/images/hero-nosotros-small.webp",
+      "/images/hero-nosotros-medium.webp",
+      "/images/hero-nosotros-large.webp",
+    ],
+  });
+  return (
   <div className="w-full bg-background flex flex-col">
       {/* Hero Institucional */}
       <section
@@ -56,6 +65,7 @@ const SobreNosotros = () => (
       </ScrollReveal>
     <FloatingContact />
   </div>
-);
+  );
+};
 
 export default SobreNosotros;

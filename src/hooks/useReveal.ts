@@ -57,10 +57,26 @@ export function useReveal(options: Options = {}) {
 
     const elementWithFlag = el as HTMLElement & { __revealOnce?: boolean };
     elementWithFlag.__revealOnce = triggerOnce;
-    io.observe(el);
+
+    const startObserve = () => {
+      try { io!.observe(el); } catch { /* noop */ }
+    };
+
+    // Defer observation until route transition loader finishes to avoid interference
+    const win = window as Window & { __routeTransitionActive?: boolean };
+    if (win.__routeTransitionActive) {
+      const onEnd = () => {
+        startObserve();
+        window.removeEventListener('route-transition-end', onEnd);
+      };
+      window.addEventListener('route-transition-end', onEnd, { once: true });
+    } else {
+      startObserve();
+    }
+
     return () => {
-      try { 
-        io!.unobserve(el); 
+      try {
+        io!.unobserve(el);
       } catch (error: unknown) {
         // Ignore unobserve errors
       }
