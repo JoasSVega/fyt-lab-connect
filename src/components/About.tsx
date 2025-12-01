@@ -1,11 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Target, Eye, Microscope, Heart, Users, BookOpen, ChevronLeft, ChevronRight, Bell } from "lucide-react";
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
 import Carrusel from "./ui/Carrusel";
 import { ScrollReveal } from "./animations/ScrollReveal";
+import { useViewportPreloader } from "@/hooks/usePredictiveLoader";
 
 const About = () => {
+  // Predictive preloading for carousel images as user scrolls
+  const { observe } = useViewportPreloader(
+    [
+      "/images/Carrusel/Farmacologia",
+      "/images/Carrusel/Farmacovigilancia",
+      "/images/Carrusel/Farmacoepidemiologia",
+      "/images/Carrusel/Proyecto-de-Investigacion",
+      "/images/Carrusel/Monografia",
+      "/images/Carrusel/Pasantia",
+      "/images/Carrusel/Asignatura-de-Postgrado",
+      "/images/Carrusel/Diplomado",
+      "/images/Carrusel/Articulo-Cientifico",
+      "/images/Carrusel/Semilleristas",
+      "/images/Carrusel/Ponencias",
+      "/images/Carrusel/Publicaciones"
+    ],
+    { rootMargin: '300% 0px', priority: 'low' }
+  );
+
+  // Register section refs for predictive loading
+  const carouselRef1 = React.useRef<HTMLDivElement>(null);
+  const carouselRef2 = React.useRef<HTMLDivElement>(null);
+  const carouselRef3 = React.useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (carouselRef1.current) observe(carouselRef1.current, "/images/Carrusel/Farmacologia");
+    if (carouselRef2.current) observe(carouselRef2.current, "/images/Carrusel/Proyecto-de-Investigacion");
+    if (carouselRef3.current) observe(carouselRef3.current, "/images/Carrusel/Semilleristas");
+  }, [observe]);
+
   const values = [
     {
       icon: <Microscope className="w-8 h-8 text-[#0066FF]" aria-label="Investigación Rigurosa" />,
@@ -135,9 +166,9 @@ const About = () => {
 
   return (
     <>
-      {/* Líneas de Investigación */}
-      <ScrollReveal>
-        <section className="mb-16">
+      {/* Lineas de Investigación */}
+      <ScrollReveal delay={0}>
+        <section className="mb-16" ref={carouselRef1}>
           <h3 className="text-4xl font-poppins font-bold text-center text-fyt-dark mb-8 drop-shadow-lg">
             Líneas de Investigación
           </h3>
@@ -155,7 +186,7 @@ const About = () => {
       </ScrollReveal>
       {/* Modalidades de Grado */}
       <ScrollReveal delay={0.1}>
-        <section className="mb-16">
+        <section className="mb-16" ref={carouselRef2}>
           <h3 className="text-4xl font-poppins font-bold text-center text-fyt-dark mb-8 drop-shadow-lg">
             Modalidades de Grado
           </h3>
@@ -166,7 +197,7 @@ const About = () => {
       </ScrollReveal>
       {/* Actividades y Productos */}
       <ScrollReveal delay={0.2}>
-        <section>
+        <section ref={carouselRef3}>
           <h3 className="text-4xl font-poppins font-bold text-center text-fyt-dark mb-8 drop-shadow-lg">
             Actividades y Productos
           </h3>

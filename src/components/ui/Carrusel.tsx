@@ -41,26 +41,57 @@ const Carrusel: React.FC<CarruselProps> = ({
   const [emblaApi, setEmblaApi] = React.useState<CarouselApi | null>(null);
   const [selected, setSelected] = React.useState(0);
   const [isHovered, setIsHovered] = React.useState(false);
+  const bufferedIndices = React.useRef<Set<number>>(new Set([0, 1, 2]));
   
-  // Preload all carousel images before rendering to prevent flickering
-  const allImages = React.useMemo(() => {
-    return items.flatMap(item => {
-      const base = item.image.replace(/-medium\.webp$/i, '');
-      return [
-        `${base}-small.webp`,
-        `${base}-medium.webp`,
-        `${base}-large.webp`,
-      ];
-    });
-  }, [items]);
-  
+  // Preload initial carousel images before rendering to prevent flickering
+  // Only preload first 3 slides initially for faster initial render
   const { loaded: imagesLoaded } = useCarouselPreloader(
-    items.map(item => {
+    items.slice(0, 3).map(item => {
       const base = item.image.replace(/-medium\.webp$/i, '');
       return `${base}-medium.webp`; // Preload medium as baseline
     }),
     { priority: 'high', timeout: 8000 }
   );
+  
+  // Buffer adjacent slides when carousel position changes
+  React.useEffect(() => {
+    if (!emblaApi || !imagesLoaded) return;
+    
+    const bufferAdjacentSlides = () => {
+      const currentIndex = emblaApi.selectedScrollSnap();
+      const totalSlides = items.length;
+      
+      // Calculate indices to buffer (current, next 2, prev 2)
+      const indicesToBuffer = new Set<number>();
+      for (let i = -2; i <= 2; i++) {
+        const index = (currentIndex + i + totalSlides) % totalSlides;
+        indicesToBuffer.add(index);
+      }
+      
+      // Preload images that haven't been buffered yet
+      indicesToBuffer.forEach(index => {
+        if (!bufferedIndices.current.has(index)) {
+          bufferedIndices.current.add(index);
+          const item = items[index];
+          if (item) {
+            const base = item.image.replace(/-medium\.webp$/i, '');
+            // Preload all 3 sizes for buffered slides
+            ['-small.webp', '-medium.webp', '-large.webp'].forEach(suffix => {
+              const img = new Image();
+              img.src = `${base}${suffix}`;
+            });
+          }
+        }
+      });
+    };
+    
+    bufferAdjacentSlides(); // Initial buffer
+    emblaApi.on('select', bufferAdjacentSlides);
+    
+    return () => {
+      emblaApi.off('select', bufferAdjacentSlides);
+    };
+  }, [emblaApi, items, imagesLoaded]);
 
   React.useEffect(() => {
     if (!emblaApi) return;

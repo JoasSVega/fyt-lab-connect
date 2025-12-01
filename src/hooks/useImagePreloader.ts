@@ -83,6 +83,9 @@ export function useImagePreloader(
 ): PreloadResult {
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(false);
+  
+  // Destructure to avoid options object in deps
+  const { priority, timeout } = options;
 
   useEffect(() => {
     if (!images || images.length === 0) {
@@ -105,7 +108,7 @@ export function useImagePreloader(
         // Preload all images in parallel
         await Promise.all(
           validImages.map(img => 
-            preloadImage(img, options).catch(err => {
+            preloadImage(img, { priority, timeout }).catch(err => {
               console.warn('Image preload failed:', img, err);
               // Don't fail the whole batch if one image fails
               return Promise.resolve();
@@ -131,7 +134,7 @@ export function useImagePreloader(
     return () => {
       cancelled = true;
     };
-  }, [images, options.priority, options.timeout]);
+  }, [images, priority, timeout]);
 
   return { loaded, error };
 }

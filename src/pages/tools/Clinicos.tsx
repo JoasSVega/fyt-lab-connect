@@ -1,10 +1,8 @@
 import * as React from "react";
-import { Suspense } from "react";
 import { useNavigate } from "react-router-dom";
 import { Stethoscope, Droplets, FlaskRound, Pill, Syringe } from "lucide-react";
 import Seo from "@/components/Seo";
 import { usePageReady } from "@/hooks/usePageReady";
-// Unificado: modal reutilizable
 import CalculatorModal from "@/components/calculators/CalculatorModal";
 import { CalculatorsRegistry } from "@/lib/calculators";
 // Migrado a modal unificado
