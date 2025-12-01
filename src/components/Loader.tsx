@@ -57,15 +57,15 @@ const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
       >
         <picture>
           <source
-            srcSet="/logo-fyt-large.webp"
+            srcSet="/images/logo-fyt-large.webp"
             media="(min-width: 1280px)"
           />
           <source
-            srcSet="/logo-fyt-medium.webp"
+            srcSet="/images/logo-fyt-medium.webp"
             media="(min-width: 640px)"
           />
           <img
-            src="/logo-fyt-small.webp"
+            src="/images/logo-fyt-small.webp"
             alt="Logo Grupo FyT"
             loading="eager"
             decoding="async"
