@@ -40,19 +40,16 @@ const AboutSobreNosotros = () => (
         {/* Imagen decorativa */}
   <div className="relative h-[400px] w-full flex items-center justify-center">
           <picture>
-            {/* Prefer AVIF, then WebP, with responsive variants */}
             <source
-              type="image/avif"
-              srcSet="/images/Objetivo-128.avif 128w, /images/Objetivo-256.avif 256w, /images/Objetivo-400.avif 400w, /images/Objetivo-800.avif 800w, /images/Objetivo-1200.avif 1200w"
-              sizes="(min-width: 1024px) 50vw, 100vw"
+              srcSet="/images/objetivo-large.webp"
+              media="(min-width: 1280px)"
             />
             <source
-              type="image/webp"
-              srcSet="/images/Objetivo-128.webp 128w, /images/Objetivo-256.webp 256w, /images/Objetivo-400.webp 400w, /images/Objetivo-800.webp 800w, /images/Objetivo-1200.webp 1200w"
-              sizes="(min-width: 1024px) 50vw, 100vw"
+              srcSet="/images/objetivo-medium.webp"
+              media="(min-width: 640px)"
             />
             <img
-              src="/images/Objetivo.jpeg"
+              src="/images/objetivo-small.webp"
               alt="Imagen objetivo del grupo FyT"
               className="w-full h-full object-cover rounded-xl shadow-2xl animate-fade-in"
               loading="lazy"

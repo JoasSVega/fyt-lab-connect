@@ -39,12 +39,22 @@ const IndexTools: React.FC = () => {
         aria-label="Hero Herramientas"
       >
         {/* Imagen de fondo unificada */}
-        <img 
-          src="/images/hero-herramientas.png" 
-          alt="" 
-          className="hero-image" 
-          aria-hidden="true"
-        />
+        <picture>
+          <source 
+            srcSet="/images/hero-herramientas-large.webp" 
+            media="(min-width: 1280px)" 
+          />
+          <source 
+            srcSet="/images/hero-herramientas-medium.webp" 
+            media="(min-width: 640px)" 
+          />
+          <img 
+            src="/images/hero-herramientas-small.webp" 
+            alt="" 
+            className="hero-image" 
+            aria-hidden="true"
+          />
+        </picture>
         {/* Overlay oscuro unificado */}
         <div className="hero-overlay" />
         {/* Content con text-shadow */}

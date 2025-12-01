@@ -13,12 +13,22 @@ const SobreNosotros = () => (
         aria-label="Hero Sobre Nosotros"
       >
         {/* Imagen de fondo unificada */}
-        <img 
-          src="/images/hero-nosotros.png" 
-          alt="" 
-          className="hero-image" 
-          aria-hidden="true"
-        />
+        <picture>
+          <source 
+            srcSet="/images/hero-nosotros-large.webp" 
+            media="(min-width: 1280px)" 
+          />
+          <source 
+            srcSet="/images/hero-nosotros-medium.webp" 
+            media="(min-width: 640px)" 
+          />
+          <img 
+            src="/images/hero-nosotros-small.webp" 
+            alt="" 
+            className="hero-image" 
+            aria-hidden="true"
+          />
+        </picture>
         {/* Overlay oscuro unificado */}
         <div className="hero-overlay" />
         {/* Content con text-shadow */}

@@ -7,14 +7,14 @@ import { Mail } from "lucide-react";
 const Team = ({ compact = false }: { compact?: boolean }) => {
   // Imágenes disponibles en /public/images/equipo/
   const imageFiles = [
-    "Antistio-Alviz.png",
-    "Yaneth-Garcia.png",
-    "Shirley-Cavadia.png",
-    "Julian-Martinez.png",
-    "Roger-Caraballo.png",
-    "Luis-Utria.png",
-    "Sergio-Uribe.png",
-    "Mariana-Mercado.png"
+    "Antistio-Alviz-medium.webp",
+    "Yaneth-Garcia-medium.webp",
+    "Shirley-Cavadia-medium.webp",
+    "Julian-Martinez-medium.webp",
+    "Roger-Caraballo-medium.webp",
+    "Luis-Utria-medium.webp",
+    "Sergio-Uribe-medium.webp",
+    "Mariana-Mercado-medium.webp"
   ];
 
   // Función para normalizar nombres (sin tildes, minúsculas, sin espacios extras)
@@ -184,16 +184,13 @@ const Team = ({ compact = false }: { compact?: boolean }) => {
                 <>
                   {imgSrc ? (
                     (() => {
-                      const base = imgSrc.replace(/\.(png|jpg|jpeg|webp)$/i, '');
-                      const avifSet = `${base}-128.avif 128w, ${base}-256.avif 256w, ${base}-400.avif 400w, ${base}-800.avif 800w, ${base}-1200.avif 1200w`;
-                      const webpSet = `${base}-128.webp 128w, ${base}-256.webp 256w, ${base}-400.webp 400w, ${base}-800.webp 800w, ${base}-1200.webp 1200w`;
-                      const sizes = "260px"; // fuerza una variante ligeramente mayor para más nitidez en desktop
+                      const base = imgSrc.replace(/-medium\.webp$/i, '');
                       return (
                         <picture>
-                          <source type="image/avif" srcSet={avifSet} sizes={sizes} />
-                          <source type="image/webp" srcSet={webpSet} sizes={sizes} />
+                          <source srcSet={`${base}-large.webp`} media="(min-width: 1280px)" />
+                          <source srcSet={`${base}-medium.webp`} media="(min-width: 640px)" />
                           <img
-                            src={imgSrc}
+                            src={`${base}-small.webp`}
                             alt={`Retrato de ${member.name}, ${member.role}`}
                             className="mb-5 shadow-lg border-2 border-[#3BB9FF]/30"
                             style={{ width: 220, height: 220, objectFit: "cover", borderRadius: 16 }}

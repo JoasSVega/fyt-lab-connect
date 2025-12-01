@@ -82,13 +82,9 @@ const Navbar = () => {
           <Link to="/" className="flex items-center space-x-3 group focus:outline-none">
               <div className="flex-shrink-0">
               <picture>
-                <source
-                  type="image/avif"
-                  srcSet="/logo-fyt-128.avif 128w, /logo-fyt-256.avif 256w, /logo-fyt-400.avif 400w"
-                  sizes="(max-width: 640px) 128px, (max-width: 1024px) 256px, 256px"
-                />
+                <source srcSet="/logo-fyt-medium.webp" media="(min-width: 640px)" />
                 <img
-                  src="/logo-fyt-128.avif"
+                  src="/logo-fyt-small.webp"
                   alt="Logo Grupo FyT, semillero de investigación en farmacología y terapéutica"
                   loading="eager"
                   decoding="async"

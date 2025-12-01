@@ -13,18 +13,9 @@ const Footer: React.FC = () => {
           <div className="flex flex-col min-w-[220px] col-span-1">
             <div className="flex items-center gap-4 mb-4">
               <picture>
-                <source
-                  type="image/avif"
-                  srcSet="/logo-fyt-128.avif 128w, /logo-fyt-256.avif 256w"
-                  sizes="(max-width: 640px) 80px, 96px"
-                />
-                <source
-                  type="image/webp"
-                  srcSet="/logo-fyt-128.webp 128w, /logo-fyt-256.webp 256w"
-                  sizes="(max-width: 640px) 80px, 96px"
-                />
+                <source srcSet="/logo-fyt-medium.webp" media="(min-width: 640px)" />
                 <img
-                  src="/logo-fyt.png"
+                  src="/logo-fyt-small.webp"
                   alt="Logo Grupo FyT"
                   loading="lazy"
                   decoding="async"

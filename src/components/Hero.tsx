@@ -14,13 +14,23 @@ export default function Hero() {
       className="hero-container"
     >
       {/* Imagen de fondo unificada */}
-      <img 
-        ref={bgRef}
-        src="/images/hero-index.png" 
-        alt="" 
-        className="hero-image" 
-        aria-hidden="true"
-      />
+      <picture>
+        <source 
+          srcSet="/images/hero-index-large.webp" 
+          media="(min-width: 1280px)" 
+        />
+        <source 
+          srcSet="/images/hero-index-medium.webp" 
+          media="(min-width: 640px)" 
+        />
+        <img 
+          ref={bgRef}
+          src="/images/hero-index-small.webp" 
+          alt="" 
+          className="hero-image" 
+          aria-hidden="true"
+        />
+      </picture>
       {/* Overlay oscuro unificado */}
       <div className="hero-overlay" />
       {/* Contenido centrado con text-shadow */}

@@ -132,22 +132,17 @@ const Carrusel: React.FC<CarruselProps> = ({
                 className="relative"
                 style={heightCss ? ({ height: heightCss } as React.CSSProperties) : ({ aspectRatio: imageAspect } as React.CSSProperties)}
               >
-                {/* Responsive <picture> with AVIF/WebP sources and fallback to original */}
+                {/* Responsive <picture> with optimized 3-size WebP strategy */}
                 {(() => {
-                  const base = item.image.replace(/\.(png|jpe?g|webp)$/i, '');
-                  // Usar únicamente tamaños garantizados en /public/images/Carrusel (evita 404 -> imagen en blanco en móviles)
-                  const avifSet = `${base}-128.avif 128w, ${base}-256.avif 256w, ${base}-400.avif 400w, ${base}-800.avif 800w`;
-                  const webpSet = `${base}-128.webp 128w, ${base}-256.webp 256w, ${base}-400.webp 400w, ${base}-800.webp 800w`;
-                  const sizes = "(max-width: 639px) 92vw, (max-width: 1023px) 85vw, (max-width: 1279px) 50vw, 33vw";
-                  // Evitar fallos de lazy-loading en móviles/iOS dentro de contenedores con overflow/transform
-                  // Cargamos con prioridad 'eager' las primeras diapositivas visibles para asegurar render.
+                  const base = item.image.replace(/-medium\.webp$/i, '');
+                  // Cargar con prioridad las primeras 3 diapositivas para asegurar render inmediato
                   const loadingMode: 'eager' | 'lazy' = index < 3 ? 'eager' : 'lazy';
                   return (
                     <picture>
-                      <source type="image/avif" srcSet={avifSet} sizes={sizes} />
-                      <source type="image/webp" srcSet={webpSet} sizes={sizes} />
+                      <source srcSet={`${base}-large.webp`} media="(min-width: 1280px)" />
+                      <source srcSet={`${base}-medium.webp`} media="(min-width: 640px)" />
                       <img
-                        src={item.image}
+                        src={`${base}-small.webp`}
                         alt={item.title}
                         loading={loadingMode}
                         decoding="async"
