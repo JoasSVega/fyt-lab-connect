@@ -75,26 +75,38 @@ function AnimatedRoutes() {
     setMinimumTimePassed(false);
     setPageReady(false);
 
+    // Bloquear scroll durante transición
+    document.body.style.overflow = 'hidden';
+
     // Timer del tiempo mínimo (900ms)
     const minTimer = setTimeout(() => {
       setMinimumTimePassed(true);
     }, 900);
 
     // Detectar cuando el nuevo componente está listo
-    // Usamos doble RAF para asegurar que el componente se montó y renderizó
+    // Usamos triple RAF para asegurar que el componente se montó, renderizó y pintó
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        setPageReady(true);
+        requestAnimationFrame(() => {
+          setPageReady(true);
+        });
       });
     });
 
-    return () => clearTimeout(minTimer);
+    return () => {
+      clearTimeout(minTimer);
+      document.body.style.overflow = '';
+    };
   }, [location.pathname]);
 
   // Ocultar loader solo cuando ambas condiciones se cumplan
   useEffect(() => {
     if (minimumTimePassed && pageReady) {
-      setShowRouteLoader(false);
+      // Pequeño delay adicional para asegurar suavidad
+      setTimeout(() => {
+        setShowRouteLoader(false);
+        document.body.style.overflow = '';
+      }, 50);
     }
   }, [minimumTimePassed, pageReady]);
 
@@ -176,10 +188,9 @@ const App: React.FC = () => {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
-  // Loader híbrido inteligente: mínimo 900ms visible + espera carga real
+  // Loader híbrido inteligente: mínimo 1450ms visible (duración completa de la animación) + espera carga real
   useEffect(() => {
-    const minDisplayTime = 900;
-    const startTime = Date.now();
+    const minDisplayTime = 1450; // Duración exacta de la animación del Loader
     let minTimeReached = false;
     let appReady = false;
 
@@ -214,6 +225,19 @@ const App: React.FC = () => {
       window.removeEventListener('load', checkReady);
     };
   }, []);
+
+  // Bloquear scroll del body durante el loader
+  useEffect(() => {
+    if (showLoader || isLoading) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [showLoader, isLoading]);
 
   const handleLoaderComplete = () => {
     setShowLoader(false);

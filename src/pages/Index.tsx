@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Users, Microscope, BookOpen } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import FloatingContact from "@/components/FloatingContact";
-// Animaciones eliminadas
+import { ScrollReveal } from "@/components/animations/ScrollReveal";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -22,6 +22,7 @@ const Index = () => {
         {/* Tarjetas principales: diseño proporcional y simétrico en todas las pantallas */}
         <section className="w-full grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 py-12 px-2 sm:px-6 md:px-12 lg:px-24 xl:px-32 2xl:px-48">
           {/* Sobre Nosotros */}
+          <ScrollReveal delay={0}>
             <div className="flex flex-col h-full items-center gap-4 bg-white rounded-xl shadow-soft p-6 md:p-8 w-full border border-blue-100">
               <span className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-blue-100 mb-2">
                 <Users className="w-7 h-7 md:w-8 md:h-8 text-blue-600" aria-label="Sobre Nosotros" />
@@ -35,7 +36,9 @@ const Index = () => {
                 Ver Más
               </Button>
             </div>
+          </ScrollReveal>
           {/* Investigación */}
+          <ScrollReveal delay={0.1}>
           <div className="flex flex-col h-full items-center gap-4 bg-white rounded-xl shadow-soft p-6 md:p-8 w-full border border-purple-100">
             <span className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-purple-100 mb-2">
               <Microscope className="w-7 h-7 md:w-8 md:h-8 text-purple-600" aria-label="Investigación" />
@@ -49,7 +52,9 @@ const Index = () => {
               Ver Investigación
             </Button>
           </div>
+          </ScrollReveal>
           {/* Noticias */}
+          <ScrollReveal delay={0.2}>
           <div className="flex flex-col h-full items-center gap-4 bg-white rounded-xl shadow-soft p-6 md:p-8 w-full border border-red-100">
             <span className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-red-100 mb-2">
               <BookOpen className="w-7 h-7 md:w-8 md:h-8 text-red-600" aria-label="Noticias" />
@@ -63,11 +68,14 @@ const Index = () => {
               Ver Noticias
             </Button>
           </div>
+          </ScrollReveal>
         </section>
       {/* Secciones de investigación, modalidades, actividades y productos, y la tarjeta de inscripción */}
-      <div className="px-2 sm:px-6 md:px-12 lg:px-24 xl:px-32 2xl:px-48">
-        <About />
-      </div>
+      <ScrollReveal delay={0.1}>
+        <div className="px-2 sm:px-6 md:px-12 lg:px-24 xl:px-32 2xl:px-48">
+          <About />
+        </div>
+      </ScrollReveal>
         {/* Pharmaceutical Tools Section removida: ahora solo en la página Herramientas */}
       </main>
       {/* Floating Contact Button */}
