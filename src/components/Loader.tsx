@@ -1,11 +1,19 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useImagePreloader } from "@/hooks/useImagePreloader";
 
 interface LoaderProps {
   onComplete?: () => void;
 }
 
 const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
+  // Preload logo variants to ensure they're cached before showing
+  useImagePreloader([
+    '/images/logo-fyt-small.webp',
+    '/images/logo-fyt-medium.webp',
+    '/images/logo-fyt-large.webp',
+  ], { priority: 'critical', timeout: 5000 });
+
   // Timing exacto según especificación:
   // Fase 1: Inicio (0s)
   // Fase 2: Fade-in (0.4s) → 0s-0.4s

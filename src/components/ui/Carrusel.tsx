@@ -2,6 +2,7 @@ import React from "react";
 import type { CarouselApi } from "./carousel";
 import { Card } from "./card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "./carousel";
+import { useCarouselPreloader } from "@/hooks/useImagePreloader";
 
 export interface CarruselItem {
   image: string;
@@ -40,6 +41,26 @@ const Carrusel: React.FC<CarruselProps> = ({
   const [emblaApi, setEmblaApi] = React.useState<CarouselApi | null>(null);
   const [selected, setSelected] = React.useState(0);
   const [isHovered, setIsHovered] = React.useState(false);
+  
+  // Preload all carousel images before rendering to prevent flickering
+  const allImages = React.useMemo(() => {
+    return items.flatMap(item => {
+      const base = item.image.replace(/-medium\.webp$/i, '');
+      return [
+        `${base}-small.webp`,
+        `${base}-medium.webp`,
+        `${base}-large.webp`,
+      ];
+    });
+  }, [items]);
+  
+  const { loaded: imagesLoaded } = useCarouselPreloader(
+    items.map(item => {
+      const base = item.image.replace(/-medium\.webp$/i, '');
+      return `${base}-medium.webp`; // Preload medium as baseline
+    }),
+    { priority: 'high', timeout: 8000 }
+  );
 
   React.useEffect(() => {
     if (!emblaApi) return;
@@ -106,6 +127,25 @@ const Carrusel: React.FC<CarruselProps> = ({
       if (timeout) window.clearTimeout(timeout);
     };
   }, [emblaApi]);
+
+  // Show loading skeleton while images preload
+  if (!imagesLoaded) {
+    return (
+      <div className={className || "w-full px-2 sm:px-3"}>
+        <div className="w-full flex items-center justify-center" style={{ minHeight: heightCss || '18rem' }}>
+          <div className="animate-pulse flex space-x-4">
+            <div className="flex-1 space-y-4 py-1">
+              <div className="h-4 bg-gray-300 rounded w-3/4"></div>
+              <div className="space-y-2">
+                <div className="h-4 bg-gray-300 rounded"></div>
+                <div className="h-4 bg-gray-300 rounded w-5/6"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div

@@ -28,7 +28,9 @@ const Card = ({ icon, title, desc, to, color }: { icon: React.ReactNode; title: 
 };
 
 const IndexTools: React.FC = () => {
-  usePageReady(); // Sincronización con TransitionProvider
+  usePageReady({
+    responsiveImages: ["/images/hero-herramientas"],
+  });
   return (
     <>
       <Seo

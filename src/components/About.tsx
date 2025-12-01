@@ -3,12 +3,6 @@ import { Target, Eye, Microscope, Heart, Users, BookOpen, ChevronLeft, ChevronRi
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
 import Carrusel from "./ui/Carrusel";
-import researchPharmacology from "@/assets/research-pharmacology.jpg";
-import researchPharmacovigilance from "@/assets/research-pharmacovigilance.jpg";
-import researchClinicalPharmacy from "@/assets/research-clinical-pharmacy.jpg";
-import researchPharmacoepidemiology from "@/assets/research-pharmacoepidemiology.jpg";
-import researchPharmacoeconomics from "@/assets/research-pharmacoeconomics.jpg";
-import researchMolecularModeling from "@/assets/research-molecular-modeling.jpg";
 import { ScrollReveal } from "./animations/ScrollReveal";
 
 const About = () => {

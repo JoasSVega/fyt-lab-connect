@@ -29,11 +29,7 @@ const tools = [
 const Herramientas = () => {
   const navigate = useNavigate();
   usePageReady({
-    criticalImages: [
-      "/images/hero-herramientas-small.webp",
-      "/images/hero-herramientas-medium.webp",
-      "/images/hero-herramientas-large.webp",
-    ],
+    responsiveImages: ["/images/hero-herramientas"],
   });
   return (
     <div className="w-full bg-background flex flex-col pt-24">

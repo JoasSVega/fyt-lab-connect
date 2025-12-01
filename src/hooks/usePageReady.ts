@@ -1,22 +1,37 @@
 import { useEffect } from 'react';
 import { useTransition } from '../providers/TransitionProvider';
+import { preloadResponsiveImage } from './useImagePreloader';
 
 interface UsePageReadyOptions {
   criticalImages?: string[];
+  responsiveImages?: string[]; // Base paths for responsive images (will auto-add -small/-medium/-large)
   onReady?: () => void;
 }
 
 export const usePageReady = (options: UsePageReadyOptions = {}) => {
   const { signalPageReady, preloadImages } = useTransition();
-  const { criticalImages = [], onReady } = options;
+  const { criticalImages = [], responsiveImages = [], onReady } = options;
 
   useEffect(() => {
     let mounted = true;
 
     const init = async () => {
-      // Preload critical images
+      // Preload critical images (single URLs)
       if (criticalImages.length > 0) {
         await preloadImages(criticalImages);
+      }
+
+      // Preload responsive image sets in parallel
+      if (responsiveImages.length > 0) {
+        await Promise.all(
+          responsiveImages.map(basePath => 
+            preloadResponsiveImage(basePath, { priority: 'high', timeout: 8000 })
+              .catch(err => {
+                console.warn('Responsive image preload failed:', basePath, err);
+                return Promise.resolve();
+              })
+          )
+        );
       }
 
       // Wait for DOM to be fully rendered
@@ -44,5 +59,5 @@ export const usePageReady = (options: UsePageReadyOptions = {}) => {
     return () => {
       mounted = false;
     };
-  }, [criticalImages, onReady, signalPageReady, preloadImages]);
+  }, [criticalImages, responsiveImages, onReady, signalPageReady, preloadImages]);
 };

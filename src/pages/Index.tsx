@@ -11,11 +11,7 @@ import { usePageReady } from "@/hooks/usePageReady";
 const Index = () => {
   const navigate = useNavigate();
   usePageReady({
-    criticalImages: [
-      "/images/hero-index-small.webp",
-      "/images/hero-index-medium.webp",
-      "/images/hero-index-large.webp",
-    ],
+    responsiveImages: ["/images/hero-index"],
   });
   return (
   <div className="w-full" style={{background: "linear-gradient(120deg, #e0f2ff 0%, #f8fafc 60%, #f3f4f6 100%)"}}>

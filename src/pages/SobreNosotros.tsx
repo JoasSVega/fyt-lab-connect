@@ -6,11 +6,7 @@ import { usePageReady } from "@/hooks/usePageReady";
 
 const SobreNosotros = () => {
   usePageReady({
-    criticalImages: [
-      "/images/hero-nosotros-small.webp",
-      "/images/hero-nosotros-medium.webp",
-      "/images/hero-nosotros-large.webp",
-    ],
+    responsiveImages: ["/images/hero-nosotros"],
   });
   return (
   <div className="w-full bg-background flex flex-col">
