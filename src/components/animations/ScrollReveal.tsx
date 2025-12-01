@@ -1,6 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { useScrollReveal } from '@/hooks/useScrollReveal';
+import { useReveal } from '@/hooks/useReveal';
 
 interface ScrollRevealProps {
   children: React.ReactNode;
@@ -17,25 +16,16 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
   slideDistance = 12,
   className = '',
 }) => {
-  const { ref, isVisible } = useScrollReveal({
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px',
-    triggerOnce: true,
-  });
-
+  const { ref } = useReveal({ threshold: 0.12, rootMargin: '0px 0px -50px 0px', triggerOnce: true });
+  const style: React.CSSProperties = {
+    // Allow per-instance tuning while keeping CSS-driven transitions
+    ['--reveal-distance' as any]: `${slideDistance}px`,
+    ['--reveal-duration' as any]: `${duration}s`,
+    ['--reveal-extra-delay' as any]: `${Math.max(0, delay * 1000)}ms`,
+  };
   return (
-    <motion.div
-      ref={ref as any}
-      initial={{ opacity: 0, y: slideDistance }}
-      animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: slideDistance }}
-      transition={{
-        duration,
-        delay,
-        ease: [0.25, 0.1, 0.25, 1],
-      }}
-      className={className}
-    >
+    <div ref={ref as any} className={`reveal ${className}`} style={style}>
       {children}
-    </motion.div>
+    </div>
   );
 };

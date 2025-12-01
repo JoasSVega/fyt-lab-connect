@@ -136,6 +136,21 @@ All colors MUST be HSL and based on institutional branding.
     width: 100vw;
   }
 
+  /* -------- Scroll Reveal (CSS only, layout-safe) -------- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(var(--reveal-distance, 12px));
+    transition-property: opacity, transform;
+    transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+    transition-duration: var(--reveal-duration, 0.5s);
+    transition-delay: calc(var(--reveal-delay-ms, 0ms) + var(--reveal-extra-delay, 0ms));
+    will-change: opacity, transform;
+  }
+  .reveal.reveal--visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   /* Responsive images */
   img {
     max-width: 100%;

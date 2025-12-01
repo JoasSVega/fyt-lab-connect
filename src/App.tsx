@@ -39,7 +39,7 @@ const TermsOfUse = React.lazy(() => import("./pages/TermsOfUse"));
 const CodeOfEthics = React.lazy(() => import("./pages/CodeOfEthics"));
 import TitleSync from "./components/TitleSync";
 import Loader from "./components/Loader";
-import { lockScroll, unlockScroll } from "./lib/scrollLock";
+import { lockBodyScroll, unlockBodyScroll } from "./utils/scrollManager";
 
 const queryClient = new QueryClient();
 
@@ -77,7 +77,7 @@ function AnimatedRoutes() {
     setPendingLocation(location);
     setShowRouteLoader(true);
     (window as any).__routeTransitionActive = true;
-    lockScroll();
+    lockBodyScroll();
 
     // No cambiamos `displayLocation` hasta que termine la animación del loader.
     return () => {};
@@ -93,7 +93,7 @@ function AnimatedRoutes() {
             setShowRouteLoader(false);
             // Llevar al tope de la página sin animación para evitar conflicto con el loader
             window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-            unlockScroll();
+            unlockBodyScroll();
             (window as any).__routeTransitionActive = false;
           }}
         />
@@ -211,15 +211,15 @@ const App: React.FC = () => {
     };
   }, []);
 
-  // Bloquear scroll del body durante el loader inicial (usa scrollLock unificado)
+  // Bloquear scroll del body durante el loader inicial (usa scrollManager unificado)
   useEffect(() => {
     if (showLoader || isLoading) {
-      lockScroll();
+      lockBodyScroll();
     } else {
-      unlockScroll();
+      unlockBodyScroll();
     }
     return () => {
-      try { unlockScroll(); } catch {}
+      try { unlockBodyScroll(); } catch {}
     };
   }, [showLoader, isLoading]);
 
