@@ -1,10 +1,12 @@
 import React from "react";
-import BaseLayout from "@/components/BaseLayout";
+import { usePageReady } from "@/hooks/usePageReady";
 
-const CodeOfEthics = () => (
-  <BaseLayout>
-    <main className="max-w-3xl mx-auto px-4 py-10 sm:py-16">
-  <h1 className="text-4xl sm:text-5xl font-serif font-extrabold text-slate-800 mb-8 text-center">Código de Ética – Grupo de Investigación en Farmacología y Terapéutica</h1>
+const CodeOfEthics = () => {
+  usePageReady(); // Sincronización con TransitionProvider
+  return (
+    <div className="w-full bg-background pt-24">{/* Patrón de páginas principales */}
+      <div className="max-w-3xl mx-auto px-4 py-10 sm:py-16">
+        <h1 className="text-4xl sm:text-5xl font-serif font-extrabold text-slate-800 mb-8 text-center">Código de Ética – Grupo de Investigación en Farmacología y Terapéutica</h1>
       <p className="text-slate-700 text-base mb-2">Universidad de Cartagena</p>
       <section className="mb-6">
         <h2 className="text-lg font-semibold mb-2 text-slate-700">1. Principios rectores</h2>
@@ -68,8 +70,9 @@ const CodeOfEthics = () => (
           <li>📍 Cra. 50 #24120, Zaragocilla, Cartagena de Indias, Provincia de Cartagena, Bolívar.</li>
         </ul>
       </section>
-    </main>
-  </BaseLayout>
-);
+      </div>
+    </div>
+  );
+};
 
 export default CodeOfEthics;

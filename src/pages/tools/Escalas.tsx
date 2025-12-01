@@ -2,12 +2,14 @@ import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import { ClipboardCheck, HeartPulse, Brain, AlertTriangle, TestTube } from "lucide-react";
 import Seo from "@/components/Seo";
+import { usePageReady } from "@/hooks/usePageReady";
 import CURB65Tool from "@/components/tools/CURB65Tool";
 import GlasgowTool from "@/components/tools/GlasgowTool";
 import HASBLEDTool from "@/components/tools/HASBLEDTool";
 import CHA2DS2VAScTool from "@/components/tools/CHA2DS2VAScTool";
 
 const Escalas: React.FC = () => {
+  usePageReady(); // Sincronización con TransitionProvider
   const navigate = useNavigate();
 
   const Card = ({ icon, title, desc, color = "#a855f7", action }: { icon: React.ReactNode; title: string; desc: string; color?: string; action?: React.ReactNode; }) => {
@@ -68,6 +70,13 @@ const Escalas: React.FC = () => {
   {/* Grid */}
   <section className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 px-4 py-4 overflow-visible" aria-label="Escalas clínicas disponibles">
         <Card
+          icon={<Brain className="w-7 h-7" />}
+          title="Escala de Glasgow (GCS)"
+          desc="Evaluación del estado neurológico del paciente."
+          color="#8e24aa"
+          action={<GlasgowTool />}
+        />
+        <Card
           icon={<AlertTriangle className="w-7 h-7" />}
           title="Riesgo de sangrado en anticoagulación (HAS-BLED)"
           desc="Riesgo de sangrado en anticoagulación."
@@ -87,13 +96,6 @@ const Escalas: React.FC = () => {
           desc="Severidad de la neumonía adquirida en la comunidad."
           color="#fb8c00"
           action={<CURB65Tool />}
-        />
-        <Card
-          icon={<Brain className="w-7 h-7" />}
-          title="Escala de Glasgow (GCS)"
-          desc="Evaluación del estado neurológico del paciente."
-          color="#8e24aa"
-          action={<GlasgowTool />}
         />
       </section>
 

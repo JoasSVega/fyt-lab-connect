@@ -2,10 +2,10 @@
 // Filtros por año y tipo, grid minimalista, cards académicas
 // Página de listado de publicaciones con filtros y paginación
 import React, { useState, useMemo } from "react";
-import BaseLayout from "@/components/BaseLayout";
 import publicationsData from "@/data/publications.json";
 import PublicationCard from "@/components/publications/PublicationCard";
 import FiltersBar from "@/components/search/FiltersBar";
+import { usePageReady } from "@/hooks/usePageReady";
 
 
 type PubType = "articulo" | "libro" | "capitulo" | "divulgacion" | "reporte" | "conferencia" | "memoria";
@@ -56,9 +56,10 @@ const PublicacionesPage: React.FC = () => {
   const paginated = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
   React.useEffect(() => { setPage(1); }, [year, type, search]);
+  usePageReady();
 
   return (
-    <BaseLayout>
+    <div className="w-full bg-background pt-24">
       <section className="max-w-6xl mx-auto px-4 py-10 sm:py-16">
   <h1 className="text-4xl sm:text-5xl font-poppins font-bold text-slate-800 mb-4 text-center">Publicaciones</h1>
         <FiltersBar>
@@ -131,7 +132,7 @@ const PublicacionesPage: React.FC = () => {
           </button>
         </div>
       </section>
-    </BaseLayout>
+    </div>
   );
 };
 

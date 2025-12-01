@@ -7,14 +7,6 @@ import { ScrollReveal } from "@/components/animations/ScrollReveal";
 // Lista de herramientas farmacéuticas (fácil de extender)
 const tools = [
   {
-    title: "Calculadoras de Función Renal",
-    description: "Herramienta farmacéutica para cálculos clínicos de función renal.",
-    color: "bg-blue-50",
-    href: "/herramientas/funcion-renal",
-    buttonText: "Ir a Calculadoras de Función Renal",
-  icon: <Droplet className="w-8 h-8 text-blue-600" aria-label="Función Renal" />,
-  },
-  {
     title: "Calculadoras Antropométricas",
     description: "Herramienta farmacéutica para cálculos clínicos antropométricos.",
     color: "bg-green-50",
@@ -22,14 +14,21 @@ const tools = [
     buttonText: "Ir a Calculadoras Antropométricas",
     icon: <Ruler className="w-8 h-8 text-green-600" aria-label="Antropométricas" />,
   },
+  {
+    title: "Calculadoras de Función Renal",
+    description: "Herramienta farmacéutica para cálculos clínicos de función renal.",
+    color: "bg-blue-50",
+    href: "/herramientas/funcion-renal",
+    buttonText: "Ir a Calculadoras de Función Renal",
+  icon: <Droplet className="w-8 h-8 text-blue-600" aria-label="Función Renal" />,
+  },
   // Agrega aquí nuevas herramientas fácilmente
 ];
 
 const Herramientas = () => {
 	const navigate = useNavigate();
 	return (
-			<div className="w-full bg-background overflow-x-hidden flex flex-col">
-			<main className="flex-1 w-full pt-24">
+			<div className="w-full bg-background flex flex-col pt-24">
                 {/* Hero Section con imagen de fondo */}
                 <section
                   className="relative left-1/2 -translate-x-1/2 w-screen h-[50vh] md:h-[70vh] flex items-center justify-center overflow-hidden"
@@ -83,10 +82,7 @@ const Herramientas = () => {
                       </ScrollReveal>
                     ))}
                   </div>
-        </section>
-      </main>
-     </div>
+				</section>
+			</div>
 	);
-};
-
-export default Herramientas;
+};export default Herramientas;

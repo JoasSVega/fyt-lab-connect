@@ -30,51 +30,22 @@ export type CalculatorMeta = {
 };
 
 export const CalculatorsRegistry = {
-  renal: {
-    id: "renal",
-    title: "Función renal",
-    subtitle: "Cockcroft–Gault / MDRD / CKD‑EPI",
-    category: "clinico",
-    color: "#3B82F6", // brand blue
+  act: {
+    id: "act",
+    title: "ACT",
+    subtitle: "Watson / Chumlea",
+    category: "fisiologico",
+    color: "#16a34a", // green
     fields: [
-      { name: "age", label: "Edad", type: "number", placeholder: "p. ej., 65", validation: { required: true, min: 18, max: 120 } },
-      { name: "sex", label: "Sexo", type: "select", options: [ { value: "male", label: "Masculino" }, { value: "female", label: "Femenino" } ], placeholder: "Seleccionar", validation: { required: true } },
       { name: "weight", label: "Peso", type: "number", unit: "kg", placeholder: "p. ej., 70", validation: { required: true, min: 20, max: 300 } },
-      { name: "scr", label: "Creatinina sérica", type: "number", unit: "mg/dL | µmol/L", placeholder: "p. ej., 1.0", validation: { required: true, min: 0.1 } },
-      { name: "unit", label: "Unidad de creatinina", type: "select", options: [ { value: "mgdl", label: "mg/dL" }, { value: "umol", label: "µmol/L" } ], placeholder: "Seleccionar", validation: { required: true } },
-    ] as FieldSpec[],
+      { name: "height", label: "Talla", type: "number", unit: "cm", placeholder: "p. ej., 170", validation: { required: true, min: 100, max: 250 } },
+      { name: "age", label: "Edad", type: "number", unit: "años", placeholder: "p. ej., 40", validation: { required: true, min: 5, max: 120 } },
+      { name: "sex", label: "Sexo", type: "select", options: [ { value: "male", label: "Masculino" }, { value: "female", label: "Femenino" } ], placeholder: "Seleccionar", validation: { required: true } },
+    ],
     formulas: [
-      { id: "cg", label: "Cockcroft–Gault", description: "CrCl en mL/min", expressionLatex: String.raw`\mathrm{CrCl}=\frac{(140-\text{edad})\times \text{peso}\times (0.85\;\text{si femenino})}{72\times SCr_{mg/dL}}`, compute: computeCockcroft, fields: [
-        { name: "age", label: "Edad", type: "number", placeholder: "p. ej., 65", validation: { required: true, min: 18, max: 120 } },
-        { name: "sex", label: "Sexo", type: "select", options: [ { value: "male", label: "Masculino" }, { value: "female", label: "Femenino" } ], placeholder: "Seleccionar", validation: { required: true } },
-        { name: "weight", label: "Peso", type: "number", unit: "kg", placeholder: "p. ej., 70", validation: { required: true, min: 20, max: 300 } },
-        { name: "scr", label: "Creatinina sérica", type: "number", unit: "mg/dL | µmol/L", placeholder: "p. ej., 1.0", validation: { required: true, min: 0.1 } },
-        { name: "unit", label: "Unidad de creatinina", type: "select", options: [ { value: "mgdl", label: "mg/dL" }, { value: "umol", label: "µmol/L" } ], placeholder: "Seleccionar", validation: { required: true } },
-      ] },
-      { id: "mdrd", label: "MDRD (4v)", description: "TFG en mL/min/1.73m²", expressionLatex: String.raw`\mathrm{TFG}=175\times (SCr)^{-1.154}\times (\text{edad})^{-0.203}\times (0.742^{[\text{femenino}]})\times (1.212^{[\text{afro}]})`, compute: computeMDRD4, fields: [
-        { name: "age", label: "Edad", type: "number", placeholder: "p. ej., 65", validation: { required: true, min: 18, max: 120 } },
-        { name: "sex", label: "Sexo", type: "select", options: [ { value: "male", label: "Masculino" }, { value: "female", label: "Femenino" } ], placeholder: "Seleccionar", validation: { required: true } },
-        { name: "scr", label: "Creatinina sérica", type: "number", unit: "mg/dL | µmol/L", placeholder: "p. ej., 1.0", validation: { required: true, min: 0.1 } },
-        { name: "unit", label: "Unidad de creatinina", type: "select", options: [ { value: "mgdl", label: "mg/dL" }, { value: "umol", label: "µmol/L" } ], placeholder: "Seleccionar", validation: { required: true } },
-        { name: "black", label: "¿Afrodescendiente?", type: "toggle", placeholder: "¿Afrodescendiente?" },
-        { name: "weight", label: "Peso", type: "number", unit: "kg", placeholder: "p. ej., 70", validation: { required: true, min: 20, max: 300 } },
-      ] },
-      { id: "ckd2009", label: "CKD‑EPI 2009", expressionLatex: String.raw`\mathrm{TFG}=141\times \min\left(\tfrac{SCr}{\kappa},1\right)^{\alpha}\times \max\left(\tfrac{SCr}{\kappa},1\right)^{-1.209}\times 0.993^{\text{edad}}\times 1.018^{[\text{femenino}]}\times 1.159^{[\text{afro}]}`, compute: computeCKDEPI2009, fields: [
-        { name: "age", label: "Edad", type: "number", placeholder: "p. ej., 65", validation: { required: true, min: 18, max: 120 } },
-        { name: "sex", label: "Sexo", type: "select", options: [ { value: "male", label: "Masculino" }, { value: "female", label: "Femenino" } ], placeholder: "Seleccionar", validation: { required: true } },
-        { name: "scr", label: "Creatinina sérica", type: "number", unit: "mg/dL | µmol/L", placeholder: "p. ej., 1.0", validation: { required: true, min: 0.1 } },
-        { name: "unit", label: "Unidad de creatinina", type: "select", options: [ { value: "mgdl", label: "mg/dL" }, { value: "umol", label: "µmol/L" } ], placeholder: "Seleccionar", validation: { required: true } },
-        { name: "black", label: "¿Afrodescendiente?", type: "toggle", placeholder: "¿Afrodescendiente?" },
-        { name: "weight", label: "Peso", type: "number", unit: "kg", placeholder: "p. ej., 70", validation: { required: true, min: 20, max: 300 } },
-      ] },
-      { id: "ckd2021", label: "CKD‑EPI 2021", expressionLatex: String.raw`\mathrm{TFG}=142\times \min\left(\tfrac{SCr}{\kappa},1\right)^{\alpha}\times \max\left(\tfrac{SCr}{\kappa},1\right)^{-1.200}\times 0.9938^{\text{edad}}\times 1.012^{[\text{femenino}]}`, compute: computeCKDEPI2021, fields: [
-        { name: "age", label: "Edad", type: "number", placeholder: "p. ej., 65", validation: { required: true, min: 18, max: 120 } },
-        { name: "sex", label: "Sexo", type: "select", options: [ { value: "male", label: "Masculino" }, { value: "female", label: "Femenino" } ], placeholder: "Seleccionar", validation: { required: true } },
-        { name: "scr", label: "Creatinina sérica", type: "number", unit: "mg/dL | µmol/L", placeholder: "p. ej., 1.0", validation: { required: true, min: 0.1 } },
-        { name: "unit", label: "Unidad de creatinina", type: "select", options: [ { value: "mgdl", label: "mg/dL" }, { value: "umol", label: "µmol/L" } ], placeholder: "Seleccionar", validation: { required: true } },
-        { name: "weight", label: "Peso", type: "number", unit: "kg", placeholder: "p. ej., 70", validation: { required: true, min: 20, max: 300 } },
-      ] },
-    ] as FormulaSpec[],
+  { id: "watson", label: "Watson", expressionLatex: String.raw`\mathrm{ACT}_{\text{masculino}}=2.447-0.09516\,\text{edad}+0.1074\,\text{talla}+0.3362\,\text{peso}\\ \mathrm{ACT}_{\text{femenino}}=-2.097+0.1069\,\text{talla}+0.2466\,\text{peso}` , compute: computeACTWatson },
+      { id: "chumlea", label: "Chumlea", expressionLatex: String.raw`\mathrm{ACT}_{\text{mujer}}=0.34454\,\text{talla}+0.183809\,\text{peso}-35.270121`, compute: computeACTChumlea },
+    ],
   },
   bmi: {
     id: "bmi",
@@ -87,32 +58,6 @@ export const CalculatorsRegistry = {
       { name: "height", label: "Talla", type: "number", unit: "cm", placeholder: "p. ej., 170", validation: { required: true, min: 100, max: 250 } },
     ],
   formulas: [ { id: "bmi", label: "IMC", description: "IMC = peso / (talla[m])²", expressionLatex: String.raw`\mathrm{IMC}=\frac{\text{peso}}{(\tfrac{\text{talla}}{100})^{2}}`, compute: computeBMI } ],
-  },
-  bsa: {
-    id: "bsa",
-    title: "SC",
-    subtitle: "DuBois & DuBois (m²)",
-    category: "fisiologico",
-    color: "#10b981", // emerald
-    fields: [
-      { name: "weight", label: "Peso", type: "number", unit: "kg", placeholder: "p. ej., 70", validation: { required: true, min: 20, max: 300 } },
-      { name: "height", label: "Talla", type: "number", unit: "cm", placeholder: "p. ej., 170", validation: { required: true, min: 100, max: 250 } },
-    ],
-  formulas: [ { id: "dubois", label: "DuBois", description: "BSA = 0.007184 × peso^0.425 × talla^0.725", expressionLatex: String.raw`\mathrm{SC}=0.007184\times \text{peso}^{0.425}\times \text{talla}^{0.725}`, compute: computeBSA } ],
-  },
-  bodyFat: {
-    id: "bodyFat",
-    title: "%GC",
-    subtitle: "Deurenberg (1991)",
-    category: "fisiologico",
-    color: "#a855f7", // violet
-    fields: [
-      { name: "weight", label: "Peso", type: "number", unit: "kg", placeholder: "p. ej., 72", validation: { required: true, min: 20, max: 300 } },
-      { name: "height", label: "Talla", type: "number", unit: "cm", placeholder: "p. ej., 170", validation: { required: true, min: 100, max: 250 } },
-      { name: "age", label: "Edad", type: "number", unit: "años", placeholder: "p. ej., 40", validation: { required: true, min: 5, max: 120 } },
-      { name: "sex", label: "Sexo", type: "select", options: [ { value: "male", label: "Masculino" }, { value: "female", label: "Femenino" } ], placeholder: "Seleccionar", validation: { required: true } },
-    ],
-  formulas: [ { id: "deurenberg", label: "Deurenberg", description: "% Grasa corporal", expressionLatex: String.raw`\%\,\mathrm{Grasa}=1.2\times \mathrm{IMC}+0.23\times \text{edad}-10.8\times [\text{masculino}]-5.4\\\text{donde }[\text{masculino}]=1,\;[\text{femenino}]=0`, compute: computeBodyFat } ],
   },
   bmr: {
     id: "bmr",
@@ -131,65 +76,71 @@ export const CalculatorsRegistry = {
   { id: "harris", label: "Harris–Benedict", description: "kcal/día", expressionLatex: String.raw`\mathrm{CEB}=\alpha+13.75\,\text{peso}+5.003\,\text{talla}-6.755\,\text{edad}\; (\alpha=66.5\;\text{masculino})\\ \mathrm{CEB}=\alpha+9.563\,\text{peso}+1.850\,\text{talla}-4.676\,\text{edad}\; (\alpha=655.1\;\text{femenino})`, compute: computeBMRHarris },
     ],
   },
-  idealWeight: {
-    id: "idealWeight",
-    title: "PI",
-    subtitle: "Devine / Robinson / Miller",
+  bodyFat: {
+    id: "bodyFat",
+    title: "%GC",
+    subtitle: "Deurenberg (1991)",
     category: "fisiologico",
-    color: "#0d9488", // teal
+    color: "#a855f7", // violet
     fields: [
-      { name: "height", label: "Talla", type: "number", unit: "cm", placeholder: "p. ej., 170", validation: { required: true, min: 100, max: 250 } },
-      { name: "sex", label: "Sexo", type: "select", options: [ { value: "male", label: "Masculino" }, { value: "female", label: "Femenino" } ], placeholder: "Seleccionar", validation: { required: true } },
-    ],
-    formulas: [
-  { id: "devine", label: "Devine (1974)", expressionLatex: String.raw`\mathrm{PI}_{\text{masculino}}=50+2.3\,(\tfrac{\text{talla\,(in)}}{1}-60)\\ \mathrm{PI}_{\text{femenino}}=45.5+2.3\,(\tfrac{\text{talla\,(in)}}{1}-60)`, compute: computeIdealDevine },
-  { id: "robinson", label: "Robinson (1983)", expressionLatex: String.raw`\mathrm{PI}_{\text{masculino}}=52+1.9\,(\text{in}-60)\\ \mathrm{PI}_{\text{femenino}}=49+1.7\,(\text{in}-60)`, compute: computeIdealRobinson },
-  { id: "miller", label: "Miller (1983)", expressionLatex: String.raw`\mathrm{PI}_{\text{masculino}}=56.2+1.41\,(\text{in}-60)\\ \mathrm{PI}_{\text{femenino}}=53.1+1.36\,(\text{in}-60)`, compute: computeIdealMiller },
-    ],
-  },
-  act: {
-    id: "act",
-    title: "ACT",
-    subtitle: "Watson / Chumlea",
-    category: "fisiologico",
-    color: "#16a34a", // green
-    fields: [
-      { name: "weight", label: "Peso", type: "number", unit: "kg", placeholder: "p. ej., 70", validation: { required: true, min: 20, max: 300 } },
+      { name: "weight", label: "Peso", type: "number", unit: "kg", placeholder: "p. ej., 72", validation: { required: true, min: 20, max: 300 } },
       { name: "height", label: "Talla", type: "number", unit: "cm", placeholder: "p. ej., 170", validation: { required: true, min: 100, max: 250 } },
       { name: "age", label: "Edad", type: "number", unit: "años", placeholder: "p. ej., 40", validation: { required: true, min: 5, max: 120 } },
       { name: "sex", label: "Sexo", type: "select", options: [ { value: "male", label: "Masculino" }, { value: "female", label: "Femenino" } ], placeholder: "Seleccionar", validation: { required: true } },
     ],
-    formulas: [
-  { id: "watson", label: "Watson", expressionLatex: String.raw`\mathrm{ACT}_{\text{masculino}}=2.447-0.09516\,\text{edad}+0.1074\,\text{talla}+0.3362\,\text{peso}\\ \mathrm{ACT}_{\text{femenino}}=-2.097+0.1069\,\text{talla}+0.2466\,\text{peso}` , compute: computeACTWatson },
-      { id: "chumlea", label: "Chumlea", expressionLatex: String.raw`\mathrm{ACT}_{\text{mujer}}=0.34454\,\text{talla}+0.183809\,\text{peso}-35.270121`, compute: computeACTChumlea },
-    ],
+  formulas: [ { id: "deurenberg", label: "Deurenberg", description: "% Grasa corporal", expressionLatex: String.raw`\%\,\mathrm{Grasa}=1.2\times \mathrm{IMC}+0.23\times \text{edad}-10.8\times [\text{masculino}]-5.4\\\text{donde }[\text{masculino}]=1,\;[\text{femenino}]=0`, compute: computeBodyFat } ],
   },
-  mmc: {
-    id: "mmc",
-    title: "MMC",
-    subtitle: "James / Hume / % grasa",
+  bsa: {
+    id: "bsa",
+    title: "SC",
+    subtitle: "DuBois & DuBois (m²)",
     category: "fisiologico",
-    color: "#0891b2", // cyan
+    color: "#10b981", // emerald
     fields: [
       { name: "weight", label: "Peso", type: "number", unit: "kg", placeholder: "p. ej., 70", validation: { required: true, min: 20, max: 300 } },
-      { name: "height", label: "Talla", type: "number", unit: "cm", placeholder: "p. ej., 170", validation: { min: 100, max: 250 } },
-      { name: "bf", label: "% Grasa corporal", type: "number", unit: "%", placeholder: "p. ej., 22", validation: { min: 0, max: 100 } },
-      { name: "sex", label: "Sexo", type: "select", options: [ { value: "male", label: "Masculino" }, { value: "female", label: "Femenino" } ], placeholder: "Seleccionar", validation: { required: true } },
+      { name: "height", label: "Talla", type: "number", unit: "cm", placeholder: "p. ej., 170", validation: { required: true, min: 100, max: 250 } },
+    ],
+  formulas: [ { id: "dubois", label: "DuBois", description: "BSA = 0.007184 × peso^0.425 × talla^0.725", expressionLatex: String.raw`\mathrm{SC}=0.007184\times \text{peso}^{0.425}\times \text{talla}^{0.725}`, compute: computeBSA } ],
+  },
+  dose: {
+    id: "dose",
+    title: "Dosis por peso y SC",
+    subtitle: "mg/kg · µg/kg · mg/m² · µg/m²",
+    category: "clinico",
+    color: "#0EA5E9",
+    fields: [
+      { name: "weight", label: "Peso", type: "number", unit: "kg", placeholder: "p. ej., 70", validation: { min: 1 } },
+      { name: "bsa", label: "Superficie corporal", type: "number", unit: "m²", placeholder: "p. ej., 1.8", validation: { min: 0 } },
+      { name: "dosePer", label: "Dosis recomendada", type: "number", placeholder: "p. ej., 15" },
+      { name: "unit", label: "Unidad", type: "select", options: [
+        { value: "mg/kg", label: "mg/kg" },
+        { value: "µg/kg", label: "µg/kg" },
+        { value: "mg/m²", label: "mg/m²" },
+        { value: "µg/m²", label: "µg/m²" },
+      ], placeholder: "Seleccionar" },
+      { name: "frequency", label: "Frecuencia / intervalo (opcional)", type: "text", placeholder: "p. ej., cada 8 h" },
+      { name: "drug", label: "Nombre del fármaco (opcional)", type: "text", placeholder: "p. ej., amikacina" },
     ],
     formulas: [
-      { id: "james", label: "James", expressionLatex: String.raw`\mathrm{MM}_{\text{masculino}}=1.1\,\text{peso}-128\,\Big(\tfrac{\text{peso}}{\text{talla}}\Big)^{2}\\ \mathrm{MM}_{\text{femenino}}=1.07\,\text{peso}-148\,\Big(\tfrac{\text{peso}}{\text{talla}}\Big)^{2}`, compute: computeMMCJames, fields: [
-        { name: "weight", label: "Peso", type: "number", unit: "kg", placeholder: "p. ej., 70", validation: { required: true, min: 20, max: 300 } },
-        { name: "height", label: "Talla", type: "number", unit: "cm", placeholder: "p. ej., 170", validation: { required: true, min: 100, max: 250 } },
-        { name: "sex", label: "Sexo", type: "select", options: [ { value: "male", label: "Masculino" }, { value: "female", label: "Femenino" } ], placeholder: "Seleccionar", validation: { required: true } },
-      ] },
-      { id: "hume", label: "Hume", expressionLatex: String.raw`\mathrm{MM}_{\text{masculino}}=0.32810\,\text{peso}+0.33929\,\text{talla}-29.5336\\ \mathrm{MM}_{\text{femenino}}=0.29569\,\text{peso}+0.41813\,\text{talla}-43.2933`, compute: computeMMCHume, fields: [
-        { name: "weight", label: "Peso", type: "number", unit: "kg", placeholder: "p. ej., 70", validation: { required: true, min: 20, max: 300 } },
-        { name: "height", label: "Talla", type: "number", unit: "cm", placeholder: "p. ej., 170", validation: { required: true, min: 100, max: 250 } },
-        { name: "sex", label: "Sexo", type: "select", options: [ { value: "male", label: "Masculino" }, { value: "female", label: "Femenino" } ], placeholder: "Seleccionar", validation: { required: true } },
-      ] },
-      { id: "lean", label: "Lean (% grasa)", description: "Masa magra a partir de % grasa", expressionLatex: String.raw`\mathrm{MM}=\text{peso}\times (1-\tfrac{\%\,\text{grasa}}{100})`, compute: computeLeanMassFromBF, fields: [
-        { name: "weight", label: "Peso", type: "number", unit: "kg", placeholder: "p. ej., 70", validation: { required: true, min: 20, max: 300 } },
-        { name: "bf", label: "% Grasa corporal", type: "number", unit: "%", placeholder: "p. ej., 22", validation: { required: true, min: 0, max: 100 } },
+      { id: "perWeight", label: "Por peso (kg)", description: "Dosis total por peso", expressionLatex: String.raw`\text{Dosis}=\text{Peso}\times \text{Dosis}_{\text{por kg}}`, compute: (v) => computeDoseByWeight(v, "weight"), fields: [
+        { name: "weight", label: "Peso", type: "number", unit: "kg", placeholder: "p. ej., 70", validation: { min: 1 } },
+        { name: "dosePer", label: "Dosis recomendada", type: "number", placeholder: "p. ej., 15" },
+        { name: "unit", label: "Unidad", type: "select", options: [
+          { value: "mg/kg", label: "mg/kg" },
+          { value: "µg/kg", label: "µg/kg" },
+        ], placeholder: "Seleccionar" },
+        { name: "frequency", label: "Frecuencia / intervalo (opcional)", type: "text", placeholder: "p. ej., cada 8 h" },
+        { name: "drug", label: "Nombre del fármaco (opcional)", type: "text", placeholder: "p. ej., amikacina" },
+  ] },
+  { id: "perBSA", label: "Por SC (m²)", description: "Dosis total por superficie corporal", expressionLatex: String.raw`\text{Dosis}=\text{SC}\times \text{Dosis}_{\text{por m}^2}`, compute: (v) => computeDoseByWeight(v, "bsa"), fields: [
+        { name: "bsa", label: "Superficie corporal", type: "number", unit: "m²", placeholder: "p. ej., 1.8", validation: { min: 0 } },
+        { name: "dosePer", label: "Dosis recomendada", type: "number", placeholder: "p. ej., 15" },
+        { name: "unit", label: "Unidad", type: "select", options: [
+          { value: "mg/m²", label: "mg/m²" },
+          { value: "µg/m²", label: "µg/m²" },
+        ], placeholder: "Seleccionar" },
+        { name: "frequency", label: "Frecuencia / intervalo (opcional)", type: "text", placeholder: "p. ej., cada 8 h" },
+        { name: "drug", label: "Nombre del fármaco (opcional)", type: "text", placeholder: "p. ej., amikacina" },
       ] },
     ],
   },
@@ -252,45 +203,96 @@ export const CalculatorsRegistry = {
       ] },
     ],
   },
-  dose: {
-    id: "dose",
-    title: "Dosis por peso y SC",
-    subtitle: "mg/kg · µg/kg · mg/m² · µg/m²",
-    category: "clinico",
-    color: "#0EA5E9",
+  idealWeight: {
+    id: "idealWeight",
+    title: "PI",
+    subtitle: "Devine / Robinson / Miller",
+    category: "fisiologico",
+    color: "#0d9488", // teal
     fields: [
-      { name: "weight", label: "Peso", type: "number", unit: "kg", placeholder: "p. ej., 70", validation: { min: 1 } },
-      { name: "bsa", label: "Superficie corporal", type: "number", unit: "m²", placeholder: "p. ej., 1.8", validation: { min: 0 } },
-      { name: "dosePer", label: "Dosis recomendada", type: "number", placeholder: "p. ej., 15" },
-      { name: "unit", label: "Unidad", type: "select", options: [
-        { value: "mg/kg", label: "mg/kg" },
-        { value: "µg/kg", label: "µg/kg" },
-        { value: "mg/m²", label: "mg/m²" },
-        { value: "µg/m²", label: "µg/m²" },
-      ], placeholder: "Seleccionar" },
-      { name: "frequency", label: "Frecuencia / intervalo (opcional)", type: "text", placeholder: "p. ej., cada 8 h" },
-      { name: "drug", label: "Nombre del fármaco (opcional)", type: "text", placeholder: "p. ej., amikacina" },
+      { name: "height", label: "Talla", type: "number", unit: "cm", placeholder: "p. ej., 170", validation: { required: true, min: 100, max: 250 } },
+      { name: "sex", label: "Sexo", type: "select", options: [ { value: "male", label: "Masculino" }, { value: "female", label: "Femenino" } ], placeholder: "Seleccionar", validation: { required: true } },
     ],
     formulas: [
-      { id: "perWeight", label: "Por peso (kg)", description: "Dosis total por peso", expressionLatex: String.raw`\text{Dosis}=\text{Peso}\times \text{Dosis}_{\text{por kg}}`, compute: (v) => computeDoseByWeight(v, "weight"), fields: [
-        { name: "weight", label: "Peso", type: "number", unit: "kg", placeholder: "p. ej., 70", validation: { min: 1 } },
-        { name: "dosePer", label: "Dosis recomendada", type: "number", placeholder: "p. ej., 15" },
-        { name: "unit", label: "Unidad", type: "select", options: [
-          { value: "mg/kg", label: "mg/kg" },
-          { value: "µg/kg", label: "µg/kg" },
-        ], placeholder: "Seleccionar" },
-        { name: "frequency", label: "Frecuencia / intervalo (opcional)", type: "text", placeholder: "p. ej., cada 8 h" },
-        { name: "drug", label: "Nombre del fármaco (opcional)", type: "text", placeholder: "p. ej., amikacina" },
-  ] },
-  { id: "perBSA", label: "Por SC (m²)", description: "Dosis total por superficie corporal", expressionLatex: String.raw`\text{Dosis}=\text{SC}\times \text{Dosis}_{\text{por m}^2}`, compute: (v) => computeDoseByWeight(v, "bsa"), fields: [
-        { name: "bsa", label: "Superficie corporal", type: "number", unit: "m²", placeholder: "p. ej., 1.8", validation: { min: 0 } },
-        { name: "dosePer", label: "Dosis recomendada", type: "number", placeholder: "p. ej., 15" },
-        { name: "unit", label: "Unidad", type: "select", options: [
-          { value: "mg/m²", label: "mg/m²" },
-          { value: "µg/m²", label: "µg/m²" },
-        ], placeholder: "Seleccionar" },
-        { name: "frequency", label: "Frecuencia / intervalo (opcional)", type: "text", placeholder: "p. ej., cada 8 h" },
-        { name: "drug", label: "Nombre del fármaco (opcional)", type: "text", placeholder: "p. ej., amikacina" },
+  { id: "devine", label: "Devine (1974)", expressionLatex: String.raw`\mathrm{PI}_{\text{masculino}}=50+2.3\,(\tfrac{\text{talla\,(in)}}{1}-60)\\ \mathrm{PI}_{\text{femenino}}=45.5+2.3\,(\tfrac{\text{talla\,(in)}}{1}-60)`, compute: computeIdealDevine },
+  { id: "robinson", label: "Robinson (1983)", expressionLatex: String.raw`\mathrm{PI}_{\text{masculino}}=52+1.9\,(\text{in}-60)\\ \mathrm{PI}_{\text{femenino}}=49+1.7\,(\text{in}-60)`, compute: computeIdealRobinson },
+  { id: "miller", label: "Miller (1983)", expressionLatex: String.raw`\mathrm{PI}_{\text{masculino}}=56.2+1.41\,(\text{in}-60)\\ \mathrm{PI}_{\text{femenino}}=53.1+1.36\,(\text{in}-60)`, compute: computeIdealMiller },
+    ],
+  },
+  infusion: {
+    id: "infusion",
+    title: "VI",
+    subtitle: "Velocidad de Infusión",
+    category: "clinico",
+    color: "#14b8a6", // teal-500
+    fields: [] as FieldSpec[],
+    formulas: [
+      { id: "volTime", label: "Volumen/tiempo", description: "VI = V / T", compute: computeInfusionRateByVolume, fields: [
+        { name: "volume", label: "Volumen total", type: "number", unit: "mL", placeholder: "p. ej., 500", validation: { min: 0, required: true } },
+        { name: "time", label: "Tiempo total", type: "number", unit: "h", placeholder: "p. ej., 4", validation: { min: 0, required: true } },
+      ] },
+      { id: "doseConc", label: "Por dosis", description: "VI = (Dosis/Conc) / T", compute: computeInfusionRateByDose, fields: [
+        { name: "dose", label: "Dosis total", type: "number", unit: "mg | µg", placeholder: "p. ej., 200", validation: { min: 0, required: true } },
+        { name: "doseUnit", label: "Unidad de dosis", type: "select", options: [ { value: "mg", label: "mg" }, { value: "µg", label: "µg" } ], placeholder: "Seleccionar", validation: { required: true } },
+        { name: "conc", label: "Concentración", type: "number", unit: "mg/mL | µg/mL", placeholder: "p. ej., 1", validation: { min: 0, required: true } },
+        { name: "concUnit", label: "Unidad de concentración", type: "select", options: [ { value: "mg/mL", label: "mg/mL" }, { value: "µg/mL", label: "µg/mL" } ], placeholder: "Seleccionar", validation: { required: true } },
+        { name: "time", label: "Tiempo total", type: "number", unit: "h", placeholder: "p. ej., 4", validation: { min: 0, required: true } },
+      ] },
+      { id: "drops", label: "Gotas/min", description: "Gotas/min = (V × factor)/(T × 60)", compute: computeDropsPerMin, fields: [
+        { name: "volume", label: "Volumen total", type: "number", unit: "mL", placeholder: "p. ej., 500", validation: { min: 0, required: true } },
+        { name: "time", label: "Tiempo total", type: "number", unit: "h", placeholder: "p. ej., 4", validation: { min: 0, required: true } },
+        { name: "dropFactor", label: "Factor de goteo", type: "number", unit: "gotas/mL", placeholder: "p. ej., 20", validation: { min: 1, required: true } },
+      ] },
+    ]
+  },
+  loadingMaintenance: {
+    id: "loadingMaintenance",
+    title: "DC/DM",
+    subtitle: "Dosis de Carga y Mantenimiento",
+    category: "clinico",
+    color: "#6366F1", // indigo
+    fields: [] as FieldSpec[],
+    formulas: [
+      { id: "carga", label: "Dosis de Carga", description: "DC = (Cp × Vd × Peso) / F", compute: computeLoadingDose, fields: [
+        { name: "weight", label: "Peso", type: "number", unit: "kg", placeholder: "p. ej., 70", validation: { min: 1, required: true } },
+        { name: "vd", label: "Vd", type: "number", unit: "L/kg", placeholder: "p. ej., 0.7", validation: { min: 0, required: true } },
+        { name: "cp", label: "Cp objetivo", type: "number", unit: "mg/L", placeholder: "p. ej., 10", validation: { min: 0, required: true } },
+        { name: "F", label: "Biodisponibilidad (F)", type: "number", placeholder: "0–1", validation: { min: 0, max: 1, required: true } },
+      ] },
+      { id: "mto", label: "Dosis de Mantenimiento", description: "DM = (Cp × Cl × τ) / F", compute: computeMaintenanceDose, fields: [
+        { name: "cp", label: "Cp objetivo", type: "number", unit: "mg/L", placeholder: "p. ej., 10", validation: { min: 0, required: true } },
+        { name: "cl", label: "Cl", type: "number", unit: "L/h", placeholder: "p. ej., 4.2", validation: { min: 0, required: true } },
+        { name: "tau", label: "Intervalo", type: "number", unit: "h", placeholder: "p. ej., 12", validation: { min: 0, required: true } },
+        { name: "F", label: "Biodisponibilidad (F)", type: "number", placeholder: "0–1", validation: { min: 0, max: 1, required: true } },
+      ] },
+    ]
+  },
+  mmc: {
+    id: "mmc",
+    title: "MMC",
+    subtitle: "James / Hume / % grasa",
+    category: "fisiologico",
+    color: "#0891b2", // cyan
+    fields: [
+      { name: "weight", label: "Peso", type: "number", unit: "kg", placeholder: "p. ej., 70", validation: { required: true, min: 20, max: 300 } },
+      { name: "height", label: "Talla", type: "number", unit: "cm", placeholder: "p. ej., 170", validation: { min: 100, max: 250 } },
+      { name: "bf", label: "% Grasa corporal", type: "number", unit: "%", placeholder: "p. ej., 22", validation: { min: 0, max: 100 } },
+      { name: "sex", label: "Sexo", type: "select", options: [ { value: "male", label: "Masculino" }, { value: "female", label: "Femenino" } ], placeholder: "Seleccionar", validation: { required: true } },
+    ],
+    formulas: [
+      { id: "james", label: "James", expressionLatex: String.raw`\mathrm{MM}_{\text{masculino}}=1.1\,\text{peso}-128\,\Big(\tfrac{\text{peso}}{\text{talla}}\Big)^{2}\\ \mathrm{MM}_{\text{femenino}}=1.07\,\text{peso}-148\,\Big(\tfrac{\text{peso}}{\text{talla}}\Big)^{2}`, compute: computeMMCJames, fields: [
+        { name: "weight", label: "Peso", type: "number", unit: "kg", placeholder: "p. ej., 70", validation: { required: true, min: 20, max: 300 } },
+        { name: "height", label: "Talla", type: "number", unit: "cm", placeholder: "p. ej., 170", validation: { required: true, min: 100, max: 250 } },
+        { name: "sex", label: "Sexo", type: "select", options: [ { value: "male", label: "Masculino" }, { value: "female", label: "Femenino" } ], placeholder: "Seleccionar", validation: { required: true } },
+      ] },
+      { id: "hume", label: "Hume", expressionLatex: String.raw`\mathrm{MM}_{\text{masculino}}=0.32810\,\text{peso}+0.33929\,\text{talla}-29.5336\\ \mathrm{MM}_{\text{femenino}}=0.29569\,\text{peso}+0.41813\,\text{talla}-43.2933`, compute: computeMMCHume, fields: [
+        { name: "weight", label: "Peso", type: "number", unit: "kg", placeholder: "p. ej., 70", validation: { required: true, min: 20, max: 300 } },
+        { name: "height", label: "Talla", type: "number", unit: "cm", placeholder: "p. ej., 170", validation: { required: true, min: 100, max: 250 } },
+        { name: "sex", label: "Sexo", type: "select", options: [ { value: "male", label: "Masculino" }, { value: "female", label: "Femenino" } ], placeholder: "Seleccionar", validation: { required: true } },
+      ] },
+      { id: "lean", label: "Lean (% grasa)", description: "Masa magra a partir de % grasa", expressionLatex: String.raw`\mathrm{MM}=\text{peso}\times (1-\tfrac{\%\,\text{grasa}}{100})`, compute: computeLeanMassFromBF, fields: [
+        { name: "weight", label: "Peso", type: "number", unit: "kg", placeholder: "p. ej., 70", validation: { required: true, min: 20, max: 300 } },
+        { name: "bf", label: "% Grasa corporal", type: "number", unit: "%", placeholder: "p. ej., 22", validation: { required: true, min: 0, max: 100 } },
       ] },
     ],
   },
@@ -320,53 +322,51 @@ export const CalculatorsRegistry = {
       { name: "weight", label: "Peso del paciente (opcional)", type: "number", unit: "kg", placeholder: "p. ej., 70" },
     ] } ],
   },
-  loadingMaintenance: {
-    id: "loadingMaintenance",
-    title: "DC/DM",
-    subtitle: "Dosis de Carga y Mantenimiento",
+  renal: {
+    id: "renal",
+    title: "Función renal",
+    subtitle: "Cockcroft–Gault / MDRD / CKD‑EPI",
     category: "clinico",
-    color: "#6366F1", // indigo
-    fields: [] as FieldSpec[],
+    color: "#3B82F6", // brand blue
+    fields: [
+      { name: "age", label: "Edad", type: "number", placeholder: "p. ej., 65", validation: { required: true, min: 18, max: 120 } },
+      { name: "sex", label: "Sexo", type: "select", options: [ { value: "male", label: "Masculino" }, { value: "female", label: "Femenino" } ], placeholder: "Seleccionar", validation: { required: true } },
+      { name: "weight", label: "Peso", type: "number", unit: "kg", placeholder: "p. ej., 70", validation: { required: true, min: 20, max: 300 } },
+      { name: "scr", label: "Creatinina sérica", type: "number", unit: "mg/dL | µmol/L", placeholder: "p. ej., 1.0", validation: { required: true, min: 0.1 } },
+      { name: "unit", label: "Unidad de creatinina", type: "select", options: [ { value: "mgdl", label: "mg/dL" }, { value: "umol", label: "µmol/L" } ], placeholder: "Seleccionar", validation: { required: true } },
+    ] as FieldSpec[],
     formulas: [
-      { id: "carga", label: "Dosis de Carga", description: "DC = (Cp × Vd × Peso) / F", compute: computeLoadingDose, fields: [
-        { name: "weight", label: "Peso", type: "number", unit: "kg", placeholder: "p. ej., 70", validation: { min: 1, required: true } },
-        { name: "vd", label: "Vd", type: "number", unit: "L/kg", placeholder: "p. ej., 0.7", validation: { min: 0, required: true } },
-        { name: "cp", label: "Cp objetivo", type: "number", unit: "mg/L", placeholder: "p. ej., 10", validation: { min: 0, required: true } },
-        { name: "F", label: "Biodisponibilidad (F)", type: "number", placeholder: "0–1", validation: { min: 0, max: 1, required: true } },
+      { id: "cg", label: "Cockcroft–Gault", description: "CrCl en mL/min", expressionLatex: String.raw`\mathrm{CrCl}=\frac{(140-\text{edad})\times \text{peso}\times (0.85\;\text{si femenino})}{72\times SCr_{mg/dL}}`, compute: computeCockcroft, fields: [
+        { name: "age", label: "Edad", type: "number", placeholder: "p. ej., 65", validation: { required: true, min: 18, max: 120 } },
+        { name: "sex", label: "Sexo", type: "select", options: [ { value: "male", label: "Masculino" }, { value: "female", label: "Femenino" } ], placeholder: "Seleccionar", validation: { required: true } },
+        { name: "weight", label: "Peso", type: "number", unit: "kg", placeholder: "p. ej., 70", validation: { required: true, min: 20, max: 300 } },
+        { name: "scr", label: "Creatinina sérica", type: "number", unit: "mg/dL | µmol/L", placeholder: "p. ej., 1.0", validation: { required: true, min: 0.1 } },
+        { name: "unit", label: "Unidad de creatinina", type: "select", options: [ { value: "mgdl", label: "mg/dL" }, { value: "umol", label: "µmol/L" } ], placeholder: "Seleccionar", validation: { required: true } },
       ] },
-      { id: "mto", label: "Dosis de Mantenimiento", description: "DM = (Cp × Cl × τ) / F", compute: computeMaintenanceDose, fields: [
-        { name: "cp", label: "Cp objetivo", type: "number", unit: "mg/L", placeholder: "p. ej., 10", validation: { min: 0, required: true } },
-        { name: "cl", label: "Cl", type: "number", unit: "L/h", placeholder: "p. ej., 4.2", validation: { min: 0, required: true } },
-        { name: "tau", label: "Intervalo", type: "number", unit: "h", placeholder: "p. ej., 12", validation: { min: 0, required: true } },
-        { name: "F", label: "Biodisponibilidad (F)", type: "number", placeholder: "0–1", validation: { min: 0, max: 1, required: true } },
+      { id: "mdrd", label: "MDRD (4v)", description: "TFG en mL/min/1.73m²", expressionLatex: String.raw`\mathrm{TFG}=175\times (SCr)^{-1.154}\times (\text{edad})^{-0.203}\times (0.742^{[\text{femenino}]})\times (1.212^{[\text{afro}]})`, compute: computeMDRD4, fields: [
+        { name: "age", label: "Edad", type: "number", placeholder: "p. ej., 65", validation: { required: true, min: 18, max: 120 } },
+        { name: "sex", label: "Sexo", type: "select", options: [ { value: "male", label: "Masculino" }, { value: "female", label: "Femenino" } ], placeholder: "Seleccionar", validation: { required: true } },
+        { name: "scr", label: "Creatinina sérica", type: "number", unit: "mg/dL | µmol/L", placeholder: "p. ej., 1.0", validation: { required: true, min: 0.1 } },
+        { name: "unit", label: "Unidad de creatinina", type: "select", options: [ { value: "mgdl", label: "mg/dL" }, { value: "umol", label: "µmol/L" } ], placeholder: "Seleccionar", validation: { required: true } },
+        { name: "black", label: "¿Afrodescendiente?", type: "toggle", placeholder: "¿Afrodescendiente?" },
+        { name: "weight", label: "Peso", type: "number", unit: "kg", placeholder: "p. ej., 70", validation: { required: true, min: 20, max: 300 } },
       ] },
-    ]
-  },
-  infusion: {
-    id: "infusion",
-    title: "VI",
-    subtitle: "Velocidad de Infusión",
-    category: "clinico",
-    color: "#14b8a6", // teal-500
-    fields: [] as FieldSpec[],
-    formulas: [
-      { id: "volTime", label: "Volumen/tiempo", description: "VI = V / T", compute: computeInfusionRateByVolume, fields: [
-        { name: "volume", label: "Volumen total", type: "number", unit: "mL", placeholder: "p. ej., 500", validation: { min: 0, required: true } },
-        { name: "time", label: "Tiempo total", type: "number", unit: "h", placeholder: "p. ej., 4", validation: { min: 0, required: true } },
+      { id: "ckd2009", label: "CKD‑EPI 2009", expressionLatex: String.raw`\mathrm{TFG}=141\times \min\left(\tfrac{SCr}{\kappa},1\right)^{\alpha}\times \max\left(\tfrac{SCr}{\kappa},1\right)^{-1.209}\times 0.993^{\text{edad}}\times 1.018^{[\text{femenino}]}\times 1.159^{[\text{afro}]}`, compute: computeCKDEPI2009, fields: [
+        { name: "age", label: "Edad", type: "number", placeholder: "p. ej., 65", validation: { required: true, min: 18, max: 120 } },
+        { name: "sex", label: "Sexo", type: "select", options: [ { value: "male", label: "Masculino" }, { value: "female", label: "Femenino" } ], placeholder: "Seleccionar", validation: { required: true } },
+        { name: "scr", label: "Creatinina sérica", type: "number", unit: "mg/dL | µmol/L", placeholder: "p. ej., 1.0", validation: { required: true, min: 0.1 } },
+        { name: "unit", label: "Unidad de creatinina", type: "select", options: [ { value: "mgdl", label: "mg/dL" }, { value: "umol", label: "µmol/L" } ], placeholder: "Seleccionar", validation: { required: true } },
+        { name: "black", label: "¿Afrodescendiente?", type: "toggle", placeholder: "¿Afrodescendiente?" },
+        { name: "weight", label: "Peso", type: "number", unit: "kg", placeholder: "p. ej., 70", validation: { required: true, min: 20, max: 300 } },
       ] },
-      { id: "doseConc", label: "Por dosis", description: "VI = (Dosis/Conc) / T", compute: computeInfusionRateByDose, fields: [
-        { name: "dose", label: "Dosis total", type: "number", unit: "mg | µg", placeholder: "p. ej., 200", validation: { min: 0, required: true } },
-        { name: "doseUnit", label: "Unidad de dosis", type: "select", options: [ { value: "mg", label: "mg" }, { value: "µg", label: "µg" } ], placeholder: "Seleccionar", validation: { required: true } },
-        { name: "conc", label: "Concentración", type: "number", unit: "mg/mL | µg/mL", placeholder: "p. ej., 1", validation: { min: 0, required: true } },
-        { name: "concUnit", label: "Unidad de concentración", type: "select", options: [ { value: "mg/mL", label: "mg/mL" }, { value: "µg/mL", label: "µg/mL" } ], placeholder: "Seleccionar", validation: { required: true } },
-        { name: "time", label: "Tiempo total", type: "number", unit: "h", placeholder: "p. ej., 4", validation: { min: 0, required: true } },
+      { id: "ckd2021", label: "CKD‑EPI 2021", expressionLatex: String.raw`\mathrm{TFG}=142\times \min\left(\tfrac{SCr}{\kappa},1\right)^{\alpha}\times \max\left(\tfrac{SCr}{\kappa},1\right)^{-1.200}\times 0.9938^{\text{edad}}\times 1.012^{[\text{femenino}]}`, compute: computeCKDEPI2021, fields: [
+        { name: "age", label: "Edad", type: "number", placeholder: "p. ej., 65", validation: { required: true, min: 18, max: 120 } },
+        { name: "sex", label: "Sexo", type: "select", options: [ { value: "male", label: "Masculino" }, { value: "female", label: "Femenino" } ], placeholder: "Seleccionar", validation: { required: true } },
+        { name: "scr", label: "Creatinina sérica", type: "number", unit: "mg/dL | µmol/L", placeholder: "p. ej., 1.0", validation: { required: true, min: 0.1 } },
+        { name: "unit", label: "Unidad de creatinina", type: "select", options: [ { value: "mgdl", label: "mg/dL" }, { value: "umol", label: "µmol/L" } ], placeholder: "Seleccionar", validation: { required: true } },
+        { name: "weight", label: "Peso", type: "number", unit: "kg", placeholder: "p. ej., 70", validation: { required: true, min: 20, max: 300 } },
       ] },
-      { id: "drops", label: "Gotas/min", description: "Gotas/min = (V × factor)/(T × 60)", compute: computeDropsPerMin, fields: [
-        { name: "volume", label: "Volumen total", type: "number", unit: "mL", placeholder: "p. ej., 500", validation: { min: 0, required: true } },
-        { name: "time", label: "Tiempo total", type: "number", unit: "h", placeholder: "p. ej., 4", validation: { min: 0, required: true } },
-        { name: "dropFactor", label: "Factor de goteo", type: "number", unit: "gotas/mL", placeholder: "p. ej., 20", validation: { min: 1, required: true } },
-      ] },
-    ]
+    ] as FormulaSpec[],
   },
 } as const;
 

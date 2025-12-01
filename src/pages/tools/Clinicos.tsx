@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { useNavigate } from "react-router-dom";
 import { Stethoscope, Droplets, FlaskRound, Pill, Syringe } from "lucide-react";
 import Seo from "@/components/Seo";
+import { usePageReady } from "@/hooks/usePageReady";
 // Unificado: modal reutilizable
 import CalculatorModal from "@/components/calculators/CalculatorModal";
 import { CalculatorsRegistry } from "@/lib/calculators";
@@ -10,6 +11,7 @@ import { CalculatorsRegistry } from "@/lib/calculators";
 // Migrados a modal unificado
 
 const Clinicos: React.FC = () => {
+  usePageReady(); // Sincronización con TransitionProvider
   const [openRenal, setOpenRenal] = React.useState(false);
   const [openHepatic, setOpenHepatic] = React.useState(false);
   const [openDose, setOpenDose] = React.useState(false);
@@ -55,82 +57,7 @@ const Clinicos: React.FC = () => {
       <p className="text-sm text-muted-foreground mb-6">Accede rápidamente a herramientas para estimar función renal, calcular dosis, programar infusiones y estandarizar procesos de reconstitución.</p>
 
   <section className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 px-4 py-4 overflow-visible" aria-label="Herramientas clínicas">
-        {/* Función renal */}
-  <div className="tool-card rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
-          <div className="flex flex-col sm:flex-row items-center sm:items-center gap-3 mb-1 min-w-0 text-center sm:text-left">
-            <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: '#3B82F622', color: '#3B82F6' }}>
-              <Droplets className="w-5 h-5" aria-hidden="true" />
-            </div>
-            <h3 className="sm:flex-1 sm:min-w-0 text-xl font-raleway font-bold text-black break-words whitespace-normal leading-snug" style={{ hyphens: 'none' }}>Función Renal</h3>
-          </div>
-          <p className="text-sm text-muted-foreground mb-4">Estima TFG/aclaramiento con Cockcroft–Gault, MDRD y CKD‑EPI.</p>
-          <div className="mt-auto">
-            <button onClick={()=>setOpenRenal(true)} className="px-4 py-2 rounded-md bg-blue-600 text-white font-semibold hover:bg-blue-700">Abrir Calculadora</button>
-          </div>
-          <CalculatorModal
-            id="calc-renal"
-            open={openRenal}
-            onOpenChange={setOpenRenal}
-            title={CalculatorsRegistry.renal.title}
-            subtitle={CalculatorsRegistry.renal.subtitle}
-            fields={CalculatorsRegistry.renal.fields}
-            formulas={CalculatorsRegistry.renal.formulas}
-            categoryColor={CalculatorsRegistry.renal.color}
-            icon={<Droplets className="w-5 h-5" style={{ color: CalculatorsRegistry.renal.color }} />}
-          />
-        </div>
-
-        {/* Función hepática */}
-  <div className="tool-card rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
-          <div className="flex flex-col sm:flex-row items-center sm:items-center gap-3 mb-1 min-w-0 text-center sm:text-left">
-            <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: '#F59E0B22', color: '#F59E0B' }}>
-              <FlaskRound className="w-5 h-5" aria-hidden="true" />
-            </div>
-            <h3 className="sm:flex-1 sm:min-w-0 text-xl font-raleway font-bold text-black break-words whitespace-normal leading-snug" style={{ hyphens: 'none' }}>Función Hepática</h3>
-          </div>
-          <p className="text-sm text-muted-foreground mb-4">Child‑Pugh, MELD/MELD‑Na, APRI y FIB‑4 para evaluar severidad y fibrosis.</p>
-          <div className="mt-auto">
-            <button onClick={()=>setOpenHepatic(true)} className="px-4 py-2 rounded-md bg-amber-600 text-white font-semibold hover:bg-amber-700">Abrir Calculadora</button>
-          </div>
-          <CalculatorModal
-            id="calc-hepatic"
-            open={openHepatic}
-            onOpenChange={setOpenHepatic}
-            title={CalculatorsRegistry.hepatic.title}
-            subtitle={CalculatorsRegistry.hepatic.subtitle}
-            fields={CalculatorsRegistry.hepatic.fields}
-            formulas={CalculatorsRegistry.hepatic.formulas}
-            categoryColor={CalculatorsRegistry.hepatic.color}
-            icon={<FlaskRound className="w-5 h-5" style={{ color: CalculatorsRegistry.hepatic.color }} />}
-          />
-        </div>
-
-        {/* Dosis por peso y superficie corporal */}
-  <div className="tool-card rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
-          <div className="flex flex-col sm:flex-row items-center sm:items-center gap-3 mb-1 min-w-0 text-center sm:text-left">
-            <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: '#0EA5E922', color: '#0EA5E9' }}>
-              <Pill className="w-5 h-5" aria-hidden="true" />
-            </div>
-            <h3 className="sm:flex-1 sm:min-w-0 text-xl font-raleway font-bold text-black break-words whitespace-normal leading-snug" style={{ hyphens: 'none' }}>Dosis por Peso y Superficie Corporal (SC)</h3>
-          </div>
-          <p className="text-sm text-muted-foreground mb-4">Calcula la dosis total según peso (mg/kg o µg/kg) o superficie corporal (mg/m² o µg/m²).</p>
-          <div className="mt-auto">
-            <button onClick={()=>setOpenDose(true)} className="px-4 py-2 rounded-md bg-cyan-600 text-white font-semibold hover:bg-cyan-700">Abrir Calculadora</button>
-          </div>
-          <CalculatorModal
-            id="calc-dose"
-            open={openDose}
-            onOpenChange={setOpenDose}
-            title={CalculatorsRegistry.dose.title}
-            subtitle={CalculatorsRegistry.dose.subtitle}
-            fields={CalculatorsRegistry.dose.fields}
-            formulas={CalculatorsRegistry.dose.formulas}
-            categoryColor={CalculatorsRegistry.dose.color}
-            icon={<Pill className="w-5 h-5" style={{ color: CalculatorsRegistry.dose.color }} />}
-          />
-        </div>
-
-        {/* Dosis de Carga y Mantenimiento */}
+        {/* Dosis de Carga y Mantenimiento (DC/DM) */}
         <div className="tool-card rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
           <div className="flex flex-col sm:flex-row items-center sm:items-center gap-3 mb-1 min-w-0 text-center sm:text-left">
             <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: '#6366F122', color: '#6366F1' }}>
@@ -155,31 +82,82 @@ const Clinicos: React.FC = () => {
           />
         </div>
 
-        {/* Velocidad de Infusión */}
-        <div className="tool-card rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+        {/* Dosis por Peso y Superficie Corporal (SC) */}
+  <div className="tool-card rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
           <div className="flex flex-col sm:flex-row items-center sm:items-center gap-3 mb-1 min-w-0 text-center sm:text-left">
-            <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: '#14b8a622', color: '#14b8a6' }}>
-              <Syringe className="w-5 h-5" aria-hidden="true" />
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: '#0EA5E922', color: '#0EA5E9' }}>
+              <Pill className="w-5 h-5" aria-hidden="true" />
             </div>
-            <h3 className="sm:flex-1 sm:min-w-0 text-xl font-raleway font-bold text-black break-words whitespace-normal leading-snug" style={{ hyphens: 'none' }}>Velocidad de Infusión (VI)</h3>
+            <h3 className="sm:flex-1 sm:min-w-0 text-xl font-raleway font-bold text-black break-words whitespace-normal leading-snug" style={{ hyphens: 'none' }}>Dosis por Peso y Superficie Corporal (SC)</h3>
           </div>
-          <p className="text-sm text-muted-foreground mb-4">Estima mL/h a partir de volumen/tiempo, dosis/concentración y opcionalmente gotas/min.</p>
+          <p className="text-sm text-muted-foreground mb-4">Calcula la dosis total según peso (mg/kg o µg/kg) o superficie corporal (mg/m² o µg/m²).</p>
           <div className="mt-auto">
-            <button onClick={()=>setOpenInf(true)} className="px-4 py-2 rounded-md bg-teal-600 text-white font-semibold hover:bg-teal-700">Abrir Calculadora</button>
+            <button onClick={()=>setOpenDose(true)} className="px-4 py-2 rounded-md bg-cyan-600 text-white font-semibold hover:bg-cyan-700">Abrir Calculadora</button>
           </div>
           <CalculatorModal
-            id="calc-vi"
-            open={openInf}
-            onOpenChange={setOpenInf}
-            title={CalculatorsRegistry.infusion.title}
-            subtitle={CalculatorsRegistry.infusion.subtitle}
-            fields={CalculatorsRegistry.infusion.fields}
-            formulas={CalculatorsRegistry.infusion.formulas}
-            categoryColor={CalculatorsRegistry.infusion.color}
-            icon={<Syringe className="w-5 h-5" style={{ color: CalculatorsRegistry.infusion.color }} />}
+            id="calc-dose"
+            open={openDose}
+            onOpenChange={setOpenDose}
+            title={CalculatorsRegistry.dose.title}
+            subtitle={CalculatorsRegistry.dose.subtitle}
+            fields={CalculatorsRegistry.dose.fields}
+            formulas={CalculatorsRegistry.dose.formulas}
+            categoryColor={CalculatorsRegistry.dose.color}
+            icon={<Pill className="w-5 h-5" style={{ color: CalculatorsRegistry.dose.color }} />}
           />
         </div>
-        {/* Reconstitución y dilución de antibióticos */}
+
+        {/* Función Hepática */}
+  <div className="tool-card rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+          <div className="flex flex-col sm:flex-row items-center sm:items-center gap-3 mb-1 min-w-0 text-center sm:text-left">
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: '#F59E0B22', color: '#F59E0B' }}>
+              <FlaskRound className="w-5 h-5" aria-hidden="true" />
+            </div>
+            <h3 className="sm:flex-1 sm:min-w-0 text-xl font-raleway font-bold text-black break-words whitespace-normal leading-snug" style={{ hyphens: 'none' }}>Función Hepática</h3>
+          </div>
+          <p className="text-sm text-muted-foreground mb-4">Child‑Pugh, MELD/MELD‑Na, APRI y FIB‑4 para evaluar severidad y fibrosis.</p>
+          <div className="mt-auto">
+            <button onClick={()=>setOpenHepatic(true)} className="px-4 py-2 rounded-md bg-amber-600 text-white font-semibold hover:bg-amber-700">Abrir Calculadora</button>
+          </div>
+          <CalculatorModal
+            id="calc-hepatic"
+            open={openHepatic}
+            onOpenChange={setOpenHepatic}
+            title={CalculatorsRegistry.hepatic.title}
+            subtitle={CalculatorsRegistry.hepatic.subtitle}
+            fields={CalculatorsRegistry.hepatic.fields}
+            formulas={CalculatorsRegistry.hepatic.formulas}
+            categoryColor={CalculatorsRegistry.hepatic.color}
+            icon={<FlaskRound className="w-5 h-5" style={{ color: CalculatorsRegistry.hepatic.color }} />}
+          />
+        </div>
+
+        {/* Función Renal */}
+  <div className="tool-card rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+          <div className="flex flex-col sm:flex-row items-center sm:items-center gap-3 mb-1 min-w-0 text-center sm:text-left">
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: '#3B82F622', color: '#3B82F6' }}>
+              <Droplets className="w-5 h-5" aria-hidden="true" />
+            </div>
+            <h3 className="sm:flex-1 sm:min-w-0 text-xl font-raleway font-bold text-black break-words whitespace-normal leading-snug" style={{ hyphens: 'none' }}>Función Renal</h3>
+          </div>
+          <p className="text-sm text-muted-foreground mb-4">Estima TFG/aclaramiento con Cockcroft–Gault, MDRD y CKD‑EPI.</p>
+          <div className="mt-auto">
+            <button onClick={()=>setOpenRenal(true)} className="px-4 py-2 rounded-md bg-blue-600 text-white font-semibold hover:bg-blue-700">Abrir Calculadora</button>
+          </div>
+          <CalculatorModal
+            id="calc-renal"
+            open={openRenal}
+            onOpenChange={setOpenRenal}
+            title={CalculatorsRegistry.renal.title}
+            subtitle={CalculatorsRegistry.renal.subtitle}
+            fields={CalculatorsRegistry.renal.fields}
+            formulas={CalculatorsRegistry.renal.formulas}
+            categoryColor={CalculatorsRegistry.renal.color}
+            icon={<Droplets className="w-5 h-5" style={{ color: CalculatorsRegistry.renal.color }} />}
+          />
+        </div>
+
+        {/* Reconstitución y Dilución de Antibióticos */}
   <div className="tool-card rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
           <div className="flex flex-col sm:flex-row items-center sm:items-center gap-3 mb-1 min-w-0 text-center sm:text-left">
             <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: '#64748B22', color: '#64748B' }}>
@@ -201,6 +179,31 @@ const Clinicos: React.FC = () => {
             formulas={CalculatorsRegistry.reconstitution.formulas}
             categoryColor={CalculatorsRegistry.reconstitution.color}
             icon={<Syringe className="w-5 h-5" style={{ color: CalculatorsRegistry.reconstitution.color }} />}
+          />
+        </div>
+
+        {/* Velocidad de Infusión (VI) */}
+        <div className="tool-card rounded-2xl border-2 bg-white/90 shadow-lg p-6 flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+          <div className="flex flex-col sm:flex-row items-center sm:items-center gap-3 mb-1 min-w-0 text-center sm:text-left">
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: '#14b8a622', color: '#14b8a6' }}>
+              <Syringe className="w-5 h-5" aria-hidden="true" />
+            </div>
+            <h3 className="sm:flex-1 sm:min-w-0 text-xl font-raleway font-bold text-black break-words whitespace-normal leading-snug" style={{ hyphens: 'none' }}>Velocidad de Infusión (VI)</h3>
+          </div>
+          <p className="text-sm text-muted-foreground mb-4">Estima mL/h a partir de volumen/tiempo, dosis/concentración y opcionalmente gotas/min.</p>
+          <div className="mt-auto">
+            <button onClick={()=>setOpenInf(true)} className="px-4 py-2 rounded-md bg-teal-600 text-white font-semibold hover:bg-teal-700">Abrir Calculadora</button>
+          </div>
+          <CalculatorModal
+            id="calc-vi"
+            open={openInf}
+            onOpenChange={setOpenInf}
+            title={CalculatorsRegistry.infusion.title}
+            subtitle={CalculatorsRegistry.infusion.subtitle}
+            fields={CalculatorsRegistry.infusion.fields}
+            formulas={CalculatorsRegistry.infusion.formulas}
+            categoryColor={CalculatorsRegistry.infusion.color}
+            icon={<Syringe className="w-5 h-5" style={{ color: CalculatorsRegistry.infusion.color }} />}
           />
         </div>
       </section>

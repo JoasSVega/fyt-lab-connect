@@ -1,12 +1,15 @@
 let lockDepth = 0;
-let prevOverflow: string | null = null;
+let prevBodyOverflow: string | null = null;
+let prevHtmlOverflow: string | null = null;
 
 export function lockBodyScroll(): void {
   lockDepth += 1;
   if (lockDepth === 1) {
     try {
-      prevOverflow = document.body.style.overflow || '';
+      prevBodyOverflow = document.body.style.overflow || '';
+      prevHtmlOverflow = document.documentElement.style.overflow || '';
       document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
       document.body.classList.add('scroll-locked');
     } catch {}
   }
@@ -17,9 +20,11 @@ export function unlockBodyScroll(): void {
   lockDepth -= 1;
   if (lockDepth === 0) {
     try {
-      document.body.style.overflow = prevOverflow || '';
+      document.body.style.overflow = prevBodyOverflow || '';
+      document.documentElement.style.overflow = prevHtmlOverflow || '';
       document.body.classList.remove('scroll-locked');
-      prevOverflow = null;
+      prevBodyOverflow = null;
+      prevHtmlOverflow = null;
     } catch {}
   }
 }
@@ -30,9 +35,11 @@ export function isBodyLocked(): boolean {
 
 export function _resetBodyLockForTests(): void {
   lockDepth = 0;
-  prevOverflow = null;
+  prevBodyOverflow = null;
+  prevHtmlOverflow = null;
   try {
     document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
     document.body.classList.remove('scroll-locked');
   } catch {}
 }

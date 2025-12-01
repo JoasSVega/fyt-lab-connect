@@ -1,13 +1,10 @@
-import Navbar from "../components/Navbar";
 import AboutSobreNosotros from "@/components/AboutSobreNosotros";
 import Team from "@/components/Team";
 import FloatingContact from "@/components/FloatingContact";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 
 const SobreNosotros = () => (
-  <div className="w-full bg-background overflow-x-hidden flex flex-col">
-    <Navbar />
-    <main className="flex-1 w-full">
+  <div className="w-full bg-background flex flex-col">
       {/* Hero Institucional */}
       <section
         className="hero-container"
@@ -57,7 +54,6 @@ const SobreNosotros = () => (
           </div>
         </section>
       </ScrollReveal>
-    </main>
     <FloatingContact />
   </div>
 );

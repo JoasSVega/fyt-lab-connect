@@ -3,6 +3,7 @@ import { Stethoscope, Ruler, FlaskConical, ClipboardCheck, ArrowRight } from "lu
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import Seo from "@/components/Seo";
+import { usePageReady } from "@/hooks/usePageReady";
 
 const Card = ({ icon, title, desc, to, color }: { icon: React.ReactNode; title: string; desc: string; to: string; color: string; }) => {
   const navigate = useNavigate();
@@ -27,6 +28,7 @@ const Card = ({ icon, title, desc, to, color }: { icon: React.ReactNode; title: 
 };
 
 const IndexTools: React.FC = () => {
+  usePageReady(); // Sincronización con TransitionProvider
   return (
     <>
       <Seo

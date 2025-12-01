@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 
 interface LoaderProps {
-  onComplete: () => void;
+  onComplete?: () => void;
 }
 
 const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
@@ -17,13 +17,15 @@ const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
 
   return (
     <motion.div
-      className="fixed inset-0 z-50 flex items-center justify-center"
+      className="fixed inset-0 z-[9999] flex items-center justify-center"
       style={{ backgroundColor: "#FFFFFF" }}
       initial={{ opacity: 1 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.4, delay: 1.05, ease: "easeOut" }}
-      onAnimationComplete={onComplete}
+      onAnimationComplete={() => {
+        if (onComplete) onComplete();
+      }}
     >
       {/* Glow sutil detrás del logo - aparece en fase 4 */}
       <motion.div
@@ -69,7 +71,7 @@ const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
             alt="Logo Grupo FyT"
             loading="eager"
             decoding="async"
-            fetchPriority="high"
+            fetchpriority="high"
             className="w-64 h-auto"
             style={{ maxWidth: "256px" }}
           />

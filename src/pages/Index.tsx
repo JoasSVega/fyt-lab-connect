@@ -1,4 +1,3 @@
-import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Tools from "@/components/Tools";
@@ -7,15 +6,19 @@ import { Users, Microscope, BookOpen } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import FloatingContact from "@/components/FloatingContact";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
+import { usePageReady } from "@/hooks/usePageReady";
 
 const Index = () => {
   const navigate = useNavigate();
+  usePageReady({
+    criticalImages: [
+      "/images/hero-index-small.webp",
+      "/images/hero-index-medium.webp",
+      "/images/hero-index-large.webp",
+    ],
+  });
   return (
-  <div className="w-full min-h-screen overflow-x-hidden" style={{background: "linear-gradient(120deg, #e0f2ff 0%, #f8fafc 60%, #f3f4f6 100%)"}}>
-      {/* Fixed Navigation */}
-      <Navbar />
-      {/* Main Content */}
-  <main className="w-full">
+  <div className="w-full" style={{background: "linear-gradient(120deg, #e0f2ff 0%, #f8fafc 60%, #f3f4f6 100%)"}}>
         {/* Título principal eliminado para evitar duplicidad. */}
         {/* Hero Section (sin ScrollReveal para evitar scroll interno y problemas de visualización) */}
         <Hero />
@@ -77,7 +80,6 @@ const Index = () => {
         </div>
       </ScrollReveal>
         {/* Pharmaceutical Tools Section removida: ahora solo en la página Herramientas */}
-      </main>
       {/* Floating Contact Button */}
       <FloatingContact />
     </div>

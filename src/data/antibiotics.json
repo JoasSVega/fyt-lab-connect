@@ -1,11 +1,11 @@
 [
   {
-    "id": "ceftriaxone",
-    "name": "Ceftriaxona",
+    "id": "ampicillin",
+    "name": "Ampicilina",
     "vialStrengthMg": 1000,
     "defaultReconstitutionMl": 10,
     "cautionMaxStockConcMgPerMl": 100,
-    "recommendedInfusion": { "volumeMl": 100, "timeMin": 30, "note": "Infundir en 30 min en SSN o DAD." }
+    "recommendedInfusion": { "volumeMl": 100, "timeMin": 30, "note": "Infundir en 30 min." }
   },
   {
     "id": "cefotaxime",
@@ -16,12 +16,12 @@
     "recommendedInfusion": { "volumeMl": 100, "timeMin": 30, "note": "Infundir en 30 min." }
   },
   {
-    "id": "vancomycin",
-    "name": "Vancomicina",
-    "vialStrengthMg": 500,
+    "id": "ceftriaxone",
+    "name": "Ceftriaxona",
+    "vialStrengthMg": 1000,
     "defaultReconstitutionMl": 10,
-    "cautionMaxStockConcMgPerMl": 50,
-    "recommendedInfusion": { "volumeMl": 250, "timeMin": 90, "note": "Evitar infusión rápida (síndrome del hombre rojo)." }
+    "cautionMaxStockConcMgPerMl": 100,
+    "recommendedInfusion": { "volumeMl": 100, "timeMin": 30, "note": "Infundir en 30 min en SSN o DAD." }
   },
   {
     "id": "meropenem",
@@ -32,19 +32,19 @@
     "recommendedInfusion": { "volumeMl": 100, "timeMin": 30, "note": "Infundir en 30 min." }
   },
   {
-    "id": "ampicillin",
-    "name": "Ampicilina",
-    "vialStrengthMg": 1000,
-    "defaultReconstitutionMl": 10,
-    "cautionMaxStockConcMgPerMl": 100,
-    "recommendedInfusion": { "volumeMl": 100, "timeMin": 30, "note": "Infundir en 30 min." }
-  },
-  {
     "id": "piptazo",
     "name": "Piperacilina/Tazobactam (4.5 g)",
     "vialStrengthMg": 4500,
     "defaultReconstitutionMl": 20,
     "cautionMaxStockConcMgPerMl": 225,
     "recommendedInfusion": { "volumeMl": 100, "timeMin": 30, "note": "Infundir en 30 min; considerar infusión extendida según protocolo." }
+  },
+  {
+    "id": "vancomycin",
+    "name": "Vancomicina",
+    "vialStrengthMg": 500,
+    "defaultReconstitutionMl": 10,
+    "cautionMaxStockConcMgPerMl": 50,
+    "recommendedInfusion": { "volumeMl": 250, "timeMin": 90, "note": "Evitar infusión rápida (síndrome del hombre rojo)." }
   }
 ]

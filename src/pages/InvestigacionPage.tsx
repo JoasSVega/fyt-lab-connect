@@ -1,10 +1,10 @@
 // Página principal de Investigación y Producción Académica
 // Hero, KPIs, proyectos destacados, publicaciones recientes, CTA y frase motivadora
 import React, { useState } from "react";
-import BaseLayout from "@/components/BaseLayout";
 import { BookOpen, Microscope, FileText, Folder, Users, Award, Dna, Atom, Briefcase, Star } from "lucide-react";
 import HeroInvestigacion from "@/components/HeroInvestigacion";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
+import { usePageReady } from "@/hooks/usePageReady";
 
 
 // Importar datos reales desde JSON
@@ -107,8 +107,10 @@ const InvestigacionPage: React.FC = () => {
   const proyectosEnCurso = (projectsData as unknown as Project[]).filter((p) => p.status === "En curso").slice(0, 3);
   const proyectosFinalizados = (projectsData as unknown as Project[]).filter((p) => p.status === "Finalizado").slice(0, 3);
 
+  usePageReady(); // Sincronización con TransitionProvider
+
   return (
-    <BaseLayout>
+    <div className="w-full bg-background">{/* Patrón de páginas principales */}
   {/* HeroInvestigacion: Hero moderno con KPIs animados y accesibles */}
   <div className="px-2 sm:px-6 md:px-12 lg:px-24 xl:px-32 2xl:px-48">
     <HeroInvestigacion />
@@ -322,9 +324,9 @@ const InvestigacionPage: React.FC = () => {
 
       {/* Frase motivadora */}
       <section className="py-6">
-  <p className="text-center text-lg font-inter font-semibold text-fyt-blue">“Generamos conocimiento para transformar la salud y la sociedad”.</p>
+  <p className="text-center text-lg font-inter font-semibold text-fyt-blue">"Generamos conocimiento para transformar la salud y la sociedad".</p>
       </section>
-    </BaseLayout>
+    </div>
   );
 };
 

@@ -141,31 +141,20 @@ const Tools = () => {
     }
   ];
 
-  // Otras calculadoras clínicas
-  const otherCalculators: ToolInfo[] = [
-    {
-      title: "Calculadora de Dosificación",
-      description: "Cálculo de dosis farmacológicas personalizadas según parámetros del paciente",
-      icon: <Pill className="h-6 w-6 text-fyt-red" />,
-      href: "/calculator/dosage",
-      comingSoon: false
-    }
-  ];
-
   // Herramientas de análisis farmacológico
   const analysisTools: ToolInfo[] = [
-    {
-      title: "Consultor Farmacológico",
-      description: "Sistema inteligente de consulta para información farmacológica",
-      icon: <Search className="h-6 w-6 text-fyt-red" />,
-      href: "/consultor",
-      comingSoon: true
-    },
     {
       title: "Comparador de Fármacos",
       description: "Compara eficacia, precio y efectos adversos entre medicamentos",
       icon: <Database className="h-6 w-6 text-fyt-purple" />,
       href: "/comparador",
+      comingSoon: true
+    },
+    {
+      title: "Consultor Farmacológico",
+      description: "Sistema inteligente de consulta para información farmacológica",
+      icon: <Search className="h-6 w-6 text-fyt-red" />,
+      href: "/consultor",
       comingSoon: true
     }
   ];
@@ -173,15 +162,15 @@ const Tools = () => {
   // Herramientas futuras
   const futureTools: ToolInfo[] = [
     {
-      title: "Farmacocinética Clínica",
-      description: "Modelos PK/PD para optimización terapéutica",
-      icon: <Microscope className="h-6 w-6 text-fyt-blue" />,
-      comingSoon: true
-    },
-    {
       title: "Adherencia Farmacoterapéutica",
       description: "Herramientas para evaluar y mejorar adherencia al tratamiento",
       icon: <Clock className="h-6 w-6 text-fyt-red" />,
+      comingSoon: true
+    },
+    {
+      title: "Farmacocinética Clínica",
+      description: "Modelos PK/PD para optimización terapéutica",
+      icon: <Microscope className="h-6 w-6 text-fyt-blue" />,
       comingSoon: true
     }
   ];

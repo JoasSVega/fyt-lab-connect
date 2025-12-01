@@ -1,7 +1,7 @@
 // Página de listado completo de proyectos de investigación
 import React, { useState } from "react";
-import BaseLayout from "@/components/BaseLayout";
 import projectsData from "@/data/projects.json";
+import { usePageReady } from "@/hooks/usePageReady";
 
 type Project = {
   id: number;
@@ -21,13 +21,14 @@ const TABS = [
 ];
 
 const ProyectosPage: React.FC = () => {
+  usePageReady(); // Sincronización con TransitionProvider
   const [tab, setTab] = useState<'en-curso' | 'finalizados'>('en-curso');
   const proyectosFiltrados = (projectsData as unknown as Project[]).filter((p) =>
     tab === 'en-curso' ? p.status === 'En curso' : p.status === 'Finalizado'
   );
 
   return (
-    <BaseLayout>
+    <div className="w-full bg-background pt-24">{/* Patrón de páginas principales */}
       <section className="max-w-6xl mx-auto px-4 py-10 sm:py-16">
         <h1 className="text-4xl sm:text-5xl font-poppins font-bold text-slate-800 mb-8 text-center">
           Proyectos de Investigación
@@ -55,7 +56,7 @@ const ProyectosPage: React.FC = () => {
           ))}
         </div>
       </section>
-    </BaseLayout>
+    </div>
   );
 };
 
