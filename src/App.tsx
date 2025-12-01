@@ -49,6 +49,8 @@ type FramerMotionModule = typeof import('framer-motion');
 function AnimatedRoutes() {
   const location = useLocation();
   const [showRouteLoader, setShowRouteLoader] = useState(false);
+  const [minimumTimePassed, setMinimumTimePassed] = useState(false);
+  const [pageReady, setPageReady] = useState(false);
   
   // Carga dinámica de framer-motion para reducir el bundle inicial.
   const [FM, setFM] = useState<FramerMotionModule | null>(null);
@@ -66,14 +68,35 @@ function AnimatedRoutes() {
     };
   }, []);
 
-  // Mostrar loader en cada cambio de ruta
+  // Loader híbrido en cada cambio de ruta: mínimo 900ms + carga real
   useEffect(() => {
+    // Activar loader
     setShowRouteLoader(true);
-    const timer = setTimeout(() => {
-      setShowRouteLoader(false);
-    }, 900); // Tiempo mínimo del loader
-    return () => clearTimeout(timer);
+    setMinimumTimePassed(false);
+    setPageReady(false);
+
+    // Timer del tiempo mínimo (900ms)
+    const minTimer = setTimeout(() => {
+      setMinimumTimePassed(true);
+    }, 900);
+
+    // Detectar cuando el nuevo componente está listo
+    // Usamos doble RAF para asegurar que el componente se montó y renderizó
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        setPageReady(true);
+      });
+    });
+
+    return () => clearTimeout(minTimer);
   }, [location.pathname]);
+
+  // Ocultar loader solo cuando ambas condiciones se cumplan
+  useEffect(() => {
+    if (minimumTimePassed && pageReady) {
+      setShowRouteLoader(false);
+    }
+  }, [minimumTimePassed, pageReady]);
 
   const routesJSX = (
     <>
