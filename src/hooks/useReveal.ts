@@ -58,7 +58,9 @@ export function useReveal(options: Options = {}) {
     (el as any).__revealOnce = triggerOnce;
     io.observe(el);
     return () => {
-      try { io!.unobserve(el); } catch {}
+      try { io!.unobserve(el); } catch (e: any) {
+        // Ignore
+      }
     };
   }, [threshold, root, rootMargin, triggerOnce, staggerBaseMs]);
 

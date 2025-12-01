@@ -9,7 +9,7 @@ const ScrollToTop = () => {
     if ((window as any).__routeTransitionActive) return;
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [pathname]);
-  return null;
+  return null as React.ReactElement | null;
 };
 
 export default ScrollToTop;

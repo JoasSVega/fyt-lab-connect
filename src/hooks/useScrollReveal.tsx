@@ -54,10 +54,12 @@ export const useScrollReveal = (options: UseScrollRevealOptions = {}) => {
     return () => {
       try {
         observer!.unobserve(element);
-      } catch {}
+      } catch (e: any) {
+        // Ignore
+      }
       delete (element as any).__revealCb;
     };
   }, [threshold, rootMargin, triggerOnce]);
 
-  return { ref, isVisible };
+  return { ref, isVisible } as const;
 };

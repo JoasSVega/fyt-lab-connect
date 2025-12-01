@@ -17,14 +17,14 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
   className = '',
 }) => {
   const { ref } = useReveal({ threshold: 0.12, rootMargin: '0px 0px -50px 0px', triggerOnce: true });
-  const style: React.CSSProperties = {
+  const style: React.CSSProperties & Record<string, any> = {
     // Allow per-instance tuning while keeping CSS-driven transitions
-    ['--reveal-distance' as any]: `${slideDistance}px`,
-    ['--reveal-duration' as any]: `${duration}s`,
-    ['--reveal-extra-delay' as any]: `${Math.max(0, delay * 1000)}ms`,
+    '--reveal-distance': `${slideDistance}px`,
+    '--reveal-duration': `${duration}s`,
+    '--reveal-extra-delay': `${Math.max(0, delay * 1000)}ms`,
   };
   return (
-    <div ref={ref as any} className={`reveal ${className}`} style={style}>
+    <div ref={ref as React.RefObject<HTMLDivElement>} className={`reveal ${className}`} style={style}>
       {children}
     </div>
   );

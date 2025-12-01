@@ -10,7 +10,7 @@ interface TransitionContextValue {
 
 const TransitionContext = createContext<TransitionContextValue | null>(null);
 
-export const useTransition = () => {
+export const useTransition = (): TransitionContextValue => {
   const ctx = useContext(TransitionContext);
   if (!ctx) throw new Error('useTransition must be used within TransitionProvider');
   return ctx;
