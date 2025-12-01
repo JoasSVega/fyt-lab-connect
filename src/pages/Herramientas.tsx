@@ -34,7 +34,7 @@ const Herramientas = () => {
                   className="relative left-1/2 -translate-x-1/2 w-screen h-[50vh] md:h-[70vh] flex items-center justify-center overflow-hidden"
                   aria-label="Hero Herramientas"
                   style={{
-                    backgroundImage: "url('/images/hero-herramientas.png')",
+                    backgroundImage: "url('/images/hero-herramientas-small.webp')",
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     backgroundRepeat: "no-repeat"

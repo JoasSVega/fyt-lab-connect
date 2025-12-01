@@ -14,7 +14,9 @@
     "analyze": "vite build --sourcemap && npx source-map-explorer \"dist/assets/*.js\" || true",
     "analyze:viz": "cross-env ANALYZE=true vite build",
     "preview": "vite preview",
-    "convert:images": "node ./scripts/convert-images.js"
+    "convert:images": "node ./scripts/convert-images.js",
+    "images:standardize": "node ./scripts/standardize-images.js",
+    "images:refactor": "node ./scripts/refactor-image-refs.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
