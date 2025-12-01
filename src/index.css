@@ -400,6 +400,20 @@ body.modal-open .calc-overlay {
   }
 
   /* Sombra de texto global para legibilidad en héroes - SUBTLE & PROFESSIONAL */
+
+    /* Global accessible focus style */
+    :focus-visible {
+      outline: 2px solid hsl(var(--fyt-blue));
+      outline-offset: 2px;
+    }
+
+    /* Ensure focus is visible for keyboard users on interactive elements */
+    button:focus-visible,
+    a:focus-visible,
+    [role="button"]:focus-visible {
+      box-shadow: 0 0 0 2px hsl(var(--fyt-blue) / 0.3);
+      border-radius: inherit;
+    }
   .hero-text-shadow * {
     text-shadow:
       0 2px 8px rgba(0, 0, 0, 0.35),

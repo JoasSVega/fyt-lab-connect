@@ -1,0 +1,17 @@
+/
+/sobre-nosotros
+/contactos
+/equipo
+/noticias
+/herramientas
+/herramientas/clinicos
+/herramientas/antropometricos
+/herramientas/avanzados
+/herramientas/escalas
+/investigacion
+/investigacion/proyectos
+/investigacion/publicaciones
+/PrivacyPolicy
+/TermsOfUse
+/CodeOfEthics
+/calculator/dosage

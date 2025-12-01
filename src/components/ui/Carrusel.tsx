@@ -219,6 +219,8 @@ const Carrusel: React.FC<CarruselProps> = ({
                         decoding="async"
                         className={defaultImageClass}
                         style={heightCss ? ({ height: '100%', maxHeight: heightCss, minHeight: heightCss } as React.CSSProperties) : ({ height: '100%' } as React.CSSProperties)}
+                        width={1200}
+                        height={900}
                       />
                     </picture>
                   );

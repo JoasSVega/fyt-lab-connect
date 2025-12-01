@@ -81,6 +81,8 @@ const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
             decoding="async"
             fetchpriority="high"
             className="w-64 h-auto"
+            width={256}
+            height={256}
             style={{ maxWidth: "256px" }}
           />
         </picture>

@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero";
+import Seo from "@/components/Seo";
 import About from "@/components/About";
 import Tools from "@/components/Tools";
 import { Button } from "@/components/ui/button";
@@ -15,6 +16,16 @@ const Index = () => {
   });
   return (
   <div className="w-full" style={{background: "linear-gradient(120deg, #e0f2ff 0%, #f8fafc 60%, #f3f4f6 100%)"}}>
+        <Seo
+          title="FYT Lab Connect – Innovación farmacéutica y herramientas clínicas"
+          description="Grupo de Investigación en Farmacología y Terapéutica: proyectos, publicaciones y herramientas clínicas con diseño corporativo y rendimiento optimizado."
+          keywords={["farmacología", "terapéutica", "investigación", "herramientas clínicas", "publicaciones"]}
+          author="FYT Lab Connect"
+          robots="index, follow"
+          canonical="https://fytlabconnect.com/"
+          openGraph={{ title: "FYT Lab Connect", description: "Innovación farmacéutica y herramientas clínicas", type: "website" }}
+          twitter={{ card: "summary_large_image", site: "@fytlab" }}
+        />
         {/* Título principal eliminado para evitar duplicidad. */}
         {/* Hero Section (sin ScrollReveal para evitar scroll interno y problemas de visualización) */}
         <Hero />

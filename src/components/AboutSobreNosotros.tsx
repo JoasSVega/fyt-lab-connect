@@ -50,8 +50,10 @@ const AboutSobreNosotros = () => (
             />
             <img
               src="/images/objetivo-small.webp"
-              alt="Imagen objetivo del grupo FyT"
               className="w-full h-full object-cover rounded-xl shadow-medium animate-fade-in"
+              alt="Miembros del grupo FyT trabajando en investigación"
+              width={1280}
+              height={720}
               loading="lazy"
               decoding="async"
               style={{ minHeight: 400, maxHeight: 400 }}

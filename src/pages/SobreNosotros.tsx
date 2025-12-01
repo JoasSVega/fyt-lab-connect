@@ -3,6 +3,7 @@ import Team from "@/components/Team";
 import FloatingContact from "@/components/FloatingContact";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { usePageReady } from "@/hooks/usePageReady";
+import Seo from "@/components/Seo";
 
 const SobreNosotros = () => {
   usePageReady({
@@ -10,6 +11,15 @@ const SobreNosotros = () => {
   });
   return (
   <div className="w-full bg-background flex flex-col">
+      <Seo
+        title="Sobre Nosotros – FYT Lab Connect"
+        description="Equipo comprometido con la innovación farmacéutica, la seguridad del paciente y la excelencia científica."
+        author="FYT Lab Connect"
+        robots="index, follow"
+        canonical="https://fytlabconnect.com/sobre-nosotros"
+        openGraph={{ title: "Sobre Nosotros", description: "Conoce nuestro equipo y valores", type: "article" }}
+        twitter={{ card: "summary", site: "@fytlab" }}
+      />
       {/* Hero Institucional */}
       <section
         className="hero-container"
@@ -30,6 +40,8 @@ const SobreNosotros = () => {
             alt="" 
             className="hero-image" 
             aria-hidden="true"
+            width={1920}
+            height={1080}
           />
         </picture>
         {/* Overlay oscuro unificado */}

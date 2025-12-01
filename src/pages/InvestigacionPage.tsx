@@ -5,6 +5,7 @@ import { BookOpen, Microscope, FileText, Folder, Users, Award, Dna, Atom, Briefc
 import HeroInvestigacion from "@/components/HeroInvestigacion";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { usePageReady } from "@/hooks/usePageReady";
+import Seo from "@/components/Seo";
 
 
 // Importar datos reales desde JSON
@@ -111,6 +112,15 @@ const InvestigacionPage: React.FC = () => {
 
   return (
     <div className="w-full bg-background">{/* Patrón de páginas principales */}
+  <Seo
+    title="Investigación y Producción Académica – FYT Lab Connect"
+    description="KPIs académicos, proyectos destacados, publicaciones recientes y eventos científicos del grupo FYT."
+    author="FYT Lab Connect"
+    robots="index, follow"
+    canonical="https://fytlabconnect.com/investigacion"
+    openGraph={{ title: "Investigación", description: "Resultados y proyectos científicos", type: "article" }}
+    twitter={{ card: "summary", site: "@fytlab" }}
+  />
   {/* HeroInvestigacion: Hero moderno con KPIs animados y accesibles */}
   <div className="px-2 sm:px-6 md:px-12 lg:px-24 xl:px-32 2xl:px-48">
     <HeroInvestigacion />

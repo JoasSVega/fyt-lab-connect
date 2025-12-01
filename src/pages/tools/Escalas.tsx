@@ -38,7 +38,7 @@ const Escalas: React.FC = () => {
     );
   };
   return (
-    <main className="w-full max-w-6xl mx-auto px-3 sm:px-6 py-10" aria-labelledby="page-title">
+    <div className="w-full max-w-6xl mx-auto px-3 sm:px-6 py-10" aria-labelledby="page-title" role="region">
       {/* SEO meta */}
       <Seo
         title="Escalas Clínicas y Validación Farmacoterapéutica | Herramientas Farmacéuticas"
@@ -103,7 +103,7 @@ const Escalas: React.FC = () => {
       <p className="text-center font-bold mt-12 text-sm text-gray-800 dark:text-gray-200">
         Estas herramientas son de uso académico e informativo. No reemplazan el juicio clínico ni las decisiones de un profesional de la salud.
       </p>
-    </main>
+    </div>
   );
 };
 

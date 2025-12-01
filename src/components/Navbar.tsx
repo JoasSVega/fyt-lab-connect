@@ -75,7 +75,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`nav-root fixed top-0 left-0 right-0 z-40 ${isScrolled ? "is-scrolled" : "bg-white"}`}>
+    <nav role="navigation" aria-label="Principal" className={`nav-root fixed top-0 left-0 right-0 z-40 ${isScrolled ? "is-scrolled" : "bg-white"}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo y nombre */}
@@ -90,6 +90,8 @@ const Navbar = () => {
                   decoding="async"
                   ref={logoRef}
                   className="h-12 w-auto transition-transform duration-250 group-hover:scale-[1.03]"
+                  width={96}
+                  height={48}
                 />
               </picture>
             </div>
@@ -102,7 +104,7 @@ const Navbar = () => {
           </Link>
 
           {/* Menú principal centrado - Desktop */}
-          <div className="hidden lg:flex items-center space-x-8 flex-1 justify-center">
+          <div className="hidden lg:flex items-center space-x-8 flex-1 justify-center" aria-label="Menú principal">
             {menuItems.map((item) => (
               <div
                 key={item.name}
@@ -145,7 +147,9 @@ const Navbar = () => {
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-slate-900 hover:text-fyt-blue focus:outline-none focus:ring-2 focus:ring-fyt-blue/30 p-2 rounded-md transition-colors duration-200"
-              aria-label="Toggle menu"
+              aria-label="Abrir menú"
+              aria-controls="nav-mobile"
+              aria-expanded={isMenuOpen}
             >
               {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
@@ -164,6 +168,8 @@ const Navbar = () => {
                 ease: [0.4, 0, 0.2, 1]
               }}
               className="lg:hidden border-t border-slate-200 overflow-hidden bg-white shadow-soft"
+              id="nav-mobile"
+              aria-label="Menú móvil"
             >
               <div className="py-4 space-y-1">
                 {menuItems.map((item) => (

@@ -1,4 +1,5 @@
 import React from "react";
+import Seo from "@/components/Seo";
 import { usePageReady } from "@/hooks/usePageReady";
 
 const PrivacyPolicy = () => {
@@ -7,6 +8,15 @@ const PrivacyPolicy = () => {
     <div className="w-full bg-background pt-24">{/* Patrón de páginas principales */}
       <div className="max-w-3xl mx-auto px-4 py-10 sm:py-16">
         <h1 className="text-3xl sm:text-4xl font-poppins font-bold text-slate-900 mb-8 text-center">Política de Privacidad del Grupo de Investigación en Farmacología y Terapéutica</h1>
+        <Seo
+          title="Política de Privacidad – FYT Lab Connect"
+          description="Conoce cómo tratamos tus datos personales y garantizamos tu privacidad."
+          author="FYT Lab Connect"
+          robots="index, follow"
+          canonical="https://fytlabconnect.com/politica-de-privacidad"
+          openGraph={{ title: "Política de Privacidad", description: "Tratamiento de datos personales", type: "article" }}
+          twitter={{ card: "summary", site: "@fytlab" }}
+        />
       <section className="mb-6">
         <h2 className="text-lg font-semibold mb-2 text-slate-700">1. Introducción</h2>
         <p className="text-slate-700 text-base leading-relaxed">El Grupo de Investigación en Farmacología y Terapéutica de la Universidad de Cartagena reconoce la importancia de la privacidad y la protección de los datos personales de los participantes, colaboradores y usuarios de nuestras plataformas. Esta Política establece los lineamientos para el manejo responsable de la información, en cumplimiento de la Ley 1581 de 2012, el Decreto 1377 de 2013, la Ley 1266 de 2008 y demás disposiciones aplicables en materia de Habeas Data y protección de información en Colombia.</p>

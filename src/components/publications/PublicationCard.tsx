@@ -13,9 +13,21 @@ interface PublicationCardProps {
 
 const PublicationCard: React.FC<PublicationCardProps> = ({ image, title, year, type, authors, link, actions }) => (
   <div className="bg-white rounded-xl border border-slate-100 shadow p-5 flex flex-col h-full">
-    <div className="mb-2 h-24 bg-slate-100 flex items-center justify-center rounded">
-      {/* Imagen placeholder */}
-      <div className="text-slate-400">Imagen</div>
+    <div className="mb-2 h-24 bg-slate-100 flex items-center justify-center rounded overflow-hidden">
+      {image ? (
+        <img
+          src={image}
+          alt={`Portada de la publicación: ${title}`}
+          width={320}
+          height={180}
+          loading="lazy"
+          decoding="async"
+          className="w-full h-full object-cover"
+        />
+      ) : (
+        // Imagen placeholder accesible
+        <span aria-hidden="true" className="text-slate-400">Imagen</span>
+      )}
     </div>
     <h3 className="text-base font-raleway font-bold text-slate-800 mb-1">{title}</h3>
     <div className="text-xs font-inter text-slate-500 mb-1">{year} · {type}</div>

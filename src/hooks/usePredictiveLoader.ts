@@ -59,6 +59,23 @@ export function usePredictiveLoader(
   const preloadedImages = useRef<Set<string>>(new Set());
   const imageElements = useRef<Map<string, HTMLElement>>(new Map());
   const rafId = useRef<number>();
+  const concurrentLoads = useRef<number>(0);
+  const maxConcurrent = 2;
+  const queue = useRef<string[]>([]);
+
+  // Ensure a preload hint is attached to <head> for critical images
+  const addPreloadHint = useCallback((path: string) => {
+    try {
+      const id = `preload:${path}`;
+      if (document.getElementById(id)) return;
+      const link = document.createElement('link');
+      link.id = id;
+      link.rel = 'preload';
+      link.as = 'image';
+      link.href = path;
+      document.head.appendChild(link);
+    } catch { /* noop */ }
+  }, []);
 
   // Register image elements for tracking
   const registerImage = useCallback((path: string, element: HTMLElement | null) => {
@@ -94,18 +111,30 @@ export function usePredictiveLoader(
   }, [lookahead, enableVelocityPrediction, minVelocity]);
 
   // Check and preload images that meet criteria
+  const processQueue = useCallback(() => {
+    while (concurrentLoads.current < maxConcurrent && queue.current.length > 0) {
+      const next = queue.current.shift()!;
+      concurrentLoads.current++;
+      addPreloadHint(next);
+      preloadResponsiveImage(next, { priority, timeout: 15000 })
+        .catch(() => { /* silent fail */ })
+        .finally(() => {
+          concurrentLoads.current = Math.max(0, concurrentLoads.current - 1);
+          requestIdleCallback?.(() => processQueue());
+        });
+    }
+  }, [priority, addPreloadHint]);
+
   const checkAndPreload = useCallback(() => {
     imageElements.current.forEach((element, path) => {
       if (preloadedImages.current.has(path)) return;
-      
       if (shouldPreloadElement(element)) {
         preloadedImages.current.add(path);
-        preloadResponsiveImage(path, { priority, timeout: 15000 }).catch(() => {
-          // Silent fail for predictive preloading
-        });
+        queue.current.push(path);
       }
     });
-  }, [shouldPreloadElement, priority]);
+    processQueue();
+  }, [shouldPreloadElement, processQueue]);
 
   // Update scroll metrics and trigger preload check
   const handleScroll = useCallback(() => {

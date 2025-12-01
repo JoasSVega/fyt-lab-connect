@@ -1,10 +1,20 @@
 import React from "react";
+import Seo from "@/components/Seo";
 import { usePageReady } from "@/hooks/usePageReady";
 
 const TermsOfUse = () => {
   usePageReady(); // Sincronización con TransitionProvider
   return (
     <div className="w-full bg-background pt-24">{/* Patrón de páginas principales */}
+      <Seo
+        title="Términos de Uso – FYT Lab Connect"
+        description="Condiciones de uso y responsabilidades al utilizar las plataformas de FYT Lab Connect."
+        author="FYT Lab Connect"
+        robots="index, follow"
+        canonical="https://fytlabconnect.com/terminos-de-uso"
+        openGraph={{ title: "Términos de Uso", description: "Condiciones y responsabilidades", type: "article" }}
+        twitter={{ card: "summary", site: "@fytlab" }}
+      />
       <div className="max-w-3xl mx-auto px-4 py-10 sm:py-16">
         <h1 className="text-3xl sm:text-4xl font-poppins font-bold text-slate-900 mb-8 text-center">Términos de Uso – Grupo de Investigación en Farmacología y Terapéutica</h1>
       <p className="text-slate-700 text-base mb-2">Universidad de Cartagena</p>

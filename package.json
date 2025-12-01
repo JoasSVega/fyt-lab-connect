@@ -16,7 +16,9 @@
     "preview": "vite preview",
     "convert:images": "node ./scripts/convert-images.js",
     "images:standardize": "node ./scripts/standardize-images.js",
-    "images:refactor": "node ./scripts/refactor-image-refs.js"
+    "images:refactor": "node ./scripts/refactor-image-refs.js",
+    "audit:run": "node ./scripts/audit-runner.mjs",
+    "audit:rerun": "node ./scripts/audit-runner.mjs --rerun"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -68,6 +70,7 @@
     "zod": "^3.25.76"
   },
   "devDependencies": {
+    "@axe-core/cli": "4.7",
     "@eslint/js": "^9.32.0",
     "@tailwindcss/typography": "^0.5.16",
     "@testing-library/jest-dom": "^6.6.3",
@@ -78,12 +81,14 @@
     "@types/react-dom": "^18.3.7",
     "@vitejs/plugin-react-swc": "^3.11.0",
     "autoprefixer": "^10.4.21",
+    "axe-core": "4.7",
     "cross-env": "^7.0.3",
     "eslint": "^9.32.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^15.15.0",
     "jsdom": "^26.0.0",
+    "lighthouse": "^12.8.2",
     "lovable-tagger": "^1.1.9",
     "postcss": "^8.5.6",
     "rollup-plugin-visualizer": "^6.0.5",

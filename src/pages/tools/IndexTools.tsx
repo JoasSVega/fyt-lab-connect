@@ -57,6 +57,8 @@ const IndexTools: React.FC = () => {
             alt="" 
             className="hero-image" 
             aria-hidden="true"
+            width={1920}
+            height={1080}
           />
         </picture>
         {/* Overlay oscuro unificado */}

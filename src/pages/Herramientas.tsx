@@ -4,6 +4,7 @@ import { Droplet, Ruler, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { usePageReady } from "@/hooks/usePageReady";
+import Seo from "@/components/Seo";
 
 // Lista de herramientas farmacéuticas (fácil de extender)
 const tools = [
@@ -33,6 +34,15 @@ const Herramientas = () => {
   });
   return (
     <div className="w-full bg-background flex flex-col pt-24">
+      <Seo
+        title="Herramientas Farmacéuticas – FYT Lab Connect"
+        description="Soluciones digitales para profesionales farmacéuticos: calculadoras antropométricas y de función renal con UI unificada."
+        author="FYT Lab Connect"
+        robots="index, follow"
+        canonical="https://fytlabconnect.com/herramientas"
+        openGraph={{ title: "Herramientas", description: "Herramientas digitales para farmacia", type: "website" }}
+        twitter={{ card: "summary_large_image", site: "@fytlab" }}
+      />
       {/* Hero Section con imagen de fondo */}
       <section
         className="relative left-1/2 -translate-x-1/2 w-screen h-[50vh] md:h-[70vh] flex items-center justify-center overflow-hidden"

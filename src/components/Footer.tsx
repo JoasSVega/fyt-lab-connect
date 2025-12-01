@@ -20,6 +20,8 @@ const Footer: React.FC = () => {
                   loading="lazy"
                   decoding="async"
                   className="w-20 h-20 sm:w-24 sm:h-24 object-contain drop-shadow-2xl transition-all duration-300"
+                  width={96}
+                  height={96}
                 />
               </picture>
               <div>
@@ -57,27 +59,27 @@ const Footer: React.FC = () => {
           {/* 3. Enlaces Institucionales */}
           <div className="flex flex-col items-start gap-3 col-span-1">
             <h4 className="text-base font-raleway font-bold mb-2 text-slate-900">Enlaces Institucionales</h4>
-            <button onClick={() => openExternal('https://www.unicartagena.edu.co/')} className="text-sm text-slate-700 hover:text-fyt-blue p-0 h-auto min-w-[120px] text-left font-inter font-medium transition-colors duration-200">
-              Universidad de Cartagena
+            <a href="https://www.unicartagena.edu.co/" target="_blank" rel="noopener noreferrer" aria-label="Abrir sitio de la Universidad de Cartagena en nueva pestaña" className="inline-flex items-center text-sm text-slate-700 hover:text-fyt-blue p-0 h-auto min-w-[120px] text-left font-inter font-medium transition-colors duration-200">
+              <span>Universidad de Cartagena</span>
               <ExternalLink className="h-3 w-3 ml-1 inline-block" />
-            </button>
-            <button onClick={() => openExternal('https://www.unicartagena.edu.co/estudia-con-nosotros?view=search&resetSearch=1&preserve=1&geo-latitude=&geo-longitude=&geo-country=&location-detected=&geolocation=&categorySuggestion=&suggestionType=&categorySearch=250')} className="text-sm text-slate-700 hover:text-fyt-blue p-0 h-auto min-w-[120px] text-left font-inter font-medium transition-colors duration-200">
-              Facultad de Ciencias Farmacéuticas
+            </a>
+            <a href="https://www.unicartagena.edu.co/estudia-con-nosotros?view=search&resetSearch=1&preserve=1&geo-latitude=&geo-longitude=&geo-country=&location-detected=&geolocation=&categorySuggestion=&suggestionType=&categorySearch=250" target="_blank" rel="noopener noreferrer" aria-label="Abrir Facultad de Ciencias Farmacéuticas en nueva pestaña" className="inline-flex items-center text-sm text-slate-700 hover:text-fyt-blue p-0 h-auto min-w-[120px] text-left font-inter font-medium transition-colors duration-200">
+              <span>Facultad de Ciencias Farmacéuticas</span>
               <ExternalLink className="h-3 w-3 ml-1 inline-block" />
-            </button>
-            <button onClick={() => openExternal('https://scienti.minciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000008618')} className="text-sm text-slate-700 hover:text-fyt-blue p-0 h-auto min-w-[120px] text-left font-inter font-medium transition-colors duration-200">
-              MinCiencias
+            </a>
+            <a href="https://scienti.minciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000008618" target="_blank" rel="noopener noreferrer" aria-label="Abrir página de MinCiencias del grupo en nueva pestaña" className="inline-flex items-center text-sm text-slate-700 hover:text-fyt-blue p-0 h-auto min-w-[120px] text-left font-inter font-medium transition-colors duration-200">
+              <span>MinCiencias</span>
               <ExternalLink className="h-3 w-3 ml-1 inline-block" />
-            </button>
+            </a>
           </div>
 
           {/* 4. Síguenos (icono) */}
           <div className="flex flex-col items-start gap-3 col-span-1">
             <h4 className="text-base font-raleway font-bold mb-2 text-slate-900">Síguenos</h4>
             <div className="flex items-center gap-3">
-              <button onClick={() => openExternal('https://www.instagram.com/grupo_fyt?igsh=MXNxbXo3eHM2MHRweA==')} aria-label="Instagram Grupo FyT" className="p-2 rounded-full text-slate-700 hover:text-fyt-purple hover:bg-slate-100 transition-all duration-200">
+              <a href="https://www.instagram.com/grupo_fyt?igsh=MXNxbXo3eHM2MHRweA==" target="_blank" rel="noopener noreferrer" aria-label="Instagram Grupo FyT" className="p-2 rounded-full text-slate-700 hover:text-fyt-purple hover:bg-slate-100 transition-all duration-200">
                 <Instagram className="w-6 h-6" />
-              </button>
+              </a>
             </div>
           </div>
         </div>

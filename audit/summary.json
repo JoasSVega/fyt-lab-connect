@@ -1,0 +1,380 @@
+[
+  {
+    "route": "/investigacion",
+    "performance": {
+      "ttfb": 2,
+      "domContentLoaded": 111.39999999850988,
+      "loadEvent": 111.80000000074506
+    },
+    "seo": {
+      "hasTitle": true,
+      "description": "KPIs académicos, proyectos destacados, publicaciones recientes y eventos científicos del grupo FYT.",
+      "canonical": "https://fyt-lab-connect.lovable.app/",
+      "robots": "index, follow",
+      "ogTitle": "Semillero FYT - Farmacología y Terapéutica",
+      "ogDesc": "Semillero de investigación comprometido con la excelencia en farmacología y terapéutica",
+      "ogImage": "https://fyt-lab-connect.lovable.app/logo-fyt.png",
+      "twitterCard": "summary_large_image",
+      "twitterImage": "https://fyt-lab-connect.lovable.app/logo-fyt.png",
+      "htmlLang": "es"
+    },
+    "a11yCount": 0
+  },
+  {
+    "route": "/investigacion/proyectos",
+    "performance": {
+      "ttfb": 1.8999999985098839,
+      "domContentLoaded": 16.299999997019768,
+      "loadEvent": 16.299999997019768
+    },
+    "seo": {
+      "hasTitle": true,
+      "description": "Semillero de Investigación FYT en Farmacología y Terapéutica. Innovación científica, formación académica y excelencia en investigación farmacológica.",
+      "canonical": "https://fyt-lab-connect.lovable.app/",
+      "robots": null,
+      "ogTitle": "Semillero FYT - Farmacología y Terapéutica",
+      "ogDesc": "Semillero de investigación comprometido con la excelencia en farmacología y terapéutica",
+      "ogImage": "https://fyt-lab-connect.lovable.app/logo-fyt.png",
+      "twitterCard": "summary_large_image",
+      "twitterImage": "https://fyt-lab-connect.lovable.app/logo-fyt.png",
+      "htmlLang": "es"
+    },
+    "a11yCount": 2
+  },
+  {
+    "route": "/investigacion/publicaciones",
+    "performance": {
+      "ttfb": 2.400000002235174,
+      "domContentLoaded": 13.699999999254942,
+      "loadEvent": 15.400000002235174
+    },
+    "seo": {
+      "hasTitle": true,
+      "description": "Semillero de Investigación FYT en Farmacología y Terapéutica. Innovación científica, formación académica y excelencia en investigación farmacológica.",
+      "canonical": "https://fyt-lab-connect.lovable.app/",
+      "robots": null,
+      "ogTitle": "Semillero FYT - Farmacología y Terapéutica",
+      "ogDesc": "Semillero de investigación comprometido con la excelencia en farmacología y terapéutica",
+      "ogImage": "https://fyt-lab-connect.lovable.app/logo-fyt.png",
+      "twitterCard": "summary_large_image",
+      "twitterImage": "https://fyt-lab-connect.lovable.app/logo-fyt.png",
+      "htmlLang": "es"
+    },
+    "a11yCount": 2
+  },
+  {
+    "route": "/",
+    "performance": {
+      "ttfb": 1,
+      "domContentLoaded": 35.5,
+      "loadEvent": 35.899999998509884
+    },
+    "seo": {
+      "hasTitle": true,
+      "description": "Grupo de Investigación en Farmacología y Terapéutica: proyectos, publicaciones y herramientas clínicas con diseño corporativo y rendimiento optimizado.",
+      "canonical": "https://fyt-lab-connect.lovable.app/",
+      "robots": "index, follow",
+      "ogTitle": "Semillero FYT - Farmacología y Terapéutica",
+      "ogDesc": "Semillero de investigación comprometido con la excelencia en farmacología y terapéutica",
+      "ogImage": "https://fyt-lab-connect.lovable.app/logo-fyt.png",
+      "twitterCard": "summary_large_image",
+      "twitterImage": "https://fyt-lab-connect.lovable.app/logo-fyt.png",
+      "htmlLang": "es"
+    },
+    "a11yCount": 1
+  },
+  {
+    "route": "/noticias",
+    "performance": {
+      "ttfb": 2.400000002235174,
+      "domContentLoaded": 43.899999998509884,
+      "loadEvent": 44.5
+    },
+    "seo": {
+      "hasTitle": true,
+      "description": "Semillero de Investigación FYT en Farmacología y Terapéutica. Innovación científica, formación académica y excelencia en investigación farmacológica.",
+      "canonical": "https://fyt-lab-connect.lovable.app/",
+      "robots": null,
+      "ogTitle": "Semillero FYT - Farmacología y Terapéutica",
+      "ogDesc": "Semillero de investigación comprometido con la excelencia en farmacología y terapéutica",
+      "ogImage": "https://fyt-lab-connect.lovable.app/logo-fyt.png",
+      "twitterCard": "summary_large_image",
+      "twitterImage": "https://fyt-lab-connect.lovable.app/logo-fyt.png",
+      "htmlLang": "es"
+    },
+    "a11yCount": 1
+  },
+  {
+    "route": "/herramientas",
+    "performance": {
+      "ttfb": 1.8999999985098839,
+      "domContentLoaded": 36.899999998509884,
+      "loadEvent": 37.30000000074506
+    },
+    "seo": {
+      "hasTitle": true,
+      "description": "Explora cálculos clínicos y farmacéuticos, cálculos fisiológicos y antropométricos, escalas clínicas y validación farmacoterapéutica, y herramientas avanzadas y conversores.",
+      "canonical": "https://fyt-lab-connect.lovable.app/",
+      "robots": null,
+      "ogTitle": "Semillero FYT - Farmacología y Terapéutica",
+      "ogDesc": "Semillero de investigación comprometido con la excelencia en farmacología y terapéutica",
+      "ogImage": "https://fyt-lab-connect.lovable.app/logo-fyt.png",
+      "twitterCard": "summary_large_image",
+      "twitterImage": "https://fyt-lab-connect.lovable.app/logo-fyt.png",
+      "htmlLang": "es"
+    },
+    "a11yCount": 2
+  },
+  {
+    "route": "/herramientas/clinicos",
+    "performance": {
+      "ttfb": 2,
+      "domContentLoaded": 14.200000002980232,
+      "loadEvent": 15.800000000745058
+    },
+    "seo": {
+      "hasTitle": true,
+      "description": "Semillero de Investigación FYT en Farmacología y Terapéutica. Innovación científica, formación académica y excelencia en investigación farmacológica.",
+      "canonical": "https://fyt-lab-connect.lovable.app/",
+      "robots": null,
+      "ogTitle": "Semillero FYT - Farmacología y Terapéutica",
+      "ogDesc": "Semillero de investigación comprometido con la excelencia en farmacología y terapéutica",
+      "ogImage": "https://fyt-lab-connect.lovable.app/logo-fyt.png",
+      "twitterCard": "summary_large_image",
+      "twitterImage": "https://fyt-lab-connect.lovable.app/logo-fyt.png",
+      "htmlLang": "es"
+    },
+    "a11yCount": 2
+  },
+  {
+    "route": "/herramientas/antropometricos",
+    "performance": {
+      "ttfb": 2.2000000029802322,
+      "domContentLoaded": 14.600000001490116,
+      "loadEvent": 14.800000000745058
+    },
+    "seo": {
+      "hasTitle": true,
+      "description": "Semillero de Investigación FYT en Farmacología y Terapéutica. Innovación científica, formación académica y excelencia en investigación farmacológica.",
+      "canonical": "https://fyt-lab-connect.lovable.app/",
+      "robots": null,
+      "ogTitle": "Semillero FYT - Farmacología y Terapéutica",
+      "ogDesc": "Semillero de investigación comprometido con la excelencia en farmacología y terapéutica",
+      "ogImage": "https://fyt-lab-connect.lovable.app/logo-fyt.png",
+      "twitterCard": "summary_large_image",
+      "twitterImage": "https://fyt-lab-connect.lovable.app/logo-fyt.png",
+      "htmlLang": "es"
+    },
+    "a11yCount": 2
+  },
+  {
+    "route": "/herramientas/avanzados",
+    "performance": {
+      "ttfb": 2.2000000029802322,
+      "domContentLoaded": 15.199999999254942,
+      "loadEvent": 15.300000000745058
+    },
+    "seo": {
+      "hasTitle": true,
+      "description": "Semillero de Investigación FYT en Farmacología y Terapéutica. Innovación científica, formación académica y excelencia en investigación farmacológica.",
+      "canonical": "https://fyt-lab-connect.lovable.app/",
+      "robots": null,
+      "ogTitle": "Semillero FYT - Farmacología y Terapéutica",
+      "ogDesc": "Semillero de investigación comprometido con la excelencia en farmacología y terapéutica",
+      "ogImage": "https://fyt-lab-connect.lovable.app/logo-fyt.png",
+      "twitterCard": "summary_large_image",
+      "twitterImage": "https://fyt-lab-connect.lovable.app/logo-fyt.png",
+      "htmlLang": "es"
+    },
+    "a11yCount": 2
+  },
+  {
+    "route": "/herramientas/escalas",
+    "performance": {
+      "ttfb": 2.199999999254942,
+      "domContentLoaded": 13.5,
+      "loadEvent": 14.799999997019768
+    },
+    "seo": {
+      "hasTitle": true,
+      "description": "Semillero de Investigación FYT en Farmacología y Terapéutica. Innovación científica, formación académica y excelencia en investigación farmacológica.",
+      "canonical": "https://fyt-lab-connect.lovable.app/",
+      "robots": null,
+      "ogTitle": "Semillero FYT - Farmacología y Terapéutica",
+      "ogDesc": "Semillero de investigación comprometido con la excelencia en farmacología y terapéutica",
+      "ogImage": "https://fyt-lab-connect.lovable.app/logo-fyt.png",
+      "twitterCard": "summary_large_image",
+      "twitterImage": "https://fyt-lab-connect.lovable.app/logo-fyt.png",
+      "htmlLang": "es"
+    },
+    "a11yCount": 2
+  },
+  {
+    "route": "/sobre-nosotros",
+    "performance": {
+      "ttfb": 2.100000001490116,
+      "domContentLoaded": 36.5,
+      "loadEvent": 37.19999999925494
+    },
+    "seo": {
+      "hasTitle": true,
+      "description": "Equipo comprometido con la innovación farmacéutica, la seguridad del paciente y la excelencia científica.",
+      "canonical": "https://fyt-lab-connect.lovable.app/",
+      "robots": "index, follow",
+      "ogTitle": "Semillero FYT - Farmacología y Terapéutica",
+      "ogDesc": "Semillero de investigación comprometido con la excelencia en farmacología y terapéutica",
+      "ogImage": "https://fyt-lab-connect.lovable.app/logo-fyt.png",
+      "twitterCard": "summary_large_image",
+      "twitterImage": "https://fyt-lab-connect.lovable.app/logo-fyt.png",
+      "htmlLang": "es"
+    },
+    "a11yCount": 1
+  },
+  {
+    "route": "/contactos",
+    "performance": {
+      "ttfb": 2.300000000745058,
+      "domContentLoaded": 42.79999999701977,
+      "loadEvent": 43.5
+    },
+    "seo": {
+      "hasTitle": true,
+      "description": "Semillero de Investigación FYT en Farmacología y Terapéutica. Innovación científica, formación académica y excelencia en investigación farmacológica.",
+      "canonical": "https://fyt-lab-connect.lovable.app/",
+      "robots": null,
+      "ogTitle": "Semillero FYT - Farmacología y Terapéutica",
+      "ogDesc": "Semillero de investigación comprometido con la excelencia en farmacología y terapéutica",
+      "ogImage": "https://fyt-lab-connect.lovable.app/logo-fyt.png",
+      "twitterCard": "summary_large_image",
+      "twitterImage": "https://fyt-lab-connect.lovable.app/logo-fyt.png",
+      "htmlLang": "es"
+    },
+    "a11yCount": 1
+  },
+  {
+    "route": "/equipo",
+    "performance": {
+      "ttfb": 2.100000001490116,
+      "domContentLoaded": 35.69999999925494,
+      "loadEvent": 36
+    },
+    "seo": {
+      "hasTitle": true,
+      "description": "Semillero de Investigación FYT en Farmacología y Terapéutica. Innovación científica, formación académica y excelencia en investigación farmacológica.",
+      "canonical": "https://fyt-lab-connect.lovable.app/",
+      "robots": null,
+      "ogTitle": "Semillero FYT - Farmacología y Terapéutica",
+      "ogDesc": "Semillero de investigación comprometido con la excelencia en farmacología y terapéutica",
+      "ogImage": "https://fyt-lab-connect.lovable.app/logo-fyt.png",
+      "twitterCard": "summary_large_image",
+      "twitterImage": "https://fyt-lab-connect.lovable.app/logo-fyt.png",
+      "htmlLang": "es"
+    },
+    "a11yCount": 1
+  },
+  {
+    "route": "/PrivacyPolicy",
+    "performance": {
+      "ttfb": 2.5,
+      "domContentLoaded": 38.899999998509884,
+      "loadEvent": 39.30000000074506
+    },
+    "seo": {
+      "hasTitle": true,
+      "description": "Conoce cómo tratamos tus datos personales y garantizamos tu privacidad.",
+      "canonical": "https://fyt-lab-connect.lovable.app/",
+      "robots": "index, follow",
+      "ogTitle": "Semillero FYT - Farmacología y Terapéutica",
+      "ogDesc": "Semillero de investigación comprometido con la excelencia en farmacología y terapéutica",
+      "ogImage": "https://fyt-lab-connect.lovable.app/logo-fyt.png",
+      "twitterCard": "summary_large_image",
+      "twitterImage": "https://fyt-lab-connect.lovable.app/logo-fyt.png",
+      "htmlLang": "es"
+    },
+    "a11yCount": 0
+  },
+  {
+    "route": "/TermsOfUse",
+    "performance": {
+      "ttfb": 2.100000001490116,
+      "domContentLoaded": 35.599999997764826,
+      "loadEvent": 36
+    },
+    "seo": {
+      "hasTitle": true,
+      "description": "Condiciones de uso y responsabilidades al utilizar las plataformas de FYT Lab Connect.",
+      "canonical": "https://fyt-lab-connect.lovable.app/",
+      "robots": "index, follow",
+      "ogTitle": "Semillero FYT - Farmacología y Terapéutica",
+      "ogDesc": "Semillero de investigación comprometido con la excelencia en farmacología y terapéutica",
+      "ogImage": "https://fyt-lab-connect.lovable.app/logo-fyt.png",
+      "twitterCard": "summary_large_image",
+      "twitterImage": "https://fyt-lab-connect.lovable.app/logo-fyt.png",
+      "htmlLang": "es"
+    },
+    "a11yCount": 0
+  },
+  {
+    "route": "/CodeOfEthics",
+    "performance": {
+      "ttfb": 2.399999998509884,
+      "domContentLoaded": 39.69999999925494,
+      "loadEvent": 40.100000001490116
+    },
+    "seo": {
+      "hasTitle": true,
+      "description": "Principios éticos y valores que guían nuestras actividades científicas y académicas.",
+      "canonical": "https://fyt-lab-connect.lovable.app/",
+      "robots": "index, follow",
+      "ogTitle": "Semillero FYT - Farmacología y Terapéutica",
+      "ogDesc": "Semillero de investigación comprometido con la excelencia en farmacología y terapéutica",
+      "ogImage": "https://fyt-lab-connect.lovable.app/logo-fyt.png",
+      "twitterCard": "summary_large_image",
+      "twitterImage": "https://fyt-lab-connect.lovable.app/logo-fyt.png",
+      "htmlLang": "es"
+    },
+    "a11yCount": 0
+  },
+  {
+    "route": "/calculator/dosage",
+    "performance": {
+      "ttfb": 2.199999999254942,
+      "domContentLoaded": 19.199999999254942,
+      "loadEvent": 19.300000000745058
+    },
+    "seo": {
+      "hasTitle": true,
+      "description": "Semillero de Investigación FYT en Farmacología y Terapéutica. Innovación científica, formación académica y excelencia en investigación farmacológica.",
+      "canonical": "https://fyt-lab-connect.lovable.app/",
+      "robots": null,
+      "ogTitle": "Semillero FYT - Farmacología y Terapéutica",
+      "ogDesc": "Semillero de investigación comprometido con la excelencia en farmacología y terapéutica",
+      "ogImage": "https://fyt-lab-connect.lovable.app/logo-fyt.png",
+      "twitterCard": "summary_large_image",
+      "twitterImage": "https://fyt-lab-connect.lovable.app/logo-fyt.png",
+      "htmlLang": "es"
+    },
+    "a11yCount": 2
+  },
+  {
+    "route": "/herramientas/antropometricas",
+    "performance": {
+      "ttfb": 2.199999999254942,
+      "domContentLoaded": 14.800000000745058,
+      "loadEvent": 16.5
+    },
+    "seo": {
+      "hasTitle": true,
+      "description": "Semillero de Investigación FYT en Farmacología y Terapéutica. Innovación científica, formación académica y excelencia en investigación farmacológica.",
+      "canonical": "https://fyt-lab-connect.lovable.app/",
+      "robots": null,
+      "ogTitle": "Semillero FYT - Farmacología y Terapéutica",
+      "ogDesc": "Semillero de investigación comprometido con la excelencia en farmacología y terapéutica",
+      "ogImage": "https://fyt-lab-connect.lovable.app/logo-fyt.png",
+      "twitterCard": "summary_large_image",
+      "twitterImage": "https://fyt-lab-connect.lovable.app/logo-fyt.png",
+      "htmlLang": "es"
+    },
+    "a11yCount": 2
+  }
+]

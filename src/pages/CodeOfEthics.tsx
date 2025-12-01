@@ -1,10 +1,20 @@
 import React from "react";
+import Seo from "@/components/Seo";
 import { usePageReady } from "@/hooks/usePageReady";
 
 const CodeOfEthics = () => {
   usePageReady(); // Sincronización con TransitionProvider
   return (
     <div className="w-full bg-background pt-24">{/* Patrón de páginas principales */}
+      <Seo
+        title="Código de Ética – FYT Lab Connect"
+        description="Principios éticos y valores que guían nuestras actividades científicas y académicas."
+        author="FYT Lab Connect"
+        robots="index, follow"
+        canonical="https://fytlabconnect.com/codigo-de-etica"
+        openGraph={{ title: "Código de Ética", description: "Principios y valores", type: "article" }}
+        twitter={{ card: "summary", site: "@fytlab" }}
+      />
       <div className="max-w-3xl mx-auto px-4 py-10 sm:py-16">
         <h1 className="text-3xl sm:text-4xl font-poppins font-bold text-slate-900 mb-8 text-center">Código de Ética – Grupo de Investigación en Farmacología y Terapéutica</h1>
       <p className="text-slate-700 text-base mb-2">Universidad de Cartagena</p>

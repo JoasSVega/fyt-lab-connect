@@ -193,6 +193,8 @@ const Team = ({ compact = false }: { compact?: boolean }) => {
                               alt={`Retrato de ${member.name}, ${member.role}`}
                               className="mb-5 shadow-soft border-2 border-fyt-blue/30"
                               style={{ width: 220, height: 220, objectFit: "cover", borderRadius: 16 }}
+                              width={220}
+                              height={220}
                               loading="lazy"
                               decoding="async"
                             />

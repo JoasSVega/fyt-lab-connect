@@ -41,6 +41,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import Footer from "./components/Footer";
 import TitleSync from "./components/TitleSync";
 import Loader from "./components/Loader";
+import AccessibleH1 from "./components/AccessibleH1";
 
 const queryClient = new QueryClient();
 
@@ -172,6 +173,8 @@ const App: React.FC = () => {
           <Navbar />
           {/* Contenido principal: darle padding-top para no quedar debajo del navbar */}
           <main className="bg-gray-50 w-full">
+            {/* Provide a guaranteed H1 for a11y without impacting layout */}
+            <AccessibleH1 />
             <AnimatedRoutes />
           </main>
           <Footer />
