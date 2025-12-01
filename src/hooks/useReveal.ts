@@ -55,11 +55,14 @@ export function useReveal(options: Options = {}) {
       observerCache.set(key, io);
     }
 
-    (el as any).__revealOnce = triggerOnce;
+    const elementWithFlag = el as HTMLElement & { __revealOnce?: boolean };
+    elementWithFlag.__revealOnce = triggerOnce;
     io.observe(el);
     return () => {
-      try { io!.unobserve(el); } catch (e: any) {
-        // Ignore
+      try { 
+        io!.unobserve(el); 
+      } catch (error: unknown) {
+        // Ignore unobserve errors
       }
     };
   }, [threshold, root, rootMargin, triggerOnce, staggerBaseMs]);

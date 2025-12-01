@@ -40,7 +40,8 @@ export const useScrollReveal = (options: UseScrollRevealOptions = {}) => {
     }
 
     // Registrar callback por elemento sin crear wrappers ni estilos extra.
-    (element as any).__revealCb = (visible: boolean) => {
+    const elementWithCallback = element as HTMLElement & { __revealCb?: (visible: boolean) => void };
+    elementWithCallback.__revealCb = (visible: boolean) => {
       if (visible) {
         setIsVisible(true);
         if (triggerOnce) observer!.unobserve(element);
@@ -54,10 +55,10 @@ export const useScrollReveal = (options: UseScrollRevealOptions = {}) => {
     return () => {
       try {
         observer!.unobserve(element);
-      } catch (e: any) {
-        // Ignore
+      } catch (error: unknown) {
+        // Ignore unobserve errors
       }
-      delete (element as any).__revealCb;
+      delete elementWithCallback.__revealCb;
     };
   }, [threshold, rootMargin, triggerOnce]);
 

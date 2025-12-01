@@ -6,10 +6,11 @@ const ScrollToTop = () => {
   useEffect(() => {
     // Si hay una transición global en curso, el propio sistema de rutas
     // gestionará el scroll al finalizar el loader de transición.
-    if ((window as any).__routeTransitionActive) return;
+    const windowWithTransition = window as Window & { __routeTransitionActive?: boolean };
+    if (windowWithTransition.__routeTransitionActive) return;
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [pathname]);
-  return null as React.ReactElement | null;
+  return null;
 };
 
 export default ScrollToTop;

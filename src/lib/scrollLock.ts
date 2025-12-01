@@ -4,8 +4,10 @@ export function lockScroll() {
   lockCount += 1;
   try {
     document.body.classList.add('scroll-locked');
-    (document.body as any).dataset.scrollLockCount = String(lockCount);
-  } catch {}
+    document.body.dataset.scrollLockCount = String(lockCount);
+  } catch (error: unknown) {
+    console.warn('Failed to lock scroll:', error);
+  }
 }
 
 export function unlockScroll() {
@@ -13,11 +15,13 @@ export function unlockScroll() {
   try {
     if (lockCount === 0) {
       document.body.classList.remove('scroll-locked');
-      delete (document.body as any).dataset.scrollLockCount;
+      delete document.body.dataset.scrollLockCount;
     } else {
-      (document.body as any).dataset.scrollLockCount = String(lockCount);
+      document.body.dataset.scrollLockCount = String(lockCount);
     }
-  } catch {}
+  } catch (error: unknown) {
+    console.warn('Failed to unlock scroll:', error);
+  }
 }
 
 export function resetScrollLock() {
