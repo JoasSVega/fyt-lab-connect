@@ -129,6 +129,13 @@ All colors MUST be HSL and based on institutional branding.
     width: 100%;
   }
 
+  /* Bloqueo global de scroll controlado por JS */
+  body.scroll-locked {
+    overflow: hidden !important;
+    position: relative;
+    width: 100vw;
+  }
+
   /* Responsive images */
   img {
     max-width: 100%;

@@ -39,6 +39,7 @@ const TermsOfUse = React.lazy(() => import("./pages/TermsOfUse"));
 const CodeOfEthics = React.lazy(() => import("./pages/CodeOfEthics"));
 import TitleSync from "./components/TitleSync";
 import Loader from "./components/Loader";
+import { lockScroll, unlockScroll } from "./lib/scrollLock";
 
 const queryClient = new QueryClient();
 
@@ -49,8 +50,9 @@ type FramerMotionModule = typeof import('framer-motion');
 function AnimatedRoutes() {
   const location = useLocation();
   const [showRouteLoader, setShowRouteLoader] = useState(false);
-  const [minimumTimePassed, setMinimumTimePassed] = useState(false);
-  const [pageReady, setPageReady] = useState(false);
+  // Mantenemos la ubicación actualmente renderizada para controlar el cambio tras el loader.
+  const [displayLocation, setDisplayLocation] = useState(location);
+  const [pendingLocation, setPendingLocation] = useState(location);
   
   // Carga dinámica de framer-motion para reducir el bundle inicial.
   const [FM, setFM] = useState<FramerMotionModule | null>(null);
@@ -68,53 +70,36 @@ function AnimatedRoutes() {
     };
   }, []);
 
-  // Loader híbrido en cada cambio de ruta: mínimo 900ms + carga real
+  // Loader de transición en cada cambio de ruta: se muestra SIEMPRE y el cambio
+  // de contenido ocurre al finalizar la animación del loader.
   useEffect(() => {
-    // Activar loader
+    if (location.pathname === displayLocation.pathname) return;
+    setPendingLocation(location);
     setShowRouteLoader(true);
-    setMinimumTimePassed(false);
-    setPageReady(false);
+    (window as any).__routeTransitionActive = true;
+    lockScroll();
 
-    // Bloquear scroll durante transición
-    document.body.style.overflow = 'hidden';
-
-    // Timer del tiempo mínimo (900ms)
-    const minTimer = setTimeout(() => {
-      setMinimumTimePassed(true);
-    }, 900);
-
-    // Detectar cuando el nuevo componente está listo
-    // Usamos triple RAF para asegurar que el componente se montó, renderizó y pintó
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          setPageReady(true);
-        });
-      });
-    });
-
-    return () => {
-      clearTimeout(minTimer);
-      document.body.style.overflow = '';
-    };
-  }, [location.pathname]);
-
-  // Ocultar loader solo cuando ambas condiciones se cumplan
-  useEffect(() => {
-    if (minimumTimePassed && pageReady) {
-      // Pequeño delay adicional para asegurar suavidad
-      setTimeout(() => {
-        setShowRouteLoader(false);
-        document.body.style.overflow = '';
-      }, 50);
-    }
-  }, [minimumTimePassed, pageReady]);
+    // No cambiamos `displayLocation` hasta que termine la animación del loader.
+    return () => {};
+  }, [location, displayLocation]);
 
   const routesJSX = (
     <>
-      {showRouteLoader && <Loader onComplete={() => setShowRouteLoader(false)} />}
+      {showRouteLoader && (
+        <Loader
+          onComplete={() => {
+            // Montar la nueva ruta justo al finalizar la animación del loader
+            setDisplayLocation(pendingLocation);
+            setShowRouteLoader(false);
+            // Llevar al tope de la página sin animación para evitar conflicto con el loader
+            window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+            unlockScroll();
+            (window as any).__routeTransitionActive = false;
+          }}
+        />
+      )}
       <React.Suspense fallback={<div className="w-full pt-16 pb-6 px-2 sm:px-4 lg:px-8 text-sm text-slate-600">Cargando…</div>}>
-      <Routes location={location}>
+      <Routes location={displayLocation}>
       {/* Investigación y Producción Académica */}
       <Route path={pathInvestigacion} element={<InvestigacionPage />} />
       <Route path={pathProyectos} element={<ProyectosPage />} />
@@ -226,16 +211,15 @@ const App: React.FC = () => {
     };
   }, []);
 
-  // Bloquear scroll del body durante el loader
+  // Bloquear scroll del body durante el loader inicial (usa scrollLock unificado)
   useEffect(() => {
     if (showLoader || isLoading) {
-      document.body.style.overflow = 'hidden';
+      lockScroll();
     } else {
-      document.body.style.overflow = '';
+      unlockScroll();
     }
-
     return () => {
-      document.body.style.overflow = '';
+      try { unlockScroll(); } catch {}
     };
   }, [showLoader, isLoading]);
 
