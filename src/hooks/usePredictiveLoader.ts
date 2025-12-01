@@ -87,27 +87,27 @@ export function usePredictiveLoader(
   }, []);
 
   // Calculate if an element should be preloaded based on position and velocity
-  const shouldPreloadElement = useCallback((element: HTMLElement): boolean => {
+  // Optimized: batch DOM reads to avoid forced reflows
+  const shouldPreloadElement = useCallback((element: HTMLElement, precomputedViewportHeight: number): boolean => {
     const rect = element.getBoundingClientRect();
-    const viewportHeight = window.innerHeight;
     const { velocity, direction } = scrollMetrics.current;
 
     // Distance from bottom of viewport to top of element
-    const distanceFromViewport = rect.top - viewportHeight;
+    const distanceFromViewport = rect.top - precomputedViewportHeight;
 
     // Base lookahead distance
-    const baseLookahead = viewportHeight * lookahead;
+    const baseLookahead = precomputedViewportHeight * lookahead;
 
     // Dynamic lookahead based on velocity (scroll faster = load further ahead)
     let dynamicLookahead = baseLookahead;
     if (enableVelocityPrediction && direction === 'down' && velocity > minVelocity) {
       // Estimate how far user will scroll in next 2 seconds
-      const velocityFactor = Math.min(velocity * 2000, viewportHeight * 2);
+      const velocityFactor = Math.min(velocity * 2000, precomputedViewportHeight * 2);
       dynamicLookahead = baseLookahead + velocityFactor;
     }
 
     // Preload if element is within lookahead distance
-    return distanceFromViewport < dynamicLookahead && distanceFromViewport > -viewportHeight;
+    return distanceFromViewport < dynamicLookahead && distanceFromViewport > -precomputedViewportHeight;
   }, [lookahead, enableVelocityPrediction, minVelocity]);
 
   // Check and preload images that meet criteria
@@ -126,9 +126,11 @@ export function usePredictiveLoader(
   }, [priority, addPreloadHint]);
 
   const checkAndPreload = useCallback(() => {
+    // Batch viewport read once per check
+    const vh = window.innerHeight;
     imageElements.current.forEach((element, path) => {
       if (preloadedImages.current.has(path)) return;
-      if (shouldPreloadElement(element)) {
+      if (shouldPreloadElement(element, vh)) {
         preloadedImages.current.add(path);
         queue.current.push(path);
       }

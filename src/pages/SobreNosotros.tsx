@@ -43,7 +43,7 @@ const SobreNosotros = () => {
             aria-hidden="true"
             width={1920}
             height={1080}
-            decoding="async"
+            loading="eager"
           />
         </picture>
         {/* Overlay oscuro unificado */}

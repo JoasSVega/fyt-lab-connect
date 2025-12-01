@@ -3,8 +3,20 @@ import animate from "tailwindcss-animate";
 
 export default {
   darkMode: ["class"],
-  content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
+  content: [
+    "./index.html",
+    "./src/**/*.{ts,tsx,js,jsx}",
+  ],
   prefix: "",
+  // Optimize for production: remove unused styles
+  safelist: [
+    // Keep critical utility classes that might be dynamically generated
+    'hero-container',
+    'hero-image',
+    'hero-overlay',
+    'hero-title',
+    'hero-subtitle',
+  ],
   theme: {
     container: {
       center: true,

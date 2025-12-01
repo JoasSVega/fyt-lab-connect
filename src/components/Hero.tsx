@@ -1,20 +1,13 @@
 // src/components/Hero.tsx
-import { useEffect, useRef } from "react";
 import SafeImage from "./SafeImage";
 
 export default function Hero() {
-  const bgRef = useRef<HTMLImageElement | null>(null);
-
-  useEffect(() => {
-    bgRef.current?.setAttribute("fetchpriority", "high");
-  }, []);
-
   return (
     <section
       id="inicio"
       className="hero-container"
     >
-      {/* Imagen de fondo unificada */}
+      {/* Imagen de fondo unificada - LCP optimizado */}
       <picture>
         <source 
           srcSet="/images/hero-index-large.webp" 
@@ -25,14 +18,13 @@ export default function Hero() {
           media="(min-width: 640px)" 
         />
         <SafeImage 
-          ref={bgRef as unknown as React.RefObject<HTMLImageElement>}
           src="/images/hero-index-small.webp" 
           alt="" 
           className="hero-image" 
           aria-hidden="true"
           width={1920}
           height={1080}
-          decoding="async"
+          fetchpriority="high"
         />
       </picture>
       {/* Overlay oscuro unificado */}

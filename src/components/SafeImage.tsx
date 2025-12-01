@@ -2,6 +2,7 @@ import React from "react";
 
 export type SafeImageProps = React.ImgHTMLAttributes<HTMLImageElement> & {
   fallbackSrc?: string;
+  fetchpriority?: 'high' | 'low' | 'auto';
 };
 
 // 1x1 transparent PNG to preserve layout when an image fails.

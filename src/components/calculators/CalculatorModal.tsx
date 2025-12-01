@@ -503,20 +503,26 @@ const CalculatorModalContent: React.FC<{
   // Ahora sólo dependemos de 'flipped'. Esto previene reinicios de la animación y duplicados visuales.
 
   // Conditional scroll: enable only when content exceeds available space (especially on small viewports)
+  // Optimized: batch DOM reads to prevent forced reflows
   const measureScrollNeed = React.useCallback(() => {
     if (!open) return;
     // Evitar recalcular altura justo en el cambio de flipped para no forzar layout y cortar la animación inversa.
     if (flipAnimatingRef.current) return;
-    const headerH = headerRef.current?.getBoundingClientRect().height || 0;
+    
+    // Batch all DOM reads first
     const viewportH = window.innerHeight || 0;
-    const available = Math.max(viewportH * 0.9 - headerH - 16 /* padding safety */, 0);
-    // Medir altura del lado activo para 3D flip
+    const headerH = headerRef.current?.getBoundingClientRect().height || 0;
     const frontH = frontFaceRef.current?.scrollHeight || 0;
     const backH = backFaceRef.current?.scrollHeight || 0;
-    // Usar la altura máxima entre ambas caras para evitar recortes al voltear
+    const bodyInnerH = bodyInnerRef.current?.scrollHeight || 0;
+    
+    // Then compute
+    const available = Math.max(viewportH * 0.9 - headerH - 16 /* padding safety */, 0);
     const activeH = Math.max(frontH, backH);
-  // En entorno de pruebas evitamos mutaciones de estado visual que puedan provocar re-renders entre cambios de inputs
-  const isTestEnv = import.meta.env?.MODE === 'test';
+    // En entorno de pruebas evitamos mutaciones de estado visual que puedan provocar re-renders entre cambios de inputs
+    const isTestEnv = import.meta.env?.MODE === 'test';
+    
+    // Then apply writes (batched)
     if (!isTestEnv) {
       setCardHeight((prev) => {
         const next = activeH || undefined;
@@ -524,7 +530,7 @@ const CalculatorModalContent: React.FC<{
         if (typeof prev === 'number' && typeof next === 'number' && Math.abs(prev - next) < 1) return prev;
         return next;
       });
-      const contentH = activeH || (bodyInnerRef.current?.scrollHeight || 0);
+      const contentH = activeH || bodyInnerH;
       setBodyScrollable(contentH > available);
     }
     if (bodyWrapRef.current) {

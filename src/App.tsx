@@ -126,6 +126,7 @@ const App: React.FC = () => {
   // en TransitionProvider; no se requiere gestión local aquí.
 
   // Aplica automáticamente la clase de mejora de legibilidad a botones con texto blanco y fondo sólido.
+  // Optimized: debounced observer to reduce performance impact
   useEffect(() => {
     const applyEnhancement = () => {
       const candidates = Array.from(document.querySelectorAll('button.text-white, a.text-white, [role="button"].text-white')) as HTMLElement[];
@@ -147,18 +148,34 @@ const App: React.FC = () => {
         }
       });
     };
-    // Primera aplicación
-    applyEnhancement();
-    // Observa mutaciones para aplicar a elementos agregados dinámicamente
+    
+    // Primera aplicación diferida para no bloquear FCP
+    if (requestIdleCallback) {
+      requestIdleCallback(applyEnhancement);
+    } else {
+      setTimeout(applyEnhancement, 100);
+    }
+    
+    // Observa mutaciones con debounce para reducir overhead
+    let timeoutId: number | null = null;
+    const debouncedApply = () => {
+      if (timeoutId) clearTimeout(timeoutId);
+      timeoutId = window.setTimeout(applyEnhancement, 150);
+    };
+    
     const observer = new MutationObserver(mutations => {
       for (const m of mutations) {
         if (m.addedNodes.length) {
-          applyEnhancement();
+          debouncedApply();
+          break; // Solo llamar una vez por batch
         }
       }
     });
     observer.observe(document.body, { childList: true, subtree: true });
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      if (timeoutId) clearTimeout(timeoutId);
+    };
   }, []);
 
   const shell = (

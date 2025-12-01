@@ -49,11 +49,43 @@ export default defineConfig(({ mode }) => ({
       },
     },
   },
-  // Build settings. Avoid custom manualChunks to prevent circular chunk execution
-  // that can cause React to be undefined in some hosts. Let Rollup handle chunking.
+  // Build settings optimized for performance
   build: {
     emptyOutDir: true,
     manifest: true,
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: mode === 'production',
+        drop_debugger: true,
+        pure_funcs: mode === 'production' ? ['console.log', 'console.info', 'console.debug'] : [],
+        passes: 2,
+      },
+      format: {
+        comments: false,
+      },
+    },
+    cssMinify: true,
+    rollupOptions: {
+      output: {
+        manualChunks: (id) => {
+          // Chunk heavy dependencies separately for better caching
+          if (id.includes('node_modules')) {
+            if (id.includes('katex')) return 'katex';
+            if (id.includes('recharts') || id.includes('victory')) return 'charts';
+            if (id.includes('@radix-ui')) return 'radix';
+            if (id.includes('framer-motion')) return 'motion';
+            return 'vendor';
+          }
+        },
+        // Optimize chunk naming for long-term caching
+        chunkFileNames: 'assets/[name]-[hash].js',
+        entryFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash].[ext]',
+      },
+    },
+    // Optimize chunk size warnings
+    chunkSizeWarningLimit: 1000,
   },
   test: {
     environment: 'jsdom',
