@@ -16,7 +16,7 @@ import {
 } from "./adapters/anthropometrics";
 import { computeChildPugh, computeMELD, computeAPRI, computeFIB4 } from "./adapters/hepatic";
 import { computeCockcroft, computeMDRD4, computeCKDEPI2009, computeCKDEPI2021 } from "./adapters/renal";
-import { computeDoseByWeight, computeReconstitution, computeLoadingDose, computeMaintenanceDose, computeInfusionRateByVolume, computeInfusionRateByDose, computeDropsPerMin } from "./adapters/pharma";
+import { computeDoseByWeight, computeReconstitution, computeLoadingDose, computeMaintenanceDose, computeInfusionRateByVolume, computeInfusionRateByDose, computeDropsPerMin } from "./adapters/pharma.tsx";
 import antibiotics from "@/data/antibiotics.json";
 
 export type CalculatorMeta = {

@@ -1,7 +1,7 @@
-
 import React, { useEffect, useRef, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -157,27 +157,38 @@ const Navbar = () => {
         </div>
 
         {/* Menú móvil y tablet */}
-        {isMenuOpen && (
-          <div className="lg:hidden border-t border-gray-200 py-4 bg-white font-inter">
-            <div className="space-y-2">
-              {menuItems.map((item) => (
-                <div key={item.name}>
-                  <NavLink
-                    to={item.href}
-                    className={({ isActive }) =>
-                      `nav-link block px-4 py-2 text-gray-700 transition-all duration-150 ease-out font-semibold ${
-                        isActive ? 'nav-link--active' : ''
-                      }`
-                    }
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.name}
-                  </NavLink>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+        <AnimatePresence mode="wait">
+          {isMenuOpen && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{
+                duration: 0.3,
+                ease: [0.4, 0, 0.2, 1]
+              }}
+              className="lg:hidden border-t border-gray-200 overflow-hidden bg-white font-inter"
+            >
+              <div className="py-4 space-y-2">
+                {menuItems.map((item) => (
+                  <div key={item.name}>
+                    <NavLink
+                      to={item.href}
+                      className={({ isActive }) =>
+                        `nav-link block px-4 py-2 text-gray-700 transition-all duration-150 ease-out font-semibold ${
+                          isActive ? 'nav-link--active' : ''
+                        }`
+                      }
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {item.name}
+                    </NavLink>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </nav>
   );
