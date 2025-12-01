@@ -61,7 +61,7 @@ const PublicacionesPage: React.FC = () => {
   return (
     <div className="w-full bg-background pt-24">
       <section className="max-w-6xl mx-auto px-4 py-10 sm:py-16">
-  <h1 className="text-4xl sm:text-5xl font-poppins font-bold text-slate-800 mb-4 text-center">Publicaciones</h1>
+  <h1 className="text-3xl sm:text-4xl font-poppins font-bold text-slate-900 mb-4 text-center">Publicaciones</h1>
         <FiltersBar>
           <select
             value={year || ''}

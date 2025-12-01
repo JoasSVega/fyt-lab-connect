@@ -89,13 +89,13 @@ const Navbar = () => {
                   loading="eager"
                   decoding="async"
                   ref={logoRef}
-                  className="h-12 w-auto transition-all duration-300 group-hover:scale-105"
+                  className="h-12 w-auto transition-transform duration-250 group-hover:scale-[1.03]"
                 />
               </picture>
             </div>
-              <div className="text-lg font-poppins font-bold text-gray-800 group-hover:text-fyt-blue transition-colors">
+              <div className="text-lg font-poppins font-bold text-slate-900 group-hover:text-fyt-blue transition-colors duration-250">
                 Grupo FyT
-                <span className="block text-xs font-raleway font-medium text-gray-600 group-hover:text-fyt-blue/80">
+                <span className="block text-xs font-raleway font-semibold text-slate-700 group-hover:text-fyt-blue/80">
                   Farmacología y Terapéutica
                 </span>
             </div>
@@ -126,7 +126,7 @@ const Navbar = () => {
                   <NavLink
                     to={item.href}
                     className={({ isActive }) =>
-                      `nav-link text-gray-700 transition-all duration-150 ease-out font-semibold px-3 py-2 rounded-md ${
+                      `nav-link text-slate-900 transition-all duration-200 ease-out font-semibold px-3 py-2 rounded-md ${
                         isActive ? 'nav-link--active' : ''
                       }`
                     }
@@ -144,7 +144,7 @@ const Navbar = () => {
           <div className="lg:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-700 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 p-2 font-inter"
+              className="text-slate-900 hover:text-fyt-blue focus:outline-none focus:ring-2 focus:ring-fyt-blue/30 p-2 rounded-md transition-colors duration-200"
               aria-label="Toggle menu"
             >
               {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -160,19 +160,19 @@ const Navbar = () => {
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{
-                duration: 0.3,
+                duration: 0.35,
                 ease: [0.4, 0, 0.2, 1]
               }}
-              className="lg:hidden border-t border-gray-200 overflow-hidden bg-white font-inter"
+              className="lg:hidden border-t border-slate-200 overflow-hidden bg-white shadow-soft"
             >
-              <div className="py-4 space-y-2">
+              <div className="py-4 space-y-1">
                 {menuItems.map((item) => (
                   <div key={item.name}>
                     <NavLink
                       to={item.href}
                       className={({ isActive }) =>
-                        `nav-link block px-4 py-2 text-gray-700 transition-all duration-150 ease-out font-semibold ${
-                          isActive ? 'nav-link--active' : ''
+                        `nav-link block px-4 py-2.5 text-slate-900 transition-all duration-200 ease-out font-semibold ${
+                          isActive ? 'nav-link--active bg-fyt-blue/5' : 'hover:bg-slate-50'
                         }`
                       }
                       onClick={() => setIsMenuOpen(false)}

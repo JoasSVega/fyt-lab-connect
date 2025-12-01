@@ -6,7 +6,7 @@ const TermsOfUse = () => {
   return (
     <div className="w-full bg-background pt-24">{/* Patrón de páginas principales */}
       <div className="max-w-3xl mx-auto px-4 py-10 sm:py-16">
-        <h1 className="text-4xl sm:text-5xl font-serif font-extrabold text-slate-800 mb-8 text-center">Términos de Uso – Grupo de Investigación en Farmacología y Terapéutica</h1>
+        <h1 className="text-3xl sm:text-4xl font-poppins font-bold text-slate-900 mb-8 text-center">Términos de Uso – Grupo de Investigación en Farmacología y Terapéutica</h1>
       <p className="text-slate-700 text-base mb-2">Universidad de Cartagena</p>
       <section className="mb-6">
         <h2 className="text-lg font-semibold mb-2 text-slate-700">1. Aceptación de los términos</h2>

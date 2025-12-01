@@ -178,7 +178,7 @@ const Team = ({ compact = false }: { compact?: boolean }) => {
             }
             return (
               <ScrollReveal key={member.name} delay={idx * 0.1}>
-                <Card className="flex flex-col items-center justify-between p-7 rounded-2xl shadow-2xl border-2 border-[#9B59B6]/30 bg-white/90 min-h-[420px] hover:scale-[1.03] transition-transform duration-300">
+                <Card className="flex flex-col items-center justify-between p-7 rounded-2xl shadow-soft border-2 border-fyt-purple/30 bg-white/90 min-h-[420px] hover:scale-[1.02] transition-transform duration-300">
                   {/* Foto o placeholder, sin tarjeta extra */}
                   <>
                     {imgSrc ? (
@@ -191,7 +191,7 @@ const Team = ({ compact = false }: { compact?: boolean }) => {
                             <img
                               src={`${base}-small.webp`}
                               alt={`Retrato de ${member.name}, ${member.role}`}
-                              className="mb-5 shadow-lg border-2 border-[#3BB9FF]/30"
+                              className="mb-5 shadow-soft border-2 border-fyt-blue/30"
                               style={{ width: 220, height: 220, objectFit: "cover", borderRadius: 16 }}
                               loading="lazy"
                               decoding="async"
@@ -235,7 +235,7 @@ const Team = ({ compact = false }: { compact?: boolean }) => {
         {/* Call to Action */}
         <ScrollReveal delay={0.2}>
           <div className="mt-16 text-center">
-            <Card className="max-w-2xl mx-auto p-7 bg-white text-[#1e293b] shadow-2xl border-2 border-[#3BB9FF]/30 rounded-2xl no-hyphens">
+            <Card className="max-w-2xl mx-auto p-7 bg-white text-slate-900 shadow-medium border-2 border-fyt-blue/30 rounded-2xl no-hyphens">
               <h3
                 className="text-2xl font-semibold mb-4 drop-shadow-lg break-normal whitespace-normal"
                 style={{ hyphens: 'none', overflowWrap: 'normal', wordBreak: 'normal' }}
@@ -252,7 +252,7 @@ const Team = ({ compact = false }: { compact?: boolean }) => {
                 asChild
                 variant="outline"
                 size="lg"
-                className="group rounded-lg border-2 border-fyt-blue bg-fyt-blue text-white hover:bg-white hover:text-fyt-blue px-8 py-3 font-medium shadow-lg transition-colors"
+                className="group rounded-lg border-2 border-fyt-blue bg-fyt-blue text-white hover:bg-white hover:text-fyt-blue px-8 py-3 font-medium shadow-soft transition-colors"
               >
                 <Link to="/contactos">Contáctanos</Link>
               </Button>

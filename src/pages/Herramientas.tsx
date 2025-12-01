@@ -48,7 +48,7 @@ const Herramientas = () => {
         <div className="absolute inset-0 bg-black/25 pointer-events-none" />
         {/* Content */}
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-poppins font-bold text-white mb-6 tracking-tight drop-shadow-lg">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-poppins font-bold text-white mb-6 tracking-tight drop-shadow-lg">
             Herramientas Digitales para Profesionales Farmacéuticos
           </h1>
           <p className="text-base sm:text-lg md:text-xl font-inter text-white/95 leading-relaxed max-w-3xl mx-auto drop-shadow-md">

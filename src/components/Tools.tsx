@@ -176,7 +176,7 @@ const Tools = () => {
   ];
 
   const ToolCard = ({ tool, category }: { tool: ToolInfo; category: ToolCategory }) => (
-    <Card className="group hover:shadow-2xl transition-all duration-300 border-2 border-[#3BB9FF]/20 bg-white/90 backdrop-blur-sm animate-fade-in-card">
+    <Card className="group hover:shadow-medium transition-all duration-300 border-2 border-fyt-blue/20 bg-white/90 backdrop-blur-sm animate-fade-in-card">
       {/* Animaciones CSS */}
       <style>{`
         @keyframes fadeInCard {
@@ -463,7 +463,7 @@ const Tools = () => {
 
         {/* Call to Action */}
         <div className="mt-16 text-center">
-          <div className="bg-gradient-to-tr from-[#3BB9FF] via-[#9B59B6] to-[#FF4C4C] border-2 border-white/30 rounded-lg p-8 shadow-2xl animate-fade-in">
+          <div className="bg-gradient-to-tr from-fyt-blue via-fyt-purple to-fyt-red border-2 border-white/30 rounded-lg p-8 shadow-medium animate-fade-in">
             <h4 className="text-xl font-bold text-fyt-dark mb-4 drop-shadow-lg">
               ¿Necesitas una herramienta específica?
             </h4>

@@ -152,7 +152,7 @@ const RenalFunctionPage: React.FC = () => {
       >
         <ArrowLeft className="w-5 h-5" /> Volver a Herramientas
       </Button>
-      <h1 className="text-4xl sm:text-5xl font-poppins font-bold text-slate-800 mb-4 text-center">
+      <h1 className="text-3xl sm:text-4xl font-poppins font-bold text-slate-900 mb-4 text-center">
         Calculadoras de Función Renal
       </h1>
       <div className="mb-4 flex flex-col md:flex-row md:items-center md:justify-between gap-2">

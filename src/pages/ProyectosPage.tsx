@@ -30,7 +30,7 @@ const ProyectosPage: React.FC = () => {
   return (
     <div className="w-full bg-background pt-24">{/* Patrón de páginas principales */}
       <section className="max-w-6xl mx-auto px-4 py-10 sm:py-16">
-        <h1 className="text-4xl sm:text-5xl font-poppins font-bold text-slate-800 mb-8 text-center">
+        <h1 className="text-3xl sm:text-4xl font-poppins font-bold text-slate-900 mb-8 text-center">
           Proyectos de Investigación
         </h1>
         <div className="flex gap-2 justify-end mb-8">

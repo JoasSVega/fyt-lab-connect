@@ -197,7 +197,7 @@ const Carrusel: React.FC<CarruselProps> = ({
           >
             <Card
               style={{ borderColor: color }}
-              className={`bg-white/90 border-2 shadow-xl md:hover:shadow-2xl md:hover:scale-[1.03] transition-all duration-300 overflow-hidden group h-full will-change-transform`}
+              className={`bg-white/90 border-2 shadow-soft md:hover:shadow-medium md:hover:scale-[1.02] transition-all duration-300 overflow-hidden group h-full will-change-transform`}
             >
               <div
                 className="relative"

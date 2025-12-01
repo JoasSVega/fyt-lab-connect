@@ -81,7 +81,7 @@ const Contact = () => {
     <section id="contacto" className="py-10 sm:py-16 md:py-20 min-h-screen bg-[#f8fafc]">
   <div className="container mx-auto px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-48">
         {/* Mapa Google Maps embebido */}
-        <div className="w-full mb-10 rounded-2xl shadow-2xl overflow-hidden animate-fade-in" style={{height: '350px'}}>
+        <div className="w-full mb-10 rounded-2xl shadow-medium overflow-hidden animate-fade-in" style={{height: '350px'}}>
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.573964624252!2d-75.5038549!3d10.3994434!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ef625bfe9eac921%3A0xa752ed6a0af4fe9b!2sCartagena%20University%20Campus%20Zaragocilla!5e0!3m2!1ses!2sco!4v1695660000000!5m2!1ses!2sco"
             width="100%"
@@ -104,7 +104,7 @@ const Contact = () => {
               </h3>
               <div className="space-y-6">
                 {contactInfo.map((item, index) => (
-                  <Card key={index} className="p-4 sm:p-6 md:p-8 bg-white border-2 border-[#3BB9FF]/20 shadow-xl hover:shadow-2xl hover:scale-[1.03] transition-all duration-300 w-full max-w-full animate-fade-in mx-1 sm:mx-2">
+                  <Card key={index} className="p-4 sm:p-6 md:p-8 bg-white border-2 border-fyt-blue/20 shadow-soft hover:shadow-medium hover:scale-[1.02] transition-all duration-300 w-full max-w-full animate-fade-in mx-1 sm:mx-2">
                     <div className="flex items-start space-x-4">
                       <div className="flex items-center justify-center shrink-0">
                         {item.icon}
@@ -136,7 +136,7 @@ const Contact = () => {
               </div>
             </div>
 
-            <Card className="p-4 sm:p-6 bg-white border-2 border-[#9B59B6]/20 shadow-xl w-full max-w-full animate-fade-in">
+            <Card className="p-4 sm:p-6 bg-white border-2 border-fyt-purple/20 shadow-soft w-full max-w-full animate-fade-in">
               <h4 className="text-base sm:text-lg font-semibold text-[#9B59B6] mb-4">
                 Síguenos en Redes Sociales
               </h4>
@@ -156,7 +156,7 @@ const Contact = () => {
 
           {/* Columna Derecha: Envíanos un mensaje */}
           <div className="flex flex-col justify-center h-full">
-            <Card className="p-6 md:p-8 bg-white border-2 border-[#FF4C4C]/20 shadow-xl w-full max-w-full animate-fade-in flex flex-col justify-center">
+            <Card className="p-6 md:p-8 bg-white border-2 border-fyt-red/20 shadow-soft w-full max-w-full animate-fade-in flex flex-col justify-center">
               <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-[#FF4C4C] mb-4 sm:mb-6">
                 Envíanos un Mensaje
               </h3>
@@ -215,7 +215,7 @@ const Contact = () => {
                 </div>
                 <Button 
                   type="submit" 
-                  className="mt-4 w-full bg-white text-[#FF4C4C] border-2 border-[#FF4C4C] text-base sm:text-lg font-bold shadow-lg hover:bg-[#FF4C4C] hover:text-white transition-colors duration-300"
+                  className="mt-4 w-full bg-white text-fyt-red border-2 border-fyt-red text-base sm:text-lg font-bold shadow-soft hover:bg-fyt-red hover:text-white transition-colors duration-300"
                 >
                   <Send className="h-4 w-4 mr-2" />
                   Enviar Mensaje
@@ -230,7 +230,7 @@ const Contact = () => {
 
         {/* CTA Colaboración */}
         <div className="mt-10 sm:mt-14 md:mt-16">
-          <Card className="p-4 sm:p-6 md:p-8 bg-white text-fyt-dark shadow-2xl text-center w-full max-w-full animate-fade-in">
+          <Card className="p-4 sm:p-6 md:p-8 bg-white text-fyt-dark shadow-medium text-center w-full max-w-full animate-fade-in">
             <h3 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2 sm:mb-4 break-words drop-shadow-lg">¿Interesado en Colaborar?</h3>
             <p className="mb-4 sm:mb-6 text-fyt-dark/90 max-w-full sm:max-w-2xl mx-auto break-words">
               Si eres investigador, estudiante o institución interesada en establecer 

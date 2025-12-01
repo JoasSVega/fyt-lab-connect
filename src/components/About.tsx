@@ -207,7 +207,7 @@ const About = () => {
           {/* INSCRÍBETE AHORA Card */}
           <div className="flex justify-center mt-8">
               <Card 
-                className="group max-w-2xl w-full p-8 shadow-2xl text-center animate-fade-in bg-fyt-blue text-white border-2 border-fyt-blue hover:bg-white transition-colors"
+                className="group max-w-2xl w-full p-8 shadow-medium text-center animate-fade-in bg-fyt-blue text-white border-2 border-fyt-blue hover:bg-white transition-colors"
               >
                 <Bell className="w-12 h-12 mx-auto mb-4 text-white group-hover:text-fyt-blue animate-bounce" aria-label="Inscríbete ahora" />
                 <h3 className="text-4xl font-poppins font-bold mb-4 text-white group-hover:text-fyt-blue">INSCRÍBETE AHORA</h3>

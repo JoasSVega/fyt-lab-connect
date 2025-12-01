@@ -51,7 +51,7 @@ const AboutSobreNosotros = () => (
             <img
               src="/images/objetivo-small.webp"
               alt="Imagen objetivo del grupo FyT"
-              className="w-full h-full object-cover rounded-xl shadow-2xl animate-fade-in"
+              className="w-full h-full object-cover rounded-xl shadow-medium animate-fade-in"
               loading="lazy"
               decoding="async"
               style={{ minHeight: 400, maxHeight: 400 }}
@@ -72,7 +72,7 @@ const AboutSobreNosotros = () => (
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-6">
-            <Card className="p-6 border-2 border-[#3BB9FF]/40 bg-white/90 shadow-2xl rounded-xl backdrop-blur-md hover:scale-[1.03] transition-transform duration-300">
+            <Card className="p-6 border-2 border-fyt-blue/40 bg-white/90 shadow-soft rounded-xl backdrop-blur-md hover:scale-[1.02] transition-transform duration-300">
               <div className="flex flex-col items-center mb-4">
                 <Target className="w-8 h-8 text-fyt-blue mb-3" aria-label="Misión" />
                 <h4 className="text-lg font-raleway font-semibold text-fyt-blue">Misión</h4>
@@ -83,7 +83,7 @@ const AboutSobreNosotros = () => (
                 molecular, para apoyar programas de pregrado y postgrado.
               </p>
             </Card>
-            <Card className="p-6 border-2 border-[#9B59B6]/40 bg-white/90 shadow-2xl rounded-xl backdrop-blur-md hover:scale-[1.03] transition-transform duration-300">
+            <Card className="p-6 border-2 border-fyt-purple/40 bg-white/90 shadow-soft rounded-xl backdrop-blur-md hover:scale-[1.02] transition-transform duration-300">
               <div className="flex flex-col items-center mb-4">
                 <Eye className="w-8 h-8 text-fyt-purple mb-3" aria-label="Visión" />
                 <h4 className="text-lg font-raleway font-semibold text-fyt-purple">Visión</h4>
@@ -105,7 +105,7 @@ const AboutSobreNosotros = () => (
         </h3>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {values.map((value, index) => (
-            <Card key={index} className={`p-6 text-center bg-white/90 border-2 shadow-xl hover:shadow-2xl hover:scale-[1.04] transition-all duration-300`} style={{ borderColor: value.border }}>
+            <Card key={index} className={`p-6 text-center bg-white/90 border-2 shadow-soft hover:shadow-medium hover:scale-[1.02] transition-all duration-300`} style={{ borderColor: value.border }}>
               <div className="flex items-center justify-center mx-auto mb-4 animate-fade-in">
                 {value.icon}
               </div>
