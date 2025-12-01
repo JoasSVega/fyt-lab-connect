@@ -1,9 +1,11 @@
 // Cleaned Footer component for the site.
 import React from "react";
 import { Mail, Phone, MapPin, ExternalLink, Instagram } from "lucide-react";
+import SafeImage from "@/components/SafeImage";
+import { sanitizeURL } from "@/lib/sanitize";
 
 const Footer: React.FC = () => {
-  const openExternal = (url: string) => window.open(url, "_blank");
+  // All external links use sanitized anchors; no window.open needed
 
   return (
     <footer className="w-full border-t border-slate-200/50 bg-white text-[#0f172a]">
@@ -14,7 +16,7 @@ const Footer: React.FC = () => {
             <div className="flex items-center gap-4 mb-4">
               <picture>
                 <source srcSet="/images/logo-fyt-medium.webp" media="(min-width: 640px)" />
-                <img
+                <SafeImage
                   src="/images/logo-fyt-small.webp"
                   alt="Logo Grupo FyT"
                   loading="lazy"
@@ -59,15 +61,15 @@ const Footer: React.FC = () => {
           {/* 3. Enlaces Institucionales */}
           <div className="flex flex-col items-start gap-3 col-span-1">
             <h4 className="text-base font-raleway font-bold mb-2 text-slate-900">Enlaces Institucionales</h4>
-            <a href="https://www.unicartagena.edu.co/" target="_blank" rel="noopener noreferrer" aria-label="Abrir sitio de la Universidad de Cartagena en nueva pestaña" className="inline-flex items-center text-sm text-slate-700 hover:text-fyt-blue p-0 h-auto min-w-[120px] text-left font-inter font-medium transition-colors duration-200">
+            <a href={sanitizeURL("https://www.unicartagena.edu.co/") || "https://www.unicartagena.edu.co/"} target="_blank" rel="noopener noreferrer" aria-label="Abrir sitio de la Universidad de Cartagena en nueva pestaña" className="inline-flex items-center text-sm text-slate-700 hover:text-fyt-blue p-0 h-auto min-w-[120px] text-left font-inter font-medium transition-colors duration-200">
               <span>Universidad de Cartagena</span>
               <ExternalLink className="h-3 w-3 ml-1 inline-block" />
             </a>
-            <a href="https://www.unicartagena.edu.co/estudia-con-nosotros?view=search&resetSearch=1&preserve=1&geo-latitude=&geo-longitude=&geo-country=&location-detected=&geolocation=&categorySuggestion=&suggestionType=&categorySearch=250" target="_blank" rel="noopener noreferrer" aria-label="Abrir Facultad de Ciencias Farmacéuticas en nueva pestaña" className="inline-flex items-center text-sm text-slate-700 hover:text-fyt-blue p-0 h-auto min-w-[120px] text-left font-inter font-medium transition-colors duration-200">
+            <a href={sanitizeURL("https://www.unicartagena.edu.co/estudia-con-nosotros?view=search&resetSearch=1&preserve=1&geo-latitude=&geo-longitude=&geo-country=&location-detected=&geolocation=&categorySuggestion=&suggestionType=&categorySearch=250") || "https://www.unicartagena.edu.co/estudia-con-nosotros?view=search&resetSearch=1&preserve=1&geo-latitude=&geo-longitude=&geo-country=&location-detected=&geolocation=&categorySuggestion=&suggestionType=&categorySearch=250"} target="_blank" rel="noopener noreferrer" aria-label="Abrir Facultad de Ciencias Farmacéuticas en nueva pestaña" className="inline-flex items-center text-sm text-slate-700 hover:text-fyt-blue p-0 h-auto min-w-[120px] text-left font-inter font-medium transition-colors duration-200">
               <span>Facultad de Ciencias Farmacéuticas</span>
               <ExternalLink className="h-3 w-3 ml-1 inline-block" />
             </a>
-            <a href="https://scienti.minciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000008618" target="_blank" rel="noopener noreferrer" aria-label="Abrir página de MinCiencias del grupo en nueva pestaña" className="inline-flex items-center text-sm text-slate-700 hover:text-fyt-blue p-0 h-auto min-w-[120px] text-left font-inter font-medium transition-colors duration-200">
+            <a href={sanitizeURL("https://scienti.minciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000008618") || "https://scienti.minciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000008618"} target="_blank" rel="noopener noreferrer" aria-label="Abrir página de MinCiencias del grupo en nueva pestaña" className="inline-flex items-center text-sm text-slate-700 hover:text-fyt-blue p-0 h-auto min-w-[120px] text-left font-inter font-medium transition-colors duration-200">
               <span>MinCiencias</span>
               <ExternalLink className="h-3 w-3 ml-1 inline-block" />
             </a>
@@ -77,7 +79,7 @@ const Footer: React.FC = () => {
           <div className="flex flex-col items-start gap-3 col-span-1">
             <h4 className="text-base font-raleway font-bold mb-2 text-slate-900">Síguenos</h4>
             <div className="flex items-center gap-3">
-              <a href="https://www.instagram.com/grupo_fyt?igsh=MXNxbXo3eHM2MHRweA==" target="_blank" rel="noopener noreferrer" aria-label="Instagram Grupo FyT" className="p-2 rounded-full text-slate-700 hover:text-fyt-purple hover:bg-slate-100 transition-all duration-200">
+              <a href={sanitizeURL("https://www.instagram.com/grupo_fyt?igsh=MXNxbXo3eHM2MHRweA==") || "https://www.instagram.com/grupo_fyt?igsh=MXNxbXo3eHM2MHRweA=="} target="_blank" rel="noopener noreferrer" aria-label="Instagram Grupo FyT" className="p-2 rounded-full text-slate-700 hover:text-fyt-purple hover:bg-slate-100 transition-all duration-200">
                 <Instagram className="w-6 h-6" />
               </a>
             </div>
@@ -99,7 +101,7 @@ const Footer: React.FC = () => {
           </div>
 
           <div className="w-full flex justify-start mt-2">
-            <a href="https://www.linkedin.com/in/joassvega" target="_blank" rel="noopener noreferrer" className="text-xs sm:text-sm text-slate-500 hover:text-fyt-blue transition-colors duration-200 flex items-center gap-1 font-inter">
+            <a href={sanitizeURL("https://www.linkedin.com/in/joassvega") || "https://www.linkedin.com/in/joassvega"} target="_blank" rel="noopener noreferrer" className="text-xs sm:text-sm text-slate-500 hover:text-fyt-blue transition-colors duration-200 flex items-center gap-1 font-inter">
               Desarrollado por: Joas S. Vega
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 ml-1"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm15.5 11.268h-3v-5.604c0-1.337-.025-3.063-1.868-3.063-1.868 0-2.154 1.459-2.154 2.968v5.699h-3v-10h2.881v1.367h.041c.401-.761 1.379-1.563 2.838-1.563 3.036 0 3.6 2.001 3.6 4.601v5.595z"/></svg>
             </a>

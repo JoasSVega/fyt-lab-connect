@@ -1,6 +1,7 @@
 import React from "react";
 import Seo from "@/components/Seo";
 import { usePageReady } from "@/hooks/usePageReady";
+import { sanitizeURL } from "@/lib/sanitize";
 
 const PrivacyPolicy = () => {
   usePageReady(); // Sincronización con TransitionProvider
@@ -77,7 +78,7 @@ const PrivacyPolicy = () => {
       </section>
       <section className="mb-6">
         <h2 className="text-lg font-semibold mb-2 text-slate-700">10. Contacto</h2>
-  <p className="text-slate-700 text-base leading-relaxed">Para ejercer sus derechos, los titulares podrán enviar sus solicitudes al correo: <a href="mailto:farmacologiayterapeutica.gi@gmail.com" className="text-fyt-blue underline">farmacologiayterapeutica.gi@gmail.com</a> o dirigirse a la sede administrativa del Grupo de Investigación en Cra. 50 #24120, Zaragocilla, Cartagena de Indias, Provincia de Cartagena, Bolívar.</p>
+  <p className="text-slate-700 text-base leading-relaxed">Para ejercer sus derechos, los titulares podrán enviar sus solicitudes al correo: <a href={sanitizeURL("mailto:farmacologiayterapeutica.gi@gmail.com") || "mailto:farmacologiayterapeutica.gi@gmail.com"} className="text-fyt-blue underline">farmacologiayterapeutica.gi@gmail.com</a> o dirigirse a la sede administrativa del Grupo de Investigación en Cra. 50 #24120, Zaragocilla, Cartagena de Indias, Provincia de Cartagena, Bolívar.</p>
       </section>
       </div>
     </div>

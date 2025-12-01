@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X, Phone, Mail } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
+import { sanitizeURL } from "@/lib/sanitize";
 
 const FloatingContact = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,24 +12,21 @@ const FloatingContact = () => {
     {
       icon: MessageCircle,
       label: "WhatsApp",
-      action: () =>
-        window.open(
-          "https://wa.me/573137375217?text=Hola, me interesa conocer más sobre el Grupo FyT",
-          "_blank"
-        ),
+      href: sanitizeURL("https://wa.me/573137375217?text=Hola, me interesa conocer más sobre el Grupo FyT") ||
+        "https://wa.me/573137375217?text=Hola, me interesa conocer más sobre el Grupo FyT",
       color: "bg-green-500 hover:bg-green-600",
     },
     {
       icon: Phone,
       label: "Llamar",
-      action: () => window.open("tel:+573137375217", "_blank"),
+      href: sanitizeURL("tel:+573137375217") || "tel:+573137375217",
       color: "bg-fyt-blue hover:bg-fyt-blue/90",
     },
     {
       icon: Mail,
       label: "Gmail",
-      action: () =>
-        window.open("mailto:farmacologiayterapeutica.gi@gmail.com", "_blank"),
+      href: sanitizeURL("mailto:farmacologiayterapeutica.gi@gmail.com") ||
+        "mailto:farmacologiayterapeutica.gi@gmail.com",
       color: "bg-fyt-purple hover:bg-fyt-purple/90",
     },
   ];
@@ -89,23 +87,24 @@ const FloatingContact = () => {
                 <motion.div
                   key={index}
                   className="cursor-pointer"
-                  onClick={option.action}
                   variants={itemVariants}
                 >
-                  <Card className="p-3 bg-white shadow-lg border-0">
-                    <div className="flex items-center space-x-3">
-                      <motion.div
-                        className={`w-10 h-10 rounded-full flex items-center justify-center ${option.color}`}
-                        whileHover={{ scale: 1.13 }}
-                        transition={{ type: "spring", stiffness: 250 }}
-                      >
-                        <Icon className="h-5 w-5 text-white" />
-                      </motion.div>
-                      <span className="text-sm font-medium text-fyt-dark">
-                        {option.label}
-                      </span>
-                    </div>
-                  </Card>
+                  <a href={option.href} target="_blank" rel="noopener noreferrer">
+                    <Card className="p-3 bg-white shadow-lg border-0">
+                      <div className="flex items-center space-x-3">
+                        <motion.div
+                          className={`w-10 h-10 rounded-full flex items-center justify-center ${option.color}`}
+                          whileHover={{ scale: 1.13 }}
+                          transition={{ type: "spring", stiffness: 250 }}
+                        >
+                          <Icon className="h-5 w-5 text-white" />
+                        </motion.div>
+                        <span className="text-sm font-medium text-fyt-dark">
+                          {option.label}
+                        </span>
+                      </div>
+                    </Card>
+                  </a>
                 </motion.div>
               );
             })}

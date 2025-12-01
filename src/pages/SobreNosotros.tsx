@@ -4,6 +4,7 @@ import FloatingContact from "@/components/FloatingContact";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { usePageReady } from "@/hooks/usePageReady";
 import Seo from "@/components/Seo";
+import SafeImage from "@/components/SafeImage";
 
 const SobreNosotros = () => {
   usePageReady({
@@ -35,13 +36,14 @@ const SobreNosotros = () => {
             srcSet="/images/hero-nosotros-medium.webp" 
             media="(min-width: 640px)" 
           />
-          <img 
+          <SafeImage 
             src="/images/hero-nosotros-small.webp" 
             alt="" 
             className="hero-image" 
             aria-hidden="true"
             width={1920}
             height={1080}
+            decoding="async"
           />
         </picture>
         {/* Overlay oscuro unificado */}

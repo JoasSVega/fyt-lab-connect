@@ -1,6 +1,7 @@
 import React from "react";
 import Seo from "@/components/Seo";
 import { usePageReady } from "@/hooks/usePageReady";
+import { sanitizeURL } from "@/lib/sanitize";
 
 const CodeOfEthics = () => {
   usePageReady(); // Sincronización con TransitionProvider
@@ -76,7 +77,7 @@ const CodeOfEthics = () => {
       <section className="mb-6">
         <h2 className="text-lg font-semibold mb-2 text-slate-700">8. Contacto</h2>
         <ul className="list-none pl-0 text-slate-700 text-base leading-relaxed">
-          <li>📧 <a href="mailto:farmacologiayterapeutica.gi@gmail.com" className="text-fyt-blue underline">farmacologiayterapeutica.gi@gmail.com</a></li>
+          <li>📧 <a href={sanitizeURL("mailto:farmacologiayterapeutica.gi@gmail.com") || "mailto:farmacologiayterapeutica.gi@gmail.com"} className="text-fyt-blue underline">farmacologiayterapeutica.gi@gmail.com</a></li>
           <li>📍 Cra. 50 #24120, Zaragocilla, Cartagena de Indias, Provincia de Cartagena, Bolívar.</li>
         </ul>
       </section>

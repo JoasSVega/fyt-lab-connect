@@ -1,6 +1,7 @@
 import React from "react";
 import Seo from "@/components/Seo";
 import { usePageReady } from "@/hooks/usePageReady";
+import { sanitizeURL } from "@/lib/sanitize";
 
 const TermsOfUse = () => {
   usePageReady(); // Sincronización con TransitionProvider
@@ -69,7 +70,7 @@ const TermsOfUse = () => {
         <h2 className="text-lg font-semibold mb-2 text-slate-700">8. Contacto</h2>
         <p className="text-slate-700 text-base leading-relaxed">Para inquietudes sobre el uso del sitio o los materiales, puede contactarnos:</p>
         <ul className="list-none pl-0 text-slate-700 text-base leading-relaxed">
-          <li>📧 <a href="mailto:farmacologiayterapeutica.gi@gmail.com" className="text-fyt-blue underline">farmacologiayterapeutica.gi@gmail.com</a></li>
+          <li>📧 <a href={sanitizeURL("mailto:farmacologiayterapeutica.gi@gmail.com") || "mailto:farmacologiayterapeutica.gi@gmail.com"} className="text-fyt-blue underline">farmacologiayterapeutica.gi@gmail.com</a></li>
           <li>📍 Cra. 50 #24120, Zaragocilla, Cartagena de Indias, Provincia de Cartagena, Bolívar.</li>
         </ul>
       </section>

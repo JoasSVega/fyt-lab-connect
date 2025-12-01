@@ -216,12 +216,12 @@ const About = () => {
                   Completa el formulario oficial de inscripción.
                 </p>
                 <Button 
+                  asChild
                   variant="outline"
                   size="lg"
                   className="bg-white text-[#3BB9FF] border-2 border-[#3BB9FF] hover:bg-[#3BB9FF] hover:text-white transition-colors duration-300 px-8 py-3 font-inter font-semibold shadow-lg"
-                  onClick={() => window.open('https://forms.gle/3fbXVW7b4Db6Q9dWA', '_blank')}
                 >
-                  Inscribirse Ahora
+                  <a href="https://forms.gle/3fbXVW7b4Db6Q9dWA" target="_blank" rel="noopener noreferrer">Inscribirse Ahora</a>
                 </Button>
               </Card>
           </div>

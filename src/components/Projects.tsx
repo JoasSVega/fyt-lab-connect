@@ -4,6 +4,7 @@ import { CardReveal } from "./animations/CardReveal";
 import { FadeInUp } from "./animations/FadeInUp";
 import { ButtonReveal } from "./animations/ButtonReveal";
 import { Button } from "./ui/button";
+import { sanitizeURL } from "@/lib/sanitize";
 import { Badge } from "./ui/badge";
 
 const currentProjects = [ 
@@ -253,13 +254,15 @@ const Projects = () => {
                     </div>
                     <ButtonReveal delay={0.25}>
                       <Button 
+                        asChild
                         variant="outline" 
                         size="sm"
                         className="border-fyt-blue/20 hover:bg-fyt-blue hover:text-white shrink-0"
-                        onClick={() => window.open(pub.url, '_blank')}
                       >
-                        <ExternalLink className="h-4 w-4 mr-2" />
-                        Ver Artículo
+                        <a href={sanitizeURL(pub.url) || pub.url} target="_blank" rel="noopener noreferrer">
+                          <ExternalLink className="h-4 w-4 mr-2" />
+                          Ver Artículo
+                        </a>
                       </Button>
                     </ButtonReveal>
                   </div>

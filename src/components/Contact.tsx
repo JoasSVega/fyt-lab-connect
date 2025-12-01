@@ -6,6 +6,7 @@ import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { Label } from "./ui/label";
 import { useToast } from "@/hooks/use-toast";
+import { stripInvisible, safeText, isLikelyEmail, sanitizeURL } from "@/lib/sanitize";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -40,20 +41,25 @@ const Contact = () => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
+    // Limpiar caracteres invisibles y normalizar espacios, manteniendo UX fluida
+    const cleaned = stripInvisible(value);
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: cleaned
     }));
   };
 
-  const validateEmail = (email: string) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
+  const validateEmail = (email: string) => isLikelyEmail(email);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+    // Sanitizar entradas antes de validar
+    const name = safeText(formData.name);
+    const email = safeText(formData.email);
+    const subject = safeText(formData.subject);
+    const message = safeText(formData.message, { preserveNewlines: true });
+
+    if (!name || !email || !subject || !message) {
       toast({
         title: "Error",
         description: "Por favor, completa todos los campos obligatorios.",
@@ -61,7 +67,7 @@ const Contact = () => {
       });
       return;
     }
-    if (!validateEmail(formData.email)) {
+    if (!validateEmail(email)) {
       toast({
         title: "Error",
         description: "Por favor, ingresa un correo electrónico válido.",
@@ -69,8 +75,15 @@ const Contact = () => {
       });
       return;
     }
-    const mailto = `mailto:farmacologiayterapeutica.gi@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Nombre: ${formData.name}\nCorreo: ${formData.email}\n\nMensaje:\n${formData.message}`)}`;
-    window.open(mailto, '_blank');
+    const mailtoRaw = `mailto:farmacologiayterapeutica.gi@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Nombre: ${name}\nCorreo: ${email}\n\nMensaje:\n${message}`)}`;
+    const mailto = sanitizeURL(mailtoRaw) || mailtoRaw; // fallback conservador si pasa validación
+    const a = document.createElement('a');
+    a.href = mailto;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
     toast({
       title: "Redirigiendo a tu correo",
       description: "Completa el envío desde tu cliente de correo.",
@@ -115,7 +128,7 @@ const Contact = () => {
                         </h4>
                         {item.title === "Correo Institucional" ? (
                           <a 
-                            href={`mailto:${item.info}`}
+                            href={sanitizeURL(`mailto:${item.info}`) || `mailto:${item.info}`}
                             className="text-fyt-purple font-medium mb-1 hover:underline cursor-pointer break-words text-xs sm:text-sm md:text-base w-full block"
                             style={{wordBreak: 'break-word', fontSize: 'clamp(0.75rem, 2vw, 1rem)'}}
                           >
@@ -141,14 +154,20 @@ const Contact = () => {
                 Síguenos en Redes Sociales
               </h4>
               <div className="flex flex-wrap gap-2 sm:space-x-4">
-                <Button 
-                  variant="outline" 
+                <Button
+                  asChild
+                  variant="outline"
                   size="sm"
                   className="group border-[#9B59B6]/40 hover:bg-[#ede9fe] hover:text-fyt-dark"
-                  onClick={() => window.open('https://www.instagram.com/grupo_fyt?igsh=MXNxbXo3eHM2MHRweA==', '_blank')}
                   aria-label="Instagram Grupo FyT"
                 >
-                  <Instagram className="w-5 h-5 text-[#9B59B6] group-hover:text-fyt-dark" />
+                  <a
+                    href={sanitizeURL('https://www.instagram.com/grupo_fyt?igsh=MXNxbXo3eHM2MHRweA==') || 'https://www.instagram.com/grupo_fyt?igsh=MXNxbXo3eHM2MHRweA=='}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Instagram className="w-5 h-5 text-[#9B59B6] group-hover:text-fyt-dark" />
+                  </a>
                 </Button>
               </div>
             </Card>
@@ -238,13 +257,19 @@ const Contact = () => {
               más sobre tus propuestas.
             </p>
              <Button 
+               asChild
                variant="outline"
                size="lg"
                className="group bg-[#9B59B6] text-white border-2 border-[#9B59B6] hover:bg-white hover:text-[#9B59B6] transition-colors duration-300 px-8 py-3 font-semibold shadow-lg"
-               onClick={() => window.open('mailto:farmacologiayterapeutica.gi@gmail.com?subject=Propuesta de Colaboración', '_blank')}
              >
-               <Mail className="w-5 h-5 mr-2 text-white group-hover:text-[#9B59B6]" aria-label="Proponer Colaboración" />
-               Proponer Colaboración
+               <a
+                 href={sanitizeURL('mailto:farmacologiayterapeutica.gi@gmail.com?subject=Propuesta de Colaboración') || 'mailto:farmacologiayterapeutica.gi@gmail.com?subject=Propuesta de Colaboración'}
+                 target="_blank"
+                 rel="noopener noreferrer"
+               >
+                 <Mail className="w-5 h-5 mr-2 text-white group-hover:text-[#9B59B6]" aria-label="Proponer Colaboración" />
+                 Proponer Colaboración
+               </a>
              </Button>
           </Card>
         </div>

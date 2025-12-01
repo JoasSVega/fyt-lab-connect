@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import Seo from "@/components/Seo";
 import { usePageReady } from "@/hooks/usePageReady";
+import SafeImage from "@/components/SafeImage";
 
 const Card = ({ icon, title, desc, to, color }: { icon: React.ReactNode; title: string; desc: string; to: string; color: string; }) => {
   const navigate = useNavigate();
@@ -52,13 +53,14 @@ const IndexTools: React.FC = () => {
             srcSet="/images/hero-herramientas-medium.webp" 
             media="(min-width: 640px)" 
           />
-          <img 
+          <SafeImage 
             src="/images/hero-herramientas-small.webp" 
             alt="" 
             className="hero-image" 
             aria-hidden="true"
             width={1920}
             height={1080}
+            decoding="async"
           />
         </picture>
         {/* Overlay oscuro unificado */}

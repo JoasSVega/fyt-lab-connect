@@ -4,6 +4,7 @@ import { Card } from "./ui/card";
 import { Button } from "./ui/button";
 import { Mail } from "lucide-react";
 import { ScrollReveal } from "./animations/ScrollReveal";
+import SafeImage from "./SafeImage";
 
 const Team = ({ compact = false }: { compact?: boolean }) => {
   // Imágenes disponibles en /public/images/equipo/
@@ -188,7 +189,7 @@ const Team = ({ compact = false }: { compact?: boolean }) => {
                           <picture>
                             <source srcSet={`${base}-large.webp`} media="(min-width: 1280px)" />
                             <source srcSet={`${base}-medium.webp`} media="(min-width: 640px)" />
-                            <img
+                            <SafeImage
                               src={`${base}-small.webp`}
                               alt={`Retrato de ${member.name}, ${member.role}`}
                               className="mb-5 shadow-soft border-2 border-fyt-blue/30"
@@ -217,13 +218,15 @@ const Team = ({ compact = false }: { compact?: boolean }) => {
                       )}
                       <div className="w-full flex justify-center">
                           <Button
+                            asChild
                             variant="outline"
                             size="sm"
                             className="group rounded-lg border-2 border-[#FF4C4C] bg-[#FF4C4C] text-white hover:bg-white hover:text-[#FF4C4C] px-6 py-2 font-medium shadow transition-colors"
-                            onClick={() => window.open(`mailto:${member.links.email}`, '_blank')}
                           >
-                            <Mail className="w-6 h-6 mr-2 text-white group-hover:text-[#FF4C4C] transition-colors" aria-label="Contactar" />
-                            Contactar
+                            <a href={`mailto:${member.links.email}`} target="_blank" rel="noopener noreferrer">
+                              <Mail className="w-6 h-6 mr-2 text-white group-hover:text-[#FF4C4C] transition-colors" aria-label="Contactar" />
+                              Contactar
+                            </a>
                           </Button>
                       </div>
                     </div>

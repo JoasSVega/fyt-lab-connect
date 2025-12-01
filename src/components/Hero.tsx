@@ -1,5 +1,6 @@
 // src/components/Hero.tsx
 import { useEffect, useRef } from "react";
+import SafeImage from "./SafeImage";
 
 export default function Hero() {
   const bgRef = useRef<HTMLImageElement | null>(null);
@@ -23,14 +24,15 @@ export default function Hero() {
           srcSet="/images/hero-index-medium.webp" 
           media="(min-width: 640px)" 
         />
-        <img 
-          ref={bgRef}
+        <SafeImage 
+          ref={bgRef as unknown as React.RefObject<HTMLImageElement>}
           src="/images/hero-index-small.webp" 
           alt="" 
           className="hero-image" 
           aria-hidden="true"
           width={1920}
           height={1080}
+          decoding="async"
         />
       </picture>
       {/* Overlay oscuro unificado */}

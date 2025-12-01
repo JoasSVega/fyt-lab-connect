@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState, useCallback, ReactNode } from 'react';
+import { createContext, useContext, useEffect, useState, useCallback, useRef, ReactNode } from 'react';
 import { useLocation } from 'react-router-dom';
 import { lockBodyScroll, unlockBodyScroll } from '../utils/scrollManager';
 
@@ -31,6 +31,8 @@ export const TransitionProvider = ({
   const [pageReadySignaled, setPageReadySignaled] = useState(false);
   const [minTimeElapsed, setMinTimeElapsed] = useState(false);
   const [imagesPreloaded, setImagesPreloaded] = useState(false);
+  const watchdogTimer = useRef<number | null>(null);
+  const startedAt = useRef<number>(0);
 
   // Preload de imágenes
   const preloadImages = useCallback((urls: string[]): Promise<void> => {
@@ -77,8 +79,34 @@ export const TransitionProvider = ({
       setMinTimeElapsed(true);
     }, minLoaderDuration);
 
+    // Watchdog: never allow the loader to hang indefinitely due to unforeseen issues
+    startedAt.current = Date.now();
+    if (watchdogTimer.current) {
+      clearTimeout(watchdogTimer.current);
+    }
+    watchdogTimer.current = window.setTimeout(() => {
+      if (isTransitioning) {
+        setIsTransitioning(false);
+        try {
+          unlockBodyScroll();
+          document.body.style.overflow = '';
+          document.documentElement.style.overflow = '';
+          document.body.classList.remove('scroll-locked');
+        } catch {/* noop */}
+        const win2 = window as Window & { __routeTransitionActive?: boolean };
+        win2.__routeTransitionActive = false;
+        try {
+          window.dispatchEvent(new CustomEvent('route-transition-end'));
+        } catch { /* noop */ }
+      }
+    }, Math.max(8000, minLoaderDuration + 5000));
+
     return () => {
       clearTimeout(timer);
+      if (watchdogTimer.current) {
+        clearTimeout(watchdogTimer.current);
+        watchdogTimer.current = null;
+      }
     };
   }, [location.pathname, minLoaderDuration]);
 

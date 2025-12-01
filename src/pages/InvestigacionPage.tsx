@@ -6,6 +6,7 @@ import HeroInvestigacion from "@/components/HeroInvestigacion";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { usePageReady } from "@/hooks/usePageReady";
 import Seo from "@/components/Seo";
+import { sanitizeURL } from "@/lib/sanitize";
 
 
 // Importar datos reales desde JSON
@@ -196,7 +197,7 @@ const InvestigacionPage: React.FC = () => {
                 <p className="text-xs sm:text-sm text-slate-600 mb-1 line-clamp-2 font-inter">{pub.summary}</p>
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-2 gap-1">
                   <span className="text-xs sm:text-sm text-slate-500">{pub.authors}</span>
-                  <a href={pub.link || "#"} target="_blank" rel="noopener noreferrer" className="px-3 py-1 rounded-full bg-blue-50 text-blue-800 font-semibold text-xs sm:text-sm shadow hover:bg-blue-100 transition mt-1 sm:mt-0">Ver más</a>
+                  <a href={pub.link ? (sanitizeURL(pub.link) || pub.link) : "#"} target="_blank" rel="noopener noreferrer" className="px-3 py-1 rounded-full bg-blue-50 text-blue-800 font-semibold text-xs sm:text-sm shadow hover:bg-blue-100 transition mt-1 sm:mt-0">Ver más</a>
                 </div>
               </div>
             ))
@@ -215,7 +216,7 @@ const InvestigacionPage: React.FC = () => {
                 <p className="text-xs text-slate-600 mb-1 line-clamp-2 font-inter">{pub.summary}</p>
                 <div className="flex justify-between items-center mt-2">
                   <span className="text-xs text-slate-500">{pub.authors}</span>
-                  <a href={pub.link || "#"} target="_blank" rel="noopener noreferrer" className="px-3 py-1 rounded-full bg-green-50 text-green-800 font-semibold text-xs shadow hover:bg-green-100 transition">Ver más</a>
+                  <a href={pub.link ? (sanitizeURL(pub.link) || pub.link) : "#"} target="_blank" rel="noopener noreferrer" className="px-3 py-1 rounded-full bg-green-50 text-green-800 font-semibold text-xs shadow hover:bg-green-100 transition">Ver más</a>
                 </div>
               </div>
             ))
@@ -234,7 +235,7 @@ const InvestigacionPage: React.FC = () => {
                 <p className="text-xs text-slate-600 mb-1 line-clamp-2 font-inter">{pub.summary}</p>
                 <div className="flex justify-between items-center mt-2">
                   <span className="text-xs text-slate-500">{pub.authors}</span>
-                  <a href={pub.link || "#"} target="_blank" rel="noopener noreferrer" className="px-3 py-1 rounded-full bg-gray-50 text-gray-800 font-semibold text-xs shadow hover:bg-gray-100 transition">Ver más</a>
+                  <a href={pub.link ? (sanitizeURL(pub.link) || pub.link) : "#"} target="_blank" rel="noopener noreferrer" className="px-3 py-1 rounded-full bg-gray-50 text-gray-800 font-semibold text-xs shadow hover:bg-gray-100 transition">Ver más</a>
                 </div>
               </div>
             ))

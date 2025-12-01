@@ -42,6 +42,7 @@ import Footer from "./components/Footer";
 import TitleSync from "./components/TitleSync";
 import Loader from "./components/Loader";
 import AccessibleH1 from "./components/AccessibleH1";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 const queryClient = new QueryClient();
 
@@ -175,7 +176,9 @@ const App: React.FC = () => {
           <main className="bg-gray-50 w-full">
             {/* Provide a guaranteed H1 for a11y without impacting layout */}
             <AccessibleH1 />
-            <AnimatedRoutes />
+            <ErrorBoundary>
+              <AnimatedRoutes />
+            </ErrorBoundary>
           </main>
           <Footer />
         </TransitionProvider>
