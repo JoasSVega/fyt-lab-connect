@@ -48,6 +48,8 @@ type FramerMotionModule = typeof import('framer-motion');
 
 function AnimatedRoutes() {
   const location = useLocation();
+  const [showRouteLoader, setShowRouteLoader] = useState(false);
+  
   // Carga dinámica de framer-motion para reducir el bundle inicial.
   const [FM, setFM] = useState<FramerMotionModule | null>(null);
   useEffect(() => {
@@ -64,9 +66,20 @@ function AnimatedRoutes() {
     };
   }, []);
 
+  // Mostrar loader en cada cambio de ruta
+  useEffect(() => {
+    setShowRouteLoader(true);
+    const timer = setTimeout(() => {
+      setShowRouteLoader(false);
+    }, 900); // Tiempo mínimo del loader
+    return () => clearTimeout(timer);
+  }, [location.pathname]);
+
   const routesJSX = (
-    <React.Suspense fallback={<div className="w-full pt-16 pb-6 px-2 sm:px-4 lg:px-8 text-sm text-slate-600">Cargando…</div>}>
-    <Routes location={location}>
+    <>
+      {showRouteLoader && <Loader onComplete={() => setShowRouteLoader(false)} />}
+      <React.Suspense fallback={<div className="w-full pt-16 pb-6 px-2 sm:px-4 lg:px-8 text-sm text-slate-600">Cargando…</div>}>
+      <Routes location={location}>
       {/* Investigación y Producción Académica */}
       <Route path={pathInvestigacion} element={<InvestigacionPage />} />
       <Route path={pathProyectos} element={<ProyectosPage />} />
@@ -105,6 +118,7 @@ function AnimatedRoutes() {
       <Route path="*" element={<NotFound />} />
     </Routes>
     </React.Suspense>
+    </>
   );
 
   // Si framer-motion aún no carga, renderizamos el contenido sin animación.
