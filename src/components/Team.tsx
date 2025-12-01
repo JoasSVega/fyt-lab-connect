@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
 import { Mail } from "lucide-react";
+import { ScrollReveal } from "./animations/ScrollReveal";
 
 const Team = ({ compact = false }: { compact?: boolean }) => {
   // Imágenes disponibles en /public/images/equipo/
@@ -168,7 +169,7 @@ const Team = ({ compact = false }: { compact?: boolean }) => {
   <section id="equipo" className={wrapperClass}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {teamMembers.map((member) => {
+          {teamMembers.map((member, idx) => {
             const imgSrc = getImageForMember(member.name);
             if (!imgSrc) {
               // Imagen no encontrada para este miembro; se omite el console.log
@@ -176,87 +177,88 @@ const Team = ({ compact = false }: { compact?: boolean }) => {
               // (Limpieza: eliminación de logs de depuración para mejorar rendimiento y limpiar la salida)
             }
             return (
-              <Card
-                key={member.name}
-                className="flex flex-col items-center justify-between p-7 rounded-2xl shadow-2xl border-2 border-[#9B59B6]/30 bg-white/90 min-h-[420px] hover:scale-[1.03] transition-transform duration-300 animate-fade-in"
-              >
-                {/* Foto o placeholder, sin tarjeta extra */}
-                <>
-                  {imgSrc ? (
-                    (() => {
-                      const base = imgSrc.replace(/-medium\.webp$/i, '');
-                      return (
-                        <picture>
-                          <source srcSet={`${base}-large.webp`} media="(min-width: 1280px)" />
-                          <source srcSet={`${base}-medium.webp`} media="(min-width: 640px)" />
-                          <img
-                            src={`${base}-small.webp`}
-                            alt={`Retrato de ${member.name}, ${member.role}`}
-                            className="mb-5 shadow-lg border-2 border-[#3BB9FF]/30"
-                            style={{ width: 220, height: 220, objectFit: "cover", borderRadius: 16 }}
-                            loading="lazy"
-                            decoding="async"
-                          />
-                        </picture>
-                      );
-                    })()
-                  ) : (
-                    <div className="mb-5 flex items-center justify-center bg-[#f1f5f9] border-2 border-[#3BB9FF]/30 shadow-lg" style={{ width: 220, height: 220, borderRadius: 16 }}>
-                      <span className="text-5xl font-bold text-fyt-blue select-none">{getInitials(member.name)}</span>
-                    </div>
-                  )}
-                  <div className="flex flex-col items-center w-full">
-                    <h3 className="text-lg font-bold text-fyt-blue mb-1 text-center">{member.name}</h3>
-                    <p className="text-sm text-fyt-purple font-semibold mb-1 text-center">{member.role}</p>
-                    {member.specialty && (
-                      <p className="text-sm text-[#3BB9FF] font-medium mb-1 text-center">{member.specialty}</p>
+              <ScrollReveal key={member.name} delay={idx * 0.1}>
+                <Card className="flex flex-col items-center justify-between p-7 rounded-2xl shadow-2xl border-2 border-[#9B59B6]/30 bg-white/90 min-h-[420px] hover:scale-[1.03] transition-transform duration-300">
+                  {/* Foto o placeholder, sin tarjeta extra */}
+                  <>
+                    {imgSrc ? (
+                      (() => {
+                        const base = imgSrc.replace(/-medium\.webp$/i, '');
+                        return (
+                          <picture>
+                            <source srcSet={`${base}-large.webp`} media="(min-width: 1280px)" />
+                            <source srcSet={`${base}-medium.webp`} media="(min-width: 640px)" />
+                            <img
+                              src={`${base}-small.webp`}
+                              alt={`Retrato de ${member.name}, ${member.role}`}
+                              className="mb-5 shadow-lg border-2 border-[#3BB9FF]/30"
+                              style={{ width: 220, height: 220, objectFit: "cover", borderRadius: 16 }}
+                              loading="lazy"
+                              decoding="async"
+                            />
+                          </picture>
+                        );
+                      })()
+                    ) : (
+                      <div className="mb-5 flex items-center justify-center bg-[#f1f5f9] border-2 border-[#3BB9FF]/30 shadow-lg" style={{ width: 220, height: 220, borderRadius: 16 }}>
+                        <span className="text-5xl font-bold text-fyt-blue select-none">{getInitials(member.name)}</span>
+                      </div>
                     )}
-                    {member.description && (
-                      <p className="text-xs text-[#334155] mb-4 text-center max-w-xs">{member.description}</p>
-                    )}
-                    <div className="w-full flex justify-center">
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="group rounded-lg border-2 border-[#FF4C4C] bg-[#FF4C4C] text-white hover:bg-white hover:text-[#FF4C4C] px-6 py-2 font-medium shadow transition-colors"
-                          onClick={() => window.open(`mailto:${member.links.email}`, '_blank')}
-                        >
-                          <Mail className="w-6 h-6 mr-2 text-white group-hover:text-[#FF4C4C] transition-colors" aria-label="Contactar" />
-                          Contactar
-                        </Button>
+                    <div className="flex flex-col items-center w-full">
+                      <h3 className="text-lg font-bold text-fyt-blue mb-1 text-center">{member.name}</h3>
+                      <p className="text-sm text-fyt-purple font-semibold mb-1 text-center">{member.role}</p>
+                      {member.specialty && (
+                        <p className="text-sm text-[#3BB9FF] font-medium mb-1 text-center">{member.specialty}</p>
+                      )}
+                      {member.description && (
+                        <p className="text-xs text-[#334155] mb-4 text-center max-w-xs">{member.description}</p>
+                      )}
+                      <div className="w-full flex justify-center">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="group rounded-lg border-2 border-[#FF4C4C] bg-[#FF4C4C] text-white hover:bg-white hover:text-[#FF4C4C] px-6 py-2 font-medium shadow transition-colors"
+                            onClick={() => window.open(`mailto:${member.links.email}`, '_blank')}
+                          >
+                            <Mail className="w-6 h-6 mr-2 text-white group-hover:text-[#FF4C4C] transition-colors" aria-label="Contactar" />
+                            Contactar
+                          </Button>
+                      </div>
                     </div>
-                  </div>
-                </>
-              </Card>
+                  </>
+                </Card>
+              </ScrollReveal>
             );
           })}
         </div>
 
         {/* Call to Action */}
-        <div className="mt-16 text-center">
-          <Card className="max-w-2xl mx-auto p-7 bg-white text-[#1e293b] shadow-2xl border-2 border-[#3BB9FF]/30 rounded-2xl animate-fade-in no-hyphens">
-            <h3
-              className="text-2xl font-semibold mb-4 drop-shadow-lg break-normal whitespace-normal"
-              style={{ hyphens: 'none', overflowWrap: 'normal', wordBreak: 'normal' }}
-            >
+        <ScrollReveal delay={0.2}>
+          <div className="mt-16 text-center">
+            <Card className="max-w-2xl mx-auto p-7 bg-white text-[#1e293b] shadow-2xl border-2 border-[#3BB9FF]/30 rounded-2xl no-hyphens">
+              <h3
+                className="text-2xl font-semibold mb-4 drop-shadow-lg break-normal whitespace-normal"
+                style={{ hyphens: 'none', overflowWrap: 'normal', wordBreak: 'normal' }}
+              >
 ¿Te interesa unirte a nuestro grupo de investigación?</h3>
-            <p
-              className="mb-6 text-[#334155] break-normal whitespace-normal"
-              style={{ hyphens: 'none', overflowWrap: 'normal', wordBreak: 'normal' }}
-            >
-              Si eres estudiante, profesional o investigador interesado en formar parte 
-              de nuestro equipo, te invitamos a contactarnos.
-            </p>
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="group rounded-lg border-2 border-fyt-blue bg-fyt-blue text-white hover:bg-white hover:text-fyt-blue px-8 py-3 font-medium shadow-lg transition-colors"
-            >
-              <Link to="/contactos">Contáctanos</Link>
-            </Button>
-          </Card>
-        </div>
+              <p
+                className="mb-6 text-[#334155] break-normal whitespace-normal"
+                style={{ hyphens: 'none', overflowWrap: 'normal', wordBreak: 'normal' }}
+              >
+                Si eres estudiante, profesional o investigador interesado en formar parte 
+                de nuestro equipo, te invitamos a contactarnos.
+              </p>
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="group rounded-lg border-2 border-fyt-blue bg-fyt-blue text-white hover:bg-white hover:text-fyt-blue px-8 py-3 font-medium shadow-lg transition-colors"
+              >
+                <Link to="/contactos">Contáctanos</Link>
+              </Button>
+            </Card>
+          </div>
+        </ScrollReveal>
       {/* Animaciones CSS */}
       <style>{`
         @keyframes fadeIn {

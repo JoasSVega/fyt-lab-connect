@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import BaseLayout from "@/components/BaseLayout";
 import { BookOpen, Microscope, FileText, Folder, Users, Award, Dna, Atom, Briefcase, Star } from "lucide-react";
 import HeroInvestigacion from "@/components/HeroInvestigacion";
+import { ScrollReveal } from "@/components/animations/ScrollReveal";
 
 
 // Importar datos reales desde JSON
@@ -141,6 +142,7 @@ const InvestigacionPage: React.FC = () => {
 
 
       {/* Publicaciones científicas y académicas */}
+      <ScrollReveal delay={0.1}>
   <section className="mb-10">
         <div className="flex flex-col gap-2 mb-6">
           <h2 className="text-2xl sm:text-3xl font-poppins font-bold text-slate-800 text-center">Publicaciones científicas y académicas</h2>
@@ -230,6 +232,7 @@ const InvestigacionPage: React.FC = () => {
           <a href="/investigacion/publicaciones" className="inline-block px-5 py-2 rounded-full bg-blue-50 text-blue-800 font-semibold shadow hover:bg-blue-100 transition">Ver todas las publicaciones</a>
         </div>
     </section>
+      </ScrollReveal>
   </div>
 
 

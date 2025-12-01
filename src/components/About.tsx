@@ -9,6 +9,7 @@ import researchClinicalPharmacy from "@/assets/research-clinical-pharmacy.jpg";
 import researchPharmacoepidemiology from "@/assets/research-pharmacoepidemiology.jpg";
 import researchPharmacoeconomics from "@/assets/research-pharmacoeconomics.jpg";
 import researchMolecularModeling from "@/assets/research-molecular-modeling.jpg";
+import { ScrollReveal } from "./animations/ScrollReveal";
 
 const About = () => {
   const values = [
@@ -141,73 +142,79 @@ const About = () => {
   return (
     <>
       {/* Líneas de Investigación */}
-      <section className="mb-16">
-        <h3 className="text-4xl font-poppins font-bold text-center text-fyt-dark mb-8 drop-shadow-lg">
-          Líneas de Investigación
-        </h3>
-        <div className="relative px-4 sm:px-16 lg:px-32 xl:px-48 2xl:px-64 py-6">
-          <Carrusel
-            items={researchLines}
-            color="#9B59B6"
-            height="clamp(14rem, 28vw, 18rem)"
-            showDescription={true}
-            className="w-full"
-            imageClassName="w-full h-full object-cover rounded-t-2xl"
-          />
-        </div>
-      </section>
+      <ScrollReveal>
+        <section className="mb-16">
+          <h3 className="text-4xl font-poppins font-bold text-center text-fyt-dark mb-8 drop-shadow-lg">
+            Líneas de Investigación
+          </h3>
+          <div className="relative px-4 sm:px-16 lg:px-32 xl:px-48 2xl:px-64 py-6">
+            <Carrusel
+              items={researchLines}
+              color="#9B59B6"
+              height="clamp(14rem, 28vw, 18rem)"
+              showDescription={true}
+              className="w-full"
+              imageClassName="w-full h-full object-cover rounded-t-2xl"
+            />
+          </div>
+        </section>
+      </ScrollReveal>
       {/* Modalidades de Grado */}
-      <section className="mb-16">
-        <h3 className="text-4xl font-poppins font-bold text-center text-fyt-dark mb-8 drop-shadow-lg">
-          Modalidades de Grado
-        </h3>
-        <div className="relative px-4 sm:px-16 lg:px-32 xl:px-48 2xl:px-64 py-6">
-          <Carrusel items={graduationModalities} color="#3BB9FF" height="clamp(14rem, 28vw, 18rem)" showDescription={true} className="w-full" imageClassName="w-full h-full object-cover rounded-t-2xl" />
-        </div>
-      </section>
+      <ScrollReveal delay={0.1}>
+        <section className="mb-16">
+          <h3 className="text-4xl font-poppins font-bold text-center text-fyt-dark mb-8 drop-shadow-lg">
+            Modalidades de Grado
+          </h3>
+          <div className="relative px-4 sm:px-16 lg:px-32 xl:px-48 2xl:px-64 py-6">
+            <Carrusel items={graduationModalities} color="#3BB9FF" height="clamp(14rem, 28vw, 18rem)" showDescription={true} className="w-full" imageClassName="w-full h-full object-cover rounded-t-2xl" />
+          </div>
+        </section>
+      </ScrollReveal>
       {/* Actividades y Productos */}
-      <section>
-        <h3 className="text-4xl font-poppins font-bold text-center text-fyt-dark mb-8 drop-shadow-lg">
-          Actividades y Productos
-        </h3>
-        <div className="relative px-4 sm:px-16 lg:px-32 xl:px-48 2xl:px-64 py-6 mb-12">
-          <Carrusel items={activitiesProducts} color="#FF4C4C" height="clamp(14rem, 28vw, 18rem)" showDescription={true} className="w-full" imageClassName="w-full h-full object-cover rounded-t-2xl" />
-        </div>
-        {/* INSCRÍBETE AHORA Card */}
-        <div className="flex justify-center mt-8">
-            <Card 
-              className="group max-w-2xl w-full p-8 shadow-2xl text-center animate-fade-in bg-fyt-blue text-white border-2 border-fyt-blue hover:bg-white transition-colors"
-            >
-              <Bell className="w-12 h-12 mx-auto mb-4 text-white group-hover:text-fyt-blue animate-bounce" aria-label="Inscríbete ahora" />
-              <h3 className="text-4xl font-poppins font-bold mb-4 text-white group-hover:text-fyt-blue">INSCRÍBETE AHORA</h3>
-              <p className="mb-6 font-inter text-white/95 group-hover:text-fyt-blue">
-                ¿Interesado en formar parte de nuestro semillero de investigación? 
-                Completa el formulario oficial de inscripción.
-              </p>
-              <Button 
-                variant="outline"
-                size="lg"
-                className="bg-white text-[#3BB9FF] border-2 border-[#3BB9FF] hover:bg-[#3BB9FF] hover:text-white transition-colors duration-300 px-8 py-3 font-inter font-semibold shadow-lg"
-                onClick={() => window.open('https://forms.gle/3fbXVW7b4Db6Q9dWA', '_blank')}
+      <ScrollReveal delay={0.2}>
+        <section>
+          <h3 className="text-4xl font-poppins font-bold text-center text-fyt-dark mb-8 drop-shadow-lg">
+            Actividades y Productos
+          </h3>
+          <div className="relative px-4 sm:px-16 lg:px-32 xl:px-48 2xl:px-64 py-6 mb-12">
+            <Carrusel items={activitiesProducts} color="#FF4C4C" height="clamp(14rem, 28vw, 18rem)" showDescription={true} className="w-full" imageClassName="w-full h-full object-cover rounded-t-2xl" />
+          </div>
+          {/* INSCRÍBETE AHORA Card */}
+          <div className="flex justify-center mt-8">
+              <Card 
+                className="group max-w-2xl w-full p-8 shadow-2xl text-center animate-fade-in bg-fyt-blue text-white border-2 border-fyt-blue hover:bg-white transition-colors"
               >
-                Inscribirse Ahora
-              </Button>
-            </Card>
-        </div>
-        {/* Animaciones CSS */}
-        <style>{`
-          @keyframes fadeIn {
-            0% { opacity: 0; transform: translateY(30px); }
-            100% { opacity: 1; transform: translateY(0); }
-          }
-          .animate-fade-in { animation: fadeIn 1.2s cubic-bezier(.42,0,.58,1); }
-          .animate-bounce { animation: bounce 1.2s infinite alternate; }
-          @keyframes bounce {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-18px); }
-          }
-        `}</style>
-      </section>
+                <Bell className="w-12 h-12 mx-auto mb-4 text-white group-hover:text-fyt-blue animate-bounce" aria-label="Inscríbete ahora" />
+                <h3 className="text-4xl font-poppins font-bold mb-4 text-white group-hover:text-fyt-blue">INSCRÍBETE AHORA</h3>
+                <p className="mb-6 font-inter text-white/95 group-hover:text-fyt-blue">
+                  ¿Interesado en formar parte de nuestro semillero de investigación? 
+                  Completa el formulario oficial de inscripción.
+                </p>
+                <Button 
+                  variant="outline"
+                  size="lg"
+                  className="bg-white text-[#3BB9FF] border-2 border-[#3BB9FF] hover:bg-[#3BB9FF] hover:text-white transition-colors duration-300 px-8 py-3 font-inter font-semibold shadow-lg"
+                  onClick={() => window.open('https://forms.gle/3fbXVW7b4Db6Q9dWA', '_blank')}
+                >
+                  Inscribirse Ahora
+                </Button>
+              </Card>
+          </div>
+          {/* Animaciones CSS */}
+          <style>{`
+            @keyframes fadeIn {
+              0% { opacity: 0; transform: translateY(30px); }
+              100% { opacity: 1; transform: translateY(0); }
+            }
+            .animate-fade-in { animation: fadeIn 1.2s cubic-bezier(.42,0,.58,1); }
+            .animate-bounce { animation: bounce 1.2s infinite alternate; }
+            @keyframes bounce {
+              0% { transform: translateY(0); }
+              100% { transform: translateY(-18px); }
+            }
+          `}</style>
+        </section>
+      </ScrollReveal>
     </>
   );
 };
