@@ -142,7 +142,7 @@ const App: React.FC = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1200); // Duración total de la animación
+    }, 1450); // Duración total de la animación (1.45s)
 
     return () => clearTimeout(timer);
   }, []);
