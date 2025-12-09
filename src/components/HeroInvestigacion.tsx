@@ -130,22 +130,22 @@ export default function HeroInvestigacion() {
 
       {/* KPIs Section - Institutional design without cards */}
       <section 
-        className="py-16 md:py-20 px-4 sm:px-6 md:px-12 lg:px-24"
+        className="py-20 md:py-28 lg:py-32 px-6 sm:px-8 md:px-16 lg:px-24 xl:px-32"
         aria-label="Indicadores académicos"
       >
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           {/* Section header */}
-          <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-2xl sm:text-3xl font-poppins font-bold text-slate-800 mb-3">
+          <div className="text-center mb-14 md:mb-20">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-poppins font-bold text-slate-800 mb-4">
               Indicadores de Producción Académica
             </h2>
-            <p className="text-base sm:text-lg font-inter text-slate-600 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg font-inter text-slate-600 max-w-2xl mx-auto leading-relaxed">
               Métricas que reflejan el compromiso científico y la trayectoria investigativa del grupo.
             </p>
           </div>
 
-          {/* KPI Grid - Clean institutional layout */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 md:gap-10">
+          {/* KPI Grid - 3+3 layout with generous spacing */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-16 lg:gap-20">
             {kpis.map((kpi, idx) => {
               const Icon = kpi.icon;
               return (
@@ -155,22 +155,22 @@ export default function HeroInvestigacion() {
                   style={{ animationDelay: `${idx * 0.1}s` }}
                 >
                   {/* Icon */}
-                  <div className={`w-14 h-14 md:w-16 md:h-16 rounded-full ${kpi.bgColor} flex items-center justify-center mb-4 transition-transform group-hover:scale-105`}>
-                    <Icon className={`w-7 h-7 md:w-8 md:h-8 ${kpi.color}`} aria-hidden="true" />
+                  <div className={`w-16 h-16 md:w-18 md:h-18 lg:w-20 lg:h-20 rounded-full ${kpi.bgColor} flex items-center justify-center mb-5 md:mb-6 transition-transform duration-300 group-hover:scale-105`}>
+                    <Icon className={`w-8 h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 ${kpi.color}`} aria-hidden="true" />
                   </div>
                   
                   {/* Number */}
-                  <span className={`text-3xl md:text-4xl font-poppins font-bold ${kpi.color} mb-2`}>
+                  <span className={`text-4xl md:text-5xl lg:text-6xl font-poppins font-bold ${kpi.color} mb-3 md:mb-4`}>
                     <AnimatedCounter value={kpi.value} />
                   </span>
                   
                   {/* Label */}
-                  <span className="text-sm md:text-base font-raleway font-semibold text-slate-800 mb-1 leading-tight">
+                  <span className="text-base md:text-lg font-raleway font-semibold text-slate-800 mb-2 leading-tight">
                     {kpi.label}
                   </span>
                   
                   {/* Subtitle */}
-                  <span className="text-xs md:text-sm font-inter text-slate-500 leading-snug max-w-[180px]">
+                  <span className="text-sm md:text-base font-inter text-slate-500 leading-relaxed max-w-[220px]">
                     {kpi.subtitle}
                   </span>
                 </div>
