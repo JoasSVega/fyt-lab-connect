@@ -79,7 +79,7 @@ const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
             alt="Logo Grupo FyT"
             loading="eager"
             decoding="async"
-            fetchpriority="high"
+            fetchPriority="high"
             className="w-64 h-auto"
             width={256}
             height={256}

@@ -2,7 +2,7 @@ import React from "react";
 import type { CarouselApi } from "./carousel";
 import { Card } from "./card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "./carousel";
-import { useCarouselPreloader } from "@/hooks/useImagePreloader";
+import { useImagePreloader } from "@/hooks/useImagePreloader";
 
 export interface CarruselItem {
   image: string;
@@ -45,13 +45,11 @@ const Carrusel: React.FC<CarruselProps> = ({
   
   // Preload initial carousel images before rendering to prevent flickering
   // Only preload first 3 slides initially for faster initial render
-  const { loaded: imagesLoaded } = useCarouselPreloader(
-    items.slice(0, 3).map(item => {
-      const base = item.image.replace(/-medium\.webp$/i, '');
-      return `${base}-medium.webp`; // Preload medium as baseline
-    }),
-    { priority: 'high', timeout: 8000 }
-  );
+  const imagesToPreload = items.slice(0, 3).map(item => {
+    const base = (item.image || '').replace(/-medium\.webp$/i, '');
+    return `${base}-medium.webp`;
+  });
+  const { loaded: imagesLoaded } = useImagePreloader(imagesToPreload, { priority: 'high', timeout: 8000 });
   
   // Buffer adjacent slides when carousel position changes
   React.useEffect(() => {
