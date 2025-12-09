@@ -42,80 +42,91 @@ const InvestigacionPage: React.FC = () => {
       {/* HeroInvestigacion: Hero moderno con KPIs animados y accesibles */}
       <HeroInvestigacion />
 
-      {/* Content sections with proper padding */}
-      <div className="px-4 sm:px-6 md:px-12 lg:px-24 xl:px-32 2xl:px-48">
-        {/* Proyectos destacados */}
+      {/* Content sections with consistent spacing */}
+      <div className="px-6 sm:px-8 md:px-16 lg:px-24 xl:px-32 2xl:px-40 max-w-7xl mx-auto w-full">
+        
+        {/* Proyectos de investigación */}
         <ScrollReveal>
-          <section className="mb-12 md:mb-16">
-            <div className="flex flex-col gap-2 mb-6">
-              <h2 className="text-xl sm:text-2xl font-poppins font-bold text-slate-800 text-center">Proyectos de investigación</h2>
-              <div className="flex gap-2 overflow-x-auto pb-1 justify-center">
-                <button onClick={() => setProyectosTab('en-curso')} className={`px-4 py-1.5 rounded-full text-sm font-inter border min-w-[110px] transition-colors ${proyectosTab === 'en-curso' ? 'bg-fyt-blue text-white border-fyt-blue' : 'bg-white text-fyt-blue border-fyt-blue/40 hover:bg-fyt-blue/5'}`}>En curso</button>
-                <button onClick={() => setProyectosTab('finalizados')} className={`px-4 py-1.5 rounded-full text-sm font-inter border min-w-[110px] transition-colors ${proyectosTab === 'finalizados' ? 'bg-fyt-purple text-white border-fyt-purple' : 'bg-white text-fyt-purple border-fyt-purple/40 hover:bg-fyt-purple/5'}`}>Completados</button>
-              </div>
+          <section className="py-16 md:py-20 lg:py-24">
+            <div className="text-center mb-10 md:mb-12">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-poppins font-bold text-slate-800 mb-3">
+                Proyectos de investigación
+              </h2>
+              <p className="text-base sm:text-lg font-inter text-slate-600 max-w-2xl mx-auto">
+                Iniciativas científicas activas y finalizadas del grupo de investigación.
+              </p>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
+            <div className="flex gap-3 justify-center mb-8 md:mb-10">
+              <button onClick={() => setProyectosTab('en-curso')} className={`px-5 py-2 rounded-full text-sm font-inter border transition-colors ${proyectosTab === 'en-curso' ? 'bg-fyt-blue text-white border-fyt-blue' : 'bg-white text-fyt-blue border-fyt-blue/40 hover:bg-fyt-blue/5'}`}>En curso</button>
+              <button onClick={() => setProyectosTab('finalizados')} className={`px-5 py-2 rounded-full text-sm font-inter border transition-colors ${proyectosTab === 'finalizados' ? 'bg-fyt-purple text-white border-fyt-purple' : 'bg-white text-fyt-purple border-fyt-purple/40 hover:bg-fyt-purple/5'}`}>Completados</button>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
               {(proyectosTab === 'en-curso' ? proyectosEnCurso : proyectosFinalizados).map((proj) => (
-                <div key={proj.id} className="bg-white rounded-xl shadow-soft p-5 sm:p-6 flex flex-col h-full transition-all hover:shadow-md">
-                  <div className="flex items-center gap-2 mb-3">
+                <div key={proj.id} className="bg-white rounded-xl shadow-soft p-6 md:p-7 flex flex-col h-full transition-all hover:shadow-md">
+                  <div className="flex items-center gap-2 mb-4">
                     <Microscope className="w-5 h-5 text-fyt-blue" aria-hidden="true" />
                     <span className="text-xs text-slate-500">{proj.year}</span>
-                    <span className={`ml-auto px-2.5 py-0.5 rounded-full text-xs font-semibold ${proj.status === 'En curso' ? 'bg-fyt-blue/10 text-fyt-blue' : 'bg-fyt-purple/10 text-fyt-purple'}`}>{proj.status}</span>
+                    <span className={`ml-auto px-3 py-1 rounded-full text-xs font-semibold ${proj.status === 'En curso' ? 'bg-fyt-blue/10 text-fyt-blue' : 'bg-fyt-purple/10 text-fyt-purple'}`}>{proj.status}</span>
                   </div>
-                  <h3 className="text-base font-raleway font-semibold text-slate-800 mb-2">{proj.title}</h3>
+                  <h3 className="text-base md:text-lg font-raleway font-semibold text-slate-800 mb-3">{proj.title}</h3>
                   <p className="text-sm text-slate-600 flex-1 font-inter leading-relaxed">{proj.summary}</p>
                 </div>
               ))}
             </div>
-            <div className="flex justify-end mt-6">
-              <a href="/investigacion/proyectos" className="inline-block px-5 py-2 rounded-full bg-fyt-blue text-white font-inter shadow hover:bg-fyt-blue/90 transition">Ver todos los proyectos</a>
+            <div className="flex justify-center mt-10">
+              <a href="/investigacion/proyectos" className="inline-block px-6 py-2.5 rounded-full bg-fyt-blue text-white font-inter shadow hover:bg-fyt-blue/90 transition">Ver todos los proyectos</a>
             </div>
           </section>
         </ScrollReveal>
 
         {/* Publicaciones científicas y académicas */}
         <ScrollReveal delay={0.1}>
-          <section className="mb-12 md:mb-16">
-            <div className="flex flex-col gap-2 mb-6">
-              <h2 className="text-xl sm:text-2xl font-poppins font-bold text-slate-800 text-center">Publicaciones científicas y académicas</h2>
-              <div className="flex gap-2 overflow-x-auto pb-1 justify-center">
-                {[ 
-                  { key: "articulos", label: "Artículos científicos", icon: <FileText className="w-4 h-4" /> },
-                  { key: "libros", label: "Libros y capítulos", icon: <BookOpen className="w-4 h-4" /> },
-                  { key: "otras", label: "Divulgación", icon: <Award className="w-4 h-4" /> }
-                ].map(tabItem => (
-                  <button
-                    key={tabItem.key}
-                    className={`px-4 py-1.5 rounded-full text-sm font-inter border transition-colors flex items-center gap-2 ${
-                      publicacionesTab === tabItem.key
-                        ? "bg-blue-600 text-white border-blue-600"
-                        : "bg-white text-blue-700 border-blue-200 hover:bg-blue-50"
-                    }`}
-                    onClick={() => setPublicacionesTab(tabItem.key as 'articulos' | 'libros' | 'otras')}
-                    type="button"
-                  >
-                    {tabItem.icon}
-                    <span>{tabItem.label}</span>
-                  </button>
-                ))}
-              </div>
+          <section className="py-16 md:py-20 lg:py-24 border-t border-slate-100">
+            <div className="text-center mb-10 md:mb-12">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-poppins font-bold text-slate-800 mb-3">
+                Publicaciones científicas y académicas
+              </h2>
+              <p className="text-base sm:text-lg font-inter text-slate-600 max-w-2xl mx-auto">
+                Producción intelectual indexada en revistas y editoriales especializadas.
+              </p>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+            <div className="flex gap-3 flex-wrap justify-center mb-8 md:mb-10">
+              {[ 
+                { key: "articulos", label: "Artículos científicos", icon: <FileText className="w-4 h-4" /> },
+                { key: "libros", label: "Libros y capítulos", icon: <BookOpen className="w-4 h-4" /> },
+                { key: "otras", label: "Divulgación", icon: <Award className="w-4 h-4" /> }
+              ].map(tabItem => (
+                <button
+                  key={tabItem.key}
+                  className={`px-5 py-2 rounded-full text-sm font-inter border transition-colors flex items-center gap-2 ${
+                    publicacionesTab === tabItem.key
+                      ? "bg-blue-600 text-white border-blue-600"
+                      : "bg-white text-blue-700 border-blue-200 hover:bg-blue-50"
+                  }`}
+                  onClick={() => setPublicacionesTab(tabItem.key as 'articulos' | 'libros' | 'otras')}
+                  type="button"
+                >
+                  {tabItem.icon}
+                  <span>{tabItem.label}</span>
+                </button>
+              ))}
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {/* Artículos científicos */}
               {publicacionesTab === "articulos" && (
                 (publicationsData as unknown as Publication[]).filter((pub) => pub.type === "articulo").slice(0, 6).map((pub) => (
-                  <div key={pub.id} className="bg-white rounded-xl shadow-soft p-5 flex flex-col group transition-all hover:shadow-md">
-                    <div className="flex items-center gap-3 mb-3">
-                      <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-blue-50 group-hover:bg-blue-100 transition-colors">
+                  <div key={pub.id} className="bg-white rounded-xl shadow-soft p-6 flex flex-col group transition-all hover:shadow-md">
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className="inline-flex items-center justify-center w-11 h-11 rounded-full bg-blue-50 group-hover:bg-blue-100 transition-colors">
                         <FileText className="w-5 h-5 text-blue-600" />
                       </span>
                       <span className="text-xs text-slate-500 font-medium">{pub.year}</span>
                     </div>
-                    <h3 className="text-sm font-raleway font-semibold text-slate-800 mb-2 line-clamp-2">{pub.title}</h3>
-                    <p className="text-xs text-slate-600 mb-2 line-clamp-2 font-inter flex-1">{pub.summary}</p>
-                    <div className="flex justify-between items-center mt-auto pt-2">
+                    <h3 className="text-sm md:text-base font-raleway font-semibold text-slate-800 mb-3 line-clamp-2">{pub.title}</h3>
+                    <p className="text-sm text-slate-600 mb-3 line-clamp-2 font-inter flex-1">{pub.summary}</p>
+                    <div className="flex justify-between items-center mt-auto pt-3">
                       <span className="text-xs text-slate-500 line-clamp-1">{pub.authors}</span>
-                      <a href={pub.link ? (sanitizeURL(pub.link) || pub.link) : "#"} target="_blank" rel="noopener noreferrer" className="px-3 py-1 rounded-full bg-blue-50 text-blue-700 font-medium text-xs hover:bg-blue-100 transition">Ver más</a>
+                      <a href={pub.link ? (sanitizeURL(pub.link) || pub.link) : "#"} target="_blank" rel="noopener noreferrer" className="px-4 py-1.5 rounded-full bg-blue-50 text-blue-700 font-medium text-xs hover:bg-blue-100 transition">Ver más</a>
                     </div>
                   </div>
                 ))
@@ -123,18 +134,18 @@ const InvestigacionPage: React.FC = () => {
               {/* Libros y capítulos */}
               {publicacionesTab === "libros" && (
                 (publicationsData as unknown as Publication[]).filter((pub) => pub.type === "libro" || pub.type === "capitulo").slice(0, 6).map((pub) => (
-                  <div key={pub.id} className="bg-white rounded-xl shadow-soft p-5 flex flex-col group transition-all hover:shadow-md">
-                    <div className="flex items-center gap-3 mb-3">
-                      <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-green-50 group-hover:bg-green-100 transition-colors">
+                  <div key={pub.id} className="bg-white rounded-xl shadow-soft p-6 flex flex-col group transition-all hover:shadow-md">
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className="inline-flex items-center justify-center w-11 h-11 rounded-full bg-green-50 group-hover:bg-green-100 transition-colors">
                         <BookOpen className="w-5 h-5 text-green-600" />
                       </span>
                       <span className="text-xs text-slate-500 font-medium">{pub.year}</span>
                     </div>
-                    <h3 className="text-sm font-raleway font-semibold text-slate-800 mb-2 line-clamp-2">{pub.title}</h3>
-                    <p className="text-xs text-slate-600 mb-2 line-clamp-2 font-inter flex-1">{pub.summary}</p>
-                    <div className="flex justify-between items-center mt-auto pt-2">
+                    <h3 className="text-sm md:text-base font-raleway font-semibold text-slate-800 mb-3 line-clamp-2">{pub.title}</h3>
+                    <p className="text-sm text-slate-600 mb-3 line-clamp-2 font-inter flex-1">{pub.summary}</p>
+                    <div className="flex justify-between items-center mt-auto pt-3">
                       <span className="text-xs text-slate-500 line-clamp-1">{pub.authors}</span>
-                      <a href={pub.link ? (sanitizeURL(pub.link) || pub.link) : "#"} target="_blank" rel="noopener noreferrer" className="px-3 py-1 rounded-full bg-green-50 text-green-700 font-medium text-xs hover:bg-green-100 transition">Ver más</a>
+                      <a href={pub.link ? (sanitizeURL(pub.link) || pub.link) : "#"} target="_blank" rel="noopener noreferrer" className="px-4 py-1.5 rounded-full bg-green-50 text-green-700 font-medium text-xs hover:bg-green-100 transition">Ver más</a>
                     </div>
                   </div>
                 ))
@@ -142,52 +153,59 @@ const InvestigacionPage: React.FC = () => {
               {/* Divulgación */}
               {publicacionesTab === "otras" && (
                 (publicationsData as unknown as Publication[]).filter((pub) => pub.type === "divulgacion" || pub.type === "reporte" || pub.type === "conferencia" || pub.type === "memoria").slice(0, 6).map((pub) => (
-                  <div key={pub.id} className="bg-white rounded-xl shadow-soft p-5 flex flex-col group transition-all hover:shadow-md">
-                    <div className="flex items-center gap-3 mb-3">
-                      <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 group-hover:bg-slate-200 transition-colors">
+                  <div key={pub.id} className="bg-white rounded-xl shadow-soft p-6 flex flex-col group transition-all hover:shadow-md">
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className="inline-flex items-center justify-center w-11 h-11 rounded-full bg-slate-100 group-hover:bg-slate-200 transition-colors">
                         <Award className="w-5 h-5 text-slate-600" />
                       </span>
                       <span className="text-xs text-slate-500 font-medium">{pub.year}</span>
                     </div>
-                    <h3 className="text-sm font-raleway font-semibold text-slate-800 mb-2 line-clamp-2">{pub.title}</h3>
-                    <p className="text-xs text-slate-600 mb-2 line-clamp-2 font-inter flex-1">{pub.summary}</p>
-                    <div className="flex justify-between items-center mt-auto pt-2">
+                    <h3 className="text-sm md:text-base font-raleway font-semibold text-slate-800 mb-3 line-clamp-2">{pub.title}</h3>
+                    <p className="text-sm text-slate-600 mb-3 line-clamp-2 font-inter flex-1">{pub.summary}</p>
+                    <div className="flex justify-between items-center mt-auto pt-3">
                       <span className="text-xs text-slate-500 line-clamp-1">{pub.authors}</span>
-                      <a href={pub.link ? (sanitizeURL(pub.link) || pub.link) : "#"} target="_blank" rel="noopener noreferrer" className="px-3 py-1 rounded-full bg-slate-100 text-slate-700 font-medium text-xs hover:bg-slate-200 transition">Ver más</a>
+                      <a href={pub.link ? (sanitizeURL(pub.link) || pub.link) : "#"} target="_blank" rel="noopener noreferrer" className="px-4 py-1.5 rounded-full bg-slate-100 text-slate-700 font-medium text-xs hover:bg-slate-200 transition">Ver más</a>
                     </div>
                   </div>
                 ))
               )}
             </div>
-            <div className="flex justify-end mt-6">
-              <a href="/investigacion/publicaciones" className="inline-block px-5 py-2 rounded-full bg-blue-50 text-blue-800 font-semibold shadow hover:bg-blue-100 transition">Ver todas las publicaciones</a>
+            <div className="flex justify-center mt-10">
+              <a href="/investigacion/publicaciones" className="inline-block px-6 py-2.5 rounded-full bg-blue-50 text-blue-800 font-semibold shadow hover:bg-blue-100 transition">Ver todas las publicaciones</a>
             </div>
           </section>
         </ScrollReveal>
 
         {/* Eventos y cursos */}
         <ScrollReveal delay={0.15}>
-          <section className="mb-12 md:mb-16">
-            <h2 className="text-xl sm:text-2xl font-poppins font-bold text-slate-800 text-center mb-6">Eventos y cursos</h2>
-            <div className="bg-white rounded-xl shadow-soft p-6 md:p-8">
-              <ul className="space-y-4">
+          <section className="py-16 md:py-20 lg:py-24 border-t border-slate-100">
+            <div className="text-center mb-10 md:mb-12">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-poppins font-bold text-slate-800 mb-3">
+                Eventos y cursos
+              </h2>
+              <p className="text-base sm:text-lg font-inter text-slate-600 max-w-2xl mx-auto">
+                Espacios de formación, intercambio académico y difusión del conocimiento.
+              </p>
+            </div>
+            <div className="bg-white rounded-xl shadow-soft p-6 md:p-8 lg:p-10">
+              <ul className="space-y-5">
                 {(eventsCoursesData as unknown as EventCourse[]).slice(0, 8).map((item) => (
-                  <li key={item.id} className="flex items-start gap-3 pb-4 border-b border-slate-100 last:border-0 last:pb-0">
-                    <span className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${item.type.includes('Curso') ? 'bg-teal-100' : 'bg-blue-100'}`}>
-                      {item.type.includes('Curso') ? <BookOpen className="w-4 h-4 text-teal-700" /> : <Award className="w-4 h-4 text-blue-700" />}
+                  <li key={item.id} className="flex items-start gap-4 pb-5 border-b border-slate-100 last:border-0 last:pb-0">
+                    <span className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center ${item.type.includes('Curso') ? 'bg-teal-100' : 'bg-blue-100'}`}>
+                      {item.type.includes('Curso') ? <BookOpen className="w-5 h-5 text-teal-700" /> : <Award className="w-5 h-5 text-blue-700" />}
                     </span>
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 flex-wrap">
+                      <div className="flex items-center gap-2 flex-wrap mb-1">
                         <span className="text-xs text-slate-500 font-medium">{item.year}</span>
-                        <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${item.type.includes('Curso') ? 'bg-teal-50 text-teal-700' : 'bg-blue-50 text-blue-700'}`}>{item.type}</span>
+                        <span className={`px-2.5 py-0.5 rounded-full text-xs font-medium ${item.type.includes('Curso') ? 'bg-teal-50 text-teal-700' : 'bg-blue-50 text-blue-700'}`}>{item.type}</span>
                       </div>
-                      <p className="font-raleway font-medium text-slate-800 mt-1">{item.title}</p>
+                      <p className="font-raleway font-medium text-slate-800 text-sm md:text-base">{item.title}</p>
                     </div>
                   </li>
                 ))}
               </ul>
-              <div className="flex justify-end mt-6">
-                <button className="inline-block px-5 py-2 rounded-full bg-fyt-blue text-white font-semibold shadow hover:bg-fyt-blue/90 transition">Ver todos los eventos</button>
+              <div className="flex justify-center mt-8">
+                <button className="inline-block px-6 py-2.5 rounded-full bg-fyt-blue text-white font-semibold shadow hover:bg-fyt-blue/90 transition">Ver todos los eventos</button>
               </div>
             </div>
           </section>
@@ -195,23 +213,30 @@ const InvestigacionPage: React.FC = () => {
 
         {/* Producción tecnológica */}
         <ScrollReveal delay={0.2}>
-          <section className="mb-12 md:mb-16">
-            <h2 className="text-xl sm:text-2xl font-poppins font-bold text-slate-800 text-center mb-6">Producción tecnológica</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+          <section className="py-16 md:py-20 lg:py-24 border-t border-slate-100">
+            <div className="text-center mb-10 md:mb-12">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-poppins font-bold text-slate-800 mb-3">
+                Producción tecnológica
+              </h2>
+              <p className="text-base sm:text-lg font-inter text-slate-600 max-w-2xl mx-auto">
+                Desarrollos, software y protocolos generados por el grupo.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {(techProductionData as unknown as TechProduction[]).map((item) => (
-                <div key={item.id} className="bg-white rounded-xl shadow-soft p-5 flex flex-col group transition-all hover:shadow-md">
-                  <div className="flex items-center gap-3 mb-3">
-                    <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-green-50 group-hover:bg-green-100 transition-colors">
+                <div key={item.id} className="bg-white rounded-xl shadow-soft p-6 flex flex-col group transition-all hover:shadow-md">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="inline-flex items-center justify-center w-11 h-11 rounded-full bg-green-50 group-hover:bg-green-100 transition-colors">
                       {item.type === 'Software' && <Briefcase className="w-5 h-5 text-green-600" />}
                       {item.type === 'Protocolo' && <FileText className="w-5 h-5 text-blue-600" />}
                       {item.type === 'Aplicación móvil' && <BookOpen className="w-5 h-5 text-purple-600" />}
                       {item.type === 'Patente' && <Award className="w-5 h-5 text-orange-600" />}
                     </span>
                     <span className="text-xs text-slate-500 font-medium">{item.year}</span>
-                    <span className="ml-auto px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-50 text-green-700">{item.type}</span>
+                    <span className="ml-auto px-3 py-1 rounded-full text-xs font-medium bg-green-50 text-green-700">{item.type}</span>
                   </div>
-                  <h3 className="text-sm font-raleway font-semibold text-slate-800 mb-2">{item.title}</h3>
-                  <p className="text-xs text-slate-600 flex-1 font-inter">{item.description}</p>
+                  <h3 className="text-sm md:text-base font-raleway font-semibold text-slate-800 mb-3">{item.title}</h3>
+                  <p className="text-sm text-slate-600 flex-1 font-inter leading-relaxed">{item.description}</p>
                 </div>
               ))}
             </div>
@@ -219,15 +244,15 @@ const InvestigacionPage: React.FC = () => {
         </ScrollReveal>
 
         {/* CTA final */}
-        <section className="py-12 px-6 sm:px-10 rounded-2xl mb-12 bg-gradient-to-r from-fyt-blue/5 to-fyt-purple/5 flex flex-col items-center justify-center">
-          <h2 className="text-2xl sm:text-3xl font-poppins font-bold text-slate-800 mb-4 text-center">¿Quieres colaborar o conocer más?</h2>
-          <p className="text-base sm:text-lg text-slate-600 mb-6 text-center max-w-xl font-inter">Contáctanos para sumar esfuerzos, compartir ideas o recibir información sobre nuestras líneas de investigación y producción académica.</p>
-          <a href="/contactos" className="inline-block px-6 py-3 rounded-full bg-fyt-blue text-white font-inter font-semibold shadow hover:bg-fyt-blue/90 transition text-base">Contactar al equipo</a>
+        <section className="py-16 md:py-20 px-8 sm:px-12 rounded-2xl my-16 md:my-20 bg-gradient-to-r from-fyt-blue/5 to-fyt-purple/5 flex flex-col items-center justify-center">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-poppins font-bold text-slate-800 mb-5 text-center">¿Quieres colaborar o conocer más?</h2>
+          <p className="text-base sm:text-lg text-slate-600 mb-8 text-center max-w-xl font-inter leading-relaxed">Contáctanos para sumar esfuerzos, compartir ideas o recibir información sobre nuestras líneas de investigación y producción académica.</p>
+          <a href="/contactos" className="inline-block px-7 py-3 rounded-full bg-fyt-blue text-white font-inter font-semibold shadow hover:bg-fyt-blue/90 transition text-base">Contactar al equipo</a>
         </section>
 
         {/* Frase motivadora */}
-        <section className="py-8 mb-8">
-          <p className="text-center text-lg font-inter font-semibold text-fyt-blue italic">"Generamos conocimiento para transformar la salud y la sociedad"</p>
+        <section className="py-12 mb-12">
+          <p className="text-center text-lg md:text-xl font-inter font-semibold text-fyt-blue italic">"Generamos conocimiento para transformar la salud y la sociedad"</p>
         </section>
       </div>
     </div>
