@@ -1,114 +1,184 @@
-
 import React from "react";
-import { FileText, BookOpen, Microscope, Users, Award } from "lucide-react";
+import { FileText, BookOpen, Microscope, Users, Award, GraduationCap } from "lucide-react";
+import SafeImage from "./SafeImage";
+import heroImage from "@/assets/hero-investigacion.jpg";
 
+// KPIs académicos
 const kpis = [
   {
-    icon: <FileText className="w-9 h-9 text-blue-400" aria-label="Publicaciones científicas" />,
+    icon: FileText,
     value: 90,
     label: "Publicaciones científicas",
     subtitle: "Artículos indexados en revistas nacionales e internacionales",
-    numberColor: "text-blue-700",
-    subtitleColor: "text-slate-600"
+    color: "text-blue-600",
+    bgColor: "bg-blue-50",
   },
   {
-    icon: <BookOpen className="w-9 h-9 text-purple-300" aria-label="Libros y capítulos" />,
+    icon: BookOpen,
     value: 3,
     label: "Libros y capítulos",
     subtitle: "Producción académica especializada en farmacología y terapéutica",
-    numberColor: "text-purple-700",
-    subtitleColor: "text-slate-600"
+    color: "text-purple-600",
+    bgColor: "bg-purple-50",
   },
   {
-    icon: <Microscope className="w-9 h-9 text-green-300" aria-label="Proyectos de investigación" />,
+    icon: Microscope,
     value: 48,
     label: "Proyectos de investigación",
-    subtitle: "Iniciativas desarrolladas en diferentes áreas de la salud",
-    numberColor: "text-green-700",
-    subtitleColor: "text-slate-600"
+    subtitle: "Proyectos institucionales y colaborativos",
+    color: "text-green-600",
+    bgColor: "bg-green-50",
   },
   {
-    icon: <Users className="w-9 h-9 text-orange-300" aria-label="Tutorías y trabajos dirigidos" />,
+    icon: Users,
     value: 116,
     label: "Tutorías y trabajos dirigidos",
-    subtitle: "Formando nuevas generaciones de investigadores",
-    numberColor: "text-orange-700",
-    subtitleColor: "text-slate-600"
+    subtitle: "Procesos de acompañamiento y formación investigativa",
+    color: "text-orange-600",
+    bgColor: "bg-orange-50",
   },
   {
-    icon: <Award className="w-9 h-9 text-gray-400" aria-label="Eventos científicos" />,
+    icon: Award,
     value: 65,
     label: "Eventos científicos",
-    subtitle: "Participación activa en congresos, simposios y seminarios",
-    numberColor: "text-gray-700",
-    subtitleColor: "text-slate-600"
+    subtitle: "Participación y liderazgo en espacios académicos",
+    color: "text-slate-600",
+    bgColor: "bg-slate-100",
   },
   {
-    icon: <BookOpen className="w-9 h-9 text-teal-300" aria-label="Cursos y formación continua" />,
+    icon: GraduationCap,
     value: 43,
     label: "Cursos y formación continua",
-    subtitle: "Capacitaciones y formación especializada",
-    numberColor: "text-teal-700",
-    subtitleColor: "text-slate-600"
+    subtitle: "Programas de fortalecimiento profesional y técnico",
+    color: "text-teal-600",
+    bgColor: "bg-teal-50",
   },
 ];
 
 function AnimatedCounter({ value }: { value: number }) {
   const [display, setDisplay] = React.useState(0);
+  const [hasAnimated, setHasAnimated] = React.useState(false);
+  const ref = React.useRef<HTMLSpanElement>(null);
+
   React.useEffect(() => {
-    const start = 0;
-    let startTimestamp: number | null = null;
-    const duration = 1400;
-    const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
-    function step(timestamp: number) {
-      if (!startTimestamp) startTimestamp = timestamp;
-      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-      setDisplay(Math.round(start + (value - start) * easeOut(progress)));
-      if (progress < 1) {
-        window.requestAnimationFrame(step);
-      }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasAnimated) {
+            setHasAnimated(true);
+            let startTimestamp: number | null = null;
+            const duration = 1400;
+            const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
+            
+            function step(timestamp: number) {
+              if (!startTimestamp) startTimestamp = timestamp;
+              const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+              setDisplay(Math.round(value * easeOut(progress)));
+              if (progress < 1) {
+                window.requestAnimationFrame(step);
+              }
+            }
+            window.requestAnimationFrame(step);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
     }
-    window.requestAnimationFrame(step);
-    return () => {
-      setDisplay(value);
-    };
-  }, [value]);
-  return <span aria-label={String(value)}>{display}</span>;
+
+    return () => observer.disconnect();
+  }, [value, hasAnimated]);
+
+  return <span ref={ref} aria-label={String(value)}>{display}</span>;
 }
 
 export default function HeroInvestigacion() {
   return (
-    <section
-      className="w-full py-10 px-2 sm:px-6 rounded-3xl mb-10"
-      style={{
-        background: "linear-gradient(120deg, #e0f2ff 0%, #f8fafc 60%, #f3f4f6 100%)",
-      }}
-      aria-label="Indicadores académicos"
-    >
-      <h1 className="text-4xl sm:text-5xl font-poppins font-extrabold text-slate-800 mb-4 text-center">
-        Investigación y Producción Académica
-      </h1>
-      <p className="text-lg font-inter text-slate-500 mb-10 text-center max-w-2xl mx-auto">
-        Contribuciones científicas, proyectos y producción intelectual del grupo.
-      </p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-        {kpis.map((kpi, i) => (
-          <div
-            key={kpi.label}
-            className="bg-white rounded-2xl shadow p-6 flex flex-col items-center"
-            aria-label={kpi.label}
-          >
-            <span className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-3" aria-hidden="true">
-              {kpi.icon}
-            </span>
-            <span className={`text-3xl font-bold mb-1 ${kpi.numberColor}`}>
-              <AnimatedCounter value={kpi.value} />
-            </span>
-            <span className="text-base font-semibold text-slate-800 mb-1 text-center">{kpi.label}</span>
-            <span className={`text-xs ${kpi.subtitleColor} text-center`}>{kpi.subtitle}</span>
+    <>
+      {/* Hero Section - matching other heroes */}
+      <section
+        className="hero-container"
+        aria-label="Hero Investigación"
+      >
+        {/* Background image */}
+        <SafeImage 
+          src={heroImage} 
+          alt="" 
+          className="hero-image" 
+          aria-hidden="true"
+          width={1920}
+          height={1080}
+          loading="eager"
+        />
+        {/* Dark overlay */}
+        <div className="hero-overlay" />
+        {/* Content with text-shadow */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 hero-text-shadow">
+          <div className="max-w-3xl text-center lg:text-left">
+            <h1 className="hero-title font-poppins font-extrabold text-white mb-6 tracking-tight drop-shadow-lg">
+              Investigación y Producción Académica
+            </h1>
+            <p className="hero-subtitle font-inter text-white/95 leading-relaxed drop-shadow-md">
+              Generación de conocimiento científico, desarrollo de proyectos de investigación y producción intelectual orientada al fortalecimiento de la farmacología y la terapéutica.
+            </p>
           </div>
-        ))}
-      </div>
-    </section>
+        </div>
+      </section>
+
+      {/* KPIs Section - Institutional design without cards */}
+      <section 
+        className="py-16 md:py-20 px-4 sm:px-6 md:px-12 lg:px-24"
+        aria-label="Indicadores académicos"
+      >
+        <div className="max-w-7xl mx-auto">
+          {/* Section header */}
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl font-poppins font-bold text-slate-800 mb-3">
+              Indicadores de Producción Académica
+            </h2>
+            <p className="text-base sm:text-lg font-inter text-slate-600 max-w-2xl mx-auto">
+              Métricas que reflejan el compromiso científico y la trayectoria investigativa del grupo.
+            </p>
+          </div>
+
+          {/* KPI Grid - Clean institutional layout */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 md:gap-10">
+            {kpis.map((kpi, idx) => {
+              const Icon = kpi.icon;
+              return (
+                <div
+                  key={kpi.label}
+                  className="flex flex-col items-center text-center group"
+                  style={{ animationDelay: `${idx * 0.1}s` }}
+                >
+                  {/* Icon */}
+                  <div className={`w-14 h-14 md:w-16 md:h-16 rounded-full ${kpi.bgColor} flex items-center justify-center mb-4 transition-transform group-hover:scale-105`}>
+                    <Icon className={`w-7 h-7 md:w-8 md:h-8 ${kpi.color}`} aria-hidden="true" />
+                  </div>
+                  
+                  {/* Number */}
+                  <span className={`text-3xl md:text-4xl font-poppins font-bold ${kpi.color} mb-2`}>
+                    <AnimatedCounter value={kpi.value} />
+                  </span>
+                  
+                  {/* Label */}
+                  <span className="text-sm md:text-base font-raleway font-semibold text-slate-800 mb-1 leading-tight">
+                    {kpi.label}
+                  </span>
+                  
+                  {/* Subtitle */}
+                  <span className="text-xs md:text-sm font-inter text-slate-500 leading-snug max-w-[180px]">
+                    {kpi.subtitle}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

@@ -275,22 +275,6 @@ const Tools = () => {
           </div>
         </div>
 
-        {/* Otras Calculadoras */}
-        <div className="mb-16">
-          <div className="flex items-center space-x-3 mb-8">
-            <div className="p-2 rounded-lg bg-gradient-accent shadow-soft">
-              <Pill className="h-6 w-6 text-fyt-red" />
-            </div>
-            <h3 className="text-2xl font-bold text-fyt-dark">
-              Otras Calculadoras
-            </h3>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {otherCalculators.map((tool, index) => (
-              <ToolCard key={index} tool={tool} category="other" />
-            ))}
-          </div>
-        </div>
 
         {/* Herramientas de Análisis Farmacológico */}
         <div className="mb-16">
