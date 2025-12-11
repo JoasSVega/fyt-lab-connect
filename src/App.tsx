@@ -10,11 +10,13 @@ import { TransitionProvider, useTransition } from "./providers/TransitionProvide
 const InvestigacionPage = React.lazy(() => import("./pages/InvestigacionPage"));
 const PublicacionesPage = React.lazy(() => import("./pages/PublicacionesPage"));
 const ProyectosPage = React.lazy(() => import("./pages/ProyectosPage"));
+const EventosPage = React.lazy(() => import("./pages/EventosPage"));
 
 // Exportar paths
 export const pathInvestigacion = "/investigacion";
 export const pathProyectos = "/investigacion/proyectos";
 export const pathPublicaciones = "/investigacion/publicaciones";
+export const pathEventos = "/investigacion/eventos";
 
 const SobreNosotros = React.lazy(() => import("./pages/SobreNosotros"));
 const Index = React.lazy(() => import("./pages/Index"));
@@ -70,6 +72,7 @@ function AnimatedRoutes() {
           <Route path={pathInvestigacion} element={<InvestigacionPage />} />
           <Route path={pathProyectos} element={<ProyectosPage />} />
           <Route path={pathPublicaciones} element={<PublicacionesPage />} />
+          <Route path={pathEventos} element={<EventosPage />} />
           
           {/* Página principal */}
           <Route path="/" element={<Index />} />
