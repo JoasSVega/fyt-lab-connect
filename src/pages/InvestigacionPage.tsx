@@ -1,12 +1,14 @@
 // Página principal de Investigación y Producción Académica
 // Hero, párrafo editorial, KPIs, proyectos, publicaciones, eventos y producción tecnológica
 import React, { useState } from "react";
-import { BookOpen, Microscope, FileText, Award, Briefcase, MapPin, Calendar, Users, ExternalLink } from "lucide-react";
+import { Link } from "react-router-dom";
+import { BookOpen, Microscope, FileText, Award, Briefcase, MapPin, Calendar, Users, ExternalLink, ArrowRight } from "lucide-react";
 import HeroInvestigacion from "@/components/HeroInvestigacion";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { usePageReady } from "@/hooks/usePageReady";
 import Seo from "@/components/Seo";
 import { sanitizeURL } from "@/lib/sanitize";
+import { pathProyectos, pathPublicaciones, pathEventos } from "@/App";
 
 // Importar datos reales desde JSON
 import projectsData from "@/data/projects.json";
@@ -185,6 +187,17 @@ const InvestigacionPage: React.FC = () => {
                   )}
                 </article>
               ))}
+            </div>
+            
+            {/* Ver todos link */}
+            <div className="text-center mt-10">
+              <Link 
+                to={pathProyectos}
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-primary-foreground font-medium text-sm hover:bg-primary/90 transition-colors"
+              >
+                Ver todos los proyectos
+                <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
           </section>
         </ScrollReveal>

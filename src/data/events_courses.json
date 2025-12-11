@@ -3,7 +3,7 @@
     "id": 1,
     "title": "Congreso Colombiano de Ciencias Farmacéuticas",
     "year": 2023,
-    "type": "Nacional",
+    "type": "Congreso",
     "participation": "Ponente",
     "location": "Bogotá, Colombia"
   },
@@ -11,7 +11,7 @@
     "id": 2,
     "title": "Simposio Nacional de Farmacología Clínica",
     "year": 2022,
-    "type": "Nacional",
+    "type": "Simposio",
     "participation": "Asistente",
     "location": "Medellín, Colombia"
   },
@@ -19,23 +19,23 @@
     "id": 3,
     "title": "Jornadas de Investigación Universidad de Cartagena",
     "year": 2021,
-    "type": "Nacional",
+    "type": "Jornada",
     "participation": "Ponente",
     "location": "Cartagena, Colombia"
   },
   {
     "id": 4,
-    "title": "Curso de Farmacovigilancia INVIMA",
+    "title": "Curso de Farmacovigilancia – INVIMA",
     "year": 2023,
     "type": "Curso",
-    "participation": "Aprobado",
+    "participation": "Participante",
     "location": "Virtual"
   },
   {
     "id": 5,
     "title": "Encuentro Regional de Farmacoepidemiología",
     "year": 2020,
-    "type": "Nacional",
+    "type": "Evento académico",
     "participation": "Ponente",
     "location": "Barranquilla, Colombia"
   },
@@ -43,7 +43,7 @@
     "id": 6,
     "title": "Congreso Internacional de Farmacología y Terapéutica",
     "year": 2022,
-    "type": "Internacional",
+    "type": "Congreso",
     "participation": "Ponente",
     "location": "Ciudad de México, México"
   },
@@ -51,15 +51,15 @@
     "id": 7,
     "title": "Seminario de Actualización en Farmacoeconomía",
     "year": 2024,
-    "type": "Nacional",
+    "type": "Seminario",
     "participation": "Comité organizador",
     "location": "Cartagena, Colombia"
   },
   {
     "id": 8,
-    "title": "Curso de Diseño Molecular Asistido por Computador",
+    "title": "Taller de Diseño Molecular Asistido por Computador",
     "year": 2024,
-    "type": "Curso",
+    "type": "Taller",
     "participation": "Director",
     "location": "Universidad de Cartagena"
   }
