@@ -1,6 +1,9 @@
 [
-  {"id": 1, "title": "Software de Dosificación Renal FYT", "year": 2024, "type": "Software", "description": "Herramienta digital para el cálculo de dosis en insuficiencia renal."},
-  {"id": 2, "title": "Protocolo de Farmacovigilancia Hospitalaria", "year": 2023, "type": "Protocolo", "description": "Guía implementada en hospitales para la detección de reacciones adversas."},
-  {"id": 3, "title": "App de Interacciones Medicamentosas", "year": 2025, "type": "Aplicación móvil", "description": "Aplicación para profesionales de la salud que identifica interacciones medicamentosas."},
-  {"id": 4, "title": "Patente: Composición farmacéutica para dolor neuropático", "year": 2022, "type": "Patente", "description": "Innovación registrada para el tratamiento del dolor neuropático."}
+  {
+    "id": 1,
+    "title": "Herramienta digital para evaluación de interacciones farmacológicas en entornos clínicos",
+    "year": 2021,
+    "type": "Software académico",
+    "description": "Aplicación web para identificación y clasificación de interacciones medicamentosas en pacientes hospitalizados."
+  }
 ]
