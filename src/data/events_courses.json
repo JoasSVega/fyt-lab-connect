@@ -1,10 +1,66 @@
 [
-  {"id":1,"title":"Congreso Nacional de Farmacología","year":2025,"type":"Evento científico"},
-  {"id":2,"title":"Simposio de Terapéutica Clínica","year":2025,"type":"Evento científico"},
-  {"id":3,"title":"Curso de Farmacovigilancia","year":2025,"type":"Curso dictado"},
-  {"id":4,"title":"Jornada de Actualización en Antibióticos","year":2024,"type":"Evento científico"},
-  {"id":5,"title":"Curso de Farmacoeconomía","year":2024,"type":"Curso dictado"},
-  {"id":6,"title":"Seminario de Farmacogenómica","year":2024,"type":"Evento científico"},
-  {"id":7,"title":"Curso de Farmacología Clínica","year":2023,"type":"Curso dictado"},
-  {"id":8,"title":"Congreso Internacional de Terapéutica","year":2023,"type":"Evento científico"}
+  {
+    "id": 1,
+    "title": "Congreso Colombiano de Ciencias Farmacéuticas",
+    "year": 2023,
+    "type": "Nacional",
+    "participation": "Ponente",
+    "location": "Bogotá, Colombia"
+  },
+  {
+    "id": 2,
+    "title": "Simposio Nacional de Farmacología Clínica",
+    "year": 2022,
+    "type": "Nacional",
+    "participation": "Asistente",
+    "location": "Medellín, Colombia"
+  },
+  {
+    "id": 3,
+    "title": "Jornadas de Investigación Universidad de Cartagena",
+    "year": 2021,
+    "type": "Nacional",
+    "participation": "Ponente",
+    "location": "Cartagena, Colombia"
+  },
+  {
+    "id": 4,
+    "title": "Curso de Farmacovigilancia INVIMA",
+    "year": 2023,
+    "type": "Curso",
+    "participation": "Aprobado",
+    "location": "Virtual"
+  },
+  {
+    "id": 5,
+    "title": "Encuentro Regional de Farmacoepidemiología",
+    "year": 2020,
+    "type": "Nacional",
+    "participation": "Ponente",
+    "location": "Barranquilla, Colombia"
+  },
+  {
+    "id": 6,
+    "title": "Congreso Internacional de Farmacología y Terapéutica",
+    "year": 2022,
+    "type": "Internacional",
+    "participation": "Ponente",
+    "location": "Ciudad de México, México"
+  },
+  {
+    "id": 7,
+    "title": "Seminario de Actualización en Farmacoeconomía",
+    "year": 2024,
+    "type": "Nacional",
+    "participation": "Comité organizador",
+    "location": "Cartagena, Colombia"
+  },
+  {
+    "id": 8,
+    "title": "Curso de Diseño Molecular Asistido por Computador",
+    "year": 2024,
+    "type": "Curso",
+    "participation": "Director",
+    "location": "Universidad de Cartagena"
+  }
 ]

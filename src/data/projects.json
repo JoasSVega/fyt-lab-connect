@@ -1,52 +1,68 @@
 [
   {
     "id": 1,
-    "title": "Desarrollo de nuevos fármacos para enfermedades infecciosas",
-    "summary": "Investigación sobre compuestos innovadores para el tratamiento de infecciones bacterianas resistentes.",
-    "meta": "2024 · En curso · Farmacología",
-    "image": "",
-    "status": "En curso",
-    "year": 2024,
-    "area": "Farmacología"
-  },
-  {
-    "id": 2,
-    "title": "Farmacovigilancia en pacientes pediátricos",
-    "summary": "Monitoreo de reacciones adversas a medicamentos en población infantil en la región Caribe.",
-    "meta": "2023 · Finalizado · Farmacovigilancia",
-    "image": "",
-    "status": "Finalizado",
-    "year": 2023,
-    "area": "Farmacovigilancia"
-  },
-  {
-    "id": 3,
-    "title": "Impacto de la farmacogenómica en la terapia personalizada",
-    "summary": "Estudio multicéntrico sobre la influencia genética en la respuesta a tratamientos oncológicos.",
-    "meta": "2022 · En curso · Farmacogenómica",
-    "image": "",
-    "status": "En curso",
-    "year": 2022,
-    "area": "Farmacogenómica"
-  },
-  {
-    "id": 4,
-    "title": "Evaluación de la adherencia terapéutica en adultos mayores",
-    "summary": "Análisis de factores que afectan la adherencia a tratamientos crónicos en adultos mayores.",
-    "meta": "2021 · Finalizado · Terapéutica",
+    "title": "Evaluación del perfil farmacoterapéutico en pacientes crónicos vinculados a programas de atención farmacéutica",
+    "summary": "Análisis integral del uso de medicamentos en pacientes con enfermedades crónicas para optimizar intervenciones farmacéuticas.",
+    "meta": "2021 · Finalizado · Atención Farmacéutica",
     "image": "",
     "status": "Finalizado",
     "year": 2021,
-    "area": "Terapéutica"
+    "area": "Atención Farmacéutica",
+    "role": "Investigador"
   },
   {
-    "id": 5,
-    "title": "Farmacoepidemiología de antibióticos en hospitales públicos",
-    "summary": "Uso y resistencia de antibióticos en instituciones de salud pública de Cartagena.",
+    "id": 2,
+    "title": "Modelización molecular para diseño de inhibidores selectivos del sistema renina–angiotensina",
+    "summary": "Aplicación de técnicas computacionales para el diseño racional de nuevos agentes terapéuticos antihipertensivos.",
+    "meta": "2022 · En curso · Diseño Molecular",
+    "image": "",
+    "status": "En curso",
+    "year": 2022,
+    "area": "Diseño y Modelización Molecular",
+    "role": "Investigador principal"
+  },
+  {
+    "id": 3,
+    "title": "Análisis farmacoepidemiológico de antibióticos en instituciones hospitalarias de la Costa Caribe",
+    "summary": "Estudio multicéntrico sobre patrones de prescripción y resistencia bacteriana en hospitales de la región.",
     "meta": "2020 · Finalizado · Farmacoepidemiología",
     "image": "",
     "status": "Finalizado",
     "year": 2020,
-    "area": "Farmacoepidemiología"
+    "area": "Farmacoepidemiología",
+    "role": "Investigador"
+  },
+  {
+    "id": 4,
+    "title": "Evaluación de intervenciones de farmacovigilancia activa en servicios hospitalarios",
+    "summary": "Implementación y evaluación de programas de detección temprana de reacciones adversas a medicamentos.",
+    "meta": "2023 · En curso · Farmacovigilancia",
+    "image": "",
+    "status": "En curso",
+    "year": 2023,
+    "area": "Farmacovigilancia y Toxicología",
+    "role": "Investigador principal"
+  },
+  {
+    "id": 5,
+    "title": "Estudio de costo-beneficio de tratamientos antihipertensivos en población adulta",
+    "summary": "Análisis farmacoeconómico comparativo de esquemas terapéuticos para hipertensión arterial.",
+    "meta": "2019 · Finalizado · Farmacoeconomía",
+    "image": "",
+    "status": "Finalizado",
+    "year": 2019,
+    "area": "Farmacoeconomía",
+    "role": "Co-investigador"
+  },
+  {
+    "id": 6,
+    "title": "Caracterización del uso de medicamentos en adultos mayores polimedicados",
+    "summary": "Identificación de problemas relacionados con medicamentos en población geriátrica de Cartagena.",
+    "meta": "2024 · En curso · Farmacología y Terapéutica",
+    "image": "",
+    "status": "En curso",
+    "year": 2024,
+    "area": "Farmacología y Terapéutica",
+    "role": "Investigador principal"
   }
 ]
