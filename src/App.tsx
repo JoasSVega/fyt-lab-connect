@@ -11,12 +11,16 @@ const InvestigacionPage = React.lazy(() => import("./pages/InvestigacionPage"));
 const PublicacionesPage = React.lazy(() => import("./pages/PublicacionesPage"));
 const ProyectosPage = React.lazy(() => import("./pages/ProyectosPage"));
 const EventosPage = React.lazy(() => import("./pages/EventosPage"));
+const FormacionPage = React.lazy(() => import("./pages/FormacionPage"));
+const ContenidosPage = React.lazy(() => import("./pages/ContenidosPage"));
 
 // Exportar paths
 export const pathInvestigacion = "/investigacion";
 export const pathProyectos = "/investigacion/proyectos";
 export const pathPublicaciones = "/investigacion/publicaciones";
 export const pathEventos = "/investigacion/eventos";
+export const pathFormacion = "/investigacion/formacion";
+export const pathContenidos = "/investigacion/contenidos";
 
 const SobreNosotros = React.lazy(() => import("./pages/SobreNosotros"));
 const Index = React.lazy(() => import("./pages/Index"));
@@ -68,11 +72,13 @@ function AnimatedRoutes() {
       {isTransitioning && <Loader />}
       <React.Suspense fallback={null}>
         <Routes>
-          {/* Investigación y Producción Académica */}
+        {/* Investigación y Producción Académica */}
           <Route path={pathInvestigacion} element={<InvestigacionPage />} />
           <Route path={pathProyectos} element={<ProyectosPage />} />
           <Route path={pathPublicaciones} element={<PublicacionesPage />} />
           <Route path={pathEventos} element={<EventosPage />} />
+          <Route path={pathFormacion} element={<FormacionPage />} />
+          <Route path={pathContenidos} element={<ContenidosPage />} />
           
           {/* Página principal */}
           <Route path="/" element={<Index />} />

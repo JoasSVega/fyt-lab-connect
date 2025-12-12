@@ -3,6 +3,7 @@ import React, { useState, useMemo } from "react";
 import publicationsData from "@/data/publications.json";
 import { usePageReady } from "@/hooks/usePageReady";
 import SmallHero from "@/components/shared/SmallHero";
+import ResearchSubNav from "@/components/investigacion/ResearchSubNav";
 import PublicationCard from "@/components/publications/PublicationCard";
 import PublicationCategoryTabs from "@/components/publications/PublicationCategoryTabs";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
@@ -68,6 +69,8 @@ const PublicacionesPage: React.FC = () => {
         title="Publicaciones Científicas y Académicas"
         subtitle="Producción intelectual del Grupo FyT en revistas indexadas, libros y espacios editoriales científicos."
       />
+
+      <ResearchSubNav />
 
       <section className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-12 md:py-16">
         {/* Category tabs */}
