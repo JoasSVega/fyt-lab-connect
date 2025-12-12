@@ -3,6 +3,7 @@ import React, { useState, useMemo } from "react";
 import eventsData from "@/data/events_courses.json";
 import { usePageReady } from "@/hooks/usePageReady";
 import SmallHero from "@/components/shared/SmallHero";
+import ResearchSubNav from "@/components/investigacion/ResearchSubNav";
 import EventCard from "@/components/events/EventCard";
 import EventsFilterBar from "@/components/events/EventsFilterBar";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
@@ -55,6 +56,8 @@ const EventosPage: React.FC = () => {
         title="Eventos Académicos y Cursos"
         subtitle="Participación del Grupo FyT en congresos, simposios, jornadas científicas y programas de formación."
       />
+
+      <ResearchSubNav />
 
       <section className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-12 md:py-16">
         <ScrollReveal>

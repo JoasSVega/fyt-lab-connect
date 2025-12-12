@@ -3,6 +3,7 @@ import React, { useState, useMemo } from "react";
 import projectsData from "@/data/projects.json";
 import { usePageReady } from "@/hooks/usePageReady";
 import SmallHero from "@/components/shared/SmallHero";
+import ResearchSubNav from "@/components/investigacion/ResearchSubNav";
 import ProjectCard from "@/components/projects/ProjectCard";
 import ProjectFilterBar from "@/components/projects/ProjectFilterBar";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
@@ -61,6 +62,8 @@ const ProyectosPage: React.FC = () => {
         title="Proyectos de Investigación"
         subtitle="Evidencia científica generada por el Grupo FyT a través de iniciativas en farmacología, terapéutica, farmacia asistencial y modelización molecular."
       />
+
+      <ResearchSubNav />
 
       <section className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-12 md:py-16">
         <ScrollReveal>
