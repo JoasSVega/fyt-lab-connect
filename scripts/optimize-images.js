@@ -13,6 +13,14 @@ const SIZES = {
   large: { width: 2400, quality: 85 }
 };
 
+// Overrides de calidad/tamaño por imagen y variante
+// Ej.: {'hero-nosotros': { small: { quality: 72 } }}
+const OVERRIDES = {
+  'hero-nosotros': {
+    small: { quality: 72 },
+  },
+};
+
 const publicDir = path.join(__dirname, '..', 'public');
 const imagesDir = path.join(publicDir, 'images');
 const outputDir = path.join(publicDir, 'images-optimized');
@@ -51,7 +59,9 @@ async function processImage(inputPath, outputBasename, outputFolder = 'images-op
     const metadata = await sharp(fullInputPath).metadata();
     console.log(`   Original: ${metadata.width}x${metadata.height} (${metadata.format})`);
 
-    for (const [sizeName, config] of Object.entries(SIZES)) {
+    for (const [sizeName, baseConfig] of Object.entries(SIZES)) {
+      const override = (OVERRIDES[outputBasename] && OVERRIDES[outputBasename][sizeName]) || {};
+      const config = { ...baseConfig, ...override };
       const outputPath = path.join(outputDirPath, `${outputBasename}-${sizeName}.webp`);
       
       await sharp(fullInputPath)

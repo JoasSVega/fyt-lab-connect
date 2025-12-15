@@ -4,7 +4,7 @@ import FloatingContact from "@/components/FloatingContact";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { usePageReady } from "@/hooks/usePageReady";
 import Seo from "@/components/Seo";
-import SafeImage from "@/components/SafeImage";
+ 
 
 const SobreNosotros = () => {
   usePageReady({
@@ -26,23 +26,24 @@ const SobreNosotros = () => {
         className="hero-container"
         aria-label="Hero Sobre Nosotros"
       >
-        {/* Imagen de fondo unificada */}
+        {/* Imagen de fondo optimizada para LCP usando <picture> */}
         <picture>
           <source 
+            media="(min-width: 1024px)" 
             srcSet="/images/hero-nosotros-large.webp" 
-            media="(min-width: 1280px)" 
           />
           <source 
-            srcSet="/images/hero-nosotros-medium.webp" 
             media="(min-width: 640px)" 
+            srcSet="/images/hero-nosotros-medium.webp" 
           />
-          <SafeImage 
+          <img 
             src="/images/hero-nosotros-small.webp" 
-            alt="" 
-            className="hero-image" 
+            alt="Equipo FyT"
+            className="w-full h-full object-cover"
             aria-hidden="true"
             width={1920}
             height={1080}
+            fetchPriority="high"
             loading="eager"
           />
         </picture>

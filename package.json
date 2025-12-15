@@ -19,7 +19,8 @@
     "images:standardize": "node ./scripts/standardize-images.js",
     "images:refactor": "node ./scripts/refactor-image-refs.js",
     "audit:run": "node ./scripts/audit-runner.mjs",
-    "audit:rerun": "node ./scripts/audit-runner.mjs --rerun"
+    "audit:rerun": "node ./scripts/audit-runner.mjs --rerun",
+    "images:recompress-nosotros": "node ./scripts/recompress-single.js public/images/hero-nosotros-small.webp 72"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
