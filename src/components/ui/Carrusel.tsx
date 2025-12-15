@@ -3,6 +3,7 @@ import type { CarouselApi } from "./carousel";
 import { Card } from "./card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "./carousel";
 import { useImagePreloader } from "@/hooks/useImagePreloader";
+import SmartImage from "@/components/SmartImage";
 
 export interface CarruselItem {
   image: string;
@@ -197,31 +198,24 @@ const Carrusel: React.FC<CarruselProps> = ({
               style={{ borderColor: color }}
               className={`bg-white/90 border-2 shadow-soft md:hover:shadow-medium md:hover:scale-[1.02] transition-all duration-300 overflow-hidden group h-full will-change-transform`}
             >
+              {/* Contenedor con aspect ratio fijo para prevenir CLS */}
               <div
-                className="relative"
+                className="relative bg-gray-100"
                 style={heightCss ? ({ height: heightCss } as React.CSSProperties) : ({ aspectRatio: imageAspect } as React.CSSProperties)}
               >
-                {/* Responsive image with srcset for optimized loading */}
-                {(() => {
-                  const base = item.image.replace(/-medium\.webp$/i, '');
-                  // Cargar con prioridad las primeras 3 diapositivas para asegurar render inmediato
-                  const loadingMode: 'eager' | 'lazy' = index < 3 ? 'eager' : 'lazy';
-                  
-                  return (
-                    <img
-                      src={`${base}-medium.webp`}
-                      srcSet={`${base}-small.webp 480w, ${base}-medium.webp 800w, ${base}-large.webp 1200w`}
-                      sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 300px"
-                      alt={item.title}
-                      loading={loadingMode}
-                      decoding="async"
-                      className={defaultImageClass}
-                      style={heightCss ? ({ height: '100%', maxHeight: heightCss, minHeight: heightCss } as React.CSSProperties) : ({ height: '100%' } as React.CSSProperties)}
-                      width={1200}
-                      height={900}
-                    />
-                  );
-                })()}
+                {/* SmartImage optimizado con loading condicional */}
+                <SmartImage
+                  basePath={item.image}
+                  alt={item.title}
+                  usage="card"
+                  loading={index < 2 ? 'eager' : 'lazy'}
+                  fallbackSize="medium"
+                  decoding="async"
+                  className={defaultImageClass}
+                  style={heightCss ? ({ height: '100%', maxHeight: heightCss, minHeight: heightCss } as React.CSSProperties) : ({ height: '100%' } as React.CSSProperties)}
+                  width={1200}
+                  height={900}
+                />
               </div>
               <div className="p-6">
                 <h4
