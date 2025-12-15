@@ -8,11 +8,15 @@
   <!-- Critical preconnects -->
   <link rel="preconnect" href="https://fyt-lab-connect.lovable.app" crossorigin />
   <link rel="dns-prefetch" href="https://fyt-lab-connect.lovable.app" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  
+  <!-- Google Fonts: Preconnect with crossorigin for optimal loading -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
   <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-  <!-- Google Fonts (no bloqueante): preload + onload swap con fallback noscript -->
+  
+  <!-- Google Fonts (non-blocking): preload + onload swap with noscript fallback -->
+  <!-- Using font-display=swap for immediate text rendering with system fonts -->
   <link
     rel="preload"
     as="style"
@@ -48,6 +52,39 @@
     imagesizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px"
     fetchpriority="high"
   />
+
+  <!-- Minimal inline critical CSS for font fallback rendering -->
+  <style>
+    /* System font stack for immediate text rendering before Google Fonts load */
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    /* Optimized font fallbacks to match Google Fonts metrics (reduces CLS) */
+    @font-face {
+      font-family: 'Poppins Fallback';
+      src: local('Arial');
+      size-adjust: 107%;
+      ascent-override: 92%;
+      descent-override: 25%;
+      line-gap-override: 0%;
+    }
+    @font-face {
+      font-family: 'Raleway Fallback';
+      src: local('Arial');
+      size-adjust: 99%;
+      ascent-override: 93%;
+      descent-override: 25%;
+      line-gap-override: 0%;
+    }
+    @font-face {
+      font-family: 'Inter Fallback';
+      src: local('Arial');
+      size-adjust: 107%;
+      ascent-override: 90%;
+      descent-override: 22%;
+      line-gap-override: 0%;
+    }
+  </style>
 
   <!-- KaTeX CSS: hint early with preload from CDN; non-blocking load -->
   <link

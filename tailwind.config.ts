@@ -91,9 +91,9 @@ export default {
         "large": "var(--shadow-large)",
       },
       fontFamily: {
-        poppins: ["Poppins", "sans-serif"],
-        raleway: ["Raleway", "sans-serif"],
-        inter: ["Inter", "sans-serif"],
+        poppins: ["Poppins", "Poppins Fallback", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],
+        raleway: ["Raleway", "Raleway Fallback", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],
+        inter: ["Inter", "Inter Fallback", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],
         academic: "var(--font-academic)",
       },
       borderRadius: {
