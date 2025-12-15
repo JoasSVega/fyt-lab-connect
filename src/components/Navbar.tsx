@@ -81,19 +81,18 @@ const Navbar = () => {
           {/* Logo y nombre */}
           <Link to="/" className="flex items-center space-x-3 group focus:outline-none">
               <div className="flex-shrink-0">
-              <picture>
-                <source srcSet="/images/logo-fyt-medium.webp" media="(min-width: 640px)" />
                 <img
                   src="/images/logo-fyt-small.webp"
+                  srcSet="/images/logo-fyt-small.webp 100w, /images/logo-fyt-medium.webp 200w"
+                  sizes="(max-width: 640px) 100px, (max-width: 1024px) 150px, 200px"
                   alt="Logo Grupo FyT, semillero de investigación en farmacología y terapéutica"
                   loading="eager"
                   decoding="async"
                   ref={logoRef}
                   className="h-12 w-auto transition-transform duration-250 group-hover:scale-[1.03]"
-                  width={96}
-                  height={48}
+                  width={200}
+                  height={100}
                 />
-              </picture>
             </div>
               <div className="text-lg font-poppins font-bold text-slate-900 group-hover:text-fyt-blue transition-colors duration-250">
                 Grupo FyT
