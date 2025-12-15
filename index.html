@@ -36,12 +36,19 @@
     <meta name="author" content="Semillero FYT" />
     <meta name="keywords" content="farmacología, terapéutica, investigación, medicina, farmacología clínica, semillero investigación" />
 
-  <!-- Favicons: serve available AVIF assets with sizes; use absolute root paths (public/) -->
-  <link rel="icon" type="image/avif" sizes="128x128" href="/logo-fyt-128.avif" />
-  <link rel="icon" type="image/avif" sizes="256x256" href="/logo-fyt-256.avif" />
-  <link rel="icon" type="image/avif" sizes="400x400" href="/logo-fyt-400.avif" />
-  <!-- Apple Touch Icon (fallback to AVIF available) -->
-  <link rel="apple-touch-icon" href="/logo-fyt-256.avif" />
+  <!-- Favicons optimizados (aspect ratio 1:1) -->
+  <!-- SVG favicon (modern browsers, vectorial, ideal para diferentes tamaños) -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  
+  <!-- PNG favicons para navegadores legacy y diferentes resoluciones -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  
+  <!-- Apple Touch Icon (iOS/iPadOS) - 180x180px cuadrado -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  
+  <!-- Web App Manifest (PWA metadata) -->
+  <link rel="manifest" href="/site.webmanifest" />
   
   <!-- Preload LCP hero image (AVIF variants) -->
   <link

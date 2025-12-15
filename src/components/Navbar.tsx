@@ -89,9 +89,9 @@ const Navbar = () => {
                   loading="eager"
                   decoding="async"
                   ref={logoRef}
-                  className="h-12 w-auto transition-transform duration-250 group-hover:scale-[1.03]"
+                  className="h-10 md:h-14 w-auto object-contain shrink-0 transition-transform duration-250 group-hover:scale-[1.03]"
                   width={200}
-                  height={100}
+                  height={56}
                 />
             </div>
               <div className="text-lg font-poppins font-bold text-slate-900 group-hover:text-fyt-blue transition-colors duration-250">

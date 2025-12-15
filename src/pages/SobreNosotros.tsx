@@ -1,6 +1,7 @@
-import AboutSobreNosotros from "@/components/AboutSobreNosotros";
-import Team from "@/components/Team";
-import FloatingContact from "@/components/FloatingContact";
+import { lazy, Suspense } from "react";
+const AboutSobreNosotros = lazy(() => import("@/components/AboutSobreNosotros"));
+const Team = lazy(() => import("@/components/Team"));
+const FloatingContact = lazy(() => import("@/components/FloatingContact"));
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { usePageReady } from "@/hooks/usePageReady";
 import Seo from "@/components/Seo";
@@ -61,20 +62,26 @@ const SobreNosotros = () => {
           </div>
         </div>
       </section>
-      {/* Sección Nuestro Objetivo y Nuestros Valores (desde About) */}
-      <ScrollReveal>
-        <AboutSobreNosotros />
-      </ScrollReveal>
-      {/* Sección Nuestro Equipo */}
+      {/* Sección Nuestro Objetivo y Nuestros Valores (lazy) */}
+      <Suspense fallback={<div className="min-h-[80vh]" />}>
+        <ScrollReveal>
+          <AboutSobreNosotros />
+        </ScrollReveal>
+      </Suspense>
+      {/* Sección Nuestro Equipo (lazy) */}
       <ScrollReveal delay={0.1}>
         <section className="py-20 min-h-[60vh] bg-[#f8fafc]">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="site-section-title text-center text-fyt-dark mb-8 drop-shadow-lg">Nuestro Equipo</h2>
-            <Team compact />
+            <Suspense fallback={<div className="min-h-[60vh]" />}>
+              <Team compact />
+            </Suspense>
           </div>
         </section>
       </ScrollReveal>
-    <FloatingContact />
+      <Suspense fallback={null}>
+        <FloatingContact />
+      </Suspense>
   </div>
   );
 };
