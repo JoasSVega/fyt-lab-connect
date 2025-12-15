@@ -1,16 +1,16 @@
-import { useState } from "react";
+import { useState, FC } from "react";
 import CalculatorPanel from "@/components/tools/common/CalculatorPanel";
 import NumberField from "@/components/inputs/NumberField";
 import SelectField from "@/components/inputs/SelectField";
 import { bsaDuBois, bsaGehanGeorge, bsaHaycock } from "./formulas";
 
-const ASCSelectorCalculator: React.FC<{ open: boolean; onOpenChange: (v:boolean)=>void; color?: string; }>
+const ASCSelectorCalculator: FC<{ open: boolean; onOpenChange: (v:boolean)=>void; color?: string; }>
 = ({ open, onOpenChange, color = '#10b981' }) => {
-  const [w, setW] = React.useState<number | "">("");
-  const [h, setH] = React.useState<number | "">("");
-  const [formula, setFormula] = React.useState<'dubois'|'gehan'|'haycock'>('dubois');
-  const [res, setRes] = React.useState<number | null>(null);
-  const [error, setError] = React.useState("");
+  const [w, setW] = useState<number | "">("");
+  const [h, setH] = useState<number | "">("");
+  const [formula, setFormula] = useState<'dubois'|'gehan'|'haycock'>('dubois');
+  const [res, setRes] = useState<number | null>(null);
+  const [error, setError] = useState("");
 
   const calc = () => {
     setError("");

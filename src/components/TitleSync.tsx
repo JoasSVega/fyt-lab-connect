@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, FC } from "react";
 import { useLocation } from "react-router-dom";
 
 const SITE_NAME = "Farmacología y Terapéutica";
@@ -40,10 +40,10 @@ function computeTitle(pathname: string): string {
   return `${normalized} — ${SITE_NAME}`;
 }
 
-const TitleSync: React.FC = () => {
+const TitleSync: FC = () => {
   const { pathname } = useLocation();
 
-  React.useEffect(() => {
+  useEffect(() => {
     const next = computeTitle(pathname);
     // Set title at the end of the tick to win over any in-page effects
     const id = window.setTimeout(() => {

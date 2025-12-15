@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, FC } from "react";
 import CalculatorModal, { FieldSpec, FormulaSpec, CalculationResult } from "@/components/calculators/CalculatorModal";
 import { Brain } from "lucide-react";
 
@@ -108,7 +108,7 @@ const formulas: ReadonlyArray<FormulaSpec> = [
   },
 ];
 
-const GlasgowTool: React.FC = () => {
+const GlasgowTool: FC = () => {
   return (
     <CalculatorModal
       id="glasgow-tool"

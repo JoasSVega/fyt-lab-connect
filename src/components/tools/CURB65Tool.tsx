@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, FC } from "react";
 import CalculatorModal, { FieldSpec, FormulaSpec, CalculationResult } from "@/components/calculators/CalculatorModal";
 import { TestTube } from "lucide-react";
 
@@ -72,7 +72,7 @@ const formulas: ReadonlyArray<FormulaSpec> = [
   },
 ];
 
-const CURB65Tool: React.FC = () => {
+const CURB65Tool: FC = () => {
   // Predicate: all required fields present & valid before enabling Calcular
   const canCalculate = (values: Record<string, unknown>): boolean => {
     for (const f of fields) {
