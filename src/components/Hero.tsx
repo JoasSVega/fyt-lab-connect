@@ -1,26 +1,34 @@
 // src/components/Hero.tsx
-import SafeImage from "./SafeImage";
 
 export default function Hero() {
   return (
     <section
       id="inicio"
       className="hero-container"
+      style={{ minHeight: '500px' }}
     >
-      {/* Imagen de fondo con srcset optimizado - LCP optimizado */}
-      <SafeImage 
-        src="/images/hero-index-medium.webp"
-        srcSet="/images/hero-index-small.webp 640w, /images/hero-index-medium.webp 1024w, /images/hero-index-large.webp 1920w"
-        sizes="100vw"
-        alt="" 
-        className="hero-image" 
-        aria-hidden="true"
-        width={1920}
-        height={1080}
-        loading="eager"
-        decoding="sync"
-        fetchpriority="high"
-      />
+      {/* Imagen de fondo optimizada para móviles - LCP crítico */}
+      <picture>
+        <source 
+          media="(min-width: 1024px)" 
+          srcSet="/images/hero-index-large-medium.webp" 
+        />
+        <source 
+          media="(min-width: 640px)" 
+          srcSet="/images/hero-index-medium-medium.webp" 
+        />
+        <img 
+          src="/images/hero-index-small-small.webp" 
+          alt=""
+          className="hero-image"
+          aria-hidden="true"
+          width={1920}
+          height={1080}
+          fetchPriority="high"
+          loading="eager"
+          decoding="sync"
+        />
+      </picture>
       {/* Overlay oscuro unificado */}
       <div className="hero-overlay" />
       {/* Contenido centrado con text-shadow */}
