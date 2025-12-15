@@ -10,7 +10,7 @@ import { useEffect, useCallback } from 'react';
  */
 export const usePrefetch = () => {
   const prefetch = useCallback(
-    (componentImporter: () => Promise<any>) => {
+    (componentImporter: () => Promise<unknown>) => {
       // Crear un script tag temporalmente para cargar en background
       // o usar dynamic import que está soportado nativamente
       try {

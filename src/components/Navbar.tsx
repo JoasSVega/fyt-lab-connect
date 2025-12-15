@@ -117,7 +117,9 @@ const Navbar = () => {
                 key={item.name}
                 className="relative"
                 onMouseEnter={() => {
-                  item.isDropdown && handleMouseEnter(item.name);
+                  if (item.isDropdown) {
+                    handleMouseEnter(item.name);
+                  }
                   // Prefetch cuando se hace hover
                   if (item.prefetchImporter) {
                     prefetch(item.prefetchImporter);
