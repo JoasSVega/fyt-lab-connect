@@ -189,7 +189,7 @@ const Team = ({ compact = false }: { compact?: boolean }) => {
                           <SafeImage
                             src={`${base}-small.webp`}
                             srcSet={`${base}-small.webp 220w, ${base}-medium.webp 440w`}
-                            sizes="220px"
+                            sizes="(max-width: 640px) 180px, 220px"
                             alt={`Retrato de ${member.name}, ${member.role}`}
                             className="mb-5 shadow-soft border-2 border-fyt-blue/30"
                             style={{ width: 220, height: 220, objectFit: "cover", borderRadius: 16 }}

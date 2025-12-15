@@ -92,7 +92,7 @@ const Navbar = () => {
                 <img
                   src="/images/logo-fyt-small.webp"
                   srcSet="/images/logo-fyt-small.webp 100w, /images/logo-fyt-medium.webp 200w"
-                  sizes="(max-width: 640px) 100px, (max-width: 1024px) 150px, 200px"
+                  sizes="(max-width: 640px) 40px, (max-width: 1024px) 56px, 80px"
                   alt="Logo Grupo FyT, semillero de investigación en farmacología y terapéutica"
                   loading="eager"
                   decoding="async"
