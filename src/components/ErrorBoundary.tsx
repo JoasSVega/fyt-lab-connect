@@ -44,7 +44,6 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo): void {
     // Log cleanly for diagnostics without spamming the console
-    // eslint-disable-next-line no-console
     console.error("UI ErrorBoundary:", { error, errorInfo });
   }
 

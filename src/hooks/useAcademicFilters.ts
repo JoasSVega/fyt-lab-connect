@@ -28,7 +28,7 @@ export interface FilterableItem {
   institution?: string;
   descripcion?: string;
   description?: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 /**

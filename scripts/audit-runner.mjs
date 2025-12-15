@@ -180,7 +180,6 @@ async function injectAxeAndRun(page) {
   const axeUrl = 'https://cdn.jsdelivr.net/npm/axe-core@4.7.0/axe.min.js';
   await page.addScriptTag({ url: axeUrl });
   const results = await page.evaluate(async () => {
-    // eslint-disable-next-line no-undef
     return await axe.run({
       runOnly: {
         type: 'tag',

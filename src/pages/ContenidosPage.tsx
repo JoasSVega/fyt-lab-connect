@@ -15,11 +15,11 @@ const DivulgacionCientificaPage: React.FC = () => {
   // Separate by category
   const videos = useMemo(() => 
     divulgacionCientifica.filter((c: DivulgacionCientificaType) => c.categoria === "audiovisual"),
-    [divulgacionCientifica]
+    []
   );
   const podcasts = useMemo(() => 
     divulgacionCientifica.filter((c: DivulgacionCientificaType) => c.categoria === "podcast"),
-    [divulgacionCientifica]
+    []
   );
 
   const hasVideos = videos.length > 0;

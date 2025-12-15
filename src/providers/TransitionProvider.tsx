@@ -17,6 +17,45 @@ export const useTransition = (): TransitionContextValue => {
   return ctx;
 };
 
+// Helper: Detectar si una ruta es una página principal
+const isMainPage = (path: string): boolean => {
+  const mainPages = [
+    '/',
+    '/noticias',
+    '/herramientas',
+    '/sobre-nosotros',
+    '/contactos',
+    '/equipo',
+    '/investigacion',
+    '/PrivacyPolicy',
+    '/TermsOfUse',
+    '/CodeOfEthics',
+  ];
+  return mainPages.includes(path);
+};
+
+// Helper: Detectar si debe mostrarse el loader
+const shouldShowLoader = (fromPath: string, toPath: string): boolean => {
+  const fromIsMain = isMainPage(fromPath);
+  const toIsMain = isMainPage(toPath);
+  
+  // Mostrar loader si:
+  // 1. De página principal a página principal
+  // 2. De subpágina a página principal
+  // 3. De página principal a subpágina
+  // NO mostrar si: De subpágina a subpágina
+  
+  if (!fromIsMain && !toIsMain) {
+    // Ambas son subpáginas, verificar si son del mismo grupo
+    const fromGroup = fromPath.split('/')[1] || '';
+    const toGroup = toPath.split('/')[1] || '';
+    // No mostrar loader entre subpáginas del mismo grupo
+    if (fromGroup === toGroup) return false;
+  }
+  
+  return true;
+};
+
 interface TransitionProviderProps {
   children: ReactNode;
   minLoaderDuration?: number;
@@ -33,6 +72,7 @@ export const TransitionProvider = ({
   const [imagesPreloaded, setImagesPreloaded] = useState(false);
   const watchdogTimer = useRef<number | null>(null);
   const startedAt = useRef<number>(0);
+  const previousPath = useRef<string>(location.pathname);
 
   // Preload de imágenes
   const preloadImages = useCallback((urls: string[]): Promise<void> => {
@@ -62,30 +102,34 @@ export const TransitionProvider = ({
 
   // Iniciar transición en cada cambio de ruta
   useEffect(() => {
-    setIsTransitioning(true);
-    setPageReadySignaled(false);
-    setMinTimeElapsed(false);
-    // Por defecto asumimos que no hay imágenes críticas; las páginas que
-    // sí tengan imágenes llamarán a preloadImages y actualizarán este estado.
-    setImagesPreloaded(true);
-    lockBodyScroll();
-    const win = window as Window & { __routeTransitionActive?: boolean };
-    win.__routeTransitionActive = true;
-    try {
-      window.dispatchEvent(new CustomEvent('route-transition-start'));
-    } catch { /* noop */ }
+    const currentPath = location.pathname;
+    const prevPath = previousPath.current;
+    
+    // Verificar si debe mostrarse el loader
+    const showLoader = shouldShowLoader(prevPath, currentPath);
+    
+    if (showLoader) {
+      setIsTransitioning(true);
+      setPageReadySignaled(false);
+      setMinTimeElapsed(false);
+      setImagesPreloaded(true);
+      lockBodyScroll();
+      const win = window as Window & { __routeTransitionActive?: boolean };
+      win.__routeTransitionActive = true;
+      try {
+        window.dispatchEvent(new CustomEvent('route-transition-start'));
+      } catch { /* noop */ }
 
-    const timer = setTimeout(() => {
-      setMinTimeElapsed(true);
-    }, minLoaderDuration);
+      const timer = setTimeout(() => {
+        setMinTimeElapsed(true);
+      }, minLoaderDuration);
 
-    // Watchdog: never allow the loader to hang indefinitely due to unforeseen issues
-    startedAt.current = Date.now();
-    if (watchdogTimer.current) {
-      clearTimeout(watchdogTimer.current);
-    }
-    watchdogTimer.current = window.setTimeout(() => {
-      if (isTransitioning) {
+      // Watchdog: never allow the loader to hang indefinitely
+      startedAt.current = Date.now();
+      if (watchdogTimer.current) {
+        clearTimeout(watchdogTimer.current);
+      }
+      watchdogTimer.current = window.setTimeout(() => {
         setIsTransitioning(false);
         try {
           unlockBodyScroll();
@@ -98,16 +142,27 @@ export const TransitionProvider = ({
         try {
           window.dispatchEvent(new CustomEvent('route-transition-end'));
         } catch { /* noop */ }
-      }
-    }, Math.max(8000, minLoaderDuration + 5000));
+      }, Math.max(8000, minLoaderDuration + 5000));
 
-    return () => {
-      clearTimeout(timer);
-      if (watchdogTimer.current) {
-        clearTimeout(watchdogTimer.current);
-        watchdogTimer.current = null;
-      }
-    };
+      // Actualizar previousPath
+      previousPath.current = currentPath;
+
+      return () => {
+        clearTimeout(timer);
+        if (watchdogTimer.current) {
+          clearTimeout(watchdogTimer.current);
+          watchdogTimer.current = null;
+        }
+      };
+    } else {
+      // No mostrar loader, solo actualizar la ruta anterior
+      previousPath.current = currentPath;
+      // Asegurar que no hay transición activa
+      setIsTransitioning(false);
+      setPageReadySignaled(true);
+      setMinTimeElapsed(true);
+      setImagesPreloaded(true);
+    }
   }, [location.pathname, minLoaderDuration]);
 
   // Finalizar transición cuando TODO esté listo

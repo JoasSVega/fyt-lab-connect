@@ -79,7 +79,7 @@ export interface ExternalAPIConfig {
  * Función helper para calcular métricas
  * (Stub para integración futura)
  */
-export const calculateMetrics = (publications: any[]): AcademicMetrics => {
+export const calculateMetrics = (publications: unknown[]): AcademicMetrics => {
   return {
     publicationsByType: {
       articles: 0,
@@ -96,7 +96,7 @@ export const calculateMetrics = (publications: any[]): AcademicMetrics => {
  */
 export const syncFromExternalAPIs = async (
   config: ExternalAPIConfig
-): Promise<any> => {
+): Promise<unknown> => {
   console.log(
     "🔗 Estructura preparada para sincronización con APIs externas",
     config
