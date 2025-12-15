@@ -211,7 +211,7 @@ const Carrusel: React.FC<CarruselProps> = ({
                     <img
                       src={`${base}-medium.webp`}
                       srcSet={`${base}-small.webp 480w, ${base}-medium.webp 800w, ${base}-large.webp 1200w`}
-                      sizes="(max-width: 640px) 85vw, (max-width: 768px) 70vw, (max-width: 1024px) 48vw, (max-width: 1280px) 31vw, (max-width: 1536px) 24vw, 19vw"
+                      sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 300px"
                       alt={item.title}
                       loading={loadingMode}
                       decoding="async"

@@ -17,7 +17,7 @@ const Footer: React.FC = () => {
               <SafeImage
                 src="/images/logo-fyt-medium.webp"
                 srcSet="/images/logo-fyt-small.webp 96w, /images/logo-fyt-medium.webp 192w, /images/logo-fyt-large.webp 288w"
-                sizes="96px"
+                sizes="(max-width: 640px) 150px, 300px"
                 alt="Logo Grupo FyT"
                 loading="lazy"
                 decoding="async"
