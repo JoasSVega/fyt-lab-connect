@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, FC } from "react";
 import { useNavigate } from "react-router-dom";
 import { Ruler, Maximize2, Percent, Flame, Target, Droplets, Activity } from "lucide-react";
 import Seo from "@/components/Seo";
@@ -6,15 +6,15 @@ import { usePageReady } from "@/hooks/usePageReady";
 import CalculatorModal from "@/components/calculators/CalculatorModal";
 import { CalculatorsRegistry } from "@/lib/calculators";
 
-const Antropometricos: React.FC = () => {
+const Antropometricos: FC = () => {
   usePageReady(); // Sincronización con TransitionProvider
-  const [openIMC, setOpenIMC] = React.useState(false);
-  const [openBSA, setOpenBSA] = React.useState(false);
-  const [openBF, setOpenBF] = React.useState(false);
-  const [openPI, setOpenPI] = React.useState(false);
-  const [openBMR, setOpenBMR] = React.useState(false);
-  const [openACT, setOpenACT] = React.useState(false);
-  const [openMMC, setOpenMMC] = React.useState(false);
+  const [openIMC, setOpenIMC] = useState(false);
+  const [openBSA, setOpenBSA] = useState(false);
+  const [openBF, setOpenBF] = useState(false);
+  const [openPI, setOpenPI] = useState(false);
+  const [openBMR, setOpenBMR] = useState(false);
+  const [openACT, setOpenACT] = useState(false);
+  const [openMMC, setOpenMMC] = useState(false);
 
   const navigate = useNavigate();
 

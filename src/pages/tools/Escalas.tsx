@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, FC, ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import { ClipboardCheck, HeartPulse, Brain, AlertTriangle, TestTube } from "lucide-react";
 import Seo from "@/components/Seo";
@@ -8,11 +8,11 @@ import GlasgowTool from "@/components/tools/GlasgowTool";
 import HASBLEDTool from "@/components/tools/HASBLEDTool";
 import CHA2DS2VAScTool from "@/components/tools/CHA2DS2VAScTool";
 
-const Escalas: React.FC = () => {
+const Escalas: FC = () => {
   usePageReady(); // Sincronización con TransitionProvider
   const navigate = useNavigate();
 
-  const Card = ({ icon, title, desc, color = "#a855f7", action }: { icon: React.ReactNode; title: string; desc: string; color?: string; action?: React.ReactNode; }) => {
+  const Card = ({ icon, title, desc, color = "#a855f7", action }: { icon: ReactNode; title: string; desc: string; color?: string; action?: ReactNode; }) => {
     return (
       <div className="tool-card rounded-2xl border-2 bg-white/90 shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-xl p-6 flex flex-col" role="article" aria-label={title}>
         <div className="flex flex-col sm:flex-row items-center sm:items-center gap-3 mb-3 min-w-0 text-center sm:text-left">

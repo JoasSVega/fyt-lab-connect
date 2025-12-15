@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, FC, ReactNode } from "react";
 import { Stethoscope, Ruler, FlaskConical, ClipboardCheck, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
@@ -6,7 +6,7 @@ import Seo from "@/components/Seo";
 import { usePageReady } from "@/hooks/usePageReady";
 import SafeImage from "@/components/SafeImage";
 
-const Card = ({ icon, title, desc, to, color }: { icon: React.ReactNode; title: string; desc: string; to: string; color: string; }) => {
+const Card = ({ icon, title, desc, to, color }: { icon: ReactNode; title: string; desc: string; to: string; color: string; }) => {
   const navigate = useNavigate();
   return (
     <div className="rounded-2xl border-2 bg-white/90 shadow-xl hover:shadow-2xl transition-all p-6 flex flex-col">
@@ -28,7 +28,7 @@ const Card = ({ icon, title, desc, to, color }: { icon: React.ReactNode; title: 
   );
 };
 
-const IndexTools: React.FC = () => {
+const IndexTools: FC = () => {
   usePageReady({
     responsiveImages: ["/images/hero-herramientas"],
   });

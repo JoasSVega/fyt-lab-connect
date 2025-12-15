@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState, FC } from "react";
 import { useNavigate } from "react-router-dom";
 import { FlaskConical } from "lucide-react";
 import Seo from "@/components/Seo";
 import { usePageReady } from "@/hooks/usePageReady";
 // Cards migradas a la sección de Cálculos Clínicos
 
-const Avanzados: React.FC = () => {
+const Avanzados: FC = () => {
   usePageReady(); // Sincronización con TransitionProvider
   const navigate = useNavigate();
   // Calculadoras avanzadas específicas migradas a Cálculos Clínicos y Farmacéuticos
