@@ -5,167 +5,163 @@ import type { Publicacion } from "@/types/investigacion";
 import { usePageReady } from "@/hooks/usePageReady";
 import SmallHero from "@/components/shared/SmallHero";
 import ResearchSubNav from "@/components/investigacion/ResearchSubNav";
-import PublicationCard from "@/components/publications/PublicationCard";
-import PublicationCategoryTabs from "@/components/publications/PublicationCategoryTabs";
-import PlaceholderSection from "@/components/investigacion/PlaceholderSection";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
-
-type PublicationType = "articulo" | "libro" | "capitulo" | "divulgacion";
+import Seo from "@/components/Seo";
+import PublicacionItem from "@/components/investigacion/PublicacionItem";
+import SmartToolbar from "@/components/investigacion/SmartToolbar";
 
 const PublicacionesPage: React.FC = () => {
   usePageReady();
-  
-  const [activeTab, setActiveTab] = useState<PublicationType | "">("");
-  const [yearFilter, setYearFilter] = useState("");
+
+  // Filtros simples con estado local
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedYear, setSelectedYear] = useState("");
+  const [selectedType, setSelectedType] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
 
-  // Get unique years
-  const years = useMemo(() => 
-    [...new Set(publicaciones.map(p => p.anio))].sort((a, b) => b - a),
-    []
-  );
-
-  // Count by type
-  const counts = useMemo(() => {
-    const c: Record<string, number> = { all: publicaciones.length };
-    publicaciones.forEach((p: Publicacion) => {
-      c[p.tipo] = (c[p.tipo] || 0) + 1;
-    });
-    return c;
-  }, []);
-
-  // Filter publications
-  const filteredPublications = useMemo(() => {
-    return publicaciones.filter((p: Publicacion) => {
-      if (activeTab && p.tipo !== activeTab) return false;
-      if (yearFilter && p.anio !== Number(yearFilter)) return false;
-      if (searchQuery) {
-        const query = searchQuery.toLowerCase();
-        return (
-          p.titulo.toLowerCase().includes(query) ||
-          p.autores.toLowerCase().includes(query) ||
-          (p.revista?.toLowerCase().includes(query) ?? false)
-        );
-      }
-      return true;
-    });
-  }, [activeTab, yearFilter, searchQuery]);
+  // Reset handler para limpiar todos los filtros
+  const handleReset = () => {
+    setSearchQuery("");
+    setSelectedYear("");
+    setSelectedType("");
+  };
 
   const hasData = publicaciones.length > 0;
 
+  // Cálculo inmediato de opciones disponibles (no bloquea render)
+  const availableYears = useMemo(
+    () => [...new Set(publicaciones.map(p => p.anio))].sort((a, b) => b - a),
+    []
+  );
+  const availableTypes = useMemo(
+    () => [...new Set(publicaciones.map(p => p.tipo))].sort(),
+    []
+  );
+
+  // Filtrado optimizado
+  const filteredItems = useMemo(() => {
+    return publicaciones.filter((pub) => {
+      const matchesSearch = searchQuery.trim() === "" ||
+        [pub.titulo, pub.autores, pub.revista, pub.editorial, pub.descripcion]
+          .filter(Boolean)
+          .join(" ")
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase());
+      const matchesYear = selectedYear === "" || pub.anio === Number(selectedYear);
+      const matchesType = selectedType === "" || pub.tipo === selectedType;
+      return matchesSearch && matchesYear && matchesType;
+    });
+  }, [searchQuery, selectedYear, selectedType]);
+
+  // Paginación: 10 items por página
+  const itemsPerPage = 10;
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const pagedItems = filteredItems.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.max(1, Math.ceil(filteredItems.length / itemsPerPage));
+  const goPrev = () => setCurrentPage((p) => Math.max(1, p - 1));
+  const goNext = () => setCurrentPage((p) => Math.min(totalPages, p + 1));
+
+  // Reset page when filters change
+  React.useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, selectedYear, selectedType]);
+
   return (
     <div className="w-full bg-background">
+      {/* SEO */}
+      <Seo
+        title="Publicaciones Científicas y Académicas – FYT Lab Connect"
+        description="Publicaciones científicas del Grupo FyT en revistas indexadas, libros y espacios editoriales académicos."
+        author="FYT Lab Connect"
+        robots="index, follow"
+        canonical="https://fytlabconnect.com/investigacion/publicaciones"
+      />
+
+      {/* Hero section */}
       <SmallHero
         title="Publicaciones Científicas y Académicas"
         subtitle="Producción intelectual del Grupo FyT en revistas indexadas, libros y espacios editoriales científicos."
       />
 
+      {/* Navigation */}
       <ResearchSubNav />
 
-      <section className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-12 md:py-16">
+      {/* Smart Toolbar - renders immediately */}
+      <SmartToolbar
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
+        onReset={handleReset}
+        availableYears={availableYears}
+        selectedYear={selectedYear}
+        onYearChange={setSelectedYear}
+        availableTypes={availableTypes}
+        selectedType={selectedType}
+        onTypeChange={setSelectedType}
+        resultCount={filteredItems.length}
+        totalCount={publicaciones.length}
+        isLoading={false}
+      />
+
+      {/* Main content */}
+      <section className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-8 md:py-12">
         {hasData ? (
           <>
-            {/* Category tabs */}
-            <ScrollReveal>
-              <PublicationCategoryTabs
-                activeTab={activeTab}
-                onTabChange={setActiveTab}
-                counts={counts}
-              />
-            </ScrollReveal>
 
-            {/* Additional filters */}
-            <ScrollReveal delay={100}>
-              <div className="flex flex-wrap gap-3 mt-6">
-                <select
-                  value={yearFilter}
-                  onChange={(e) => setYearFilter(e.target.value)}
-                  className="px-3 py-2 rounded-lg border border-border bg-card text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20"
-                  aria-label="Filtrar por año"
-                >
-                  <option value="">Año (todos)</option>
-                  {years.map((year) => (
-                    <option key={year} value={year}>
-                      {year}
-                    </option>
-                  ))}
-                </select>
-
-                <input
-                  type="text"
-                  placeholder="Buscar por título, autor o revista..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="flex-1 min-w-[200px] max-w-md px-3 py-2 rounded-lg border border-border bg-card text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20"
-                  aria-label="Buscar publicación"
-                />
-
-                {(activeTab || yearFilter || searchQuery) && (
-                  <button
-                    onClick={() => {
-                      setActiveTab("");
-                      setYearFilter("");
-                      setSearchQuery("");
-                    }}
-                    className="px-3 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    Limpiar filtros
-                  </button>
-                )}
-              </div>
-            </ScrollReveal>
-
-            {/* Results count */}
-            <ScrollReveal delay={150}>
-              <p className="text-sm text-muted-foreground mt-6 mb-8">
-                Mostrando {filteredPublications.length} de {publicaciones.length} publicaciones
-              </p>
-            </ScrollReveal>
-
-            {/* Publications grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredPublications.map((pub, idx) => (
-                <ScrollReveal key={pub.id} delay={idx * 50}>
-                  <PublicationCard
-                    title={pub.titulo}
-                    authors={pub.autores}
-                    journal={pub.revista || pub.editorial || ""}
-                    year={pub.anio}
-                    type={pub.tipo}
-                    summary={pub.descripcion}
-                    doi={pub.doi}
-                    indexation={pub.indexacion}
-                  />
+            {/* Lista premium de publicaciones (row layout) */}
+            {filteredItems.length > 0 ? (
+              <>
+                <ScrollReveal>
+                  <div className="flex flex-col gap-4">
+                    {pagedItems.map((pub, idx) => {
+                      const fecha = `${pub.anio}-${String(pub.mes || 1).padStart(2, "0")}-01`;
+                      return (
+                        <PublicacionItem
+                          key={pub.id || `${pub.doi || pub.titulo}-${idx}`}
+                          titulo={pub.titulo}
+                          autores={pub.autores}
+                          fecha={fecha}
+                          tipo={pub.tipo}
+                          institucion={pub.revista || pub.editorial}
+                          enlace={pub.enlace}
+                          descripcion={pub.descripcion}
+                          doi={pub.doi}
+                          tags={pub.tags}
+                        />
+                      );
+                    })}
+                  </div>
                 </ScrollReveal>
-              ))}
-            </div>
 
-            {/* Empty state */}
-            {filteredPublications.length === 0 && (
-              <ScrollReveal>
-                <div className="text-center py-16">
-                  <p className="text-muted-foreground">
-                    No se encontraron publicaciones con los filtros seleccionados.
-                  </p>
+                <div className="mt-8 flex items-center justify-center gap-4">
                   <button
-                    onClick={() => {
-                      setActiveTab("");
-                      setYearFilter("");
-                      setSearchQuery("");
-                    }}
-                    className="mt-4 text-primary hover:underline"
+                    onClick={goPrev}
+                    disabled={currentPage === 1}
+                    className="px-4 py-2 border border-slate-300 rounded-md text-slate-700 disabled:opacity-50 hover:bg-slate-100 transition-colors"
                   >
-                    Limpiar filtros
+                    Anterior
                   </button>
+                  <span className="text-sm text-slate-600">Página {currentPage} de {totalPages}</span>
+                  <button
+                    onClick={goNext}
+                    disabled={currentPage === totalPages}
+                    className="px-4 py-2 border border-slate-300 rounded-md text-slate-700 disabled:opacity-50 hover:bg-slate-100 transition-colors"
+                  >
+                    Siguiente
+                  </button>
+                </div>
+              </>
+            ) : (
+              // 🆕 PASO 4: Estado vacío académico
+              <ScrollReveal>
+                <div className="py-16 flex flex-col items-center justify-center border border-dashed border-slate-300 rounded-lg">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 text-slate-400 mb-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 20v-2a4 4 0 0 1 4-4h.5"/><path d="M2 12h6"/><path d="M4 10v4"/><circle cx="9" cy="7" r="4"/><path d="m16 11 2 2 4-4"/></svg>
+                  <p className="text-slate-600">No hay publicaciones registradas en esta categoría aún.</p>
                 </div>
               </ScrollReveal>
             )}
           </>
-        ) : (
-          <ScrollReveal>
-            <PlaceholderSection message="Aquí se cargará el listado de publicaciones científicas y académicas del Grupo FyT." />
-          </ScrollReveal>
-        )}
+        ) : null}
       </section>
     </div>
   );

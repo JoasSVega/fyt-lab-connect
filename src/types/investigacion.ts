@@ -38,14 +38,13 @@ export interface Publicacion {
 export interface Evento {
   id: number;
   titulo: string;
-  autores?: string;
   anio: number;
   mes?: number;
   tipo: string;
-  participacion: string;
-  institucion?: string;
-  ciudad?: string;
-  lugar?: string;
+  ciudad: string;
+  pais: string;
+  ambito: "Nacional" | "Internacional";
+  participacion: "Ponente" | "Ponente Magistral" | "Organizador";
   enlace?: string;
   descripcion?: string;
   tags?: string[];
@@ -80,6 +79,18 @@ export interface ContenidoDigital {
   enlace?: string;
   descripcion?: string;
   tags?: string[];
+}
+
+export interface DivulgacionCientifica {
+  id: number;
+  titulo: string;
+  anio: number;
+  tipo: string;
+  categoria: "audiovisual" | "podcast";
+  enfoque: string;
+  descripcion: string;
+  enlace: string;
+  plataforma?: string;
 }
 
 // Tipo para tutorías y trabajos dirigidos

@@ -20,7 +20,7 @@ export const pathProyectos = "/investigacion/proyectos";
 export const pathPublicaciones = "/investigacion/publicaciones";
 export const pathEventos = "/investigacion/eventos";
 export const pathFormacion = "/investigacion/formacion";
-export const pathContenidos = "/investigacion/contenidos";
+export const pathDivulgacionCientifica = "/investigacion/divulgacion-cientifica";
 
 const SobreNosotros = React.lazy(() => import("./pages/SobreNosotros"));
 const Index = React.lazy(() => import("./pages/Index"));
@@ -78,7 +78,7 @@ function AnimatedRoutes() {
           <Route path={pathPublicaciones} element={<PublicacionesPage />} />
           <Route path={pathEventos} element={<EventosPage />} />
           <Route path={pathFormacion} element={<FormacionPage />} />
-          <Route path={pathContenidos} element={<ContenidosPage />} />
+          <Route path={pathDivulgacionCientifica} element={<ContenidosPage />} />
           
           {/* Página principal */}
           <Route path="/" element={<Index />} />

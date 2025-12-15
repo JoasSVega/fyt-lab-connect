@@ -1,158 +1,103 @@
-// Página de Producción de Contenido Digital (Videos/Podcasts)
+// Página de Divulgación Científica y Transferencia del Conocimiento
 import React, { useMemo } from "react";
-import { contenidosDigitales } from "@/data/contenidosDigitales";
-import type { ContenidoDigital } from "@/types/investigacion";
+import { divulgacionCientifica } from "@/data/contenidosDigitales";
+import type { DivulgacionCientifica as DivulgacionCientificaType } from "@/types/investigacion";
 import { usePageReady } from "@/hooks/usePageReady";
 import SmallHero from "@/components/shared/SmallHero";
 import ResearchSubNav from "@/components/investigacion/ResearchSubNav";
-import PlaceholderSection from "@/components/investigacion/PlaceholderSection";
-import ContenidoDigitalItem from "@/components/investigacion/ContenidoDigitalItem";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import Seo from "@/components/Seo";
+import ContenidoDigitalItem from "@/components/investigacion/ContenidoDigitalItem";
 
-const ContenidosPage: React.FC = () => {
+const DivulgacionCientificaPage: React.FC = () => {
   usePageReady();
 
-  // Separate by type
+  // Separate by category
   const videos = useMemo(() => 
-    contenidosDigitales.filter((c: ContenidoDigital) => c.tipo === "video"),
-    []
+    divulgacionCientifica.filter((c: DivulgacionCientificaType) => c.categoria === "audiovisual"),
+    [divulgacionCientifica]
   );
   const podcasts = useMemo(() => 
-    contenidosDigitales.filter((c: ContenidoDigital) => c.tipo === "podcast"),
-    []
-  );
-  const webinars = useMemo(() => 
-    contenidosDigitales.filter((c: ContenidoDigital) => c.tipo === "webinar"),
-    []
+    divulgacionCientifica.filter((c: DivulgacionCientificaType) => c.categoria === "podcast"),
+    [divulgacionCientifica]
   );
 
   const hasVideos = videos.length > 0;
   const hasPodcasts = podcasts.length > 0;
-  const hasWebinars = webinars.length > 0;
+
+  // Paginación: 10 items por página
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const itemsPerPage = 10;
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const totalPages = Math.max(1, Math.ceil(divulgacionCientifica.length / itemsPerPage));
+  const pagedItems = divulgacionCientifica.slice(indexOfFirstItem, indexOfLastItem);
+  const goPrev = () => setCurrentPage((p) => Math.max(1, p - 1));
+  const goNext = () => setCurrentPage((p) => Math.min(totalPages, p + 1));
 
   return (
     <div className="w-full bg-background">
       <Seo
-        title="Contenidos Digitales – FYT Lab Connect"
-        description="Videos, podcasts, webinars y contenidos de divulgación científica producidos por el Grupo de Investigación FyT."
+        title="Producción Audiovisual y Sonora – FYT Lab Connect"
+        description="Producción audiovisual y sonora asociada a proyectos de investigación en ciencias farmacéuticas del Grupo FyT."
         author="FYT Lab Connect"
         robots="index, follow"
-        canonical="https://fytlabconnect.com/investigacion/contenidos"
+        canonical="https://fytlabconnect.com/investigacion/divulgacion-cientifica"
       />
 
       <SmallHero
-        title="Producción de Contenido Digital"
-        subtitle="Videos, podcasts y material multimedia para la divulgación del conocimiento científico en farmacología y terapéutica."
+        title="Producción Audiovisual y Sonora"
+        subtitle="Producción audiovisual y sonora asociada a proyectos de investigación en ciencias farmacéuticas."
       />
 
       <ResearchSubNav />
 
       <section className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-12 md:py-16">
-        {/* Sección: Videos */}
         <ScrollReveal>
-          <div className="mb-16">
-            <div className="text-center mb-10">
-              <h2 className="text-2xl sm:text-3xl font-poppins font-bold text-foreground mb-3">
-                Videos Educativos
-              </h2>
-              <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
-                Material audiovisual sobre farmacología, terapéutica y ciencias biomédicas.
-              </p>
-            </div>
-            {hasVideos ? (
+          {divulgacionCientifica.length > 0 ? (
+            <>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {videos.map((video, idx) => (
-                  <ScrollReveal key={video.id} delay={idx * 50}>
-                    <ContenidoDigitalItem
-                      titulo={video.titulo}
-                      autores={video.autores}
-                      fecha={`${video.anio}`}
-                      tipo={video.tipo}
-                      enlace={video.enlace}
-                      descripcion={video.descripcion}
-                      duracion={video.duracion}
-                      tags={video.tags}
-                    />
-                  </ScrollReveal>
+                {pagedItems.map((item, idx) => (
+                  <ContenidoDigitalItem
+                    key={item.id}
+                    titulo={item.titulo}
+                    tipo={item.tipo}
+                    fecha={`${item.anio}-01-01`}
+                    descripcion={item.descripcion}
+                    enlace={item.enlace}
+                    tags={item.plataforma ? [item.plataforma] : undefined}
+                  />
                 ))}
               </div>
-            ) : (
-              <PlaceholderSection message="Aquí se cargará el catálogo de videos educativos y de divulgación científica del grupo." />
-            )}
-          </div>
-        </ScrollReveal>
 
-        {/* Sección: Podcasts */}
-        <ScrollReveal delay={100}>
-          <div className="mb-16 pt-12 border-t border-border">
-            <div className="text-center mb-10">
-              <h2 className="text-2xl sm:text-3xl font-poppins font-bold text-foreground mb-3">
-                Podcasts
-              </h2>
-              <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
-                Episodios de audio sobre investigación, salud y ciencia farmacéutica.
-              </p>
-            </div>
-            {hasPodcasts ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {podcasts.map((podcast, idx) => (
-                  <ScrollReveal key={podcast.id} delay={idx * 50}>
-                    <ContenidoDigitalItem
-                      titulo={podcast.titulo}
-                      autores={podcast.autores}
-                      fecha={`${podcast.anio}`}
-                      tipo={podcast.tipo}
-                      enlace={podcast.enlace}
-                      descripcion={podcast.descripcion}
-                      duracion={podcast.duracion}
-                      tags={podcast.tags}
-                    />
-                  </ScrollReveal>
-                ))}
+              <div className="mt-8 flex items-center justify-center gap-4">
+                <button
+                  onClick={goPrev}
+                  disabled={currentPage === 1}
+                  className="px-4 py-2 border border-slate-300 rounded-md text-slate-700 disabled:opacity-50 hover:bg-slate-100 transition-colors"
+                >
+                  Anterior
+                </button>
+                <span className="text-sm text-slate-600">Página {currentPage} de {totalPages}</span>
+                <button
+                  onClick={goNext}
+                  disabled={currentPage === totalPages}
+                  className="px-4 py-2 border border-slate-300 rounded-md text-slate-700 disabled:opacity-50 hover:bg-slate-100 transition-colors"
+                >
+                  Siguiente
+                </button>
               </div>
-            ) : (
-              <PlaceholderSection message="Aquí se cargará el listado de episodios de podcast producidos por el grupo de investigación." />
-            )}
-          </div>
-        </ScrollReveal>
-
-        {/* Sección: Webinars */}
-        <ScrollReveal delay={200}>
-          <div className="pt-12 border-t border-border">
-            <div className="text-center mb-10">
-              <h2 className="text-2xl sm:text-3xl font-poppins font-bold text-foreground mb-3">
-                Webinars y Conferencias Online
-              </h2>
-              <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
-                Seminarios virtuales y presentaciones académicas en línea.
-              </p>
+            </>
+          ) : (
+            <div className="py-16 flex flex-col items-center justify-center border border-dashed border-slate-300 rounded-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 text-slate-400 mb-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8"/><path d="M16 3H8a2 2 0 0 0-2 2v0"/><path d="M22 8H2"/><path d="M7 12h10"/><path d="M7 16h10"/></svg>
+              <p className="text-slate-600">No hay elementos registrados en esta categoría aún.</p>
             </div>
-            {hasWebinars ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {webinars.map((webinar, idx) => (
-                  <ScrollReveal key={webinar.id} delay={idx * 50}>
-                    <ContenidoDigitalItem
-                      titulo={webinar.titulo}
-                      autores={webinar.autores}
-                      fecha={`${webinar.anio}`}
-                      tipo={webinar.tipo}
-                      enlace={webinar.enlace}
-                      descripcion={webinar.descripcion}
-                      duracion={webinar.duracion}
-                      tags={webinar.tags}
-                    />
-                  </ScrollReveal>
-                ))}
-              </div>
-            ) : (
-              <PlaceholderSection message="Aquí se cargará el archivo de webinars y conferencias virtuales realizadas por miembros del grupo." />
-            )}
-          </div>
+          )}
         </ScrollReveal>
       </section>
     </div>
   );
 };
 
-export default ContenidosPage;
+export default DivulgacionCientificaPage;

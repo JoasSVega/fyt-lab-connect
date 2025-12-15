@@ -31,8 +31,8 @@ const navItems = [
     icon: GraduationCap 
   },
   { 
-    path: "/investigacion/contenidos", 
-    label: "Contenidos digitales", 
+    path: "/investigacion/divulgacion-cientifica", 
+    label: "Divulgación Científica", 
     icon: Video 
   },
 ];

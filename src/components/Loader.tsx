@@ -23,6 +23,12 @@ const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
   // Fase 6: Fade-out (0.4s) → 1.05s-1.45s
   // Total: 1.45s
 
+  const imgRef = React.useRef<HTMLImageElement | null>(null);
+
+  React.useEffect(() => {
+    imgRef.current?.setAttribute("fetchpriority", "high");
+  }, []);
+
   return (
     <motion.div
       className="fixed inset-0 z-[9999] flex items-center justify-center"
@@ -79,7 +85,7 @@ const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
             alt="Logo Grupo FyT"
             loading="eager"
             decoding="async"
-            fetchPriority="high"
+            ref={imgRef}
             className="w-64 h-auto"
             width={256}
             height={256}

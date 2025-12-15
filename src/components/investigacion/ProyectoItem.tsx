@@ -1,100 +1,84 @@
-// Componente base para item de proyecto
 import React from "react";
-import { ExternalLink, Users, Calendar, Tag, Building } from "lucide-react";
 
-export interface ProyectoItemProps {
+type ProyectoItemProps = {
   titulo: string;
   autores?: string;
-  fecha?: string;
-  tipo?: string;
+  fecha?: string; // ISO o legible
+  tipo?: string; // estado/tipo: "En curso", "Finalizado", etc.
   institucion?: string;
   enlace?: string;
   tags?: string[];
   descripcion?: string;
-}
+};
 
-const ProyectoItem: React.FC<ProyectoItemProps> = ({
+const getYear = (fecha?: string) => {
+  if (!fecha) return undefined;
+  const yearPart = fecha.substring(0, 4);
+  const year = Number(yearPart);
+  return Number.isNaN(year) ? undefined : year;
+};
+
+export const ProyectoItem: React.FC<ProyectoItemProps> = ({
   titulo,
-  autores,
   fecha,
   tipo,
   institucion,
-  enlace,
   tags,
   descripcion,
 }) => {
+  const year = getYear(fecha);
+  const estado = tipo || "Proyecto";
+
+  // Determinar si el proyecto está activo o finalizado
+  const isActive = estado.toLowerCase().includes("en curso") || estado.toLowerCase().includes("activo");
+  const isFinished = estado.toLowerCase().includes("finalizado") || estado.toLowerCase().includes("concluido");
+
   return (
-    <article className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300 border border-slate-100">
-      {/* Header con tipo y fecha */}
-      <div className="flex flex-wrap items-center gap-3 mb-4">
-        {tipo && (
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-medium">
-            <Tag className="w-3 h-3" />
-            {tipo}
-          </span>
-        )}
-        {fecha && (
-          <span className="inline-flex items-center gap-1.5 text-slate-500 text-xs">
-            <Calendar className="w-3 h-3" />
-            {fecha}
+    <article className="bg-white border border-gray-200 rounded-xl p-4 md:p-6 shadow-sm hover:shadow-md transition-all duration-300">
+      {/* Header */}
+      <div className="flex items-center justify-between mb-3">
+        <span className={`px-3 py-1 rounded-full text-xs font-semibold ring-1 ${
+          isActive 
+            ? "bg-emerald-50 text-emerald-700 ring-emerald-600/20" 
+            : isFinished 
+            ? "bg-gray-100 text-gray-600 ring-gray-500/20"
+            : "bg-indigo-50 text-indigo-700 ring-indigo-600/20"
+        }`}>
+          {estado}
+        </span>
+        {year && (
+          <span className="px-2.5 py-1 rounded-full bg-gray-100 text-gray-700 text-xs font-semibold">
+            {year}
           </span>
         )}
       </div>
 
-      {/* Título */}
-      <h3 className="text-base md:text-lg font-semibold text-slate-800 mb-3 leading-snug">
+      {/* Body */}
+      <h3 className="text-lg font-bold text-indigo-900 leading-snug mb-2">
         {titulo}
       </h3>
-
-      {/* Descripción opcional */}
       {descripcion && (
-        <p className="text-sm text-slate-600 mb-4 leading-relaxed line-clamp-3">
+        <p className="text-sm text-gray-600 leading-relaxed line-clamp-3">
           {descripcion}
         </p>
       )}
 
-      {/* Metadata */}
-      <div className="flex flex-wrap items-center gap-4 text-sm text-slate-500">
-        {autores && (
-          <span className="inline-flex items-center gap-1.5">
-            <Users className="w-4 h-4" />
-            <span className="line-clamp-1">{autores}</span>
-          </span>
-        )}
-        {institucion && (
-          <span className="inline-flex items-center gap-1.5">
-            <Building className="w-4 h-4" />
-            <span>{institucion}</span>
-          </span>
-        )}
-      </div>
-
-      {/* Tags */}
-      {tags && tags.length > 0 && (
-        <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-100">
-          {tags.map((tag, idx) => (
-            <span 
-              key={idx}
-              className="px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 text-xs"
+      {/* Footer */}
+      <div className="mt-4 flex flex-wrap items-center gap-2">
+        {Array.isArray(tags) &&
+          tags.filter(Boolean).map((tag) => (
+            <span
+              key={tag}
+              className="inline-flex items-center px-2.5 py-1 rounded-full bg-gray-100 text-gray-700 text-xs"
             >
               {tag}
             </span>
           ))}
-        </div>
-      )}
+      </div>
 
-      {/* Enlace */}
-      {enlace && (
-        <div className="mt-4 pt-4 border-t border-slate-100">
-          <a
-            href={enlace}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-primary hover:text-primary/80 text-sm font-medium transition-colors"
-          >
-            <ExternalLink className="w-4 h-4" />
-            Ver más detalles
-          </a>
+      {institucion && (
+        <div className="mt-3 text-xs text-gray-500">
+          Institución: <span className="font-medium text-gray-700">{institucion}</span>
         </div>
       )}
     </article>

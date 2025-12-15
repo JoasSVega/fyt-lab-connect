@@ -5,20 +5,29 @@ import type { Proyecto } from "@/types/investigacion";
 import { usePageReady } from "@/hooks/usePageReady";
 import SmallHero from "@/components/shared/SmallHero";
 import ResearchSubNav from "@/components/investigacion/ResearchSubNav";
-import ProjectCard from "@/components/projects/ProjectCard";
-import ProjectFilterBar from "@/components/projects/ProjectFilterBar";
+import ProyectoItem from "@/components/investigacion/ProyectoItem";
+import SmartToolbar from "@/components/investigacion/SmartToolbar";
 import PlaceholderSection from "@/components/investigacion/PlaceholderSection";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 
 const ProyectosPage: React.FC = () => {
   usePageReady();
   
-  const [statusFilter, setStatusFilter] = useState("");
-  const [typeFilter, setTypeFilter] = useState("");
-  const [yearFilter, setYearFilter] = useState("");
-  const [roleFilter, setRoleFilter] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedYear, setSelectedYear] = useState("");
+  const [selectedType, setSelectedType] = useState("");
+  const [selectedStatus, setSelectedStatus] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
 
-  // Extract unique values for filters
+  // Reset handler para limpiar todos los filtros
+  const handleReset = () => {
+    setSearchQuery("");
+    setSelectedYear("");
+    setSelectedType("");
+    setSelectedStatus("");
+  };
+
+  // Extract unique values for filters (immediate calculation)
   const years = useMemo(() => 
     [...new Set(proyectos.map(p => p.anio))].sort((a, b) => b - a),
     []
@@ -27,23 +36,42 @@ const ProyectosPage: React.FC = () => {
     [...new Set(proyectos.map(p => p.tipo))],
     []
   );
-  const roles = useMemo(() => 
-    [...new Set(proyectos.map(p => p.rol))],
+  const states = useMemo(() => 
+    [...new Set(proyectos.map(p => p.estado))],
     []
   );
 
   // Filter projects
   const filteredProjects = useMemo(() => {
     return proyectos.filter((p: Proyecto) => {
-      if (statusFilter && p.estado !== statusFilter) return false;
-      if (typeFilter && p.tipo !== typeFilter) return false;
-      if (yearFilter && p.anio !== Number(yearFilter)) return false;
-      if (roleFilter && p.rol !== roleFilter) return false;
-      return true;
+      const matchesSearch = searchQuery.trim() === "" ||
+        [p.titulo, p.descripcion, p.institucion]
+          .filter(Boolean)
+          .join(" ")
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase());
+      const matchesYear = selectedYear === "" || p.anio === Number(selectedYear);
+      const matchesType = selectedType === "" || p.tipo === selectedType;
+      const matchesStatus = selectedStatus === "" || p.estado === selectedStatus;
+      return matchesSearch && matchesYear && matchesType && matchesStatus;
     });
-  }, [statusFilter, typeFilter, yearFilter, roleFilter]);
+  }, [searchQuery, selectedYear, selectedType, selectedStatus]);
 
   const hasData = proyectos.length > 0;
+
+  // Paginación: 10 items por página
+  const itemsPerPage = 10;
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const pagedProjects = filteredProjects.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.max(1, Math.ceil(filteredProjects.length / itemsPerPage));
+  const goPrev = () => setCurrentPage((p) => Math.max(1, p - 1));
+  const goNext = () => setCurrentPage((p) => Math.min(totalPages, p + 1));
+
+  // Reset page when filters change
+  React.useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, selectedYear, selectedType, selectedStatus]);
 
   return (
     <div className="w-full bg-background">
@@ -54,49 +82,68 @@ const ProyectosPage: React.FC = () => {
 
       <ResearchSubNav />
 
-      <section className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-12 md:py-16">
+      <SmartToolbar
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
+        onReset={handleReset}
+        availableYears={years}
+        selectedYear={selectedYear}
+        onYearChange={setSelectedYear}
+        availableTypes={types}
+        selectedType={selectedType}
+        onTypeChange={setSelectedType}
+        availableCategories={states}
+        selectedCategory={selectedStatus}
+        onCategoryChange={setSelectedStatus}
+        resultCount={filteredProjects.length}
+        totalCount={proyectos.length}
+        isLoading={false}
+      />
+
+      <section className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-8 md:py-12">
         {hasData ? (
           <>
-            <ScrollReveal>
-              <ProjectFilterBar
-                statusFilter={statusFilter}
-                onStatusChange={setStatusFilter}
-                typeFilter={typeFilter}
-                onTypeChange={setTypeFilter}
-                yearFilter={yearFilter}
-                onYearChange={setYearFilter}
-                roleFilter={roleFilter}
-                onRoleChange={setRoleFilter}
-                years={years}
-                types={types}
-                roles={roles}
-              />
-            </ScrollReveal>
 
-            {/* Results count */}
-            <ScrollReveal delay={100}>
-              <p className="text-sm text-muted-foreground mt-6 mb-8">
-                Mostrando {filteredProjects.length} de {proyectos.length} proyectos
-              </p>
-            </ScrollReveal>
+            {/* Projects grid (premium cards) */}
+            <>
+              <ScrollReveal>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {pagedProjects.map((p, idx) => {
+                    const fecha = `${p.anio}-${String(p.mes || 1).padStart(2, "0")}-01`;
+                    return (
+                      <ProyectoItem
+                        key={p.id}
+                        titulo={p.titulo}
+                        fecha={fecha}
+                        tipo={p.estado}
+                        institucion={p.institucion}
+                        descripcion={p.descripcion}
+                        tags={p.tags || p.lineas}
+                        enlace={p.enlace}
+                      />
+                    );
+                  })}
+                </div>
+              </ScrollReveal>
 
-            {/* Projects grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredProjects.map((project, idx) => (
-                <ScrollReveal key={project.id} delay={idx * 50}>
-                  <ProjectCard
-                    title={project.titulo}
-                    type={project.tipo}
-                    status={project.estado}
-                    year={project.anio}
-                    role={project.rol}
-                    summary={project.descripcion}
-                    lines={project.lineas}
-                    link={project.enlace}
-                  />
-                </ScrollReveal>
-              ))}
-            </div>
+              <div className="mt-8 flex items-center justify-center gap-4">
+                <button
+                  onClick={goPrev}
+                  disabled={currentPage === 1}
+                  className="px-4 py-2 border border-slate-300 rounded-md text-slate-700 disabled:opacity-50 hover:bg-slate-100 transition-colors"
+                >
+                  Anterior
+                </button>
+                <span className="text-sm text-slate-600">Página {currentPage} de {totalPages}</span>
+                <button
+                  onClick={goNext}
+                  disabled={currentPage === totalPages}
+                  className="px-4 py-2 border border-slate-300 rounded-md text-slate-700 disabled:opacity-50 hover:bg-slate-100 transition-colors"
+                >
+                  Siguiente
+                </button>
+              </div>
+            </>
 
             {/* Empty state for filters */}
             {filteredProjects.length === 0 && (
@@ -105,17 +152,6 @@ const ProyectosPage: React.FC = () => {
                   <p className="text-muted-foreground">
                     No se encontraron proyectos con los filtros seleccionados.
                   </p>
-                  <button
-                    onClick={() => {
-                      setStatusFilter("");
-                      setTypeFilter("");
-                      setYearFilter("");
-                      setRoleFilter("");
-                    }}
-                    className="mt-4 text-primary hover:underline"
-                  >
-                    Limpiar filtros
-                  </button>
                 </div>
               </ScrollReveal>
             )}

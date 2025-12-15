@@ -1,135 +1,92 @@
-// Componente base para item de publicación
 import React from "react";
-import { ExternalLink, Users, Calendar, BookOpen, Tag, Building } from "lucide-react";
+import { BookOpen, ExternalLink, FileText } from "lucide-react";
 
-export interface PublicacionItemProps {
+type PublicacionItemProps = {
   titulo: string;
   autores?: string;
-  fecha?: string;
-  tipo?: string;
-  institucion?: string; // Revista o editorial
-  enlace?: string;
+  fecha?: string; // ISO o legible; se obtiene el año
+  tipo?: string; // "articulo", "libro", "capitulo", etc.
+  institucion?: string;
+  enlace?: string; // url o doi link
   tags?: string[];
   descripcion?: string;
   doi?: string;
-}
+};
 
-const PublicacionItem: React.FC<PublicacionItemProps> = ({
+const getYear = (fecha?: string) => {
+  if (!fecha) return undefined;
+  const yearPart = fecha.substring(0, 4);
+  const year = Number(yearPart);
+  return Number.isNaN(year) ? undefined : year;
+};
+
+export const PublicacionItem: React.FC<PublicacionItemProps> = ({
   titulo,
   autores,
   fecha,
   tipo,
   institucion,
   enlace,
-  tags,
-  descripcion,
   doi,
 }) => {
-  const getTypeStyles = () => {
-    switch (tipo?.toLowerCase()) {
-      case "artículo":
-      case "articulo":
-        return "bg-blue-50 text-blue-700";
-      case "libro":
-        return "bg-green-50 text-green-700";
-      case "capítulo":
-      case "capitulo":
-        return "bg-purple-50 text-purple-700";
-      case "divulgación":
-      case "divulgacion":
-        return "bg-amber-50 text-amber-700";
-      default:
-        return "bg-slate-100 text-slate-700";
-    }
-  };
+  const year = getYear(fecha);
+  const kind = (tipo || "").toLowerCase();
+  const isBook = kind.includes("libro") || kind.includes("capitulo");
+
+  const iconColor = isBook ? "text-violet-600" : "text-sky-600";
+  const Icon = isBook ? BookOpen : FileText;
+
+  const targetUrl = doi
+    ? (doi.startsWith("http") ? doi : `https://doi.org/${doi}`)
+    : enlace;
 
   return (
-    <article className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300 border border-slate-100">
-      {/* Header con tipo y fecha */}
-      <div className="flex flex-wrap items-center gap-3 mb-4">
-        {tipo && (
-          <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium ${getTypeStyles()}`}>
-            <BookOpen className="w-3 h-3" />
-            {tipo}
+    <article className="w-full px-2 sm:px-3">
+      <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-4 py-4 border-b border-gray-200 hover:bg-gray-50 rounded-md transition-colors">
+        {/* Izquierda: Icono del tipo */}
+        <div className="flex items-center sm:items-start gap-3 min-w-0">
+          <span className="inline-flex items-center justify-center w-6 h-6 min-w-[24px] shrink-0">
+            <Icon className={`w-6 h-6 ${iconColor}`} />
           </span>
-        )}
-        {fecha && (
-          <span className="inline-flex items-center gap-1.5 text-slate-500 text-xs">
-            <Calendar className="w-3 h-3" />
-            {fecha}
-          </span>
-        )}
-      </div>
 
-      {/* Título */}
-      <h3 className="text-base md:text-lg font-semibold text-slate-800 mb-3 leading-snug">
-        {titulo}
-      </h3>
-
-      {/* Descripción opcional */}
-      {descripcion && (
-        <p className="text-sm text-slate-600 mb-4 leading-relaxed line-clamp-3">
-          {descripcion}
-        </p>
-      )}
-
-      {/* Metadata */}
-      <div className="flex flex-wrap items-center gap-4 text-sm text-slate-500">
-        {autores && (
-          <span className="inline-flex items-center gap-1.5">
-            <Users className="w-4 h-4" />
-            <span className="line-clamp-1">{autores}</span>
-          </span>
-        )}
-        {institucion && (
-          <span className="inline-flex items-center gap-1.5">
-            <Building className="w-4 h-4" />
-            <span>{institucion}</span>
-          </span>
-        )}
-      </div>
-
-      {/* Tags */}
-      {tags && tags.length > 0 && (
-        <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-100">
-          {tags.map((tag, idx) => (
-            <span 
-              key={idx}
-              className="px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 text-xs"
-            >
-              {tag}
-            </span>
-          ))}
+          {/* Centro: Título + meta */}
+          <div className="flex-1 min-w-0">
+            <h3 className="text-sm sm:text-base md:text-lg font-semibold text-gray-900 leading-snug line-clamp-2">
+              {titulo}
+            </h3>
+            {(autores || institucion) && (
+              <div className="mt-1 text-xs sm:text-sm text-gray-500">
+                {autores && <span className="truncate inline-block max-w-full align-top">{autores}</span>}
+                {autores && institucion && <span className="px-2">•</span>}
+                {institucion && <em className="text-gray-400 not-italic italic">{institucion}</em>}
+              </div>
+            )}
+          </div>
         </div>
-      )}
 
-      {/* Enlaces */}
-      <div className="flex flex-wrap gap-3 mt-4 pt-4 border-t border-slate-100">
-        {doi && (
-          <a
-            href={`https://doi.org/${doi}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 text-blue-700 text-xs font-medium hover:bg-blue-100 transition-colors"
-          >
-            <ExternalLink className="w-3 h-3" />
-            DOI
-          </a>
-        )}
-        {enlace && (
-          <a
-            href={enlace}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-primary hover:text-primary/80 text-sm font-medium transition-colors"
-          >
-            <ExternalLink className="w-4 h-4" />
-            Ver publicación
-          </a>
-        )}
+        {/* Derecha: Año + DOI/Enlace */}
+        <div className="flex items-center gap-2 sm:ml-auto pt-1 sm:pt-0">
+          {year && (
+            <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-gray-100 text-gray-700 text-xs font-semibold">
+              {year}
+            </span>
+          )}
+          {targetUrl && (
+            <a
+              href={targetUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 px-2.5 py-1 border border-gray-300 text-gray-700 rounded-md text-xs hover:bg-gray-100 transition-colors"
+            >
+              <ExternalLink className="w-3.5 h-3.5" />
+              <span>Ver</span>
+            </a>
+          )}
+        </div>
       </div>
     </article>
   );
 };
 
 export default PublicacionItem;
+ 
