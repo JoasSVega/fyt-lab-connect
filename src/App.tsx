@@ -51,6 +51,9 @@ const AccessibleH1 = React.lazy(() => import("./components/AccessibleH1"));
 const ErrorBoundary = React.lazy(() => import("./components/ErrorBoundary"));
 
 import Loader from "./components/Loader";
+import TopLoader from "./components/loaders/TopLoader";
+import PageLoader from "./components/loaders/PageLoader";
+import { useTopLoader } from "./hooks/useTopLoader";
 
 const queryClient = new QueryClient();
 
@@ -58,6 +61,7 @@ const queryClient = new QueryClient();
 function AnimatedRoutes() {
   const location = useLocation();
   const { isTransitioning, signalPageReady } = useTransition();
+  const { isLoading: isTopLoading } = useTopLoader();
 
   // Fallback: si la página no usa usePageReady, señalamos listo tras el render.
   useEffect(() => {
@@ -72,7 +76,8 @@ function AnimatedRoutes() {
   return (
     <>
       {isTransitioning && <Loader />}
-      <React.Suspense fallback={null}>
+      <TopLoader isLoading={isTopLoading} color="#8b5cf6" />
+      <React.Suspense fallback={<PageLoader />}>
         <Routes>
         {/* Investigación y Producción Académica */}
           <Route path={pathInvestigacion} element={<InvestigacionPage />} />

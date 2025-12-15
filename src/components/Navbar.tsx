@@ -2,12 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { usePrefetch } from "@/hooks/usePrefetch";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const logoRef = useRef<HTMLImageElement | null>(null);
+  const { prefetch } = usePrefetch();
 
   useEffect(() => {
     // Apply native fetchpriority attribute via DOM to avoid React prop warning
@@ -26,32 +28,38 @@ const Navbar = () => {
     {
       name: "Inicio",
       href: "/",
-      isDropdown: false
+      isDropdown: false,
+      prefetchImporter: undefined // No necesita prefetch (ya está en el bundle)
     },
     {
       name: "Sobre Nosotros",
       href: "/sobre-nosotros",
-      isDropdown: false
+      isDropdown: false,
+      prefetchImporter: () => import("@/pages/SobreNosotros")
     },
     {
       name: "Herramientas",
       href: "/herramientas",
-      isDropdown: false
+      isDropdown: false,
+      prefetchImporter: () => import("@/pages/Herramientas")
     },
     {
       name: "Investigación",
       href: "/investigacion",
-      isDropdown: false
+      isDropdown: false,
+      prefetchImporter: () => import("@/pages/InvestigacionPage")
     },
     {
       name: "Noticias",
       href: "/noticias",
-      isDropdown: false
+      isDropdown: false,
+      prefetchImporter: () => import("@/pages/Noticias")
     },
     {
       name: "Contactos",
       href: "/contactos",
-      isDropdown: false
+      isDropdown: false,
+      prefetchImporter: () => import("@/pages/Contactos")
     }
   ];
 
@@ -108,7 +116,13 @@ const Navbar = () => {
               <div
                 key={item.name}
                 className="relative"
-                onMouseEnter={() => item.isDropdown && handleMouseEnter(item.name)}
+                onMouseEnter={() => {
+                  item.isDropdown && handleMouseEnter(item.name);
+                  // Prefetch cuando se hace hover
+                  if (item.prefetchImporter) {
+                    prefetch(item.prefetchImporter);
+                  }
+                }}
                 onMouseLeave={() => item.isDropdown && handleMouseLeave()}
               >
                 {item.isDropdown ? (
@@ -126,6 +140,12 @@ const Navbar = () => {
                 ) : (
                   <NavLink
                     to={item.href}
+                    onMouseEnter={() => {
+                      // Asegurar prefetch al hacer hover en NavLink
+                      if (item.prefetchImporter) {
+                        prefetch(item.prefetchImporter);
+                      }
+                    }}
                     className={({ isActive }) =>
                       `nav-link text-slate-900 transition-all duration-200 ease-out font-semibold px-3 py-2 rounded-md ${
                         isActive ? 'nav-link--active' : ''
@@ -175,6 +195,12 @@ const Navbar = () => {
                   <div key={item.name}>
                     <NavLink
                       to={item.href}
+                      onMouseEnter={() => {
+                        // Prefetch en hover (mobile puede no tener hover, pero por compatibilidad)
+                        if (item.prefetchImporter) {
+                          prefetch(item.prefetchImporter);
+                        }
+                      }}
                       className={({ isActive }) =>
                         `nav-link block px-4 py-2.5 text-slate-900 transition-all duration-200 ease-out font-semibold ${
                           isActive ? 'nav-link--active bg-fyt-blue/5' : 'hover:bg-slate-50'
