@@ -201,26 +201,25 @@ const Carrusel: React.FC<CarruselProps> = ({
                 className="relative"
                 style={heightCss ? ({ height: heightCss } as React.CSSProperties) : ({ aspectRatio: imageAspect } as React.CSSProperties)}
               >
-                {/* Responsive <picture> with optimized 3-size WebP strategy */}
+                {/* Responsive image with srcset for optimized loading */}
                 {(() => {
                   const base = item.image.replace(/-medium\.webp$/i, '');
                   // Cargar con prioridad las primeras 3 diapositivas para asegurar render inmediato
                   const loadingMode: 'eager' | 'lazy' = index < 3 ? 'eager' : 'lazy';
+                  
                   return (
-                    <picture>
-                      <source srcSet={`${base}-large.webp`} media="(min-width: 1280px)" />
-                      <source srcSet={`${base}-medium.webp`} media="(min-width: 640px)" />
-                      <img
-                        src={`${base}-small.webp`}
-                        alt={item.title}
-                        loading={loadingMode}
-                        decoding="async"
-                        className={defaultImageClass}
-                        style={heightCss ? ({ height: '100%', maxHeight: heightCss, minHeight: heightCss } as React.CSSProperties) : ({ height: '100%' } as React.CSSProperties)}
-                        width={1200}
-                        height={900}
-                      />
-                    </picture>
+                    <img
+                      src={`${base}-medium.webp`}
+                      srcSet={`${base}-small.webp 480w, ${base}-medium.webp 800w, ${base}-large.webp 1200w`}
+                      sizes="(max-width: 640px) 85vw, (max-width: 768px) 70vw, (max-width: 1024px) 48vw, (max-width: 1280px) 31vw, (max-width: 1536px) 24vw, 19vw"
+                      alt={item.title}
+                      loading={loadingMode}
+                      decoding="async"
+                      className={defaultImageClass}
+                      style={heightCss ? ({ height: '100%', maxHeight: heightCss, minHeight: heightCss } as React.CSSProperties) : ({ height: '100%' } as React.CSSProperties)}
+                      width={1200}
+                      height={900}
+                    />
                   );
                 })()}
               </div>

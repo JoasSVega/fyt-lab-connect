@@ -180,26 +180,24 @@ const Team = ({ compact = false }: { compact?: boolean }) => {
             return (
               <ScrollReveal key={member.name} delay={idx * 0.1}>
                 <Card className="flex flex-col items-center justify-between p-7 rounded-2xl shadow-soft border-2 border-fyt-purple/30 bg-white/90 min-h-[420px] hover:scale-[1.02] transition-transform duration-300">
-                  {/* Foto o placeholder, sin tarjeta extra */}
+                  {/* Foto o placeholder con srcset optimizado */}
                   <>
                     {imgSrc ? (
                       (() => {
                         const base = imgSrc.replace(/-medium\.webp$/i, '');
                         return (
-                          <picture>
-                            <source srcSet={`${base}-large.webp`} media="(min-width: 1280px)" />
-                            <source srcSet={`${base}-medium.webp`} media="(min-width: 640px)" />
-                            <SafeImage
-                              src={`${base}-small.webp`}
-                              alt={`Retrato de ${member.name}, ${member.role}`}
-                              className="mb-5 shadow-soft border-2 border-fyt-blue/30"
-                              style={{ width: 220, height: 220, objectFit: "cover", borderRadius: 16 }}
-                              width={220}
-                              height={220}
-                              loading="lazy"
-                              decoding="async"
-                            />
-                          </picture>
+                          <SafeImage
+                            src={`${base}-medium.webp`}
+                            srcSet={`${base}-small.webp 220w, ${base}-medium.webp 440w, ${base}-large.webp 660w`}
+                            sizes="220px"
+                            alt={`Retrato de ${member.name}, ${member.role}`}
+                            className="mb-5 shadow-soft border-2 border-fyt-blue/30"
+                            style={{ width: 220, height: 220, objectFit: "cover", borderRadius: 16 }}
+                            width={220}
+                            height={220}
+                            loading="lazy"
+                            decoding="async"
+                          />
                         );
                       })()
                     ) : (

@@ -103,7 +103,7 @@ export default function HeroInvestigacion() {
         className="hero-container"
         aria-label="Hero Investigación"
       >
-        {/* Background image */}
+        {/* Background image with lazy loading (not LCP) */}
         <SafeImage 
           src={heroImage} 
           alt="" 
@@ -111,7 +111,9 @@ export default function HeroInvestigacion() {
           aria-hidden="true"
           width={1920}
           height={1080}
-          loading="eager"
+          loading="lazy"
+          decoding="async"
+          fetchpriority="low"
         />
         {/* Dark overlay */}
         <div className="hero-overlay" />

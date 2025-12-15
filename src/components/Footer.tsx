@@ -14,18 +14,18 @@ const Footer: React.FC = () => {
           {/* 1. Información del grupo */}
           <div className="flex flex-col min-w-[220px] col-span-1">
             <div className="flex items-center gap-4 mb-4">
-              <picture>
-                <source srcSet="/images/logo-fyt-medium.webp" media="(min-width: 640px)" />
-                <SafeImage
-                  src="/images/logo-fyt-small.webp"
-                  alt="Logo Grupo FyT"
-                  loading="lazy"
-                  decoding="async"
-                  className="w-20 h-20 sm:w-24 sm:h-24 object-contain drop-shadow-2xl transition-all duration-300"
-                  width={96}
-                  height={96}
-                />
-              </picture>
+              <SafeImage
+                src="/images/logo-fyt-medium.webp"
+                srcSet="/images/logo-fyt-small.webp 96w, /images/logo-fyt-medium.webp 192w, /images/logo-fyt-large.webp 288w"
+                sizes="96px"
+                alt="Logo Grupo FyT"
+                loading="lazy"
+                decoding="async"
+                fetchpriority="low"
+                className="w-20 h-20 sm:w-24 sm:h-24 object-contain drop-shadow-2xl transition-all duration-300"
+                width={96}
+                height={96}
+              />
               <div>
                 <h3 className="text-xl font-bold text-slate-900 tracking-tight font-poppins">
                   Grupo FyT

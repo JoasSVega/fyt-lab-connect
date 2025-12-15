@@ -7,26 +7,20 @@ export default function Hero() {
       id="inicio"
       className="hero-container"
     >
-      {/* Imagen de fondo unificada - LCP optimizado */}
-      <picture>
-        <source 
-          srcSet="/images/hero-index-large.webp" 
-          media="(min-width: 1280px)" 
-        />
-        <source 
-          srcSet="/images/hero-index-medium.webp" 
-          media="(min-width: 640px)" 
-        />
-        <SafeImage 
-          src="/images/hero-index-small.webp" 
-          alt="" 
-          className="hero-image" 
-          aria-hidden="true"
-          width={1920}
-          height={1080}
-          fetchpriority="high"
-        />
-      </picture>
+      {/* Imagen de fondo con srcset optimizado - LCP optimizado */}
+      <SafeImage 
+        src="/images/hero-index-medium.webp"
+        srcSet="/images/hero-index-small.webp 640w, /images/hero-index-medium.webp 1024w, /images/hero-index-large.webp 1920w"
+        sizes="100vw"
+        alt="" 
+        className="hero-image" 
+        aria-hidden="true"
+        width={1920}
+        height={1080}
+        loading="eager"
+        decoding="sync"
+        fetchpriority="high"
+      />
       {/* Overlay oscuro unificado */}
       <div className="hero-overlay" />
       {/* Contenido centrado con text-shadow */}

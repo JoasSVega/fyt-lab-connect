@@ -3,13 +3,15 @@ import React from "react";
 export type SafeImageProps = React.ImgHTMLAttributes<HTMLImageElement> & {
   fallbackSrc?: string;
   fetchpriority?: 'high' | 'low' | 'auto';
+  srcSet?: string;
+  sizes?: string;
 };
 
 // 1x1 transparent PNG to preserve layout when an image fails.
 const TRANSPARENT_PLACEHOLDER =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMB/ZXs6nEAAAAASUVORK5CYII=";
 
-const SafeImage: React.FC<SafeImageProps> = ({ fallbackSrc, onError, ...props }) => {
+const SafeImage: React.FC<SafeImageProps> = ({ fallbackSrc, onError, srcSet, sizes, ...props }) => {
   const [broken, setBroken] = React.useState(false);
 
   const handleError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
@@ -18,11 +20,14 @@ const SafeImage: React.FC<SafeImageProps> = ({ fallbackSrc, onError, ...props })
   };
 
   const effectiveSrc = broken ? (fallbackSrc || TRANSPARENT_PLACEHOLDER) : props.src;
+  const effectiveSrcSet = broken ? undefined : srcSet;
 
   return (
     <img
       {...props}
       src={effectiveSrc}
+      srcSet={effectiveSrcSet}
+      sizes={sizes}
       onError={handleError}
       // Keep decoding async & lazy loading if provided by caller
     />
