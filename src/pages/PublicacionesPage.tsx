@@ -8,6 +8,7 @@ import ResearchSubNav from "@/components/investigacion/ResearchSubNav";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import Seo from "@/components/Seo";
 import PublicacionItem from "@/components/investigacion/PublicacionItem";
+import { PublicacionItemSkeleton } from "@/components/investigacion/PublicacionItemSkeleton";
 import SmartToolbar from "@/components/investigacion/SmartToolbar";
 
 const PublicacionesPage: React.FC = () => {
@@ -103,8 +104,8 @@ const PublicacionesPage: React.FC = () => {
         isLoading={false}
       />
 
-      {/* Main content */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-8 md:py-12">
+      {/* Main content - Min height reserves space to prevent CLS */}
+      <section className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-8 md:py-12 min-h-[800px]">
         {hasData ? (
           <>
 
@@ -112,7 +113,7 @@ const PublicacionesPage: React.FC = () => {
             {filteredItems.length > 0 ? (
               <>
                 <ScrollReveal>
-                  <div className="flex flex-col gap-4">
+                  <div className="flex flex-col gap-4 min-h-[600px]">
                     {pagedItems.map((pub, idx) => {
                       const fecha = `${pub.anio}-${String(pub.mes || 1).padStart(2, "0")}-01`;
                       return (

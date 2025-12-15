@@ -8,6 +8,7 @@ import ResearchSubNav from "@/components/investigacion/ResearchSubNav";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import Seo from "@/components/Seo";
 import ContenidoDigitalItem from "@/components/investigacion/ContenidoDigitalItem";
+import { ContenidoDigitalItemSkeleton } from "@/components/investigacion/ContenidoDigitalItemSkeleton";
 
 const DivulgacionCientificaPage: React.FC = () => {
   usePageReady();
@@ -52,11 +53,11 @@ const DivulgacionCientificaPage: React.FC = () => {
 
       <ResearchSubNav />
 
-      <section className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-12 md:py-16">
+      <section className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-12 md:py-16 min-h-[900px]">
         <ScrollReveal>
           {divulgacionCientifica.length > 0 ? (
             <>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 min-h-[700px]">
                 {pagedItems.map((item, idx) => (
                   <ContenidoDigitalItem
                     key={item.id}

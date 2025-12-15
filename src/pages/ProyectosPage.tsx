@@ -6,6 +6,7 @@ import { usePageReady } from "@/hooks/usePageReady";
 import SmallHero from "@/components/shared/SmallHero";
 import ResearchSubNav from "@/components/investigacion/ResearchSubNav";
 import ProyectoItem from "@/components/investigacion/ProyectoItem";
+import { ProyectoItemSkeleton } from "@/components/investigacion/ProyectoItemSkeleton";
 import SmartToolbar from "@/components/investigacion/SmartToolbar";
 import PlaceholderSection from "@/components/investigacion/PlaceholderSection";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
@@ -100,14 +101,14 @@ const ProyectosPage: React.FC = () => {
         isLoading={false}
       />
 
-      <section className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-8 md:py-12">
+      <section className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-8 md:py-12 min-h-[900px]">
         {hasData ? (
           <>
 
             {/* Projects grid (premium cards) */}
             <>
               <ScrollReveal>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 min-h-[700px]">
                   {pagedProjects.map((p, idx) => {
                     const fecha = `${p.anio}-${String(p.mes || 1).padStart(2, "0")}-01`;
                     return (

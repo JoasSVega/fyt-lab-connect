@@ -6,6 +6,7 @@ import { usePageReady } from "@/hooks/usePageReady";
 import SmallHero from "@/components/shared/SmallHero";
 import ResearchSubNav from "@/components/investigacion/ResearchSubNav";
 import EventoItem from "@/components/investigacion/EventoItem";
+import { EventoItemSkeleton } from "@/components/investigacion/EventoItemSkeleton";
 import SmartToolbar from "@/components/investigacion/SmartToolbar";
 import PlaceholderSection from "@/components/investigacion/PlaceholderSection";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
@@ -106,14 +107,14 @@ const EventosPage: React.FC = () => {
         isLoading={false}
       />
 
-      <section className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-8 md:py-12">
+      <section className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-8 md:py-12 min-h-[800px]">
         {hasData ? (
           <>
 
             {/* Events list (timeline-like rows) */}
             <>
               <ScrollReveal>
-                <div className="flex flex-col gap-6">
+                <div className="flex flex-col gap-6 min-h-[600px]">
                   {pagedEvents.map((e, idx) => {
                     const fecha = `${e.anio}-${String(e.mes || 1).padStart(2, "0")}-01`;
                     return (
