@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import CalculatorPanel from "@/components/tools/common/CalculatorPanel";
 import NumberField from "@/components/inputs/NumberField";
 import SelectField from "@/components/inputs/SelectField";

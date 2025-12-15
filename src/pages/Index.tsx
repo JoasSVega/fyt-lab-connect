@@ -1,13 +1,16 @@
+import { lazy, Suspense } from "react";
 import Hero from "@/components/Hero";
 import Seo from "@/components/Seo";
-import About from "@/components/About";
-import Tools from "@/components/Tools";
 import { Button } from "@/components/ui/button";
 import { Users, Microscope, BookOpen } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import FloatingContact from "@/components/FloatingContact";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { usePageReady } from "@/hooks/usePageReady";
+
+// Lazy load heavy components that appear below-the-fold
+const About = lazy(() => import("@/components/About"));
+const Tools = lazy(() => import("@/components/Tools"));
 
 const Index = () => {
   const navigate = useNavigate();
@@ -81,11 +84,13 @@ const Index = () => {
           </ScrollReveal>
         </section>
       {/* Secciones de investigación, modalidades, actividades y productos, y la tarjeta de inscripción */}
-      <ScrollReveal delay={0.1}>
-        <div className="px-2 sm:px-6 md:px-12 lg:px-24 xl:px-32 2xl:px-48">
-          <About />
-        </div>
-      </ScrollReveal>
+      <Suspense fallback={<div className="min-h-[600px]" />}>
+        <ScrollReveal delay={0.1}>
+          <div className="px-2 sm:px-6 md:px-12 lg:px-24 xl:px-32 2xl:px-48">
+            <About />
+          </div>
+        </ScrollReveal>
+      </Suspense>
         {/* Pharmaceutical Tools Section removida: ahora solo en la página Herramientas */}
       {/* Floating Contact Button */}
       <FloatingContact />

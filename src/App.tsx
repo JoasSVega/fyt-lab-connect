@@ -41,14 +41,16 @@ const PrivacyPolicy = React.lazy(() => import("./pages/PrivacyPolicy"));
 const TermsOfUse = React.lazy(() => import("./pages/TermsOfUse"));
 const CodeOfEthics = React.lazy(() => import("./pages/CodeOfEthics"));
 
-import DosageCalculator from "./components/DosageCalculator";
-import Navbar from "./components/Navbar";
-import ScrollToTop from "./components/ScrollToTop";
-import Footer from "./components/Footer";
-import TitleSync from "./components/TitleSync";
+// Componentes core lazy loaded
+const DosageCalculator = React.lazy(() => import("./components/DosageCalculator"));
+const Navbar = React.lazy(() => import("./components/Navbar"));
+const ScrollToTop = React.lazy(() => import("./components/ScrollToTop"));
+const Footer = React.lazy(() => import("./components/Footer"));
+const TitleSync = React.lazy(() => import("./components/TitleSync"));
+const AccessibleH1 = React.lazy(() => import("./components/AccessibleH1"));
+const ErrorBoundary = React.lazy(() => import("./components/ErrorBoundary"));
+
 import Loader from "./components/Loader";
-import AccessibleH1 from "./components/AccessibleH1";
-import ErrorBoundary from "./components/ErrorBoundary";
 
 const queryClient = new QueryClient();
 
@@ -193,20 +195,22 @@ const App: React.FC = () => {
       <Sonner />
       <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <TransitionProvider>
-          <ScrollToTop />
-          {/* Sincroniza el título del navegador con la ruta actual */}
-          <TitleSync />
-          {/* Barra superior fija */}
-          <Navbar />
-          {/* Contenido principal: darle padding-top para no quedar debajo del navbar */}
-          <main className="bg-gray-50 w-full">
-            {/* Provide a guaranteed H1 for a11y without impacting layout */}
-            <AccessibleH1 />
-            <ErrorBoundary>
-              <AnimatedRoutes />
-            </ErrorBoundary>
-          </main>
-          <Footer />
+          <React.Suspense fallback={null}>
+            <ScrollToTop />
+            {/* Sincroniza el título del navegador con la ruta actual */}
+            <TitleSync />
+            {/* Barra superior fija */}
+            <Navbar />
+            {/* Contenido principal: darle padding-top para no quedar debajo del navbar */}
+            <main className="bg-gray-50 w-full">
+              {/* Provide a guaranteed H1 for a11y without impacting layout */}
+              <AccessibleH1 />
+              <ErrorBoundary>
+                <AnimatedRoutes />
+              </ErrorBoundary>
+            </main>
+            <Footer />
+          </React.Suspense>
         </TransitionProvider>
       </BrowserRouter>
     </>

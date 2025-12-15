@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ClipboardCheck, HeartPulse, Brain, AlertTriangle, TestTube } from "lucide-react";
 import Seo from "@/components/Seo";

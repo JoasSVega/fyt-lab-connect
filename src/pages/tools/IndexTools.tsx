@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import { Stethoscope, Ruler, FlaskConical, ClipboardCheck, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";

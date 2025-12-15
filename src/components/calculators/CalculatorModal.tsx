@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState, useCallback, useMemo } from "react";
 import { motion, AnimatePresence, MotionConfig } from "framer-motion";
 import { createPortal } from "react-dom";
 import { X, Info } from "lucide-react";

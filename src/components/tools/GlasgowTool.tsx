@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import CalculatorModal, { FieldSpec, FormulaSpec, CalculationResult } from "@/components/calculators/CalculatorModal";
 import { Brain } from "lucide-react";
 
