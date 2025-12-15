@@ -187,8 +187,8 @@ const Team = ({ compact = false }: { compact?: boolean }) => {
                         const base = imgSrc.replace(/-medium\.webp$/i, '');
                         return (
                           <SafeImage
-                            src={`${base}-medium.webp`}
-                            srcSet={`${base}-small.webp 220w, ${base}-medium.webp 440w, ${base}-large.webp 660w`}
+                            src={`${base}-small.webp`}
+                            srcSet={`${base}-small.webp 220w, ${base}-medium.webp 440w`}
                             sizes="220px"
                             alt={`Retrato de ${member.name}, ${member.role}`}
                             className="mb-5 shadow-soft border-2 border-fyt-blue/30"
