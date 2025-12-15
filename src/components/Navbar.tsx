@@ -91,15 +91,15 @@ const Navbar = () => {
               <div className="flex-shrink-0">
                 <img
                   src="/images/logo-fyt-small.webp"
-                  srcSet="/images/logo-fyt-small.webp 100w, /images/logo-fyt-medium.webp 200w"
-                  sizes="(max-width: 640px) 40px, (max-width: 1024px) 56px, 80px"
+                  srcSet="/images/logo-fyt-small.webp 300w, /images/logo-fyt-medium.webp 600w"
+                  sizes="(max-width: 640px) 120px, 200px"
                   alt="Logo Grupo FyT, semillero de investigación en farmacología y terapéutica"
                   loading="eager"
                   decoding="async"
                   ref={logoRef}
                   className="h-10 md:h-14 w-auto object-contain shrink-0 transition-transform duration-250 group-hover:scale-[1.03]"
-                  width={200}
-                  height={56}
+                  width={140}
+                  height={40}
                 />
             </div>
               <div className="text-lg font-poppins font-bold text-slate-900 group-hover:text-fyt-blue transition-colors duration-250">
