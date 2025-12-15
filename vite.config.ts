@@ -71,10 +71,21 @@ export default defineConfig(({ mode }) => ({
         manualChunks: (id) => {
           // Chunk heavy dependencies separately for better caching
           if (id.includes('node_modules')) {
-            if (id.includes('katex')) return 'katex';
-            if (id.includes('recharts') || id.includes('victory')) return 'charts';
-            if (id.includes('@radix-ui')) return 'radix';
+            // Core React libraries - loaded first, cached long-term
+            if (id.includes('react') || id.includes('react-dom')) {
+              return 'vendor';
+            }
+            // Animation library - loaded on-demand for interactive components
             if (id.includes('framer-motion')) return 'motion';
+            // Math rendering - large but only needed on specific pages
+            if (id.includes('katex')) return 'katex';
+            // Charts libraries - only for data visualization pages
+            if (id.includes('recharts') || id.includes('victory')) return 'charts';
+            // UI component primitives - shared across routes
+            if (id.includes('@radix-ui')) return 'radix';
+            // Carousel/image libraries
+            if (id.includes('embla')) return 'carousel';
+            // Everything else goes to vendor
             return 'vendor';
           }
         },
