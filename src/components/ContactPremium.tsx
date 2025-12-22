@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Mail, Phone, MapPin, Send, Instagram, Linkedin, ExternalLink } from "lucide-react";
+import { Mail, Phone, MapPin, Send, Instagram, ExternalLink } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
@@ -66,14 +66,8 @@ const ContactPremium = () => {
     {
       icon: Instagram,
       label: "Instagram",
-      href: "https://www.instagram.com/grupo_fyt",
+      href: "https://www.instagram.com/grupofyt_udea/",
       color: "hover:bg-gradient-to-br hover:from-purple-500 hover:to-pink-500 hover:text-white",
-    },
-    {
-      icon: Linkedin,
-      label: "LinkedIn",
-      href: "#",
-      color: "hover:bg-[#0077B5] hover:text-white",
     },
   ];
 
@@ -167,8 +161,8 @@ const ContactPremium = () => {
           custom={0}
           className="text-center mb-12 md:mb-16"
         >
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-fyt-dark mb-4">
-            <span className="bg-gradient-to-r from-fyt-purple via-primary to-fyt-blue bg-clip-text text-transparent">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-violet-900 mb-4 drop-shadow-sm">
+            <span className="text-violet-900">
               Conectemos
             </span>{" "}
             Ciencia y Futuro
@@ -311,7 +305,7 @@ const ContactPremium = () => {
             custom={0.2}
             className="lg:col-span-3"
           >
-            <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 md:p-8 lg:p-10">
+            <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
               <div className="mb-6">
                 <h2 className="text-2xl md:text-3xl font-bold text-fyt-dark mb-2">
                   Envíanos un mensaje
@@ -395,7 +389,7 @@ const ContactPremium = () => {
                 {/* Submit Button */}
                 <Button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-fyt-purple via-primary to-fyt-blue text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300"
+                  className="w-full bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-200"
                   size="lg"
                 >
                   <Send className="w-5 h-5 mr-2" />
@@ -419,13 +413,13 @@ const ContactPremium = () => {
           custom={0.3}
           className="mt-16"
         >
-          <div className="rounded-2xl overflow-hidden shadow-lg border border-gray-200 relative">
+          <div className="rounded-2xl overflow-hidden shadow-sm border border-gray-200 relative">
             <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-b from-transparent via-transparent to-slate-50/30" />
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.573964624252!2d-75.5038549!3d10.3994434!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ef625bfe9eac921%3A0xa752ed6a0af4fe9b!2sCartagena%20University%20Campus%20Zaragocilla!5e0!3m2!1ses!2sco!4v1695660000000!5m2!1ses!2sco"
               width="100%"
               height="350"
-              style={{ border: 0, filter: "grayscale(80%) contrast(1.1)" }}
+              style={{ border: 0, filter: "grayscale(20%) contrast(110%)" }}
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
