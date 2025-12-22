@@ -14,12 +14,8 @@ export { default as AcademicFilters } from "./AcademicFilters";
 export { default as AcademicItem } from "./AcademicItem";
 export { default as SectionHeader } from "./SectionHeader";
 
-// Re-exportar tipos
-export type { ProyectoItemProps } from "./ProyectoItem";
-export type { PublicacionItemProps } from "./PublicacionItem";
-export type { EventoItemProps } from "./EventoItem";
+// Re-exportar tipos desde CursoItem que ya los exporta con 'export interface'
 export type { CursoItemProps } from "./CursoItem";
-export type { ContenidoDigitalItemProps } from "./ContenidoDigitalItem";
 
 // 🆕 Tipos de nuevos componentes
 export type { AcademicItemProps } from "./AcademicItem";
