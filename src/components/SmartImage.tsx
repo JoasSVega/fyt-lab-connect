@@ -24,7 +24,7 @@ import React from "react";
 
 type ImageUsage = 'hero' | 'card' | 'avatar' | 'team' | 'thumbnail';
 
-export interface SmartImageProps extends Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src' | 'srcSet' | 'sizes'> {
+export interface SmartImageProps extends Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src' | 'srcSet' | 'sizes' | 'loading' | 'fetchPriority'> {
   /** 
    * Ruta base de la imagen (sin sufijos -small/-medium/-large.webp)
    * Ejemplo: "/images/Carrusel/Farmacologia"
@@ -78,6 +78,12 @@ export interface SmartImageProps extends Omit<React.ImgHTMLAttributes<HTMLImageE
    * fetchPriority para control fino de priorización
    */
   fetchPriority?: 'high' | 'low' | 'auto';
+
+  /**
+   * Prioridad semántica: cuando es true, fuerza `loading="eager"` y `fetchPriority="high"`.
+   * Por defecto false (carga diferida).
+   */
+  priority?: boolean;
 }
 
 /**
@@ -93,7 +99,7 @@ const USAGE_SIZES: Record<ImageUsage, string> = {
   // Tablet: 50vw (fuerza medium sobre small en tablets)
   // Desktop: 33vw (permite medium en escritorio)
   // El "tamaño mentiroso" combinado con srcSet limitado (sin large) fuerza descarga ligera
-  card: '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw',
+  card: '(max-width: 640px) 400px, (max-width: 1024px) 600px, 400px',
   
   // Avatar: Tamaño fijo para logos/perfiles
   avatar: '100px',
@@ -111,7 +117,7 @@ const USAGE_SIZES: Record<ImageUsage, string> = {
  */
 const VARIANT_WIDTHS = {
   small: 500,  // Móvil estándar (aumentado de 480 para mejor cobertura)
-  medium: 1000, // Tablet y pantallas medianas
+  medium: 800, // Tablet y pantallas medianas
   // large NUNCA aparece en srcSet - solo como fallback en casos especiales
 };
 
@@ -122,9 +128,8 @@ const SmartImage: React.FC<SmartImageProps> = ({
   fallbackSize = 'small',
   width,
   height,
-  loading = 'lazy',
   decoding = 'async',
-  fetchPriority,
+  priority = false,
   className,
   style,
   ...rest
@@ -142,6 +147,10 @@ const SmartImage: React.FC<SmartImageProps> = ({
   // Obtener sizes predefinido según el uso (con "tamaño mentiroso" mobile-first)
   const sizes = USAGE_SIZES[usage];
   
+  // Derivar atributos de prioridad
+  const loading: 'eager' | 'lazy' = priority ? 'eager' : 'lazy';
+  const fetchPriority: 'high' | 'low' | 'auto' = priority ? 'high' : 'auto';
+
   return (
     <img
       src={src}

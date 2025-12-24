@@ -203,12 +203,12 @@ const Carrusel: React.FC<CarruselProps> = ({
                 className="relative bg-gray-100"
                 style={heightCss ? ({ height: heightCss } as React.CSSProperties) : ({ aspectRatio: imageAspect } as React.CSSProperties)}
               >
-                {/* SmartImage optimizado con loading condicional */}
+                {/* SmartImage optimizado con prioridad en las 2 primeras tarjetas */}
                 <SmartImage
                   basePath={item.image}
                   alt={item.title}
                   usage="card"
-                  loading={index < 2 ? 'eager' : 'lazy'}
+                  priority={index < 2}
                   fallbackSize="small"
                   decoding="async"
                   className={defaultImageClass}
