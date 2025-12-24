@@ -2,6 +2,7 @@ import { useLocation } from "react-router-dom";
 // import ScrollReveal from "@/components/ScrollReveal";
 import { useEffect } from "react";
 import { usePageReady } from "@/hooks/usePageReady";
+import Seo from "@/components/Seo";
 
 const NotFound = () => {
   const location = useLocation();
@@ -17,6 +18,12 @@ const NotFound = () => {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100">
+      <Seo
+        title="Grupo FyT | Página no encontrada"
+        description="La página que buscas no existe."
+        author="Grupo FyT"
+        robots="noindex, nofollow"
+      />
       <div className="text-center">
         <h1 className="mb-4 text-3xl sm:text-4xl font-poppins font-bold text-slate-900 text-center">404</h1>
         <p className="mb-4 text-xl text-gray-600">Oops! Page not found</p>

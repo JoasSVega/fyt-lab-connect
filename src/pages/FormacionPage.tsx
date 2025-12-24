@@ -18,11 +18,11 @@ const FormacionPage: React.FC = () => {
   return (
     <div className="w-full bg-background">
       <Seo
-        title="Formación y Actividades Docentes – FYT Lab Connect"
-        description="Procesos formativos, tutorías, direcciones de tesis y actividades docentes del Grupo de Investigación FyT."
-        author="FYT Lab Connect"
+        title="Grupo FyT | Formación y Actividades Docentes"
+        description="Procesos formativos, tutorías, direcciones de tesis y actividades docentes del Grupo de Investigación en Farmacología y Terapéutica."
+        author="Grupo FyT"
         robots="index, follow"
-        canonical="https://fytlabconnect.com/investigacion/formacion"
+        canonical="https://fyt-research.org/investigacion/formacion"
       />
 
       <SmallHero

@@ -24,10 +24,10 @@ const InvestigacionPage: React.FC = () => {
   const contenidosDestacados = [...divulgacionCientifica].sort((a, b) => b.anio - a.anio).slice(0, 3);
   const eventosRecientes = [...eventos].sort((a, b) => b.anio - a.anio).slice(0, 3);
   return <div className="w-full bg-background flex flex-col">
-      <Seo title="Investigación y Producción Académica – FYT Lab Connect" description="Hub académico del Grupo FyT: publicaciones científicas, proyectos, eventos científicos y producción digital desde GrupLAC." author="FYT Lab Connect" robots="index, follow" canonical="https://fytlabconnect.com/investigacion" openGraph={{
-      title: "Investigación",
-      description: "Producción científica del grupo FyT",
-      type: "article"
+      <Seo title="Grupo FyT | Investigación y Producción Académica" description="Producción académica y científica del Grupo de Investigación en Farmacología y Terapéutica: publicaciones, proyectos, eventos y divulgación." author="Grupo FyT" robots="index, follow" canonical="https://fyt-research.org/investigacion" openGraph={{
+      title: "Grupo FyT | Investigación y Producción Académica",
+      description: "Producción científica del Grupo de Investigación en Farmacología y Terapéutica.",
+      type: "website"
     }} twitter={{
       card: "summary",
       site: "@fytlab"

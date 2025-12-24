@@ -1,7 +1,7 @@
 import { useEffect, FC } from "react";
 import { useLocation } from "react-router-dom";
 
-const SITE_NAME = "Farmacología y Terapéutica";
+const SITE_NAME = "Grupo FyT | Grupo de Investigación en Farmacología y Terapéutica";
 
 function titleCase(s: string) {
   return s

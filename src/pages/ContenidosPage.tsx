@@ -39,11 +39,11 @@ const DivulgacionCientificaPage: React.FC = () => {
   return (
     <div className="w-full bg-background">
       <Seo
-        title="Producción Audiovisual y Sonora – FYT Lab Connect"
+        title="Grupo FyT | Producción Audiovisual y Sonora"
         description="Producción audiovisual y sonora asociada a proyectos de investigación en ciencias farmacéuticas del Grupo FyT."
-        author="FYT Lab Connect"
+        author="Grupo FyT"
         robots="index, follow"
-        canonical="https://fytlabconnect.com/investigacion/divulgacion-cientifica"
+        canonical="https://fyt-research.org/investigacion/divulgacion-cientifica"
       />
 
       <SmallHero

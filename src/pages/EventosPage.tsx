@@ -10,6 +10,7 @@ import { EventoItemSkeleton } from "@/components/investigacion/EventoItemSkeleto
 import SmartToolbar from "@/components/investigacion/SmartToolbar";
 import PlaceholderSection from "@/components/investigacion/PlaceholderSection";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
+import Seo from "@/components/Seo";
 
 const EventosPage: React.FC = () => {
   usePageReady();
@@ -82,6 +83,15 @@ const EventosPage: React.FC = () => {
 
   return (
     <div className="w-full bg-background">
+      <Seo
+        title="Grupo FyT | Eventos Académicos y Cursos"
+        description="Agenda académica del Grupo de Investigación en Farmacología y Terapéutica: congresos, simposios, jornadas y cursos."
+        author="Grupo FyT"
+        robots="index, follow"
+        canonical="https://fyt-research.org/investigacion/eventos"
+        openGraph={{ title: "Grupo FyT | Eventos Académicos y Cursos", description: "Eventos y cursos del Grupo FyT", type: "website" }}
+        twitter={{ card: "summary", site: "@fytlab" }}
+      />
       <SmallHero
         title="Eventos Académicos y Cursos"
         subtitle="Participación del Grupo FyT en congresos, simposios, jornadas científicas y programas de formación."

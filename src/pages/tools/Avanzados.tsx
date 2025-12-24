@@ -17,8 +17,9 @@ const Avanzados: FC = () => {
         title="Herramientas Farmacéuticas Avanzadas y Conversores | Herramientas para profesionales de la salud"
         description="Convierte, calcula y analiza compatibilidad y estabilidad: conversores, osmolaridad IV, compatibilidad, dilución y nutrición parenteral."
         keywords={["compatibilidad IV", "osmolaridad", "dilución", "nutrición parenteral", "conversores", "herramientas avanzadas"]}
-        author="FYT Lab Connect"
+        author="Grupo FyT"
         robots="index, follow"
+        canonical="https://fyt-research.org/herramientas/avanzados"
       />
 
       {/* Breadcrumbs */}

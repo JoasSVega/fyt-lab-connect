@@ -20,7 +20,7 @@ function titleFromPath(pathname: string): string {
     "/TermsOfUse": "Términos de uso",
     "/CodeOfEthics": "Código de Ética",
   };
-  return map[pathname] || document.title || "FYT Lab Connect";
+  return map[pathname] || document.title || "Grupo FyT";
 }
 
 const AccessibleH1: React.FC = () => {
@@ -32,7 +32,7 @@ const AccessibleH1: React.FC = () => {
   }, [pathname]);
 
   return (
-    <h1 className="sr-only" id="page-top-heading">{label || "FYT Lab Connect"}</h1>
+    <h1 className="sr-only" id="page-top-heading">{label || "Grupo FyT"}</h1>
   );
 };
 

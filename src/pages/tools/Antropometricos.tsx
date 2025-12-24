@@ -25,8 +25,9 @@ const Antropometricos: FC = () => {
         title="Cálculos Fisiológicos y Antropométricos | Herramientas para profesionales de la salud"
         description="IMC, superficie corporal, masa magra, peso ideal y consumo energético basal en una interfaz unificada."
         keywords={["IMC", "ASC", "masa magra", "peso ideal", "metabolismo basal", "cálculos fisiológicos", "antropometría"]}
-        author="FYT Lab Connect"
+        author="Grupo FyT"
         robots="index, follow"
+        canonical="https://fyt-research.org/herramientas/antropometricos"
       />
 
       {/* Breadcrumbs */}

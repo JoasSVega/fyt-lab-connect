@@ -44,8 +44,9 @@ const Escalas: FC = () => {
         title="Escalas Clínicas y Validación Farmacoterapéutica | Herramientas Farmacéuticas"
         description="Evalúa la seguridad, riesgo y efectividad del tratamiento farmacológico mediante escalas clínicas validadas como HAS-BLED, CHA₂DS₂-VASc, CURB-65 y Glasgow."
         keywords={["escalas clínicas", "HAS-BLED", "CHA2DS2-VASc", "CURB-65", "Glasgow", "validación farmacoterapéutica"]}
-        author="FYT Lab Connect"
+        author="Grupo FyT"
         robots="index, follow"
+        canonical="https://fyt-research.org/herramientas/escalas"
       />
 
       {/* Breadcrumbs */}

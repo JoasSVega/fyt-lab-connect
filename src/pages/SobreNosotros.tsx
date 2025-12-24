@@ -14,12 +14,12 @@ const SobreNosotros = () => {
   return (
   <div className="w-full bg-background flex flex-col">
       <Seo
-        title="Sobre Nosotros – FYT Lab Connect"
+        title="Grupo FyT | Sobre Nosotros"
         description="Equipo comprometido con la innovación farmacéutica, la seguridad del paciente y la excelencia científica."
-        author="FYT Lab Connect"
+        author="Grupo FyT"
         robots="index, follow"
-        canonical="https://fytlabconnect.com/sobre-nosotros"
-        openGraph={{ title: "Sobre Nosotros", description: "Conoce nuestro equipo y valores", type: "article" }}
+        canonical="https://fyt-research.org/sobre-nosotros"
+        openGraph={{ title: "Grupo FyT | Sobre Nosotros", description: "Conoce nuestro equipo y valores", type: "article" }}
         twitter={{ card: "summary", site: "@fytlab" }}
       />
       {/* Hero Institucional */}

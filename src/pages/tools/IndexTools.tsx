@@ -35,8 +35,11 @@ const IndexTools: FC = () => {
   return (
     <>
       <Seo
-        title="Herramientas farmacéuticas clínicas y asistenciales"
+        title="Grupo FyT | Herramientas farmacéuticas clínicas y asistenciales"
         description="Explora cálculos clínicos y farmacéuticos, cálculos fisiológicos y antropométricos, escalas clínicas y validación farmacoterapéutica, y herramientas avanzadas y conversores."
+        author="Grupo FyT"
+        robots="index, follow"
+        canonical="https://fyt-research.org/herramientas"
       />
       {/* Hero Section con imagen de fondo */}
       <section

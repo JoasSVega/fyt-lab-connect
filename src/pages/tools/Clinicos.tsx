@@ -25,8 +25,9 @@ const Clinicos: React.FC = () => {
         title="Cálculos Clínicos y Farmacéuticos | Herramientas para profesionales de la salud"
         description="Optimiza tus decisiones terapéuticas con cálculos precisos basados en evidencia: función renal (Cockcroft-Gault, MDRD, CKD-EPI), dosis, infusión y reconstitución."
         keywords={["cálculos clínicos", "farmacéuticos", "función renal", "dosis", "infusión", "reconstitución", "Cockcroft-Gault", "MDRD", "CKD-EPI"]}
-        author="FYT Lab Connect"
+        author="Grupo FyT"
         robots="index, follow"
+        canonical="https://fyt-research.org/herramientas/clinicos"
       />
 
       {/* Breadcrumbs */}

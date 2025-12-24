@@ -35,12 +35,12 @@ const Herramientas = () => {
   return (
     <div className="w-full bg-background flex flex-col pt-24">
       <Seo
-        title="Herramientas Farmacéuticas – FYT Lab Connect"
+        title="Grupo FyT | Herramientas Farmacéuticas"
         description="Soluciones digitales para profesionales farmacéuticos: calculadoras antropométricas y de función renal con UI unificada."
-        author="FYT Lab Connect"
+        author="Grupo FyT"
         robots="index, follow"
-        canonical="https://fytlabconnect.com/herramientas"
-        openGraph={{ title: "Herramientas", description: "Herramientas digitales para farmacia", type: "website" }}
+        canonical="https://fyt-research.org/herramientas"
+        openGraph={{ title: "Grupo FyT | Herramientas", description: "Herramientas digitales para farmacia", type: "website" }}
         twitter={{ card: "summary_large_image", site: "@fytlab" }}
       />
       {/* Hero Section con imagen de fondo */}

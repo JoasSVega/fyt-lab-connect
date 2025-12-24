@@ -10,12 +10,12 @@ const PrivacyPolicy = () => {
       <div className="max-w-3xl mx-auto px-4 py-10 sm:py-16">
         <h1 className="text-3xl sm:text-4xl font-poppins font-bold text-slate-900 mb-8 text-center">Política de Privacidad del Grupo de Investigación en Farmacología y Terapéutica</h1>
         <Seo
-          title="Política de Privacidad – FYT Lab Connect"
-          description="Conoce cómo tratamos tus datos personales y garantizamos tu privacidad."
-          author="FYT Lab Connect"
+          title="Grupo FyT | Política de Privacidad"
+          description="Política de privacidad del Grupo de Investigación en Farmacología y Terapéutica."
+          author="Grupo FyT"
           robots="index, follow"
-          canonical="https://fytlabconnect.com/politica-de-privacidad"
-          openGraph={{ title: "Política de Privacidad", description: "Tratamiento de datos personales", type: "article" }}
+          canonical="https://fyt-research.org/politica-de-privacidad"
+          openGraph={{ title: "Grupo FyT | Política de Privacidad", description: "Tratamiento de datos personales", type: "article" }}
           twitter={{ card: "summary", site: "@fytlab" }}
         />
       <section className="mb-6">

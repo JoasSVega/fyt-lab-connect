@@ -8,12 +8,12 @@ const CodeOfEthics = () => {
   return (
     <div className="w-full bg-background pt-24">{/* Patrón de páginas principales */}
       <Seo
-        title="Código de Ética – FYT Lab Connect"
+        title="Grupo FyT | Código de Ética"
         description="Principios éticos y valores que guían nuestras actividades científicas y académicas."
-        author="FYT Lab Connect"
+        author="Grupo FyT"
         robots="index, follow"
-        canonical="https://fytlabconnect.com/codigo-de-etica"
-        openGraph={{ title: "Código de Ética", description: "Principios y valores", type: "article" }}
+        canonical="https://fyt-research.org/codigo-de-etica"
+        openGraph={{ title: "Grupo FyT | Código de Ética", description: "Principios y valores", type: "article" }}
         twitter={{ card: "summary", site: "@fytlab" }}
       />
       <div className="max-w-3xl mx-auto px-4 py-10 sm:py-16">

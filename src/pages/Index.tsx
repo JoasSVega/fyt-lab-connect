@@ -20,13 +20,13 @@ const Index = () => {
   return (
   <div className="w-full" style={{background: "linear-gradient(120deg, #e0f2ff 0%, #f8fafc 60%, #f3f4f6 100%)"}}>
         <Seo
-          title="FYT Lab Connect – Innovación farmacéutica y herramientas clínicas"
-          description="Grupo de Investigación en Farmacología y Terapéutica: proyectos, publicaciones y herramientas clínicas con diseño corporativo y rendimiento optimizado."
-          keywords={["farmacología", "terapéutica", "investigación", "herramientas clínicas", "publicaciones"]}
-          author="FYT Lab Connect"
+          title="Grupo FyT | Grupo de Investigación en Farmacología y Terapéutica"
+          description="Grupo FyT es el Grupo de Investigación en Farmacología y Terapéutica enfocado en investigación científica, farmacovigilancia, farmacoterapia y análisis terapéutico."
+          keywords={["Grupo FyT", "farmacología", "terapéutica", "investigación científica", "farmacovigilancia", "farmacoterapia", "análisis terapéutico"]}
+          author="Grupo FyT"
           robots="index, follow"
-          canonical="https://fytlabconnect.com/"
-          openGraph={{ title: "FYT Lab Connect", description: "Innovación farmacéutica y herramientas clínicas", type: "website" }}
+          canonical="https://fyt-research.org"
+          openGraph={{ title: "Grupo FyT | Grupo de Investigación en Farmacología y Terapéutica", description: "Grupo FyT es el Grupo de Investigación en Farmacología y Terapéutica enfocado en investigación científica, farmacovigilancia, farmacoterapia y análisis terapéutico.", type: "website" }}
           twitter={{ card: "summary_large_image", site: "@fytlab" }}
         />
         {/* Título principal eliminado para evitar duplicidad. */}

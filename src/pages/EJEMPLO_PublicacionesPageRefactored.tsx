@@ -76,11 +76,11 @@ const PublicacionesPageRefactored: React.FC = () => {
     <div className="w-full bg-background">
       {/* SEO */}
       <Seo
-        title="Publicaciones Científicas y Académicas – FYT Lab Connect"
-        description="Producción intelectual del Grupo FyT en revistas indexadas, libros y espacios editoriales científicos."
-        author="FYT Lab Connect"
+        title="Grupo FyT | Publicaciones Científicas y Académicas"
+        description="Producción intelectual del Grupo de Investigación en Farmacología y Terapéutica en revistas indexadas, libros y espacios editoriales científicos."
+        author="Grupo FyT"
         robots="index, follow"
-        canonical="https://fytlabconnect.com/investigacion/publicaciones"
+        canonical="https://fyt-research.org/investigacion/publicaciones"
       />
 
       {/* Hero */}

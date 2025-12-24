@@ -8,12 +8,12 @@ const TermsOfUse = () => {
   return (
     <div className="w-full bg-background pt-24">{/* Patrón de páginas principales */}
       <Seo
-        title="Términos de Uso – FYT Lab Connect"
-        description="Condiciones de uso y responsabilidades al utilizar las plataformas de FYT Lab Connect."
-        author="FYT Lab Connect"
+        title="Grupo FyT | Términos de Uso"
+        description="Condiciones de uso del sitio del Grupo de Investigación en Farmacología y Terapéutica."
+        author="Grupo FyT"
         robots="index, follow"
-        canonical="https://fytlabconnect.com/terminos-de-uso"
-        openGraph={{ title: "Términos de Uso", description: "Condiciones y responsabilidades", type: "article" }}
+        canonical="https://fyt-research.org/terminos-de-uso"
+        openGraph={{ title: "Grupo FyT | Términos de Uso", description: "Condiciones y responsabilidades", type: "article" }}
         twitter={{ card: "summary", site: "@fytlab" }}
       />
       <div className="max-w-3xl mx-auto px-4 py-10 sm:py-16">
