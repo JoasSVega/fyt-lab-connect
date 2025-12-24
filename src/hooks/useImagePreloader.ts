@@ -157,10 +157,12 @@ export function useCarouselPreloader(
  * Preload responsive image set (small, medium, large)
  */
 export function preloadResponsiveImage(basePath: string, options: PreloadOptions = {}): Promise<void> {
+  // Mobile-first: no incluir '-large.webp' en preloads por defecto
+  const isMobile = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(max-width: 640px)').matches;
+  const wantMedium = !isMobile && ((typeof window !== 'undefined' && window.devicePixelRatio > 1) || (typeof window !== 'undefined' && window.innerWidth >= 768));
   const variants = [
     `${basePath}-small.webp`,
-    `${basePath}-medium.webp`,
-    `${basePath}-large.webp`,
+    ...(wantMedium ? [`${basePath}-medium.webp`] : []),
   ];
 
   return Promise.all(

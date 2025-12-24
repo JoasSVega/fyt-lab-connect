@@ -46,9 +46,12 @@ const Carrusel: React.FC<CarruselProps> = ({
   
   // Preload initial carousel images before rendering to prevent flickering
   // Only preload first 3 slides initially for faster initial render
+  // Preload inicial: elegir variante según viewport para evitar descargas grandes en móvil
+  const isMobileViewport = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(max-width: 640px)').matches;
+  const initialVariant = isMobileViewport ? '-small.webp' : '-medium.webp';
   const imagesToPreload = items.slice(0, 3).map(item => {
-    const base = (item.image || '').replace(/-medium\.webp$/i, '');
-    return `${base}-medium.webp`;
+    const base = (item.image || '').replace(/-(small|medium|large)\.webp$/i, '');
+    return `${base}${initialVariant}`;
   });
   const { loaded: imagesLoaded } = useImagePreloader(imagesToPreload, { priority: 'high', timeout: 8000 });
   
@@ -74,8 +77,11 @@ const Carrusel: React.FC<CarruselProps> = ({
           const item = items[index];
           if (item) {
             const base = item.image.replace(/-medium\.webp$/i, '');
-            // Preload all 3 sizes for buffered slides
-            ['-small.webp', '-medium.webp', '-large.webp'].forEach(suffix => {
+            // Estrategia mobile-first: nunca predescargar '-large.webp' en carrusel
+            const wantMedium = !isMobileViewport && ((typeof window !== 'undefined' && window.devicePixelRatio > 1) || (typeof window !== 'undefined' && window.innerWidth >= 768));
+            const variants = ['-small.webp'];
+            if (wantMedium) variants.push('-medium.webp');
+            variants.forEach(suffix => {
               const img = new Image();
               img.src = `${base}${suffix}`;
             });
