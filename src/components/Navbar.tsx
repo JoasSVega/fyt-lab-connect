@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -8,13 +8,9 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
-  const logoRef = useRef<HTMLImageElement | null>(null);
   const { prefetch } = usePrefetch();
 
-  useEffect(() => {
-    // Apply native fetchpriority attribute via DOM to avoid React prop warning
-    logoRef.current?.setAttribute("fetchpriority", "high");
-  }, []);
+  // No hack de fetchpriority: se establece directamente en el JSX del <img>
 
   // Toggle glassmorphism on scroll (without changing layout)
   useEffect(() => {
@@ -92,13 +88,11 @@ const Navbar = () => {
                 <img
                   src="/images/logo-fyt-small.webp"
                   srcSet="/images/logo-fyt-small.webp 1x, /images/logo-fyt-medium.webp 2x"
-                  alt="Logo FyT"
-                  sizes="100px"
+                  alt="Logo Grupo FyT"
+                  sizes="120px"
+                  className="h-10 w-auto object-contain"
                   loading="eager"
-                  ref={logoRef}
-                  className="h-10 md:h-14 w-auto object-contain shrink-0 transition-transform duration-250 group-hover:scale-[1.03]"
-                  width={140}
-                  height={40}
+                  fetchPriority="high"
                 />
             </div>
               <div className="text-lg font-poppins font-bold text-slate-900 group-hover:text-fyt-blue transition-colors duration-250">
