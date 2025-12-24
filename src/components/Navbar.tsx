@@ -12,10 +12,24 @@ const Navbar = () => {
 
   // No hack de fetchpriority: se establece directamente en el JSX del <img>
 
-  // Toggle glassmorphism on scroll (without changing layout)
+  // Toggle glassmorphism on scroll, batched via rAF to avoid forced reflow
   useEffect(() => {
-    const onScroll = () => setIsScrolled(window.scrollY > 8);
-    onScroll();
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      const y = window.scrollY || 0;
+      const next = y > 8;
+      // Only update if value actually changes to avoid style recalculation
+      setIsScrolled(prev => (prev !== next ? next : prev));
+    };
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(update);
+      }
+    };
+    // Initial state
+    update();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
