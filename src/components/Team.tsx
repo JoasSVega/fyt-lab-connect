@@ -5,6 +5,7 @@ import { Button } from "./ui/button";
 import { Mail } from "lucide-react";
 import { ScrollReveal } from "./animations/ScrollReveal";
 import SafeImage from "./SafeImage";
+import { getPersonSchema, baseUrl } from "@/utils/seoSchemas";
 
 const Team = ({ compact = false }: { compact?: boolean }) => {
   // Imágenes disponibles en /public/images/equipo/
@@ -69,7 +70,7 @@ const Team = ({ compact = false }: { compact?: boolean }) => {
       role: "Director del grupo FyT",
       specialty: "QF, MSc. Farmacología, PhD. Ciencias Biomédicas",
       description: "Docente de planta y Director del programa de Química Farmacéutica.",
-      
+      imageFile: "Antistio-Alviz-medium.webp",
       links: {
         orcid: "0000-0000-0000-0000",
         scholar: "scholar-profile",
@@ -81,7 +82,7 @@ const Team = ({ compact = false }: { compact?: boolean }) => {
       role: "Coordinadora de semillero del grupo FyT",
       specialty: "QF, esp. en Administración Educativa",
       description: "Docente de planta.",
-      
+      imageFile: "Yaneth-Garcia-medium.webp",
       links: {
         orcid: "0000-0000-0000-0001",
         scholar: "scholar-profile-2",
@@ -93,7 +94,7 @@ const Team = ({ compact = false }: { compact?: boolean }) => {
       role: "Estudiante Coordinadora del grupo FyT",
       specialty: "Estudiante de Química Farmacéutica",
       description: "Estudiante de pregrado.",
-      
+      imageFile: "Mariana-Mercado-medium.webp",
       links: {
         orcid: "0000-0000-0000-0007",
         scholar: "scholar-profile-8",
@@ -105,7 +106,7 @@ const Team = ({ compact = false }: { compact?: boolean }) => {
       role: "Líder de linea de investigación en Atención Farmacéutica y Farmacia Asistencial",
       specialty: "QF, MSc. Farmacia Clínica, esp. Gestión administartiva de Servicios Farmacéuticos",
       description: "Docente de Planta y Jefe del departamento académico.",
-      
+      imageFile: "Shirley-Cavadia-medium.webp",
       links: {
         orcid: "0000-0000-0000-0002",
         scholar: "scholar-profile-3",
@@ -117,7 +118,7 @@ const Team = ({ compact = false }: { compact?: boolean }) => {
       role: "Líder de linea de investigación en Farmacología y Terapéutica",
       specialty: "QF, MSc. Farmacología",
       description: "Docente de planta.",
-      
+      imageFile: "Julian-Martinez-medium.webp",
       links: {
         orcid: "0000-0000-0000-0003",
         scholar: "scholar-profile-4",
@@ -129,7 +130,7 @@ const Team = ({ compact = false }: { compact?: boolean }) => {
       role: "Líder de linea de investigación en Farmacoecoeconomía",
       specialty: "QF, MSc. Farmacología",
       description: "Docente de planta y subgerente del Hospital Universitario del Caribe.",
-      
+      imageFile: "Roger-Caraballo-medium.webp",
       links: {
         orcid: "0000-0000-0000-0004",
         scholar: "scholar-profile-5",
@@ -141,7 +142,7 @@ const Team = ({ compact = false }: { compact?: boolean }) => {
       role: "Líder de linea de investigación en Farmacovigilancia y Toxicología",
       specialty: "QF, M.Sc. Farmacología",
       description: "Docente de cátedra.",
-      
+      imageFile: "Luis-Utria-medium.webp",
       links: {
         orcid: "0000-0000-0000-0005",
         scholar: "scholar-profile-6",
@@ -153,14 +154,13 @@ const Team = ({ compact = false }: { compact?: boolean }) => {
       role: "Líder de linea de investigación en Farmacoepidemiología y PROA",
       specialty: "QF, MSc. Farmacología, PhD(c) Ciencias Biomédicas",
       description: "Docente de Catedra y Químico Farmacéutico asistencial.",
-      
+      imageFile: "Sergio-Uribe-medium.webp",
       links: {
         orcid: "0000-0000-0000-0006",
         scholar: "scholar-profile-7",
         email: "suribem@unicartagena.edu.co"
       }
     },
-    
   ];
 
 
@@ -172,6 +172,16 @@ const Team = ({ compact = false }: { compact?: boolean }) => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {teamMembers.map((member, idx) => {
             const imgSrc = getImageForMember(member.name);
+            
+            // Person schema para cada miembro
+            const personSchema = getPersonSchema({
+              name: member.name,
+              jobTitle: member.role,
+              description: member.description || member.specialty,
+              image: imgSrc ? `${baseUrl}${imgSrc}` : undefined,
+              url: `${baseUrl}/equipo#${member.name.replace(/\s+/g, '-').toLowerCase()}`,
+            });
+            
             if (!imgSrc) {
               // Imagen no encontrada para este miembro; se omite el console.log
               // Se mantiene el placeholder con iniciales para evitar errores de render.
@@ -180,6 +190,10 @@ const Team = ({ compact = false }: { compact?: boolean }) => {
             return (
               <ScrollReveal key={member.name} delay={idx * 0.1}>
                 <Card className="flex flex-col items-center justify-between p-7 rounded-2xl shadow-soft border-2 border-fyt-purple/30 bg-white/90 min-h-[420px] hover:scale-[1.02] transition-transform duration-300">
+                  {/* JSON-LD inline para este miembro */}
+                  <script type="application/ld+json">
+                    {JSON.stringify(personSchema)}
+                  </script>
                   {/* Foto o placeholder con srcset optimizado */}
                   <>
                     {imgSrc ? (
@@ -206,7 +220,9 @@ const Team = ({ compact = false }: { compact?: boolean }) => {
                       </div>
                     )}
                     <div className="flex flex-col items-center w-full">
-                      <h3 className="text-lg font-bold text-fyt-blue mb-1 text-center">{member.name}</h3>
+                      <h2 className="text-lg font-bold text-fyt-blue mb-1 text-center" id={member.name.replace(/\s+/g, '-').toLowerCase()}>
+                        {member.name}
+                      </h2>
                       <p className="text-sm text-fyt-purple font-semibold mb-1 text-center">{member.role}</p>
                       {member.specialty && (
                         <p className="text-sm text-[#3BB9FF] font-medium mb-1 text-center">{member.specialty}</p>

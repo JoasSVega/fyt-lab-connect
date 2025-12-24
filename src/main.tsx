@@ -1,8 +1,13 @@
 import { createRoot } from "react-dom/client";
+import { HelmetProvider } from 'react-helmet-async';
 import App from "./App.tsx";
 import "./index.css";
 
-createRoot(document.getElementById("root")!).render(<App />);
+createRoot(document.getElementById("root")!).render(
+  <HelmetProvider>
+    <App />
+  </HelmetProvider>
+);
 
 // Register a lightweight service worker to add runtime caching for static assets.
 // Safe and reversible; it won't interfere with Lovable deployments.

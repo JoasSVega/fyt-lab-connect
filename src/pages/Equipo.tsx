@@ -2,21 +2,52 @@ import Team from "@/components/Team";
 import FloatingContact from "@/components/FloatingContact";
 import { usePageReady } from "@/hooks/usePageReady";
 import Seo from "@/components/Seo";
+import { baseUrl } from "@/utils/seoSchemas";
 
 const Equipo = () => {
   usePageReady();
+  
+  // Organization schema con team members (Organization members array)
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': `${baseUrl}/equipo`,
+    name: 'Grupo FyT - Equipo de Investigación',
+    description: 'Equipo de investigación en Farmacología y Terapéutica de la Universidad de Cartagena',
+    url: `${baseUrl}/equipo`,
+    image: `${baseUrl}/logo-fyt.png`,
+    organization: {
+      '@type': 'Organization',
+      name: 'Grupo FyT - Universidad de Cartagena',
+      url: `${baseUrl}`,
+      image: `${baseUrl}/logo-fyt.png`,
+    },
+  };
+  
   return (
     <div className="w-full bg-background flex flex-col pt-24">
       <Seo
-        title="Grupo FyT | Equipo"
-        description="Integrantes y miembros del Grupo de Investigación en Farmacología y Terapéutica."
+        title="Equipo | Investigadores Farmacéuticos | Grupo FyT"
+        description="Conoce al equipo del Grupo FyT: investigadores, docentes y estudiantes en Farmacología, Farmacovigilancia, Farmacoecoeconomía y más."
+        keywords="investigadores farmacéuticos, equipo FyT, farmacología, farmacovigilancia, Universidad Cartagena, farmacoecoeconomía"
         author="Grupo FyT"
         robots="index, follow"
-        canonical="https://fyt-research.org/equipo"
-        openGraph={{ title: "Grupo FyT | Equipo", description: "Integrantes del Grupo FyT", type: "website" }}
-        twitter={{ card: "summary", site: "@fytlab" }}
+        canonical={`${baseUrl}/equipo`}
+        openGraph={{
+          title: "Equipo Investigador | Grupo FyT",
+          description: "Profesionales dedicados a la investigación farmacéutica en Cartagena",
+          type: "website",
+          url: `${baseUrl}/equipo`,
+          image: `${baseUrl}/logo-fyt.png`,
+        }}
+        twitter={{
+          card: "summary",
+          site: "@fytlab",
+          image: `${baseUrl}/logo-fyt.png`,
+        }}
+        schema={schema}
       />
-      {/* Título principal eliminado para evitar duplicado, el componente Team lo incluye */}
+      <h1 className="sr-only">Equipo de Investigadores Farmacéuticos - Grupo FyT</h1>
       <Team />
       <FloatingContact />
     </div>

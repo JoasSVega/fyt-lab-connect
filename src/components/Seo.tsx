@@ -1,87 +1,126 @@
-import * as React from "react";
+import { Helmet } from 'react-helmet-async';
+import { ReactNode } from 'react';
 
-type OpenGraphProps = {
-  title?: string;
-  description?: string;
-  type?: string;
-};
-
-type TwitterProps = {
-  card?: string;
-  site?: string;
-};
-
-type Props = {
+interface SEOProps {
+  /**
+   * Título de la página (visible en pestañas y resultados de búsqueda)
+   * Máximo 60 caracteres para evitar truncamiento
+   */
   title: string;
+
+  /**
+   * Descripción meta (visible en Google)
+   * Máximo 160 caracteres
+   */
   description?: string;
+
+  /**
+   * Palabras clave separadas por comas o array
+   */
   keywords?: string[] | string;
-  author?: string;
-  robots?: string;
+
+  /**
+   * URL canónica de la página
+   */
   canonical?: string;
-  openGraph?: OpenGraphProps;
-  twitter?: TwitterProps;
-};
 
-const ensureMeta = (name: string, content: string) => {
-  if (!content) return;
-  let meta = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement | null;
-  if (!meta) {
-    meta = document.createElement("meta");
-    meta.name = name;
-    document.head.appendChild(meta);
+  /**
+   * Autor de la página
+   */
+  author?: string;
+
+  /**
+   * Instrucciones para robots
+   */
+  robots?: string;
+
+  /**
+   * Schema JSON-LD para datos estructurados
+   */
+  schema?: Record<string, unknown>;
+
+  /**
+   * Open Graph para redes sociales
+   */
+  openGraph?: {
+    title?: string;
+    description?: string;
+    type?: string;
+    image?: string;
+    url?: string;
+  };
+
+  /**
+   * Twitter Card
+   */
+  twitter?: {
+    card?: string;
+    site?: string;
+    image?: string;
+  };
+
+  /**
+   * Hijos opcionales
+   */
+  children?: ReactNode;
+}
+
+// Palabras clave globales
+const GLOBAL_KEYWORDS = 'Grupo FyT, FyT, Farmacología y Terapéutica, Investigación Farmacéutica';
+
+/**
+ * Componente reutilizable para gestionar meta tags y datos estructurados
+ * Usa react-helmet-async para inyectar dinámicamente en el <head>
+ */
+export default function SEO({
+  title,
+  description = '',
+  keywords = '',
+  canonical = '',
+  author = '',
+  robots = 'index, follow',
+  schema = null,
+  openGraph = {},
+  twitter = {},
+  children,
+}: SEOProps) {
+  // Combinar keywords
+  let finalKeywords = GLOBAL_KEYWORDS;
+  if (keywords) {
+    const keywordString = Array.isArray(keywords) ? keywords.join(', ') : keywords;
+    finalKeywords = `${keywordString}, ${GLOBAL_KEYWORDS}`;
   }
-  meta.content = content;
-};
 
-const ensureMetaProperty = (property: string, content: string) => {
-  if (!content) return;
-  let meta = document.querySelector(`meta[property="${property}"]`) as HTMLMetaElement | null;
-  if (!meta) {
-    meta = document.createElement("meta");
-    meta.setAttribute("property", property);
-    document.head.appendChild(meta);
-  }
-  meta.content = content;
-};
+  return (
+    <Helmet>
+      {/* Básicos */}
+      <title>{title}</title>
+      {description && <meta name="description" content={description} />}
+      {keywords && <meta name="keywords" content={finalKeywords} />}
+      {author && <meta name="author" content={author} />}
+      {robots && <meta name="robots" content={robots} />}
 
-const ensureLink = (rel: string, href: string) => {
-  if (!href) return;
-  let link = document.querySelector(`link[rel="${rel}"]`) as HTMLLinkElement | null;
-  if (!link) {
-    link = document.createElement("link");
-    link.rel = rel;
-    document.head.appendChild(link);
-  }
-  link.href = href;
-};
+      {/* Open Graph */}
+      <meta property="og:title" content={openGraph?.title || title} />
+      {description && <meta property="og:description" content={openGraph?.description || description} />}
+      {openGraph?.type && <meta property="og:type" content={openGraph.type} />}
+      {openGraph?.image && <meta property="og:image" content={openGraph.image} />}
+      {openGraph?.url && <meta property="og:url" content={openGraph.url} />}
 
-const Seo: React.FC<Props> = ({ title, description, keywords, author, robots, canonical, openGraph, twitter }) => {
-  React.useEffect(() => {
-    if (title) document.title = title;
-    if (typeof description === "string") ensureMeta("description", description);
-    if (typeof author === "string") ensureMeta("author", author);
-    if (typeof robots === "string") ensureMeta("robots", robots);
-    const kw = Array.isArray(keywords) ? keywords.join(", ") : keywords;
-    if (typeof kw === "string") ensureMeta("keywords", kw);
-    
-    // Canonical URL
-    if (canonical) ensureLink("canonical", canonical);
-    
-    // OpenGraph
-    if (openGraph) {
-      if (openGraph.title) ensureMetaProperty("og:title", openGraph.title);
-      if (openGraph.description) ensureMetaProperty("og:description", openGraph.description);
-      if (openGraph.type) ensureMetaProperty("og:type", openGraph.type);
-    }
-    
-    // Twitter
-    if (twitter) {
-      if (twitter.card) ensureMeta("twitter:card", twitter.card);
-      if (twitter.site) ensureMeta("twitter:site", twitter.site);
-    }
-  }, [title, description, keywords, author, robots, canonical, openGraph, twitter]);
+      {/* Twitter Card */}
+      {twitter?.card && <meta name="twitter:card" content={twitter.card} />}
+      {twitter?.site && <meta name="twitter:site" content={twitter.site} />}
+      <meta name="twitter:title" content={title} />
+      {description && <meta name="twitter:description" content={description} />}
+      {twitter?.image && <meta name="twitter:image" content={twitter.image} />}
 
-  return null;
-};
+      {/* Canonical URL */}
+      {canonical && <link rel="canonical" href={canonical} />}
 
-export default Seo;
+      {/* JSON-LD Schema */}
+      {schema && <script type="application/ld+json">{JSON.stringify(schema)}</script>}
+
+      {children}
+    </Helmet>
+  );
+}

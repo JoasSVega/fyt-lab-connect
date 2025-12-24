@@ -5,24 +5,27 @@ import { useNavigate } from "react-router-dom";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { usePageReady } from "@/hooks/usePageReady";
 import Seo from "@/components/Seo";
+import { getSoftwareApplicationSchema, baseUrl } from "@/utils/seoSchemas";
 
 // Lista de herramientas farmacéuticas (fácil de extender)
 const tools = [
   {
     title: "Calculadoras Antropométricas",
-    description: "Herramienta farmacéutica para cálculos clínicos antropométricos.",
+    description: "Herramienta farmacéutica para cálculos clínicos antropométricos: índice de masa corporal (IMC), superficie corporal, peso ideal.",
     color: "bg-green-50",
     href: "/herramientas/antropometricos",
     buttonText: "Ir a Calculadoras Antropométricas",
     icon: <Ruler className="w-8 h-8 text-green-600" aria-label="Antropométricas" />,
+    keywords: "calculadora antropométrica, IMC, índice de masa corporal, superficie corporal, farmacología clínica",
   },
   {
     title: "Calculadoras de Función Renal",
-    description: "Herramienta farmacéutica para cálculos clínicos de función renal.",
+    description: "Herramienta farmacéutica para cálculos clínicos de función renal: tasa de filtración glomerular (TFG), clearance, dosificación por insuficiencia renal.",
     color: "bg-blue-50",
     href: "/herramientas/funcion-renal",
     buttonText: "Ir a Calculadoras de Función Renal",
     icon: <Droplet className="w-8 h-8 text-blue-600" aria-label="Función Renal" />,
+    keywords: "calculadora función renal, TFG, tasa filtración glomerular, clearance, dosificación, farmacocinética",
   },
   // Agrega aquí nuevas herramientas fácilmente
 ];
@@ -32,16 +35,48 @@ const Herramientas = () => {
   usePageReady({
     responsiveImages: ["/images/hero-herramientas"],
   });
+
+  // Schema para la página de herramientas con lista de aplicaciones
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Herramientas Farmacéuticas',
+    description: 'Soluciones digitales para cálculos farmacéuticos y clínicos',
+    url: `${baseUrl}/herramientas`,
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: tools.map((tool, idx) => ({
+        '@type': 'ListItem',
+        position: idx + 1,
+        name: tool.title,
+        description: tool.description,
+        url: `${baseUrl}${tool.href}`,
+      })),
+    },
+  };
+
   return (
     <div className="w-full bg-background flex flex-col pt-24">
       <Seo
-        title="Grupo FyT | Herramientas Farmacéuticas"
-        description="Soluciones digitales para profesionales farmacéuticos: calculadoras antropométricas y de función renal con UI unificada."
+        title="Herramientas Farmacéuticas | Calculadoras Clínicas | Grupo FyT"
+        description="Herramientas digitales para farmacéuticos: calculadoras antropométricas, función renal, dosificación. Análisis clínico y farmacocinética online."
+        keywords="calculadora farmacéutica, herramientas clínicas, función renal, antropométrica, farmacocinética, análisis terapéutico"
         author="Grupo FyT"
         robots="index, follow"
-        canonical="https://fyt-research.org/herramientas"
-        openGraph={{ title: "Grupo FyT | Herramientas", description: "Herramientas digitales para farmacia", type: "website" }}
-        twitter={{ card: "summary_large_image", site: "@fytlab" }}
+        canonical={`${baseUrl}/herramientas`}
+        openGraph={{
+          title: "Herramientas Farmacéuticas | Grupo FyT",
+          description: "Calculadoras clínicas para farmacéuticos y profesionales de salud.",
+          type: "website",
+          url: `${baseUrl}/herramientas`,
+          image: `${baseUrl}/logo-fyt.png`,
+        }}
+        twitter={{
+          card: "summary_large_image",
+          site: "@fytlab",
+          image: `${baseUrl}/logo-fyt.png`,
+        }}
+        schema={schema}
       />
       {/* Hero Section con imagen de fondo */}
       <section
@@ -69,32 +104,46 @@ const Herramientas = () => {
       {/* Sección de tarjetas */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-          {tools.map((tool, idx) => (
-            <ScrollReveal key={tool.title} delay={idx * 0.1}>
-              <Card className="flex flex-col items-center rounded-xl shadow-soft bg-white/80">
-                <CardContent className="flex flex-col items-center gap-4 p-8 w-full">
-                  {/* Espacio reservado para imagen/icono */}
-                  <div
-                    className={`w-16 h-16 flex items-center justify-center rounded-full mb-2 ${tool.color}`}
-                  >
-                    {tool.icon}
-                  </div>
-                  <h3 className="text-xl font-raleway font-semibold text-fyt-dark mb-2 text-center">
-                    {tool.title}
-                  </h3>
-                  <p className="text-muted-foreground text-center text-sm mb-4 font-inter">
-                    {tool.description}
-                  </p>
-                  <Button
-                    onClick={() => navigate(tool.href)}
-                    className={`w-full rounded-full px-5 py-2 font-inter shadow bg-fyt-blue text-white hover:bg-fyt-blue/90 transition font-inter`}
-                  >
-                    {tool.buttonText}
-                  </Button>
-                </CardContent>
-              </Card>
-            </ScrollReveal>
-          ))}
+          {tools.map((tool, idx) => {
+            // Schema individual para cada herramienta
+            const toolSchema = getSoftwareApplicationSchema({
+              name: tool.title,
+              description: tool.description,
+              category: "Medical",
+              url: `${baseUrl}${tool.href}`,
+            });
+
+            return (
+              <ScrollReveal key={tool.title} delay={idx * 0.1}>
+                <Card className="flex flex-col items-center rounded-xl shadow-soft bg-white/80">
+                  {/* JSON-LD inline para esta herramienta */}
+                  <script type="application/ld+json">
+                    {JSON.stringify(toolSchema)}
+                  </script>
+                  <CardContent className="flex flex-col items-center gap-4 p-8 w-full">
+                    {/* Espacio reservado para imagen/icono */}
+                    <div
+                      className={`w-16 h-16 flex items-center justify-center rounded-full mb-2 ${tool.color}`}
+                    >
+                      {tool.icon}
+                    </div>
+                    <h2 className="text-xl font-raleway font-semibold text-fyt-dark mb-2 text-center">
+                      {tool.title}
+                    </h2>
+                    <p className="text-muted-foreground text-center text-sm mb-4 font-inter">
+                      {tool.description}
+                    </p>
+                    <Button
+                      onClick={() => navigate(tool.href)}
+                      className={`w-full rounded-full px-5 py-2 font-inter shadow bg-fyt-blue text-white hover:bg-fyt-blue/90 transition font-inter`}
+                    >
+                      {tool.buttonText}
+                    </Button>
+                  </CardContent>
+                </Card>
+              </ScrollReveal>
+            );
+          })}
         </div>
       </section>
     </div>

@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import Hero from "@/components/Hero";
 import Seo from "@/components/Seo";
+import { getOrganizationSchema, baseUrl } from "@/utils/seoSchemas";
 import { Button } from "@/components/ui/button";
 import { Users, Microscope, BookOpen } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -20,14 +21,25 @@ const Index = () => {
   return (
   <div className="w-full" style={{background: "linear-gradient(120deg, #e0f2ff 0%, #f8fafc 60%, #f3f4f6 100%)"}}>
         <Seo
-          title="Grupo FyT | Grupo de Investigación en Farmacología y Terapéutica"
-          description="Grupo FyT es el Grupo de Investigación en Farmacología y Terapéutica enfocado en investigación científica, farmacovigilancia, farmacoterapia y análisis terapéutico."
-          keywords={["Grupo FyT", "farmacología", "terapéutica", "investigación científica", "farmacovigilancia", "farmacoterapia", "análisis terapéutico"]}
+          title="Grupo FyT | Investigación en Farmacología y Terapéutica"
+          description="Grupo FyT: Investigación rigurosa en Farmacología y Terapéutica. Herramientas científicas, farmacovigilancia, análisis terapéutico e impacto en la salud."
+          keywords="Grupo FyT, farmacología, terapéutica, investigación científica, herramientas de salud, farmacovigilancia"
           author="Grupo FyT"
           robots="index, follow"
-          canonical="https://fyt-research.org"
-          openGraph={{ title: "Grupo FyT | Grupo de Investigación en Farmacología y Terapéutica", description: "Grupo FyT es el Grupo de Investigación en Farmacología y Terapéutica enfocado en investigación científica, farmacovigilancia, farmacoterapia y análisis terapéutico.", type: "website" }}
-          twitter={{ card: "summary_large_image", site: "@fytlab" }}
+          canonical={baseUrl}
+          openGraph={{
+            title: "Grupo FyT | Investigación en Farmacología y Terapéutica",
+            description: "Grupo FyT: Investigación rigurosa en Farmacología y Terapéutica. Herramientas científicas, farmacovigilancia, análisis terapéutico e impacto en la salud.",
+            type: "website",
+            url: baseUrl,
+            image: `${baseUrl}/logo-fyt.png`,
+          }}
+          twitter={{
+            card: "summary_large_image",
+            site: "@fytlab",
+            image: `${baseUrl}/logo-fyt.png`,
+          }}
+          schema={getOrganizationSchema()}
         />
         {/* Título principal eliminado para evitar duplicidad. */}
         {/* Hero Section (sin ScrollReveal para evitar scroll interno y problemas de visualización) */}
