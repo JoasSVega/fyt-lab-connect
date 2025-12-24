@@ -86,7 +86,8 @@ const Index = () => {
       {/* Secciones de investigación, modalidades, actividades y productos, y la tarjeta de inscripción */}
       <Suspense fallback={<div className="min-h-[600px]" />}>
         <ScrollReveal delay={0.1}>
-          <div className="px-2 sm:px-6 md:px-12 lg:px-24 xl:px-32 2xl:px-48">
+          {/* Breakout: el carrusel ocupa todo el viewport ignorando contenedor centrado */}
+          <div className="w-screen relative left-[50%] right-[50%] -ml-[50vw] -mr-[50vw] px-4 md:px-8">
             <About />
           </div>
         </ScrollReveal>

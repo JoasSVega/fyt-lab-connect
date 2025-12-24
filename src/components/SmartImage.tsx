@@ -3,10 +3,13 @@ import React from "react";
 /**
  * SmartImage - Componente optimizado para imágenes responsivas
  * 
- * Automatiza la generación de srcSet y sizes para garantizar que:
- * - Los dispositivos móviles descarguen versiones ligeras (-small.webp)
- * - Los escritorios usen versiones de alta calidad (-large.webp)
- * - Nunca más escribir manualmente srcSet
+ * REGLAS DE ORO - MOBILE FIRST:
+ * 1. El atributo `src` apunta SIEMPRE a -small.webp (mobile first)
+ * 2. El `srcSet` NUNCA incluye -large.webp (prohibido en móvil)
+ *    - srcSet limitado: ${basePath}-small.webp 500w, ${basePath}-medium.webp 1000w
+ * 3. El atributo `sizes` es "mentiroso" para engañar a pantallas Retina:
+ *    - "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+ * 4. Lazy loading por defecto: loading="lazy", decoding="async"
  * 
  * @example
  * ```tsx
@@ -31,7 +34,7 @@ export interface SmartImageProps extends Omit<React.ImgHTMLAttributes<HTMLImageE
   /** 
    * Tipo de uso para determinar el atributo sizes automáticamente
    * - 'hero': Imagen a pantalla completa (100vw en todas las resoluciones)
-   * - 'card': Tarjetas en carrusel/grid (90vw móvil, 45vw tablet, 300px escritorio)
+   * - 'card': Tarjetas en carrusel/grid (mobile first: 100vw, optimiza para small/medium)
    * - 'avatar': Logos pequeños o fotos de perfil (100px fijo)
    * - 'team': Fotos de equipo (180px móvil, 220px escritorio)
    * - 'thumbnail': Miniaturas pequeñas (150px móvil, 200px escritorio)
@@ -45,9 +48,9 @@ export interface SmartImageProps extends Omit<React.ImgHTMLAttributes<HTMLImageE
   
   /**
    * Versión por defecto a usar como fallback
-   * - 'small': Ideal para móviles (default)
+   * - 'small': Ideal para móviles (default - RECOMENDADO)
    * - 'medium': Balance entre calidad y tamaño
-   * - 'large': Máxima calidad (solo usar para héroes críticos)
+   * - 'large': Máxima calidad (RARA VEZ - solo héroes críticos)
    */
   fallbackSize?: 'small' | 'medium' | 'large';
   
@@ -79,16 +82,18 @@ export interface SmartImageProps extends Omit<React.ImgHTMLAttributes<HTMLImageE
 
 /**
  * Configuración de sizes predefinidos por tipo de uso
+ * MOBILE FIRST - Con "sizes mentiroso" para forzar descarga de versiones ligeras
  */
 const USAGE_SIZES: Record<ImageUsage, string> = {
   // Hero: Ocupa toda la pantalla en todos los dispositivos
   hero: '100vw',
   
-  // Card: Para carruseles y grids responsivos
-  // Móvil: 90% del ancho de pantalla
-  // Tablet: 45% (2 columnas)
-  // Desktop: 300px fijo
-  card: '(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 300px',
+  // Card: Para carruseles y grids responsivos (MOBILE FIRST)
+  // Móvil: 100vw (dice que ocupa todo el ancho pero srcSet limitado fuerza small/medium)
+  // Tablet: 50vw (fuerza medium sobre small en tablets)
+  // Desktop: 33vw (permite medium en escritorio)
+  // El "tamaño mentiroso" combinado con srcSet limitado (sin large) fuerza descarga ligera
+  card: '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw',
   
   // Avatar: Tamaño fijo para logos/perfiles
   avatar: '100px',
@@ -102,11 +107,12 @@ const USAGE_SIZES: Record<ImageUsage, string> = {
 
 /**
  * Configuración de anchos descriptores para cada variante
+ * NOTA: Solo small y medium para mobile-first (large está prohibido en srcSet)
  */
 const VARIANT_WIDTHS = {
-  small: 480,
-  medium: 800,
-  large: 1200,
+  small: 500,  // Móvil estándar (aumentado de 480 para mejor cobertura)
+  medium: 1000, // Tablet y pantallas medianas
+  // large NUNCA aparece en srcSet - solo como fallback en casos especiales
 };
 
 const SmartImage: React.FC<SmartImageProps> = ({
@@ -126,13 +132,14 @@ const SmartImage: React.FC<SmartImageProps> = ({
   // Limpiar basePath de posibles sufijos existentes
   const cleanBasePath = basePath.replace(/-(small|medium|large)\.webp$/i, '');
   
-  // Generar srcSet automáticamente
-  const srcSet = `${cleanBasePath}-small.webp ${VARIANT_WIDTHS.small}w, ${cleanBasePath}-medium.webp ${VARIANT_WIDTHS.medium}w, ${cleanBasePath}-large.webp ${VARIANT_WIDTHS.large}w`;
+  // REGLA DE ORO: srcSet NUNCA incluye -large.webp
+  // Solo small (500w) y medium (1000w) para forzar descargas ligeras en móvil
+  const srcSet = `${cleanBasePath}-small.webp ${VARIANT_WIDTHS.small}w, ${cleanBasePath}-medium.webp ${VARIANT_WIDTHS.medium}w`;
   
-  // Seleccionar src fallback basado en fallbackSize
-  const src = `${cleanBasePath}-${fallbackSize}.webp`;
+  // REGLA DE ORO: src SIEMPRE apunta a -small.webp (mobile first)
+  const src = `${cleanBasePath}-small.webp`;
   
-  // Obtener sizes predefinido según el uso
+  // Obtener sizes predefinido según el uso (con "tamaño mentiroso" mobile-first)
   const sizes = USAGE_SIZES[usage];
   
   return (

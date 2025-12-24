@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense, lazy } from "react";
 import { Target, Eye, Microscope, Heart, Users, BookOpen, ChevronLeft, ChevronRight, Bell } from "lucide-react";
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
-import Carrusel from "./ui/Carrusel";
+const Carrusel = lazy(() => import("./ui/Carrusel"));
 import { ScrollReveal } from "./animations/ScrollReveal";
 import { useViewportPreloader } from "@/hooks/usePredictiveLoader";
 
@@ -173,14 +173,16 @@ const About = () => {
             Líneas de Investigación
           </h3>
           <div className="relative px-4 sm:px-16 lg:px-32 xl:px-48 2xl:px-64 py-6">
-            <Carrusel
-              items={researchLines}
-              color="#9B59B6"
-              height="clamp(14rem, 28vw, 18rem)"
-              showDescription={true}
-              className="w-full"
-              imageClassName="w-full h-full object-cover rounded-t-2xl"
-            />
+            <Suspense fallback={<div className="h-64 bg-gray-50" />}>
+              <Carrusel
+                items={researchLines}
+                color="#9B59B6"
+                height="clamp(14rem, 28vw, 18rem)"
+                showDescription={true}
+                className="w-full"
+                imageClassName="w-full h-full object-cover rounded-t-2xl"
+              />
+            </Suspense>
           </div>
         </section>
       </ScrollReveal>
@@ -191,7 +193,9 @@ const About = () => {
             Modalidades de Grado
           </h3>
           <div className="relative px-4 sm:px-16 lg:px-32 xl:px-48 2xl:px-64 py-6 mb-12">
-            <Carrusel items={graduationModalities} color="#9B59B6" height="clamp(14rem, 28vw, 18rem)" showDescription={true} className="w-full" imageClassName="w-full h-full object-cover rounded-t-2xl" />
+            <Suspense fallback={<div className="h-64 bg-gray-50" />}>
+              <Carrusel items={graduationModalities} color="#9B59B6" height="clamp(14rem, 28vw, 18rem)" showDescription={true} className="w-full" imageClassName="w-full h-full object-cover rounded-t-2xl" />
+            </Suspense>
           </div>
         </section>
       </ScrollReveal>
@@ -202,7 +206,9 @@ const About = () => {
             Actividades y Productos
           </h3>
           <div className="relative px-4 sm:px-16 lg:px-32 xl:px-48 2xl:px-64 py-6 mb-12">
-            <Carrusel items={activitiesProducts} color="#FF4C4C" height="clamp(14rem, 28vw, 18rem)" showDescription={true} className="w-full" imageClassName="w-full h-full object-cover rounded-t-2xl" />
+            <Suspense fallback={<div className="h-64 bg-gray-50" />}>
+              <Carrusel items={activitiesProducts} color="#FF4C4C" height="clamp(14rem, 28vw, 18rem)" showDescription={true} className="w-full" imageClassName="w-full h-full object-cover rounded-t-2xl" />
+            </Suspense>
           </div>
           {/* INSCRÍBETE AHORA Card */}
           <div className="flex justify-center mt-8">

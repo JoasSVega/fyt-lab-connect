@@ -8,20 +8,26 @@ export default function Hero() {
       style={{ minHeight: '500px' }}
     >
       {/* Imagen de fondo optimizada para móviles - LCP crítico */}
+      {/* ESTRUCTURA ESTRICTA: Cada viewport carga EXACTAMENTE su versión */}
       <picture>
+        {/* 1. ESCRITORIO (>1024px): Solo aquí se permite la imagen pesada */}
         <source 
           media="(min-width: 1024px)" 
-          srcSet="/images/hero-index-large-medium.webp" 
+          srcSet="/images/hero-index-large.webp" 
         />
+        
+        {/* 2. TABLET (640px - 1023px): Imagen mediana */}
         <source 
           media="(min-width: 640px)" 
-          srcSet="/images/hero-index-medium-medium.webp" 
+          srcSet="/images/hero-index-medium.webp" 
         />
+        
+        {/* 3. MÓVIL (<640px): Imagen súper ligera OBLIGATORIA */}
+        {/* Nota: NO usamos srcSet aquí, solo src para evitar que el navegador decida mal */}
         <img 
-          src="/images/hero-index-small-small.webp" 
-          alt=""
+          src="/images/hero-index-small.webp" 
+          alt="Investigación rigurosa, impacto real en la salud, ciencia e innovación"
           className="hero-image"
-          aria-hidden="true"
           width={1920}
           height={1080}
           fetchPriority="high"

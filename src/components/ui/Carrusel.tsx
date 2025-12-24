@@ -161,7 +161,7 @@ const Carrusel: React.FC<CarruselProps> = ({
   // Show loading skeleton while images preload
   if (!imagesLoaded) {
     return (
-      <div className={className || "w-full px-2 sm:px-3"}>
+      <div className={className || "w-full max-w-[1800px] mx-auto px-4 md:px-8"}>
         <div className="w-full flex items-center justify-center" style={{ minHeight: heightCss || '18rem' }}>
           <div className="animate-pulse flex space-x-4">
             <div className="flex-1 space-y-4 py-1">
@@ -181,7 +181,7 @@ const Carrusel: React.FC<CarruselProps> = ({
     <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className={className || "w-full px-2 sm:px-3"}
+      className={className || "w-full max-w-[1800px] mx-auto px-4 md:px-8"}
     >
   <Carousel
         opts={{ align: "center", loop: true, containScroll: 'keepSnaps', slidesToScroll: 1 }}
@@ -192,7 +192,7 @@ const Carrusel: React.FC<CarruselProps> = ({
         {items.map((item, index) => (
           <CarouselItem
             key={index}
-            className="px-2 md:px-4 basis-[85%] sm:basis-[70%] md:basis-[48%] lg:basis-[31%] xl:basis-[24%] 2xl:basis-[19%] min-w-[280px] md:min-w-[320px] max-w-[520px]"
+            className="px-2 md:px-4 basis-[66%] sm:basis-[66%] md:basis-[50%] lg:basis-[33.333%] xl:basis-[25%] 2xl:basis-[20%] min-w-[280px] md:min-w-[320px] max-w-[520px]"
           >
             <Card
               style={{ borderColor: color }}
@@ -209,7 +209,7 @@ const Carrusel: React.FC<CarruselProps> = ({
                   alt={item.title}
                   usage="card"
                   loading={index < 2 ? 'eager' : 'lazy'}
-                  fallbackSize="medium"
+                  fallbackSize="small"
                   decoding="async"
                   className={defaultImageClass}
                   style={heightCss ? ({ height: '100%', maxHeight: heightCss, minHeight: heightCss } as React.CSSProperties) : ({ height: '100%' } as React.CSSProperties)}
