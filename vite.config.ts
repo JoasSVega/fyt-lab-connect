@@ -7,9 +7,9 @@ import { visualizer } from 'rollup-plugin-visualizer';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  // Usar rutas relativas en producción para evitar 404 de assets en previews o subrutas (Lovable)
-  // En dev mantenemos '/'
-  base: mode === 'production' ? './' : '/',
+  // Configuración para GitHub Pages con dominio propio
+  // Usar '/' para dominio personalizado, evita problemas con rutas absolutas
+  base: '/',
   server: {
     host: "::",
     port: 8080,
