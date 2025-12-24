@@ -14,6 +14,7 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { stripInvisible, safeText, isLikelyEmail, sanitizeURL } from "@/lib/sanitize";
 import { motion } from "framer-motion";
+import heroContacto from "@/assets/hero-contacto.jpg";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -146,32 +147,44 @@ const ContactPremium = () => {
   };
 
   return (
-    <section className="relative min-h-screen bg-slate-50 overflow-hidden py-16 md:py-24">
-      {/* Decorative Background Elements */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br from-fyt-purple/20 via-primary/10 to-transparent rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gradient-to-tr from-primary/15 to-transparent rounded-full blur-3xl translate-y-1/3 -translate-x-1/4 pointer-events-none" />
+    <>
+      {/* Hero Section with Background Image */}
+      <section className="relative h-[60vh] min-h-[400px] flex items-center justify-center overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <img
+            src={heroContacto}
+            alt="Laboratorio de investigación"
+            className="w-full h-full object-cover"
+          />
+          {/* Dark Overlay */}
+          <div className="absolute inset-0 bg-black/50" />
+        </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+        {/* Hero Content */}
         <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-          custom={0}
-          className="text-center mb-12 md:mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="relative z-10 text-center px-4 max-w-4xl mx-auto"
         >
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-violet-900 mb-4 drop-shadow-sm">
-            <span className="text-violet-900">
-              Conectemos
-            </span>{" "}
-            Ciencia y Futuro
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 drop-shadow-lg">
+            Conectemos Ciencia y Futuro
           </h1>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            Estamos abiertos a colaboraciones en investigación, docencia y extensión.
-            Tu propuesta puede transformar la farmacología del mañana.
+          <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
+            Promovemos la excelencia mediante alianzas en investigación, docencia y extensión. 
+            Tu visión puede ser el motor que transforme la salud del mañana.
           </p>
         </motion.div>
+      </section>
+
+      {/* Contact Content Section */}
+      <section className="relative bg-slate-50 overflow-hidden py-16 md:py-24">
+        {/* Decorative Background Elements */}
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br from-fyt-purple/20 via-primary/10 to-transparent rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gradient-to-tr from-primary/15 to-transparent rounded-full blur-3xl translate-y-1/3 -translate-x-1/4 pointer-events-none" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Main Grid: Info (40%) + Form (60%) */}
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 items-start">
@@ -305,7 +318,7 @@ const ContactPremium = () => {
             custom={0.2}
             className="lg:col-span-3"
           >
-            <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
+            <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-200 hover:shadow-md transition-all duration-300">
               <div className="mb-6">
                 <h2 className="text-2xl md:text-3xl font-bold text-fyt-dark mb-2">
                   Envíanos un mensaje
@@ -386,10 +399,10 @@ const ContactPremium = () => {
                   />
                 </div>
 
-                {/* Submit Button */}
+                {/* Submit Button - Solid Color */}
                 <Button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-200"
+                  className="w-full bg-violet-600 hover:bg-violet-700 text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-200"
                   size="lg"
                 >
                   <Send className="w-5 h-5 mr-2" />
@@ -428,8 +441,9 @@ const ContactPremium = () => {
             />
           </div>
         </motion.div>
-      </div>
-    </section>
+        </div>
+      </section>
+    </>
   );
 };
 
