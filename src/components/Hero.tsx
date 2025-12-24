@@ -8,10 +8,10 @@ export default function Hero() {
       style={{ minHeight: '500px' }}
     >
       <picture>
-        {/* 1. ESCRITORIO (>1024px): Solo aquí permitimos la imagen pesada */}
-        <source media="(min-width: 1024px)" srcSet="/images/hero-index-large.webp" />
+        {/* 1. ESCRITORIO (>1200px): Imagen pesada solo para pantallas muy grandes */}
+        <source media="(min-width: 1200px)" srcSet="/images/hero-index-large.webp" />
 
-        {/* 2. TABLET (640px - 1023px): Imagen mediana */}
+        {/* 2. TABLET/DESKTOP PEQUEÑO (640px - 1199px): Imagen mediana */}
         <source media="(min-width: 640px)" srcSet="/images/hero-index-medium.webp" />
 
         {/* 3. MÓVIL (<640px): Imagen súper ligera OBLIGATORIA */}
@@ -20,6 +20,8 @@ export default function Hero() {
           src="/images/hero-index-small.webp"
           alt="Investigación rigurosa, impacto real en la salud"
           className="hero-image w-full h-full object-cover"
+          width={1920}
+          height={1080}
           fetchPriority="high"
           loading="eager"
           decoding="sync"
