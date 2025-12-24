@@ -15,40 +15,23 @@ import { divulgacionCientifica } from "@/data/contenidosDigitales";
 import { eventos } from "@/data/eventos";
 import type { Publicacion, Proyecto, DivulgacionCientifica, Evento } from "@/types/investigacion";
 import { pathPublicaciones, pathProyectos, pathFormacion, pathDivulgacionCientifica, pathEventos } from "@/App";
-
-
 const InvestigacionPage: React.FC = () => {
   usePageReady();
 
   // Calcular datos reales sin duplicar
-  const publicacionesRecientes = [...publicacionesFyT]
-    .sort((a, b) => b.anio - a.anio)
-    .slice(0, 5);
-  
-  const proyectosDestacados = [
-    ...proyectos.filter(p => p.estado === "En curso").slice(0, 2),
-    ...proyectos.filter(p => p.estado === "Finalizado").slice(0, 1)
-  ].slice(0, 3);
-  
-  const contenidosDestacados = [...divulgacionCientifica]
-    .sort((a, b) => b.anio - a.anio)
-    .slice(0, 3);
-
-  const eventosRecientes = [...eventos]
-    .sort((a, b) => b.anio - a.anio)
-    .slice(0, 3);
-
-  return (
-    <div className="w-full bg-background flex flex-col">
-      <Seo
-        title="Investigación y Producción Académica – FYT Lab Connect"
-        description="Hub académico del Grupo FyT: publicaciones científicas, proyectos, eventos científicos y producción digital desde GrupLAC."
-        author="FYT Lab Connect"
-        robots="index, follow"
-        canonical="https://fytlabconnect.com/investigacion"
-        openGraph={{ title: "Investigación", description: "Producción científica del grupo FyT", type: "article" }}
-        twitter={{ card: "summary", site: "@fytlab" }}
-      />
+  const publicacionesRecientes = [...publicacionesFyT].sort((a, b) => b.anio - a.anio).slice(0, 5);
+  const proyectosDestacados = [...proyectos.filter(p => p.estado === "En curso").slice(0, 2), ...proyectos.filter(p => p.estado === "Finalizado").slice(0, 1)].slice(0, 3);
+  const contenidosDestacados = [...divulgacionCientifica].sort((a, b) => b.anio - a.anio).slice(0, 3);
+  const eventosRecientes = [...eventos].sort((a, b) => b.anio - a.anio).slice(0, 3);
+  return <div className="w-full bg-background flex flex-col">
+      <Seo title="Investigación y Producción Académica – FYT Lab Connect" description="Hub académico del Grupo FyT: publicaciones científicas, proyectos, eventos científicos y producción digital desde GrupLAC." author="FYT Lab Connect" robots="index, follow" canonical="https://fytlabconnect.com/investigacion" openGraph={{
+      title: "Investigación",
+      description: "Producción científica del grupo FyT",
+      type: "article"
+    }} twitter={{
+      card: "summary",
+      site: "@fytlab"
+    }} />
       
       {/* Hero con KPIs */}
       <HeroInvestigacion />
@@ -69,38 +52,23 @@ const InvestigacionPage: React.FC = () => {
         <nav className="py-8 px-6 sm:px-8 md:px-16 lg:px-24 xl:px-32 bg-white border-b border-slate-200">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-wrap gap-3 justify-center">
-              <Link 
-                to={pathPublicaciones}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 text-slate-700 hover:text-blue-700 font-medium text-sm transition-all duration-200"
-              >
+              <Link to={pathPublicaciones} className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 text-slate-700 hover:text-blue-700 font-medium text-sm transition-all duration-200">
                 <BookOpen className="w-4 h-4" />
                 Publicaciones
               </Link>
-              <Link 
-                to={pathProyectos}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 text-slate-700 hover:text-blue-700 font-medium text-sm transition-all duration-200"
-              >
+              <Link to={pathProyectos} className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 text-slate-700 hover:text-blue-700 font-medium text-sm transition-all duration-200">
                 <Microscope className="w-4 h-4" />
                 Proyectos
               </Link>
-              <Link 
-                to={pathEventos}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 text-slate-700 hover:text-blue-700 font-medium text-sm transition-all duration-200"
-              >
+              <Link to={pathEventos} className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 text-slate-700 hover:text-blue-700 font-medium text-sm transition-all duration-200">
                 <Users className="w-4 h-4" />
                 Eventos
               </Link>
-              <Link 
-                to={pathFormacion}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 text-slate-700 hover:text-blue-700 font-medium text-sm transition-all duration-200"
-              >
+              <Link to={pathFormacion} className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 text-slate-700 hover:text-blue-700 font-medium text-sm transition-all duration-200">
                 <GraduationCap className="w-4 h-4" />
                 Formación
               </Link>
-              <Link 
-                to={pathDivulgacionCientifica}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 text-slate-700 hover:text-blue-700 font-medium text-sm transition-all duration-200"
-              >
+              <Link to={pathDivulgacionCientifica} className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 text-slate-700 hover:text-blue-700 font-medium text-sm transition-all duration-200">
                 <Video className="w-4 h-4" />
                 Contenido Digital
               </Link>
@@ -123,15 +91,11 @@ const InvestigacionPage: React.FC = () => {
 
             <div className="space-y-4 mb-8">
               {publicacionesRecientes.map((pub: Publicacion) => {
-                const isBook = pub.tipo === "libro" || pub.tipo === "capitulo";
-                const iconColor = isBook ? "text-violet-600" : "text-sky-600";
-                const badgeBg = isBook ? "bg-violet-50" : "bg-sky-50";
-                const badgeText = isBook ? "text-violet-800" : "text-sky-800";
-                return (
-                <article
-                  key={pub.id}
-                  className="bg-white border border-gray-200 rounded-xl p-4 md:p-6 shadow-sm hover:shadow-md transition-all duration-300"
-                >
+              const isBook = pub.tipo === "libro" || pub.tipo === "capitulo";
+              const iconColor = isBook ? "text-violet-600" : "text-sky-600";
+              const badgeBg = isBook ? "bg-violet-50" : "bg-sky-50";
+              const badgeText = isBook ? "text-violet-800" : "text-sky-800";
+              return <article key={pub.id} className="bg-white border border-gray-200 rounded-xl p-4 md:p-6 shadow-sm hover:shadow-md transition-all duration-300">
                   <div className="flex flex-col md:flex-row md:items-start justify-between gap-3 md:gap-6">
                     {/* Header: icon + badges (badges mobile here, desktop on right) */}
                     <div className="flex items-center justify-between md:justify-start gap-3">
@@ -163,16 +127,12 @@ const InvestigacionPage: React.FC = () => {
                       </span>
                     </div>
                   </div>
-                </article>
-                );
-              })}
+                </article>;
+            })}
             </div>
 
             <div className="text-center">
-              <Link 
-                to={pathPublicaciones}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-colors duration-200"
-              >
+              <Link to={pathPublicaciones} className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-colors duration-200">
                 Ver todas las publicaciones
                 <ChevronRight className="w-4 h-4" />
               </Link>
@@ -190,11 +150,7 @@ const InvestigacionPage: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {proyectosDestacados.map((proyecto: Proyecto) => (
-                <article
-                  key={proyecto.id}
-                  className="bg-white border border-gray-200 rounded-xl p-4 md:p-6 shadow-sm hover:shadow-md transition-all duration-300"
-                >
+              {proyectosDestacados.map((proyecto: Proyecto) => <article key={proyecto.id} className="bg-white border border-gray-200 rounded-xl p-4 md:p-6 shadow-sm hover:shadow-md transition-all duration-300">
                   {/* Header: Icono + Badges en una línea (Mobile: icon prominent) */}
                   <div className="flex items-center gap-3 mb-3">
                     {/* Icono fijo - NO se aplasta */}
@@ -216,15 +172,11 @@ const InvestigacionPage: React.FC = () => {
                       {proyecto.titulo}
                     </h3>
                   </div>
-                </article>
-              ))}
+                </article>)}
             </div>
 
             <div className="text-center mt-10">
-              <Link 
-                to={pathProyectos}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-colors duration-200"
-              >
+              <Link to={pathProyectos} className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-colors duration-200">
                 Ver todos los proyectos
                 <ChevronRight className="w-4 h-4" />
               </Link>
@@ -242,11 +194,7 @@ const InvestigacionPage: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {eventosRecientes.map((evento: Evento) => (
-                <article
-                  key={evento.id}
-                  className="bg-white border border-gray-200 rounded-xl p-4 md:p-6 shadow-sm hover:shadow-md transition-all duration-300"
-                >
+              {eventosRecientes.map((evento: Evento) => <article key={evento.id} className="bg-white border border-gray-200 rounded-xl p-4 md:p-6 shadow-sm hover:shadow-md transition-all duration-300">
                   {/* Header: Icono + Badges en una línea */}
                   <div className="flex items-center gap-3 mb-3">
                     {/* Icono fijo - NO se aplasta */}
@@ -272,15 +220,11 @@ const InvestigacionPage: React.FC = () => {
                   <div className="text-sm text-slate-600">
                     <span className="font-medium">{evento.ciudad}</span>, {evento.pais}
                   </div>
-                </article>
-              ))}
+                </article>)}
             </div>
 
             <div className="text-center mt-10">
-              <Link 
-                to={pathEventos}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-colors duration-200"
-              >
+              <Link to={pathEventos} className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-colors duration-200">
                 Ver todos los eventos
                 <ChevronRight className="w-4 h-4" />
               </Link>
@@ -298,11 +242,7 @@ const InvestigacionPage: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {contenidosDestacados.map((contenido: DivulgacionCientifica) => (
-                <article
-                  key={contenido.id}
-                  className="bg-white border border-gray-200 rounded-xl p-4 md:p-6 shadow-sm hover:shadow-md transition-all duration-300"
-                >
+              {contenidosDestacados.map((contenido: DivulgacionCientifica) => <article key={contenido.id} className="bg-white border border-gray-200 rounded-xl p-4 md:p-6 shadow-sm hover:shadow-md transition-all duration-300">
                   <div className="flex items-start justify-between mb-3">
                     <span className="px-2.5 py-1 rounded-full bg-rose-50 text-rose-800 text-xs font-semibold inline-flex items-center gap-1">
                       <Video className="w-4 h-4 text-rose-600" />
@@ -315,15 +255,11 @@ const InvestigacionPage: React.FC = () => {
                   <h3 className="text-base md:text-lg font-inter font-semibold text-gray-900 leading-snug line-clamp-2">
                     {contenido.titulo}
                   </h3>
-                </article>
-              ))}
+                </article>)}
             </div>
 
             <div className="text-center mt-10">
-              <Link 
-                to={pathDivulgacionCientifica}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-colors duration-200"
-              >
+              <Link to={pathDivulgacionCientifica} className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-colors duration-200">
                 Ver todos los contenidos
                 <ChevronRight className="w-4 h-4" />
               </Link>
@@ -340,20 +276,15 @@ const InvestigacionPage: React.FC = () => {
               ¿Interesado en colaborar con nuestra investigación?
             </h2>
             <p className="text-slate-600 font-inter text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-8">
-              Buscamos constantemente alianzas estratégicas y nuevos talentos para impulsar la ciencia farmacéutica y el análisis de datos.
+              Generamos conocimiento para transformar el bienestar. Buscamos aliados para impulsar la investigación con impacto directo en la salud.
             </p>
-            <Link
-              to="/contacto"
-              className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-violet-600 hover:bg-violet-700 text-white font-semibold shadow-lg shadow-violet-600/20 transition-all duration-200"
-            >
+            <Link to="/contacto" className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-violet-600 hover:bg-violet-700 text-white font-semibold shadow-lg shadow-violet-600/20 transition-all duration-200">
               Proponer Colaboración
               <ChevronRight className="w-4 h-4" />
             </Link>
           </div>
         </section>
       </ScrollReveal>
-    </div>
-  );
+    </div>;
 };
-
 export default InvestigacionPage;
