@@ -209,7 +209,7 @@ const ContactPremium = () => {
                     viewport={{ once: true }}
                     variants={fadeInUp}
                     custom={0.15 + index * 0.1}
-                    className="flex items-start gap-4 p-4 rounded-xl bg-white/80 backdrop-blur-sm border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300"
+                    className="flex items-start gap-4 p-4 rounded-xl bg-white border border-gray-200/60 shadow-sm hover:shadow-md transition-all duration-300"
                   >
                     <div
                       className={`flex items-center justify-center w-12 h-12 rounded-full ${item.color} shrink-0`}
@@ -280,7 +280,7 @@ const ContactPremium = () => {
               viewport={{ once: true }}
               variants={fadeInUp}
               custom={0.6}
-              className="p-6 rounded-xl bg-gradient-to-br from-fyt-purple/10 via-primary/5 to-primary/10 border border-primary/20"
+              className="p-6 rounded-xl bg-white border border-gray-200/60 shadow-md"
             >
               <h3 className="font-semibold text-fyt-dark mb-2">
                 ¿Propuesta urgente?
@@ -318,7 +318,7 @@ const ContactPremium = () => {
             custom={0.2}
             className="lg:col-span-3"
           >
-            <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-200 hover:shadow-md transition-all duration-300">
+            <div className="bg-white p-8 md:p-10 rounded-2xl shadow-lg border border-gray-200/60">
               <div className="mb-6">
                 <h2 className="text-2xl md:text-3xl font-bold text-fyt-dark mb-2">
                   Envíanos un mensaje
