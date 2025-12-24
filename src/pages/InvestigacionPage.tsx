@@ -25,11 +25,8 @@ const InvestigacionPage: React.FC = () => {
     .sort((a, b) => b.anio - a.anio)
     .slice(0, 5);
   
-  const totalPublicaciones = publicacionesFyT.length;
-  
-  const proyectosActivos = proyectos.filter(p => p.estado === "En curso");
   const proyectosDestacados = [
-    ...proyectosActivos.slice(0, 2),
+    ...proyectos.filter(p => p.estado === "En curso").slice(0, 2),
     ...proyectos.filter(p => p.estado === "Finalizado").slice(0, 1)
   ].slice(0, 3);
   
@@ -118,13 +115,10 @@ const InvestigacionPage: React.FC = () => {
         {/* 🔬 Publicaciones científicas */}
         <ScrollReveal>
           <section className="py-16 md:py-20 lg:py-24">
-            <div className="flex items-center justify-between mb-10 md:mb-12">
+            <div className="mb-10 md:mb-12">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-poppins font-bold text-slate-800">
                 Publicaciones Científicas
               </h2>
-              <span className="text-sm text-slate-600 font-inter">
-                {totalPublicaciones} publicaciones registradas
-              </span>
             </div>
 
             <div className="space-y-4 mb-8">
@@ -189,13 +183,10 @@ const InvestigacionPage: React.FC = () => {
         {/* 🧪 Proyectos de investigación */}
         <ScrollReveal>
           <section className="py-16 md:py-20 lg:py-24 border-t border-slate-200">
-            <div className="flex items-center justify-between mb-10 md:mb-12">
+            <div className="mb-10 md:mb-12">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-poppins font-bold text-slate-800">
                 Proyectos de Investigación
               </h2>
-              <span className="text-sm text-slate-600 font-inter">
-                {proyectosActivos.length} activos · {proyectos.length} totales
-              </span>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -340,6 +331,27 @@ const InvestigacionPage: React.FC = () => {
           </section>
         </ScrollReveal>
       </div>
+
+      {/* CTA Section - Colaboración */}
+      <ScrollReveal>
+        <section className="py-16 md:py-20 bg-slate-50 border-t border-gray-100">
+          <div className="max-w-4xl mx-auto px-6 sm:px-8 text-center">
+            <h2 className="text-2xl sm:text-3xl font-poppins font-bold text-slate-900 mb-4">
+              ¿Interesado en colaborar con nuestra investigación?
+            </h2>
+            <p className="text-slate-600 font-inter text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-8">
+              Buscamos constantemente alianzas estratégicas y nuevos talentos para impulsar la ciencia farmacéutica y el análisis de datos.
+            </p>
+            <Link
+              to="/contacto"
+              className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-violet-600 hover:bg-violet-700 text-white font-semibold shadow-lg shadow-violet-600/20 transition-all duration-200"
+            >
+              Proponer Colaboración
+              <ChevronRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </section>
+      </ScrollReveal>
     </div>
   );
 };
