@@ -31,9 +31,14 @@ const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
       className="fixed inset-0 z-[9999] flex items-center justify-center"
       style={{ backgroundColor: "#FFFFFF" }}
       initial={{ opacity: 1 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.2, ease: "easeOut" }}
+      animate={{
+        opacity: [1, 1, 1, 0],
+      }}
+      transition={{
+        duration: 0.9,
+        times: [0, 0.33, 0.78, 1],
+        ease: "easeInOut",
+      }}
       onAnimationComplete={() => {
         if (onComplete) onComplete();
       }}
