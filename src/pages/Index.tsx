@@ -22,14 +22,14 @@ const Index = () => {
   <div className="w-full" style={{background: "linear-gradient(120deg, #e0f2ff 0%, #f8fafc 60%, #f3f4f6 100%)"}}>
         <Seo
           title="Grupo FyT | Investigación en Farmacología y Terapéutica"
-          description="Grupo FyT: Investigación rigurosa en Farmacología y Terapéutica. Herramientas científicas, farmacovigilancia, análisis terapéutico e impacto en la salud."
-          keywords="Grupo FyT, farmacología, terapéutica, investigación científica, herramientas de salud, farmacovigilancia"
+          description="Grupo FyT: Investigación de vanguardia en Farmacología y Terapéutica de la Universidad de Cartagena. Descubre nuestros proyectos, publicaciones y herramientas digitales."
+          keywords={["Grupo FyT", "Farmacología", "Investigación", "Universidad de Cartagena", "Ciencia de Datos", "Cartagena"]}
           author="Grupo FyT"
           robots="index, follow"
           canonical={baseUrl}
           openGraph={{
             title: "Grupo FyT | Investigación en Farmacología y Terapéutica",
-            description: "Grupo FyT: Investigación rigurosa en Farmacología y Terapéutica. Herramientas científicas, farmacovigilancia, análisis terapéutico e impacto en la salud.",
+            description: "Grupo FyT: Investigación de vanguardia en Farmacología y Terapéutica de la Universidad de Cartagena. Descubre nuestros proyectos, publicaciones y herramientas digitales.",
             type: "website",
             url: baseUrl,
             image: `${baseUrl}/logo-fyt.png`,

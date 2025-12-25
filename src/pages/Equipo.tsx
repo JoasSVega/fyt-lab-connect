@@ -27,15 +27,15 @@ const Equipo = () => {
   return (
     <div className="w-full bg-background flex flex-col pt-24">
       <Seo
-        title="Equipo | Investigadores Farmacéuticos | Grupo FyT"
-        description="Conoce al equipo del Grupo FyT: investigadores, docentes y estudiantes en Farmacología, Farmacovigilancia, Farmacoecoeconomía y más."
-        keywords="investigadores farmacéuticos, equipo FyT, farmacología, farmacovigilancia, Universidad Cartagena, farmacoecoeconomía"
+        title="Nuestro Equipo de Investigadores | Grupo FyT"
+        description="Conoce al equipo de la Universidad de Cartagena. Investigadores y semilleristas comprometidos con el rigor científico en Farmacología, Toxicología y Salud Pública."
+        keywords={["Investigadores UdeC", "Químicos Farmacéuticos", "Equipo FyT", "Semillero de investigación", "Científicos Cartagena"]}
         author="Grupo FyT"
         robots="index, follow"
         canonical={`${baseUrl}/equipo`}
         openGraph={{
-          title: "Equipo Investigador | Grupo FyT",
-          description: "Profesionales dedicados a la investigación farmacéutica en Cartagena",
+          title: "Nuestro Equipo de Investigadores | Grupo FyT",
+          description: "Conoce al equipo de la Universidad de Cartagena. Investigadores y semilleristas comprometidos con el rigor científico en Farmacología, Toxicología y Salud Pública.",
           type: "website",
           url: `${baseUrl}/equipo`,
           image: `${baseUrl}/logo-fyt.png`,

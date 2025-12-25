@@ -7,12 +7,17 @@ const Contactos = () => {
   return (
     <div className="w-full bg-background flex flex-col pt-16">
       <Seo
-        title="Grupo FyT | Contactos"
-        description="Canales de contacto del Grupo de Investigación en Farmacología y Terapéutica."
+        title="Contacto y Alianzas Estratégicas | Grupo FyT"
+        description="¿Buscas colaboración científica? Contacta al Grupo FyT de la Universidad de Cartagena para alianzas en investigación o pasantías académicas."
+        keywords={["Contacto FyT", "Alianzas investigación", "Consultoría farmacéutica", "Pasantías Cartagena"]}
         author="Grupo FyT"
         robots="index, follow"
         canonical="https://fyt-research.org/contactos"
-        openGraph={{ title: "Grupo FyT | Contactos", description: "Información de contacto del Grupo FyT", type: "website" }}
+        openGraph={{ 
+          title: "Contacto y Alianzas Estratégicas | Grupo FyT", 
+          description: "¿Buscas colaboración científica? Contacta al Grupo FyT de la Universidad de Cartagena para alianzas en investigación o pasantías académicas.", 
+          type: "website" 
+        }}
         twitter={{ card: "summary", site: "@fytlab" }}
       />
       <ContactPremium />

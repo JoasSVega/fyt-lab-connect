@@ -3,7 +3,14 @@ import { HelmetProvider } from 'react-helmet-async';
 import App from "./App.tsx";
 import "./index.css";
 
-createRoot(document.getElementById("root")!).render(
+const root = createRoot(document.getElementById("root")!);
+
+// Remove loading overlay when React mounts
+if (typeof window !== 'undefined' && window.removeAppLoader) {
+  window.removeAppLoader();
+}
+
+root.render(
   <HelmetProvider>
     <App />
   </HelmetProvider>

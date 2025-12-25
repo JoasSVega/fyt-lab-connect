@@ -13,7 +13,10 @@
         }
       })();
     </script>
-    <title>Grupo FyT | Grupo de Investigación en Farmacología y Terapéutica</title>
+    <title>Grupo FyT | Investigación en Farmacología y Terapéutica</title>
+  <!-- Primary Meta Tags -->
+  <meta name="description" content="Grupo FyT: Investigación de vanguardia en Farmacología y Terapéutica de la Universidad de Cartagena. Descubre nuestros proyectos, publicaciones y herramientas digitales." />
+  
   <!-- Performance: Preconnect to Google Fonts to shorten the critical chain -->
   <!-- Critical preconnects -->
   <link rel="preconnect" href="https://fyt-lab-connect.lovable.app" crossorigin />
@@ -39,12 +42,11 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Raleway:wght@400;500;600&family=Inter:wght@400;500;700&display=swap"
     />
   </noscript>
-  <meta name="description" content="Grupo FyT es el Grupo de Investigación en Farmacología y Terapéutica enfocado en investigación científica, farmacovigilancia, farmacoterapia y análisis terapéutico." />
   <!-- Señales de idioma para motores de búsqueda -->
   <meta http-equiv="Content-Language" content="es" />
   <meta name="language" content="es" />
-    <meta name="author" content="Grupo FyT" />
-    <meta name="keywords" content="Grupo FyT, farmacología, terapéutica, investigación científica, farmacovigilancia, farmacoterapia, análisis terapéutico" />
+  <meta name="author" content="Grupo FyT" />
+  <meta name="keywords" content="Grupo FyT, Farmacología, Investigación, Universidad de Cartagena, Ciencia de Datos, Cartagena, farmacoterapia, farmacovigilancia" />
 
   <!-- Favicons optimizados (aspect ratio 1:1) -->
   <!-- SVG favicon (modern browsers, vectorial, ideal para diferentes tamaños) -->
@@ -117,13 +119,13 @@
   <link rel="canonical" href="https://fyt-research.org" />
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Grupo FyT | Grupo de Investigación en Farmacología y Terapéutica" />
-  <meta property="og:description" content="Grupo FyT es el Grupo de Investigación en Farmacología y Terapéutica enfocado en investigación científica, farmacovigilancia, farmacoterapia y análisis terapéutico." />
+  <meta property="og:title" content="Grupo FyT | Investigación en Farmacología y Terapéutica" />
+  <meta property="og:description" content="Grupo FyT: Investigación de vanguardia en Farmacología y Terapéutica de la Universidad de Cartagena. Descubre nuestros proyectos, publicaciones y herramientas digitales." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://fyt-research.org" />
   <meta property="og:site_name" content="Grupo FyT" />
-  <meta property="og:image" content="https://fyt-research.org/apple-touch-icon.png" />
-  <meta property="og:image:alt" content="Logo del Grupo FyT" />
+  <meta property="og:image" content="https://fyt-research.org/logo-fyt.png" />
+  <meta property="og:image:alt" content="Logo del Grupo FyT - Farmacología y Terapéutica" />
   <meta property="og:locale" content="es_ES" />
 
   <!-- hreflang principal en español -->
@@ -132,16 +134,96 @@
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:url" content="https://fyt-research.org" />
-  <meta name="twitter:title" content="Grupo FyT | Grupo de Investigación en Farmacología y Terapéutica" />
-  <meta name="twitter:description" content="Grupo FyT es el Grupo de Investigación en Farmacología y Terapéutica enfocado en investigación científica, farmacovigilancia, farmacoterapia y análisis terapéutico." />
-  <meta name="twitter:image" content="https://fyt-research.org/apple-touch-icon.png" />
+  <meta name="twitter:title" content="Grupo FyT | Investigación en Farmacología y Terapéutica" />
+  <meta name="twitter:description" content="Grupo FyT: Investigación de vanguardia en Farmacología y Terapéutica de la Universidad de Cartagena. Descubre nuestros proyectos, publicaciones y herramientas digitales." />
+  <meta name="twitter:image" content="https://fyt-research.org/logo-fyt.png" />
   <meta name="twitter:image:alt" content="Logo del Grupo FyT" />
   </head>
 
   <body>
-    <div id="root"></div>
-    <!-- Preload LCP image (mobile-first) to improve discoverability -->
-    <link rel="preload" as="image" href="/images/hero-index-small.webp" />
+    <!-- Fallback content for JavaScript disabled / loading state -->
+    <noscript>
+      <div style="
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        text-align: center;
+        padding: 20px;
+      ">
+        <div style="max-width: 500px;">
+          <h1 style="margin-top: 0; font-size: 28px;">Bienvenido a Grupo FyT</h1>
+          <p style="font-size: 16px; line-height: 1.6; opacity: 0.9;">
+            Este sitio requiere JavaScript para funcionar correctamente.
+          </p>
+          <p style="font-size: 14px; opacity: 0.8;">
+            Por favor, habilita JavaScript en tu navegador para acceder a nuestro contenido de investigación en Farmacología y Terapéutica.
+          </p>
+          <p style="font-size: 12px; margin-top: 30px; opacity: 0.7;">
+            Si tienes problemas, contáctanos: <a href="mailto:farmacologiayterapeutica.gi@gmail.com" style="color: #fff; text-decoration: underline;">farmacologiayterapeutica.gi@gmail.com</a>
+          </p>
+        </div>
+      </div>
+    </noscript>
+
+    <div id="root" style="width: 100%; height: 100%;">
+      <!-- Loading skeleton while React initializes -->
+      <div id="app-loader" style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        z-index: 9999;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      ">
+        <div style="text-align: center; color: white;">
+          <div style="
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255,255,255,0.2);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+          "></div>
+          <p style="margin: 0; font-size: 16px; font-weight: 500;">Cargando Grupo FyT...</p>
+          <p style="margin: 10px 0 0 0; font-size: 12px; opacity: 0.8;">Investigación en Farmacología y Terapéutica</p>
+        </div>
+      </div>
+      <style>
+        @keyframes spin {
+          to { transform: rotate(360deg); }
+        }
+      </style>
+    </div>
+
+    <!-- Script to remove loader once React mounts -->
+    <script>
+      window.removeAppLoader = function() {
+        const loader = document.getElementById('app-loader');
+        if (loader) {
+          loader.style.transition = 'opacity 0.3s ease-out';
+          loader.style.opacity = '0';
+          setTimeout(() => loader.remove(), 300);
+        }
+      };
+      
+      // Fallback: remove loader after 5 seconds (in case React fails)
+      setTimeout(() => {
+        window.removeAppLoader?.();
+      }, 5000);
+    </script>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

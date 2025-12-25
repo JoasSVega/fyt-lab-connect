@@ -67,7 +67,7 @@ const ContactPremium = () => {
     {
       icon: Instagram,
       label: "Instagram",
-      href: "https://www.instagram.com/grupofyt_udea/",
+      href: "https://www.instagram.com/grupo_fyt?igsh=MXNxbXo3eHM2MHRweA==",
       color: "hover:bg-gradient-to-br hover:from-purple-500 hover:to-pink-500 hover:text-white",
     },
   ];

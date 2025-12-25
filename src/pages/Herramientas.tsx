@@ -58,15 +58,15 @@ const Herramientas = () => {
   return (
     <div className="w-full bg-background flex flex-col pt-24">
       <Seo
-        title="Herramientas Farmacéuticas | Calculadoras Clínicas | Grupo FyT"
-        description="Herramientas digitales para farmacéuticos: calculadoras antropométricas, función renal, dosificación. Análisis clínico y farmacocinética online."
-        keywords="calculadora farmacéutica, herramientas clínicas, función renal, antropométrica, farmacocinética, análisis terapéutico"
+        title="Herramientas y Calculadoras Farmacéuticas | Grupo FyT"
+        description="Optimiza tu práctica clínica con nuestras herramientas digitales gratuitas. Soluciones rigurosas para cálculos farmacéuticos y dosificación."
+        keywords={["Calculadora de dosis", "Farmacocinética", "Software médico", "Herramientas Salud", "Universidad de Cartagena"]}
         author="Grupo FyT"
         robots="index, follow"
         canonical={`${baseUrl}/herramientas`}
         openGraph={{
-          title: "Herramientas Farmacéuticas | Grupo FyT",
-          description: "Calculadoras clínicas para farmacéuticos y profesionales de salud.",
+          title: "Herramientas y Calculadoras Farmacéuticas | Grupo FyT",
+          description: "Optimiza tu práctica clínica con nuestras herramientas digitales gratuitas. Soluciones rigurosas para cálculos farmacéuticos y dosificación.",
           type: "website",
           url: `${baseUrl}/herramientas`,
           image: `${baseUrl}/logo-fyt.png`,
