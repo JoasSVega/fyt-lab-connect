@@ -141,7 +141,7 @@
   </head>
 
   <body>
-    <!-- Fallback content for JavaScript disabled / loading state -->
+    <!-- Fallback content for JavaScript disabled -->
     <noscript>
       <div style="
         display: flex;
@@ -150,80 +150,21 @@
         justify-content: center;
         height: 100vh;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
+        background: white;
+        color: #333;
         text-align: center;
         padding: 20px;
       ">
         <div style="max-width: 500px;">
           <h1 style="margin-top: 0; font-size: 28px;">Bienvenido a Grupo FyT</h1>
-          <p style="font-size: 16px; line-height: 1.6; opacity: 0.9;">
+          <p style="font-size: 16px; line-height: 1.6; opacity: 0.8;">
             Este sitio requiere JavaScript para funcionar correctamente.
-          </p>
-          <p style="font-size: 14px; opacity: 0.8;">
-            Por favor, habilita JavaScript en tu navegador para acceder a nuestro contenido de investigación en Farmacología y Terapéutica.
-          </p>
-          <p style="font-size: 12px; margin-top: 30px; opacity: 0.7;">
-            Si tienes problemas, contáctanos: <a href="mailto:farmacologiayterapeutica.gi@gmail.com" style="color: #fff; text-decoration: underline;">farmacologiayterapeutica.gi@gmail.com</a>
           </p>
         </div>
       </div>
     </noscript>
 
-    <div id="root" style="width: 100%; height: 100%;">
-      <!-- Loading skeleton while React initializes -->
-      <div id="app-loader" style="
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        z-index: 9999;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      ">
-        <div style="text-align: center; color: white;">
-          <div style="
-            display: inline-block;
-            width: 50px;
-            height: 50px;
-            border: 4px solid rgba(255,255,255,0.2);
-            border-top: 4px solid white;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 20px;
-          "></div>
-          <p style="margin: 0; font-size: 16px; font-weight: 500;">Cargando Grupo FyT...</p>
-          <p style="margin: 10px 0 0 0; font-size: 12px; opacity: 0.8;">Investigación en Farmacología y Terapéutica</p>
-        </div>
-      </div>
-      <style>
-        @keyframes spin {
-          to { transform: rotate(360deg); }
-        }
-      </style>
-    </div>
-
-    <!-- Script to remove loader once React mounts -->
-    <script>
-      window.removeAppLoader = function() {
-        const loader = document.getElementById('app-loader');
-        if (loader) {
-          loader.style.transition = 'opacity 0.3s ease-out';
-          loader.style.opacity = '0';
-          setTimeout(() => loader.remove(), 300);
-        }
-      };
-      
-      // Fallback: remove loader after 5 seconds (in case React fails)
-      setTimeout(() => {
-        window.removeAppLoader?.();
-      }, 5000);
-    </script>
-
+    <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

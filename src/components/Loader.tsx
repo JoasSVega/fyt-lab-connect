@@ -14,14 +14,11 @@ const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
     '/images/logo-fyt-large.webp',
   ], { priority: 'critical', timeout: 5000 });
 
-  // Timing exacto según especificación:
-  // Fase 1: Inicio (0s)
-  // Fase 2: Fade-in (0.4s) → 0s-0.4s
-  // Fase 3: Pulse (0.2s) → 0.4s-0.6s
-  // Fase 4: Glow (0.25s) → 0.6s-0.85s
-  // Fase 5: Pausa (0.2s) → 0.85s-1.05s
-  // Fase 6: Fade-out (0.4s) → 1.05s-1.45s
-  // Total: 1.45s
+  // Timing optimizado (más rápido, sin demora al final):
+  // Fase 1: Fade-in (0.3s) → 0s-0.3s
+  // Fase 2: Hold (0.4s) → 0.3s-0.7s
+  // Fase 3: Fade-out (0.2s) → 0.7s-0.9s
+  // Total: 0.9s (OPTIMIZADO - sin demora extra)
 
   const imgRef = React.useRef<HTMLImageElement | null>(null);
 
@@ -36,38 +33,37 @@ const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
       initial={{ opacity: 1 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.4, delay: 1.05, ease: "easeOut" }}
+      transition={{ duration: 0.2, ease: "easeOut" }}
       onAnimationComplete={() => {
         if (onComplete) onComplete();
       }}
     >
-      {/* Glow sutil detrás del logo - aparece en fase 4 */}
+      {/* Glow sutil detrás del logo - aparece sutilmente */}
       <motion.div
         className="absolute"
         initial={{ opacity: 0 }}
-        animate={{ opacity: 0.12 }}
-        transition={{ duration: 0.25, delay: 0.6, ease: "easeOut" }}
+        animate={{ opacity: 0.08 }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
         style={{
           width: "320px",
           height: "320px",
-          background: "radial-gradient(circle, #6C63FF 0%, transparent 70%)",
+          background: "radial-gradient(circle, #667eea 0%, transparent 70%)",
           filter: "blur(35px)",
           borderRadius: "50%",
         }}
       />
 
-      {/* Logo con animación secuencial exacta */}
+      {/* Logo con animación optimizada (entrada suave, sin salida demora) */}
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{
-          opacity: [0, 1, 1, 1, 1, 0],
-          scale: [0.95, 1, 1, 1.03, 1, 1],
-          filter: ["blur(0px)", "blur(0px)", "blur(0px)", "blur(0px)", "blur(0px)", "blur(6px)"],
+          opacity: [0, 1, 1, 0],
+          scale: [0.95, 1, 1, 1],
         }}
         transition={{
-          duration: 1.45,
-          times: [0, 0.28, 0.41, 0.48, 0.72, 1],
-          ease: [0.25, 0.1, 0.25, 1],
+          duration: 0.9,
+          times: [0, 0.33, 0.78, 1],
+          ease: "easeInOut",
         }}
         className="relative z-10"
       >

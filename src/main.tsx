@@ -5,9 +5,12 @@ import "./index.css";
 
 const root = createRoot(document.getElementById("root")!);
 
-// Remove loading overlay when React mounts
-if (typeof window !== 'undefined' && window.removeAppLoader) {
-  window.removeAppLoader();
+// Signal to HTML loader that React is mounted and ready
+if (typeof window !== 'undefined' && window.markReactReady) {
+  // Small delay to ensure React DOM is fully rendered
+  requestAnimationFrame(() => {
+    window.markReactReady();
+  });
 }
 
 root.render(
