@@ -1,0 +1,1 @@
+import{jsx as A}from"react/jsx-runtime";import r from"react";const s=({fallbackSrc:s,onError:t,srcSet:e,sizes:o,...a})=>{const[c,i]=r.useState(!1),m=c?s||"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMB/ZXs6nEAAAAASUVORK5CYII=":a.src,n=c?void 0:e;return A("img",{...a,src:m,srcSet:n,sizes:o,onError:A=>{c||i(!0),t&&t(A)}})};export{s as S};

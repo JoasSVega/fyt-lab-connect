@@ -1,0 +1,1 @@
+import{useEffect as o}from"react";import{useLocation as t}from"react-router-dom";const r=()=>{const{pathname:r}=t();return o(()=>{window.__routeTransitionActive||window.scrollTo({top:0,behavior:"smooth"})},[r]),null};export{r as default};

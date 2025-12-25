@@ -1,0 +1,1 @@
+import{al as A,j as s}from"./vendor-WH7e70IT.js";const r=({fallbackSrc:r,onError:o,srcSet:a,sizes:e,...t})=>{const[c,n]=A.useState(!1),i=c?r||"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMB/ZXs6nEAAAAASUVORK5CYII=":t.src,S=c?void 0:a;return s.jsx("img",{...t,src:i,srcSet:S,sizes:e,onError:A=>{c||n(!0),o&&o(A)}})};export{r as S};
