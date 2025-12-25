@@ -2,16 +2,26 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="robots" content="noindex" />
-  <title>Redirecting…</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grupo FyT</title>
+  <!-- SPA fallback: Serve index.html for all 404 errors to support client-side routing -->
   <script>
-    (function () {
-      var l = window.location;
-      var redirect = l.pathname + l.search + l.hash;
-      var target = l.protocol + '//' + l.host + '/?redirect=' + encodeURIComponent(redirect);
-      l.replace(target);
-    })();
+    // Store the original pathname for React Router to handle
+    sessionStorage.redirect = location.pathname + location.search + location.hash;
+  </script>
+  <!-- Redirect to index.html which will handle the route -->
+  <meta http-equiv="refresh" content="0;url=/" />
+  <!-- Fallback for browsers that don't support meta refresh -->
+  <script>
+    if (sessionStorage.redirect && location.pathname === '/404.html') {
+      // This shouldn't happen in normal operation on GitHub Pages with custom domain
+      // but serves as a safety net
+      location.replace(sessionStorage.redirect);
+    }
   </script>
 </head>
-<body></body>
+<body>
+  <!-- Fallback content while redirect happens -->
+  <p>Redirigiendo...</p>
+</body>
 </html>
