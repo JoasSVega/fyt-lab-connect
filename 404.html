@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Página no encontrada | Grupo FyT</title>
+  <script>
+    // SPA fallback: Guardar ruta para React Router (SIN redirect visible)
+    sessionStorage.setItem('spa_redirect', location.pathname + location.search + location.hash);
+    // Cargar index.html sin meta refresh (evita flash de redirect)
+    location.replace('/');
+  </script>
+</head>
+<body>
+  <p style="font-family: system-ui; text-align: center; padding-top: 2rem;">Cargando...</p>
+</body>
+</html>

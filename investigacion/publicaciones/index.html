@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <script type="module" crossorigin src="/assets/polyfills-C9umQY5u.js"></script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grupo FyT | Investigación en Farmacología y Terapéutica</title>
+  <!-- Primary Meta Tags -->
+  <meta name="description" content="Grupo FyT: Investigación de vanguardia en Farmacología y Terapéutica de la Universidad de Cartagena. Descubre nuestros proyectos, publicaciones y herramientas digitales." />
+  
+  <!-- Performance: Preconnect to Google Fonts to shorten the critical chain -->
+  <!-- Critical preconnects -->
+  <link rel="preconnect" href="https://fyt-lab-connect.lovable.app" crossorigin />
+  <link rel="dns-prefetch" href="https://fyt-lab-connect.lovable.app" />
+  
+  <!-- Google Fonts: Preconnect with crossorigin for optimal loading -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+  
+  <!-- Google Fonts (non-blocking): preload + onload swap with noscript fallback -->
+  <!-- Using font-display=swap for immediate text rendering with system fonts -->
+  <link
+    rel="preload"
+    as="style"
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Raleway:wght@400;500;600&family=Inter:wght@400;500;700&display=swap"
+    onload="this.onload=null;this.rel='stylesheet'"
+  />
+  <noscript>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Raleway:wght@400;500;600&family=Inter:wght@400;500;700&display=swap"
+    />
+  </noscript>
+  <!-- Señales de idioma para motores de búsqueda -->
+  <meta http-equiv="Content-Language" content="es" />
+  <meta name="language" content="es" />
+  <meta name="author" content="Grupo FyT" />
+  <meta name="keywords" content="Grupo FyT, Farmacología, Investigación, Universidad de Cartagena, Ciencia de Datos, Cartagena, farmacoterapia, farmacovigilancia" />
+
+  <!-- Favicons optimizados (aspect ratio 1:1) -->
+  <!-- SVG favicon (modern browsers, vectorial, ideal para diferentes tamaños) -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  
+  <!-- PNG favicons para navegadores legacy y diferentes resoluciones -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  
+  <!-- Apple Touch Icon (iOS/iPadOS) - 180x180px cuadrado -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  
+  <!-- Web App Manifest (PWA metadata) -->
+  <link rel="manifest" href="/site.webmanifest" />
+  
+  <!-- Preload LCP hero image (AVIF variants) -->
+  <link
+    rel="preload"
+    as="image"
+    href="/images/Hero-Index-800.avif"
+    imagesrcset="/images/Hero-Index-400.avif 400w, /images/Hero-Index-800.avif 800w, /images/Hero-Index-1200.avif 1200w, /images/Hero-Index-1600.avif 1600w, /images/Hero-Index-1920.avif 1920w"
+    imagesizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px"
+    fetchpriority="high"
+  />
+
+  <!-- Minimal inline critical CSS for font fallback rendering -->
+  <style>
+    /* System font stack for immediate text rendering before Google Fonts load */
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    /* Optimized font fallbacks to match Google Fonts metrics (reduces CLS) */
+    @font-face {
+      font-family: 'Poppins Fallback';
+      src: local('Arial');
+      size-adjust: 107%;
+      ascent-override: 92%;
+      descent-override: 25%;
+      line-gap-override: 0%;
+    }
+    @font-face {
+      font-family: 'Raleway Fallback';
+      src: local('Arial');
+      size-adjust: 99%;
+      ascent-override: 93%;
+      descent-override: 25%;
+      line-gap-override: 0%;
+    }
+    @font-face {
+      font-family: 'Inter Fallback';
+      src: local('Arial');
+      size-adjust: 107%;
+      ascent-override: 90%;
+      descent-override: 22%;
+      line-gap-override: 0%;
+    }
+  </style>
+
+  <!-- KaTeX CSS: hint early with preload from CDN; non-blocking load -->
+  <link
+    rel="preload"
+    as="style"
+    href="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.css"
+    onload="this.onload=null;this.rel='stylesheet'"
+  />
+  <noscript>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.css" />
+  </noscript>
+  <!-- Canonical domain -->
+  <link rel="canonical" href="https://fyt-research.org/investigacion/publicaciones/" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Grupo FyT | Investigación en Farmacología y Terapéutica" />
+  <meta property="og:description" content="Grupo FyT: Investigación de vanguardia en Farmacología y Terapéutica de la Universidad de Cartagena. Descubre nuestros proyectos, publicaciones y herramientas digitales." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://fyt-research.org/investigacion/publicaciones/" />
+  <meta property="og:site_name" content="Grupo FyT" />
+  <meta property="og:image" content="https://fyt-research.org/logo-fyt.png" />
+  <meta property="og:image:alt" content="Logo del Grupo FyT - Farmacología y Terapéutica" />
+  <meta property="og:locale" content="es_ES" />
+
+  <!-- hreflang principal en español -->
+  <link rel="alternate" hreflang="es" href="https://fyt-research.org" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://fyt-research.org/investigacion/publicaciones/" />
+  <meta name="twitter:title" content="Grupo FyT | Investigación en Farmacología y Terapéutica" />
+  <meta name="twitter:description" content="Grupo FyT: Investigación de vanguardia en Farmacología y Terapéutica de la Universidad de Cartagena. Descubre nuestros proyectos, publicaciones y herramientas digitales." />
+  <meta name="twitter:image" content="https://fyt-research.org/logo-fyt.png" />
+  <meta name="twitter:image:alt" content="Logo del Grupo FyT" />
+    <script type="module" crossorigin src="/assets/index-CtRNSMMG.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/radix-CttiZxwU.js">
+    <link rel="modulepreload" crossorigin href="/assets/carousel-CQL47Cha.js">
+    <link rel="modulepreload" crossorigin href="/assets/vendor-29DZ0te0.js">
+    <link rel="modulepreload" crossorigin href="/assets/motion-DhUH61oz.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-D0AKOKJS.css">
+    <script type="module">import.meta.url;import("_").catch(()=>1);(async function*(){})().next();if(location.protocol!="file:"){window.__vite_is_modern_browser=true}</script>
+    <script type="module">!function(){if(window.__vite_is_modern_browser)return;console.warn("vite: loading legacy chunks, syntax error above and the same error below should be ignored");var e=document.getElementById("vite-legacy-polyfill"),n=document.createElement("script");n.src=e.src,n.onload=function(){System.import(document.getElementById('vite-legacy-entry').getAttribute('data-src'))},document.body.appendChild(n)}();</script>
+  </head>
+
+  <body>
+    <!-- Fallback content for JavaScript disabled -->
+    <noscript>
+      <div style="
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        background: white;
+        color: #333;
+        text-align: center;
+        padding: 20px;
+      ">
+        <div style="max-width: 500px;">
+          <h1 style="margin-top: 0; font-size: 28px;">Bienvenido a Grupo FyT</h1>
+          <p style="font-size: 16px; line-height: 1.6; opacity: 0.8;">
+            Este sitio requiere JavaScript para funcionar correctamente.
+          </p>
+        </div>
+      </div>
+    </noscript>
+
+    <div id="root"></div>
+    <!-- Polyfills críticos para Safari 11-15: DEBE cargar ANTES de React -->
+    <script src="/polyfills.js"></script>
+    <script nomodule>!function(){var e=document,t=e.createElement("script");if(!("noModule"in t)&&"onbeforeload"in t){var n=!1;e.addEventListener("beforeload",(function(e){if(e.target===t)n=!0;else if(!e.target.hasAttribute("nomodule")||!n)return;e.preventDefault()}),!0),t.type="module",t.src=".",e.head.appendChild(t),t.remove()}}();</script>
+    <script nomodule crossorigin id="vite-legacy-polyfill" src="/assets/polyfills-legacy-gi_aMIsJ.js"></script>
+    <script nomodule crossorigin id="vite-legacy-entry" data-src="/assets/index-legacy-BLrhpqKE.js">System.import(document.getElementById('vite-legacy-entry').getAttribute('data-src'))</script>
+  </body>
+</html>
