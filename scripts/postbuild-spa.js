@@ -9,6 +9,11 @@ const distDir = join(process.cwd(), 'dist');
 const indexPath = join(distDir, 'index.html');
 const notFoundPath = join(distDir, '404.html');
 
+if (process.env.SSG_BUILD === 'true' || process.env.SSG_BUILD === '1') {
+  console.log('[postbuild] Skip SPA 404 generation (SSG build).');
+  process.exit(0);
+}
+
 if (existsSync(indexPath)) {
   try {
     const indexHtml = readFileSync(indexPath, 'utf8');

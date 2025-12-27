@@ -6,7 +6,7 @@ import { componentTagger } from "lovable-tagger";
 import { visualizer } from 'rollup-plugin-visualizer';
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => ({
+export default defineConfig(({ mode, command, isSsrBuild }) => ({
   // Configuración para GitHub Pages con dominio propio
   // Usar '/' para dominio personalizado, evita problemas con rutas absolutas
   base: '/',
@@ -23,6 +23,10 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
+      // En SSR usar shim para react-helmet-async (no se usa en prerender; head estático)
+      ...(process.env.SSR === 'true' && {
+        'react-helmet-async': path.resolve(__dirname, './src/shims/react-helmet-async.tsx'),
+      }),
     },
     // Deduplicate React to avoid multiple instances across chunks/dep graphs (prevents dispatcher=null)
     dedupe: ["react", "react-dom"],
@@ -53,6 +57,7 @@ export default defineConfig(({ mode }) => ({
   build: {
     emptyOutDir: true,
     manifest: true,
+    ssrManifest: true,
     minify: 'terser',
     terserOptions: {
       compress: {

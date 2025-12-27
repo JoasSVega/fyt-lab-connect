@@ -1,7 +1,35 @@
 import { createRoot } from "react-dom/client";
 import { HelmetProvider } from 'react-helmet-async';
+import { BrowserRouter } from 'react-router-dom';
 import App from "./App.tsx";
 import "./index.css";
+
+declare global {
+  interface Window {
+    markReactReady?: () => void;
+  }
+}
+
+const restoreInitialPath = () => {
+  if (typeof window === 'undefined') return;
+  const search = new URLSearchParams(window.location.search);
+  const redirectParam = search.get('redirect');
+  const storedRedirect = window.sessionStorage.getItem('redirect');
+  const target = redirectParam || storedRedirect;
+  if (!target) return;
+
+  const normalized = target.startsWith('/') ? target : `/${target}`;
+  const current = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+  if (normalized !== current) {
+    window.history.replaceState(null, '', normalized);
+  }
+
+  if (storedRedirect) {
+    window.sessionStorage.removeItem('redirect');
+  }
+};
+
+restoreInitialPath();
 
 const root = createRoot(document.getElementById("root")!);
 
@@ -15,7 +43,9 @@ if (typeof window !== 'undefined' && window.markReactReady) {
 
 root.render(
   <HelmetProvider>
-    <App />
+    <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+      <App />
+    </BrowserRouter>
   </HelmetProvider>
 );
 

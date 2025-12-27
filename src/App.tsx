@@ -106,9 +106,9 @@ function AnimatedRoutes() {
           <Route path="/equipo" element={<Equipo />} />
           
           {/* Páginas legales */}
-          <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
-          <Route path="/TermsOfUse" element={<TermsOfUse />} />
-          <Route path="/CodeOfEthics" element={<CodeOfEthics />} />
+          <Route path="/politica-privacidad" element={<PrivacyPolicy />} />
+          <Route path="/terminos-uso" element={<TermsOfUse />} />
+          <Route path="/codigo-etica" element={<CodeOfEthics />} />
           
           {/* Calculadoras */}
           <Route
@@ -198,26 +198,24 @@ const App: React.FC = () => {
     <>
       <ToasterShadcn />
       <Sonner />
-      <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-        <TransitionProvider>
-          <React.Suspense fallback={null}>
-            <ScrollToTop />
-            {/* Sincroniza el título del navegador con la ruta actual */}
-            <TitleSync />
-            {/* Barra superior fija */}
-            <Navbar />
-            {/* Contenido principal: darle padding-top para no quedar debajo del navbar */}
-            <main className="bg-gray-50 w-full">
-              {/* Provide a guaranteed H1 for a11y without impacting layout */}
-              <AccessibleH1 />
-              <ErrorBoundary>
-                <AnimatedRoutes />
-              </ErrorBoundary>
-            </main>
-            <Footer />
-          </React.Suspense>
-        </TransitionProvider>
-      </BrowserRouter>
+      <TransitionProvider>
+        <React.Suspense fallback={null}>
+          <ScrollToTop />
+          {/* Sincroniza el título del navegador con la ruta actual */}
+          <TitleSync />
+          {/* Barra superior fija */}
+          <Navbar />
+          {/* Contenido principal: darle padding-top para no quedar debajo del navbar */}
+          <main className="bg-gray-50 w-full">
+            {/* Provide a guaranteed H1 for a11y without impacting layout */}
+            <AccessibleH1 />
+            <ErrorBoundary>
+              <AnimatedRoutes />
+            </ErrorBoundary>
+          </main>
+          <Footer />
+        </React.Suspense>
+      </TransitionProvider>
     </>
   );
 
@@ -229,5 +227,3 @@ const App: React.FC = () => {
 }
 
 export default App;
-
-

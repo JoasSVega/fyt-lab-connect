@@ -27,9 +27,9 @@ const isMainPage = (path: string): boolean => {
     '/contactos',
     '/equipo',
     '/investigacion',
-    '/PrivacyPolicy',
-    '/TermsOfUse',
-    '/CodeOfEthics',
+    '/politica-privacidad',
+    '/terminos-uso',
+    '/codigo-etica',
   ];
   return mainPages.includes(path);
 };
