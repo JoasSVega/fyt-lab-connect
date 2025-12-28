@@ -1,68 +1,88 @@
-# Welcome to your Lovable project
+# FyT Lab Connect
 
-## Project info
+## Español
 
-**URL**: https://lovable.dev/projects/7e4f4b53-264a-46f7-bccc-4a989f7b0ced
+### ¿Qué es FyT Lab Connect?
+FyT Lab Connect es la plataforma front-end del Grupo de Investigación en Farmacología y Terapéutica (FyT). Provee una interfaz web para presentar producción académica (publicaciones, proyectos, eventos, contenidos) y facilitar la interacción entre investigadores, estudiantes e interesados.
 
-## How can I edit this code?
+### Propósito del proyecto
+El proyecto centraliza la presencia digital del grupo, facilita la divulgación académica y sirve como base para funciones futuras (formularios de contacto, portales de colaboración, integración de datos académicos).
 
-There are several ways of editing your application.
+### Público objetivo
+- Académico: investigadores, estudiantes, colaboradores universitarios.
+- Institucional/Comercial (futuro): organizaciones interesadas en servicios de investigación, consultoría y formación.
 
-**Use Lovable**
+### Estado actual
+Repositorio en `develop`. UI implementada en React + TypeScript con rutas principales y scripts para desarrollo, build y SSG/SSR parcial. Código en fase activa de desarrollo.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/7e4f4b53-264a-46f7-bccc-4a989f7b0ced) and start prompting.
+### Arquitectura (resumen)
+- Aplicación React (Vite) escrita en TypeScript.
+- Ruteo con `react-router-dom` y componentes lazy-loaded.
+- Estilos con Tailwind CSS y utilidades modernas.
+- Soporte para builds con Vite, incluyendo scripts para SSG/SSR y prerendering (ver `package.json`).
 
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
+### Tecnologías principales
+- React, React Router
 - TypeScript
-- React
-- shadcn-ui
+- Vite
 - Tailwind CSS
+- Lucide (iconos), Framer Motion
+- Herramientas de testing: Vitest
 
-## Math/LaTeX rendering (KaTeX)
+### Cómo contribuir
+1. Crea una rama desde `develop`: `git checkout -b feature/mi-cambio`.
+2. Sigue las convenciones de commits (Conventional Commits).
+3. Abre un Pull Request hacia `develop` y solicita revisión.
 
-The calculators can render mathematical formulas using KaTeX. In a `FormulaSpec`, set `expressionLatex` to a LaTeX string and it will be displayed in the modal de fórmulas.
+### Roadmap resumido
+- Corto plazo: estabilizar UI, tests básicos, arreglar bugs de navegación.
+- Mediano plazo: accesibilidad, automatización CI, pre-rendering completo.
+- Largo plazo: internacionalización, panel de administración, monetización controlada.
+
+---
+
+## English
+
+### What is FyT Lab Connect?
+FyT Lab Connect is the front-end platform for the FyT Research Group. It provides a web interface to showcase academic output (publications, projects, events, multimedia) and to enable interactions among researchers, students and external stakeholders.
+
+### Project purpose
+The project centralizes the group's digital presence, streamlines academic dissemination and provides a foundation for future features (contact forms, collaboration portals, academic data integrations).
+
+### Target audience
+- Academic: researchers, students, university collaborators.
+- Institutional/Commercial (future): organizations seeking research services, consulting and training.
+
+### Current status
+Repository on `develop`. UI implemented with React + TypeScript, routing and build scripts present. Active development.
+
+### Architecture (summary)
+- React SPA with Vite and TypeScript.
+- Routing via `react-router-dom`, components lazy-loaded.
+- Styling with Tailwind CSS.
+- Build tooling includes SSG/SSR support scripts (see `package.json`).
+
+### Key technologies
+- React, React Router
+- TypeScript
+- Vite
+- Tailwind CSS
+- Lucide, Framer Motion
+- Vitest for tests
+
+### How to contribute
+1. Branch from `develop`: `git checkout -b feature/my-change`.
+2. Follow Conventional Commits.
+3. Open a PR against `develop` and request review.
+
+### Short roadmap
+- Short term: stabilize UI, basic tests, fix navigation bugs.
+- Mid term: accessibility, CI automation, complete pre-rendering.
+- Long term: i18n, admin panel, controlled monetization.
+
+---
+
+Nota: Para detalles técnicos y guías de contribución avanzadas, revisa la carpeta `docs/`.
 
 - Library: `katex` (CSS included via component)
 - Where: `CalculatorModal` info modal, using the reusable `src/components/ui/Latex.tsx`
