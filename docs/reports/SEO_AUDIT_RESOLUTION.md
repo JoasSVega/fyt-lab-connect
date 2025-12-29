@@ -1,3 +1,7 @@
+---
+Estado: Completado
+Idioma: ES
+---
 # Resolución de Auditoría Web - Informe de Mejoras SEO y Rendimiento
 
 **Fecha:** 25 de diciembre de 2025  

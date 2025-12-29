@@ -1,3 +1,7 @@
+---
+Estado: Completado
+Idioma: ES
+---
 # SmartImage - Guía de Refactorización
 
 ## 📋 Componente Creado

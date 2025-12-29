@@ -1,3 +1,7 @@
+---
+Estado: Completado
+Idioma: ES
+---
 # Optimización de Entrega de Imágenes - Reporte
 
 ## Resumen Ejecutivo

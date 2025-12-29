@@ -1,3 +1,7 @@
+---
+Estado: Completado
+Idioma: ES
+---
 # Optimización de CLS (Cumulative Layout Shift)
 
 ## Resumen Ejecutivo

@@ -1,3 +1,7 @@
+---
+Estado: Completado
+Idioma: EN
+---
 # PR: Calculators UI unification and fixes
 
 This PR unifies the calculators UX across the app and fixes long-standing UI/UX issues.

@@ -1,3 +1,7 @@
+---
+Estado: Propuesto
+Idioma: ES
+---
 /**
  * GUÍA DE IMPLEMENTACIÓN: Portal Académico Evaluable
  * 

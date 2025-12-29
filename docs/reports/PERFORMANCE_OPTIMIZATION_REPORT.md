@@ -1,3 +1,7 @@
+---
+Estado: Completado
+Idioma: ES
+---
 # 🚀 Optimizaciones de PageSpeed Insights Implementadas
 
 ## 📊 Resumen Ejecutivo

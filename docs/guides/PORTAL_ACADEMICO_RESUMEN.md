@@ -1,3 +1,7 @@
+---
+Estado: Completado
+Idioma: ES
+---
 # 📊 PORTAL ACADÉMICO EVALUABLE - RESUMEN EJECUTIVO
 
 **Fecha:** 15 de diciembre de 2025  

@@ -1,3 +1,7 @@
+---
+Estado: Completado
+Idioma: ES
+---
 # Optimización Integral del Sistema de Imágenes
 
 ## Resumen de Mejoras Implementadas

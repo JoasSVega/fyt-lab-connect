@@ -1,3 +1,7 @@
+---
+Estado: Completado
+Idioma: ES
+---
 ## ✅ Optimización de Hero Image - Sobre Nosotros
 
 ### 🎯 Cambios Realizados

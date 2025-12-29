@@ -1,3 +1,7 @@
+---
+Estado: Completado
+Idioma: ES
+---
 # SmartImage Component Optimization Report
 
 ## 🎯 Objetivo

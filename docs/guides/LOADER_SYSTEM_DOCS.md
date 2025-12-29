@@ -1,3 +1,7 @@
+---
+Estado: Completado
+Idioma: ES
+---
 # Sistema de Carga Unificado - Documentación
 
 **Fecha:** 25 de diciembre de 2025  

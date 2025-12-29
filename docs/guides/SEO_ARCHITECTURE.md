@@ -1,3 +1,7 @@
+---
+Estado: Completado
+Idioma: EN
+---
 # SEO Architecture Diagram
 
 ## Application Structure with SEO Components
