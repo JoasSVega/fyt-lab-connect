@@ -1,40 +1,75 @@
-# Arquitectura del Proyecto — FyT Lab Connect
 
-## Resumen
-FyT Lab Connect es una aplicación front-end construida con React + TypeScript y empaquetada con Vite. El repositorio contiene rutas, componentes, estilos con Tailwind CSS y scripts para builds que incluyen soporte para SSG/SSR y prerender.
+# FyT Lab Connect — Arquitectura Técnica
 
-## Principios de diseño
-- Single Responsibility: componentes con responsabilidad única cuando es posible.
-- Rendimiento: carga diferida (lazy) de rutas y componentes pesados.
-- Accesibilidad: estructura semántica (usar h1/h2, roles ARIA cuando aplique).
-- Preparación para escala: separación clara entre `pages`, `components`, `data` y `utils`.
+## 1. Arquitectura actual (As-Is)
+FyT Lab Connect es una aplicación front-end desarrollada con React y TypeScript, utilizando Vite como bundler principal. El sistema está orientado a la presentación de información y herramientas especializadas, sin backend propio ni panel administrativo.
 
-## Estructura principal de carpetas
-- `src/` — código fuente
-  - `pages/` — rutas y vistas de página
-  - `components/` — componentes reutilizables UI
-  - `assets/` — imágenes y recursos estáticos
-  - `data/` — datasets locales, fixtures
-  - `hooks/`, `lib/`, `utils/` — utilidades y hooks compartidos
-  - `providers/` — contextos/Providers React
-  - `seo/` — metadatos y rutas meta
+### Estructura de carpetas
 
-## Decisiones técnicas relevantes
-- Vite como bundler: tiempos de desarrollo rápidos y soporte moderno.
-- TypeScript para seguridad de tipos.
-- Tailwind CSS para utilidades de estilo y consistencia.
-- `react-router-dom` v6 para ruteo; uso de `React.lazy` para lazy-loading.
-- Scripts personalizados en `scripts/` para revisión de desarrollo, optimización de imágenes, prerender y precompress.
+```
+src/
+├── assets/           # Imágenes y recursos estáticos
+├── components/       # Componentes UI reutilizables
+├── config/           # Configuración específica del cliente
+├── data/             # Datasets locales y fixtures
+├── hooks/            # Hooks personalizados
+├── lib/              # Librerías y utilidades compartidas
+├── pages/            # Rutas y vistas principales
+├── providers/        # Contextos y Providers de React
+├── seo/              # Metadatos y rutas meta
+├── shims/, types/, utils/ # Tipos, utilidades y adaptadores
+```
 
-## Preparación para escalabilidad
-- Componentes atómicos y separación por dominio (investigación, contacto, etc.).
-- Lazy-loading en rutas para reducir bundle inicial.
-- Soporte existente para SSG/SSR y prerender; recomendar integrar una pipeline de CI que genere artefactos pre-rendered y los valide.
+scripts/
+├── audit-runner.mjs, optimize-images.js, prerender-react.mjs, ...
+    # Scripts para auditoría, optimización de imágenes, prerender y utilidades de build
 
-## Recomendaciones inmediatas
-1. Añadir `docs/DIAGRAMS` con diagramas de alto nivel (plantillas mermaid o SVG) — placeholder.
-2. Añadir `ops/` con scripts de despliegue y configuración de CI (placeholder para Jenkins/GitHub Actions).
-3. Normalizar `src/components/` y documentar patrones de diseño (Atomic Design o similar).
+### Principales dependencias
+- React, React DOM, React Router DOM v6
+- TypeScript
+- Tailwind CSS y tailwindcss-animate
+- Radix UI, Framer Motion, Zod, TanStack React Query
+
+### Flujos principales
+- Renderizado SPA con soporte para SSG/SSR y prerender (no SSR en producción actualmente)
+- Ruteo con `react-router-dom` y carga diferida (`React.lazy`) de rutas y componentes pesados
+- Estilos con Tailwind CSS y utilidades de animación
+- Scripts de build y optimización en la carpeta `scripts/`
+
+## 2. Decisiones clave de diseño
+- Separación estricta de dominios funcionales en `src/` (investigación, contacto, equipo, etc.)
+- Uso de componentes atómicos y reutilizables para UI
+- Lazy-loading en rutas y vistas para mejorar el rendimiento inicial
+- SSG/SSR y prerender soportados mediante scripts personalizados, pero no desplegados como SSR en producción
+- No se incluye backend, panel administrativo ni internacionalización (i18n) en la arquitectura actual
+
+## 3. Evolución prevista (To-Be)
+- Consolidar patrones de diseño en `src/components/` (Atomic Design recomendado)
+- Documentar y estandarizar el uso de hooks y providers
+- Integrar diagramas técnicos en `docs/DIAGRAMS` (Mermaid/SVG)
+- Evaluar la integración de pipelines de CI para validación y despliegue automatizado de artefactos pre-renderizados
+- Mejorar la documentación de flujos de build y scripts personalizados
+
+## 4. Límites explícitos del sistema
+- No incluye backend, autenticación, panel administrativo ni internacionalización
+- No gestiona usuarios, roles ni permisos
+- No implementa CI/CD ni despliegue automatizado actualmente
+- No expone API pública ni endpoints propios
+
+## 5. Diagrama textual de arquitectura
+
+```mermaid
+graph TD
+    A[Usuario] -->|HTTP| B[Frontend React]
+    B --> C[React Router DOM]
+    B --> D[Tailwind CSS]
+    B --> E[Componentes UI]
+    B --> F[SSG/SSR/Prerender Scripts]
+    E --> G[Assets/Data]
+```
 
 ---
-> Placeholders: validar con el owner los requisitos de despliegue (hosting, CDN, SSR vs SSG prioritario).
+
+## Resumen ejecutivo (ENGLISH)
+
+FyT Lab Connect is a front-end application built with React and TypeScript, using Vite as the main bundler. The project is structured for maintainability and scalability, with clear separation of domains and atomic UI components. It supports SSG/SSR and prerender via custom scripts, but does not include backend, admin panel, authentication, or i18n. The current system focuses on presentation and client-side logic, with technical documentation and build scripts prepared for future evolution.
