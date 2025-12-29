@@ -3,111 +3,112 @@
 ## Español
 
 ### ¿Qué es FyT Lab Connect?
-FyT Lab Connect es la plataforma front-end del Grupo de Investigación en Farmacología y Terapéutica (FyT). Provee una interfaz web para presentar producción académica (publicaciones, proyectos, eventos, contenidos) y facilitar la interacción entre investigadores, estudiantes e interesados.
+FyT Lab Connect es la plataforma web del **Grupo de Investigación en Farmacología y Terapéutica (FyT)**. Su objetivo es centralizar y presentar la producción académica del grupo —publicaciones, proyectos, eventos y contenidos— mediante una interfaz moderna, accesible y orientada a la divulgación científica.
 
 ### Propósito del proyecto
-El proyecto centraliza la presencia digital del grupo, facilita la divulgación académica y sirve como base para funciones futuras (formularios de contacto, portales de colaboración, integración de datos académicos).
+
+El proyecto consolida la presencia digital del grupo FyT y sirve como base tecnológica para futuras iniciativas de colaboración académica, interacción institucional y difusión del conocimiento.
 
 ### Público objetivo
-- Académico: investigadores, estudiantes, colaboradores universitarios.
-- Institucional/Comercial (futuro): organizaciones interesadas en servicios de investigación, consultoría y formación.
+
+- **Académico:** investigadores, estudiantes, docentes y colaboradores universitarios.
+- **Institucional / Comercial (proyección futura):** organizaciones interesadas en investigación, consultoría científica y formación especializada.
 
 ### Estado actual
-Repositorio en `develop`. UI implementada en React + TypeScript con rutas principales y scripts para desarrollo, build y SSG/SSR parcial. Código en fase activa de desarrollo.
+
+El repositorio se encuentra en desarrollo activo sobre la rama `develop`.  
+La interfaz está implementada con React y TypeScript, con ruteo funcional, componentes principales y scripts de desarrollo, build y prerendering parcial.
 
 ### Arquitectura (resumen)
-- Aplicación React (Vite) escrita en TypeScript.
-- Ruteo con `react-router-dom` y componentes lazy-loaded.
-- Estilos con Tailwind CSS y utilidades modernas.
-- Soporte para builds con Vite, incluyendo scripts para SSG/SSR y prerendering (ver `package.json`).
+
+- Aplicación web construida con **React + Vite** y **TypeScript**.
+- Ruteo mediante `react-router-dom` con carga diferida de componentes.
+- Estilos basados en **Tailwind CSS** y utilidades modernas.
+- Soporte para builds optimizados, incluyendo prerendering y exploración de SSG/SSR.
 
 ### Tecnologías principales
+
 - React, React Router
 - TypeScript
 - Vite
 - Tailwind CSS
-- Lucide (iconos), Framer Motion
-- Herramientas de testing: Vitest
+- Framer Motion, Lucide Icons
+- Testing con Vitest
 
 ### Cómo contribuir
-1. Crea una rama desde `develop`: `git checkout -b feature/mi-cambio`.
-2. Sigue las convenciones de commits (Conventional Commits).
-3. Abre un Pull Request hacia `develop` y solicita revisión.
 
-### Roadmap resumido
-- Corto plazo: estabilizar UI, tests básicos, arreglar bugs de navegación.
-- Mediano plazo: accesibilidad, automatización CI, pre-rendering completo.
-- Largo plazo: internacionalización, panel de administración, monetización controlada.
+1. Crea una rama desde `develop`:
+
+```bash
+git checkout -b feature/mi-cambio
+```
+
+Sigue el estándar de Conventional Commits.
+
+Abre un Pull Request hacia `develop` para revisión.
+
+### Roadmap (resumen)
+
+- **Corto plazo:** estabilización de UI, pruebas básicas, corrección de bugs de navegación.
+- **Mediano plazo:** accesibilidad, automatización CI, prerendering completo.
+- **Largo plazo:** internacionalización, panel de administración y evaluación de modelos de sostenibilidad.
 
 ---
 
 ## English
 
 ### What is FyT Lab Connect?
-FyT Lab Connect is the front-end platform for the FyT Research Group. It provides a web interface to showcase academic output (publications, projects, events, multimedia) and to enable interactions among researchers, students and external stakeholders.
+
+FyT Lab Connect is the web platform of the Pharmacology and Therapeutics Research Group (FyT). It centralizes and showcases the group’s academic output — publications, projects, events and content — through a modern, accessible and research-oriented interface.
 
 ### Project purpose
-The project centralizes the group's digital presence, streamlines academic dissemination and provides a foundation for future features (contact forms, collaboration portals, academic data integrations).
+
+The project consolidates the FyT group’s digital presence and provides a technological foundation for future academic collaboration, institutional interaction and scientific dissemination initiatives.
 
 ### Target audience
-- Academic: researchers, students, university collaborators.
-- Institutional/Commercial (future): organizations seeking research services, consulting and training.
+
+- **Academic:** researchers, students, faculty members and university collaborators.
+- **Institutional / Commercial (future scope):** organizations seeking research services, scientific consulting and specialized training.
 
 ### Current status
-Repository on `develop`. UI implemented with React + TypeScript, routing and build scripts present. Active development.
+
+The repository is under active development on the `develop` branch.  
+The UI is implemented using React and TypeScript, with functional routing, core components and development/build/prerendering scripts.
 
 ### Architecture (summary)
-- React SPA with Vite and TypeScript.
-- Routing via `react-router-dom`, components lazy-loaded.
-- Styling with Tailwind CSS.
-- Build tooling includes SSG/SSR support scripts (see `package.json`).
+
+- Web application built with **React + Vite** and **TypeScript**.
+- Routing handled by `react-router-dom` with lazy-loaded components.
+- Styling powered by **Tailwind CSS**.
+- Optimized build workflows, including prerendering and exploratory SSG/SSR support.
 
 ### Key technologies
+
 - React, React Router
 - TypeScript
 - Vite
 - Tailwind CSS
-- Lucide, Framer Motion
-- Vitest for tests
+- Framer Motion, Lucide Icons
+- Vitest for testing
 
 ### How to contribute
-1. Branch from `develop`: `git checkout -b feature/my-change`.
-2. Follow Conventional Commits.
-3. Open a PR against `develop` and request review.
 
-### Short roadmap
-- Short term: stabilize UI, basic tests, fix navigation bugs.
-- Mid term: accessibility, CI automation, complete pre-rendering.
-- Long term: i18n, admin panel, controlled monetization.
+Create a branch from `develop`:
 
----
-
-Nota: Para detalles técnicos y guías de contribución avanzadas, revisa la carpeta `docs/`.
-
-- Library: `katex` (CSS included via component)
-- Where: `CalculatorModal` info modal, using the reusable `src/components/ui/Latex.tsx`
-
-Example:
-
-```ts
-// src/lib/calculators/index.ts (excerpt)
-{
-	id: "ckd-epi",
-	label: "CKD-EPI",
-	expressionLatex: "eGFR=141\n\times\n\min(\frac{S_{Cr}}{\kappa}, 1)^\alpha\n\times\n\max(\frac{S_{Cr}}{\kappa}, 1)^{-1.209}\n\times\n0.993^{\text{age}}\n\times\n1.018^{[female]}\n\times\n1.159^{[black]}",
-}
+```bash
+git checkout -b feature/my-change
 ```
 
-If `expressionLatex` isn't provided, the UI falls back to `expressionText` or `description`.
+Follow Conventional Commits.
 
-## How can I deploy this project?
+Open a Pull Request against `develop` for review.
 
-Simply open [Lovable](https://lovable.dev/projects/7e4f4b53-264a-46f7-bccc-4a989f7b0ced) and click on Share -> Publish.
+### Roadmap (summary)
 
-## Can I connect a custom domain to my Lovable project?
+- **Short term:** UI stabilization, basic testing, navigation bug fixes.
+- **Mid term:** accessibility improvements, CI automation, full prerendering.
+- **Long term:** internationalization, admin panel, sustainability models.
 
-Yes, you can!
+📌 **Nota / Note**
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Para documentación técnica detallada, guías de arquitectura y reportes, consulta la carpeta `docs/`.
