@@ -14,7 +14,7 @@ import { proyectos } from "@/data/proyectos";
 import { divulgacionCientifica } from "@/data/contenidosDigitales";
 import { eventos } from "@/data/eventos";
 import type { Publicacion, Proyecto, DivulgacionCientifica, Evento } from "@/types/investigacion";
-import { pathPublicaciones, pathProyectos, pathFormacion, pathDivulgacionCientifica, pathEventos } from "@/App";
+import { pathPublicaciones, pathProyectos, pathFormacion, pathDivulgacionCientifica, pathEventos, pathContactos } from "@/App";
 const InvestigacionPage: React.FC = () => {
   usePageReady();
 
@@ -278,7 +278,7 @@ const InvestigacionPage: React.FC = () => {
             <p className="text-slate-600 font-inter text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-8">
               Generamos conocimiento para transformar el bienestar. Buscamos aliados para impulsar la investigación con impacto directo en la salud.
             </p>
-            <Link to="/contactos" className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-violet-600 hover:bg-violet-700 text-white font-semibold shadow-lg shadow-violet-600/20 transition-all duration-200">
+            <Link to={pathContactos} className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-violet-600 hover:bg-violet-700 text-white font-semibold shadow-lg shadow-violet-600/20 transition-all duration-200">
               Proponer Colaboración
               <ChevronRight className="w-4 h-4" />
             </Link>

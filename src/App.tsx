@@ -21,6 +21,7 @@ export const pathPublicaciones = "/investigacion/publicaciones";
 export const pathEventos = "/investigacion/eventos";
 export const pathFormacion = "/investigacion/formacion";
 export const pathDivulgacionCientifica = "/investigacion/divulgacion-cientifica";
+export const pathContactos = "/contactos";
 
 const SobreNosotros = React.lazy(() => import("./pages/SobreNosotros"));
 import Index from "./pages/Index";
