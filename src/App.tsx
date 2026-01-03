@@ -14,6 +14,10 @@ const EventosPage = React.lazy(() => import("./pages/EventosPage"));
 const FormacionPage = React.lazy(() => import("./pages/FormacionPage"));
 const ContenidosPage = React.lazy(() => import("./pages/ContenidosPage"));
 
+// Rutas de divulgación (carga diferida)
+const DivulgacionPage = React.lazy(() => import("./pages/DivulgacionPage"));
+const DivulgacionPostPage = React.lazy(() => import("./pages/DivulgacionPostPage"));
+
 // Exportar paths
 export const pathInvestigacion = "/investigacion";
 export const pathProyectos = "/investigacion/proyectos";
@@ -21,6 +25,7 @@ export const pathPublicaciones = "/investigacion/publicaciones";
 export const pathEventos = "/investigacion/eventos";
 export const pathFormacion = "/investigacion/formacion";
 export const pathDivulgacionCientifica = "/investigacion/divulgacion-cientifica";
+export const pathDivulgacion = "/divulgacion";
 export const pathContactos = "/contactos";
 
 const SobreNosotros = React.lazy(() => import("./pages/SobreNosotros"));
@@ -93,6 +98,10 @@ function AnimatedRoutes() {
           
           {/* Noticias y Herramientas */}
           <Route path="/noticias" element={<Noticias />} />
+          
+          {/* Divulgación */}
+          <Route path="/divulgacion" element={<DivulgacionPage />} />
+          <Route path="/divulgacion/:slug" element={<DivulgacionPostPage />} />
           
           {/* Nueva arquitectura de Herramientas */}
           <Route path="/herramientas" element={<ToolsIndex />} />

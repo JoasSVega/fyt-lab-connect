@@ -1,14 +1,11 @@
 // Página principal de Investigación - Hub académico premium
-// Vista general estructurada de la producción investigativa del grupo FyT
 import React from "react";
 import { Link } from "react-router-dom";
-import { BookOpen, Microscope, FileText, Users, Video, ChevronRight, Presentation, GraduationCap } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import HeroInvestigacion from "@/components/HeroInvestigacion";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { usePageReady } from "@/hooks/usePageReady";
 import Seo from "@/components/Seo";
-
-// Importar datos reales desde GrupLAC
 import { publicacionesFyT } from "@/data/publicaciones";
 import { proyectos } from "@/data/proyectos";
 import { divulgacionCientifica } from "@/data/contenidosDigitales";
@@ -19,10 +16,10 @@ const InvestigacionPage: React.FC = () => {
   usePageReady();
 
   // Calcular datos reales sin duplicar
-  const publicacionesRecientes = [...publicacionesFyT].sort((a, b) => b.anio - a.anio).slice(0, 5);
-  const proyectosDestacados = [...proyectos.filter(p => p.estado === "En curso").slice(0, 2), ...proyectos.filter(p => p.estado === "Finalizado").slice(0, 1)].slice(0, 3);
-  const contenidosDestacados = [...divulgacionCientifica].sort((a, b) => b.anio - a.anio).slice(0, 3);
-  const eventosRecientes = [...eventos].sort((a, b) => b.anio - a.anio).slice(0, 3);
+  const publicacionesRecientes = [...publicacionesFyT].sort((a: Publicacion, b: Publicacion) => b.anio - a.anio).slice(0, 5);
+  const proyectosDestacados = [...proyectos.filter((p: Proyecto) => p.estado === "En curso").slice(0, 2), ...proyectos.filter((p: Proyecto) => p.estado === "Finalizado").slice(0, 1)].slice(0, 3);
+  const contenidosDestacados = [...divulgacionCientifica].sort((a: DivulgacionCientifica, b: DivulgacionCientifica) => b.anio - a.anio).slice(0, 3);
+  const eventosRecientes = [...eventos].sort((a: Evento, b: Evento) => b.anio - a.anio).slice(0, 3);
   return <div className="w-full bg-background flex flex-col">
       <Seo title="Grupo FyT | Investigación y Producción Académica" description="Producción académica y científica del Grupo de Investigación en Farmacología y Terapéutica: publicaciones, proyectos, eventos y divulgación." author="Grupo FyT" robots="index, follow" canonical="https://fyt-research.org/investigacion" openGraph={{
       title: "Grupo FyT | Investigación y Producción Académica",
