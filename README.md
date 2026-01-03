@@ -112,3 +112,25 @@ Open a Pull Request against `develop` for review.
 📌 **Nota / Note**
 
 Para documentación técnica detallada, guías de arquitectura y reportes, consulta la carpeta `docs/`.
+
+## Modelo de ramas
+
+**Español:**
+
+- `develop`: Rama principal de desarrollo y documentación. Aquí se integran todas las nuevas funcionalidades, correcciones y la documentación bilingüe antes de cualquier publicación.
+- `main`: Rama de publicación. Contiene únicamente los artefactos generados (SSG) para despliegue en producción, sin código fuente editable ni documentación raw.
+
+**English:**
+
+- `develop`: Main branch for development and documentation. All new features, fixes, and bilingual documentation are integrated here before any publication.
+- `main`: Publication branch. Contains only the generated artifacts (SSG) for production deployment, with no editable source code or raw documentation.
+
+## Gobernanza y documentación
+
+**Español:**
+
+Las reglas de gobierno, estrategia de ramas y política de documentación bilingüe están detalladas en [docs/GOVERNANCE.md](docs/GOVERNANCE.md).
+
+**English:**
+
+Governance rules, branching strategy, and bilingual documentation policy are detailed in [docs/GOVERNANCE.md](docs/GOVERNANCE.md).
