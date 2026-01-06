@@ -14,6 +14,33 @@ import type { DivulgacionPost } from "@/types/divulgacion";
 
 export const divulgacionPosts: DivulgacionPost[] = [
   {
+    slug: "actualizacion-codigos-cups-atencion-farmaceutica",
+    title: "La actualización y apropiación de los códigos CUPS: Un paso inapelable hacia la visibilidad de la profesión Químico Farmacéutica desde el ámbito de la atención farmacéutica en Colombia",
+    excerpt: "La evolución de los códigos CUPS no debe verse como un simple ajuste administrativo, sino como una necesidad imperativa para otorgar visibilidad real a la profesión desde el ámbito de la atención farmacéutica, lo cual constituye una necesidad en los procesos de seguridad del paciente.",
+    author: "Antistio Alviz Amador",
+    authorRole: "Q.F., MSc, PhD - Grupo de Investigación en Farmacología y Terapéutica (FyT)",
+    authorImage: "/images/equipo/Antistio-Alviz-medium.webp",
+    date: "2026-01-06",
+    readTime: "7 min",
+    category: "Política Farmacéutica",
+    tags: ["Atención Farmacéutica", "CUPS", "Política de Salud", "Química Farmacéutica", "Colombia"],
+    content: `
+<p>En el sistema de salud colombiano, la Clasificación Única de Procedimientos en Salud (CUPS) constituye el eje sobre el cual se articula la atención; es el lenguaje técnico que permite que cada intervención sea registrada, medida y, por supuesto, financiada. Sin embargo, para el Químico Farmacéutico, esta estructura ha presentado históricamente un vacío que limita el reconocimiento de su rol asistencial. Por esta razón, la evolución de estos códigos no debe verse como un simple ajuste administrativo, sino como una necesidad imperativa para otorgar visibilidad real a la profesión desde el ámbito de la atención farmacéutica, lo cual constituye una necesidad en los procesos de seguridad del paciente.</p>
+
+<h2>¿Qué son los códigos CUPS?</h2>
+
+<p>Formalmente, el Artículo 4 de la Resolución 4678 de 2015 define los CUPS como el sistema que "corresponde al ordenamiento lógico y detallado de los procedimientos y servicios en salud que se realizan en el país, en cumplimiento de los principios de interoperabilidad y estandarización de datos". En la práctica, esto significa que cada procedimiento, desde una cirugía compleja hasta una consulta de control, recibe un código y una descripción únicos. Este sistema es esencial para estandarizar el registro de la atención, la facturación de servicios y el análisis de datos a nivel nacional, independientemente del profesional que realice el procedimiento. Sin embargo, si bien este modelo funciona para la mayoría de las áreas, presenta una ambigüedad crítica en lo que respecta a los servicios clínicos farmacéuticos.</p>
+
+<p>Teniendo en cuenta lo anterior, nos enfrentamos a una falta de especificidad que diluye la labor del Químico Farmacéutico colombiano. Al agrupar diversas actividades farmacéuticas en códigos genéricos, se genera un déficit de datos que impide al Ministerio de Salud y a los entes de control valorar el impacto real de nuestras intervenciones. La atención farmacéutica, por su propia naturaleza legal y técnica, no es un proceso de soporte logístico, sino un acto clínico autónomo. Cuando realizamos una entrevista al paciente, construimos su perfil farmacoterapéutico y detectamos problemas relacionados con los medicamentos, estamos ejecutando una actividad que es equivalente, en rigor y responsabilidad, a una consulta profesional, que además puede ser especializada por el universo complejo de patologías a las que nos enfrentamos y a todo el arsenal terapéutico disponible tanto farmacológico como no farmacológico.</p>
+
+<p>Bajo esta premisa, la inclusión de códigos específicos para la Interconsulta por Químico Farmacéutico y las consultas de seguimiento se vuelve el pilar para la integración definitiva del farmacéutico en el equipo interdisciplinario. Este reconocimiento permite que nuestra participación en la historia clínica deje de ser una nota marginal para convertirse en un procedimiento trazable. Es, en esencia, la herramienta que nos permite hablar el mismo idioma que otras disciplinas de la salud, como enfermería o nutrición, quienes ya cuentan con este respaldo en la codificación nacional para sus consultas especializadas.</p>
+
+<p>El beneficio de esta visibilidad impacta directamente en la seguridad de las poblaciones más vulnerables. En escenarios de alta complejidad, como el manejo de enfermedades huérfanas, la atención pediátrica o el control de la polifarmacia en adultos mayores, la intervención del Químico Farmacéutico reduce de forma comprobada la morbilidad y los reingresos hospitalarios. Al formalizar estos procedimientos mediante códigos CUPS diferenciados, el sistema finalmente podrá cuantificar cómo la gestión experta de la farmacoterapia salva vidas y optimiza los recursos públicos.</p>
+
+<p>En definitiva, actualizar los CUPS para reflejar la realidad de la atención farmacéutica es un acto de justicia profesional y de responsabilidad sanitaria. Solo a través de una codificación que reconozca nuestra autonomía clínica podremos asegurar que el papel del Químico Farmacéutico en Colombia sea valorado por su verdadero aporte: garantizar que cada tratamiento sea una herramienta de curación segura, efectiva y humana.</p>
+    `
+  },
+  {
     slug: "futuro-farmacologia-personalizada",
     title: "El futuro de la farmacología personalizada: De la teoría a la práctica clínica",
     excerpt: "La farmacogenómica está revolucionando el tratamiento médico. Exploramos cómo la medicina personalizada está transformando la forma en que prescribimos medicamentos.",
