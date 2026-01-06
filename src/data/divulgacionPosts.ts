@@ -40,6 +40,10 @@ export const divulgacionPosts: DivulgacionPost[] = [
 <p>En definitiva, actualizar los CUPS para reflejar la realidad de la atención farmacéutica es un acto de justicia profesional y de responsabilidad sanitaria. Solo a través de una codificación que reconozca nuestra autonomía clínica podremos asegurar que el papel del Químico Farmacéutico en Colombia sea valorado por su verdadero aporte: garantizar que cada tratamiento sea una herramienta de curación segura, efectiva y humana.</p>
     `
   },
+  // COMENTADOS: Posts de prueba/demostración generados por IA
+  // Se dejan en el código como referencia para futuras reactivaciones
+  // pero no se prerenderizarán ni aparecerán en el sitio público
+  /*
   {
     slug: "futuro-farmacologia-personalizada",
     title: "El futuro de la farmacología personalizada: De la teoría a la práctica clínica",
@@ -192,6 +196,7 @@ En nuestra región, debemos:
 La IA no reemplaza al científico, sino que potencia su capacidad para innovar. El futuro del descubrimiento farmacológico es colaborativo: humano + máquina.
     `
   }
+  */
 ];
 
 /**
