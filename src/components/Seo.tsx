@@ -48,6 +48,11 @@ interface SEOProps {
     type?: string;
     image?: string;
     url?: string;
+    locale?: string;
+    siteName?: string;
+    imageAlt?: string;
+    imageWidth?: string;
+    imageHeight?: string;
   };
 
   /**
@@ -100,12 +105,22 @@ export default function SEO({
       {author && <meta name="author" content={author} />}
       {robots && <meta name="robots" content={robots} />}
 
-      {/* Open Graph */}
+      {/* Open Graph - Completo para WhatsApp/LinkedIn/Facebook */}
       <meta property="og:title" content={openGraph?.title || title} />
       {description && <meta property="og:description" content={openGraph?.description || description} />}
       {openGraph?.type && <meta property="og:type" content={openGraph.type} />}
-      {openGraph?.image && <meta property="og:image" content={openGraph.image} />}
+      {openGraph?.image && (
+        <>
+          <meta property="og:image" content={openGraph.image} />
+          <meta property="og:image:secure_url" content={openGraph.image} />
+        </>
+      )}
+      {openGraph?.imageAlt && <meta property="og:image:alt" content={openGraph.imageAlt} />}
+      {openGraph?.imageWidth && <meta property="og:image:width" content={openGraph.imageWidth} />}
+      {openGraph?.imageHeight && <meta property="og:image:height" content={openGraph.imageHeight} />}
       {openGraph?.url && <meta property="og:url" content={openGraph.url} />}
+      {openGraph?.locale && <meta property="og:locale" content={openGraph.locale} />}
+      {openGraph?.siteName && <meta property="og:site_name" content={openGraph.siteName} />}
 
       {/* Twitter Card */}
       {twitter?.card && <meta name="twitter:card" content={twitter.card} />}
