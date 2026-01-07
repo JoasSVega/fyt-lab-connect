@@ -70,18 +70,58 @@ const DivulgacionPostPage: React.FC = () => {
     }
   };
 
+  // Metadatos SEO / Open Graph / Twitter
+  const baseUrl = "https://fyt-research.org";
+  const canonicalUrl = `${baseUrl}/divulgacion/${post.slug}`;
+  const ogImage = `${baseUrl}${post.authorImage}`;
+  const metaDescription = post.excerpt.length > 160 ? `${post.excerpt.slice(0, 157)}…` : post.excerpt;
+  const metaKeywords = post.tags ? [...post.tags, "Divulgación", "Grupo FyT", "Farmacología y Terapéutica"] : ["Divulgación", "Grupo FyT", "Farmacología y Terapéutica"];
+
   return (
     <div className="w-full bg-background">
       <Seo
         title={`${post.title} | Divulgación FyT`}
-        description={post.excerpt}
-        canonical={`https://fyt-research.org/divulgacion/${post.slug}`}
+        description={metaDescription}
+        keywords={metaKeywords}
+        author={post.author}
+        canonical={canonicalUrl}
         openGraph={{
           title: post.title,
-          description: post.excerpt,
-          type: "article"
+          description: metaDescription,
+          type: "article",
+          image: ogImage,
+          url: canonicalUrl,
         }}
-      />
+        twitter={{
+          card: "summary_large_image",
+          image: ogImage,
+        }}
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "Article",
+          headline: post.title,
+          description: metaDescription,
+          author: {
+            "@type": "Person",
+            name: post.author,
+          },
+          datePublished: post.date,
+          image: ogImage,
+          url: canonicalUrl,
+          genre: post.category || "Divulgación",
+          keywords: (post.tags || []).join(", "),
+        }}
+      >
+        {/* Etiquetas adicionales Open Graph para artículos */}
+        <meta property="article:published_time" content={post.date} />
+        {post.author && <meta property="article:author" content={post.author} />}
+        {post.category && <meta property="article:section" content={post.category} />}        
+        {(post.tags || []).map((tag) => (
+          <meta key={tag} property="article:tag" content={tag} />
+        ))}
+        <meta property="og:image:alt" content={`Foto del autor ${post.author}`} />
+        <meta property="og:site_name" content="Grupo FyT" />
+      </Seo>
 
       {/* Botón de regreso */}
       <div className="border-b border-gray-100 bg-white">
