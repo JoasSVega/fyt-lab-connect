@@ -1,7 +1,7 @@
 // Página principal de Investigación - Hub académico premium
 import React from "react";
 import { Link } from "react-router-dom";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, BookOpen, Microscope, Users, GraduationCap, Video, FileText, Presentation } from "lucide-react";
 import HeroInvestigacion from "@/components/HeroInvestigacion";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { usePageReady } from "@/hooks/usePageReady";

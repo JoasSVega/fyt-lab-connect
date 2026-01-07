@@ -24,17 +24,17 @@ const DivulgacionPostPage: React.FC = () => {
     return getPostBySlug(slug);
   }, [slug]);
 
-  // Si no existe el post, redirigir a 404
-  if (!post) {
-    return <Navigate to="/404" replace />;
-  }
-
   // Obtener posts relacionados (otros 2 posts)
   const relatedPosts = useMemo(() => {
     return divulgacionPosts
       .filter(p => p.slug !== slug)
       .slice(0, 2);
   }, [slug]);
+
+  // Si no existe el post, redirigir a 404
+  if (!post) {
+    return <Navigate to="/404" replace />;
+  }
 
   // Función para compartir en LinkedIn
   const shareOnLinkedIn = () => {

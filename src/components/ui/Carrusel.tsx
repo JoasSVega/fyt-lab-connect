@@ -96,7 +96,7 @@ const Carrusel: React.FC<CarruselProps> = ({
     return () => {
       emblaApi.off('select', bufferAdjacentSlides);
     };
-  }, [emblaApi, items, imagesLoaded]);
+  }, [emblaApi, items, imagesLoaded, isMobileViewport]);
 
   React.useEffect(() => {
     if (!emblaApi) return;

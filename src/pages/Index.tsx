@@ -23,7 +23,7 @@ const Index = () => {
         <Seo
           title="Grupo FyT | Investigación en Farmacología y Terapéutica"
           description="Grupo FyT: Investigación de vanguardia en Farmacología y Terapéutica de la Universidad de Cartagena. Descubre nuestros proyectos, publicaciones y herramientas digitales."
-          keywords={["Grupo FyT", "Farmacología", "Investigación", "Universidad de Cartagena", "Ciencia de Datos", "Cartagena"]}
+          keywords={["Grupo FyT", "Grupo de Investigación FyT", "Grupo de Investigación Farmacología y Terapéutica", "Farmacología y Terapéutica Universidad de Cartagena", "Universidad de Cartagena", "Grupo de investigación", "Investigación Farmacéutica", "Cartagena", "Colombia"]}
           author="Grupo FyT"
           robots="index, follow"
           canonical={baseUrl}
