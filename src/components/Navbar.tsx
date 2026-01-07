@@ -35,42 +35,13 @@ const Navbar = () => {
   }, []);
 
   const menuItems = [
-    {
-      name: "Inicio",
-      href: "/",
-      isDropdown: false,
-      prefetchImporter: undefined // No necesita prefetch (ya está en el bundle)
-    },
-    {
-      name: "Sobre Nosotros",
-      href: "/sobre-nosotros",
-      isDropdown: false,
-      prefetchImporter: () => import("@/pages/SobreNosotros")
-    },
-    {
-      name: "Herramientas",
-      href: "/herramientas",
-      isDropdown: false,
-      prefetchImporter: () => import("@/pages/Herramientas")
-    },
-    {
-      name: "Investigación",
-      href: "/investigacion",
-      isDropdown: false,
-      prefetchImporter: () => import("@/pages/InvestigacionPage")
-    },
-    {
-      name: "Noticias",
-      href: "/noticias",
-      isDropdown: false,
-      prefetchImporter: () => import("@/pages/Noticias")
-    },
-    {
-      name: "Contactos",
-      href: "/contactos",
-      isDropdown: false,
-      prefetchImporter: () => import("@/pages/Contactos")
-    }
+    { name: "Inicio", href: "/", isDropdown: false, prefetchImporter: undefined },
+    { name: "Sobre Nosotros", href: "/sobre-nosotros", isDropdown: false, prefetchImporter: () => import("@/pages/SobreNosotros") },
+    { name: "Investigación", href: "/investigacion", isDropdown: false, prefetchImporter: () => import("@/pages/InvestigacionPage") },
+    { name: "Divulgación", href: "/divulgacion", isDropdown: false, prefetchImporter: () => import("@/pages/DivulgacionPage") },
+    { name: "Herramientas", href: "/herramientas", isDropdown: false, prefetchImporter: () => import("@/pages/Herramientas") },
+    { name: "Noticias", href: "/noticias", isDropdown: false, prefetchImporter: () => import("@/pages/Noticias") },
+    { name: "Contacto", href: "/contactos", isDropdown: false, prefetchImporter: () => import("@/pages/Contactos") }
   ];
 
   const handleDropdownToggle = (itemName: string) => {

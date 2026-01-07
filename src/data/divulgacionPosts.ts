@@ -15,8 +15,8 @@ import type { DivulgacionPost } from "@/types/divulgacion";
 export const divulgacionPosts: DivulgacionPost[] = [
   {
     slug: "actualizacion-codigos-cups-atencion-farmaceutica",
-    title: "La actualización y apropiación de los códigos CUPS: Un paso inapelable hacia la visibilidad de la profesión Químico Farmacéutica desde el ámbito de la atención farmacéutica en Colombia",
-    excerpt: "La evolución de los códigos CUPS no debe verse como un simple ajuste administrativo, sino como una necesidad imperativa para otorgar visibilidad real a la profesión desde el ámbito de la atención farmacéutica, lo cual constituye una necesidad en los procesos de seguridad del paciente.",
+    title: "CUPS en atención farmacéutica: visibilidad del Químico Farmacéutico",
+    excerpt: "Actualizar los CUPS en atención farmacéutica visibiliza la labor clínica del Químico Farmacéutico y mejora la seguridad del paciente con trazabilidad.",
     author: "Antistio Alviz Amador",
     authorRole: "Q.F., MSc, PhD - Grupo de Investigación en Farmacología y Terapéutica (FyT)",
     authorImage: "/images/equipo/Antistio-Alviz-medium.webp",

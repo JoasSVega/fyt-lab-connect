@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from "react";
+import { Link } from "react-router-dom";
 import { divulgacionPosts } from "@/data/divulgacionPosts";
 import DivulgacionCard from "@/components/divulgacion/DivulgacionCard";
 import { usePageReady } from "@/hooks/usePageReady";
@@ -175,20 +176,11 @@ const DivulgacionPage: React.FC = () => {
             estamos abiertos a nuevas ideas y alianzas.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              asChild
-              size="lg"
-              className="text-lg px-8"
-            >
-              <a href="/contactos">Contactar</a>
+            <Button asChild size="lg" className="text-lg px-8">
+              <Link to="/contactos">Contactar</Link>
             </Button>
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="text-lg px-8"
-            >
-              <a href="/investigacion">Ver investigación</a>
+            <Button asChild variant="outline" size="lg" className="text-lg px-8">
+              <Link to="/investigacion">Ver investigación</Link>
             </Button>
           </div>
         </div>
