@@ -145,6 +145,7 @@ import SmartImage from '@/components/SmartImage';
 
 **❌ ANTES:**
 ```tsx
+{% raw %}
 <SafeImage
   src={`${base}-small.webp`}
   srcSet={`${base}-small.webp 220w, ${base}-medium.webp 440w`}
@@ -157,10 +158,12 @@ import SmartImage from '@/components/SmartImage';
   loading="lazy"
   decoding="async"
 />
+{% endraw %}
 ```
 
 **✅ DESPUÉS:**
 ```tsx
+{% raw %}
 import SmartImage from '@/components/SmartImage';
 
 <SmartImage
@@ -174,6 +177,7 @@ import SmartImage from '@/components/SmartImage';
   width={220}
   height={220}
 />
+{% endraw %}
 ```
 
 **Beneficios:**
@@ -308,6 +312,7 @@ interface SmartImageProps {
    ```
 3. **Reemplazar `<SafeImage>`** (líneas ~189-200) con:
    ```tsx
+   {% raw %}
    <SmartImage
      basePath={imgSrc}
      alt={`Retrato de ${member.name}, ${member.role}`}
@@ -319,6 +324,7 @@ interface SmartImageProps {
      width={220}
      height={220}
    />
+   {% endraw %}
    ```
 
 ---

@@ -56,8 +56,8 @@ Idioma: EN
 │  │         description="..."                                │   │
 │  │         keywords="grupo FyT, ..."                        │   │
 │  │         canonical={`${baseUrl}/`}                        │   │
-│  │         openGraph={{...}}                                │   │
-│  │         twitter={{...}}                                  │   │
+│  │         openGraph={spread_operator}                      │   │
+│  │         twitter={spread_operator}                        │   │
 │  │         schema={getOrganizationSchema()}                 │   │
 │  │       />                                                 │   │
 │  │       <main>Page content...</main>                       │   │

@@ -58,6 +58,7 @@ const schema = {
 
 ### Step 3: Add Seo Component
 ```tsx
+{% raw %}
 export default function MyPage() {
   return (
     <>
@@ -83,6 +84,7 @@ export default function MyPage() {
       <main>Your content here</main>
     </>
   );
+{% endraw %}
 }
 ```
 

@@ -305,6 +305,7 @@ public/
 
 ### Import Seo Component
 ```tsx
+{% raw %}
 import Seo from "@/components/Seo";
 import { baseUrl, getOrganizationSchema } from "@/utils/seoSchemas";
 
@@ -327,6 +328,7 @@ import { baseUrl, getOrganizationSchema } from "@/utils/seoSchemas";
   }}
   schema={getOrganizationSchema()}
 />
+{% endraw %}
 ```
 
 ### Schema Generators Available
