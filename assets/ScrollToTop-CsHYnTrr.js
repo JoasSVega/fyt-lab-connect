@@ -1,0 +1,1 @@
+import{ac as o,r}from"./vendor-CFnzp11V.js";import"./radix-CttiZxwU.js";import"./carousel-CHkIgb8Q.js";const t=()=>{const{pathname:t}=o();return r.useEffect(()=>{window.__routeTransitionActive||window.scrollTo({top:0,behavior:"smooth"})},[t]),null};export{t as default};
