@@ -55,6 +55,8 @@ El componente `BaseLayout` usado en páginas de investigación incluía su propi
 
 ```tsx
 // ✅ DESPUÉS (correcto)
+```tsx
+{% raw %}
 const Index = () => {
   const navigate = useNavigate();
   usePageReady({
@@ -72,6 +74,7 @@ const Index = () => {
     </div>
   );
 };
+{% endraw %}
 ```
 
 #### `/src/pages/SobreNosotros.tsx`
