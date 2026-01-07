@@ -48,14 +48,14 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fyt-research.org/investigacion/contenidos</loc>
-    <lastmod>2025-12-15</lastmod>
+    <loc>https://fyt-research.org/investigacion/divulgacion-cientifica</loc>
+    <lastmod>2025-12-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://fyt-research.org/investigacion/formacion</loc>
-    <lastmod>2025-12-15</lastmod>
+    <lastmod>2025-12-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -63,31 +63,31 @@
   <!-- Herramientas (Prioridad Media) -->
   <url>
     <loc>https://fyt-research.org/herramientas</loc>
-    <lastmod>2025-12-15</lastmod>
+    <lastmod>2025-12-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://fyt-research.org/herramientas/clinicos</loc>
-    <lastmod>2025-12-15</lastmod>
+    <lastmod>2025-12-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://fyt-research.org/herramientas/antropometricos</loc>
-    <lastmod>2025-12-15</lastmod>
+    <lastmod>2025-12-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://fyt-research.org/herramientas/avanzados</loc>
-    <lastmod>2025-12-15</lastmod>
+    <lastmod>2025-12-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://fyt-research.org/herramientas/escalas</loc>
-    <lastmod>2025-12-15</lastmod>
+    <lastmod>2025-12-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -95,7 +95,7 @@
   <!-- Contacto -->
   <url>
     <loc>https://fyt-research.org/contactos</loc>
-    <lastmod>2025-12-15</lastmod>
+    <lastmod>2025-12-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -103,27 +103,27 @@
   <!-- Calculadora dedicada (ruta histórica) -->
   <url>
     <loc>https://fyt-research.org/calculator/dosage</loc>
-    <lastmod>2025-12-15</lastmod>
+    <lastmod>2025-12-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
 
   <!-- Páginas Legales -->
   <url>
-    <loc>https://fyt-research.org/PrivacyPolicy</loc>
-    <lastmod>2025-12-15</lastmod>
+    <loc>https://fyt-research.org/politica-privacidad</loc>
+    <lastmod>2025-12-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://fyt-research.org/TermsOfUse</loc>
-    <lastmod>2025-12-15</lastmod>
+    <loc>https://fyt-research.org/terminos-uso</loc>
+    <lastmod>2025-12-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://fyt-research.org/CodeOfEthics</loc>
-    <lastmod>2025-12-15</lastmod>
+    <loc>https://fyt-research.org/codigo-etica</loc>
+    <lastmod>2025-12-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

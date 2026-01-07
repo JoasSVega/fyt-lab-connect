@@ -1,0 +1,274 @@
+import { Evento } from '../types/investigacion';
+
+export const eventos: Evento[] = [
+  {
+    id: 1,
+    titulo: "XIII Congreso Nacional de Ciencias Farmacéuticas - Integrando las ciencias farmacéuticas para la Construcción del Futuro",
+    anio: 2025,
+    tipo: "Congreso",
+    ciudad: "Barranquilla",
+    pais: "Colombia",
+    ambito: "Nacional",
+    participacion: "Ponente"
+  },
+  {
+    id: 2,
+    titulo: "IV Encuentro Nacional y III Latinoamericano de Farmacovigilancia para Estudiantes de Ciencias de la Salud",
+    anio: 2025,
+    tipo: "Encuentro",
+    ciudad: "Bogotá",
+    pais: "Colombia",
+    ambito: "Nacional",
+    participacion: "Ponente"
+  },
+  {
+    id: 3,
+    titulo: "Tercer Encuentro Nacional y Segundo Latinoamericano de Farmacovigilancia",
+    anio: 2024,
+    tipo: "Encuentro",
+    ciudad: "Bogotá",
+    pais: "Colombia",
+    ambito: "Internacional",
+    participacion: "Ponente"
+  },
+  {
+    id: 4,
+    titulo: "VII Congreso Colombiano de Atención Farmacéutica - Encuentro Iberoamericano de Farmacia Hospitalaria Conductual",
+    anio: 2023,
+    tipo: "Congreso",
+    ciudad: "Armenia",
+    pais: "Colombia",
+    ambito: "Internacional",
+    participacion: "Ponente"
+  },
+  {
+    id: 5,
+    titulo: "VIII Encuentro Nacional de Químicos Teóricos y Computacionales",
+    anio: 2023,
+    tipo: "Encuentro",
+    ciudad: "Bogotá",
+    pais: "Colombia",
+    ambito: "Nacional",
+    participacion: "Ponente Magistral"
+  },
+  {
+    id: 6,
+    titulo: "XII Congreso Colombiano de Ciencias Farmacéuticas - XVI Simposio Colombiano de Ciencia y Tecnología Cosmética",
+    anio: 2023,
+    tipo: "Congreso",
+    ciudad: "Bogotá",
+    pais: "Colombia",
+    ambito: "Nacional",
+    participacion: "Ponente"
+  },
+  {
+    id: 7,
+    titulo: "IV Congreso Latinoamericano de Farmacogenómica y Medicina Personalizada",
+    anio: 2021,
+    tipo: "Congreso",
+    ciudad: "Buenos Aires",
+    pais: "Argentina",
+    ambito: "Internacional",
+    participacion: "Ponente"
+  },
+  {
+    id: 8,
+    titulo: "XXI Semana Científica y Cultural de la Facultad de Química y Farmacia de la Universidad del Atlántico",
+    anio: 2021,
+    tipo: "Semana Científica",
+    ciudad: "Barranquilla",
+    pais: "Colombia",
+    ambito: "Nacional",
+    participacion: "Ponente Magistral"
+  },
+  {
+    id: 9,
+    titulo: "34º Congreso Latinoamericano de Química CLAQ 2020",
+    anio: 2021,
+    tipo: "Congreso",
+    ciudad: "Cartagena",
+    pais: "Colombia",
+    ambito: "Internacional",
+    participacion: "Ponente"
+  },
+  {
+    id: 10,
+    titulo: "1ª Jornada de Investigación en la E.S.E Hospital Universitario del Caribe",
+    anio: 2021,
+    tipo: "Jornada",
+    ciudad: "Cartagena",
+    pais: "Colombia",
+    ambito: "Nacional",
+    participacion: "Ponente"
+  },
+  {
+    id: 11,
+    titulo: "III Congreso de Química Farmacéutica",
+    anio: 2021,
+    tipo: "Congreso",
+    ciudad: "Montevideo",
+    pais: "Uruguay",
+    ambito: "Internacional",
+    participacion: "Ponente"
+  },
+  {
+    id: 12,
+    titulo: "Ciclo de Conferencias: Una Mirada Hacia los Campos de Trabajo",
+    anio: 2021,
+    tipo: "Seminario",
+    ciudad: "Cartagena",
+    pais: "Colombia",
+    ambito: "Nacional",
+    participacion: "Ponente Magistral"
+  },
+  {
+    id: 13,
+    titulo: "Vacunación sobre el COVID-19: Un Enfoque Holístico Sobre lo que Debes Saber",
+    anio: 2021,
+    tipo: "Encuentro",
+    ciudad: "Cartagena",
+    pais: "Colombia",
+    ambito: "Nacional",
+    participacion: "Ponente"
+  },
+  {
+    id: 14,
+    titulo: "Webinar: Plataformas de Vacunas Frente a SARS-CoV-2",
+    anio: 2021,
+    tipo: "Seminario",
+    ciudad: "Barranquilla",
+    pais: "Colombia",
+    ambito: "Nacional",
+    participacion: "Ponente Magistral"
+  },
+  {
+    id: 15,
+    titulo: "III Simposio de Epidemiología y Bioestadística: Farmacoepidemiología",
+    anio: 2020,
+    tipo: "Simposio",
+    ciudad: "Medellín",
+    pais: "Colombia",
+    ambito: "Nacional",
+    participacion: "Ponente"
+  },
+  {
+    id: 16,
+    titulo: "I Congreso Internacional de Ciencias Básicas",
+    anio: 2020,
+    tipo: "Congreso",
+    ciudad: "Montería",
+    pais: "Colombia",
+    ambito: "Internacional",
+    participacion: "Ponente"
+  },
+  {
+    id: 17,
+    titulo: "VII Congreso Latinoamericano de Plantas Medicinales",
+    anio: 2020,
+    tipo: "Congreso",
+    ciudad: "Cuenca",
+    pais: "Ecuador",
+    ambito: "Internacional",
+    participacion: "Ponente Magistral"
+  },
+  {
+    id: 18,
+    titulo: "VIII Congreso Latinoamericano de Plantas Medicinales",
+    anio: 2020,
+    tipo: "Congreso",
+    ciudad: "Medellín",
+    pais: "Colombia",
+    ambito: "Internacional",
+    participacion: "Ponente"
+  },
+  {
+    id: 19,
+    titulo: "XIII Encuentro de Investigación en Medicina Tropical",
+    anio: 2020,
+    tipo: "Encuentro",
+    ciudad: "Cartagena",
+    pais: "Colombia",
+    ambito: "Nacional",
+    participacion: "Organizador"
+  },
+  {
+    id: 20,
+    titulo: "Encuentro Interno de Socialización de Trabajos de Semillero de Investigación y PATc",
+    anio: 2020,
+    tipo: "Encuentro",
+    ciudad: "Cartagena",
+    pais: "Colombia",
+    ambito: "Nacional",
+    participacion: "Organizador"
+  },
+  {
+    id: 21,
+    titulo: "5th International Conference on Drug Discovery, Development and Lead Optimization",
+    anio: 2019,
+    tipo: "Congreso",
+    ciudad: "Boston",
+    pais: "Estados Unidos",
+    ambito: "Internacional",
+    participacion: "Ponente"
+  },
+  {
+    id: 22,
+    titulo: "III Congreso Latinoamericano de Farmacogenómica y Medicina Personalizada",
+    anio: 2019,
+    tipo: "Congreso",
+    ciudad: "Cusco",
+    pais: "Perú",
+    ambito: "Internacional",
+    participacion: "Ponente"
+  },
+  {
+    id: 23,
+    titulo: "Asociación Colombiana de Ciencias Biológicas - Congreso 2019",
+    anio: 2019,
+    tipo: "Congreso",
+    ciudad: "Montería",
+    pais: "Colombia",
+    ambito: "Internacional",
+    participacion: "Ponente"
+  },
+  {
+    id: 24,
+    titulo: "IV Encuentro Nacional de Semilleros de Investigación en Medicina y Salud",
+    anio: 2018,
+    tipo: "Encuentro",
+    ciudad: "Cúcuta",
+    pais: "Colombia",
+    ambito: "Nacional",
+    participacion: "Ponente"
+  },
+  {
+    id: 25,
+    titulo: "VII Encuentro Nacional de Químicos Teóricos y Computacionales y IV Escuela Colombiana de Teoría y Computación en las Ciencias Moleculares",
+    anio: 2018,
+    tipo: "Encuentro",
+    ciudad: "Barranquilla",
+    pais: "Colombia",
+    ambito: "Nacional",
+    participacion: "Ponente"
+  },
+  {
+    id: 26,
+    titulo: "XI Encuentro de Investigación en Medicina Tropical",
+    anio: 2018,
+    tipo: "Encuentro",
+    ciudad: "Cartagena",
+    pais: "Colombia",
+    ambito: "Nacional",
+    participacion: "Ponente"
+  },
+  {
+    id: 27,
+    titulo: "1st Protein Structure, Function and Drug Discovery School",
+    anio: 2017,
+    tipo: "Escuela",
+    ciudad: "Medellín",
+    pais: "Colombia",
+    ambito: "Nacional",
+    participacion: "Ponente"
+  }
+];

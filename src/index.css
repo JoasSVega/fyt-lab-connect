@@ -1,0 +1,585 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* FYT Research Group Design System - Pharmacology & Therapeutics 
+All colors MUST be HSL and based on institutional branding.
+*/
+
+@layer base {
+  :root {
+    /* Base colors */
+    --background: 0 0% 98%;
+    --foreground: 0 0% 15%;
+
+    /* FYT Institutional Colors */
+    --fyt-blue: 195 100% 50%;      /* Celeste blue #00BFFF */
+    --fyt-red: 0 100% 50%;         /* Intense red #FF0000 */
+    --fyt-purple: 271 76% 53%;     /* Purple/violet #8A2BE2 */
+    --fyt-dark: 0 0% 15%;          /* Dark text */
+    --fyt-light: 0 0% 98%;         /* Light backgrounds */
+
+    /* Semantic color mapping */
+    --primary: var(--fyt-blue);
+    --primary-foreground: 0 0% 98%;
+    
+    --secondary: var(--fyt-purple);
+    --secondary-foreground: 0 0% 98%;
+    
+    --accent: var(--fyt-red);
+    --accent-foreground: 0 0% 98%;
+
+    /* Card and surface colors */
+    --card: 0 0% 100%;
+    --card-foreground: var(--fyt-dark);
+    --card-border: 220 13% 91%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: var(--fyt-dark);
+
+    /* Muted colors for text hierarchy */
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 8% 46%;
+
+    /* Interactive elements */
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: var(--fyt-blue);
+
+    /* Gradients for modern look */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--fyt-blue)) 0%, hsl(var(--fyt-purple)) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(220 14% 98%) 100%);
+    --gradient-accent: linear-gradient(90deg, hsl(var(--fyt-red)) 0%, hsl(var(--fyt-purple)) 100%);
+
+    /* Shadows for depth */
+    --shadow-soft: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-medium: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-large: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+    /* Academic typography */
+    --font-academic: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    
+    /* Spacing and sizing */
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    overflow-x: hidden;
+    width: 100%;
+    height: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    overflow-x: hidden;
+    width: 100%;
+    min-height: 100%;
+  }
+
+  /* Bloqueo global de scroll controlado por JS */
+  body.scroll-locked {
+    overflow: hidden !important;
+    position: relative;
+    width: 100%;
+  }
+
+  /* -------- Scroll Reveal (CSS only, layout-safe) -------- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(var(--reveal-distance, 12px));
+    transition-property: opacity, transform;
+    transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+    transition-duration: var(--reveal-duration, 0.5s);
+    transition-delay: calc(var(--reveal-delay-ms, 0ms) + var(--reveal-extra-delay, 0ms));
+    will-change: opacity, transform;
+  }
+  .reveal.reveal--visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Responsive images */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Ensure no horizontal scroll */
+  .container {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Fix for full width sections */
+  section {
+    width: 100%;
+    max-width: 100%;
+    /* Allow hover scaling of cards to render beyond the section without clipping */
+    overflow: visible;
+  }
+
+  /* Mobile-first responsive design */
+  @media (max-width: 768px) {
+    .container {
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
+    }
+    
+    /* Prevent text overflow on mobile */
+    h1, h2, h3, h4, h5, h6 {
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      hyphens: auto;
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+    }
+    /* Ensure main section titles keep stronger hierarchy */
+    .site-section-title {
+      font-size: clamp(2.25rem, 6vw, 2.875rem); /* 36px min, up to ~46px on mid mobile */
+      hyphens: none;
+    }
+    
+    /* Ensure images are responsive */
+    img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      max-width: 100%;
+    }
+    
+    /* Prevent horizontal scrolling */
+    * {
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
+    /* Grid responsive fixes */
+    .grid {
+      grid-template-columns: 1fr !important;
+      gap: 1rem;
+    }
+
+    /* Card responsive fixes */
+    .card, [class*="Card"] {
+      margin-left: 0;
+      margin-right: 0;
+      width: 100%;
+    }
+
+    /* Text size adjustments */
+    p {
+      font-size: clamp(0.875rem, 2.5vw, 1rem);
+      line-height: 1.6;
+    }
+  }
+
+  /* Additional mobile optimizations */
+  @media (max-width: 480px) {
+    .container {
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
+
+    /* Extra small screens */
+    h1 {
+      font-size: clamp(1.25rem, 5vw, 2rem) !important;
+    }
+
+    h2 {
+      font-size: clamp(1.125rem, 4vw, 1.5rem) !important;
+    }
+    /* Reassert hierarchy on extra small screens */
+    .site-section-title {
+      font-size: clamp(2.25rem, 7vw, 2.75rem) !important; /* Keep ≥36px; allow gentle scaling */
+    }
+
+    /* Button responsive fixes */
+    button {
+      width: 100%;
+      max-width: 100%;
+      padding: 0.75rem 1rem;
+    }
+
+    /* Spacing adjustments */
+    .space-y-4 > * + * {
+      margin-top: 1rem;
+    }
+
+    .space-y-6 > * + * {
+      margin-top: 1.5rem;
+    }
+  }
+
+  /* Calculator cards: prevent word hyphenation and clipping */
+  .tool-card h3 {
+    hyphens: none !important;
+    overflow-wrap: break-word;
+    word-break: normal;
+    white-space: normal;
+  }
+
+  /* Utility: force-disable hyphenation and intraword breaks for a subtree */
+  .no-hyphens, .no-hyphens * {
+    -webkit-hyphens: none !important;
+    -ms-hyphens: none !important;
+    hyphens: none !important;
+    word-break: keep-all !important; /* only break at spaces */
+    overflow-wrap: normal !important;
+    white-space: normal !important;
+  }
+
+  /* Calculator modal card & body for consistent scrolling */
+  .calc-modal-card {
+    /* Allow internal body to manage its own scroll */
+    overflow: visible;
+    contain: layout paint style; /* improve performance */
+  }
+  .calc-modal-body {
+    max-height: 100%;
+    scrollbar-gutter: stable both-edge;
+  }
+  @media (max-height: 780px) {
+    .calc-modal-body { scrollbar-gutter: stable; }
+  }
+
+  /* Unified main section/page titles */
+  .site-section-title {
+    font-family: var(--font-poppins, Poppins, sans-serif);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    /* 2.25rem (36px) minimum for stronger presence on very small screens */
+    font-size: clamp(2.25rem, 5.2vw, 3rem); /* 36px → up to 48px */
+    hyphens: none;
+    word-break: normal;
+    overflow-wrap: break-word;
+    white-space: normal;
+  }
+
+  @media (min-width: 1280px) {
+    .site-section-title { font-size: 3rem; }
+  }
+
+  /* Tablet optimizations */
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+
+    .grid-cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid-cols-3 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+
+/* Disable card hover transforms while any calculator modal is open */
+body.modal-open .tool-card,
+body.modal-open .tool-card:hover {
+  transform: none !important;
+  box-shadow: inherit !important;
+}
+
+/* Ensure smoother transforms when enabled */
+.tool-card {
+  will-change: transform;
+}
+
+/* Overlay safety: never block when modal is closed */
+.calc-overlay {
+  pointer-events: none;
+}
+body.modal-open .calc-overlay {
+  pointer-events: auto;
+}
+
+@layer utilities {
+  /* Glow azul para SALUD - REFINED WITHOUT STROKE */
+  .glow-salud {
+    color: #ffffff;
+    font-weight: 700; /* Ensure bold for visibility */
+    text-shadow:
+      0 0 20px rgba(59, 185, 255, 0.5), /* Softer, wider glow */
+      0 2px 8px rgba(0, 0, 0, 0.3);     /* Depth shadow */
+  }
+
+  /* Glow rojo para CIENCIA - REFINED WITHOUT STROKE */
+  .glow-ciencia {
+    color: #ffffff;
+    font-weight: 700;
+    text-shadow:
+      0 0 20px rgba(255, 76, 76, 0.5),  /* Softer, wider glow */
+      0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Glow morado para INNOVACIÓN - REFINED WITHOUT STROKE */
+  .glow-innovacion {
+    color: #ffffff;
+    font-weight: 700;
+    text-shadow:
+      0 0 20px rgba(147, 51, 234, 0.5), /* Softer, wider glow */
+      0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Overlay oscuro unificado para todos los héroes - OPTIMIZED FOR READABILITY */
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.45), /* Lightened from 0.55 */
+      rgba(0, 0, 0, 0.55)  /* Lightened from 0.65 */
+    );
+    mix-blend-mode: multiply;
+    pointer-events: none;
+  }
+
+  /* Sombra de texto global para legibilidad en héroes - SUBTLE & PROFESSIONAL */
+
+    /* Global accessible focus style */
+    :focus-visible {
+      outline: 2px solid hsl(var(--fyt-blue));
+      outline-offset: 2px;
+    }
+
+    /* Ensure focus is visible for keyboard users on interactive elements */
+    button:focus-visible,
+    a:focus-visible,
+    [role="button"]:focus-visible {
+      box-shadow: 0 0 0 2px hsl(var(--fyt-blue) / 0.3);
+      border-radius: inherit;
+    }
+  .hero-text-shadow * {
+    text-shadow:
+      0 2px 8px rgba(0, 0, 0, 0.35),
+      0 1px 3px rgba(0, 0, 0, 0.25); /* Softened shadows */
+  }
+
+  /* Mejora global de legibilidad para botones sólidos con texto blanco - OPTIMIZED */
+  .btn-text-enhanced {
+    font-weight: 600; /* equivalente a font-semibold */
+    text-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.2); /* Single subtle shadow, less aggressive */
+  }
+
+  /* Interacción corporativa unificada para botones sólidos - PREMIUM & SUBTLE */
+  .btn-solid-interactive {
+    transition: background-color .25s cubic-bezier(0.4, 0, 0.2, 1), 
+                filter .25s cubic-bezier(0.4, 0, 0.2, 1), 
+                transform .2s cubic-bezier(0.4, 0, 0.2, 1), 
+                box-shadow .25s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+  }
+  .btn-solid-interactive:hover {
+    /* Subtle brightness increase without color inversion */
+    filter: brightness(1.08); /* Reduced from 1.10 to 1.08 for subtlety */
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px -2px rgba(0,0,0,0.15), 
+                0 2px 6px -1px rgba(0,0,0,0.10); /* Softer shadows */
+  }
+  .btn-solid-interactive:active {
+    filter: brightness(0.96); /* Slightly darker on press */
+    transform: translateY(0px); /* No downward push, just return */
+    box-shadow: 0 2px 6px -1px rgba(0,0,0,0.15), 
+                0 1px 3px -1px rgba(0,0,0,0.10);
+  }
+  .btn-solid-interactive:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255,255,255,0.5), 
+                0 0 0 5px rgba(0,0,0,0.15); /* Softer focus ring */
+  }
+}
+
+/* 3D Flip Utilities (fallback-safe, scoped, no !important) */
+.preserve-3d {
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+}
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.perspective-1200 {
+  perspective: 1200px;
+  -webkit-perspective: 1200px;
+}
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+/* Flip root fallback: CSS-driven rotation to ensure animation even if JS animations are reduced */
+.flip-root {
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  transition: transform 0.6s ease;
+}
+.flip-root.is-flipped {
+  transform: rotateY(180deg);
+}
+
+  /* Contenedor base unificado para todos los heroes - OPTIMIZED HEIGHT */
+  .hero-container {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    min-height: clamp(26rem, 55vh, 40rem); /* Reduced from 50vh to 55vh for better proportions */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding-top: clamp(2rem, 6vh, 3.5rem);
+    padding-bottom: clamp(2rem, 6vh, 3.5rem);
+  }
+
+  @media (min-width: 768px) {
+    .hero-container {
+      min-height: clamp(30rem, 65vh, 45rem); /* Reduced from 55vh to 65vh for desktop */
+    }
+  }
+
+  /* Tipografía fluida para títulos principales de heroes - OPTIMIZED HIERARCHY */
+  .hero-title {
+    font-size: clamp(1.75rem, 4.5vw, 3.25rem); /* Reduced max from 3.8rem to 3.25rem */
+    font-weight: 700;
+    line-height: 1.2; /* Improved from 1.15 for readability */
+    letter-spacing: -0.02em; /* Tighter tracking for large text */
+    word-break: keep-all;
+    overflow-wrap: normal;
+    hyphens: none;
+  }
+
+  /* Tipografía fluida para subtítulos de heroes - OPTIMIZED WEIGHT */
+  .hero-subtitle {
+    font-size: clamp(0.95rem, 2.8vw, 1.375rem); /* Reduced max from 1.6rem to 1.375rem */
+    font-weight: 300; /* Lighter for contrast with title */
+    line-height: 1.65; /* Increased from 1.6 for better readability */
+    letter-spacing: 0.01em; /* Slight spacing for legibility */
+    word-break: keep-all;
+    overflow-wrap: normal;
+    hyphens: none;
+  }
+
+  /* Imagen de fondo de hero con comportamiento consistente */
+  .hero-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* (Reverted carousel enlargement utilities removed) */
+
+  /* ----------------------------- */
+  /* Navbar minimal interactions   */
+  /* ----------------------------- */
+  .nav-link {
+    position: relative;
+    font-weight: 600; /* font-semibold */
+    transition: all 150ms ease-out;
+    --nav-underline: #3BB9FF; /* azul corporativo suave */
+  }
+
+  /* Variante opcional morada */
+  .nav-link[data-variant="purple"] {
+    --nav-underline: #9333EA;
+  }
+
+  /* Subrayado fino (hover / activo) */
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0.5rem;
+    right: 0.5rem;
+    bottom: 0.2rem;
+    height: 2px;
+    background-color: var(--nav-underline);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 150ms ease-out;
+    border-radius: 2px;
+  }
+
+  .nav-link:hover::after,
+  .nav-link.nav-link--active::after {
+    transform: scaleX(1);
+  }
+
+  /* Estado base de la barra (borde limpio) */
+  .nav-root {
+    border-bottom: 1px solid #e2e8f0; /* gray-200 */
+    transition: background-color 160ms ease, backdrop-filter 160ms ease;
+  }
+  .nav-root.is-scrolled {
+    backdrop-filter: blur(4px); /* blur-sm */
+    -webkit-backdrop-filter: blur(4px);
+    background-color: rgba(255,255,255,0.80); /* bg-white/80 */
+  }
+

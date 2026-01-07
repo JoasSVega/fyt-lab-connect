@@ -1,0 +1,247 @@
+[
+  {
+    "area": "Performance",
+    "severity": "Medium",
+    "msg": "Oversized images: 3"
+  },
+  {
+    "area": "UX/Scroll",
+    "severity": "Low",
+    "msg": "Nested scroll containers detected"
+  },
+  {
+    "area": "Best Practices",
+    "severity": "High",
+    "msg": "Console errors: 1"
+  },
+  {
+    "area": "Accessibility",
+    "severity": "Medium",
+    "msg": "landmark-one-main: Document should have one main landmark"
+  },
+  {
+    "area": "Accessibility",
+    "severity": "Medium",
+    "msg": "page-has-heading-one: Page should contain a level-one heading"
+  },
+  {
+    "area": "UX/Scroll",
+    "severity": "Low",
+    "msg": "Nested scroll containers detected"
+  },
+  {
+    "area": "Best Practices",
+    "severity": "High",
+    "msg": "Console errors: 1"
+  },
+  {
+    "area": "Accessibility",
+    "severity": "Medium",
+    "msg": "landmark-one-main: Document should have one main landmark"
+  },
+  {
+    "area": "Accessibility",
+    "severity": "Medium",
+    "msg": "page-has-heading-one: Page should contain a level-one heading"
+  },
+  {
+    "area": "Performance",
+    "severity": "Medium",
+    "msg": "Oversized images: 20"
+  },
+  {
+    "area": "Accessibility",
+    "severity": "Medium",
+    "msg": "landmark-unique: Ensures landmarks are unique"
+  },
+  {
+    "area": "Performance",
+    "severity": "Medium",
+    "msg": "Oversized images: 3"
+  },
+  {
+    "area": "Accessibility",
+    "severity": "High",
+    "msg": "color-contrast: Elements must meet minimum color contrast ratio thresholds"
+  },
+  {
+    "area": "Performance",
+    "severity": "Medium",
+    "msg": "Oversized images: 4"
+  },
+  {
+    "area": "Accessibility",
+    "severity": "High",
+    "msg": "color-contrast: Elements must meet minimum color contrast ratio thresholds"
+  },
+  {
+    "area": "Accessibility",
+    "severity": "Medium",
+    "msg": "heading-order: Heading levels should only increase by one"
+  },
+  {
+    "area": "UX/Scroll",
+    "severity": "Low",
+    "msg": "Nested scroll containers detected"
+  },
+  {
+    "area": "Best Practices",
+    "severity": "High",
+    "msg": "Console errors: 1"
+  },
+  {
+    "area": "Accessibility",
+    "severity": "Medium",
+    "msg": "landmark-one-main: Document should have one main landmark"
+  },
+  {
+    "area": "Accessibility",
+    "severity": "Medium",
+    "msg": "page-has-heading-one: Page should contain a level-one heading"
+  },
+  {
+    "area": "UX/Scroll",
+    "severity": "Low",
+    "msg": "Nested scroll containers detected"
+  },
+  {
+    "area": "Best Practices",
+    "severity": "High",
+    "msg": "Console errors: 1"
+  },
+  {
+    "area": "Accessibility",
+    "severity": "Medium",
+    "msg": "landmark-one-main: Document should have one main landmark"
+  },
+  {
+    "area": "Accessibility",
+    "severity": "Medium",
+    "msg": "page-has-heading-one: Page should contain a level-one heading"
+  },
+  {
+    "area": "UX/Scroll",
+    "severity": "Low",
+    "msg": "Nested scroll containers detected"
+  },
+  {
+    "area": "Best Practices",
+    "severity": "High",
+    "msg": "Console errors: 1"
+  },
+  {
+    "area": "Accessibility",
+    "severity": "Medium",
+    "msg": "landmark-one-main: Document should have one main landmark"
+  },
+  {
+    "area": "Accessibility",
+    "severity": "Medium",
+    "msg": "page-has-heading-one: Page should contain a level-one heading"
+  },
+  {
+    "area": "UX/Scroll",
+    "severity": "Low",
+    "msg": "Nested scroll containers detected"
+  },
+  {
+    "area": "Best Practices",
+    "severity": "High",
+    "msg": "Console errors: 1"
+  },
+  {
+    "area": "Accessibility",
+    "severity": "Medium",
+    "msg": "landmark-one-main: Document should have one main landmark"
+  },
+  {
+    "area": "Accessibility",
+    "severity": "Medium",
+    "msg": "page-has-heading-one: Page should contain a level-one heading"
+  },
+  {
+    "area": "Performance",
+    "severity": "Medium",
+    "msg": "Oversized images: 4"
+  },
+  {
+    "area": "Accessibility",
+    "severity": "Medium",
+    "msg": "heading-order: Heading levels should only increase by one"
+  },
+  {
+    "area": "Performance",
+    "severity": "Medium",
+    "msg": "Oversized images: 3"
+  },
+  {
+    "area": "Accessibility",
+    "severity": "Medium",
+    "msg": "heading-order: Heading levels should only increase by one"
+  },
+  {
+    "area": "Performance",
+    "severity": "Medium",
+    "msg": "Oversized images: 11"
+  },
+  {
+    "area": "Accessibility",
+    "severity": "Medium",
+    "msg": "heading-order: Heading levels should only increase by one"
+  },
+  {
+    "area": "Performance",
+    "severity": "Medium",
+    "msg": "Oversized images: 3"
+  },
+  {
+    "area": "Performance",
+    "severity": "Medium",
+    "msg": "Oversized images: 3"
+  },
+  {
+    "area": "Performance",
+    "severity": "Medium",
+    "msg": "Oversized images: 3"
+  },
+  {
+    "area": "UX/Scroll",
+    "severity": "Low",
+    "msg": "Nested scroll containers detected"
+  },
+  {
+    "area": "Best Practices",
+    "severity": "High",
+    "msg": "Console errors: 1"
+  },
+  {
+    "area": "Accessibility",
+    "severity": "Medium",
+    "msg": "landmark-one-main: Document should have one main landmark"
+  },
+  {
+    "area": "Accessibility",
+    "severity": "Medium",
+    "msg": "page-has-heading-one: Page should contain a level-one heading"
+  },
+  {
+    "area": "UX/Scroll",
+    "severity": "Low",
+    "msg": "Nested scroll containers detected"
+  },
+  {
+    "area": "Best Practices",
+    "severity": "High",
+    "msg": "Console errors: 1"
+  },
+  {
+    "area": "Accessibility",
+    "severity": "Medium",
+    "msg": "landmark-one-main: Document should have one main landmark"
+  },
+  {
+    "area": "Accessibility",
+    "severity": "Medium",
+    "msg": "page-has-heading-one: Page should contain a level-one heading"
+  }
+]
