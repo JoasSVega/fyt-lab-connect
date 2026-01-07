@@ -97,13 +97,13 @@ const DivulgacionHero: React.FC<DivulgacionHeroProps> = ({
         <div className="h-px bg-gray-200 mb-10"></div>
 
         {/* Título principal - más prominente */}
-        <h1 className="font-poppins font-bold text-3xl sm:text-4xl lg:text-5xl text-gray-900 leading-tight mb-6 break-words hyphens-auto">
+        <h1 className="font-poppins font-bold text-3xl sm:text-4xl lg:text-5xl text-gray-900 leading-tight mb-6 break-words">
           {title}
         </h1>
 
         {/* Subtítulo (extracto) */}
         {subtitle && (
-          <p className="font-inter text-base sm:text-lg lg:text-xl text-gray-600 leading-relaxed break-words hyphens-auto">
+          <p className="font-inter text-base sm:text-lg lg:text-xl text-gray-600 leading-relaxed break-words">
             {subtitle}
           </p>
         )}

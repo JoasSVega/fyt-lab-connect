@@ -118,7 +118,7 @@ const DivulgacionPostPage: React.FC = () => {
             prose-h4:text-lg sm:prose-h4:text-xl prose-h4:mt-10 prose-h4:mb-5 prose-h4:text-gray-800
             prose-h5:text-base sm:prose-h5:text-lg prose-h5:mt-8 prose-h5:mb-4 prose-h5:text-gray-800
             prose-h6:text-sm sm:prose-h6:text-base prose-h6:mt-6 prose-h6:mb-3 prose-h6:font-bold prose-h6:text-gray-800
-            prose-p:font-inter prose-p:text-gray-700 prose-p:leading-8 prose-p:mb-8 prose-p:text-sm sm:prose-p:text-base prose-p:break-words prose-p:hyphens-auto prose-p:text-justify
+            prose-p:font-inter prose-p:text-gray-700 prose-p:leading-8 prose-p:mb-8 prose-p:text-sm sm:prose-p:text-base prose-p:break-words prose-p:text-justify
             prose-p:first-of-type:text-base sm:prose-p:first-of-type:text-lg prose-p:first-of-type:leading-relaxed prose-p:first-of-type:text-gray-800 prose-p:first-of-type:font-medium
             prose-a:text-primary prose-a:no-underline prose-a:font-medium hover:prose-a:underline prose-a:transition-colors prose-a:break-words
             prose-strong:text-gray-900 prose-strong:font-bold prose-strong:break-words
