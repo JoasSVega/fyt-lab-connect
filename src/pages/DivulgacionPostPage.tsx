@@ -108,42 +108,49 @@ const DivulgacionPostPage: React.FC = () => {
       />
 
       {/* Contenido del artículo */}
-      <article className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 py-12 sm:py-16">
+      <article className="max-w-3xl mx-auto px-6 sm:px-8 lg:px-12 py-12 sm:py-16 lg:py-20">
         {/* Contenido en formato Markdown/HTML */}
         <div 
-          className="prose prose-xl prose-gray max-w-prose mx-auto
-            prose-headings:font-poppins prose-headings:font-bold prose-headings:text-gray-900 prose-headings:mt-14 prose-headings:mb-8 prose-headings:leading-tight
-            prose-h2:sr-only prose-h3:sr-only
-            prose-h4:text-2xl prose-h4:mt-12 prose-h4:mb-6
-            prose-h5:text-xl prose-h5:mt-10 prose-h5:mb-5
-            prose-h6:text-lg prose-h6:mt-8 prose-h6:mb-4
-            prose-p:font-inter prose-p:text-gray-700 prose-p:leading-relaxed prose-p:mb-10 prose-p:text-justify
-            prose-p:first-of-type:text-xl prose-p:first-of-type:leading-relaxed prose-p:first-of-type:text-gray-800
-            prose-a:text-primary prose-a:no-underline prose-a:font-medium hover:prose-a:underline prose-a:transition-colors
+          className="prose prose-gray max-w-none
+            prose-headings:font-poppins prose-headings:font-bold prose-headings:text-gray-900 prose-headings:leading-tight
+            prose-h2:text-3xl prose-h2:mt-16 prose-h2:mb-8 prose-h2:pt-8 prose-h2:border-t prose-h2:border-gray-200
+            prose-h3:text-2xl prose-h3:mt-12 prose-h3:mb-6 prose-h3:text-gray-800
+            prose-h4:text-xl prose-h4:mt-10 prose-h4:mb-5 prose-h4:text-gray-800
+            prose-h5:text-lg prose-h5:mt-8 prose-h5:mb-4 prose-h5:text-gray-800
+            prose-h6:text-base prose-h6:mt-6 prose-h6:mb-3 prose-h6:font-semibold prose-h6:text-gray-800
+            prose-p:font-inter prose-p:text-gray-700 prose-p:leading-8 prose-p:mb-7 prose-p:text-base
+            prose-p:first-of-type:text-lg prose-p:first-of-type:leading-relaxed prose-p:first-of-type:text-gray-800 prose-p:first-of-type:font-medium
+            prose-a:text-primary prose-a:no-underline prose-a:font-medium hover:prose-a:underline prose-a:transition-colors prose-a:break-words
             prose-strong:text-gray-900 prose-strong:font-semibold
             prose-em:text-gray-800 prose-em:italic
-            prose-ol:font-inter prose-ol:mb-10 prose-ol:space-y-4 prose-ul:font-inter prose-ul:mb-10 prose-ul:space-y-4
-            prose-li:text-gray-700 prose-li:leading-relaxed prose-li:mb-4
-            prose-code:text-primary prose-code:bg-gray-100 prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:font-mono
-            prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-pre:p-6 prose-pre:rounded-lg prose-pre:mb-10 prose-pre:overflow-x-auto
-            prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-primary/5 prose-blockquote:py-6 prose-blockquote:px-8 prose-blockquote:mb-10 prose-blockquote:italic prose-blockquote:text-gray-800
-            prose-img:rounded-lg prose-img:shadow-lg prose-img:my-12 prose-img:w-full
-            prose-hr:border-gray-200 prose-hr:my-12
-            prose-table:mb-10"
+            prose-code:text-primary prose-code:bg-gray-100 prose-code:px-2.5 prose-code:py-1.5 prose-code:rounded prose-code:font-mono prose-code:text-sm
+            prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-pre:p-6 prose-pre:rounded-lg prose-pre:mb-8 prose-pre:overflow-x-auto prose-pre:text-sm prose-pre:leading-relaxed
+            prose-pre:shadow-lg
+            prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-primary/5 prose-blockquote:py-6 prose-blockquote:px-8 prose-blockquote:mb-8 prose-blockquote:italic prose-blockquote:text-gray-800 prose-blockquote:my-6 prose-blockquote:rounded-r-lg
+            prose-blockquote:not-italic prose-blockquote:font-semibold
+            prose-ol:font-inter prose-ol:mb-8 prose-ol:space-y-3 prose-ol:ml-2 prose-ol:list-decimal
+            prose-ul:font-inter prose-ul:mb-8 prose-ul:space-y-3 prose-ul:ml-2 prose-ul:list-disc
+            prose-li:text-gray-700 prose-li:leading-7 prose-li:text-base
+            prose-img:rounded-lg prose-img:shadow-lg prose-img:my-10 prose-img:w-full prose-img:border prose-img:border-gray-200
+            prose-hr:border-gray-200 prose-hr:my-12 prose-hr:opacity-60
+            prose-table:my-8 prose-table:border-collapse prose-table:w-full
+            prose-thead:bg-gray-100
+            prose-th:border prose-th:border-gray-200 prose-th:px-4 prose-th:py-3 prose-th:text-left prose-th:font-semibold prose-th:text-gray-900
+            prose-td:border prose-td:border-gray-200 prose-td:px-4 prose-td:py-3 prose-td:text-gray-700"
           dangerouslySetInnerHTML={{ __html: post.content }}
         />
 
         {/* Tags (si existen) */}
         {post.tags && post.tags.length > 0 && (
-          <div className="mt-12 pt-8 border-t border-gray-200">
-            <h3 className="font-poppins font-semibold text-sm text-gray-500 uppercase tracking-wide mb-4">
-              Temas relacionados
+          <div className="mt-14 pt-10 border-t-2 border-gray-200">
+            <h3 className="font-poppins font-bold text-sm uppercase tracking-wider text-gray-600 mb-5">
+              Palabras clave
             </h3>
             <div className="flex flex-wrap gap-2">
               {post.tags.map(tag => (
                 <span
                   key={tag}
-                  className="inline-block px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors"
+                  className="inline-block px-4 py-2 bg-primary/10 text-primary text-xs sm:text-sm font-medium rounded-full border border-primary/30 hover:bg-primary/20 hover:border-primary/50 transition-colors duration-200"
                 >
                   {tag}
                 </span>
@@ -154,45 +161,45 @@ const DivulgacionPostPage: React.FC = () => {
       </article>
 
       {/* Compartir artículo */}
-      <section className="border-t border-gray-200 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 py-12">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+      <section className="border-t-2 border-gray-200 bg-white">
+        <div className="max-w-3xl mx-auto px-6 sm:px-8 lg:px-12 py-12 sm:py-14">
+          <div className="flex flex-col items-start gap-6">
             <div>
               <h3 className="font-poppins font-bold text-xl text-gray-900 mb-2 flex items-center gap-2">
-                <Share2 className="w-5 h-5" />
-                Compartir artículo
+                <Share2 className="w-5 h-5 text-primary" />
+                Compartir este artículo
               </h3>
               <p className="text-gray-600 text-sm">
-                Ayúdanos a difundir conocimiento científico
+                Ayúdanos a difundir este análisis académico en tu red
               </p>
             </div>
-            <div className="flex gap-3">
+            <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
               <Button
                 onClick={shareOnLinkedIn}
+                className="gap-2 text-[#0A66C2] bg-white border-2 border-[#0A66C2] hover:bg-[#0A66C2] hover:text-white transition-colors"
                 variant="outline"
                 size="lg"
-                className="gap-2 text-[#0A66C2] border-[#0A66C2] hover:bg-[#0A66C2] hover:text-white active:bg-[#0A66C2] active:text-white focus-visible:ring-2 focus-visible:ring-[#0A66C2]/40"
               >
                 <Linkedin className="w-5 h-5" />
                 LinkedIn
               </Button>
               <Button
                 onClick={shareOnWhatsApp}
+                className="gap-2 text-[#25D366] bg-white border-2 border-[#25D366] hover:bg-[#25D366] hover:text-white transition-colors"
                 variant="outline"
                 size="lg"
-                className="gap-2 text-[#25D366] border-[#25D366] hover:bg-[#25D366] hover:text-white active:bg-[#25D366] active:text-white focus-visible:ring-2 focus-visible:ring-[#25D366]/40"
               >
                 <MessageCircle className="w-5 h-5" />
                 WhatsApp
               </Button>
               <Button
                 onClick={copyLink}
+                className="gap-2 text-gray-700 bg-white border-2 border-gray-300 hover:bg-gray-100 hover:border-gray-400 transition-colors"
                 variant="outline"
                 size="lg"
-                className="gap-2 text-purple-600 border-purple-600 hover:bg-purple-600 hover:text-white active:bg-purple-600 active:text-white focus-visible:ring-2 focus-visible:ring-purple-400/40"
               >
                 <Copy className="w-5 h-5" />
-                Copiar
+                Copiar enlace
               </Button>
             </div>
           </div>
@@ -200,21 +207,21 @@ const DivulgacionPostPage: React.FC = () => {
       </section>
 
       {/* CTA institucional */}
-      <section className="border-t border-gray-200 bg-white">
-        <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 py-16 text-center">
-          <h2 className="font-poppins font-bold text-3xl text-gray-900 mb-4">
-            ¿Te interesó este tema?
+      <section className="border-t-2 border-gray-200 bg-gradient-to-b from-white to-gray-50">
+        <div className="max-w-3xl mx-auto px-6 sm:px-8 lg:px-12 py-16 sm:py-20 text-center">
+          <h2 className="font-poppins font-bold text-3xl sm:text-4xl text-gray-900 mb-4">
+            ¿Interesado en colaborar?
           </h2>
-          <p className="font-inter text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-            Si deseas conocer más sobre nuestra investigación o proponer una colaboración, 
-            estamos abiertos al diálogo académico.
+          <p className="font-inter text-base sm:text-lg text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
+            Si este tema te interesa o deseas proponer una colaboración académica con nuestro grupo de investigación, 
+            estaremos encantados de establecer un diálogo.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" className="text-lg px-8">
-              <Link to="/contactos">Proponer colaboración</Link>
+            <Button asChild size="lg" className="text-base px-8 font-medium">
+              <Link to="/contactos">Ponerse en contacto</Link>
             </Button>
-            <Button asChild variant="outline" size="lg" className="text-lg px-8">
-              <Link to="/investigacion">Ver investigación</Link>
+            <Button asChild variant="outline" size="lg" className="text-base px-8 font-medium border-2">
+              <Link to="/investigacion">Ver más investigación</Link>
             </Button>
           </div>
         </div>
@@ -222,20 +229,26 @@ const DivulgacionPostPage: React.FC = () => {
 
       {/* Artículos relacionados */}
       {relatedPosts.length > 0 && (
-        <section className="border-t border-gray-200 bg-gray-50">
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16">
-            <h2 className="font-poppins font-bold text-3xl text-gray-900 mb-8 flex items-center gap-2">
-              Más artículos
+        <section className="border-t-2 border-gray-200 bg-white">
+          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16 sm:py-20">
+            <h2 className="font-poppins font-bold text-3xl sm:text-4xl text-gray-900 mb-3 flex items-center gap-3">
+              <span>Más artículos de divulgación</span>
               <ArrowRight className="w-6 h-6 text-primary" />
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <p className="text-gray-600 text-base mb-10 max-w-2xl">
+              Continúa explorando nuestras publicaciones científicas
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
               {relatedPosts.map(relatedPost => (
                 <DivulgacionCard key={relatedPost.slug} post={relatedPost} />
               ))}
             </div>
-            <div className="text-center mt-12">
-              <Button asChild variant="outline" size="lg">
-                <Link to="/divulgacion">Ver todos los artículos</Link>
+            <div className="text-center">
+              <Button asChild variant="outline" size="lg" className="border-2 font-medium">
+                <Link to="/divulgacion" className="flex items-center gap-2">
+                  Ver todos los artículos
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
               </Button>
             </div>
           </div>
