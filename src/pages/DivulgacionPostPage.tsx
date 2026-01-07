@@ -55,8 +55,29 @@ const DivulgacionPostPage: React.FC = () => {
 
   // Función para copiar enlace
   const copyLink = async () => {
+    const url = window.location.href;
     try {
-      await navigator.clipboard.writeText(window.location.href);
+      // Intento estándar (HTTPS, Safari moderno)
+      if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+        await navigator.clipboard.writeText(url);
+      } else {
+        // Fallback para navegadores con soporte limitado (Safari antiguo)
+        const textarea = document.createElement('textarea');
+        textarea.value = url;
+        // Evitar scroll en iOS
+        textarea.style.position = 'fixed';
+        textarea.style.top = '0';
+        textarea.style.left = '0';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+        try {
+          document.execCommand('copy');
+        } finally {
+          document.body.removeChild(textarea);
+        }
+      }
       toast({
         title: "Enlace copiado",
         description: "El enlace ha sido copiado al portapapeles",
