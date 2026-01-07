@@ -94,7 +94,8 @@ const DivulgacionPostPage: React.FC = () => {
   // Metadatos SEO / Open Graph / Twitter
   const baseUrl = "https://fyt-research.org";
   const canonicalUrl = `${baseUrl}/divulgacion/${post.slug}`;
-  const ogImage = `${baseUrl}${post.authorImage || "/images/logo-fyt-medium.webp"}`;
+  const authorImagePath = post.authorImage || "/images/logo-fyt-medium.webp";
+  const ogImage = `${baseUrl}${authorImagePath.replace(/\.webp$/i, ".jpg")}`;
   const metaDescription = post.excerpt.length > 160 ? `${post.excerpt.slice(0, 157)}…` : post.excerpt;
   const metaKeywords = post.tags ? [...post.tags, "Divulgación", "Grupo FyT", "Farmacología y Terapéutica"] : ["Divulgación", "Grupo FyT", "Farmacología y Terapéutica"];
 
@@ -142,6 +143,16 @@ const DivulgacionPostPage: React.FC = () => {
         ))}
         <meta property="og:image:alt" content={`Foto del autor ${post.author}`} />
         <meta property="og:site_name" content="Grupo FyT" />
+        {/* Metas adicionales requeridas por WhatsApp y redes sociales */}
+        <meta property="og:locale" content="es_ES" />
+        <meta property="og:type" content="article" />
+        <meta property="og:image:secure_url" content={ogImage} />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        {/* Twitter Card adicionales para mejor compatibilidad */}
+        <meta name="twitter:title" content={post.title} />
+        <meta name="twitter:description" content={metaDescription} />
       </Seo>
 
       {/* Botón de regreso */}
