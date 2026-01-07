@@ -22,6 +22,12 @@ const DivulgacionCard: React.FC<DivulgacionCardProps> = ({ post }) => {
     day: "numeric"
   });
 
+  // Extraer estudios académicos del authorRole (antes del guión)
+  // Ejemplo: "Q.F., MSc, PhD - Grupo de Investigación..." → "Q.F., MSc, PhD"
+  const academicCredentials = post.authorRole
+    ? post.authorRole.split(" - ")[0].trim()
+    : "";
+
   return (
     <Card className="group overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-200 bg-white h-full flex flex-col">
       <Link 
@@ -41,38 +47,47 @@ const DivulgacionCard: React.FC<DivulgacionCardProps> = ({ post }) => {
 
           {/* Contenido del artículo */}
           <div className="p-6 sm:p-7 flex-1 flex flex-col">
-            {/* Autor y fecha - prominentemente debajo de la imagen */}
-            <div className="text-center mb-5">
-              <h4 className="font-poppins font-bold text-base sm:text-lg text-gray-900 mb-1">
+            {/* Nombre del autor - centrado */}
+            <div className="text-center mb-2">
+              <h4 className="font-poppins font-bold text-base sm:text-lg text-gray-900 break-words">
                 {post.author}
               </h4>
-              <p className="text-xs sm:text-sm text-gray-500 font-inter">
-                {formattedDate}
-              </p>
             </div>
 
+            {/* Estudios académicos - centrados */}
+            {academicCredentials && (
+              <p className="text-xs sm:text-sm text-gray-600 font-inter text-center mb-3 break-words">
+                {academicCredentials}
+              </p>
+            )}
+
+            {/* Fecha - alineada a la izquierda */}
+            <p className="text-xs sm:text-sm text-gray-500 font-inter mb-5 text-left break-words">
+              {formattedDate}
+            </p>
+
             {/* Título */}
-            <h3 className="font-poppins font-bold text-lg sm:text-xl text-gray-900 mb-3 group-hover:text-primary transition-colors line-clamp-2">
+            <h3 className="font-poppins font-bold text-lg sm:text-xl text-gray-900 mb-3 group-hover:text-primary transition-colors line-clamp-3 break-words">
               {post.title}
             </h3>
 
             {/* Extracto */}
-            <p className="font-inter text-sm sm:text-base text-gray-600 leading-relaxed mb-6 flex-1 line-clamp-3">
+            <p className="font-inter text-sm sm:text-base text-gray-600 leading-relaxed mb-6 flex-1 line-clamp-4 break-words">
               {post.excerpt}
             </p>
 
             {/* Categoría y tiempo de lectura - parte inferior */}
-            <div className="flex items-center justify-between gap-3 pt-5 border-t border-gray-100">
-              <div className="flex items-center gap-3">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-3 pt-5 border-t border-gray-100">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3 flex-wrap">
                 {post.category && (
-                  <span className="font-medium text-primary uppercase tracking-wide text-xs">
+                  <span className="font-medium text-primary uppercase tracking-wide text-xs break-words">
                     {post.category}
                   </span>
                 )}
                 {post.readTime && (
                   <div className="flex items-center gap-1 text-gray-500 text-xs sm:text-sm">
-                    <Clock className="w-4 h-4" />
-                    <span>{post.readTime}</span>
+                    <Clock className="w-4 h-4 flex-shrink-0" />
+                    <span className="break-words">{post.readTime}</span>
                   </div>
                 )}
               </div>
