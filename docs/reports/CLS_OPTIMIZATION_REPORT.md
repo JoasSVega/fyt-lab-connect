@@ -91,6 +91,7 @@ El componente `Carrusel.tsx` ya tenía optimizaciones implementadas:
 - ✅ Aspect ratio preservado con CSS
 
 ```tsx
+{% raw %}
 if (!imagesLoaded) {
   return (
     <div style={{ minHeight: heightCss || '18rem' }}>
@@ -98,6 +99,7 @@ if (!imagesLoaded) {
     </div>
   );
 }
+{% endraw %}
 ```
 
 ## Archivos Modificados

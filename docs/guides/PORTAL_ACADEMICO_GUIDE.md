@@ -1,10 +1,6 @@
 ---
 Estado: Propuesto
 Idioma: ES
-````markdown
----
-Estado: Propuesto
-Idioma: ES
 ---
 
 # GUÍA DE IMPLEMENTACIÓN: Portal Académico Evaluable
