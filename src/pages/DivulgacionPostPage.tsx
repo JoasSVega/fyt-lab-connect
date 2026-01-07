@@ -85,11 +85,11 @@ const DivulgacionPostPage: React.FC = () => {
 
       {/* Botón de regreso */}
       <div className="border-b border-gray-100 bg-white">
-        <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 py-4">
-          <Button variant="ghost" asChild className="gap-2">
-            <Link to="/divulgacion">
-              <ArrowLeft className="w-4 h-4" />
-              Volver a Divulgación
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-12 py-4">
+          <Button variant="ghost" asChild className="gap-2 text-sm sm:text-base">
+            <Link to="/divulgacion" className="flex items-center">
+              <ArrowLeft className="w-4 h-4 flex-shrink-0" />
+              <span>Volver a Divulgación</span>
             </Link>
           </Button>
         </div>
@@ -108,49 +108,49 @@ const DivulgacionPostPage: React.FC = () => {
       />
 
       {/* Contenido del artículo */}
-      <article className="max-w-3xl mx-auto px-6 sm:px-8 lg:px-12 py-12 sm:py-16 lg:py-20">
+      <article className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-12 py-12 sm:py-16 lg:py-20">
         {/* Contenido en formato Markdown/HTML */}
         <div 
           className="prose prose-gray max-w-none
-            prose-headings:font-poppins prose-headings:font-bold prose-headings:text-gray-900 prose-headings:leading-tight
-            prose-h2:text-3xl prose-h2:mt-16 prose-h2:mb-8 prose-h2:pt-8 prose-h2:border-t prose-h2:border-gray-200
-            prose-h3:text-2xl prose-h3:mt-12 prose-h3:mb-6 prose-h3:text-gray-800
-            prose-h4:text-xl prose-h4:mt-10 prose-h4:mb-5 prose-h4:text-gray-800
-            prose-h5:text-lg prose-h5:mt-8 prose-h5:mb-4 prose-h5:text-gray-800
-            prose-h6:text-base prose-h6:mt-6 prose-h6:mb-3 prose-h6:font-semibold prose-h6:text-gray-800
-            prose-p:font-inter prose-p:text-gray-700 prose-p:leading-8 prose-p:mb-7 prose-p:text-base
-            prose-p:first-of-type:text-lg prose-p:first-of-type:leading-relaxed prose-p:first-of-type:text-gray-800 prose-p:first-of-type:font-medium
+            prose-headings:font-poppins prose-headings:font-bold prose-headings:text-gray-900 prose-headings:leading-tight prose-headings:break-words
+            prose-h2:text-2xl sm:prose-h2:text-3xl prose-h2:mt-16 prose-h2:mb-8 prose-h2:pt-8 prose-h2:border-t prose-h2:border-gray-200
+            prose-h3:text-xl sm:prose-h3:text-2xl prose-h3:mt-12 prose-h3:mb-6 prose-h3:text-gray-800
+            prose-h4:text-lg sm:prose-h4:text-xl prose-h4:mt-10 prose-h4:mb-5 prose-h4:text-gray-800
+            prose-h5:text-base sm:prose-h5:text-lg prose-h5:mt-8 prose-h5:mb-4 prose-h5:text-gray-800
+            prose-h6:text-sm sm:prose-h6:text-base prose-h6:mt-6 prose-h6:mb-3 prose-h6:font-semibold prose-h6:text-gray-800
+            prose-p:font-inter prose-p:text-gray-700 prose-p:leading-8 prose-p:mb-7 prose-p:text-sm sm:prose-p:text-base prose-p:break-words prose-p:hyphens-auto
+            prose-p:first-of-type:text-base sm:prose-p:first-of-type:text-lg prose-p:first-of-type:leading-relaxed prose-p:first-of-type:text-gray-800 prose-p:first-of-type:font-medium
             prose-a:text-primary prose-a:no-underline prose-a:font-medium hover:prose-a:underline prose-a:transition-colors prose-a:break-words
-            prose-strong:text-gray-900 prose-strong:font-semibold
+            prose-strong:text-gray-900 prose-strong:font-semibold prose-strong:break-words
             prose-em:text-gray-800 prose-em:italic
-            prose-code:text-primary prose-code:bg-gray-100 prose-code:px-2.5 prose-code:py-1.5 prose-code:rounded prose-code:font-mono prose-code:text-sm
-            prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-pre:p-6 prose-pre:rounded-lg prose-pre:mb-8 prose-pre:overflow-x-auto prose-pre:text-sm prose-pre:leading-relaxed
+            prose-code:text-primary prose-code:bg-gray-100 prose-code:px-2.5 prose-code:py-1.5 prose-code:rounded prose-code:font-mono prose-code:text-xs sm:prose-code:text-sm prose-code:break-words
+            prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-pre:p-4 sm:prose-pre:p-6 prose-pre:rounded-lg prose-pre:mb-8 prose-pre:overflow-x-auto prose-pre:text-xs sm:prose-pre:text-sm prose-pre:leading-relaxed
             prose-pre:shadow-lg
-            prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-primary/5 prose-blockquote:py-6 prose-blockquote:px-8 prose-blockquote:mb-8 prose-blockquote:italic prose-blockquote:text-gray-800 prose-blockquote:my-6 prose-blockquote:rounded-r-lg
-            prose-blockquote:not-italic prose-blockquote:font-semibold
+            prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-primary/5 prose-blockquote:py-4 sm:prose-blockquote:py-6 prose-blockquote:px-4 sm:prose-blockquote:px-8 prose-blockquote:mb-8 prose-blockquote:italic prose-blockquote:text-gray-800 prose-blockquote:my-6 prose-blockquote:rounded-r-lg
+            prose-blockquote:not-italic prose-blockquote:font-semibold prose-blockquote:break-words
             prose-ol:font-inter prose-ol:mb-8 prose-ol:space-y-3 prose-ol:ml-2 prose-ol:list-decimal
             prose-ul:font-inter prose-ul:mb-8 prose-ul:space-y-3 prose-ul:ml-2 prose-ul:list-disc
-            prose-li:text-gray-700 prose-li:leading-7 prose-li:text-base
-            prose-img:rounded-lg prose-img:shadow-lg prose-img:my-10 prose-img:w-full prose-img:border prose-img:border-gray-200
+            prose-li:text-gray-700 prose-li:leading-7 prose-li:text-sm sm:prose-li:text-base prose-li:break-words
+            prose-img:rounded-lg prose-img:shadow-lg prose-img:my-10 prose-img:w-full prose-img:border prose-img:border-gray-200 prose-img:max-w-full
             prose-hr:border-gray-200 prose-hr:my-12 prose-hr:opacity-60
-            prose-table:my-8 prose-table:border-collapse prose-table:w-full
+            prose-table:my-8 prose-table:border-collapse prose-table:w-full prose-table:overflow-x-auto prose-table:block sm:prose-table:table
             prose-thead:bg-gray-100
-            prose-th:border prose-th:border-gray-200 prose-th:px-4 prose-th:py-3 prose-th:text-left prose-th:font-semibold prose-th:text-gray-900
-            prose-td:border prose-td:border-gray-200 prose-td:px-4 prose-td:py-3 prose-td:text-gray-700"
+            prose-th:border prose-th:border-gray-200 prose-th:px-3 sm:prose-th:px-4 prose-th:py-2 sm:prose-th:py-3 prose-th:text-left prose-th:font-semibold prose-th:text-gray-900 prose-th:text-xs sm:prose-th:text-sm
+            prose-td:border prose-td:border-gray-200 prose-td:px-3 sm:prose-td:px-4 prose-td:py-2 sm:prose-td:py-3 prose-td:text-gray-700 prose-td:text-xs sm:prose-td:text-sm prose-td:break-words"
           dangerouslySetInnerHTML={{ __html: post.content }}
         />
 
         {/* Tags (si existen) */}
         {post.tags && post.tags.length > 0 && (
           <div className="mt-14 pt-10 border-t-2 border-gray-200">
-            <h3 className="font-poppins font-bold text-sm uppercase tracking-wider text-gray-600 mb-5">
+            <h3 className="font-poppins font-bold text-xs sm:text-sm uppercase tracking-wider text-gray-600 mb-5 break-words">
               Palabras clave
             </h3>
             <div className="flex flex-wrap gap-2">
               {post.tags.map(tag => (
                 <span
                   key={tag}
-                  className="inline-block px-4 py-2 bg-primary/10 text-primary text-xs sm:text-sm font-medium rounded-full border border-primary/30 hover:bg-primary/20 hover:border-primary/50 transition-colors duration-200"
+                  className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-primary/10 text-primary text-xs sm:text-sm font-medium rounded-full border border-primary/30 hover:bg-primary/20 hover:border-primary/50 transition-colors duration-200 break-words"
                 >
                   {tag}
                 </span>
@@ -162,44 +162,44 @@ const DivulgacionPostPage: React.FC = () => {
 
       {/* Compartir artículo */}
       <section className="border-t-2 border-gray-200 bg-white">
-        <div className="max-w-3xl mx-auto px-6 sm:px-8 lg:px-12 py-12 sm:py-14">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-12 py-12 sm:py-14">
           <div className="flex flex-col items-start gap-6">
             <div>
-              <h3 className="font-poppins font-bold text-xl text-gray-900 mb-2 flex items-center gap-2">
-                <Share2 className="w-5 h-5 text-primary" />
-                Compartir este artículo
+              <h3 className="font-poppins font-bold text-lg sm:text-xl text-gray-900 mb-2 flex items-center gap-2 flex-wrap">
+                <Share2 className="w-5 h-5 text-primary flex-shrink-0" />
+                <span className="break-words">Compartir este artículo</span>
               </h3>
-              <p className="text-gray-600 text-sm">
+              <p className="text-gray-600 text-sm break-words">
                 Ayúdanos a difundir este análisis académico en tu red
               </p>
             </div>
-            <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+            <div className="flex flex-col sm:flex-row gap-3 w-full">
               <Button
                 onClick={shareOnLinkedIn}
-                className="gap-2 text-[#0A66C2] bg-white border-2 border-[#0A66C2] hover:bg-[#0A66C2] hover:text-white transition-colors"
+                className="gap-2 text-[#0A66C2] bg-white border-2 border-[#0A66C2] hover:bg-[#0A66C2] hover:text-white transition-colors w-full sm:w-auto justify-center"
                 variant="outline"
                 size="lg"
               >
-                <Linkedin className="w-5 h-5" />
-                LinkedIn
+                <Linkedin className="w-5 h-5 flex-shrink-0" />
+                <span>LinkedIn</span>
               </Button>
               <Button
                 onClick={shareOnWhatsApp}
-                className="gap-2 text-[#25D366] bg-white border-2 border-[#25D366] hover:bg-[#25D366] hover:text-white transition-colors"
+                className="gap-2 text-[#25D366] bg-white border-2 border-[#25D366] hover:bg-[#25D366] hover:text-white transition-colors w-full sm:w-auto justify-center"
                 variant="outline"
                 size="lg"
               >
-                <MessageCircle className="w-5 h-5" />
-                WhatsApp
+                <MessageCircle className="w-5 h-5 flex-shrink-0" />
+                <span>WhatsApp</span>
               </Button>
               <Button
                 onClick={copyLink}
-                className="gap-2 text-gray-700 bg-white border-2 border-gray-300 hover:bg-gray-100 hover:border-gray-400 transition-colors"
+                className="gap-2 text-gray-700 bg-white border-2 border-gray-400 hover:bg-gray-700 hover:text-white hover:border-gray-700 transition-colors w-full sm:w-auto justify-center"
                 variant="outline"
                 size="lg"
               >
-                <Copy className="w-5 h-5" />
-                Copiar enlace
+                <Copy className="w-5 h-5 flex-shrink-0" />
+                <span className="whitespace-nowrap">Copiar enlace</span>
               </Button>
             </div>
           </div>
@@ -208,20 +208,20 @@ const DivulgacionPostPage: React.FC = () => {
 
       {/* CTA institucional */}
       <section className="border-t-2 border-gray-200 bg-gradient-to-b from-white to-gray-50">
-        <div className="max-w-3xl mx-auto px-6 sm:px-8 lg:px-12 py-16 sm:py-20 text-center">
-          <h2 className="font-poppins font-bold text-3xl sm:text-4xl text-gray-900 mb-4">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-12 py-16 sm:py-20 text-center">
+          <h2 className="font-poppins font-bold text-2xl sm:text-3xl lg:text-4xl text-gray-900 mb-4 break-words px-2">
             ¿Interesado en colaborar?
           </h2>
-          <p className="font-inter text-base sm:text-lg text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
+          <p className="font-inter text-sm sm:text-base lg:text-lg text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed break-words px-2">
             Si este tema te interesa o deseas proponer una colaboración académica con nuestro grupo de investigación, 
             estaremos encantados de establecer un diálogo.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" className="text-base px-8 font-medium">
-              <Link to="/contactos">Ponerse en contacto</Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center px-2">
+            <Button asChild size="lg" className="text-sm sm:text-base px-6 sm:px-8 font-medium w-full sm:w-auto">
+              <Link to="/contactos" className="whitespace-nowrap">Ponerse en contacto</Link>
             </Button>
-            <Button asChild variant="outline" size="lg" className="text-base px-8 font-medium border-2">
-              <Link to="/investigacion">Ver más investigación</Link>
+            <Button asChild variant="outline" size="lg" className="text-sm sm:text-base px-6 sm:px-8 font-medium border-2 w-full sm:w-auto">
+              <Link to="/investigacion" className="whitespace-nowrap">Ver más investigación</Link>
             </Button>
           </div>
         </div>
@@ -230,24 +230,24 @@ const DivulgacionPostPage: React.FC = () => {
       {/* Artículos relacionados */}
       {relatedPosts.length > 0 && (
         <section className="border-t-2 border-gray-200 bg-white">
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16 sm:py-20">
-            <h2 className="font-poppins font-bold text-3xl sm:text-4xl text-gray-900 mb-3 flex items-center gap-3">
-              <span>Más artículos de divulgación</span>
-              <ArrowRight className="w-6 h-6 text-primary" />
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-16 sm:py-20">
+            <h2 className="font-poppins font-bold text-2xl sm:text-3xl lg:text-4xl text-gray-900 mb-3 flex flex-wrap items-center gap-2 sm:gap-3">
+              <span className="break-words">Más artículos de divulgación</span>
+              <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 text-primary flex-shrink-0" />
             </h2>
-            <p className="text-gray-600 text-base mb-10 max-w-2xl">
+            <p className="text-gray-600 text-sm sm:text-base mb-10 max-w-2xl break-words">
               Continúa explorando nuestras publicaciones científicas
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-12">
               {relatedPosts.map(relatedPost => (
                 <DivulgacionCard key={relatedPost.slug} post={relatedPost} />
               ))}
             </div>
             <div className="text-center">
-              <Button asChild variant="outline" size="lg" className="border-2 font-medium">
-                <Link to="/divulgacion" className="flex items-center gap-2">
-                  Ver todos los artículos
-                  <ArrowRight className="w-4 h-4" />
+              <Button asChild variant="outline" size="lg" className="border-2 font-medium text-sm sm:text-base w-full sm:w-auto">
+                <Link to="/divulgacion" className="flex items-center justify-center gap-2">
+                  <span>Ver todos los artículos</span>
+                  <ArrowRight className="w-4 h-4 flex-shrink-0" />
                 </Link>
               </Button>
             </div>
