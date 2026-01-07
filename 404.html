@@ -4,7 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Grupo FyT</title>
-  <!-- 404 estática: sin redirecciones ni hacks SPA -->
+  <!-- SPA fallback: Serve index.html for all 404 errors to support client-side routing -->
+  <script>
+    // Store the original pathname for React Router to handle
+    sessionStorage.redirect = location.pathname + location.search + location.hash;
+  </script>
+  <!-- Redirect to index.html which will handle the route -->
+  <meta http-equiv="refresh" content="0;url=/" />
+  <!-- Fallback for older browsers -->
+  <script>
+    if (sessionStorage.redirect && location.pathname === '/404.html') {
+      location.replace(sessionStorage.redirect);
+    }
+  </script>
 </head>
 <body>
   <!-- Fallback content while redirect happens -->
