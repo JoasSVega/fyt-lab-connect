@@ -1,5 +1,6 @@
 // Cleaned Footer component for the site.
 import React from "react";
+import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, ExternalLink, Instagram } from "lucide-react";
 import SafeImage from "@/components/SafeImage";
 import { sanitizeURL } from "@/lib/sanitize";
