@@ -76,28 +76,28 @@ const DivulgacionHero: React.FC<DivulgacionHeroProps> = ({
         {/* Información del autor - debajo de la imagen */}
         <div className="mb-8 text-center">
           {/* Nombre del autor */}
-          <h2 className="font-poppins font-bold text-xl sm:text-2xl lg:text-2xl text-gray-900 mb-2 break-words px-2">
+          <h2 className="font-poppins font-bold text-xl sm:text-2xl lg:text-3xl text-gray-900 mb-2 break-words px-2">
             {author}
           </h2>
 
           {/* Credenciales académicas */}
           {academicCredentials && (
-            <p className="text-base sm:text-lg font-semibold text-gray-700 font-poppins mb-2 break-words px-2">
+            <p className="text-base sm:text-lg lg:text-xl font-semibold text-gray-700 font-poppins mb-2 break-words px-2">
               {academicCredentials}
             </p>
           )}
 
           {/* Fecha de publicación */}
-          <p className="text-xs sm:text-sm text-gray-400 font-inter break-words px-2">
+          <time className="text-xs sm:text-sm lg:text-base text-gray-400 font-inter break-words px-2">
             {formattedDate}
-          </p>
+          </time>
         </div>
 
         {/* Divisor visual */}
         <div className="h-px bg-gray-200 mb-10"></div>
 
         {/* Título principal - más prominente */}
-        <h1 className="font-poppins font-bold text-3xl sm:text-4xl lg:text-5xl xl:text-6xl text-gray-900 leading-tight mb-6 break-words hyphens-auto">
+        <h1 className="font-poppins font-bold text-3xl sm:text-4xl lg:text-5xl text-gray-900 leading-tight mb-6 break-words hyphens-auto">
           {title}
         </h1>
 

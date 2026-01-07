@@ -117,25 +117,25 @@ const DivulgacionPostPage: React.FC = () => {
             prose-h3:text-xl sm:prose-h3:text-2xl prose-h3:mt-12 prose-h3:mb-6 prose-h3:text-gray-800
             prose-h4:text-lg sm:prose-h4:text-xl prose-h4:mt-10 prose-h4:mb-5 prose-h4:text-gray-800
             prose-h5:text-base sm:prose-h5:text-lg prose-h5:mt-8 prose-h5:mb-4 prose-h5:text-gray-800
-            prose-h6:text-sm sm:prose-h6:text-base prose-h6:mt-6 prose-h6:mb-3 prose-h6:font-semibold prose-h6:text-gray-800
-            prose-p:font-inter prose-p:text-gray-700 prose-p:leading-8 prose-p:mb-7 prose-p:text-sm sm:prose-p:text-base prose-p:break-words prose-p:hyphens-auto
+            prose-h6:text-sm sm:prose-h6:text-base prose-h6:mt-6 prose-h6:mb-3 prose-h6:font-bold prose-h6:text-gray-800
+            prose-p:font-inter prose-p:text-gray-700 prose-p:leading-8 prose-p:mb-8 prose-p:text-sm sm:prose-p:text-base prose-p:break-words prose-p:hyphens-auto prose-p:text-justify
             prose-p:first-of-type:text-base sm:prose-p:first-of-type:text-lg prose-p:first-of-type:leading-relaxed prose-p:first-of-type:text-gray-800 prose-p:first-of-type:font-medium
             prose-a:text-primary prose-a:no-underline prose-a:font-medium hover:prose-a:underline prose-a:transition-colors prose-a:break-words
-            prose-strong:text-gray-900 prose-strong:font-semibold prose-strong:break-words
-            prose-em:text-gray-800 prose-em:italic
+            prose-strong:text-gray-900 prose-strong:font-bold prose-strong:break-words
+            prose-em:text-gray-800 prose-em:italic prose-em:break-words
             prose-code:text-primary prose-code:bg-gray-100 prose-code:px-2.5 prose-code:py-1.5 prose-code:rounded prose-code:font-mono prose-code:text-xs sm:prose-code:text-sm prose-code:break-words
             prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-pre:p-4 sm:prose-pre:p-6 prose-pre:rounded-lg prose-pre:mb-8 prose-pre:overflow-x-auto prose-pre:text-xs sm:prose-pre:text-sm prose-pre:leading-relaxed
             prose-pre:shadow-lg
             prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-primary/5 prose-blockquote:py-4 sm:prose-blockquote:py-6 prose-blockquote:px-4 sm:prose-blockquote:px-8 prose-blockquote:mb-8 prose-blockquote:italic prose-blockquote:text-gray-800 prose-blockquote:my-6 prose-blockquote:rounded-r-lg
             prose-blockquote:not-italic prose-blockquote:font-semibold prose-blockquote:break-words
-            prose-ol:font-inter prose-ol:mb-8 prose-ol:space-y-3 prose-ol:ml-2 prose-ol:list-decimal
-            prose-ul:font-inter prose-ul:mb-8 prose-ul:space-y-3 prose-ul:ml-2 prose-ul:list-disc
-            prose-li:text-gray-700 prose-li:leading-7 prose-li:text-sm sm:prose-li:text-base prose-li:break-words
+            prose-ol:font-inter prose-ol:mb-8 prose-ol:space-y-4 prose-ol:ml-2 prose-ol:list-decimal
+            prose-ul:font-inter prose-ul:mb-8 prose-ul:space-y-4 prose-ul:ml-2 prose-ul:list-disc
+            prose-li:text-gray-700 prose-li:leading-7 prose-li:text-sm sm:prose-li:text-base prose-li:break-words prose-li:text-justify
             prose-img:rounded-lg prose-img:shadow-lg prose-img:my-10 prose-img:w-full prose-img:border prose-img:border-gray-200 prose-img:max-w-full
             prose-hr:border-gray-200 prose-hr:my-12 prose-hr:opacity-60
             prose-table:my-8 prose-table:border-collapse prose-table:w-full prose-table:overflow-x-auto prose-table:block sm:prose-table:table
             prose-thead:bg-gray-100
-            prose-th:border prose-th:border-gray-200 prose-th:px-3 sm:prose-th:px-4 prose-th:py-2 sm:prose-th:py-3 prose-th:text-left prose-th:font-semibold prose-th:text-gray-900 prose-th:text-xs sm:prose-th:text-sm
+            prose-th:border prose-th:border-gray-200 prose-th:px-3 sm:prose-th:px-4 prose-th:py-2 sm:prose-th:py-3 prose-th:text-left prose-th:font-bold prose-th:text-gray-900 prose-th:text-xs sm:prose-th:text-sm
             prose-td:border prose-td:border-gray-200 prose-td:px-3 sm:prose-td:px-4 prose-td:py-2 sm:prose-td:py-3 prose-td:text-gray-700 prose-td:text-xs sm:prose-td:text-sm prose-td:break-words"
           dangerouslySetInnerHTML={{ __html: post.content }}
         />
@@ -217,11 +217,25 @@ const DivulgacionPostPage: React.FC = () => {
             estaremos encantados de establecer un diálogo.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center px-2">
-            <Button asChild size="lg" className="text-sm sm:text-base px-6 sm:px-8 font-medium w-full sm:w-auto">
-              <Link to="/contactos" className="whitespace-nowrap">Ponerse en contacto</Link>
+            <Button 
+              asChild 
+              className="text-sm sm:text-base px-6 sm:px-8 font-medium w-full sm:w-auto bg-transparent border-2 border-gray-400 text-gray-900 hover:bg-primary hover:text-white hover:border-primary transition-all duration-200"
+              variant="outline"
+              size="lg"
+            >
+              <Link to="/contactos" className="whitespace-nowrap">
+                Ponerse en contacto
+              </Link>
             </Button>
-            <Button asChild variant="outline" size="lg" className="text-sm sm:text-base px-6 sm:px-8 font-medium border-2 w-full sm:w-auto">
-              <Link to="/investigacion" className="whitespace-nowrap">Ver más investigación</Link>
+            <Button 
+              asChild 
+              className="text-sm sm:text-base px-6 sm:px-8 font-medium w-full sm:w-auto bg-transparent border-2 border-gray-400 text-gray-900 hover:bg-secondary hover:text-white hover:border-secondary transition-all duration-200"
+              variant="outline"
+              size="lg"
+            >
+              <Link to="/investigacion" className="whitespace-nowrap">
+                Ver más investigación
+              </Link>
             </Button>
           </div>
         </div>
