@@ -6,5 +6,10 @@
 // Implementa componentes no operativos que simplemente renderizan children.
 import type { ReactNode } from 'react';
 
-export const HelmetProvider = ({ children }: { children?: ReactNode }) => children as any;
-export const Helmet = ({ children }: { children?: ReactNode }) => children as any;
+export function HelmetProvider({ children }: { children?: ReactNode }): ReactNode {
+	return children ?? null;
+}
+
+export function Helmet({ children }: { children?: ReactNode }): ReactNode {
+	return children ?? null;
+}
