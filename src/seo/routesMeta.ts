@@ -77,12 +77,12 @@ export const routeMeta: Record<string, { title: string; description: string }> =
   '/sobre-nosotros': {
     title: 'Sobre Nosotros',
     description:
-      'Conoce la misión, visión y líneas de trabajo del Grupo FyT de la Universidad de Cartagena.'
+      'Grupo de Investigación en Farmacología y Terapéutica (Grupo FyT) - Universidad de Cartagena. Líneas de investigación: Atención Farmacéutica, Diseño de Fármacos, Farmacoeconomía, Farmacoepidemiología, Farmacovigilancia y Toxicología. Categoría B Minciencias.'
   },
   '/investigacion': {
     title: 'Investigación',
     description:
-      'Producción científica en farmacología y terapéutica: proyectos, publicaciones y divulgación del Grupo FyT.'
+      'Producción científica del Grupo de Investigación en Farmacología y Terapéutica (FyT) - Universidad de Cartagena. Investigación en Atención Farmacéutica, Diseño de Fármacos, Farmacoeconomía, Farmacoepidemiología, Farmacovigilancia y Toxicología.'
   },
   '/investigacion/publicaciones': {
     title: 'Publicaciones',
@@ -94,11 +94,11 @@ export const routeMeta: Record<string, { title: string; description: string }> =
   },
   '/investigacion/eventos': {
     title: 'Eventos',
-    description: 'Eventos y encuentros científicos del Grupo FyT.'
+    description: 'Congresos, seminarios, jornadas científicas y eventos académicos del Grupo FyT - Universidad de Cartagena en farmacología, farmacovigilancia y ciencias de la salud.'
   },
   '/investigacion/formacion': {
     title: 'Formación',
-    description: 'Programas de formación y actividades académicas del Grupo FyT.'
+    description: 'Programas de formación académica, maestrías, doctorados, semilleros de investigación y actividades educativas del Grupo FyT - Universidad de Cartagena en ciencias farmacéuticas.'
   },
   '/investigacion/divulgacion-cientifica': {
     title: 'Divulgación Científica',
@@ -110,27 +110,27 @@ export const routeMeta: Record<string, { title: string; description: string }> =
   },
   '/noticias': {
     title: 'Noticias',
-    description: 'Actualidad institucional del Grupo FyT.'
+    description: 'Actualidad científica y logros del Grupo de Investigación en Farmacología y Terapéutica de la Universidad de Cartagena. Eventos, publicaciones, reconocimientos y actividades académicas.'
   },
   '/herramientas': {
     title: 'Herramientas',
-    description: 'Plataforma de herramientas clínicas y científicas.'
+    description: 'Herramientas clínicas, farmacéuticas y científicas del Grupo de Investigación en Farmacología y Terapéutica (FyT) - Universidad de Cartagena. Recursos para Atención Farmacéutica, Farmacoeconomía, Farmacoepidemiología y Farmacovigilancia. Calculadoras digitales para profesionales de la salud en Colombia.'
   },
   '/herramientas/clinicos': {
     title: 'Herramientas Clínicas',
-    description: 'Herramientas clínicas para práctica e investigación.'
+    description: 'Calculadoras clínicas validadas para farmacología aplicada, dosificación terapéutica y análisis farmacológico. Herramientas científicas del Grupo de Investigación FyT - Universidad de Cartagena para Atención Farmacéutica y Farmacovigilancia.'
   },
   '/herramientas/antropometricos': {
     title: 'Herramientas Antropométricas',
-    description: 'Cálculos y escalas antropométricas.'
+    description: 'Calculadoras de índice de masa corporal (IMC), superficie corporal, peso ideal y evaluación nutricional. Herramientas científicas del Grupo FyT para análisis antropométrico en farmacoterapia.'
   },
   '/herramientas/avanzados': {
     title: 'Herramientas Avanzadas',
-    description: 'Utilidades avanzadas y experimentales.'
+    description: 'Herramientas computacionales avanzadas para farmacocinética, farmacodinámica, diseño de fármacos y modelización molecular. Utilidades experimentales del Grupo de Investigación en Farmacología y Terapéutica FyT - Universidad de Cartagena.'
   },
   '/herramientas/escalas': {
     title: 'Herramientas: Escalas',
-    description: 'Escalas clínicas normalizadas disponibles.'
+    description: 'Escalas clínicas validadas y normalizadas para evaluación farmacoterapéutica, farmacovigilancia, toxicología y seguimiento de pacientes. Recursos científicos del Grupo de Investigación FyT - Universidad de Cartagena.'
   },
   '/contactos': {
     title: 'Contactos',
@@ -138,23 +138,23 @@ export const routeMeta: Record<string, { title: string; description: string }> =
   },
   '/equipo': {
     title: 'Equipo',
-    description: 'Miembros del Grupo FyT y sus líneas de trabajo.'
+    description: 'Investigadores y semilleristas del Grupo de Investigación en Farmacología y Terapéutica (Grupo FyT) - Universidad de Cartagena. Especialistas en farmacología, farmacovigilancia, farmacoeconomía, farmacoepidemiología y ciencias biomédicas comprometidos con la investigación científica.'
   },
   '/politica-privacidad': {
     title: 'Política de Privacidad',
-    description: 'Política de tratamiento de datos del Grupo FyT.'
+    description: 'Política de tratamiento de datos personales y protección de información del Grupo de Investigación en Farmacología y Terapéutica - Universidad de Cartagena. Cumplimiento normativa colombiana.'
   },
   '/terminos-uso': {
     title: 'Términos de Uso',
-    description: 'Términos y condiciones del sitio del Grupo FyT.'
+    description: 'Términos y condiciones de uso de recursos, herramientas y plataformas digitales del Grupo FyT - Universidad de Cartagena. Normativa y responsabilidades para usuarios.'
   },
   '/codigo-etica': {
     title: 'Código de Ética',
-    description: 'Principios éticos y buenas prácticas del Grupo FyT.'
+    description: 'Principios éticos, valores institucionales y buenas prácticas de investigación científica del Grupo FyT - Universidad de Cartagena. Compromiso con la integridad académica en Colombia.'
   },
   '/calculator/dosage': {
     title: 'Calculadora de Dosificación',
-    description: 'Herramienta para cálculo de dosificación segura.'
+    description: 'Calculadora farmacológica para cálculo preciso de dosificación y ajuste de dosis. Herramienta clínica de atención farmacéutica del Grupo de Investigación FyT - Universidad de Cartagena para profesionales de la salud.'
   },
   
   // ========================================

@@ -94,9 +94,9 @@ const Footer: React.FC = () => {
             <p className="text-left w-full md:w-auto">© 2025 Grupo de Investigación FyT. Todos los derechos reservados.</p>
 
             <div className="flex flex-row gap-3 md:gap-6 w-full md:w-auto items-center justify-end font-inter font-medium">
-              <a href="/PrivacyPolicy" className="hover:text-fyt-blue transition-colors duration-200 text-left md:text-center" aria-label="Política de Privacidad">Política de Privacidad</a>
-              <a href="/TermsOfUse" className="hover:text-fyt-purple transition-colors duration-200 text-left md:text-center" aria-label="Términos de Uso">Términos de Uso</a>
-              <a href="/CodeOfEthics" className="hover:text-fyt-red transition-colors duration-200 text-left md:text-center" aria-label="Código de Ética">Código de Ética</a>
+              <Link to="/politica-privacidad" className="hover:text-fyt-blue transition-colors duration-200 text-left md:text-center" aria-label="Política de Privacidad">Política de Privacidad</Link>
+              <Link to="/terminos-uso" className="hover:text-fyt-purple transition-colors duration-200 text-left md:text-center" aria-label="Términos de Uso">Términos de Uso</Link>
+              <Link to="/codigo-etica" className="hover:text-fyt-red transition-colors duration-200 text-left md:text-center" aria-label="Código de Ética">Código de Ética</Link>
             </div>
           </div>
 

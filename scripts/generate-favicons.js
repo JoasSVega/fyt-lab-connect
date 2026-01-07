@@ -29,56 +29,82 @@ async function generateFavicons() {
     const metadata = await sharp(sourceImage).metadata();
     console.log(`Source: ${metadata.width}x${metadata.height}`);
 
-    // Create square base image (take the larger dimension)
-    const targetSize = Math.max(metadata.width, metadata.height);
+    // PASO 1: Recortar espacios en blanco/transparentes del logo original
+    console.log('✓ Recortando espacios en blanco del logo...');
+    const trimmedBuffer = await sharp(sourceImage)
+      .trim({ threshold: 10 }) // Elimina bordes con alpha < 10
+      .toBuffer();
     
-    // Create square canvas with white background, center the logo
-    const squareBase = await sharp(sourceImage)
+    const trimmedMeta = await sharp(trimmedBuffer).metadata();
+    console.log(`✓ Logo recortado: ${trimmedMeta.width}x${trimmedMeta.height}`);
+
+    // PASO 2: Crear base cuadrada con FONDO TRANSPARENTE y padding mínimo (2%)
+    const targetSize = Math.max(trimmedMeta.width, trimmedMeta.height);
+    const paddingPercent = 0.02; // 2% de padding
+    const finalSize = Math.ceil(targetSize / (1 - paddingPercent * 2));
+    
+    const squareBase = await sharp(trimmedBuffer)
       .resize(targetSize, targetSize, {
         fit: 'contain',
-        background: { r: 255, g: 255, b: 255, alpha: 1 }
+        background: { r: 0, g: 0, b: 0, alpha: 0 } // TRANSPARENTE
+      })
+      .extend({
+        top: Math.floor(finalSize * paddingPercent),
+        bottom: Math.floor(finalSize * paddingPercent),
+        left: Math.floor(finalSize * paddingPercent),
+        right: Math.floor(finalSize * paddingPercent),
+        background: { r: 0, g: 0, b: 0, alpha: 0 } // TRANSPARENTE
       })
       .toBuffer();
 
-    console.log('✓ Created square base image');
+    console.log('✓ Creada imagen base cuadrada con fondo transparente');
 
-    // Generate all sizes
+    // PASO 3: Generar todos los tamaños
     for (const { name, size } of sizes) {
       const outputPath = path.join(publicDir, name);
       
       await sharp(squareBase)
         .resize(size, size, {
           fit: 'contain',
-          background: { r: 255, g: 255, b: 255, alpha: name.includes('apple') ? 1 : 0 }
+          background: { r: 0, g: 0, b: 0, alpha: 0 } // SIEMPRE TRANSPARENTE
         })
-        .png()
+        .png({ compressionLevel: 9, palette: true })
         .toFile(outputPath);
       
-      console.log(`✓ Generated ${name} (${size}x${size})`);
+      console.log(`✓ Generated ${name} (${size}x${size}) con fondo transparente`);
     }
 
-    // Generate .ico file (16x16 + 32x32 multi-resolution)
+    // Generate .ico file (16x16 + 32x32 multi-resolution) CON TRANSPARENCIA
     const ico16 = await sharp(squareBase)
-      .resize(16, 16)
-      .png()
+      .resize(16, 16, {
+        fit: 'contain',
+        background: { r: 0, g: 0, b: 0, alpha: 0 }
+      })
+      .png({ compressionLevel: 9, palette: true })
       .toBuffer();
     
     const ico32 = await sharp(squareBase)
-      .resize(32, 32)
-      .png()
+      .resize(32, 32, {
+        fit: 'contain',
+        background: { r: 0, g: 0, b: 0, alpha: 0 }
+      })
+      .png({ compressionLevel: 9, palette: true })
       .toBuffer();
 
     // Note: sharp doesn't natively support .ico, but we'll create a 32x32 PNG as favicon.ico
     await sharp(ico32)
       .toFile(path.join(publicDir, 'favicon.ico'));
     
-    console.log('✓ Generated favicon.ico (32x32)');
+    console.log('✓ Generated favicon.ico (32x32) con fondo transparente');
 
     // Generate SVG from PNG logo (rasterized in SVG wrapper for compatibility)
     // For best results, replace with actual vector logo if available
     const svg64Buffer = await sharp(squareBase)
-      .resize(512, 512)
-      .png()
+      .resize(512, 512, {
+        fit: 'contain',
+        background: { r: 0, g: 0, b: 0, alpha: 0 }
+      })
+      .png({ compressionLevel: 9 })
       .toBuffer();
     
     const base64Image = svg64Buffer.toString('base64');

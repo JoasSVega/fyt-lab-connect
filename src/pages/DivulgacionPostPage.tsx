@@ -24,17 +24,17 @@ const DivulgacionPostPage: React.FC = () => {
     return getPostBySlug(slug);
   }, [slug]);
 
-  // Si no existe el post, redirigir a 404
-  if (!post) {
-    return <Navigate to="/404" replace />;
-  }
-
   // Obtener posts relacionados (otros 2 posts)
   const relatedPosts = useMemo(() => {
     return divulgacionPosts
       .filter(p => p.slug !== slug)
       .slice(0, 2);
   }, [slug]);
+
+  // Si no existe el post, redirigir a 404
+  if (!post) {
+    return <Navigate to="/404" replace />;
+  }
 
   // Función para compartir en LinkedIn
   const shareOnLinkedIn = () => {
@@ -111,18 +111,25 @@ const DivulgacionPostPage: React.FC = () => {
       <article className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 py-12 sm:py-16">
         {/* Contenido en formato Markdown/HTML */}
         <div 
-          className="prose prose-lg prose-gray max-w-none
-            prose-headings:font-poppins prose-headings:font-bold prose-headings:text-gray-900 prose-headings:mt-8 prose-headings:mb-4
+          className="prose prose-xl prose-gray max-w-prose mx-auto
+            prose-headings:font-poppins prose-headings:font-bold prose-headings:text-gray-900 prose-headings:mt-14 prose-headings:mb-8 prose-headings:leading-tight
             prose-h2:sr-only prose-h3:sr-only
-            prose-p:font-inter prose-p:text-gray-700 prose-p:leading-8 prose-p:mb-6
-            prose-a:text-primary prose-a:no-underline hover:prose-a:underline
+            prose-h4:text-2xl prose-h4:mt-12 prose-h4:mb-6
+            prose-h5:text-xl prose-h5:mt-10 prose-h5:mb-5
+            prose-h6:text-lg prose-h6:mt-8 prose-h6:mb-4
+            prose-p:font-inter prose-p:text-gray-700 prose-p:leading-relaxed prose-p:mb-10 prose-p:text-justify
+            prose-p:first-of-type:text-xl prose-p:first-of-type:leading-relaxed prose-p:first-of-type:text-gray-800
+            prose-a:text-primary prose-a:no-underline prose-a:font-medium hover:prose-a:underline prose-a:transition-colors
             prose-strong:text-gray-900 prose-strong:font-semibold
-            prose-ol:font-inter prose-ol:mb-6 prose-ul:font-inter prose-ul:mb-6
-            prose-li:text-gray-700 prose-li:leading-8 prose-li:mb-3
-            prose-code:text-primary prose-code:bg-gray-100 prose-code:px-2 prose-code:py-1 prose-code:rounded
-            prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-pre:p-4 prose-pre:rounded-lg prose-pre:mb-6
-            prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-primary/5 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:mb-6 prose-blockquote:italic
-            prose-img:rounded-lg prose-img:shadow-lg prose-img:my-8"
+            prose-em:text-gray-800 prose-em:italic
+            prose-ol:font-inter prose-ol:mb-10 prose-ol:space-y-4 prose-ul:font-inter prose-ul:mb-10 prose-ul:space-y-4
+            prose-li:text-gray-700 prose-li:leading-relaxed prose-li:mb-4
+            prose-code:text-primary prose-code:bg-gray-100 prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:font-mono
+            prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-pre:p-6 prose-pre:rounded-lg prose-pre:mb-10 prose-pre:overflow-x-auto
+            prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-primary/5 prose-blockquote:py-6 prose-blockquote:px-8 prose-blockquote:mb-10 prose-blockquote:italic prose-blockquote:text-gray-800
+            prose-img:rounded-lg prose-img:shadow-lg prose-img:my-12 prose-img:w-full
+            prose-hr:border-gray-200 prose-hr:my-12
+            prose-table:mb-10"
           dangerouslySetInnerHTML={{ __html: post.content }}
         />
 

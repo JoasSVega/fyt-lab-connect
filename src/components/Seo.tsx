@@ -65,8 +65,8 @@ interface SEOProps {
   children?: ReactNode;
 }
 
-// Palabras clave globales
-const GLOBAL_KEYWORDS = 'Grupo FyT, FyT, Farmacología y Terapéutica, Investigación Farmacéutica';
+// Palabras clave globales: variaciones del nombre del grupo + líneas de investigación (todas equitativas)
+const GLOBAL_KEYWORDS = 'Grupo FyT, Grupo de Investigación FyT, Grupo de Investigación Farmacología y Terapéutica, Farmacología y Terapéutica Universidad de Cartagena, FyT, Grupo de investigación, Universidad de Cartagena, Atención Farmacéutica, Diseño de Fármacos, Farmacoeconomía, Farmacoepidemiología, Farmacología y Terapéutica, Farmacovigilancia, Toxicología, Farmacia Asistencial, Modelización Molecular, Investigación Farmacéutica, Ciencias Farmacéuticas, Cartagena, Colombia, Minciencias';
 
 /**
  * Componente reutilizable para gestionar meta tags y datos estructurados
