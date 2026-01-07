@@ -73,7 +73,7 @@ const DivulgacionPostPage: React.FC = () => {
   // Metadatos SEO / Open Graph / Twitter
   const baseUrl = "https://fyt-research.org";
   const canonicalUrl = `${baseUrl}/divulgacion/${post.slug}`;
-  const ogImage = `${baseUrl}${post.authorImage}`;
+  const ogImage = `${baseUrl}${post.authorImage || "/images/logo-fyt-medium.webp"}`;
   const metaDescription = post.excerpt.length > 160 ? `${post.excerpt.slice(0, 157)}…` : post.excerpt;
   const metaKeywords = post.tags ? [...post.tags, "Divulgación", "Grupo FyT", "Farmacología y Terapéutica"] : ["Divulgación", "Grupo FyT", "Farmacología y Terapéutica"];
 
