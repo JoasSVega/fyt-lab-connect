@@ -1,5 +1,5 @@
 import React from "react";
-import SafeImage from "@/components/SafeImage";
+import SmartImage from "@/components/SmartImage";
 
 interface AuthorBadgeProps {
   name: string;
@@ -51,12 +51,15 @@ const AuthorBadge: React.FC<AuthorBadgeProps> = ({
 
   const currentSize = sizes[size];
 
+  // Derivar basePath sin extensión para SmartImage
+  const basePath = image.replace(/\.webp$/i, "");
+
   return (
     <div className="flex items-center gap-4">
-      <SafeImage
-        src={image}
+      <SmartImage
+        basePath={basePath}
+        usage="avatar"
         alt={name}
-        fallbackSrc="/images/equipo/placeholder-avatar.webp"
         className={`${currentSize.image} rounded-full object-cover ring-2 ring-white shadow-md`}
       />
       <div>

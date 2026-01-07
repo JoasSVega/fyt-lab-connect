@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Clock, ArrowRight } from "lucide-react";
-import SafeImage from "@/components/SafeImage";
+import SmartImage from "@/components/SmartImage";
 import type { DivulgacionPost } from "@/types/divulgacion";
 
 interface DivulgacionCardProps {
@@ -57,10 +57,10 @@ const DivulgacionCard: React.FC<DivulgacionCardProps> = ({ post }) => {
 
             {/* Autor y fecha */}
             <div className="flex items-center gap-4 pt-4 border-t border-gray-100">
-              <SafeImage
-                src={post.authorImage}
+              <SmartImage
+                basePath={post.authorImage.replace(/\.webp$/i, "")}
+                usage="avatar"
                 alt={post.author}
-                fallbackSrc="/images/equipo/placeholder-avatar.webp"
                 className="w-12 h-12 rounded-full object-cover"
               />
               <div className="flex-1">

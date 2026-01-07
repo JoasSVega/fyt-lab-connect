@@ -112,16 +112,17 @@ const DivulgacionPostPage: React.FC = () => {
         {/* Contenido en formato Markdown/HTML */}
         <div 
           className="prose prose-lg prose-gray max-w-none
-            prose-headings:font-poppins prose-headings:font-bold prose-headings:text-gray-900
-            prose-p:font-inter prose-p:text-gray-700 prose-p:leading-relaxed
+            prose-headings:font-poppins prose-headings:font-bold prose-headings:text-gray-900 prose-headings:mt-8 prose-headings:mb-4
+            prose-h2:sr-only prose-h3:sr-only
+            prose-p:font-inter prose-p:text-gray-700 prose-p:leading-8 prose-p:mb-6
             prose-a:text-primary prose-a:no-underline hover:prose-a:underline
             prose-strong:text-gray-900 prose-strong:font-semibold
-            prose-ol:font-inter prose-ul:font-inter
-            prose-li:text-gray-700 prose-li:leading-relaxed
-            prose-code:text-primary prose-code:bg-gray-100 prose-code:px-1 prose-code:rounded
-            prose-pre:bg-gray-900 prose-pre:text-gray-100
-            prose-blockquote:border-primary prose-blockquote:bg-primary/5 prose-blockquote:py-1
-            prose-img:rounded-lg prose-img:shadow-lg"
+            prose-ol:font-inter prose-ol:mb-6 prose-ul:font-inter prose-ul:mb-6
+            prose-li:text-gray-700 prose-li:leading-8 prose-li:mb-3
+            prose-code:text-primary prose-code:bg-gray-100 prose-code:px-2 prose-code:py-1 prose-code:rounded
+            prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-pre:p-4 prose-pre:rounded-lg prose-pre:mb-6
+            prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-primary/5 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:mb-6 prose-blockquote:italic
+            prose-img:rounded-lg prose-img:shadow-lg prose-img:my-8"
           dangerouslySetInnerHTML={{ __html: post.content }}
         />
 
@@ -163,7 +164,7 @@ const DivulgacionPostPage: React.FC = () => {
                 onClick={shareOnLinkedIn}
                 variant="outline"
                 size="lg"
-                className="gap-2"
+                className="gap-2 text-[#0A66C2] border-[#0A66C2] hover:bg-[#0A66C2] hover:text-white active:bg-[#0A66C2] active:text-white focus-visible:ring-2 focus-visible:ring-[#0A66C2]/40"
               >
                 <Linkedin className="w-5 h-5" />
                 LinkedIn
@@ -172,7 +173,7 @@ const DivulgacionPostPage: React.FC = () => {
                 onClick={shareOnWhatsApp}
                 variant="outline"
                 size="lg"
-                className="gap-2"
+                className="gap-2 text-[#25D366] border-[#25D366] hover:bg-[#25D366] hover:text-white active:bg-[#25D366] active:text-white focus-visible:ring-2 focus-visible:ring-[#25D366]/40"
               >
                 <MessageCircle className="w-5 h-5" />
                 WhatsApp
@@ -181,7 +182,7 @@ const DivulgacionPostPage: React.FC = () => {
                 onClick={copyLink}
                 variant="outline"
                 size="lg"
-                className="gap-2"
+                className="gap-2 text-purple-600 border-purple-600 hover:bg-purple-600 hover:text-white active:bg-purple-600 active:text-white focus-visible:ring-2 focus-visible:ring-purple-400/40"
               >
                 <Copy className="w-5 h-5" />
                 Copiar

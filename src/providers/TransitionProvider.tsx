@@ -22,6 +22,7 @@ const isMainPage = (path: string): boolean => {
   const mainPages = [
     '/',
     '/noticias',
+    '/divulgacion',
     '/herramientas',
     '/sobre-nosotros',
     '/contactos',
@@ -33,6 +34,19 @@ const isMainPage = (path: string): boolean => {
   ];
   return mainPages.includes(path);
 };
+  const mainPages = [
+    '/',
+    '/noticias',
+    '/divulgacion',
+    '/herramientas',
+    '/sobre-nosotros',
+    '/contactos',
+    '/equipo',
+    '/investigacion',
+    '/politica-privacidad',
+    '/terminos-uso',
+    '/codigo-etica',
+  ];
 
 // Helper: Detectar si debe mostrarse el loader
 const shouldShowLoader = (fromPath: string, toPath: string): boolean => {
