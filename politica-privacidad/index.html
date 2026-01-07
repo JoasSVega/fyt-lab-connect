@@ -1,13 +1,21 @@
 <!doctype html>
 <html lang="es">
   <head>
-    <script type="module" crossorigin src="/assets/polyfills-C9umQY5u.js"></script>
-
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Grupo FyT | Investigación en Farmacología y Terapéutica</title>
+    <script>
+      (function () {
+        var params = new URLSearchParams(window.location.search);
+        var redirect = params.get('redirect');
+        if (redirect) {
+          var target = redirect.charAt(0) === '/' ? redirect : '/' + redirect;
+          window.history.replaceState(null, '', target);
+        }
+      })();
+    </script>
+    
   <!-- Primary Meta Tags -->
-  <meta name="description" content="Grupo FyT: Investigación de vanguardia en Farmacología y Terapéutica de la Universidad de Cartagena. Descubre nuestros proyectos, publicaciones y herramientas digitales." />
+  
   
   <!-- Performance: Preconnect to Google Fonts to shorten the critical chain -->
   <!-- Critical preconnects -->
@@ -37,8 +45,8 @@
   <!-- Señales de idioma para motores de búsqueda -->
   <meta http-equiv="Content-Language" content="es" />
   <meta name="language" content="es" />
-  <meta name="author" content="Grupo FyT" />
-  <meta name="keywords" content="Grupo FyT, Farmacología, Investigación, Universidad de Cartagena, Ciencia de Datos, Cartagena, farmacoterapia, farmacovigilancia" />
+  
+  
 
   <!-- Favicons optimizados (aspect ratio 1:1) -->
   <!-- SVG favicon (modern browsers, vectorial, ideal para diferentes tamaños) -->
@@ -108,37 +116,61 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.css" />
   </noscript>
   <!-- Canonical domain -->
-  <link rel="canonical" href="https://fyt-research.org/politica-privacidad/" />
+  
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Grupo FyT | Investigación en Farmacología y Terapéutica" />
-  <meta property="og:description" content="Grupo FyT: Investigación de vanguardia en Farmacología y Terapéutica de la Universidad de Cartagena. Descubre nuestros proyectos, publicaciones y herramientas digitales." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://fyt-research.org/politica-privacidad/" />
-  <meta property="og:site_name" content="Grupo FyT" />
-  <meta property="og:image" content="https://fyt-research.org/logo-fyt.png" />
-  <meta property="og:image:alt" content="Logo del Grupo FyT - Farmacología y Terapéutica" />
-  <meta property="og:locale" content="es_ES" />
+  
+  
+  
+  
+  
+  
+  
+  
 
   <!-- hreflang principal en español -->
   <link rel="alternate" hreflang="es" href="https://fyt-research.org" />
 
   <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content="https://fyt-research.org/politica-privacidad/" />
-  <meta name="twitter:title" content="Grupo FyT | Investigación en Farmacología y Terapéutica" />
-  <meta name="twitter:description" content="Grupo FyT: Investigación de vanguardia en Farmacología y Terapéutica de la Universidad de Cartagena. Descubre nuestros proyectos, publicaciones y herramientas digitales." />
-  <meta name="twitter:image" content="https://fyt-research.org/logo-fyt.png" />
-  <meta name="twitter:image:alt" content="Logo del Grupo FyT" />
-    <script type="module" crossorigin src="/assets/index-CtRNSMMG.js"></script>
+  
+  
+  
+  
+  
+  
+    <script type="module" crossorigin src="/assets/index-B0Uz8yDJ.js"></script>
     <link rel="modulepreload" crossorigin href="/assets/radix-CttiZxwU.js">
-    <link rel="modulepreload" crossorigin href="/assets/carousel-CQL47Cha.js">
-    <link rel="modulepreload" crossorigin href="/assets/vendor-29DZ0te0.js">
-    <link rel="modulepreload" crossorigin href="/assets/motion-DhUH61oz.js">
-    <link rel="stylesheet" crossorigin href="/assets/index-D0AKOKJS.css">
-    <script type="module">import.meta.url;import("_").catch(()=>1);(async function*(){})().next();if(location.protocol!="file:"){window.__vite_is_modern_browser=true}</script>
-    <script type="module">!function(){if(window.__vite_is_modern_browser)return;console.warn("vite: loading legacy chunks, syntax error above and the same error below should be ignored");var e=document.getElementById("vite-legacy-polyfill"),n=document.createElement("script");n.src=e.src,n.onload=function(){System.import(document.getElementById('vite-legacy-entry').getAttribute('data-src'))},document.body.appendChild(n)}();</script>
-  </head>
+    <link rel="modulepreload" crossorigin href="/assets/carousel-CHkIgb8Q.js">
+    <link rel="modulepreload" crossorigin href="/assets/vendor-CFnzp11V.js">
+    <link rel="modulepreload" crossorigin href="/assets/motion-Dmkun9ii.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-DHaTJq0X.css">
+  
+
+
+
+
+
+
+
+
+
+
+
+
+<title>Grupo FyT | Política de Privacidad</title>
+<meta name="author" content="Grupo FyT">
+<meta name="description" content="Política de tratamiento de datos del Grupo FyT.">
+<link rel="canonical" href="https://fyt-research.org/politica-privacidad">
+<meta property="og:title" content="Grupo FyT | Política de Privacidad">
+<meta property="og:description" content="Política de tratamiento de datos del Grupo FyT.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fyt-research.org/politica-privacidad">
+<meta property="og:site_name" content="Grupo FyT">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Grupo FyT | Política de Privacidad">
+<meta name="twitter:description" content="Política de tratamiento de datos del Grupo FyT.">
+</head>
 
   <body>
     <!-- Fallback content for JavaScript disabled -->
@@ -164,11 +196,12 @@
       </div>
     </noscript>
 
-    <div id="root"></div>
-    <!-- Polyfills críticos para Safari 11-15: DEBE cargar ANTES de React -->
-    <script src="/polyfills.js"></script>
-    <script nomodule>!function(){var e=document,t=e.createElement("script");if(!("noModule"in t)&&"onbeforeload"in t){var n=!1;e.addEventListener("beforeload",(function(e){if(e.target===t)n=!0;else if(!e.target.hasAttribute("nomodule")||!n)return;e.preventDefault()}),!0),t.type="module",t.src=".",e.head.appendChild(t),t.remove()}}();</script>
-    <script nomodule crossorigin id="vite-legacy-polyfill" src="/assets/polyfills-legacy-gi_aMIsJ.js"></script>
-    <script nomodule crossorigin id="vite-legacy-entry" data-src="/assets/index-legacy-BLrhpqKE.js">System.import(document.getElementById('vite-legacy-entry').getAttribute('data-src'))</script>
+    <div id="root"><div role="region" aria-label="Notifications (F8)" tabindex="-1" style="pointer-events:none"><ol tabindex="-1" class="fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]"></ol></div><section aria-label="Notifications alt+T" tabindex="-1" aria-live="polite" aria-relevant="additions text" aria-atomic="false"></section><!--$!--><template data-msg="The server did not finish this Suspense boundary: The server used &quot;renderToString&quot; which does not support Suspense. If you intended for this Suspense boundary to render the fallback content on the server consider throwing an Error somewhere within the Suspense boundary. If you intended to have the server wait for the suspended component please switch to &quot;renderToPipeableStream&quot; which supports Suspense on the server" data-stck="
+    at Suspense
+    at ue (file:///workspaces/fyt-lab-connect/dist/server/assets/main.ssg-BMhjZazl.js:1:6629)
+    at QueryClientProvider (file:///workspaces/fyt-lab-connect/node_modules/@tanstack/react-query/build/modern/QueryClientProvider.js:20:3)
+    at kt (file:///workspaces/fyt-lab-connect/dist/server/assets/main.ssg-BMhjZazl.js:1:32749)
+    at Router (/workspaces/fyt-lab-connect/node_modules/react-router/dist/umd/react-router.development.js:1207:17)
+    at StaticRouter (file:///workspaces/fyt-lab-connect/node_modules/react-router-dom/server.mjs:11:3)"></template><!--/$--></div>
   </body>
 </html>

@@ -1,1 +1,0 @@
-System.register(["./vendor-legacy-DgXOJGI_.js","./radix-legacy-DrD57dci.js","./carousel-legacy-DJBaTSmb.js"],function(e,t){"use strict";var r,n;return{setters:[e=>{r=e.ac,n=e.r},null,null],execute:function(){e("default",()=>{const{pathname:e}=r();return n.useEffect(()=>{window.__routeTransitionActive||window.scrollTo({top:0,behavior:"smooth"})},[e]),null})}}});
