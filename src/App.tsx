@@ -176,7 +176,8 @@ const App: React.FC = () => {
     };
     
     // Primera aplicación diferida para no bloquear FCP
-    if (requestIdleCallback) {
+    // Safari: polyfill de requestIdleCallback cargado en index.html
+    if (typeof requestIdleCallback !== 'undefined') {
       requestIdleCallback(applyEnhancement);
     } else {
       setTimeout(applyEnhancement, 100);

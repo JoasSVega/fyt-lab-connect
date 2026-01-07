@@ -120,7 +120,12 @@ export function usePredictiveLoader(
         .catch(() => { /* silent fail */ })
         .finally(() => {
           concurrentLoads.current = Math.max(0, concurrentLoads.current - 1);
-          requestIdleCallback?.(() => processQueue());
+          // Safari-safe: requestIdleCallback siempre existe (polyfill en index.html)
+          if (typeof requestIdleCallback !== 'undefined') {
+            requestIdleCallback(() => processQueue());
+          } else {
+            setTimeout(processQueue, 0);
+          }
         });
     }
   }, [priority, addPreloadHint]);

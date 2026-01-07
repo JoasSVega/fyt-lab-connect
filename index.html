@@ -4,6 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script>
+      // Polyfill para requestIdleCallback (Safari no lo soporta)
+      window.requestIdleCallback = window.requestIdleCallback || function(cb) {
+        var start = Date.now();
+        return setTimeout(function() {
+          cb({
+            didTimeout: false,
+            timeRemaining: function() {
+              return Math.max(0, 50 - (Date.now() - start));
+            }
+          });
+        }, 1);
+      };
+      
+      window.cancelIdleCallback = window.cancelIdleCallback || function(id) {
+        clearTimeout(id);
+      };
+      
+      // Redirect handling
       (function () {
         var params = new URLSearchParams(window.location.search);
         var redirect = params.get('redirect');
@@ -62,12 +80,12 @@
   <!-- Web App Manifest (PWA metadata) -->
   <link rel="manifest" href="/site.webmanifest" />
   
-  <!-- Preload LCP hero image (AVIF variants) -->
+  <!-- Preload LCP hero image (WebP variants - Safari compatible) -->
   <link
     rel="preload"
     as="image"
-    href="/images/Hero-Index-800.avif"
-    imagesrcset="/images/Hero-Index-400.avif 400w, /images/Hero-Index-800.avif 800w, /images/Hero-Index-1200.avif 1200w, /images/Hero-Index-1600.avif 1600w, /images/Hero-Index-1920.avif 1920w"
+    href="/images/hero-index-medium-medium.webp"
+    imagesrcset="/images/hero-index-small.webp 400w, /images/hero-index-medium-medium.webp 800w, /images/Hero-Index-large.webp 1200w"
     imagesizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px"
     fetchpriority="high"
   />
