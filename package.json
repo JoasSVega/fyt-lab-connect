@@ -11,7 +11,7 @@
     "build:client": "vite build",
     "build:ssr": "cross-env SSR=true vite build --ssr src/main.ssg.tsx --outDir dist/server",
     "prerender": "node scripts/prerender-react.mjs",
-    "build:ssg": "rm -rf dist && cross-env SSG_BUILD=true npm run build:client && npm run build:ssr && npm run validate:content && npm run prerender && node scripts/precompress.js",
+    "build:ssg": "rm -rf dist && cross-env SSG_BUILD=true npm run build:client && npm run build:ssr && npm run validate:content && npm run prerender && node scripts/generate-sitemap.mjs && node scripts/precompress.js",
     "validate:content": "tsx scripts/validate-content.mjs",
     "lint": "eslint .",
     "test": "vitest run",
