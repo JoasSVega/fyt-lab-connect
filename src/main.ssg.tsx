@@ -35,6 +35,7 @@ export function getRoutes(): string[] {
 export function render(path: string): { html: string; head: string } {
   const meta = routeMeta[path] || routeMeta['/'];
   const canonical = `https://fyt-research.org${path === '/' ? '' : path}`;
+  const baseUrl = 'https://fyt-research.org';
   // ========================================
   // DETECCIÓN DE TIPO DE CONTENIDO
   // ========================================
@@ -64,6 +65,11 @@ export function render(path: string): { html: string; head: string } {
   `<meta name="author" content="${post.author}">`,
   `<meta name="description" content="${post.excerpt}">`,
   `<link rel="canonical" href="${canonical}">`,
+  
+  // Imagen social (autor o logo)
+  `<meta property="og:image" content="${baseUrl}${post.authorImage || '/images/logo-fyt-medium.webp'}">`,
+  `<meta property="og:image:secure_url" content="${baseUrl}${post.authorImage || '/images/logo-fyt-medium.webp'}">`,
+  `<meta property="og:image:alt" content="Foto del autor ${post.author}">`,
       
   // OpenGraph para artículos
   `<meta property="og:title" content="${post.title}">`,
@@ -82,6 +88,7 @@ export function render(path: string): { html: string; head: string } {
   `<meta name="twitter:card" content="summary_large_image">`,
   `<meta name="twitter:title" content="${post.title}">`,
   `<meta name="twitter:description" content="${post.excerpt}">`,
+  `<meta name="twitter:image" content="${baseUrl}${post.authorImage || '/images/logo-fyt-medium.webp'}">`,
       
   // Structured Data (JSON-LD) para artículos
   `<script type="application/ld+json">
@@ -116,6 +123,11 @@ export function render(path: string): { html: string; head: string } {
   `<meta name="description" content="${meta.description}">`,
   `<link rel="canonical" href="${canonical}">`,
       
+  // Imagen social por defecto (logo)
+  `<meta property="og:image" content="${baseUrl}/images/logo-fyt-medium.webp">`,
+  `<meta property="og:image:secure_url" content="${baseUrl}/images/logo-fyt-medium.webp">`,
+  `<meta property="og:image:alt" content="Logo Grupo FyT">`,
+      
   // OpenGraph genérico
   `<meta property="og:title" content="Grupo FyT | ${meta.title}">`,
   `<meta property="og:description" content="${meta.description}">`,
@@ -128,6 +140,7 @@ export function render(path: string): { html: string; head: string } {
   `<meta name="twitter:card" content="summary_large_image">`,
   `<meta name="twitter:title" content="Grupo FyT | ${meta.title}">`,
   `<meta name="twitter:description" content="${meta.description}">`,
+  `<meta name="twitter:image" content="${baseUrl}/images/logo-fyt-medium.webp">`,
     ];
   }
 
