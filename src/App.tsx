@@ -131,8 +131,14 @@ function AnimatedRoutes() {
             }
           />
           
-          {/* Redirecciones */}
+          {/* Redirecciones (301 redirects para SEO) */}
           <Route path="/herramientas/antropometricas" element={<Navigate to="/herramientas/antropometricos" replace />} />
+          
+          {/* Redirects para URLs legales antiguas (evitar 404 desde sitemap antiguo) */}
+          <Route path="/PrivacyPolicy" element={<Navigate to="/politica-privacidad" replace />} />
+          <Route path="/TermsOfUse" element={<Navigate to="/terminos-uso" replace />} />
+          <Route path="/CodeOfEthics" element={<Navigate to="/codigo-etica" replace />} />
+          <Route path="/investigacion/contenidos" element={<Navigate to="/investigacion/divulgacion-cientifica" replace />} />
           
           {/* Página no encontrada */}
           <Route path="*" element={<NotFound />} />
