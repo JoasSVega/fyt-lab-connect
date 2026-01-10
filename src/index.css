@@ -587,23 +587,48 @@ body.modal-open .calc-overlay {
   
   /* Párrafo Lead/Intro */
   .prose .lead {
-    @apply text-base sm:text-lg font-medium text-gray-800 leading-relaxed first-letter:font-bold;
-    color: hsl(var(--fyt-dark));
-    font-size: 1.125rem;
-    line-height: 1.75;
-    letter-spacing: 0.3px;
+    color: hsl(var(--fyt-dark)) !important;
+    font-size: 1.125rem !important;
+    line-height: 1.75 !important;
+    letter-spacing: 0.3px !important;
+    font-weight: 500 !important;
+  }
+
+  @media (min-width: 640px) {
+    .prose .lead {
+      font-size: 1.25rem !important;
+    }
+  }
+
+  .prose .lead::first-letter {
+    font-weight: 700 !important;
   }
 
   /* Blockquote destacado para citas - Diseño Editorial */
   .prose .highlight-quote {
-    @apply border-l-4 border-[hsl(var(--fyt-blue))] bg-[hsl(var(--fyt-blue))]/5 py-4 sm:py-6 px-4 sm:px-8 my-8 rounded-r-lg italic;
+    border-left: 4px solid hsl(var(--fyt-blue)) !important;
+    background: hsl(var(--fyt-blue) / 0.05) !important;
+    padding: 1rem 2rem !important;
+    margin: 2rem 0 !important;
+    border-radius: 0 0.5rem 0.5rem 0 !important;
+    
+    /* Tipografía Editorial */
+    font-style: italic !important;
+    font-size: 1.25rem !important;
+    line-height: 1.6 !important;
+    color: #1a2637 !important; /* Gris muy oscuro casi azul */
+    font-weight: 500 !important;
+    
+    /* Efectos */
     position: relative;
     box-shadow: 0 2px 8px rgba(0, 191, 255, 0.08);
     transition: all 300ms ease;
-    font-size: 1.25rem;
-    line-height: 1.6;
-    color: #1a2637; /* Gris muy oscuro casi azul */
-    font-weight: 500;
+  }
+
+  @media (min-width: 640px) {
+    .prose .highlight-quote {
+      padding: 1.5rem 2rem !important;
+    }
   }
 
   .prose .highlight-quote:hover {
@@ -613,23 +638,43 @@ body.modal-open .calc-overlay {
 
   /* Sección de referencias bibliográficas */
   .prose .references-section {
-    @apply mt-12 pt-12 border-t border-gray-200;
-    margin-top: 3rem;
-    padding-top: 3rem;
+    margin-top: 3rem !important;
+    padding-top: 3rem !important;
+    border-top: 1px solid #e5e7eb !important;
   }
 
   .prose .references-section h3 {
-    @apply text-lg sm:text-xl font-bold text-gray-900 mb-6;
-    font-family: 'Poppins', sans-serif;
-    letter-spacing: 0.5px;
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 1.25rem !important;
+    font-weight: 700 !important;
+    color: #111827 !important;
+    margin-bottom: 1.5rem !important;
+    letter-spacing: 0.5px !important;
+  }
+
+  @media (min-width: 640px) {
+    .prose .references-section h3 {
+      font-size: 1.5rem !important;
+    }
   }
 
   .prose .references-section ol {
-    @apply space-y-3 list-decimal ml-6;
+    list-style-type: decimal !important;
+    margin-left: 1.5rem !important;
+    padding-left: 0 !important;
   }
 
-  .prose .references-section li {
-    @apply text-gray-700 text-sm sm:text-base leading-6;
+  .prose .references-section ol li {
+    color: #374151 !important;
+    font-size: 0.875rem !important;
+    line-height: 1.5 !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  @media (min-width: 640px) {
+    .prose .references-section ol li {
+      font-size: 1rem !important;
+    }
   }
 
   /* Mejora de headers en artículos */
@@ -702,21 +747,21 @@ body.modal-open .calc-overlay {
 
   /* Mejora de tipografía científica */
   article h1 {
-    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    line-height: 1.2;
-    letter-spacing: -0.3px;
-    word-spacing: 0.1em;
-    font-size: clamp(1.75rem, 5vw, 2.5rem); /* 28px móvil, hasta 40px desktop */
-    font-weight: 700;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+    line-height: 1.2 !important;
+    letter-spacing: -0.3px !important;
+    word-spacing: 0.1em !important;
+    font-size: clamp(1.75rem, 5vw, 2.5rem) !important; /* 28px móvil, hasta 40px desktop */
+    font-weight: 700 !important;
   }
 
   article h2 {
-    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    letter-spacing: -0.2px;
-    margin-top: 2rem;
-    margin-bottom: 1.5rem;
-    font-size: clamp(1.25rem, 3.5vw, 1.75rem); /* 20px móvil, hasta 28px desktop */
-    font-weight: 600;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+    letter-spacing: -0.2px !important;
+    margin-top: 2rem !important;
+    margin-bottom: 1.5rem !important;
+    font-size: clamp(1.25rem, 3.5vw, 1.75rem) !important; /* 20px móvil, hasta 28px desktop */
+    font-weight: 600 !important;
   }
 
   /* Espaciado de párrafos mejorado */
@@ -741,24 +786,24 @@ body.modal-open .calc-overlay {
   /* Responsive optimizado para mobile */
   @media (max-width: 640px) {
     article h1 {
-      font-size: 1.75rem;
-      line-height: 1.2;
-      font-weight: 700;
+      font-size: 1.75rem !important;
+      line-height: 1.2 !important;
+      font-weight: 700 !important;
     }
 
     article h2 {
-      font-size: 1.25rem;
-      margin-top: 1.5rem;
-      margin-bottom: 1rem;
-      font-weight: 600;
+      font-size: 1.25rem !important;
+      margin-top: 1.5rem !important;
+      margin-bottom: 1rem !important;
+      font-weight: 600 !important;
     }
 
     .prose .lead {
-      font-size: 1rem;
+      font-size: 1rem !important;
     }
 
     .prose .highlight-quote {
-      padding: 1rem;
-      font-size: 1.1rem;
+      padding: 1rem !important;
+      font-size: 1.1rem !important;
     }
   }

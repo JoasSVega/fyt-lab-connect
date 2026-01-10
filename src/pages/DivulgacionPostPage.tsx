@@ -260,8 +260,8 @@ const DivulgacionPostPage: React.FC = () => {
             prose-code:text-primary prose-code:bg-gray-100 prose-code:px-2.5 prose-code:py-1.5 prose-code:rounded prose-code:font-mono prose-code:text-xs sm:prose-code:text-sm prose-code:break-words
             prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-pre:p-4 sm:prose-pre:p-6 prose-pre:rounded-lg prose-pre:mb-8 prose-pre:overflow-x-auto prose-pre:text-xs sm:prose-pre:text-sm prose-pre:leading-relaxed
             prose-pre:shadow-lg
-            prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-primary/5 prose-blockquote:py-4 sm:prose-blockquote:py-6 prose-blockquote:px-4 sm:prose-blockquote:px-8 prose-blockquote:mb-8 prose-blockquote:italic prose-blockquote:text-gray-800 prose-blockquote:my-6 prose-blockquote:rounded-r-lg
-            prose-blockquote:not-italic prose-blockquote:font-semibold prose-blockquote:break-words
+            prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-primary/5 prose-blockquote:py-4 sm:prose-blockquote:py-6 prose-blockquote:px-4 sm:prose-blockquote:px-8 prose-blockquote:mb-8 prose-blockquote:text-gray-800 prose-blockquote:my-6 prose-blockquote:rounded-r-lg
+            prose-blockquote:break-words
             prose-ol:font-inter prose-ol:mb-8 prose-ol:space-y-4 prose-ol:ml-2 prose-ol:list-decimal
             prose-ul:font-inter prose-ul:mb-8 prose-ul:space-y-4 prose-ul:ml-2 prose-ul:list-disc
             prose-li:text-gray-700 prose-li:leading-7 prose-li:text-sm sm:prose-li:text-base prose-li:break-words prose-li:text-justify
@@ -273,7 +273,7 @@ const DivulgacionPostPage: React.FC = () => {
             prose-td:border prose-td:border-gray-200 prose-td:px-3 sm:prose-td:px-4 prose-td:py-2 sm:prose-td:py-3 prose-td:text-gray-700 prose-td:text-xs sm:prose-td:text-sm prose-td:break-words
             
             [&_.lead]:text-base [&_.lead]:sm:text-lg [&_.lead]:font-medium [&_.lead]:text-gray-800 [&_.lead]:leading-relaxed [&_.lead]:first-letter:font-bold
-            [&_.highlight-quote]:border-l-4 [&_.highlight-quote]:border-primary [&_.highlight-quote]:bg-primary/5 [&_.highlight-quote]:py-4 [&_.highlight-quote]:sm:py-6 [&_.highlight-quote]:px-4 [&_.highlight-quote]:sm:px-8 [&_.highlight-quote]:my-8 [&_.highlight-quote]:rounded-r-lg [&_.highlight-quote]:not-italic [&_.highlight-quote]:font-semibold [&_.highlight-quote]:text-gray-800
+            [&_.highlight-quote]:italic [&_.highlight-quote]:text-[1.25rem] [&_.highlight-quote]:text-[#1a2637] [&_.highlight-quote]:font-medium [&_.highlight-quote]:leading-relaxed
             [&_.references-section]:mt-12 [&_.references-section]:pt-12 [&_.references-section]:border-t [&_.references-section]:border-gray-200
             [&_.references-section_h3]:text-lg [&_.references-section_h3]:sm:text-xl [&_.references-section_h3]:font-bold [&_.references-section_h3]:text-gray-900 [&_.references-section_h3]:mb-6
             [&_.references-section_ol]:space-y-3 [&_.references-section_ol]:list-decimal [&_.references-section_ol]:ml-6
