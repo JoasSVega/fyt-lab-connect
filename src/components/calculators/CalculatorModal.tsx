@@ -1,5 +1,4 @@
 import React, { useState, useCallback, useMemo } from "react";
-import { motion, AnimatePresence, MotionConfig } from "framer-motion";
 import { createPortal } from "react-dom";
 import { X, Info } from "lucide-react";
 const Latex = React.lazy(() => import("../ui/Latex"));
@@ -115,6 +114,7 @@ const CalculatorModal: React.FC<Props> = ({
   const [flipped, setFlipped] = React.useState(false);
   const [error, setError] = React.useState<string>("");
   const [infoOpen, setInfoOpen] = React.useState(false);
+  const [fm, setFm] = React.useState<{ motion: any; AnimatePresence: any; MotionConfig: any } | null>(null);
   // Reseteo controlado de inputs no controlados (uncontrolled): cada incremento reinicia el formulario visual
   const [resetTick, setResetTick] = React.useState(0);
   const firstInputRef = React.useRef<HTMLInputElement | HTMLSelectElement | null>(null);
@@ -153,6 +153,24 @@ const CalculatorModal: React.FC<Props> = ({
     setFlipped(false);
     setError("");
     setResetTick((t) => t + 1);
+  }, [actuallyOpen]);
+
+  React.useEffect(() => {
+    if (!actuallyOpen) return;
+    let cancelled = false;
+    import("framer-motion")
+      .then((mod) => {
+        if (cancelled) return;
+        setFm({
+          motion: mod.motion,
+          AnimatePresence: (mod as any).AnimatePresence ?? mod.AnimatePresence,
+          MotionConfig: (mod as any).MotionConfig ?? mod.MotionConfig,
+        });
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
   }, [actuallyOpen]);
 
   const close = () => {
@@ -365,6 +383,7 @@ const CalculatorModal: React.FC<Props> = ({
           resetTick={resetTick}
           onFlipAnimationComplete={handleFlipAnimationComplete}
           enableCalculatePredicate={enableCalculatePredicate}
+          fm={fm}
         />
       </div>
     );
@@ -402,6 +421,7 @@ const CalculatorModal: React.FC<Props> = ({
       resetTick={resetTick}
       onFlipAnimationComplete={handleFlipAnimationComplete}
       enableCalculatePredicate={enableCalculatePredicate}
+      fm={fm}
     />
   );
 };
@@ -438,9 +458,13 @@ const CalculatorModalContent: React.FC<{
   resetTick: number;
   onFlipAnimationComplete?: () => void;
   enableCalculatePredicate?: (values: Record<string, unknown>) => boolean;
-}> = ({ id, open, onClose, title, subtitle, icon, fields, values, onInput, formulas, selectedFormula, onSelectFormula, onCalculate, onClear, onReturn, result, flipped, error, categoryColor, infoOpen, setInfoOpen, firstInputRef, autoCalculate = false, actionVisibility = "default", backAction = "volver", resetTick, onFlipAnimationComplete, enableCalculatePredicate }) => {
+  fm?: { motion: any; AnimatePresence: any; MotionConfig: any } | null;
+}> = ({ id, open, onClose, title, subtitle, icon, fields, values, onInput, formulas, selectedFormula, onSelectFormula, onCalculate, onClear, onReturn, result, flipped, error, categoryColor, infoOpen, setInfoOpen, firstInputRef, autoCalculate = false, actionVisibility = "default", backAction = "volver", resetTick, onFlipAnimationComplete, enableCalculatePredicate, fm }) => {
   // Bandera de entorno de test para la UI/renderizado
   const isTestEnvUI = typeof import.meta !== 'undefined' && import.meta.env?.MODE === 'test';
+  const MotionDiv = fm?.motion?.div || "div";
+  const MotionAnimatePresence = (fm?.AnimatePresence as React.ComponentType<any>) || (({ children }: { children: React.ReactNode }) => <>{children}</>);
+  const MotionConfigComp = (fm?.MotionConfig as React.ComponentType<any>) || (({ children }: { children: React.ReactNode }) => <>{children}</>);
   // Helpers de validación y mensajes unificados
   const normalizeDecimal = React.useCallback((raw: string) => raw.replace(',', '.'), []);
   const validateValues = React.useCallback((vals: Record<string, unknown>): string | null => {
@@ -483,10 +507,11 @@ const CalculatorModalContent: React.FC<{
   React.useEffect(() => {
     if (prevFlippedRef.current !== flipped) {
       // Cambio de estado de flipped -> comienza animación
-      flipAnimatingRef.current = true;
+      flipAnimatingRef.current = !!fm;
+      if (!fm && !flipped) onFlipAnimationComplete?.();
     }
     prevFlippedRef.current = flipped;
-  }, [flipped]);
+  }, [flipped, fm, onFlipAnimationComplete]);
   const [cardHeight, setCardHeight] = React.useState<number | undefined>(undefined);
   const [bodyScrollable, setBodyScrollable] = React.useState(false);
   const prevOverflowRef = React.useRef<string | null>(null);
@@ -705,24 +730,24 @@ const CalculatorModalContent: React.FC<{
         />
 
         {/* Contenedor centrado del modal: se anima su presencia para sincronizar con el overlay */}
-        <AnimatePresence>
+        <MotionAnimatePresence>
           {open && (
-            <motion.div
+            <MotionDiv
               className="absolute inset-0 flex items-center justify-center"
-              initial={hasAnimatedRef.current ? false : { opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25, ease: 'easeInOut' }}
+              initial={fm && !hasAnimatedRef.current ? { opacity: 0 } : undefined}
+              animate={fm ? { opacity: 1 } : undefined}
+              exit={fm ? { opacity: 0 } : undefined}
+              transition={fm ? { duration: 0.25, ease: 'easeInOut' } : undefined}
               // El control de hasAnimatedRef se realiza en la tarjeta (card) para asegurar que el fade+scale ocurra suavemente
             >
               {/* Card */}
-              <motion.div
+              <MotionDiv
                 className="relative z-[999] w-[94vw] sm:w-[85vw] md:w-[70vw] lg:w-[60vw] xl:w-[50vw] max-h-[90vh]"
-                initial={hasAnimatedRef.current ? false : { opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-                onAnimationComplete={() => { if (!hasAnimatedRef.current) hasAnimatedRef.current = true; }}
+                initial={fm && !hasAnimatedRef.current ? { opacity: 0, scale: 0.95 } : undefined}
+                animate={fm ? { opacity: 1, scale: 1 } : undefined}
+                exit={fm ? { opacity: 0, scale: 0.95 } : undefined}
+                transition={fm ? { duration: 0.3, ease: "easeInOut" } : undefined}
+                onAnimationComplete={fm ? () => { if (!hasAnimatedRef.current) hasAnimatedRef.current = true; } : undefined}
                 onClick={(e)=>e.stopPropagation()}
                 ref={cardRootRef}
               >
@@ -843,10 +868,10 @@ const CalculatorModalContent: React.FC<{
                   {/* Contenedor 3D para flip suave entre caras */}
                   <div className="relative w-full perspective-1200" style={{ perspective: '1200px', WebkitPerspective: '1200px' }}>
                     {/* Forzar animación aún con prefers-reduced-motion mediante MotionConfig */}
-                    <MotionConfig reducedMotion="never">
+                    <MotionConfigComp reducedMotion="never">
                       {/* Nuevo inicio limpio: único contenedor rota, sin tarjeta interna visible ni sombras dinámicas */}
-                      <motion.div
-                        initial={false}
+                      <MotionDiv
+                        initial={fm ? false : undefined}
                         className={`relative w-full preserve-3d flip-root ${flipped ? 'is-flipped' : ''}`}
                         style={{
                           height: cardHeight ? `${cardHeight}px` : undefined,
@@ -855,11 +880,12 @@ const CalculatorModalContent: React.FC<{
                           willChange: 'transform',
                           transformPerspective: 1200,
                           transition: 'transform 0.6s ease',
+                          transform: flipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
                         }}
-                        animate={{ rotateY: flipped ? 180 : 0 }}
-                        transition={{ duration: 0.6, ease: 'easeInOut' }}
-                        onAnimationStart={() => { flipAnimatingRef.current = true; }}
-                        onAnimationComplete={() => { flipAnimatingRef.current = false; if (!flipped) onFlipAnimationComplete?.(); }}
+                        animate={fm ? { rotateY: flipped ? 180 : 0 } : undefined}
+                        transition={fm ? { duration: 0.6, ease: 'easeInOut' } : undefined}
+                        onAnimationStart={fm ? () => { flipAnimatingRef.current = true; } : undefined}
+                        onAnimationComplete={fm ? () => { flipAnimatingRef.current = false; if (!flipped) onFlipAnimationComplete?.(); } : undefined}
                       >
                       <div
                         ref={frontFaceRef}
@@ -968,13 +994,13 @@ const CalculatorModalContent: React.FC<{
                           )}
                         </div>
                       </div>
-                      </motion.div>
-                    </MotionConfig>
+                      </MotionDiv>
+                    </MotionConfigComp>
                   </div>
                 </div>
               </div>
             </div>
-          </motion.div>
+          </MotionDiv>
 
           {/* Info modal for formulas */}
           {infoOpen && (
@@ -1051,9 +1077,9 @@ const CalculatorModalContent: React.FC<{
               </div>
             </div>
           )}
-        </motion.div>
+        </MotionDiv>
         )}
-      </AnimatePresence>
+      </MotionAnimatePresence>
     </div>
   </ModalPortal>
   );
