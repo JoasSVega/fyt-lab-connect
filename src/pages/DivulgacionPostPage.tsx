@@ -300,7 +300,6 @@ const DivulgacionPostPage: React.FC = () => {
           </div>
         )}
       </section>
-      </article>
 
       {/* Footer del artículo */}
       <footer className="border-t-2 border-gray-200 bg-gray-50">
@@ -334,6 +333,7 @@ const DivulgacionPostPage: React.FC = () => {
           </div>
         </div>
       </footer>
+      </article>
 
       {/* Compartir artículo */}
       <section className="border-t-2 border-gray-200 bg-white">
