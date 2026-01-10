@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useEffect, useState } from "react";
 import { MessageCircle, X, Phone, Mail } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
@@ -7,6 +6,27 @@ import { sanitizeURL } from "@/lib/sanitize";
 
 const FloatingContact = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [fm, setFm] = useState<{ motion: any; AnimatePresence: any } | null>(null);
+
+  // Prefetch framer-motion after idle; ensures animations load without blocking first paint.
+  useEffect(() => {
+    let cancelled = false;
+    const load = () => {
+      import("framer-motion")
+        .then((mod) => {
+          if (cancelled) return;
+          setFm({ motion: mod.motion, AnimatePresence: (mod as any).AnimatePresence ?? mod.AnimatePresence });
+        })
+        .catch(() => {});
+    };
+    const idle = (window as any).requestIdleCallback;
+    const id = idle ? idle(load) : window.setTimeout(load, 1200);
+    return () => {
+      cancelled = true;
+      if (idle && typeof id === "number") (window as any).cancelIdleCallback?.(id);
+      else clearTimeout(id as any);
+    };
+  }, []);
 
   const contactOptions = [
     {
@@ -69,53 +89,57 @@ const FloatingContact = () => {
     open: { opacity: 1, y: 0, transition: { duration: 0.32, ease: easeInOut } },
   };
 
+  const MotionDiv = fm?.motion?.div || "div";
+  const MotionButton = fm?.motion?.button || "button";
+  const MotionAnimatePresence = fm?.AnimatePresence || (({ children }: { children: React.ReactNode }) => <>{children}</>);
+
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
       {/* Opciones del menú */}
-      <AnimatePresence>
+      <MotionAnimatePresence>
         {isOpen && (
-          <motion.div
+          <MotionDiv
             className="mb-4 space-y-3"
-            initial="closed"
-            animate="open"
-            exit="closed"
-            variants={menuVariants}
+            initial={fm ? "closed" : undefined}
+            animate={fm ? "open" : undefined}
+            exit={fm ? "closed" : undefined}
+            variants={fm ? menuVariants : undefined}
           >
             {[...contactOptions].reverse().map((option, index) => {
               const Icon = option.icon;
               return (
-                <motion.div
+                <MotionDiv
                   key={index}
                   className="cursor-pointer"
-                  variants={itemVariants}
+                  variants={fm ? itemVariants : undefined}
                 >
                   <a href={option.href} target="_blank" rel="noopener noreferrer">
                     <Card className="p-3 bg-white shadow-lg border-0">
                       <div className="flex items-center space-x-3">
-                        <motion.div
+                        <MotionDiv
                           className={`w-10 h-10 rounded-full flex items-center justify-center ${option.color}`}
-                          whileHover={{ scale: 1.13 }}
-                          transition={{ type: "spring", stiffness: 250 }}
+                          whileHover={fm ? { scale: 1.13 } : undefined}
+                          transition={fm ? { type: "spring", stiffness: 250 } : undefined}
                         >
                           <Icon className="h-5 w-5 text-white" />
-                        </motion.div>
+                        </MotionDiv>
                         <span className="text-sm font-medium text-fyt-dark">
                           {option.label}
                         </span>
                       </div>
                     </Card>
                   </a>
-                </motion.div>
+                </MotionDiv>
               );
             })}
-          </motion.div>
+          </MotionDiv>
         )}
-      </AnimatePresence>
+      </MotionAnimatePresence>
       {/* FAB button */}
-      <motion.button
-        initial={false}
-        animate={isOpen ? "open" : "closed"}
-        variants={fabVariants}
+      <MotionButton
+        initial={fm ? false : undefined}
+        animate={fm ? (isOpen ? "open" : "closed") : undefined}
+        variants={fm ? fabVariants : undefined}
         onClick={() => setIsOpen(!isOpen)}
         className="w-14 h-14 rounded-full flex items-center justify-center p-0 border-0 shadow-lg"
         style={{
@@ -134,7 +158,7 @@ const FloatingContact = () => {
         ) : (
           <MessageCircle className="h-6 w-6 text-white" />
         )}
-      </motion.button>
+      </MotionButton>
     </div>
   );
 };

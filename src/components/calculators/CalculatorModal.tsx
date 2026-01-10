@@ -709,7 +709,7 @@ const CalculatorModalContent: React.FC<{
           {open && (
             <motion.div
               className="absolute inset-0 flex items-center justify-center"
-              initial={hasAnimatedRef.current ? false : { opacity: 0 }}
+              initial={!hasAnimatedRef.current ? { opacity: 0 } : false}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.25, ease: 'easeInOut' }}
@@ -718,7 +718,7 @@ const CalculatorModalContent: React.FC<{
               {/* Card */}
               <motion.div
                 className="relative z-[999] w-[94vw] sm:w-[85vw] md:w-[70vw] lg:w-[60vw] xl:w-[50vw] max-h-[90vh]"
-                initial={hasAnimatedRef.current ? false : { opacity: 0, scale: 0.95 }}
+                initial={!hasAnimatedRef.current ? { opacity: 0, scale: 0.95 } : false}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.3, ease: "easeInOut" }}
@@ -854,7 +854,6 @@ const CalculatorModalContent: React.FC<{
                           WebkitTransformStyle: 'preserve-3d',
                           willChange: 'transform',
                           transformPerspective: 1200,
-                          transition: 'transform 0.6s ease',
                         }}
                         animate={{ rotateY: flipped ? 180 : 0 }}
                         transition={{ duration: 0.6, ease: 'easeInOut' }}

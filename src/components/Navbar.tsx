@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 import { usePrefetch } from "@/hooks/usePrefetch";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [fm, setFm] = useState<{ motion: any; AnimatePresence: any } | null>(null);
   const { prefetch } = usePrefetch();
 
   // No hack de fetchpriority: se establece directamente en el JSX del <img>
@@ -62,6 +62,22 @@ const Navbar = () => {
     setIsMenuOpen(false);
     setOpenDropdown(null);
   };
+
+  // Lazy-load framer-motion only when the mobile menu is opened (avoids loading motion on first paint).
+  useEffect(() => {
+    if (!isMenuOpen || fm) return;
+    let cancelled = false;
+    import("framer-motion").then((mod) => {
+      if (cancelled) return;
+      setFm({ motion: mod.motion, AnimatePresence: (mod as any).AnimatePresence ?? mod.AnimatePresence });
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [isMenuOpen, fm]);
+
+  const MotionDiv = fm?.motion?.div || "div";
+  const MotionAnimatePresence = fm?.AnimatePresence || React.Fragment;
 
   return (
     <nav role="navigation" aria-label="Principal" className={`nav-root fixed top-0 left-0 right-0 z-50 ${isScrolled ? "is-scrolled" : "bg-white"}`}>
@@ -158,16 +174,13 @@ const Navbar = () => {
         </div>
 
         {/* Menú móvil y tablet */}
-        <AnimatePresence mode="wait">
+        <MotionAnimatePresence mode="wait">
           {isMenuOpen && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{
-                duration: 0.35,
-                ease: [0.4, 0, 0.2, 1]
-              }}
+            <MotionDiv
+              initial={fm ? { height: 0, opacity: 0 } : undefined}
+              animate={fm ? { height: "auto", opacity: 1 } : undefined}
+              exit={fm ? { height: 0, opacity: 0 } : undefined}
+              transition={fm ? { duration: 0.35, ease: [0.4, 0, 0.2, 1] } : undefined}
               className="lg:hidden border-t border-slate-200 overflow-hidden bg-white shadow-soft"
               id="nav-mobile"
               aria-label="Menú móvil"
@@ -195,9 +208,9 @@ const Navbar = () => {
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </MotionDiv>
           )}
-        </AnimatePresence>
+        </MotionAnimatePresence>
       </div>
     </nav>
   );
