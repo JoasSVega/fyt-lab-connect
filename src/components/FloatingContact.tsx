@@ -6,7 +6,7 @@ import { sanitizeURL } from "@/lib/sanitize";
 
 const FloatingContact = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [fm, setFm] = useState<{ motion: any; AnimatePresence: any } | null>(null);
+  const [fm, setFm] = useState<{ motion: typeof import("framer-motion").motion; AnimatePresence: typeof import("framer-motion").AnimatePresence } | null>(null);
 
   // Prefetch framer-motion after idle; ensures animations load without blocking first paint.
   useEffect(() => {
@@ -15,16 +15,16 @@ const FloatingContact = () => {
       import("framer-motion")
         .then((mod) => {
           if (cancelled) return;
-          setFm({ motion: mod.motion, AnimatePresence: (mod as any).AnimatePresence ?? mod.AnimatePresence });
+          setFm({ motion: mod.motion, AnimatePresence: (mod as unknown as typeof mod).AnimatePresence ?? mod.AnimatePresence });
         })
         .catch(() => {});
     };
-    const idle = (window as any).requestIdleCallback;
+    const idle = (window as Window & { requestIdleCallback?: (cb: () => void) => number }).requestIdleCallback;
     const id = idle ? idle(load) : window.setTimeout(load, 1200);
     return () => {
       cancelled = true;
-      if (idle && typeof id === "number") (window as any).cancelIdleCallback?.(id);
-      else clearTimeout(id as any);
+      if (idle && typeof id === "number") (window as Window & { cancelIdleCallback?: (id: number) => void }).cancelIdleCallback?.(id);
+      else clearTimeout(id as number);
     };
   }, []);
 

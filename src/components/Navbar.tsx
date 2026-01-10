@@ -7,7 +7,7 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [fm, setFm] = useState<{ motion: any; AnimatePresence: any } | null>(null);
+  const [fm, setFm] = useState<{ motion: typeof import("framer-motion").motion; AnimatePresence: typeof import("framer-motion").AnimatePresence } | null>(null);
   const { prefetch } = usePrefetch();
 
   // No hack de fetchpriority: se establece directamente en el JSX del <img>
@@ -69,7 +69,7 @@ const Navbar = () => {
     let cancelled = false;
     import("framer-motion").then((mod) => {
       if (cancelled) return;
-      setFm({ motion: mod.motion, AnimatePresence: (mod as any).AnimatePresence ?? mod.AnimatePresence });
+      setFm({ motion: mod.motion, AnimatePresence: (mod as unknown as typeof mod).AnimatePresence ?? mod.AnimatePresence });
     });
     return () => {
       cancelled = true;
