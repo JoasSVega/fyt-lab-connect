@@ -33,7 +33,7 @@ export const Latex: React.FC<LatexProps> = ({
         ]);
         if (!cancelled) {
           // Some bundlers expose default, others return the module itself.
-          setKatexModule((katexDynamic as any).default ?? katexDynamic);
+          setKatexModule((katexDynamic as unknown as { default?: typeof katexDynamic }).default ?? katexDynamic);
         }
       } finally {
         if (!cancelled) setLoading(false);
