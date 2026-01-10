@@ -14,9 +14,9 @@ import type { DivulgacionPost } from "@/types/divulgacion";
 
 export const divulgacionPosts: DivulgacionPost[] = [
   {
-    slug: "actualizacion-codigos-cups-atencion-farmaceutica",
-    title: "La actualización y apropiación de los códigos CUPS: Un paso inapelable hacia la visibilidad de la profesión Químico Farmacéutica desde el ámbito de la atención farmacéutica en Colombia",
-    excerpt: "En el sistema de salud colombiano, la Clasificación Única de Procedimientos en Salud (CUPS) constituye el eje sobre el cual se articula la atención. Para el Químico Farmacéutico, esta estructura ha presentado históricamente un vacío que limita el reconocimiento de su rol asistencial.",
+    slug: "codigos-cups-atencion-farmaceutica-colombia",
+    title: "Códigos CUPS y Atención Farmacéutica: El paso clave para la visibilidad del Químico Farmacéutico en Colombia",
+    excerpt: "Análisis sobre la necesidad de actualizar los códigos CUPS en Colombia para reconocer el rol clínico del Químico Farmacéutico, garantizar la seguridad del paciente y optimizar recursos.",
     author: "Antistio Alviz Amador",
     authorRole: "Q.F., MSc, PhD - Grupo de Investigación en Farmacología y Terapéutica (FyT)",
     authorImage: "/images/equipo/Antistio-Alviz-medium.webp",
@@ -25,19 +25,50 @@ export const divulgacionPosts: DivulgacionPost[] = [
     category: "Política Farmacéutica",
     tags: ["Atención Farmacéutica", "CUPS", "Política de Salud", "Química Farmacéutica", "Colombia"],
     content: `
-<p>En el sistema de salud colombiano, la <strong>Clasificación Única de Procedimientos en Salud (CUPS)</strong> constituye el eje sobre el cual se articula la atención; es el lenguaje técnico que permite que cada intervención sea registrada, medida y, por supuesto, financiada. Sin embargo, para el <strong>Químico Farmacéutico</strong>, esta estructura ha presentado históricamente un vacío que limita el reconocimiento de su rol asistencial. Por esta razón, la evolución de estos códigos no debe verse como un simple ajuste administrativo, sino como una <strong>necesidad imperativa</strong> para otorgar visibilidad real a la profesión desde el ámbito de la atención farmacéutica, lo que es una necesidad en los procesos de <strong>seguridad del paciente</strong>.</p>
+<p class="lead">En el sistema de salud colombiano, la <strong>Clasificación Única de Procedimientos en Salud (CUPS)</strong> constituye el lenguaje técnico que permite registrar, medir y financiar cada intervención. Sin embargo, para el Químico Farmacéutico, esta estructura ha presentado históricamente un vacío que limita el reconocimiento de su rol asistencial. La evolución de estos códigos no es un simple ajuste administrativo, sino una <strong>necesidad imperativa</strong> para otorgar visibilidad real a la profesión y fortalecer la seguridad del paciente.</p>
 
-<h2>¿Qué son los códigos CUPS?</h2>
+<h2>¿Qué son los códigos CUPS y por qué importan?</h2>
 
-<p>Formalmente, el Artículo 4 de la <em>Resolución 4678 de 2015</em> define los <strong>CUPS</strong> como el sistema que <em>"corresponde al ordenamiento lógico y detallado de los procedimientos y servicios en salud que se realizan en el país, en cumplimiento de los principios de interoperabilidad y estandarización de datos"</em>. En la práctica, esto significa que cada procedimiento, desde una cirugía compleja hasta una consulta de control, recibe un código y una descripción únicos. Este sistema es <strong>esencial</strong> para estandarizar el registro de la atención, la facturación de servicios y el análisis de datos a nivel nacional, independientemente del profesional que realice el procedimiento. Sin embargo, si bien este modelo funciona para la mayoría de las áreas, presenta una <strong>ambigüedad crítica</strong> en lo que respecta a los servicios clínicos farmacéuticos.</p>
+<p>Formalmente, el Artículo 4 de la Resolución 4678 de 2015 define los CUPS como el <em>"ordenamiento lógico y detallado de los procedimientos y servicios en salud"</em>. En la práctica, esto significa que cada acción clínica recibe un código único. Este sistema es esencial para la <strong>estandarización del registro</strong> y el análisis de datos a nivel nacional.</p>
 
-<p>Teniendo en cuenta lo anterior, nos enfrentamos a una <strong>falta de especificidad</strong> que diluye la labor del Químico Farmacéutico colombiano. Al agrupar diversas actividades farmacéuticas en códigos genéricos, se genera un <strong>déficit de datos</strong> que impide al Ministerio de Salud y a los entes de control valorar el impacto real de nuestras intervenciones. La <strong>atención farmacéutica</strong>, por su propia naturaleza legal y técnica, no es un proceso de soporte logístico, sino un <strong>acto clínico autónomo</strong>. Cuando realizamos una entrevista al paciente, construimos su perfil farmacoterapéutico y detectamos problemas relacionados con los medicamentos, estamos ejecutando una actividad que es <strong>equivalente, en rigor y responsabilidad</strong>, a una consulta profesional, que además puede ser especializada por el universo complejo de patologías a las que nos enfrentamos y a todo el arsenal terapéutico disponible tanto farmacológico como no farmacológico.</p>
+<p>Sin embargo, si bien este modelo funciona para la mayoría de las áreas médicas, presenta una <strong>ambigüedad crítica</strong> en lo que respecta a los servicios clínicos farmacéuticos.</p>
 
-<p>Bajo esta premisa, la <strong>inclusión de códigos específicos</strong> para la Interconsulta por Químico Farmacéutico y las consultas de seguimiento se vuelve el <strong>pilar</strong> para la integración definitiva del farmacéutico en el equipo interdisciplinario. Este reconocimiento permite que nuestra participación en la historia clínica deje de ser una nota marginal para convertirse en un <strong>procedimiento trazable</strong>. Es, en esencia, la herramienta que nos permite hablar el <strong>mismo idioma</strong> que otras disciplinas de la salud, como enfermería o nutrición, quienes ya cuentan con este respaldo en la codificación nacional para sus consultas especializadas.</p>
+<h2>El problema: Invisibilidad de datos y labor clínica</h2>
 
-<p>El beneficio de esta visibilidad impacta directamente en la <strong>seguridad de las poblaciones más vulnerables</strong>. En escenarios de alta complejidad, como el manejo de enfermedades huérfanas, la atención pediátrica o el control de la polifarmacia en adultos mayores, la intervención del Químico Farmacéutico <strong>reduce de forma comprobada</strong> la morbilidad y los reingresos hospitalarios. Al formalizar estos procedimientos mediante códigos <strong>CUPS diferenciados</strong>, el sistema finalmente podrá cuantificar cómo la <strong>gestión experta de la farmacoterapia</strong> salva vidas y optimiza los recursos públicos.</p>
+<p>Nos enfrentamos a una falta de especificidad que diluye la labor del Químico Farmacéutico. Al agrupar diversas actividades en códigos genéricos, se genera un <strong>déficit de datos</strong> que impide a los entes de control valorar el impacto real de nuestras intervenciones.</p>
 
-<p>En definitiva, actualizar los CUPS para reflejar la realidad de la atención farmacéutica es un <strong>acto de justicia profesional</strong> y de <strong>responsabilidad sanitaria</strong>. Solo a través de una codificación que reconozca nuestra <strong>autonomía clínica</strong> podremos asegurar que el papel del Químico Farmacéutico en Colombia sea valorado por su verdadero aporte: <strong>garantizar que cada tratamiento sea una herramienta de curación segura, efectiva y humana</strong>.</p>
+<blockquote class="highlight-quote">"La atención farmacéutica, por su propia naturaleza legal y técnica, no es un proceso de soporte logístico, sino un acto clínico autónomo."</blockquote>
+
+<p>Cuando realizamos una entrevista al paciente, construimos su perfil farmacoterapéutico y detectamos problemas relacionados con los medicamentos, estamos ejecutando una actividad equivalente en rigor a una consulta profesional especializada. Nos enfrentamos a un universo complejo de patologías y a un vasto arsenal terapéutico que requiere gestión experta.</p>
+
+<h2>La solución: Codificación de la Interconsulta</h2>
+
+<p>La inclusión de códigos específicos para la <strong>Interconsulta por Químico Farmacéutico</strong> es el pilar para la integración definitiva en el equipo interdisciplinario. Este reconocimiento permite que nuestra participación en la historia clínica deje de ser una nota marginal para convertirse en un <strong>procedimiento trazable</strong>.</p>
+
+<p>Es la herramienta que nos permite "hablar el mismo idioma" que otras disciplinas, como enfermería o nutrición, quienes ya cuentan con este respaldo en la codificación nacional.</p>
+
+<h2>Impacto directo en la Seguridad del Paciente</h2>
+
+<p>El beneficio de esta visibilidad impacta directamente a las poblaciones más vulnerables. La intervención del Químico Farmacéutico reduce de forma comprobada la morbilidad y los reingresos hospitalarios en escenarios de alta complejidad, tales como:</p>
+
+<ul>
+  <li>Manejo de enfermedades huérfanas.</li>
+  <li>Atención pediátrica especializada.</li>
+  <li>Control de la polifarmacia en adultos mayores.</li>
+</ul>
+
+<p>Al formalizar estos procedimientos mediante códigos CUPS diferenciados, el sistema finalmente podrá cuantificar cómo la <strong>gestión experta de la farmacoterapia</strong> salva vidas y optimiza los recursos públicos.</p>
+
+<h2>Conclusión</h2>
+
+<p>Actualizar los CUPS para reflejar la realidad de la atención farmacéutica es un acto de justicia profesional y responsabilidad sanitaria. Solo a través de una codificación que reconozca nuestra <strong>autonomía clínica</strong> podremos asegurar que el papel del Químico Farmacéutico en Colombia sea valorado por su verdadero aporte: garantizar tratamientos seguros, efectivos y humanos.</p>
+
+<div class="references-section">
+  <h3>Referencias y Lecturas Recomendadas</h3>
+  <ol>
+    <li>Ministerio de Salud y Protección Social. Resolución 4678 de 2015: Por la cual se adopta la Clasificación Única de Procedimientos en Salud - CUPS.</li>
+  </ol>
+</div>
     `
   },
   // COMENTADOS: Posts de prueba/demostración generados por IA
