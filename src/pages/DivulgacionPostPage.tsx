@@ -196,7 +196,7 @@ const DivulgacionPostPage: React.FC = () => {
           </div>
 
           {/* Título H1 optimizado para SEO */}
-          <h1 className="font-poppins font-bold text-2xl sm:text-3xl lg:text-4xl text-gray-900 leading-tight mb-8 break-words">
+          <h1 className="mb-8">
             {post.title}
           </h1>
 
@@ -224,7 +224,7 @@ const DivulgacionPostPage: React.FC = () => {
             </div>
 
             {/* Fecha y tiempo de lectura */}
-            <div className="flex items-center gap-4 sm:gap-6 text-xs sm:text-sm text-gray-600">
+            <div className="flex items-center gap-4 sm:gap-6 text-xs sm:text-sm text-gray-600 sm:ml-auto sm:text-right">
               <span className="flex items-center gap-1 whitespace-nowrap">
                 <time dateTime={post.date}>
                   {new Date(post.date).toLocaleDateString('es-ES', {
@@ -323,11 +323,7 @@ const DivulgacionPostPage: React.FC = () => {
                     {post.authorRole}
                   </p>
                 )}
-                <p className="text-gray-700 text-sm leading-relaxed">
-                  Miembro activo del Grupo de Investigación en Farmacología y Terapéutica (FyT), 
-                  dedicado a la generación de conocimiento científico y la divulgación académica 
-                  en temas de salud y farmacoterapia en Colombia.
-                </p>
+                <p className="text-gray-700 text-sm leading-relaxed">Antistio Alviz es el Director del grupo FyT. Cuenta con formación como Químico Farmacéutico, MSc. en Farmacología y PhD. en Ciencias Biomédicas. Actualmente se desempeña como docente de planta y Director del programa de Química Farmacéutica.</p>
               </div>
             </div>
           </div>
