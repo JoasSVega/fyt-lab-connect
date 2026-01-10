@@ -594,12 +594,16 @@ body.modal-open .calc-overlay {
     letter-spacing: 0.3px;
   }
 
-  /* Blockquote destacado para citas */
+  /* Blockquote destacado para citas - Diseño Editorial */
   .prose .highlight-quote {
-    @apply border-l-4 border-[hsl(var(--fyt-blue))] bg-[hsl(var(--fyt-blue))]/5 py-4 sm:py-6 px-4 sm:px-8 my-8 rounded-r-lg not-italic font-semibold text-gray-800;
+    @apply border-l-4 border-[hsl(var(--fyt-blue))] bg-[hsl(var(--fyt-blue))]/5 py-4 sm:py-6 px-4 sm:px-8 my-8 rounded-r-lg italic;
     position: relative;
     box-shadow: 0 2px 8px rgba(0, 191, 255, 0.08);
     transition: all 300ms ease;
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: #1a2637; /* Gris muy oscuro casi azul */
+    font-weight: 500;
   }
 
   .prose .highlight-quote:hover {
@@ -660,12 +664,50 @@ body.modal-open .calc-overlay {
     transition: transform 200ms ease;
   }
 
+  /* Avatar del autor - Dimensiones fijas y object-fit */
+  article header .author-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center top;
+    border: 2px solid hsl(var(--fyt-blue) / 0.2);
+    flex-shrink: 0;
+  }
+
+  @media (min-width: 640px) {
+    article header .author-avatar {
+      width: 60px;
+      height: 60px;
+    }
+  }
+
+  /* Avatar extendido en footer */
+  article footer .author-avatar-large {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center top;
+    border: 4px solid hsl(var(--fyt-blue) / 0.2);
+    flex-shrink: 0;
+  }
+
+  @media (min-width: 640px) {
+    article footer .author-avatar-large {
+      width: 100px;
+      height: 100px;
+    }
+  }
+
   /* Mejora de tipografía científica */
   article h1 {
     font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     line-height: 1.2;
     letter-spacing: -0.3px;
     word-spacing: 0.1em;
+    font-size: clamp(1.75rem, 5vw, 2.5rem); /* 28px móvil, hasta 40px desktop */
+    font-weight: 700;
   }
 
   article h2 {
@@ -673,6 +715,8 @@ body.modal-open .calc-overlay {
     letter-spacing: -0.2px;
     margin-top: 2rem;
     margin-bottom: 1.5rem;
+    font-size: clamp(1.25rem, 3.5vw, 1.75rem); /* 20px móvil, hasta 28px desktop */
+    font-weight: 600;
   }
 
   /* Espaciado de párrafos mejorado */
@@ -698,13 +742,15 @@ body.modal-open .calc-overlay {
   @media (max-width: 640px) {
     article h1 {
       font-size: 1.75rem;
-      line-height: 1.25;
+      line-height: 1.2;
+      font-weight: 700;
     }
 
     article h2 {
-      font-size: 1.5rem;
+      font-size: 1.25rem;
       margin-top: 1.5rem;
       margin-bottom: 1rem;
+      font-weight: 600;
     }
 
     .prose .lead {
@@ -713,6 +759,6 @@ body.modal-open .calc-overlay {
 
     .prose .highlight-quote {
       padding: 1rem;
-      font-size: 0.95rem;
+      font-size: 1.1rem;
     }
   }

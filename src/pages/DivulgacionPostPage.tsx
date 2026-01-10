@@ -208,7 +208,7 @@ const DivulgacionPostPage: React.FC = () => {
                 <img
                   src={post.authorImage}
                   alt={post.author}
-                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover border-2 border-primary/20"
+                  className="author-avatar"
                 />
               )}
               <div className="flex flex-col">
@@ -312,7 +312,7 @@ const DivulgacionPostPage: React.FC = () => {
                 <img
                   src={post.authorImage}
                   alt={post.author}
-                  className="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover border-4 border-primary/20 flex-shrink-0"
+                  className="author-avatar-large"
                 />
               )}
               <div className="flex-grow">
