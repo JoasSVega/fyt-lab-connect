@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Clock } from "lucide-react";
 import type { DivulgacionPost } from "@/types/divulgacion";
 
 interface DivulgacionCardProps {
@@ -31,7 +31,7 @@ const DivulgacionCard: React.FC<DivulgacionCardProps> = ({ post }) => {
 
   // Obtener clase modificadora según categoría
   const categoryClass = post.category ? categoryClassMap[post.category] || "cat-regulatoria" : "cat-regulatoria";
-  const cardClassName = `divulgacion-card ${categoryClass}`;
+  const cardClassName = `blog-card ${categoryClass}`;
 
   return (
     <Link 
@@ -40,37 +40,43 @@ const DivulgacionCard: React.FC<DivulgacionCardProps> = ({ post }) => {
     >
       <article className={cardClassName}>
         {/* Cabecera: Categoría y Fecha */}
-        <header className="divulgacion-card__header">
+        <header className="blog-card__header">
           {post.category && (
-            <span className="divulgacion-card__category">
+            <span className="blog-card__category">
               {post.category}
             </span>
           )}
         </header>
 
         {/* Título */}
-        <h3 className="divulgacion-card__title">
+        <h3 className="blog-card__title">
           {post.title}
         </h3>
 
         {/* Resumen */}
-        <p className="divulgacion-card__excerpt">
+        <p className="blog-card__excerpt">
           {post.excerpt}
         </p>
 
-        {/* Footer: Autor, Tiempo de lectura y CTA */}
-        <footer className="divulgacion-card__footer">
-          <div className="divulgacion-card__meta">
-            <span className="divulgacion-card__author">
+        {/* Footer: Autor y Contenedor de Acción Interactivo */}
+        <footer className="blog-card__footer">
+          <div className="blog-card__meta">
+            <span className="blog-card__author">
               {post.author}
             </span>
-            <time dateTime={post.date} className="divulgacion-card__date">
+            <time dateTime={post.date} className="blog-card__date">
               {formattedDate}
             </time>
           </div>
-          <span className="divulgacion-card__cta">
-            Leer más <ArrowRight className="w-4 h-4" />
-          </span>
+          <div className="blog-card__meta-action">
+            <span className="blog-card__read-time">
+              <Clock className="w-3.5 h-3.5" />
+              {post.readTime}
+            </span>
+            <span className="blog-card__read-more">
+              Leer más <ArrowRight className="w-4 h-4" />
+            </span>
+          </div>
         </footer>
       </article>
     </Link>

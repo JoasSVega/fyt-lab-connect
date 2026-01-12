@@ -189,7 +189,16 @@ const DivulgacionPostPage: React.FC = () => {
 
             {/* Category Badge */}
             {post.category && (
-              <span className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-primary/10 text-primary text-xs sm:text-sm font-semibold rounded-full border border-primary/30 whitespace-nowrap">
+              <span 
+                className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold rounded-full whitespace-nowrap"
+                style={{ 
+                  width: 'fit-content', 
+                  alignSelf: 'flex-start',
+                  backgroundColor: 'rgba(21, 101, 192, 0.08)',
+                  border: 'none',
+                  color: '#2d2d2d'
+                }}
+              >
                 {post.category}
               </span>
             )}
@@ -203,7 +212,7 @@ const DivulgacionPostPage: React.FC = () => {
           {/* Metadatos en fila horizontal (Flexbox) */}
           <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 pt-8 border-t border-gray-200">
             {/* Avatar y nombre del autor */}
-            <div className="flex items-center gap-3">
+            <a href="#autor-bio" className="flex items-center gap-3 hover:opacity-80 transition-opacity no-underline">
               {post.authorImage && (
                 <img
                   src={post.authorImage}
@@ -221,7 +230,7 @@ const DivulgacionPostPage: React.FC = () => {
                   </p>
                 )}
               </div>
-            </div>
+            </a>
 
             {/* Fecha y tiempo de lectura */}
             <div className="flex items-center gap-4 sm:gap-6 text-xs sm:text-sm text-gray-600 sm:ml-auto sm:text-right">
@@ -287,14 +296,31 @@ const DivulgacionPostPage: React.FC = () => {
             <h3 className="font-poppins font-bold text-xs sm:text-sm uppercase tracking-wider text-gray-600 mb-5 break-words">
               Palabras clave
             </h3>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2.5">
               {post.tags.map(tag => (
-                <span
+                <a
                   key={tag}
-                  className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-primary/10 text-primary text-xs sm:text-sm font-medium rounded-full border border-primary/30 hover:bg-primary/20 hover:border-primary/50 transition-colors duration-200 break-words"
+                  href="#"
+                  className="inline-block px-3 py-1.5 text-xs font-medium rounded-full transition-all duration-200 cursor-pointer hover:no-underline"
+                  style={{
+                    backgroundColor: '#f5f5f5',
+                    color: '#555555',
+                    border: '1px solid #dddddd',
+                    padding: '5px 12px',
+                    borderRadius: '50px',
+                    transition: 'background 0.2s ease, color 0.2s ease'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = '#d6d6d6';
+                    e.currentTarget.style.color = '#222222';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = '#f5f5f5';
+                    e.currentTarget.style.color = '#555555';
+                  }}
                 >
-                  {tag}
-                </span>
+                  #{tag}
+                </a>
               ))}
             </div>
           </div>
@@ -305,7 +331,7 @@ const DivulgacionPostPage: React.FC = () => {
       <footer className="border-t-2 border-gray-200 bg-gray-50">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-12 py-12 sm:py-14">
           {/* Información del autor extendida */}
-          <div className="bg-white rounded-lg p-6 sm:p-8 border border-gray-200 mb-8">
+          <div id="autor-bio" className="bg-white rounded-lg p-6 sm:p-8 border border-gray-200 mb-8" style={{ scrollMarginTop: '120px' }}>
             <div className="flex flex-col sm:flex-row sm:items-start gap-6">
               {post.authorImage && (
                 <img
@@ -347,7 +373,7 @@ const DivulgacionPostPage: React.FC = () => {
             <div className="flex flex-col sm:flex-row gap-3 w-full">
               <Button
                 onClick={shareOnLinkedIn}
-                className="gap-2 text-[#0A66C2] bg-white border-2 border-[#0A66C2] hover:bg-[#0A66C2] hover:text-white transition-colors w-full sm:w-auto justify-center"
+                className="gap-2 cta-button cta-linkedin w-full sm:w-auto justify-center"
                 variant="outline"
                 size="lg"
               >
@@ -356,7 +382,7 @@ const DivulgacionPostPage: React.FC = () => {
               </Button>
               <Button
                 onClick={shareOnWhatsApp}
-                className="gap-2 text-[#25D366] bg-white border-2 border-[#25D366] hover:bg-[#25D366] hover:text-white transition-colors w-full sm:w-auto justify-center"
+                className="gap-2 cta-button cta-whatsapp w-full sm:w-auto justify-center"
                 variant="outline"
                 size="lg"
               >
@@ -365,7 +391,7 @@ const DivulgacionPostPage: React.FC = () => {
               </Button>
               <Button
                 onClick={copyLink}
-                className="gap-2 text-gray-700 bg-white border-2 border-gray-400 hover:bg-gray-700 hover:text-white hover:border-gray-700 transition-colors w-full sm:w-auto justify-center"
+                className="gap-2 cta-button cta-copy w-full sm:w-auto justify-center"
                 variant="outline"
                 size="lg"
               >
@@ -390,7 +416,7 @@ const DivulgacionPostPage: React.FC = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center px-2">
             <Button 
               asChild 
-              className="text-sm sm:text-base px-6 sm:px-8 font-medium w-full sm:w-auto bg-transparent border-2 border-gray-400 text-gray-900 hover:bg-primary hover:text-white hover:border-primary transition-all duration-200"
+              className="text-sm sm:text-base px-6 sm:px-8 font-medium w-full sm:w-auto cta-button cta-secondary"
               variant="outline"
               size="lg"
             >
@@ -400,7 +426,7 @@ const DivulgacionPostPage: React.FC = () => {
             </Button>
             <Button 
               asChild 
-              className="text-sm sm:text-base px-6 sm:px-8 font-medium w-full sm:w-auto bg-transparent border-2 border-gray-400 text-gray-900 hover:bg-secondary hover:text-white hover:border-secondary transition-all duration-200"
+              className="text-sm sm:text-base px-6 sm:px-8 font-medium w-full sm:w-auto cta-button cta-secondary"
               variant="outline"
               size="lg"
             >

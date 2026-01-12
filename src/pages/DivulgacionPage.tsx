@@ -176,10 +176,10 @@ const DivulgacionPage: React.FC = () => {
             estamos abiertos a nuevas ideas y alianzas.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" className="text-lg px-8">
+            <Button asChild size="lg" className="text-lg px-8 cta-primary">
               <Link to="/contactos">Contactar</Link>
             </Button>
-            <Button asChild variant="outline" size="lg" className="text-lg px-8">
+            <Button asChild variant="outline" size="lg" className="text-lg px-8 cta-secondary">
               <Link to="/investigacion">Ver investigación</Link>
             </Button>
           </div>

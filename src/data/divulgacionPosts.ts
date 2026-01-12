@@ -19,11 +19,11 @@ export const divulgacionPosts: DivulgacionPost[] = [
     excerpt: "Análisis sobre la necesidad de actualizar los códigos CUPS en Colombia para reconocer el rol clínico del Químico Farmacéutico, garantizar la seguridad del paciente y optimizar recursos.",
     author: "Antistio Alviz Amador",
     authorRole: "Q.F., MSc, PhD",
-    authorImage: "/images/equipo/Antistio-Alviz-medium.webp",
+    authorImage: "/images/equipo/Antistio-Alviz-large.webp",
     date: "2026-01-06",
     readTime: "7 min",
     category: "Asuntos Regulatorios",
-    tags: ["Atención Farmacéutica", "CUPS", "Política de Salud", "Química Farmacéutica", "Colombia"],
+    tags: ["Codificación en Salud", "CUPS", "Interoperabilidad", "Rol Farmacéutico", "Seguridad del Paciente"],
     content: `
 <p class="lead">En el sistema de salud colombiano, la <strong>Clasificación Única de Procedimientos en Salud (CUPS)</strong> constituye el lenguaje técnico que permite que cada intervención sea registrada, medida y financiada. Sin embargo, para el Químico Farmacéutico, esta estructura ha presentado históricamente un vacío que limita el reconocimiento de su rol asistencial. La evolución de estos códigos no debe verse como un simple ajuste administrativo, sino como una necesidad imperativa para otorgar visibilidad real a la profesión y fortalecer los procesos de seguridad del paciente.</p>
 
@@ -79,7 +79,7 @@ export const divulgacionPosts: DivulgacionPost[] = [
     excerpt: "La farmacogenómica está revolucionando el tratamiento médico. Exploramos cómo la medicina personalizada está transformando la forma en que prescribimos medicamentos.",
     author: "Antistio Alviz",
     authorRole: "Director del grupo FyT, PhD. Ciencias Biomédicas",
-    authorImage: "/images/equipo/Antistio-Alviz-medium.webp",
+    authorImage: "/images/equipo/Antistio-Alviz-large.webp",
     date: "2025-01-15",
     readTime: "8 min",
     category: "Farmacología",
