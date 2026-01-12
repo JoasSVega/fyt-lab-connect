@@ -2,46 +2,43 @@
 @tailwind components;
 @tailwind utilities;
 
-/* FYT Research Group Design System - Pharmacology & Therapeutics 
-All colors MUST be HSL and based on institutional branding.
-*/
+/* FYT Research Group Design System - Pharmacology & Therapeutics */
+:root {
+    /* Brand palette */
+    --fyt-blue: 195 100% 50%;
+    --fyt-red: 0 100% 50%;
+    --fyt-purple: 271 76% 53%;
+    --fyt-dark: 0 0% 15%;
+    --fyt-light: 0 0% 98%;
 
-@layer base {
-  :root {
-    /* Base colors */
-    --background: 0 0% 98%;
-    --foreground: 0 0% 15%;
+    /* Surfaces and text */
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
 
-    /* FYT Institutional Colors */
-    --fyt-blue: 195 100% 50%;      /* Celeste blue #00BFFF */
-    --fyt-red: 0 100% 50%;         /* Intense red #FF0000 */
-    --fyt-purple: 271 76% 53%;     /* Purple/violet #8A2BE2 */
-    --fyt-dark: 0 0% 15%;          /* Dark text */
-    --fyt-light: 0 0% 98%;         /* Light backgrounds */
-
-    /* Semantic color mapping */
-    --primary: var(--fyt-blue);
-    --primary-foreground: 0 0% 98%;
-    
-    --secondary: var(--fyt-purple);
-    --secondary-foreground: 0 0% 98%;
-    
-    --accent: var(--fyt-red);
-    --accent-foreground: 0 0% 98%;
-
-    /* Card and surface colors */
     --card: 0 0% 100%;
-    --card-foreground: var(--fyt-dark);
+    --card-foreground: 222.2 84% 4.9%;
     --card-border: 220 13% 91%;
 
     --popover: 0 0% 100%;
     --popover-foreground: var(--fyt-dark);
 
+    /* Interactive elements */
+    --primary: var(--fyt-blue);
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
     /* Muted colors for text hierarchy */
     --muted: 220 14% 96%;
     --muted-foreground: 220 8% 46%;
 
-    /* Interactive elements */
+    --accent: 220 14% 96%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
     --border: 220 13% 91%;
     --input: 220 13% 91%;
     --ring: var(--fyt-blue);
@@ -116,7 +113,7 @@ All colors MUST be HSL and based on institutional branding.
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
-}
+
 
 @layer base {
   * {
@@ -583,3 +580,807 @@ body.modal-open .calc-overlay {
     background-color: rgba(255,255,255,0.80); /* bg-white/80 */
   }
 
+  /* ====== Estilos específicos para Divulgación/Blog Post ====== */
+  
+  /* Párrafo Lead/Intro */
+  .prose .lead {
+    color: hsl(var(--fyt-dark)) !important;
+    font-size: 1.125rem !important;
+    line-height: 1.75 !important;
+    letter-spacing: 0.3px !important;
+    font-weight: 500 !important;
+  }
+
+  @media (min-width: 640px) {
+    .prose .lead {
+      font-size: 1.25rem !important;
+    }
+  }
+
+  .prose .lead::first-letter {
+    font-weight: 700 !important;
+  }
+
+  /* Blockquote destacado para citas - Diseño Editorial */
+  .prose .highlight-quote {
+    border-left: 4px solid hsl(var(--fyt-blue)) !important;
+    background: hsl(var(--fyt-blue) / 0.05) !important;
+    padding: 1rem 2rem !important;
+    margin: 2rem 2rem 2rem 3rem !important; /* alineado con lista clínica */
+    border-radius: 0 0.5rem 0.5rem 0 !important;
+    
+    /* Tipografía Editorial */
+    font-style: italic !important;
+    font-size: 1.25rem !important;
+    line-height: 1.6 !important;
+    color: #1a2637 !important; /* Gris muy oscuro casi azul */
+    font-weight: 500 !important;
+    
+    /* Efectos */
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0, 191, 255, 0.08);
+    transition: all 300ms ease;
+  }
+
+  @media (min-width: 640px) {
+    .prose .highlight-quote {
+      padding: 1.5rem 2rem !important;
+    }
+  }
+
+  .prose .highlight-quote:hover {
+    box-shadow: 0 4px 12px rgba(0, 191, 255, 0.15);
+    transform: translateX(4px);
+  }
+
+  /* Sección de referencias bibliográficas */
+  .prose .references-section {
+    margin-top: 3rem !important;
+    padding-top: 3rem !important;
+    border-top: 1px solid #e5e7eb !important;
+  }
+
+  .prose .references-section h3 {
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 1.25rem !important;
+    font-weight: 700 !important;
+    color: #111827 !important;
+    margin-bottom: 1.5rem !important;
+    letter-spacing: 0.5px !important;
+  }
+
+  @media (min-width: 640px) {
+    .prose .references-section h3 {
+      font-size: 1.5rem !important;
+    }
+  }
+
+  .prose .references-section ol {
+    list-style-type: decimal !important;
+    margin-left: 1.5rem !important;
+    padding-left: 0 !important;
+  }
+
+  .prose .references-section ol li {
+    color: #374151 !important;
+    font-size: 0.875rem !important;
+    line-height: 1.5 !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  @media (min-width: 640px) {
+    .prose .references-section ol li {
+      font-size: 1rem !important;
+    }
+  }
+
+  /* Mejora de headers en artículos */
+  article header {
+    background: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(240, 249, 255, 0.5) 100%);
+  }
+
+  /* Footer del artículo con autor */
+  article footer {
+    background-color: rgba(249, 250, 251, 0.7);
+  }
+
+  article footer .bg-white {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
+
+  /* Breadcrumbs mejorado */
+  nav[aria-label="Breadcrumb"] ol li a {
+    @apply text-gray-600 hover:text-[hsl(var(--fyt-blue))] transition-colors duration-200;
+  }
+
+  nav[aria-label="Breadcrumb"] ol li a:hover {
+    text-decoration: underline;
+    text-decoration-color: hsl(var(--fyt-blue));
+    text-underline-offset: 4px;
+  }
+
+  /* Avatar responsive en metadatos */
+  article header img[alt]:hover {
+    transform: scale(1.05);
+    transition: transform 200ms ease;
+  }
+
+  /* Avatar del autor - Dimensiones fijas y object-fit */
+  article header .author-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center top;
+    border: 2px solid hsl(var(--fyt-blue) / 0.2);
+    flex-shrink: 0;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+    transform: translate3d(0, 0, 0);
+  }
+
+  @media (min-width: 640px) {
+    article header .author-avatar {
+      width: 60px;
+      height: 60px;
+    }
+  }
+
+  /* Avatar extendido en footer */
+  article footer .author-avatar-large {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center top;
+    border: 4px solid hsl(var(--fyt-blue) / 0.2);
+    flex-shrink: 0;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+    transform: translate3d(0, 0, 0);
+  }
+
+  @media (min-width: 640px) {
+    article footer .author-avatar-large {
+      width: 100px;
+      height: 100px;
+    }
+  }
+
+  /* Mejora de tipografía científica */
+  article h1 {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+    line-height: 1.3 !important; /* mejorado para títulos multilínea */
+    letter-spacing: -0.3px !important;
+    word-spacing: 0.1em !important;
+    font-size: clamp(1.75rem, 5vw, 2.5rem) !important; /* 28px móvil, hasta 40px desktop */
+    font-weight: 700 !important;
+    color: #111827 !important; /* gray-900 */
+    /* Salto de línea automático */
+    white-space: normal !important;
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
+    text-align: left !important;
+    height: auto !important;
+    max-width: 100% !important;
+  }
+
+  article h2 {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+    letter-spacing: -0.2px !important;
+    margin-top: 2rem !important;
+    margin-bottom: 1.5rem !important;
+    font-size: clamp(1.25rem, 3.5vw, 1.75rem) !important; /* 20px móvil, hasta 28px desktop */
+    font-weight: 600 !important;
+  }
+
+  /* Espaciado de párrafos mejorado */
+  article section p {
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.2px;
+  }
+
+  article section p + h2 {
+    margin-top: 2.5rem;
+  }
+
+  /* Lista de puntos clave con mejor espaciado */
+  article ul {
+    @apply space-y-3;
+  }
+
+  article ul li {
+    @apply leading-7;
+  }
+
+  /* Lista clínica (Puntos de Verificación) */
+  .prose ul.clinical-checklist {
+    list-style: none !important;
+    margin-left: 0 !important;
+    padding-left: 3rem !important; /* sangría visual del bloque */
+  }
+
+  .prose ul.clinical-checklist li {
+    position: relative;
+    padding-left: 28px; /* espacio para el icono */
+    font-weight: 500; /* semi-bold visual */
+    margin-bottom: 12px;
+  }
+
+  .prose ul.clinical-checklist li::before {
+    content: "✓"; /* icono de verificación */
+    position: absolute;
+    left: 0;
+    top: 0.1em;
+    color: #007bff; /* azul corporativo del logo */
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1;
+  }
+
+  /* Responsive optimizado para mobile */
+  @media (max-width: 640px) {
+    article h1 {
+      font-size: 1.75rem !important;
+      line-height: 1.2 !important;
+      font-weight: 700 !important;
+    }
+
+    article h2 {
+      font-size: 1.25rem !important;
+      margin-top: 1.5rem !important;
+      margin-bottom: 1rem !important;
+      font-weight: 600 !important;
+    }
+
+    .prose .lead {
+      font-size: 1rem !important;
+    }
+
+    .prose .highlight-quote {
+      padding: 1rem !important;
+      font-size: 1.1rem !important;
+      margin: 1.5rem 0 !important; /* eliminar sangría lateral en móviles */
+    }
+  }
+
+  /* ====== Tarjeta de Divulgación - Sistema de Colores Dinámico por Categoría ====== */
+  
+  .blog-card {
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    border-top: 4px solid var(--accent-color, #0056b3);
+    border-left: 1px solid #eeeeee;
+    border-right: 1px solid #eeeeee;
+    border-bottom: 1px solid #eeeeee;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    padding: 1.5rem;
+    border-radius: 4px;
+    transition: all 300ms ease;
+    height: 100%;
+  }
+
+  .blog-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  /* ===== CLASES DE CATEGORÍA CON COLORES DINÁMICOS ===== */
+
+  /* Asuntos Regulatorios - Azul Institucional */
+  .blog-card.cat-regulatoria {
+    --accent-color: #1565C0;
+    --bg-soft: #E3F2FD;
+  }
+
+  /* Farmacia Clínica - Teal / Verde Azulado */
+  .blog-card.cat-clinica {
+    --accent-color: #00897B;
+    --bg-soft: #E0F2F1;
+  }
+
+  /* Farmacovigilancia - Rojo Ladrillo Sobrio */
+  .blog-card.cat-seguridad {
+    --accent-color: #C62828;
+    --bg-soft: #FFEBEE;
+  }
+
+  /* Industria & Tecnología - Gris Acero */
+  .blog-card.cat-industria {
+    --accent-color: #455A64;
+    --bg-soft: #ECEFF1;
+  }
+
+  /* Data & Salud Digital - Indigo / Violeta */
+  .blog-card.cat-data {
+    --accent-color: #673AB7;
+    --bg-soft: #EDE7F6;
+  }
+
+  /* ===== CABECERA: Categoría y Fecha - TRANSPARENTE ===== */
+  .blog-card__header {
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    margin-bottom: 1rem !important;
+    gap: 0.5rem !important;
+    width: 100% !important;
+    background-color: transparent !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  /* Categoría - Pill Style con color dinámico (ÚNICA con fondo) */
+  .blog-card__category {
+    background: var(--bg-soft, #E3F2FD) !important;
+    color: var(--accent-color, #1565C0) !important;
+    font-size: 0.7rem !important;
+    font-weight: 700 !important;
+    font-family: 'Inter', 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    letter-spacing: 1px !important;
+    padding: 0.375rem 0.875rem !important;
+    border-radius: 50px !important;
+    letter-spacing: 0.5px !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    transition: all 250ms ease !important;
+    border: none !important;
+    margin: 0 !important;
+    margin-left: 0.5rem !important;
+    display: inline-block !important;
+    height: auto !important;
+    line-height: normal !important;
+    width: fit-content !important;
+    align-self: flex-start !important;
+  }
+
+  /* Fecha - Completamente transparente y limpia */
+  .blog-card__date {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+    font-size: 0.875rem !important;
+    color: #888 !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+     margin-left: auto !important;
+    background-color: transparent !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    text-align: right !important;
+    height: auto !important;
+    display: inline-block !important;
+    line-height: normal !important;
+  }
+
+  /* ===== TÍTULO - Serif, Grande, Izquierda ===== */
+  .blog-card__title {
+    font-family: 'Merriweather', 'Georgia', serif !important;
+    font-size: 1.6rem !important;
+    font-weight: 700 !important;
+    color: #111111 !important;
+    line-height: 1.3 !important;
+    margin-top: 0 !important;
+    margin-bottom: 1rem !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    transition: color 250ms ease !important;
+    text-align: left !important;
+    padding: 0 !important;
+    display: block !important;
+  }
+
+  .blog-card:hover .blog-card__title {
+    color: var(--accent-color, #1565C0);
+  }
+
+  /* ===== RESUMEN - Excerpt ===== */
+  .blog-card__excerpt {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+    font-size: 0.95rem !important;
+    color: #444444 !important;
+    line-height: 1.5 !important;
+    margin-bottom: 1.5rem !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    margin-top: 0 !important;
+    flex: 1 !important;
+    display: block !important;
+    white-space: normal !important;
+    text-align: left !important;
+    padding: 0 !important;
+  }
+
+  /* ===== FOOTER - Completamente transparente ===== */
+  .blog-card__footer {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin-top: auto !important;
+    padding-top: 1rem !important;
+    padding-bottom: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    border-top: 1px solid #f0f0f0 !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: none !important;
+    gap: 1rem !important;
+    background-color: transparent !important;
+    background: transparent !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* Meta-información (Autor + Tiempo de lectura) */
+  .blog-card__meta {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.25rem !important;
+    background-color: transparent !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Refuerzo de especificidad para evitar overrides */
+  .blog-card .blog-card__meta {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  /* Autor */
+  .blog-card__author {
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 0.8125rem !important;
+    font-weight: 600 !important;
+    color: #333333 !important;
+    background-color: transparent !important;
+    margin-left: 0 !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    text-align: left !important;
+  }
+    text-align: left !important;
+  
+
+  /* CTA - Leer más */
+  .blog-card__cta {
+
+  .blog-card .blog-card__date {
+    display: block !important;
+    text-align: left !important;
+    margin-left: 0 !important;
+  }
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.375rem !important;
+    font-size: 0.875rem !important;
+    font-weight: 600 !important;
+    color: var(--accent-color, #1565C0) !important;
+    transition: gap 250ms ease !important;
+    white-space: nowrap !important;
+    background-color: transparent !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    text-align: right !important;
+  }
+
+  .blog-card:hover .blog-card__cta {
+    gap: 0.625rem !important;
+  }
+
+  /* ===== META-ACTION: Contenedor Interactivo con Swap de Tiempo/Leer Más ===== */
+  .blog-card__meta-action {
+    position: relative !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: 1.5rem !important;
+    min-width: 120px !important;
+    background-color: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Tiempo de Lectura - Visible por defecto */
+  .blog-card__read-time {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.375rem !important;
+    font-size: 0.8125rem !important;
+    color: #666666 !important;
+    font-family: 'Inter', sans-serif !important;
+    background-color: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    white-space: nowrap !important;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    transition: all 0.3s ease !important;
+    position: relative !important;
+    z-index: 1 !important;
+  }
+
+  .blog-card__read-time svg {
+    width: 14px !important;
+    height: 14px !important;
+    fill: none !important;
+    stroke: currentColor !important;
+    stroke-width: 2 !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Leer Más - Oculto por defecto, posicionado absolutamente */
+  .blog-card__read-more {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.375rem !important;
+    font-size: 0.8125rem !important;
+    color: var(--accent-color, #1565C0) !important;
+    font-weight: 600 !important;
+    font-family: 'Inter', sans-serif !important;
+    background-color: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    white-space: nowrap !important;
+    opacity: 0 !important;
+    transform: translateY(10px) !important;
+    transition: all 0.3s ease !important;
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    translate: -50% -50% !important;
+    z-index: 0 !important;
+    cursor: pointer !important;
+  }
+
+  .blog-card__read-more svg {
+    width: 1rem !important;
+    height: 1rem !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Animación en Hover de la Tarjeta */
+  .blog-card:hover .blog-card__read-time {
+    opacity: 0 !important;
+    transform: translateY(-10px) !important;
+  }
+
+  .blog-card:hover .blog-card__read-more {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .blog-card {
+      padding: 2rem;
+    }
+
+    .blog-card__header {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 1.25rem;
+    }
+
+    .blog-card__category {
+      align-self: flex-start;
+    }
+
+    .blog-card__date {
+      align-self: flex-start;
+      text-align: left;
+    }
+
+    .blog-card__title {
+      font-size: 1.35rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .blog-card__excerpt {
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+    }
+
+    .blog-card__footer {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .blog-card__meta {
+      width: 100%;
+    }
+
+    .blog-card__cta {
+      width: 100%;
+      text-align: left;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .blog-card {
+      padding: 1.5rem;
+    }
+
+    .blog-card__title {
+      font-size: 1.15rem;
+      margin-bottom: 1rem;
+    }
+
+    .blog-card__excerpt {
+      font-size: 0.875rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .blog-card__author,
+    .blog-card__cta {
+      font-size: 0.8125rem;
+    }
+
+    .blog-card__meta {
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+  }
+
+/* ====== BOTONES CTA DIVULGACIÓN - ANIMACIÓN Y CONTRASTE MEJORADOS ====== */
+
+/* Botón CTA estándar con hover mejorado */
+.cta-button {
+  position: relative;
+  overflow: hidden;
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, box-shadow, background-color, border-color;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px -2px rgba(0, 0, 0, 0.15);
+}
+
+.cta-button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.1);
+}
+
+/* Botón LinkedIn CTA */
+.cta-linkedin {
+  color: #0A66C2;
+  background-color: #ffffff;
+  border: 2px solid #0A66C2;
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cta-linkedin:hover {
+  background-color: #004B97;
+  color: #ffffff;
+  border-color: #004B97;
+  box-shadow: 0 8px 20px -2px rgba(0, 75, 151, 0.4);
+  transform: translateY(-2px);
+}
+
+.cta-linkedin:active {
+  background-color: #003366;
+  border-color: #003366;
+  transform: translateY(0);
+}
+
+/* Botón WhatsApp CTA */
+.cta-whatsapp {
+  color: #25D366;
+  background-color: #ffffff;
+  border: 2px solid #25D366;
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cta-whatsapp:hover {
+  background-color: #128C45;
+  color: #ffffff;
+  border-color: #128C45;
+  box-shadow: 0 8px 20px -2px rgba(18, 140, 69, 0.4);
+  transform: translateY(-2px);
+}
+
+.cta-whatsapp:active {
+  background-color: #0D6B33;
+  border-color: #0D6B33;
+  transform: translateY(0);
+}
+
+/* Botón Copiar enlace CTA */
+.cta-copy {
+  color: #4B5563;
+  background-color: #ffffff;
+  border: 2px solid #9CA3AF;
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cta-copy:hover {
+  background-color: #2D3748;
+  color: #ffffff;
+  border-color: #2D3748;
+  box-shadow: 0 8px 20px -2px rgba(45, 55, 72, 0.4);
+  transform: translateY(-2px);
+}
+
+.cta-copy:active {
+  background-color: #1A202C;
+  border-color: #1A202C;
+  transform: translateY(0);
+}
+
+/* Botón CTA primario (Contactar) */
+.cta-primary {
+  background: hsl(var(--fyt-blue));
+  color: #ffffff;
+  border: 2px solid hsl(var(--fyt-blue));
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cta-primary:hover {
+  background: hsl(var(--fyt-blue) / 0.9);
+  border-color: hsl(var(--fyt-blue) / 0.9);
+  box-shadow: 0 8px 20px -2px rgba(195, 100, 50, 0.3);
+  transform: translateY(-2px);
+}
+
+.cta-primary:active {
+  background: hsl(var(--fyt-blue) / 0.8);
+  border-color: hsl(var(--fyt-blue) / 0.8);
+  transform: translateY(0);
+}
+
+/* Botón CTA secundario (Outline) */
+.cta-secondary {
+  color: #111827;
+  background-color: transparent;
+  border: 2px solid #9CA3AF;
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cta-secondary:hover {
+  background-color: #2D3748;
+  color: #ffffff;
+  border-color: #2D3748;
+  box-shadow: 0 8px 20px -2px rgba(45, 55, 72, 0.4);
+  transform: translateY(-2px);
+}
+
+.cta-secondary:active {
+  background-color: #1A202C;
+  border-color: #1A202C;
+  transform: translateY(0);
+}
+
+/* Botones de lectura y meta-acciones en divulgación */
+.divulgacion-read-more,
+.divulgacion-meta-action {
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: color, transform;
+}
+
+.divulgacion-read-more:hover,
+.divulgacion-meta-action:hover {
+  color: hsl(var(--fyt-blue));
+  transform: translateX(2px);
+}

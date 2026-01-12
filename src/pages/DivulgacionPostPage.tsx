@@ -95,7 +95,10 @@ const DivulgacionPostPage: React.FC = () => {
   const baseUrl = "https://fyt-research.org";
   const canonicalUrl = `${baseUrl}/divulgacion/${post.slug}`;
   const ogImage = `${baseUrl}${post.authorImage || "/images/logo-fyt-medium.webp"}`;
-  const metaDescription = post.excerpt.length > 160 ? `${post.excerpt.slice(0, 157)}…` : post.excerpt;
+  
+  // Meta descripción optimizada (máx 160 caracteres para SEO)
+  const metaDescription = "Análisis sobre la necesidad de actualizar los códigos CUPS en Colombia para reconocer el rol clínico del Químico Farmacéutico, garantizar la seguridad del paciente y optimizar recursos.";
+  
   const metaKeywords = post.tags ? [...post.tags, "Divulgación", "Grupo FyT", "Farmacología y Terapéutica"] : ["Divulgación", "Grupo FyT", "Farmacología y Terapéutica"];
 
   return (
@@ -159,20 +162,96 @@ const DivulgacionPostPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Hero del artículo */}
-      <DivulgacionHero
-        title={post.title}
-        subtitle={post.excerpt}
-        author={post.author}
-        authorRole={post.authorRole}
-        authorImage={post.authorImage}
-        date={post.date}
-        readTime={post.readTime}
-        category={post.category}
-      />
+      {/* Artículo principal con estructura semántica */}
+      <article className="bg-white">
+        {/* Header del artículo */}
+        <header className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-12 py-8 sm:py-12 lg:py-16">
+          {/* Breadcrumbs y categoría */}
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+            {/* Breadcrumbs */}
+            <nav aria-label="Breadcrumb" className="text-xs sm:text-sm">
+              <ol className="flex flex-wrap items-center gap-1 sm:gap-2">
+                <li>
+                  <Link to="/" className="text-gray-600 hover:text-primary transition-colors">
+                    Inicio
+                  </Link>
+                </li>
+                <li className="text-gray-400">/</li>
+                <li>
+                  <Link to="/divulgacion" className="text-gray-600 hover:text-primary transition-colors">
+                    Divulgación
+                  </Link>
+                </li>
+                <li className="text-gray-400">/</li>
+                <li className="text-gray-900 font-medium">{post.category}</li>
+              </ol>
+            </nav>
 
-      {/* Contenido del artículo */}
-      <article className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-12 py-12 sm:py-16 lg:py-20">
+            {/* Category Badge */}
+            {post.category && (
+              <span 
+                className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold rounded-full whitespace-nowrap"
+                style={{ 
+                  width: 'fit-content', 
+                  alignSelf: 'flex-start',
+                  backgroundColor: 'rgba(21, 101, 192, 0.08)',
+                  border: 'none',
+                  color: '#2d2d2d'
+                }}
+              >
+                {post.category}
+              </span>
+            )}
+          </div>
+
+          {/* Título H1 optimizado para SEO */}
+          <h1 className="mb-8">
+            {post.title}
+          </h1>
+
+          {/* Metadatos en fila horizontal (Flexbox) */}
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 pt-8 border-t border-gray-200">
+            {/* Avatar y nombre del autor */}
+            <a href="#autor-bio" className="flex items-center gap-3 hover:opacity-80 transition-opacity no-underline">
+              {post.authorImage && (
+                <img
+                  src={post.authorImage}
+                  alt={post.author}
+                  className="author-avatar"
+                />
+              )}
+              <div className="flex flex-col">
+                <p className="font-medium text-gray-900 text-sm sm:text-base break-words">
+                  {post.author}
+                </p>
+                {post.authorRole && (
+                  <p className="text-xs sm:text-sm text-gray-600 break-words line-clamp-1">
+                    {post.authorRole}
+                  </p>
+                )}
+              </div>
+            </a>
+
+            {/* Fecha y tiempo de lectura */}
+            <div className="flex items-center gap-4 sm:gap-6 text-xs sm:text-sm text-gray-600 sm:ml-auto sm:text-right">
+              <span className="flex items-center gap-1 whitespace-nowrap">
+                <time dateTime={post.date}>
+                  {new Date(post.date).toLocaleDateString('es-ES', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  })}
+                </time>
+              </span>
+              <span className="flex items-center gap-1 whitespace-nowrap">
+                ⏱ {post.readTime}
+              </span>
+            </div>
+          </div>
+        </header>
+
+        {/* Contenido del artículo */}
+        <section className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-12 py-12 sm:py-16 lg:py-20">
         {/* Contenido en formato Markdown/HTML */}
         <div 
           className="prose prose-gray max-w-none
@@ -190,8 +269,8 @@ const DivulgacionPostPage: React.FC = () => {
             prose-code:text-primary prose-code:bg-gray-100 prose-code:px-2.5 prose-code:py-1.5 prose-code:rounded prose-code:font-mono prose-code:text-xs sm:prose-code:text-sm prose-code:break-words
             prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-pre:p-4 sm:prose-pre:p-6 prose-pre:rounded-lg prose-pre:mb-8 prose-pre:overflow-x-auto prose-pre:text-xs sm:prose-pre:text-sm prose-pre:leading-relaxed
             prose-pre:shadow-lg
-            prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-primary/5 prose-blockquote:py-4 sm:prose-blockquote:py-6 prose-blockquote:px-4 sm:prose-blockquote:px-8 prose-blockquote:mb-8 prose-blockquote:italic prose-blockquote:text-gray-800 prose-blockquote:my-6 prose-blockquote:rounded-r-lg
-            prose-blockquote:not-italic prose-blockquote:font-semibold prose-blockquote:break-words
+            prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-primary/5 prose-blockquote:py-4 sm:prose-blockquote:py-6 prose-blockquote:px-4 sm:prose-blockquote:px-8 prose-blockquote:mb-8 prose-blockquote:text-gray-800 prose-blockquote:my-6 prose-blockquote:rounded-r-lg
+            prose-blockquote:break-words
             prose-ol:font-inter prose-ol:mb-8 prose-ol:space-y-4 prose-ol:ml-2 prose-ol:list-decimal
             prose-ul:font-inter prose-ul:mb-8 prose-ul:space-y-4 prose-ul:ml-2 prose-ul:list-disc
             prose-li:text-gray-700 prose-li:leading-7 prose-li:text-sm sm:prose-li:text-base prose-li:break-words prose-li:text-justify
@@ -200,7 +279,14 @@ const DivulgacionPostPage: React.FC = () => {
             prose-table:my-8 prose-table:border-collapse prose-table:w-full prose-table:overflow-x-auto prose-table:block sm:prose-table:table
             prose-thead:bg-gray-100
             prose-th:border prose-th:border-gray-200 prose-th:px-3 sm:prose-th:px-4 prose-th:py-2 sm:prose-th:py-3 prose-th:text-left prose-th:font-bold prose-th:text-gray-900 prose-th:text-xs sm:prose-th:text-sm
-            prose-td:border prose-td:border-gray-200 prose-td:px-3 sm:prose-td:px-4 prose-td:py-2 sm:prose-td:py-3 prose-td:text-gray-700 prose-td:text-xs sm:prose-td:text-sm prose-td:break-words"
+            prose-td:border prose-td:border-gray-200 prose-td:px-3 sm:prose-td:px-4 prose-td:py-2 sm:prose-td:py-3 prose-td:text-gray-700 prose-td:text-xs sm:prose-td:text-sm prose-td:break-words
+            
+            [&_.lead]:text-base [&_.lead]:sm:text-lg [&_.lead]:font-medium [&_.lead]:text-gray-800 [&_.lead]:leading-relaxed [&_.lead]:first-letter:font-bold
+            [&_.highlight-quote]:italic [&_.highlight-quote]:text-[1.25rem] [&_.highlight-quote]:text-[#1a2637] [&_.highlight-quote]:font-medium [&_.highlight-quote]:leading-relaxed
+            [&_.references-section]:mt-12 [&_.references-section]:pt-12 [&_.references-section]:border-t [&_.references-section]:border-gray-200
+            [&_.references-section_h3]:text-lg [&_.references-section_h3]:sm:text-xl [&_.references-section_h3]:font-bold [&_.references-section_h3]:text-gray-900 [&_.references-section_h3]:mb-6
+            [&_.references-section_ol]:space-y-3 [&_.references-section_ol]:list-decimal [&_.references-section_ol]:ml-6
+            [&_.references-section_li]:text-gray-700 [&_.references-section_li]:text-sm [&_.references-section_li]:sm:text-base [&_.references-section_li]:leading-6"
           dangerouslySetInnerHTML={{ __html: post.content }}
         />
 
@@ -210,18 +296,65 @@ const DivulgacionPostPage: React.FC = () => {
             <h3 className="font-poppins font-bold text-xs sm:text-sm uppercase tracking-wider text-gray-600 mb-5 break-words">
               Palabras clave
             </h3>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2.5">
               {post.tags.map(tag => (
-                <span
+                <a
                   key={tag}
-                  className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-primary/10 text-primary text-xs sm:text-sm font-medium rounded-full border border-primary/30 hover:bg-primary/20 hover:border-primary/50 transition-colors duration-200 break-words"
+                  href="#"
+                  className="inline-block px-3 py-1.5 text-xs font-medium rounded-full transition-all duration-200 cursor-pointer hover:no-underline"
+                  style={{
+                    backgroundColor: '#f5f5f5',
+                    color: '#555555',
+                    border: '1px solid #dddddd',
+                    padding: '5px 12px',
+                    borderRadius: '50px',
+                    transition: 'background 0.2s ease, color 0.2s ease'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = '#d6d6d6';
+                    e.currentTarget.style.color = '#222222';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = '#f5f5f5';
+                    e.currentTarget.style.color = '#555555';
+                  }}
                 >
-                  {tag}
-                </span>
+                  #{tag}
+                </a>
               ))}
             </div>
           </div>
         )}
+      </section>
+
+      {/* Footer del artículo */}
+      <footer className="border-t-2 border-gray-200 bg-gray-50">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-12 py-12 sm:py-14">
+          {/* Información del autor extendida */}
+          <div id="autor-bio" className="bg-white rounded-lg p-6 sm:p-8 border border-gray-200 mb-8" style={{ scrollMarginTop: '120px' }}>
+            <div className="flex flex-col sm:flex-row sm:items-start gap-6">
+              {post.authorImage && (
+                <img
+                  src={post.authorImage}
+                  alt={post.author}
+                  className="author-avatar-large"
+                />
+              )}
+              <div className="flex-grow">
+                <h3 className="font-poppins font-bold text-lg text-gray-900 mb-1">
+                  {post.author}
+                </h3>
+                {post.authorRole && (
+                  <p className="text-gray-600 text-sm sm:text-base mb-3">
+                    {post.authorRole}
+                  </p>
+                )}
+                <p className="text-gray-700 text-sm leading-relaxed">Antistio Alviz es el Director del grupo FyT. Cuenta con formación como Químico Farmacéutico, MSc. en Farmacología y PhD. en Ciencias Biomédicas. Actualmente se desempeña como docente de planta y Director del programa de Química Farmacéutica.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
       </article>
 
       {/* Compartir artículo */}
@@ -240,7 +373,7 @@ const DivulgacionPostPage: React.FC = () => {
             <div className="flex flex-col sm:flex-row gap-3 w-full">
               <Button
                 onClick={shareOnLinkedIn}
-                className="gap-2 text-[#0A66C2] bg-white border-2 border-[#0A66C2] hover:bg-[#0A66C2] hover:text-white transition-colors w-full sm:w-auto justify-center"
+                className="gap-2 cta-button cta-linkedin w-full sm:w-auto justify-center"
                 variant="outline"
                 size="lg"
               >
@@ -249,7 +382,7 @@ const DivulgacionPostPage: React.FC = () => {
               </Button>
               <Button
                 onClick={shareOnWhatsApp}
-                className="gap-2 text-[#25D366] bg-white border-2 border-[#25D366] hover:bg-[#25D366] hover:text-white transition-colors w-full sm:w-auto justify-center"
+                className="gap-2 cta-button cta-whatsapp w-full sm:w-auto justify-center"
                 variant="outline"
                 size="lg"
               >
@@ -258,7 +391,7 @@ const DivulgacionPostPage: React.FC = () => {
               </Button>
               <Button
                 onClick={copyLink}
-                className="gap-2 text-gray-700 bg-white border-2 border-gray-400 hover:bg-gray-700 hover:text-white hover:border-gray-700 transition-colors w-full sm:w-auto justify-center"
+                className="gap-2 cta-button cta-copy w-full sm:w-auto justify-center"
                 variant="outline"
                 size="lg"
               >
@@ -283,7 +416,7 @@ const DivulgacionPostPage: React.FC = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center px-2">
             <Button 
               asChild 
-              className="text-sm sm:text-base px-6 sm:px-8 font-medium w-full sm:w-auto bg-transparent border-2 border-gray-400 text-gray-900 hover:bg-primary hover:text-white hover:border-primary transition-all duration-200"
+              className="text-sm sm:text-base px-6 sm:px-8 font-medium w-full sm:w-auto cta-button cta-secondary"
               variant="outline"
               size="lg"
             >
@@ -293,7 +426,7 @@ const DivulgacionPostPage: React.FC = () => {
             </Button>
             <Button 
               asChild 
-              className="text-sm sm:text-base px-6 sm:px-8 font-medium w-full sm:w-auto bg-transparent border-2 border-gray-400 text-gray-900 hover:bg-secondary hover:text-white hover:border-secondary transition-all duration-200"
+              className="text-sm sm:text-base px-6 sm:px-8 font-medium w-full sm:w-auto cta-button cta-secondary"
               variant="outline"
               size="lg"
             >
