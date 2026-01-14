@@ -49,7 +49,9 @@ const DivulgacionPostPage: React.FC = () => {
 
   // Función para compartir en WhatsApp
   const shareOnWhatsApp = () => {
-    const text = encodeURIComponent(`${post.title} - ${window.location.href}`);
+    // Formato: Título + Resumen + URL
+    const sharingText = `📚 ${post.title}\n\n${post.excerpt}\n\n🔗 ${window.location.href}`;
+    const text = encodeURIComponent(sharingText);
     window.open(`https://wa.me/?text=${text}`, "_blank");
   };
 
@@ -96,8 +98,11 @@ const DivulgacionPostPage: React.FC = () => {
   const canonicalUrl = `${baseUrl}/divulgacion/${post.slug}`;
   const ogImage = `${baseUrl}${post.authorImage || "/images/logo-fyt-medium.webp"}`;
   
-  // Meta descripción optimizada (máx 160 caracteres para SEO)
-  const metaDescription = "Análisis sobre la necesidad de actualizar los códigos CUPS en Colombia para reconocer el rol clínico del Químico Farmacéutico, garantizar la seguridad del paciente y optimizar recursos.";
+  // Meta descripción: usar el excerpt del artículo (máx 160 caracteres para SEO)
+  // Si el excerpt es más largo, truncarlo para mantener el estándar
+  const metaDescription = post.excerpt && post.excerpt.length > 0 
+    ? post.excerpt.substring(0, 160) 
+    : "Artículo de divulgación científica del Grupo FyT sobre farmacología, investigación y salud.";
   
   const metaKeywords = post.tags ? [...post.tags, "Divulgación", "Grupo FyT", "Farmacología y Terapéutica"] : ["Divulgación", "Grupo FyT", "Farmacología y Terapéutica"];
 
