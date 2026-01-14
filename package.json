@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "node scripts/dev-check.js && vite",
-    "build": "vite build && node scripts/postbuild-spa.js && node scripts/inline-css.js && node scripts/precompress.js",
+    "build": "npm run build:ssg",
     "build:fast": "vite build && node scripts/postbuild-spa.js",
     "build:dev": "vite build --mode development",
     "build:client": "vite build",

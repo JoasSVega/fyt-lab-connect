@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { ReactNode } from 'react';
+import { logoUrl } from '@/utils/seoSchemas';
 
 interface SEOProps {
   /**
@@ -96,6 +97,14 @@ export default function SEO({
     finalKeywords = `${keywordString}, ${GLOBAL_KEYWORDS}`;
   }
 
+  // Fallbacks para imágenes y descripciones sociales
+  const resolvedOgImage = openGraph?.image || logoUrl;
+  const resolvedOgDescription = openGraph?.description || description || '';
+  const resolvedOgTitle = openGraph?.title || title;
+  const resolvedOgAlt = openGraph?.imageAlt || 'Logo Grupo FyT';
+
+  const resolvedTwitterImage = twitter?.image || resolvedOgImage;
+
   return (
     <Helmet>
       {/* Básicos */}
@@ -106,16 +115,12 @@ export default function SEO({
       {robots && <meta name="robots" content={robots} />}
 
       {/* Open Graph - Completo para WhatsApp/LinkedIn/Facebook */}
-      <meta property="og:title" content={openGraph?.title || title} />
-      {description && <meta property="og:description" content={openGraph?.description || description} />}
+      <meta property="og:title" content={resolvedOgTitle} />
+      {resolvedOgDescription && <meta property="og:description" content={resolvedOgDescription} />}
       {openGraph?.type && <meta property="og:type" content={openGraph.type} />}
-      {openGraph?.image && (
-        <>
-          <meta property="og:image" content={openGraph.image} />
-          <meta property="og:image:secure_url" content={openGraph.image} />
-        </>
-      )}
-      {openGraph?.imageAlt && <meta property="og:image:alt" content={openGraph.imageAlt} />}
+      <meta property="og:image" content={resolvedOgImage} />
+      <meta property="og:image:secure_url" content={resolvedOgImage} />
+      <meta property="og:image:alt" content={resolvedOgAlt} />
       {openGraph?.imageWidth && <meta property="og:image:width" content={openGraph.imageWidth} />}
       {openGraph?.imageHeight && <meta property="og:image:height" content={openGraph.imageHeight} />}
       {openGraph?.url && <meta property="og:url" content={openGraph.url} />}
@@ -127,7 +132,7 @@ export default function SEO({
       {twitter?.site && <meta name="twitter:site" content={twitter.site} />}
       <meta name="twitter:title" content={title} />
       {description && <meta name="twitter:description" content={description} />}
-      {twitter?.image && <meta name="twitter:image" content={twitter.image} />}
+      <meta name="twitter:image" content={resolvedTwitterImage} />
 
       {/* Canonical URL */}
       {canonical && <link rel="canonical" href={canonical} />}
