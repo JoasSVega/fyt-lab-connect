@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      // Polyfill para requestIdleCallback (Safari no lo soporta)
+      window.requestIdleCallback = window.requestIdleCallback || function(cb) {
+        var start = Date.now();
+        return setTimeout(function() {
+          cb({
+            didTimeout: false,
+            timeRemaining: function() {
+              return Math.max(0, 50 - (Date.now() - start));
+            }
+          });
+        }, 1);
+      };
+      
+      window.cancelIdleCallback = window.cancelIdleCallback || function(id) {
+        clearTimeout(id);
+      };
+      
+      // GitHub Pages SPA redirect handling
+      // Restores the path that was stored when 404.html redirected here
+      (function () {
+        // First, check for sessionStorage redirect (from 404.html)
+        var redirectPath = sessionStorage.getItem('redirectPath');
+        if (redirectPath) {
+          sessionStorage.removeItem('redirectPath');
+          window.history.replaceState(null, '', redirectPath);
+        } else {
+          // Fallback: check for legacy query parameter redirect
+          var params = new URLSearchParams(window.location.search);
+          var redirect = params.get('redirect');
+          if (redirect) {
+            var target = redirect.charAt(0) === '/' ? redirect : '/' + redirect;
+            window.history.replaceState(null, '', target);
+          }
+        }
+      })();
+    </script>
+    
+  <!-- Primary Meta Tags -->
+  
+  
+  <!-- Performance: Preconnect to Google Fonts to shorten the critical chain -->
+  <!-- Critical preconnects -->
+  <link rel="preconnect" href="https://fyt-lab-connect.lovable.app" crossorigin />
+  <link rel="dns-prefetch" href="https://fyt-lab-connect.lovable.app" />
+  
+  <!-- Google Fonts: Preconnect with crossorigin for optimal loading -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+  
+  <!-- Google Fonts (non-blocking): preload + onload swap with noscript fallback -->
+  <!-- Using font-display=swap for immediate text rendering with system fonts -->
+  <link
+    rel="preload"
+    as="style"
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Raleway:wght@400;500;600&family=Inter:wght@400;500;700&display=swap"
+    onload="this.onload=null;this.rel='stylesheet'"
+  />
+  <noscript>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Raleway:wght@400;500;600&family=Inter:wght@400;500;700&display=swap"
+    />
+  </noscript>
+  <!-- Señales de idioma para motores de búsqueda -->
+  <meta http-equiv="Content-Language" content="es" />
+  <meta name="language" content="es" />
+  
+  
+
+  <!-- Favicons optimizados (aspect ratio 1:1) -->
+  <!-- SVG favicon (modern browsers, vectorial, ideal para diferentes tamaños) -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  
+  <!-- PNG favicons para navegadores legacy y diferentes resoluciones -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  
+  <!-- Apple Touch Icon (iOS/iPadOS) - 180x180px cuadrado -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  
+  <!-- Web App Manifest (PWA metadata) -->
+  <link rel="manifest" href="/site.webmanifest" />
+  
+  <!-- Preload LCP hero image (WebP variants - Safari compatible) -->
+  <link
+    rel="preload"
+    as="image"
+    href="/images/hero-index-medium-medium.webp"
+    imagesrcset="/images/hero-index-small.webp 400w, /images/hero-index-medium-medium.webp 800w, /images/Hero-Index-large.webp 1200w"
+    imagesizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px"
+    fetchpriority="high"
+  />
+
+  <!-- Minimal inline critical CSS for font fallback rendering -->
+  <style>
+    /* System font stack for immediate text rendering before Google Fonts load */
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    /* Optimized font fallbacks to match Google Fonts metrics (reduces CLS) */
+    @font-face {
+      font-family: 'Poppins Fallback';
+      src: local('Arial');
+      size-adjust: 107%;
+      ascent-override: 92%;
+      descent-override: 25%;
+      line-gap-override: 0%;
+    }
+    @font-face {
+      font-family: 'Raleway Fallback';
+      src: local('Arial');
+      size-adjust: 99%;
+      ascent-override: 93%;
+      descent-override: 25%;
+      line-gap-override: 0%;
+    }
+    @font-face {
+      font-family: 'Inter Fallback';
+      src: local('Arial');
+      size-adjust: 107%;
+      ascent-override: 90%;
+      descent-override: 22%;
+      line-gap-override: 0%;
+    }
+  </style>
+
+  <!-- KaTeX CSS: hint early with preload from CDN; non-blocking load -->
+  <link
+    rel="preload"
+    as="style"
+    href="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.css"
+    onload="this.onload=null;this.rel='stylesheet'"
+  />
+  <noscript>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.css" />
+  </noscript>
+  <!-- Canonical domain -->
+  
+
+  <!-- Open Graph -->
+  
+  
+  
+  
+  
+  
+  
+  
+
+  <!-- hreflang principal en español -->
+  <link rel="alternate" hreflang="es" href="https://fyt-research.org" />
+
+  <!-- Twitter -->
+  
+  
+  
+  
+  
+  
+    <script type="module" crossorigin src="/assets/index-BekIvFK4.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/radix-ByoYm48K.js">
+    <link rel="modulepreload" crossorigin href="/assets/carousel-CHkIgb8Q.js">
+    <link rel="modulepreload" crossorigin href="/assets/vendor-DgCxsNbX.js">
+    <link rel="modulepreload" crossorigin href="/assets/motion-DzJUcuP3.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-f9Aizzr7.css">
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<title>Grupo FyT | Investigación</title>
+<meta name="author" content="Grupo FyT">
+<meta name="description" content="Producción científica del Grupo de Investigación en Farmacología y Terapéutica (FyT) - Universidad de Cartagena. Investigación en Atención Farmacéutica, Diseño de Fármacos, Farmacoeconomía, Farmacoepidemiología, Farmacovigilancia y Toxicología.">
+<link rel="canonical" href="https://fyt-research.org/investigacion">
+<meta property="og:image" content="https://fyt-research.org/images/logo-fyt-medium.webp">
+<meta property="og:image:secure_url" content="https://fyt-research.org/images/logo-fyt-medium.webp">
+<meta property="og:image:alt" content="Logo Grupo FyT">
+<meta property="og:title" content="Grupo FyT | Investigación">
+<meta property="og:description" content="Producción científica del Grupo de Investigación en Farmacología y Terapéutica (FyT) - Universidad de Cartagena. Investigación en Atención Farmacéutica, Diseño de Fármacos, Farmacoeconomía, Farmacoepidemiología, Farmacovigilancia y Toxicología.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fyt-research.org/investigacion">
+<meta property="og:site_name" content="Grupo FyT">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Grupo FyT | Investigación">
+<meta name="twitter:description" content="Producción científica del Grupo de Investigación en Farmacología y Terapéutica (FyT) - Universidad de Cartagena. Investigación en Atención Farmacéutica, Diseño de Fármacos, Farmacoeconomía, Farmacoepidemiología, Farmacovigilancia y Toxicología.">
+<meta name="twitter:image" content="https://fyt-research.org/images/logo-fyt-medium.webp">
+</head>
+
+  <body>
+    <!-- Fallback content for JavaScript disabled -->
+    <noscript>
+      <div style="
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        background: white;
+        color: #333;
+        text-align: center;
+        padding: 20px;
+      ">
+        <div style="max-width: 500px;">
+          <h1 style="margin-top: 0; font-size: 28px;">Bienvenido a Grupo FyT</h1>
+          <p style="font-size: 16px; line-height: 1.6; opacity: 0.8;">
+            Este sitio requiere JavaScript para funcionar correctamente.
+          </p>
+        </div>
+      </div>
+    </noscript>
+
+    <div id="root"><div role="region" aria-label="Notifications (F8)" tabindex="-1" style="pointer-events:none"><ol tabindex="-1" class="fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]"></ol></div><section aria-label="Notifications alt+T" tabindex="-1" aria-live="polite" aria-relevant="additions text" aria-atomic="false"></section><!--$!--><template data-msg="The server did not finish this Suspense boundary: The server used &quot;renderToString&quot; which does not support Suspense. If you intended for this Suspense boundary to render the fallback content on the server consider throwing an Error somewhere within the Suspense boundary. If you intended to have the server wait for the suspended component please switch to &quot;renderToPipeableStream&quot; which supports Suspense on the server" data-stck="
+    at Suspense
+    at me (file:///home/runner/work/fyt-lab-connect/fyt-lab-connect/dist/server/assets/main.ssg-BzUod4cU.js:1:6620)
+    at QueryClientProvider (file:///home/runner/work/fyt-lab-connect/fyt-lab-connect/node_modules/@tanstack/react-query/build/modern/QueryClientProvider.js:20:3)
+    at jt (file:///home/runner/work/fyt-lab-connect/fyt-lab-connect/dist/server/assets/main.ssg-BzUod4cU.js:1:34406)
+    at Router (/home/runner/work/fyt-lab-connect/fyt-lab-connect/node_modules/react-router/dist/umd/react-router.development.js:1207:17)
+    at StaticRouter (file:///home/runner/work/fyt-lab-connect/fyt-lab-connect/node_modules/react-router-dom/server.mjs:11:3)"></template><!--/$--></div>
+  </body>
+</html>
