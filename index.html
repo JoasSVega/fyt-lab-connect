@@ -21,13 +21,22 @@
         clearTimeout(id);
       };
       
-      // Redirect handling
+      // GitHub Pages SPA redirect handling
+      // Restores the path that was stored when 404.html redirected here
       (function () {
-        var params = new URLSearchParams(window.location.search);
-        var redirect = params.get('redirect');
-        if (redirect) {
-          var target = redirect.charAt(0) === '/' ? redirect : '/' + redirect;
-          window.history.replaceState(null, '', target);
+        // First, check for sessionStorage redirect (from 404.html)
+        var redirectPath = sessionStorage.getItem('redirectPath');
+        if (redirectPath) {
+          sessionStorage.removeItem('redirectPath');
+          window.history.replaceState(null, '', redirectPath);
+        } else {
+          // Fallback: check for legacy query parameter redirect
+          var params = new URLSearchParams(window.location.search);
+          var redirect = params.get('redirect');
+          if (redirect) {
+            var target = redirect.charAt(0) === '/' ? redirect : '/' + redirect;
+            window.history.replaceState(null, '', target);
+          }
         }
       })();
     </script>
