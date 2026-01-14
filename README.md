@@ -35,6 +35,28 @@ La interfaz está implementada con React y TypeScript, con ruteo funcional, comp
 - Framer Motion, Lucide Icons
 - Testing con Vitest
 
+### Documentación
+
+La documentación completa del proyecto se encuentra en la carpeta `docs/`:
+
+- **[QUICK_START.md](docs/QUICK_START.md)** ⭐ - Guía rápida de inicio (5 min)
+- **[RESUMEN_EJECUTIVO.md](docs/RESUMEN_EJECUTIVO.md)** - Visión general ejecutiva
+- **[ARCHITECTURE.md](docs/ARCHITECTURE.md)** - Arquitectura del proyecto
+- **[ROADMAP.md](docs/ROADMAP.md)** - Hoja de ruta y futuro
+- **[CONTRIBUTING.md](docs/CONTRIBUTING.md)** - Guía de contribución
+
+#### Documentación SEO e Indexación
+
+- **[INDEXATION_FIX_SUMMARY.md](docs/INDEXATION_FIX_SUMMARY.md)** - Solución de indexación en Google
+- **[GOOGLE_INDEXATION_VERIFICATION.md](docs/GOOGLE_INDEXATION_VERIFICATION.md)** - Verificación en Google Search Console
+- **[VALIDATION_CHECKLIST.md](docs/VALIDATION_CHECKLIST.md)** - Checklist de validación
+
+### Scripts de utilidad
+
+Los scripts de utilidad se encuentran en la carpeta `scripts/`:
+
+- **verify-spa-seo.sh** - Verificación automática de SPA routing y SEO
+
 ### Cómo contribuir
 
 1. Crea una rama desde `develop`:
@@ -43,15 +65,19 @@ La interfaz está implementada con React y TypeScript, con ruteo funcional, comp
 git checkout -b feature/mi-cambio
 ```
 
-Sigue el estándar de Conventional Commits.
+2. Sigue el estándar de Conventional Commits.
 
-Abre un Pull Request hacia `develop` para revisión.
+3. Abre un Pull Request hacia `develop` para revisión.
+
+Consulta [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) para más detalles.
 
 ### Roadmap (resumen)
 
 - **Corto plazo:** estabilización de UI, pruebas básicas, corrección de bugs de navegación.
 - **Mediano plazo:** accesibilidad, automatización CI, prerendering completo.
 - **Largo plazo:** internacionalización, panel de administración y evaluación de modelos de sostenibilidad.
+
+Ver [docs/ROADMAP.md](docs/ROADMAP.md) para el roadmap completo.
 
 ---
 
