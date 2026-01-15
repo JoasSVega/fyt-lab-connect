@@ -14,8 +14,8 @@ const SobreNosotros = () => {
   return (
   <div className="w-full bg-background flex flex-col">
       <Seo
-        title="Grupo FyT | Sobre Nosotros"
-        description="Equipo comprometido con la innovación farmacéutica, la seguridad del paciente y la excelencia científica."
+        title="Equipo FyT: Investigadores Farmacéuticos"
+        description="Equipo de investigadores comprometidos con la innovación farmacéutica, seguridad del paciente y excelencia científica."
         author="Grupo FyT"
         robots="index, follow"
         canonical="https://fyt-research.org/sobre-nosotros"
