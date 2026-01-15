@@ -63,10 +63,10 @@ export function render(path: string): { html: string; head: string } {
     let ogImage = '/images/logo-fyt-og.webp';
     if (post.authorImage) {
       // Convertir la ruta de la imagen del autor a la versión OG
-      ogImage = post.authorImage.replace(/-large\.webp$/, '-og.webp')
-                                .replace(/-medium\.webp$/, '-og.webp')
-                                .replace(/-small\.webp$/, '-og.webp')
-                                .replace(/\.webp$/, '-og.webp');
+      // Primero remover sufijos de tamaño (-large, -medium, -small)
+      ogImage = post.authorImage.replace(/-(large|medium|small)\.webp$/, '.webp');
+      // Luego agregar el sufijo OG
+      ogImage = ogImage.replace(/\.webp$/, '-og.webp');
     }
     
     // META TAGS PARA ARTÍCULOS (OpenGraph Article)
