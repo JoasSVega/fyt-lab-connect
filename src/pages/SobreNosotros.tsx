@@ -19,8 +19,15 @@ const SobreNosotros = () => {
         author="Grupo FyT"
         robots="index, follow"
         canonical="https://fyt-research.org/sobre-nosotros"
-        openGraph={{ title: "Grupo FyT | Sobre Nosotros", description: "Conoce nuestro equipo y valores", type: "article" }}
-        twitter={{ card: "summary", site: "@fytlab" }}
+        openGraph={{ 
+          title: "Grupo FyT | Sobre Nosotros", 
+          description: "Conoce nuestro equipo y valores", 
+          type: "website",
+          url: "https://fyt-research.org/sobre-nosotros",
+          siteName: "Grupo FyT",
+          locale: "es_ES",
+        }}
+        twitter={{ card: "summary_large_image", site: "@fytlab" }}
       />
       {/* Hero Institucional */}
       <section

@@ -59,6 +59,16 @@ export function render(path: string): { html: string; head: string } {
 
   let headArray: string[];
   if (post) {
+    // Usar imagen OG optimizada del autor si existe, o el logo por defecto
+    let ogImage = '/images/logo-fyt-og.webp';
+    if (post.authorImage) {
+      // Convertir la ruta de la imagen del autor a la versión OG
+      ogImage = post.authorImage.replace(/-large\.webp$/, '-og.webp')
+                                .replace(/-medium\.webp$/, '-og.webp')
+                                .replace(/-small\.webp$/, '-og.webp')
+                                .replace(/\.webp$/, '-og.webp');
+    }
+    
     // META TAGS PARA ARTÍCULOS (OpenGraph Article)
     headArray = [
   `<title>${post.title}</title>`,
@@ -66,9 +76,12 @@ export function render(path: string): { html: string; head: string } {
   `<meta name="description" content="${post.excerpt}">`,
   `<link rel="canonical" href="${canonical}">`,
   
-  // Imagen social (autor o logo)
-  `<meta property="og:image" content="${baseUrl}${post.authorImage || '/images/logo-fyt-medium.webp'}">`,
-  `<meta property="og:image:secure_url" content="${baseUrl}${post.authorImage || '/images/logo-fyt-medium.webp'}">`,
+  // Imagen social (autor o logo) - optimizada para OG
+  `<meta property="og:image" content="${baseUrl}${ogImage}">`,
+  `<meta property="og:image:secure_url" content="${baseUrl}${ogImage}">`,
+  `<meta property="og:image:type" content="image/webp">`,
+  `<meta property="og:image:width" content="1200">`,
+  `<meta property="og:image:height" content="630">`,
   `<meta property="og:image:alt" content="Foto del autor ${post.author}">`,
       
   // OpenGraph para artículos
@@ -88,7 +101,7 @@ export function render(path: string): { html: string; head: string } {
   `<meta name="twitter:card" content="summary_large_image">`,
   `<meta name="twitter:title" content="${post.title}">`,
   `<meta name="twitter:description" content="${post.excerpt}">`,
-  `<meta name="twitter:image" content="${baseUrl}${post.authorImage || '/images/logo-fyt-medium.webp'}">`,
+  `<meta name="twitter:image" content="${baseUrl}${ogImage}">`,
       
   // Structured Data (JSON-LD) para artículos
   `<script type="application/ld+json">
@@ -123,9 +136,12 @@ export function render(path: string): { html: string; head: string } {
   `<meta name="description" content="${meta.description}">`,
   `<link rel="canonical" href="${canonical}">`,
       
-  // Imagen social por defecto (logo)
-  `<meta property="og:image" content="${baseUrl}/images/logo-fyt-medium.webp">`,
-  `<meta property="og:image:secure_url" content="${baseUrl}/images/logo-fyt-medium.webp">`,
+  // Imagen social por defecto (logo optimizado para OG)
+  `<meta property="og:image" content="${baseUrl}/images/logo-fyt-og.webp">`,
+  `<meta property="og:image:secure_url" content="${baseUrl}/images/logo-fyt-og.webp">`,
+  `<meta property="og:image:type" content="image/webp">`,
+  `<meta property="og:image:width" content="1200">`,
+  `<meta property="og:image:height" content="630">`,
   `<meta property="og:image:alt" content="Logo Grupo FyT">`,
       
   // OpenGraph genérico

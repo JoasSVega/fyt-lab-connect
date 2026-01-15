@@ -4,7 +4,7 @@
  */
 
 export const baseUrl = 'https://fyt-research.org';
-export const logoUrl = `${baseUrl}/logo-fyt.png`;
+export const logoUrl = `${baseUrl}/images/logo-fyt-og.webp`;
 
 /**
  * Schema Organization: Identifica quién eres como grupo

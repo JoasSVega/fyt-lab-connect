@@ -23,6 +23,15 @@ const FormacionPage: React.FC = () => {
         author="Grupo FyT"
         robots="index, follow"
         canonical="https://fyt-research.org/investigacion/formacion"
+        openGraph={{
+          title: "Grupo FyT | Formación y Actividades Docentes",
+          description: "Procesos formativos y actividades docentes del Grupo FyT",
+          type: "website",
+          url: "https://fyt-research.org/investigacion/formacion",
+          siteName: "Grupo FyT",
+          locale: "es_ES",
+        }}
+        twitter={{ card: "summary_large_image", site: "@fytlab" }}
       />
 
       <SmallHero

@@ -38,12 +38,12 @@ const Equipo = () => {
           description: "Conoce al equipo de la Universidad de Cartagena. Investigadores y semilleristas comprometidos con el rigor científico en Farmacología, Toxicología y Salud Pública.",
           type: "website",
           url: `${baseUrl}/equipo`,
-          image: `${baseUrl}/logo-fyt.png`,
+          siteName: "Grupo FyT",
+          locale: "es_ES",
         }}
         twitter={{
-          card: "summary",
+          card: "summary_large_image",
           site: "@fytlab",
-          image: `${baseUrl}/logo-fyt.png`,
         }}
         schema={schema}
       />

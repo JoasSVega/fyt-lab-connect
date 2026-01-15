@@ -77,6 +77,15 @@ const PublicacionesPage: React.FC = () => {
         author="Grupo FyT"
         robots="index, follow"
         canonical="https://fyt-research.org/investigacion/publicaciones"
+        openGraph={{
+          title: "Grupo FyT | Publicaciones Científicas",
+          description: "Producción científica en revistas indexadas y espacios editoriales académicos",
+          type: "website",
+          url: "https://fyt-research.org/investigacion/publicaciones",
+          siteName: "Grupo FyT",
+          locale: "es_ES",
+        }}
+        twitter={{ card: "summary_large_image", site: "@fytlab" }}
       />
 
       {/* Hero section */}

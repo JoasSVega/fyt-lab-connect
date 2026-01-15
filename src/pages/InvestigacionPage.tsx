@@ -24,9 +24,12 @@ const InvestigacionPage: React.FC = () => {
       <Seo title="Grupo FyT | Investigación y Producción Académica" description="Producción académica y científica del Grupo de Investigación en Farmacología y Terapéutica: publicaciones, proyectos, eventos y divulgación." author="Grupo FyT" robots="index, follow" canonical="https://fyt-research.org/investigacion" openGraph={{
       title: "Grupo FyT | Investigación y Producción Académica",
       description: "Producción científica del Grupo de Investigación en Farmacología y Terapéutica.",
-      type: "website"
+      type: "website",
+      url: "https://fyt-research.org/investigacion",
+      siteName: "Grupo FyT",
+      locale: "es_ES",
     }} twitter={{
-      card: "summary",
+      card: "summary_large_image",
       site: "@fytlab"
     }} />
       

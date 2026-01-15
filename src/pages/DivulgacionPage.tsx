@@ -55,7 +55,13 @@ const DivulgacionPage: React.FC = () => {
         openGraph={{
           title: "Divulgación Científica | Grupo FyT",
           description: "Conocimiento científico accesible",
-          type: "website"
+          type: "website",
+          url: "https://fyt-research.org/divulgacion",
+          siteName: "Grupo FyT",
+          locale: "es_ES",
+        }}
+        twitter={{
+          card: "summary_large_image",
         }}
       />
 

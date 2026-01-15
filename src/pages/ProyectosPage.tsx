@@ -83,8 +83,15 @@ const ProyectosPage: React.FC = () => {
         author="Grupo FyT"
         robots="index, follow"
         canonical="https://fyt-research.org/investigacion/proyectos"
-        openGraph={{ title: "Grupo FyT | Proyectos de Investigación", description: "Proyectos del Grupo FyT", type: "website" }}
-        twitter={{ card: "summary", site: "@fytlab" }}
+        openGraph={{ 
+          title: "Grupo FyT | Proyectos de Investigación", 
+          description: "Proyectos del Grupo FyT", 
+          type: "website",
+          url: "https://fyt-research.org/investigacion/proyectos",
+          siteName: "Grupo FyT",
+          locale: "es_ES",
+        }}
+        twitter={{ card: "summary_large_image", site: "@fytlab" }}
       />
       <SmallHero
         title="Proyectos de Investigación"

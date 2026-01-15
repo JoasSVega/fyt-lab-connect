@@ -96,7 +96,18 @@ const DivulgacionPostPage: React.FC = () => {
   // Metadatos SEO / Open Graph / Twitter
   const baseUrl = "https://fyt-research.org";
   const canonicalUrl = `${baseUrl}/divulgacion/${post.slug}`;
-  const ogImage = `${baseUrl}${post.authorImage || "/images/logo-fyt-medium.webp"}`;
+  
+  // Usar imagen OG optimizada del autor si existe, o el logo por defecto
+  let ogImage = `${baseUrl}/images/logo-fyt-og.webp`;
+  if (post.authorImage) {
+    // Convertir la ruta de la imagen del autor a la versión OG
+    // Ejemplo: /images/equipo/Antistio-Alviz-large.webp -> /images/equipo/Antistio-Alviz-og.webp
+    const authorImagePath = post.authorImage.replace(/-large\.webp$/, '-og.webp')
+                                            .replace(/-medium\.webp$/, '-og.webp')
+                                            .replace(/-small\.webp$/, '-og.webp')
+                                            .replace(/\.webp$/, '-og.webp');
+    ogImage = `${baseUrl}${authorImagePath}`;
+  }
   
   // Meta descripción: usar el excerpt del artículo (máx 160 caracteres para SEO)
   // Si el excerpt es más largo, truncarlo para mantener el estándar
