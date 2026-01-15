@@ -101,7 +101,9 @@ export default function SEO({
   const resolvedOgImage = openGraph?.image || logoUrl;
   const resolvedOgDescription = openGraph?.description || description || '';
   const resolvedOgTitle = openGraph?.title || title;
-  const resolvedOgAlt = openGraph?.imageAlt || 'Logo Grupo FyT';
+  const resolvedOgAlt = openGraph?.imageAlt || 'Logo Grupo FyT - Farmacología y Terapéutica';
+  const resolvedOgWidth = openGraph?.imageWidth || '1200';
+  const resolvedOgHeight = openGraph?.imageHeight || '630';
 
   const resolvedTwitterImage = twitter?.image || resolvedOgImage;
 
@@ -120,9 +122,10 @@ export default function SEO({
       {openGraph?.type && <meta property="og:type" content={openGraph.type} />}
       <meta property="og:image" content={resolvedOgImage} />
       <meta property="og:image:secure_url" content={resolvedOgImage} />
+      <meta property="og:image:type" content="image/webp" />
+      <meta property="og:image:width" content={resolvedOgWidth} />
+      <meta property="og:image:height" content={resolvedOgHeight} />
       <meta property="og:image:alt" content={resolvedOgAlt} />
-      {openGraph?.imageWidth && <meta property="og:image:width" content={openGraph.imageWidth} />}
-      {openGraph?.imageHeight && <meta property="og:image:height" content={openGraph.imageHeight} />}
       {openGraph?.url && <meta property="og:url" content={openGraph.url} />}
       {openGraph?.locale && <meta property="og:locale" content={openGraph.locale} />}
       {openGraph?.siteName && <meta property="og:site_name" content={openGraph.siteName} />}

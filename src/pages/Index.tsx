@@ -32,12 +32,12 @@ const Index = () => {
             description: "Grupo FyT: Investigación de vanguardia en Farmacología y Terapéutica de la Universidad de Cartagena. Descubre nuestros proyectos, publicaciones y herramientas digitales.",
             type: "website",
             url: baseUrl,
-            image: `${baseUrl}/logo-fyt.png`,
+            siteName: "Grupo FyT",
+            locale: "es_ES",
           }}
           twitter={{
             card: "summary_large_image",
             site: "@fytlab",
-            image: `${baseUrl}/logo-fyt.png`,
           }}
           schema={getOrganizationSchema()}
         />

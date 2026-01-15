@@ -15,10 +15,13 @@ const Contactos = () => {
         canonical="https://fyt-research.org/contactos"
         openGraph={{ 
           title: "Contacto y Alianzas Estratégicas | Grupo FyT", 
-          description: "¿Buscas colaboración científica? Contacta al Grupo FyT de la Universidad de Cartagena para alianzas en investigación o pasantías académicas.", 
-          type: "website" 
+          description: "Contacta al Grupo FyT para colaboración científica y alianzas en investigación", 
+          type: "website",
+          url: "https://fyt-research.org/contactos",
+          siteName: "Grupo FyT",
+          locale: "es_ES",
         }}
-        twitter={{ card: "summary", site: "@fytlab" }}
+        twitter={{ card: "summary_large_image", site: "@fytlab" }}
       />
       <ContactPremium />
     </div>

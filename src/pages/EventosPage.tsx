@@ -89,8 +89,15 @@ const EventosPage: React.FC = () => {
         author="Grupo FyT"
         robots="index, follow"
         canonical="https://fyt-research.org/investigacion/eventos"
-        openGraph={{ title: "Grupo FyT | Eventos Académicos y Cursos", description: "Eventos y cursos del Grupo FyT", type: "website" }}
-        twitter={{ card: "summary", site: "@fytlab" }}
+        openGraph={{ 
+          title: "Grupo FyT | Eventos Académicos y Cursos", 
+          description: "Eventos y cursos del Grupo FyT", 
+          type: "website",
+          url: "https://fyt-research.org/investigacion/eventos",
+          siteName: "Grupo FyT",
+          locale: "es_ES",
+        }}
+        twitter={{ card: "summary_large_image", site: "@fytlab" }}
       />
       <SmallHero
         title="Eventos Académicos y Cursos"

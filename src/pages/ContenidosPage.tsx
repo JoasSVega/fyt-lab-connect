@@ -44,6 +44,15 @@ const DivulgacionCientificaPage: React.FC = () => {
         author="Grupo FyT"
         robots="index, follow"
         canonical="https://fyt-research.org/investigacion/divulgacion-cientifica"
+        openGraph={{
+          title: "Grupo FyT | Producción Audiovisual y Sonora",
+          description: "Producción audiovisual y sonora en ciencias farmacéuticas",
+          type: "website",
+          url: "https://fyt-research.org/investigacion/divulgacion-cientifica",
+          siteName: "Grupo FyT",
+          locale: "es_ES",
+        }}
+        twitter={{ card: "summary_large_image", site: "@fytlab" }}
       />
 
       <SmallHero

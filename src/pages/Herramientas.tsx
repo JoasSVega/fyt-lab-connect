@@ -69,12 +69,12 @@ const Herramientas = () => {
           description: "Optimiza tu práctica clínica con nuestras herramientas digitales gratuitas. Soluciones rigurosas para cálculos farmacéuticos y dosificación.",
           type: "website",
           url: `${baseUrl}/herramientas`,
-          image: `${baseUrl}/logo-fyt.png`,
+          siteName: "Grupo FyT",
+          locale: "es_ES",
         }}
         twitter={{
           card: "summary_large_image",
           site: "@fytlab",
-          image: `${baseUrl}/logo-fyt.png`,
         }}
         schema={schema}
       />
