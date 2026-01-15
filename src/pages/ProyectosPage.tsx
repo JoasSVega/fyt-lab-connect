@@ -78,8 +78,8 @@ const ProyectosPage: React.FC = () => {
   return (
     <div className="w-full bg-background">
       <Seo
-        title="Grupo FyT | Proyectos de Investigación"
-        description="Listado de proyectos de investigación del Grupo de Investigación en Farmacología y Terapéutica."
+        title="Proyectos de Investigación FyT"
+        description="Proyectos de investigación del Grupo FyT en Farmacología, Terapéutica, Farmacia Asistencial y Modelización Molecular."
         author="Grupo FyT"
         robots="index, follow"
         canonical="https://fyt-research.org/investigacion/proyectos"

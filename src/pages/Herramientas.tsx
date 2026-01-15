@@ -58,8 +58,8 @@ const Herramientas = () => {
   return (
     <div className="w-full bg-background flex flex-col pt-24">
       <Seo
-        title="Herramientas y Calculadoras Farmacéuticas | Grupo FyT"
-        description="Optimiza tu práctica clínica con nuestras herramientas digitales gratuitas. Soluciones rigurosas para cálculos farmacéuticos y dosificación."
+        title="Calculadoras Farmacéuticas Gratuitas"
+        description="Herramientas digitales gratuitas para cálculos farmacéuticos clínicos: IMC, función renal, dosificación y más."
         keywords={["Calculadora de dosis", "Farmacocinética", "Software médico", "Herramientas Salud", "Universidad de Cartagena"]}
         author="Grupo FyT"
         robots="index, follow"

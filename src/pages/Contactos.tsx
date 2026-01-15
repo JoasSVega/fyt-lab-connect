@@ -7,8 +7,8 @@ const Contactos = () => {
   return (
     <div className="w-full bg-background flex flex-col pt-16">
       <Seo
-        title="Contacto y Alianzas Estratégicas | Grupo FyT"
-        description="¿Buscas colaboración científica? Contacta al Grupo FyT de la Universidad de Cartagena para alianzas en investigación o pasantías académicas."
+        title="Contacta con Grupo FyT"
+        description="Contacto para colaboraciones científicas, alianzas en investigación y pasantías en Farmacología. Universidad de Cartagena."
         keywords={["Contacto FyT", "Alianzas investigación", "Consultoría farmacéutica", "Pasantías Cartagena"]}
         author="Grupo FyT"
         robots="index, follow"

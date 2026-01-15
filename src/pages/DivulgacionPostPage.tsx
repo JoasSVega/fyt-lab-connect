@@ -99,14 +99,22 @@ const DivulgacionPostPage: React.FC = () => {
   
   // Usar imagen OG optimizada del autor si existe, o el logo por defecto
   let ogImage = `${baseUrl}/images/logo-fyt-og.webp`;
+  let ogImageAlt = "Logo Grupo FyT";
+  
   if (post.authorImage) {
     // Convertir la ruta de la imagen del autor a la versión OG
     // Ejemplo: /images/equipo/Antistio-Alviz-large.webp -> /images/equipo/Antistio-Alviz-og.webp
-    const authorImagePath = post.authorImage.replace(/-large\.webp$/, '-og.webp')
-                                            .replace(/-medium\.webp$/, '-og.webp')
-                                            .replace(/-small\.webp$/, '-og.webp')
-                                            .replace(/\.webp$/, '-og.webp');
+    // Primero extraer el nombre base sin sufijos de tamaño
+    let authorImagePath = post.authorImage;
+    
+    // Remover sufijos de tamaño (-large, -medium, -small)
+    authorImagePath = authorImagePath.replace(/-(large|medium|small)\.webp$/, '.webp');
+    
+    // Reemplazar .webp con -og.webp
+    authorImagePath = authorImagePath.replace(/\.webp$/, '-og.webp');
+    
     ogImage = `${baseUrl}${authorImagePath}`;
+    ogImageAlt = `Foto del autor ${post.author}`;
   }
   
   // Meta descripción: usar el excerpt del artículo (máx 160 caracteres para SEO)
@@ -133,7 +141,7 @@ const DivulgacionPostPage: React.FC = () => {
           url: canonicalUrl,
           locale: "es_ES",
           siteName: "Grupo FyT - Farmacología y Terapéutica",
-          imageAlt: `Foto del autor ${post.author}`,
+          imageAlt: ogImageAlt,
           imageWidth: "1200",
           imageHeight: "630",
         }}

@@ -27,8 +27,8 @@ const Equipo = () => {
   return (
     <div className="w-full bg-background flex flex-col pt-24">
       <Seo
-        title="Nuestro Equipo de Investigadores | Grupo FyT"
-        description="Conoce al equipo de la Universidad de Cartagena. Investigadores y semilleristas comprometidos con el rigor científico en Farmacología, Toxicología y Salud Pública."
+        title="Investigadores: Grupo FyT"
+        description="Conoce nuestro equipo de investigadores y semilleristas en Farmacología, Toxicología, Toxicología y Salud Pública de la Universidad de Cartagena."
         keywords={["Investigadores UdeC", "Químicos Farmacéuticos", "Equipo FyT", "Semillero de investigación", "Científicos Cartagena"]}
         author="Grupo FyT"
         robots="index, follow"

@@ -72,8 +72,8 @@ const PublicacionesPage: React.FC = () => {
     <div className="w-full bg-background">
       {/* SEO */}
       <Seo
-        title="Grupo FyT | Publicaciones Científicas y Académicas"
-        description="Publicaciones científicas del Grupo de Investigación en Farmacología y Terapéutica en revistas indexadas, libros y espacios editoriales académicos."
+        title="Publicaciones Científicas FyT"
+        description="Publicaciones del Grupo FyT en revistas indexadas, libros y espacios editoriales académicos en Farmacología."
         author="Grupo FyT"
         robots="index, follow"
         canonical="https://fyt-research.org/investigacion/publicaciones"

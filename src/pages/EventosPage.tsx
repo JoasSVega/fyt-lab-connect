@@ -84,8 +84,8 @@ const EventosPage: React.FC = () => {
   return (
     <div className="w-full bg-background">
       <Seo
-        title="Grupo FyT | Eventos Académicos y Cursos"
-        description="Agenda académica del Grupo de Investigación en Farmacología y Terapéutica: congresos, simposios, jornadas y cursos."
+        title="Eventos y Cursos del Grupo FyT"
+        description="Congresos, simposios, jornadas científicas y cursos del Grupo de Investigación en Farmacología y Terapéutica."
         author="Grupo FyT"
         robots="index, follow"
         canonical="https://fyt-research.org/investigacion/eventos"

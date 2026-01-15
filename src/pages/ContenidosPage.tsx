@@ -39,8 +39,8 @@ const DivulgacionCientificaPage: React.FC = () => {
   return (
     <div className="w-full bg-background">
       <Seo
-        title="Grupo FyT | Producción Audiovisual y Sonora"
-        description="Producción audiovisual y sonora asociada a proyectos de investigación en ciencias farmacéuticas del Grupo FyT."
+        title="Producción Audiovisual: Grupo FyT"
+        description="Videos y podcasts en ciencias farmacéuticas: producciones audiovisuales de investigación del Grupo FyT."
         author="Grupo FyT"
         robots="index, follow"
         canonical="https://fyt-research.org/investigacion/divulgacion-cientifica"
