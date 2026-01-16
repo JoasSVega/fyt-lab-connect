@@ -131,7 +131,7 @@ export function render(path: string): { html: string; head: string } {
   } else {
     // META TAGS PARA PÁGINAS ESTÁTICAS
     headArray = [
-      `<title>Grupo FyT | ${meta.title}</title>`,
+      `<title>${meta.title}</title>`,
       `<meta name="author" content="Grupo FyT">`,
   `<meta name="description" content="${meta.description}">`,
   `<link rel="canonical" href="${canonical}">`,
@@ -145,7 +145,7 @@ export function render(path: string): { html: string; head: string } {
   `<meta property="og:image:alt" content="Logo Grupo FyT">`,
       
   // OpenGraph genérico
-  `<meta property="og:title" content="Grupo FyT | ${meta.title}">`,
+  `<meta property="og:title" content="${meta.title}">`,
   `<meta property="og:description" content="${meta.description}">`,
   `<meta property="og:type" content="website">`,
   `<meta property="og:url" content="${canonical}">`,
@@ -154,7 +154,7 @@ export function render(path: string): { html: string; head: string } {
       
   // Twitter Card
   `<meta name="twitter:card" content="summary_large_image">`,
-  `<meta name="twitter:title" content="Grupo FyT | ${meta.title}">`,
+  `<meta name="twitter:title" content="${meta.title}">`,
   `<meta name="twitter:description" content="${meta.description}">`,
   `<meta name="twitter:image" content="${baseUrl}/images/logo-fyt-medium.webp">`,
     ];

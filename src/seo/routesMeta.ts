@@ -70,16 +70,16 @@ export const routeMeta: Record<string, { title: string; description: string }> =
   // PÁGINAS ESTÁTICAS
   // ========================================
   '/': {
-    title: 'Grupo FyT - Investigación Farmacología Universidad',
-    description: 'Grupo de investigación en Farmacología y Terapéutica de la Universidad de Cartagena. Proyectos, publicaciones y herramientas.'
+    title: 'Grupo FyT | Farmacología y Terapéutica basada en evidencia',
+    description: 'Grupo de investigación enfocado en farmacología y terapéutica. Promovemos investigación, divulgación científica y análisis riguroso en salud.'
   },
   '/sobre-nosotros': {
-    title: 'Sobre Nosotros - Grupo FyT Universidad de Cartagena',
-    description: 'Grupo de investigación categoría B Minciencias. Líneas: Atención Farmacéutica, Farmacoeconomía, Farmacovigilancia y Toxicología.'
+    title: 'Sobre Nosotros | Misión, Visión y Equipo del Grupo FyT',
+    description: 'Objetivo, misión, visión y valores del Grupo FyT, junto con la presentación del equipo principal y su enfoque en farmacología y terapéutica.'
   },
   '/investigacion': {
-    title: 'Investigación Científica Farmacológica - Grupo FyT UdeC',
-    description: 'Producción científica del Grupo FyT: proyectos, publicaciones y eventos en Farmacología y Terapéutica de la Universidad de Cartagena.'
+    title: 'Investigación | Producción Académica y Actividad Científica FyT',
+    description: 'Resumen de la actividad investigativa del Grupo FyT: publicaciones, proyectos, participación en eventos, formación impartida y contenido digital.'
   },
   '/investigacion/publicaciones': {
     title: 'Publicaciones Científicas Farmacología - Grupo FyT UdeC',
@@ -102,16 +102,16 @@ export const routeMeta: Record<string, { title: string; description: string }> =
     description: 'Contenidos de divulgación científica y transferencia de conocimiento del Grupo de Investigación FyT Universidad de Cartagena.'
   },
   '/divulgacion': {
-    title: 'Divulgación Científica Farmacológica - Artículos FyT UdeC',
-    description: 'Artículos de divulgación científica y análisis en farmacología, terapéutica y política de salud del Grupo FyT.'
+    title: 'Divulgación Científica | Artículos del Grupo FyT',
+    description: 'Artículos de divulgación científica en farmacología, investigación y salud. Contenido riguroso, accesible y basado en evidencia.'
   },
   '/noticias': {
-    title: 'Noticias Científicas Farmacológicas - Grupo FyT Universidad',
-    description: 'Actualidad científica, eventos, publicaciones y logros del Grupo de Investigación en Farmacología y Terapéutica UdeC.'
+    title: 'Noticias | Actualidad del Grupo FyT',
+    description: 'Novedades, actividades y actualizaciones del Grupo FyT relacionadas con investigación, divulgación y trabajo académico.'
   },
   '/herramientas': {
-    title: 'Herramientas Clínicas Farmacológicas - Grupo FyT Universidad',
-    description: 'Calculadoras y herramientas clínicas para profesionales de la salud. Recursos del Grupo FyT en farmacología y terapéutica.'
+    title: 'Herramientas | Recursos Científicos del Grupo FyT',
+    description: 'Herramientas y recursos desarrollados por el Grupo FyT para apoyar el análisis, la investigación y la práctica en salud.'
   },
   '/herramientas/clinicos': {
     title: 'Calculadoras Clínicas Farmacéuticas - Grupo FyT Universidad',
@@ -130,8 +130,8 @@ export const routeMeta: Record<string, { title: string; description: string }> =
     description: 'Escalas clínicas validadas para evaluación farmacoterapéutica, farmacovigilancia y toxicología del Grupo FyT UdeC.'
   },
   '/contactos': {
-    title: 'Contacto Grupo FyT - Investigación Farmacología Universidad',
-    description: 'Información de contacto del Grupo de Investigación en Farmacología y Terapéutica de la Universidad de Cartagena.'
+    title: 'Contacto | Grupo FyT Investigación Científica',
+    description: 'Ponte en contacto con el Grupo FyT para información académica, colaboración científica o consultas institucionales.'
   },
   '/equipo': {
     title: 'Equipo Investigador Farmacología - Grupo FyT Universidad',
