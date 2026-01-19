@@ -485,18 +485,18 @@ body.modal-open .calc-overlay {
     left: 50%;
     transform: translateX(-50%);
     width: 100vw;
-    min-height: clamp(26rem, 55vh, 40rem); /* Reduced from 50vh to 55vh for better proportions */
+    min-height: clamp(28rem, 60vh, 42rem);
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    padding-top: clamp(2rem, 6vh, 3.5rem);
-    padding-bottom: clamp(2rem, 6vh, 3.5rem);
+    padding-top: clamp(3rem, 8vh, 5rem);
+    padding-bottom: clamp(3rem, 8vh, 5rem);
   }
 
   @media (min-width: 768px) {
     .hero-container {
-      min-height: clamp(30rem, 65vh, 45rem); /* Reduced from 55vh to 65vh for desktop */
+      min-height: clamp(32rem, 70vh, 48rem);
     }
   }
 
