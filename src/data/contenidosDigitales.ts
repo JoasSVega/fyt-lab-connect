@@ -25,9 +25,9 @@ export const divulgacionCientifica: DivulgacionCientifica[] = [
   },
   {
     id: 3,
-    titulo: "Conversatorio: Hablemos de farmacia comunitaria",
+    titulo: "Conversatorio Hablemos de farmacia comunitaria",
     anio: 2023,
-    tipo: "Cápsula audiovisual",
+    tipo: "Video",
     categoria: "audiovisual",
     enfoque: "Farmacia comunitaria y ejercicio profesional",
     descripcion: "Diálogo especializado sobre el rol de la farmacia comunitaria en la práctica clínica contemporánea.",
@@ -35,7 +35,7 @@ export const divulgacionCientifica: DivulgacionCientifica[] = [
   },
   {
     id: 4,
-    titulo: "Actualización en el análisis de parámetros PK/PD en paciente de cuidado crítico",
+    titulo: "Actualización en análisis de los parámetros PK/PD - farmacocinética/farmacodinamia en paciente de cuidado crítico",
     anio: 2023,
     tipo: "Video",
     categoria: "audiovisual",
@@ -45,9 +45,9 @@ export const divulgacionCientifica: DivulgacionCientifica[] = [
   },
   {
     id: 5,
-    titulo: "Hábitos de consumo de medicamentos de venta libre por estudiantes del área de la salud en Cartagena",
+    titulo: "Hábitos de consumo de medicamentos de venta libre por estudiantes del área de la salud en Cartagena-Colombia",
     anio: 2024,
-    tipo: "Cápsula audiovisual",
+    tipo: "Cápsulas de video",
     categoria: "audiovisual",
     enfoque: "Uso racional de medicamentos y salud pública",
     descripcion: "Documentación de resultados de investigación sobre patrones de automedicación en población estudiantil de ciencias de la salud.",
@@ -55,7 +55,7 @@ export const divulgacionCientifica: DivulgacionCientifica[] = [
   },
   {
     id: 6,
-    titulo: "AUDIOCIENCIA – Perfiles",
+    titulo: "AUDIOCIENCIA ? PERFILES",
     anio: 2024,
     tipo: "Podcast",
     categoria: "podcast",
