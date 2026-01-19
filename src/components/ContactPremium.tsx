@@ -177,7 +177,7 @@ const ContactPremium = () => {
           className="relative z-10 hero-content-left hero-text-shadow text-center md:text-left"
         >
           <h1 className="hero-title font-poppins font-extrabold text-white mb-6 tracking-tight drop-shadow-lg">
-            Conectemos Ciencia y Futuro
+            Contacto y colaboración institucional
           </h1>
           <p className="hero-subtitle font-inter text-white/95 leading-relaxed drop-shadow-md max-w-3xl mx-auto md:mx-0">
             Promovemos la excelencia mediante alianzas en investigación, docencia y extensión.

@@ -50,7 +50,7 @@ const DivulgacionPage: React.FC = () => {
   return (
     <div className="w-full bg-background">
       <Seo
-        title="Divulgación Científica FyT"
+        title="Divulgación Científica | Artículos del Grupo FyT"
         description="Artículos de divulgación en farmacología, investigación y salud. Contenido académico accesible del Grupo FyT."
         canonical="https://fyt-research.org/divulgacion"
         openGraph={{
@@ -88,7 +88,7 @@ const DivulgacionPage: React.FC = () => {
         <div className="relative z-10 w-full hero-content-left hero-text-shadow text-center md:text-left">
           <div className="max-w-3xl mx-auto md:mx-0">
             <h1 className="hero-title font-poppins font-extrabold text-white mb-6 tracking-tight drop-shadow-lg">
-              Divulgación Científica
+              Divulgación científica y contenidos del Grupo FyT
             </h1>
             <p className="hero-subtitle font-inter text-white/95 leading-relaxed drop-shadow-md">
               Artículos académicos accesibles sobre farmacología, investigación y salud.
