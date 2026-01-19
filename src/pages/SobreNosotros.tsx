@@ -32,7 +32,7 @@ const SobreNosotros = () => {
       {/* Hero Institucional */}
       <section className="hero-container" aria-label="Hero Sobre Nosotros">
         <picture>
-          <source media="(min-width: 1024px)" srcSet="/images/hero-nosotros-large.webp" />
+          <source media="(min-width: 1280px)" srcSet="/images/hero-nosotros-large.webp" />
           <source media="(min-width: 640px)" srcSet="/images/hero-nosotros-medium.webp" />
           <img
             src="/images/hero-nosotros-small.webp"
@@ -47,8 +47,8 @@ const SobreNosotros = () => {
           />
         </picture>
         <div className="hero-overlay" />
-        <div className="relative z-10 w-full hero-text-shadow text-center md:text-left flex items-center">
-          <div className="hero-content-left max-w-3xl">
+        <div className="relative z-10 w-full hero-content-left hero-text-shadow text-center md:text-left">
+          <div className="max-w-3xl mx-auto md:mx-0">
             <h1 className="hero-title font-poppins font-extrabold text-white mb-6 tracking-tight drop-shadow-lg">
               Propósito, valores y equipo del Grupo FyT
             </h1>

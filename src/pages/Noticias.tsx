@@ -36,7 +36,7 @@ const Noticias = () => {
           />
         </picture>
         <div className="hero-overlay" />
-        <div className="relative z-10 w-full hero-content-left text-center md:text-left hero-text-shadow">
+        <div className="relative z-10 w-full hero-content-left hero-text-shadow text-center md:text-left">
           <h1 className="hero-title font-poppins font-extrabold text-white mb-6 tracking-tight drop-shadow-lg">
             Noticias y actualidad del Grupo FyT
           </h1>

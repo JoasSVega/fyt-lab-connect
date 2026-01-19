@@ -18,7 +18,7 @@ export default function Hero() {
         <img
           src="/images/hero-index-small.webp"
           alt="Investigación rigurosa, impacto real en la salud"
-          className="hero-image w-full h-full object-cover"
+          className="hero-image"
           width={1920}
           height={1080}
           fetchpriority="high"

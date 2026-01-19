@@ -64,12 +64,13 @@ const IndexTools: FC = () => {
             width={1920}
             height={1080}
             loading="eager"
+            fetchpriority="high"
           />
         </picture>
         {/* Overlay oscuro unificado */}
         <div className="hero-overlay" />
         {/* Content con text-shadow */}
-        <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 text-center hero-text-shadow">
+        <div className="relative z-10 w-full max-w-4xl mx-auto px-6 md:px-12 text-center hero-text-shadow">
           <h1 className="hero-title font-poppins font-extrabold text-white mb-6 tracking-tight drop-shadow-lg">
             Herramientas Digitales para Profesionales Farmacéuticos
           </h1>
