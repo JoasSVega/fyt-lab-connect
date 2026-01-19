@@ -1,8 +1,10 @@
 import { useState, FC, ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
-import { ClipboardCheck, HeartPulse, Brain, AlertTriangle, TestTube } from "lucide-react";
+import { HeartPulse, Brain, AlertTriangle, TestTube } from "lucide-react";
 import Seo from "@/components/Seo";
 import { usePageReady } from "@/hooks/usePageReady";
+import ToolsSmallHero from "@/components/tools/ToolsSmallHero";
+import ToolsSubNav from "@/components/tools/ToolsSubNav";
 import CURB65Tool from "@/components/tools/CURB65Tool";
 import GlasgowTool from "@/components/tools/GlasgowTool";
 import HASBLEDTool from "@/components/tools/HASBLEDTool";
@@ -38,7 +40,7 @@ const Escalas: FC = () => {
     );
   };
   return (
-    <div className="w-full max-w-6xl mx-auto px-3 sm:px-6 py-10" aria-labelledby="page-title" role="region">
+    <div className="w-full bg-background flex flex-col">
       {/* SEO meta */}
       <Seo
         title="Escalas Clínicas y Validación Farmacoterapéutica | Herramientas Farmacéuticas"
@@ -49,25 +51,14 @@ const Escalas: FC = () => {
         canonical="https://fyt-research.org/herramientas/escalas"
       />
 
-      {/* Breadcrumbs */}
-      <nav className="text-sm text-slate-600 mb-4" aria-label="Breadcrumb">
-        <ol className="flex items-center gap-2">
-          <li><button onClick={()=>navigate("/")} className="underline-offset-2 hover:underline">Inicio</button></li>
-          <li className="opacity-60" aria-hidden="true">/</li>
-          <li><button onClick={()=>navigate("/herramientas")} className="underline-offset-2 hover:underline">Herramientas</button></li>
-          <li className="opacity-60" aria-hidden="true">/</li>
-          <li className="font-medium">Escalas Clínicas</li>
-        </ol>
-      </nav>
+      <ToolsSmallHero
+        title="Escalas Clínicas y Validación Farmacoterapéutica"
+        subtitle="Evalúa la seguridad, riesgo y efectividad del tratamiento farmacológico mediante escalas clínicas validadas."
+      />
 
-      {/* Header */}
-      <header className="flex items-center gap-3 mb-2 min-w-0">
-        <ClipboardCheck className="w-6 h-6 text-violet-600" aria-hidden="true" />
-        <h1 id="page-title" className="text-3xl sm:text-4xl font-poppins font-bold text-slate-900 break-words whitespace-normal leading-snug min-w-0" style={{ hyphens: 'none' }}>Escalas Clínicas y Validación Farmacoterapéutica</h1>
-      </header>
-      <p className="text-base text-muted-foreground mb-2">Evalúa riesgo, seguridad y efectividad terapéutica con escalas validadas clínicamente.</p>
-      <p className="text-sm text-muted-foreground mb-6">Esta sección reúne herramientas para apoyar la toma de decisiones farmacoterapéuticas, estandarizando la valoración clínica y facilitando la comunicación interdisciplinaria.</p>
+      <ToolsSubNav />
 
+      <div className="w-full max-w-6xl mx-auto px-3 sm:px-6 py-10" aria-labelledby="page-title" role="region">
   {/* Grid */}
   <section className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 px-4 py-4 overflow-visible" aria-label="Escalas clínicas disponibles">
         <Card
@@ -104,6 +95,7 @@ const Escalas: FC = () => {
       <p className="text-center font-bold mt-12 text-sm text-gray-800 dark:text-gray-200">
         Estas herramientas son de uso académico e informativo. No reemplazan el juicio clínico ni las decisiones de un profesional de la salud.
       </p>
+      </div>
     </div>
   );
 };
