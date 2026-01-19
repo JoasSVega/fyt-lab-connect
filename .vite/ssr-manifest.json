@@ -6440,37 +6440,37 @@
   ],
   "src/App.tsx": [],
   "src/components/About.tsx": [
-    "/assets/About-BlpgSr9y.js"
+    "/assets/About-CLc1LgZP.js"
   ],
   "src/components/AboutSobreNosotros.tsx": [
-    "/assets/AboutSobreNosotros-DWMC2wTm.js"
+    "/assets/AboutSobreNosotros-DrG_45Ea.js"
   ],
   "src/components/AccessibleH1.tsx": [
     "/assets/AccessibleH1-D1LaG0A8.js"
   ],
   "src/components/ContactPremium.tsx": [
-    "/assets/Contactos-ChFJFyas.js"
+    "/assets/Contactos-GNeeWCJZ.js"
   ],
   "src/components/DosageCalculator.tsx": [
     "/assets/DosageCalculator-Be-vuofl.js"
   ],
   "src/components/ErrorBoundary.tsx": [
-    "/assets/ErrorBoundary-Ct_OwIVx.js"
+    "/assets/ErrorBoundary-BS7GeHv8.js"
   ],
   "src/components/FloatingContact.tsx": [],
   "src/components/Footer.tsx": [
-    "/assets/Footer-DtYtXgU0.js"
+    "/assets/Footer-C-RD07MR.js"
   ],
   "src/components/Hero.tsx": [],
   "src/components/HeroInvestigacion.tsx": [
-    "/assets/InvestigacionPage-Du4WAmPG.js"
+    "/assets/InvestigacionPage-ChrSIFI-.js"
   ],
   "src/components/Loader.tsx": [],
   "src/components/Navbar.tsx": [
-    "/assets/Navbar-DuEcuqSk.js"
+    "/assets/Navbar-jGnCs7fr.js"
   ],
   "src/components/News.tsx": [
-    "/assets/Noticias-BXD41QCq.js"
+    "/assets/Noticias-ByaQO2vx.js"
   ],
   "src/components/SafeImage.tsx": [
     "/assets/SafeImage-vMY5AQSJ.js"
@@ -6480,23 +6480,23 @@
   ],
   "src/components/Seo.tsx": [],
   "src/components/SmartImage.tsx": [
-    "/assets/Carrusel-Gon8yOSa.js"
+    "/assets/Carrusel-B4qjaM_x.js"
   ],
   "src/components/Team.tsx": [
-    "/assets/Team-zthhgLLO.js"
+    "/assets/Team-CQtjXXOD.js"
   ],
   "src/components/TitleSync.tsx": [
     "/assets/TitleSync-BpKDQlKr.js"
   ],
   "src/components/Tools.tsx": [
-    "/assets/Tools-RlW_F3ge.js"
+    "/assets/Tools-DP5_ywT6.js"
   ],
   "src/components/animations/CardReveal.tsx": [
-    "/assets/Noticias-BXD41QCq.js"
+    "/assets/Noticias-ByaQO2vx.js"
   ],
   "src/components/animations/ScrollReveal.tsx": [],
   "src/components/calculators/CalculatorModal.tsx": [
-    "/assets/CalculatorModal-DNYmMymS.js"
+    "/assets/CalculatorModal-aFirT2Qd.js"
   ],
   "src/components/calculators/antropometricas/formulas.ts": [
     "/assets/index-BwDn6llW.js"
@@ -6505,22 +6505,22 @@
     "/assets/DivulgacionCard-pcoymPSY.js"
   ],
   "src/components/investigacion/ContenidoDigitalItem.tsx": [
-    "/assets/ContenidosPage-DgUh3NjO.js"
+    "/assets/ContenidosPage-BD4MxV2u.js"
   ],
   "src/components/investigacion/CursoItem.tsx": [
-    "/assets/FormacionPage-8Qe1BX0X.js"
+    "/assets/FormacionPage-BMVCzGxq.js"
   ],
   "src/components/investigacion/EventoItem.tsx": [
-    "/assets/EventosPage-CwPqBsv1.js"
+    "/assets/EventosPage-BBXcQKrz.js"
   ],
   "src/components/investigacion/PlaceholderSection.tsx": [
     "/assets/PlaceholderSection-hUyrreH0.js"
   ],
   "src/components/investigacion/ProyectoItem.tsx": [
-    "/assets/ProyectosPage-DgWzNp-4.js"
+    "/assets/ProyectosPage--Rp_7lu_.js"
   ],
   "src/components/investigacion/PublicacionItem.tsx": [
-    "/assets/PublicacionesPage-8zCLxbyD.js"
+    "/assets/PublicacionesPage-DjPhBYKp.js"
   ],
   "src/components/investigacion/ResearchSubNav.tsx": [
     "/assets/ResearchSubNav-DJrFkC51.js"
@@ -6534,43 +6534,43 @@
     "/assets/ResearchSubNav-DJrFkC51.js"
   ],
   "src/components/tools/CHA2DS2VAScTool.tsx": [
-    "/assets/Escalas-Dyjnqchu.js"
+    "/assets/Escalas-DNGJQ82R.js"
   ],
   "src/components/tools/CURB65Tool.tsx": [
-    "/assets/Escalas-Dyjnqchu.js"
+    "/assets/Escalas-DNGJQ82R.js"
   ],
   "src/components/tools/GlasgowTool.tsx": [
-    "/assets/Escalas-Dyjnqchu.js"
+    "/assets/Escalas-DNGJQ82R.js"
   ],
   "src/components/tools/HASBLEDTool.tsx": [
-    "/assets/Escalas-Dyjnqchu.js"
+    "/assets/Escalas-DNGJQ82R.js"
   ],
   "src/components/ui/Carrusel.tsx": [
-    "/assets/Carrusel-Gon8yOSa.js"
+    "/assets/Carrusel-B4qjaM_x.js"
   ],
   "src/components/ui/Latex.tsx": [
-    "/assets/Latex-DYbfJ_1v.js"
+    "/assets/Latex-7MfvAiYn.js"
   ],
   "src/components/ui/badge.tsx": [
-    "/assets/Tools-RlW_F3ge.js"
+    "/assets/Tools-DP5_ywT6.js"
   ],
   "src/components/ui/button.tsx": [],
   "src/components/ui/card.tsx": [],
   "src/components/ui/carousel.tsx": [
-    "/assets/Carrusel-Gon8yOSa.js"
+    "/assets/Carrusel-B4qjaM_x.js"
   ],
   "src/components/ui/input.tsx": [
-    "/assets/input-Di_7PD7U.js"
+    "/assets/input-n2EBP7oi.js"
   ],
   "src/components/ui/label.tsx": [
-    "/assets/Contactos-ChFJFyas.js"
+    "/assets/Contactos-GNeeWCJZ.js"
   ],
   "src/components/ui/select.tsx": [
-    "/assets/select-BYgRDSGl.js"
+    "/assets/select-DnVnKdH2.js"
   ],
   "src/components/ui/sonner.tsx": [],
   "src/components/ui/textarea.tsx": [
-    "/assets/Contactos-ChFJFyas.js"
+    "/assets/Contactos-GNeeWCJZ.js"
   ],
   "src/components/ui/toast.tsx": [],
   "src/components/ui/toaster.tsx": [],
@@ -6579,7 +6579,7 @@
     "/assets/index-BwDn6llW.js"
   ],
   "src/data/contenidosDigitales.ts": [
-    "/assets/contenidosDigitales-CdzdPK6_.js"
+    "/assets/contenidosDigitales-B5FPAvaz.js"
   ],
   "src/data/divulgacionPosts.ts": [
     "/assets/DivulgacionCard-pcoymPSY.js"
@@ -6588,7 +6588,7 @@
     "/assets/eventos-BeImU3Ys.js"
   ],
   "src/data/formacion.ts": [
-    "/assets/FormacionPage-8Qe1BX0X.js"
+    "/assets/FormacionPage-BMVCzGxq.js"
   ],
   "src/data/proyectos.ts": [
     "/assets/proyectos-C848vuf1.js"
@@ -6600,10 +6600,10 @@
   "src/hooks/useImagePreloader.ts": [],
   "src/hooks/usePageReady.ts": [],
   "src/hooks/usePredictiveLoader.ts": [
-    "/assets/About-BlpgSr9y.js"
+    "/assets/About-CLc1LgZP.js"
   ],
   "src/hooks/usePrefetch.ts": [
-    "/assets/Navbar-DuEcuqSk.js"
+    "/assets/Navbar-jGnCs7fr.js"
   ],
   "src/hooks/useReveal.ts": [],
   "src/hooks/useTopLoader.ts": [],
@@ -6624,77 +6624,77 @@
     "/assets/index-BwDn6llW.js"
   ],
   "src/lib/calculators/utils.ts": [
-    "/assets/CalculatorModal-DNYmMymS.js"
+    "/assets/CalculatorModal-aFirT2Qd.js"
   ],
   "src/lib/sanitize.ts": [],
   "src/lib/utils.ts": [],
   "src/main.tsx": [],
   "src/pages/CodeOfEthics.tsx": [
-    "/assets/CodeOfEthics-DJ6RDK_q.js"
+    "/assets/CodeOfEthics-1uotahmr.js"
   ],
   "src/pages/Contactos.tsx": [
-    "/assets/Contactos-ChFJFyas.js"
+    "/assets/Contactos-GNeeWCJZ.js"
   ],
   "src/pages/ContenidosPage.tsx": [
-    "/assets/ContenidosPage-DgUh3NjO.js"
+    "/assets/ContenidosPage-BD4MxV2u.js"
   ],
   "src/pages/DivulgacionPage.tsx": [
-    "/assets/DivulgacionPage-Ct5sUwLz.js"
+    "/assets/DivulgacionPage-CoC32zGw.js"
   ],
   "src/pages/DivulgacionPostPage.tsx": [
-    "/assets/DivulgacionPostPage-CDjELjjZ.js"
+    "/assets/DivulgacionPostPage-DnBmAYeg.js"
   ],
   "src/pages/Equipo.tsx": [
-    "/assets/Equipo-C4chBXmu.js"
+    "/assets/Equipo-DJK8tWaL.js"
   ],
   "src/pages/EventosPage.tsx": [
-    "/assets/EventosPage-CwPqBsv1.js"
+    "/assets/EventosPage-BBXcQKrz.js"
   ],
   "src/pages/FormacionPage.tsx": [
-    "/assets/FormacionPage-8Qe1BX0X.js"
+    "/assets/FormacionPage-BMVCzGxq.js"
   ],
   "src/pages/Herramientas.tsx": [
-    "/assets/Herramientas-BVKtXecz.js"
+    "/assets/Herramientas-DZ79Ccjk.js"
   ],
   "src/pages/Index.tsx": [],
   "src/pages/InvestigacionPage.tsx": [
-    "/assets/InvestigacionPage-Du4WAmPG.js"
+    "/assets/InvestigacionPage-ChrSIFI-.js"
   ],
   "src/pages/NotFound.tsx": [
-    "/assets/NotFound-BfLTORwQ.js"
+    "/assets/NotFound-BPVND9zI.js"
   ],
   "src/pages/Noticias.tsx": [
-    "/assets/Noticias-BXD41QCq.js"
+    "/assets/Noticias-ByaQO2vx.js"
   ],
   "src/pages/PrivacyPolicy.tsx": [
-    "/assets/PrivacyPolicy-Etov23Q0.js"
+    "/assets/PrivacyPolicy-C4STiYwb.js"
   ],
   "src/pages/ProyectosPage.tsx": [
-    "/assets/ProyectosPage-DgWzNp-4.js"
+    "/assets/ProyectosPage--Rp_7lu_.js"
   ],
   "src/pages/PublicacionesPage.tsx": [
-    "/assets/PublicacionesPage-8zCLxbyD.js"
+    "/assets/PublicacionesPage-DjPhBYKp.js"
   ],
   "src/pages/SobreNosotros.tsx": [
-    "/assets/SobreNosotros-DJO7PPor.js"
+    "/assets/SobreNosotros-RelAwIx2.js"
   ],
   "src/pages/TermsOfUse.tsx": [
-    "/assets/TermsOfUse-OC4JvZv7.js"
+    "/assets/TermsOfUse-DDuBfeHO.js"
   ],
   "src/pages/tools/Antropometricos.tsx": [
-    "/assets/Antropometricos-BKcTmNNi.js"
+    "/assets/Antropometricos-C73Ag4z0.js"
   ],
   "src/pages/tools/Avanzados.tsx": [
-    "/assets/Avanzados-BVLLZx04.js"
+    "/assets/Avanzados-DylXrRY6.js"
   ],
   "src/pages/tools/Clinicos.tsx": [
-    "/assets/Clinicos-hr4PJAJ1.js"
+    "/assets/Clinicos-DIg4ZLtZ.js"
   ],
   "src/pages/tools/Escalas.tsx": [
-    "/assets/Escalas-Dyjnqchu.js"
+    "/assets/Escalas-DNGJQ82R.js"
   ],
   "src/pages/tools/IndexTools.tsx": [
-    "/assets/IndexTools-Bxmxi4Ag.js"
+    "/assets/IndexTools-Dxf2CBPP.js"
   ],
   "src/providers/TransitionProvider.tsx": [],
   "src/utils/renal.ts": [
