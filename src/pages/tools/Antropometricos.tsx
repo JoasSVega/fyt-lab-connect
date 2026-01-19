@@ -35,6 +35,8 @@ const Antropometricos: FC = () => {
       <ToolsSmallHero
         title="Cálculos Fisiológicos y Antropométricos"
         subtitle="Determina parámetros corporales clave para farmacocinética."
+        icon={Ruler}
+        color="#0EA5E9"
       />
 
       <ToolsSubNav />

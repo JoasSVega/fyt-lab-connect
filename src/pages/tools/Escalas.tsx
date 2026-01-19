@@ -1,6 +1,6 @@
 import { useState, FC, ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
-import { HeartPulse, Brain, AlertTriangle, TestTube } from "lucide-react";
+import { BarChart3, Brain, AlertTriangle, TestTube, HeartPulse } from "lucide-react";
 import Seo from "@/components/Seo";
 import { usePageReady } from "@/hooks/usePageReady";
 import ToolsSmallHero from "@/components/tools/ToolsSmallHero";
@@ -54,6 +54,8 @@ const Escalas: FC = () => {
       <ToolsSmallHero
         title="Escalas Clínicas y Validación Farmacoterapéutica"
         subtitle="Evalúa la seguridad, riesgo y efectividad del tratamiento farmacológico mediante escalas clínicas validadas."
+        icon={BarChart3}
+        color="#A855F7"
       />
 
       <ToolsSubNav />

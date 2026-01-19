@@ -35,6 +35,8 @@ const Clinicos: React.FC = () => {
       <ToolsSmallHero
         title="Cálculos Clínicos y Farmacéuticos"
         subtitle="Optimiza tus decisiones terapéuticas con cálculos precisos y basados en evidencia."
+        icon={Stethoscope}
+        color="#6366F1"
       />
 
       <ToolsSubNav />

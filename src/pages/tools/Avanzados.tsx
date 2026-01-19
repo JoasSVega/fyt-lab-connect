@@ -1,6 +1,6 @@
 import { useState, FC } from "react";
 import { useNavigate } from "react-router-dom";
-import { FlaskConical } from "lucide-react";
+import { Zap } from "lucide-react";
 import Seo from "@/components/Seo";
 import { usePageReady } from "@/hooks/usePageReady";
 import ToolsSmallHero from "@/components/tools/ToolsSmallHero";
@@ -27,6 +27,8 @@ const Avanzados: FC = () => {
       <ToolsSmallHero
         title="Herramientas Farmacéuticas Avanzadas y Conversores"
         subtitle="Convierte, compara y analiza compatibilidades y estabilidad."
+        icon={Zap}
+        color="#16A34A"
       />
 
       <ToolsSubNav />

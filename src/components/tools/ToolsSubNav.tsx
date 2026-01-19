@@ -8,26 +8,58 @@ import {
   BarChart3 
 } from "lucide-react";
 
+// Paleta de colores consistente para cada herramienta
+const toolColors = {
+  clinicos: {
+    hex: "#6366F1",
+    bg: "bg-indigo-600",
+    hover: "hover:bg-indigo-100",
+    text: "text-indigo-600",
+  },
+  antropometricos: {
+    hex: "#0EA5E9",
+    bg: "bg-cyan-600",
+    hover: "hover:bg-cyan-100",
+    text: "text-cyan-600",
+  },
+  avanzados: {
+    hex: "#16A34A",
+    bg: "bg-green-600",
+    hover: "hover:bg-green-100",
+    text: "text-green-600",
+  },
+  escalas: {
+    hex: "#A855F7",
+    bg: "bg-violet-600",
+    hover: "hover:bg-violet-100",
+    text: "text-violet-600",
+  },
+};
+
 const navItems = [
   { 
     path: "/herramientas/clinicos", 
     label: "Clínicos", 
-    icon: Stethoscope 
+    icon: Stethoscope,
+    colorKey: "clinicos" as const,
   },
   { 
     path: "/herramientas/antropometricos", 
     label: "Antropométricos", 
-    icon: Ruler 
+    icon: Ruler,
+    colorKey: "antropometricos" as const,
   },
   { 
     path: "/herramientas/avanzados", 
     label: "Avanzados", 
-    icon: Zap 
+    icon: Zap,
+    colorKey: "avanzados" as const,
   },
   { 
     path: "/herramientas/escalas", 
     label: "Escalas", 
-    icon: BarChart3 
+    icon: BarChart3,
+    colorKey: "escalas" as const,
   },
 ];
 
@@ -45,6 +77,7 @@ const ToolsSubNav: React.FC<ToolsSubNavProps> = ({ className = "" }) => {
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = location.pathname === item.path;
+            const colors = toolColors[item.colorKey];
             
             return (
               <NavLink
@@ -54,8 +87,8 @@ const ToolsSubNav: React.FC<ToolsSubNavProps> = ({ className = "" }) => {
                   flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium 
                   whitespace-nowrap transition-all duration-200
                   ${isActive 
-                    ? "bg-primary text-primary-foreground shadow-sm" 
-                    : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+                    ? `${colors.bg} text-white shadow-sm` 
+                    : `text-slate-600 ${colors.hover} hover:text-slate-900`
                   }
                 `}
               >
