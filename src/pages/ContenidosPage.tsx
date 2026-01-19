@@ -43,12 +43,12 @@ const DivulgacionCientificaPage: React.FC = () => {
         description="Videos, podcasts y contenido audiovisual sobre investigación en ciencias farmacéuticas del Grupo FyT."
         author="Grupo FyT"
         robots="index, follow"
-        canonical="https://fyt-research.org/investigacion/divulgacion-cientifica"
+        canonical="https://fyt-research.org/investigacion/contenido-digital"
         openGraph={{
           title: "Contenido Digital | Grupo FyT",
           description: "Contenido audiovisual sobre investigación en ciencias farmacéuticas",
           type: "website",
-          url: "https://fyt-research.org/investigacion/divulgacion-cientifica",
+          url: "https://fyt-research.org/investigacion/contenido-digital",
           siteName: "Grupo FyT",
           locale: "es_ES",
         }}

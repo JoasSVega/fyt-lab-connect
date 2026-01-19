@@ -24,7 +24,7 @@ export const pathProyectos = "/investigacion/proyectos";
 export const pathPublicaciones = "/investigacion/publicaciones";
 export const pathEventos = "/investigacion/eventos";
 export const pathFormacion = "/investigacion/formacion";
-export const pathDivulgacionCientifica = "/investigacion/divulgacion-cientifica";
+export const pathDivulgacionCientifica = "/investigacion/contenido-digital";
 export const pathDivulgacion = "/divulgacion";
 export const pathContactos = "/contactos";
 
@@ -138,7 +138,8 @@ function AnimatedRoutes() {
           <Route path="/PrivacyPolicy" element={<Navigate to="/politica-privacidad" replace />} />
           <Route path="/TermsOfUse" element={<Navigate to="/terminos-uso" replace />} />
           <Route path="/CodeOfEthics" element={<Navigate to="/codigo-etica" replace />} />
-          <Route path="/investigacion/contenidos" element={<Navigate to="/investigacion/divulgacion-cientifica" replace />} />
+          <Route path="/investigacion/contenidos" element={<Navigate to="/investigacion/contenido-digital" replace />} />
+          <Route path="/investigacion/divulgacion-cientifica" element={<Navigate to="/investigacion/contenido-digital" replace />} />
           
           {/* Página no encontrada */}
           <Route path="*" element={<NotFound />} />
