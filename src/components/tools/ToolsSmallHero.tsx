@@ -43,7 +43,7 @@ const ToolsSmallHero: React.FC<ToolsSmallHeroProps> = ({ title, subtitle, icon: 
   };
 
   return (
-    <section className={`relative bg-gradient-to-br ${generateGradient(color)} py-16 md:py-20 lg:py-24`}>
+    <section className={`relative bg-gradient-to-br ${generateGradient(color)} pt-20 pb-16 md:pt-24 md:pb-20 lg:pt-28 lg:pb-24`}>
       {/* Subtle pattern overlay */}
       <div className="absolute inset-0 opacity-5">
         <div
