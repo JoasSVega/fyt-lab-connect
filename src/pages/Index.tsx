@@ -21,7 +21,7 @@ const Index = () => {
   return (
   <div className="w-full" style={{background: "linear-gradient(120deg, #e0f2ff 0%, #f8fafc 60%, #f3f4f6 100%)"}}>
         <Seo
-          title="Grupo FyT: Investigación Farmacológica"
+          title="Grupo FyT | Investigación y Divulgación en Salud"
           description="Investigación en Farmacología y Terapéutica de la Universidad de Cartagena. Proyectos, publicaciones y herramientas científicas."
           keywords={["Grupo FyT", "Grupo de Investigación FyT", "Grupo de Investigación Farmacología y Terapéutica", "Farmacología y Terapéutica Universidad de Cartagena", "Universidad de Cartagena", "Grupo de investigación", "Investigación Farmacéutica", "Cartagena", "Colombia"]}
           author="Grupo FyT"

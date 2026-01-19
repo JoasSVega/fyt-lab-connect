@@ -125,7 +125,7 @@ export default function HeroInvestigacion() {
         <div className="relative z-10 w-full hero-content-left hero-text-shadow text-center md:text-left">
           <div className="max-w-3xl mx-auto md:mx-0">
             <h1 className="hero-title font-poppins font-extrabold text-white mb-6 tracking-tight drop-shadow-lg">
-              Investigación y Producción Académica
+              Producción académica, proyectos y participación científica
             </h1>
             <p className="hero-subtitle font-inter text-white/95 leading-relaxed drop-shadow-md">
               Generación de conocimiento científico, desarrollo de proyectos de investigación y producción intelectual orientada al fortalecimiento de la farmacología y la terapéutica.
