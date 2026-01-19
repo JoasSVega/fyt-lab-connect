@@ -2,28 +2,28 @@
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { 
+  BookOpen,
   Microscope, 
-  FileText, 
-  Calendar, 
+  Users,
   GraduationCap, 
   Video 
 } from "lucide-react";
 
 const navItems = [
   { 
+    path: "/investigacion/publicaciones", 
+    label: "Publicaciones", 
+    icon: BookOpen 
+  },
+  { 
     path: "/investigacion/proyectos", 
     label: "Proyectos", 
     icon: Microscope 
   },
   { 
-    path: "/investigacion/publicaciones", 
-    label: "Publicaciones", 
-    icon: FileText 
-  },
-  { 
     path: "/investigacion/eventos", 
     label: "Eventos", 
-    icon: Calendar 
+    icon: Users 
   },
   { 
     path: "/investigacion/formacion", 
@@ -32,7 +32,7 @@ const navItems = [
   },
   { 
     path: "/investigacion/divulgacion-cientifica", 
-    label: "Divulgación Científica", 
+    label: "Contenido Digital", 
     icon: Video 
   },
 ];
