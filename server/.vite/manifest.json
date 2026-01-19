@@ -1,6 +1,6 @@
 {
-  "_CalculatorModal-ZjXlvcMM.js": {
-    "file": "assets/CalculatorModal-ZjXlvcMM.js",
+  "_CalculatorModal-ChkQc6xW.js": {
+    "file": "assets/CalculatorModal-ChkQc6xW.js",
     "name": "CalculatorModal",
     "dynamicImports": [
       "src/components/ui/Latex.tsx"
@@ -38,8 +38,8 @@
     "file": "assets/index-CcVaT-II.js",
     "name": "index"
   },
-  "_input-DKMet2bs.js": {
-    "file": "assets/input-DKMet2bs.js",
+  "_input-o_kfORlY.js": {
+    "file": "assets/input-o_kfORlY.js",
     "name": "input",
     "imports": [
       "src/main.ssg.tsx"
@@ -53,15 +53,15 @@
     "file": "assets/publicaciones-C930amTq.js",
     "name": "publicaciones"
   },
-  "_select-C7YCy3H1.js": {
-    "file": "assets/select-C7YCy3H1.js",
+  "_select-B7bQU2bA.js": {
+    "file": "assets/select-B7bQU2bA.js",
     "name": "select",
     "imports": [
       "src/main.ssg.tsx"
     ]
   },
   "src/components/About.tsx": {
-    "file": "assets/About-CkgZ6sE_.js",
+    "file": "assets/About-CNavL-UP.js",
     "name": "About",
     "src": "src/components/About.tsx",
     "isDynamicEntry": true,
@@ -73,7 +73,7 @@
     ]
   },
   "src/components/AboutSobreNosotros.tsx": {
-    "file": "assets/AboutSobreNosotros-CLxNoBQY.js",
+    "file": "assets/AboutSobreNosotros-6sVlkfmx.js",
     "name": "AboutSobreNosotros",
     "src": "src/components/AboutSobreNosotros.tsx",
     "isDynamicEntry": true,
@@ -94,7 +94,7 @@
     "isDynamicEntry": true
   },
   "src/components/ErrorBoundary.tsx": {
-    "file": "assets/ErrorBoundary-Dj2IrBIv.js",
+    "file": "assets/ErrorBoundary-DLvF7iM2.js",
     "name": "ErrorBoundary",
     "src": "src/components/ErrorBoundary.tsx",
     "isDynamicEntry": true,
@@ -103,7 +103,7 @@
     ]
   },
   "src/components/Footer.tsx": {
-    "file": "assets/Footer-DwMi30Eq.js",
+    "file": "assets/Footer-DxOMz9di.js",
     "name": "Footer",
     "src": "src/components/Footer.tsx",
     "isDynamicEntry": true,
@@ -113,7 +113,7 @@
     ]
   },
   "src/components/Navbar.tsx": {
-    "file": "assets/Navbar-DHiY-OG6.js",
+    "file": "assets/Navbar-COsksaIJ.js",
     "name": "Navbar",
     "src": "src/components/Navbar.tsx",
     "isDynamicEntry": true,
@@ -133,7 +133,7 @@
     "isDynamicEntry": true
   },
   "src/components/Team.tsx": {
-    "file": "assets/Team-B5ss5F-2.js",
+    "file": "assets/Team-cvhEUyOq.js",
     "name": "Team",
     "src": "src/components/Team.tsx",
     "isDynamicEntry": true,
@@ -149,17 +149,17 @@
     "isDynamicEntry": true
   },
   "src/components/Tools.tsx": {
-    "file": "assets/Tools-x9n_LDQ0.js",
+    "file": "assets/Tools-BOyeeNjm.js",
     "name": "Tools",
     "src": "src/components/Tools.tsx",
     "isDynamicEntry": true,
     "imports": [
       "src/main.ssg.tsx",
-      "_input-DKMet2bs.js"
+      "_input-o_kfORlY.js"
     ]
   },
   "src/components/ui/Carrusel.tsx": {
-    "file": "assets/Carrusel-1rQEjPIP.js",
+    "file": "assets/Carrusel-DRGPU5Sk.js",
     "name": "Carrusel",
     "src": "src/components/ui/Carrusel.tsx",
     "isDynamicEntry": true,
@@ -168,13 +168,13 @@
     ]
   },
   "src/components/ui/Latex.tsx": {
-    "file": "assets/Latex-CE5cpkQ_.js",
+    "file": "assets/Latex-5zBjeXE8.js",
     "name": "Latex",
     "src": "src/components/ui/Latex.tsx",
     "isDynamicEntry": true
   },
   "src/main.ssg.tsx": {
-    "file": "assets/main.ssg-BR6Rs_Ot.js",
+    "file": "assets/main.ssg-Cx3adRbJ.js",
     "name": "main.ssg",
     "src": "src/main.ssg.tsx",
     "isEntry": true,
@@ -214,7 +214,7 @@
     ]
   },
   "src/pages/CodeOfEthics.tsx": {
-    "file": "assets/CodeOfEthics-C5yYfDGJ.js",
+    "file": "assets/CodeOfEthics-BXJwQMIc.js",
     "name": "CodeOfEthics",
     "src": "src/pages/CodeOfEthics.tsx",
     "isDynamicEntry": true,
@@ -223,21 +223,19 @@
     ]
   },
   "src/pages/Contactos.tsx": {
-    "file": "assets/Contactos-BQlaAkXU.js",
+    "file": "assets/Contactos-BRm8jzMA.js",
     "name": "Contactos",
     "src": "src/pages/Contactos.tsx",
     "isDynamicEntry": true,
     "imports": [
       "src/main.ssg.tsx",
-      "_input-DKMet2bs.js",
-      "_select-C7YCy3H1.js"
-    ],
-    "assets": [
-      "assets/hero-contacto-4oaIFM4b.jpg"
+      "_input-o_kfORlY.js",
+      "_select-B7bQU2bA.js",
+      "_SafeImage-DaBfSwsl.js"
     ]
   },
   "src/pages/ContenidosPage.tsx": {
-    "file": "assets/ContenidosPage-DsbjwIOx.js",
+    "file": "assets/ContenidosPage-Bd5qtrA_.js",
     "name": "ContenidosPage",
     "src": "src/pages/ContenidosPage.tsx",
     "isDynamicEntry": true,
@@ -248,19 +246,20 @@
     ]
   },
   "src/pages/DivulgacionPage.tsx": {
-    "file": "assets/DivulgacionPage-DbuZvgs5.js",
+    "file": "assets/DivulgacionPage-vo5_xlMj.js",
     "name": "DivulgacionPage",
     "src": "src/pages/DivulgacionPage.tsx",
     "isDynamicEntry": true,
     "imports": [
       "src/main.ssg.tsx",
       "_DivulgacionCard-QZogXtNC.js",
-      "_input-DKMet2bs.js",
-      "_select-C7YCy3H1.js"
+      "_input-o_kfORlY.js",
+      "_select-B7bQU2bA.js",
+      "_SafeImage-DaBfSwsl.js"
     ]
   },
   "src/pages/DivulgacionPostPage.tsx": {
-    "file": "assets/DivulgacionPostPage-rm3h05HS.js",
+    "file": "assets/DivulgacionPostPage-DToIJnfp.js",
     "name": "DivulgacionPostPage",
     "src": "src/pages/DivulgacionPostPage.tsx",
     "isDynamicEntry": true,
@@ -270,7 +269,7 @@
     ]
   },
   "src/pages/Equipo.tsx": {
-    "file": "assets/Equipo-D692iKpc.js",
+    "file": "assets/Equipo-gpZFB2oZ.js",
     "name": "Equipo",
     "src": "src/pages/Equipo.tsx",
     "isDynamicEntry": true,
@@ -281,7 +280,7 @@
     ]
   },
   "src/pages/EventosPage.tsx": {
-    "file": "assets/EventosPage-DDXTLWPz.js",
+    "file": "assets/EventosPage-IWzvWwE4.js",
     "name": "EventosPage",
     "src": "src/pages/EventosPage.tsx",
     "isDynamicEntry": true,
@@ -294,7 +293,7 @@
     ]
   },
   "src/pages/FormacionPage.tsx": {
-    "file": "assets/FormacionPage-Bt5fhffk.js",
+    "file": "assets/FormacionPage-DYAB_bEQ.js",
     "name": "FormacionPage",
     "src": "src/pages/FormacionPage.tsx",
     "isDynamicEntry": true,
@@ -305,7 +304,7 @@
     ]
   },
   "src/pages/Herramientas.tsx": {
-    "file": "assets/Herramientas-4Y-ivDxN.js",
+    "file": "assets/Herramientas-B9gJWzdE.js",
     "name": "Herramientas",
     "src": "src/pages/Herramientas.tsx",
     "isDynamicEntry": true,
@@ -314,7 +313,7 @@
     ]
   },
   "src/pages/InvestigacionPage.tsx": {
-    "file": "assets/InvestigacionPage-BXksaCmp.js",
+    "file": "assets/InvestigacionPage-CEh_lXmj.js",
     "name": "InvestigacionPage",
     "src": "src/pages/InvestigacionPage.tsx",
     "isDynamicEntry": true,
@@ -325,13 +324,10 @@
       "_proyectos-C848vuf1.js",
       "_contenidosDigitales-CdzdPK6_.js",
       "_eventos-BeImU3Ys.js"
-    ],
-    "assets": [
-      "assets/hero-investigacion-c5Kply5i.jpg"
     ]
   },
   "src/pages/NotFound.tsx": {
-    "file": "assets/NotFound-CvDF5Ahg.js",
+    "file": "assets/NotFound-CP2agGrc.js",
     "name": "NotFound",
     "src": "src/pages/NotFound.tsx",
     "isDynamicEntry": true,
@@ -340,16 +336,17 @@
     ]
   },
   "src/pages/Noticias.tsx": {
-    "file": "assets/Noticias-1aA6ZZVy.js",
+    "file": "assets/Noticias-BKxB9RK0.js",
     "name": "Noticias",
     "src": "src/pages/Noticias.tsx",
     "isDynamicEntry": true,
     "imports": [
-      "src/main.ssg.tsx"
+      "src/main.ssg.tsx",
+      "_SafeImage-DaBfSwsl.js"
     ]
   },
   "src/pages/PrivacyPolicy.tsx": {
-    "file": "assets/PrivacyPolicy-BZFKw6ON.js",
+    "file": "assets/PrivacyPolicy-BViCYj1u.js",
     "name": "PrivacyPolicy",
     "src": "src/pages/PrivacyPolicy.tsx",
     "isDynamicEntry": true,
@@ -358,7 +355,7 @@
     ]
   },
   "src/pages/ProyectosPage.tsx": {
-    "file": "assets/ProyectosPage-Bv6vA1O6.js",
+    "file": "assets/ProyectosPage-W315Il9h.js",
     "name": "ProyectosPage",
     "src": "src/pages/ProyectosPage.tsx",
     "isDynamicEntry": true,
@@ -371,7 +368,7 @@
     ]
   },
   "src/pages/PublicacionesPage.tsx": {
-    "file": "assets/PublicacionesPage-CtTMCdd7.js",
+    "file": "assets/PublicacionesPage-CRrSvL6f.js",
     "name": "PublicacionesPage",
     "src": "src/pages/PublicacionesPage.tsx",
     "isDynamicEntry": true,
@@ -383,7 +380,7 @@
     ]
   },
   "src/pages/SobreNosotros.tsx": {
-    "file": "assets/SobreNosotros-DIolxuiZ.js",
+    "file": "assets/SobreNosotros-d-9UMmcs.js",
     "name": "SobreNosotros",
     "src": "src/pages/SobreNosotros.tsx",
     "isDynamicEntry": true,
@@ -397,7 +394,7 @@
     ]
   },
   "src/pages/TermsOfUse.tsx": {
-    "file": "assets/TermsOfUse-CZyJgzWd.js",
+    "file": "assets/TermsOfUse-C4OltzMu.js",
     "name": "TermsOfUse",
     "src": "src/pages/TermsOfUse.tsx",
     "isDynamicEntry": true,
@@ -406,18 +403,18 @@
     ]
   },
   "src/pages/tools/Antropometricos.tsx": {
-    "file": "assets/Antropometricos-B3_57YX8.js",
+    "file": "assets/Antropometricos-Sfdyxd3f.js",
     "name": "Antropometricos",
     "src": "src/pages/tools/Antropometricos.tsx",
     "isDynamicEntry": true,
     "imports": [
       "src/main.ssg.tsx",
-      "_CalculatorModal-ZjXlvcMM.js",
+      "_CalculatorModal-ChkQc6xW.js",
       "_index-CcVaT-II.js"
     ]
   },
   "src/pages/tools/Avanzados.tsx": {
-    "file": "assets/Avanzados-9MQHOgHP.js",
+    "file": "assets/Avanzados-Clq280g8.js",
     "name": "Avanzados",
     "src": "src/pages/tools/Avanzados.tsx",
     "isDynamicEntry": true,
@@ -426,28 +423,28 @@
     ]
   },
   "src/pages/tools/Clinicos.tsx": {
-    "file": "assets/Clinicos-BeriIsio.js",
+    "file": "assets/Clinicos-CObsZZI_.js",
     "name": "Clinicos",
     "src": "src/pages/tools/Clinicos.tsx",
     "isDynamicEntry": true,
     "imports": [
       "src/main.ssg.tsx",
-      "_CalculatorModal-ZjXlvcMM.js",
+      "_CalculatorModal-ChkQc6xW.js",
       "_index-CcVaT-II.js"
     ]
   },
   "src/pages/tools/Escalas.tsx": {
-    "file": "assets/Escalas-BG6cnI4Z.js",
+    "file": "assets/Escalas-CUzPphaS.js",
     "name": "Escalas",
     "src": "src/pages/tools/Escalas.tsx",
     "isDynamicEntry": true,
     "imports": [
       "src/main.ssg.tsx",
-      "_CalculatorModal-ZjXlvcMM.js"
+      "_CalculatorModal-ChkQc6xW.js"
     ]
   },
   "src/pages/tools/IndexTools.tsx": {
-    "file": "assets/IndexTools-CqnobUHf.js",
+    "file": "assets/IndexTools-DOmcbj6g.js",
     "name": "IndexTools",
     "src": "src/pages/tools/IndexTools.tsx",
     "isDynamicEntry": true,
