@@ -174,7 +174,7 @@ const ContactPremium = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="relative z-10 hero-content-left hero-text-shadow text-center md:text-left"
+          className="relative z-10 w-full hero-content-left hero-text-shadow text-center md:text-left"
         >
           <h1 className="hero-title font-poppins font-extrabold text-white mb-6 tracking-tight drop-shadow-lg">
             Contacto y colaboración institucional

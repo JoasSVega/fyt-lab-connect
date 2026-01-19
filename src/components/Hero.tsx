@@ -5,7 +5,6 @@ export default function Hero() {
     <section
       id="inicio"
       className="hero-container"
-      style={{ minHeight: '500px' }}
     >
       <picture>
         {/* 1. ESCRITORIO (>1200px): Imagen pesada solo para pantallas muy grandes */}
