@@ -1,7 +1,6 @@
 import React from "react";
 import { FileText, BookOpen, Microscope, Users, Award, GraduationCap } from "lucide-react";
 import SafeImage from "./SafeImage";
-import heroImage from "@/assets/hero-investigacion.jpg";
 
 // KPIs académicos
 const kpis = [
@@ -103,23 +102,28 @@ export default function HeroInvestigacion() {
         className="hero-container"
         aria-label="Hero Investigación"
       >
-        {/* Background image with lazy loading (not LCP) */}
-        <SafeImage 
-          src={heroImage} 
-          alt="" 
-          className="hero-image" 
-          aria-hidden="true"
-          width={1920}
-          height={1080}
-          loading="lazy"
-          decoding="async"
-          fetchpriority="low"
-        />
+        {/* Imagen responsive optimizada */}
+        <picture>
+          <source srcSet="/images/hero-investigacion-large.webp" media="(min-width: 1280px)" />
+          <source srcSet="/images/hero-investigacion-medium.webp" media="(min-width: 640px)" />
+          <SafeImage
+            src="/images/hero-investigacion-small.webp"
+            fallbackSrc="/images/hero-investigacion.png"
+            alt=""
+            className="hero-image"
+            aria-hidden="true"
+            width={1920}
+            height={1080}
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+          />
+        </picture>
         {/* Dark overlay */}
         <div className="hero-overlay" />
         {/* Content with text-shadow */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 hero-text-shadow">
-          <div className="max-w-3xl text-center lg:text-left">
+        <div className="relative z-10 w-full hero-content-left hero-text-shadow text-center md:text-left">
+          <div className="max-w-3xl mx-auto md:mx-0">
             <h1 className="hero-title font-poppins font-extrabold text-white mb-6 tracking-tight drop-shadow-lg">
               Investigación y Producción Académica
             </h1>

@@ -14,7 +14,7 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { stripInvisible, safeText, isLikelyEmail, sanitizeURL } from "@/lib/sanitize";
 import { motion } from "framer-motion";
-import heroContacto from "@/assets/hero-contacto.jpg";
+import SafeImage from "./SafeImage";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -149,30 +149,38 @@ const ContactPremium = () => {
   return (
     <>
       {/* Hero Section with Background Image */}
-      <section className="relative h-[60vh] min-h-[400px] flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <img
-            src={heroContacto}
+      <section className="hero-container" aria-label="Hero Contacto">
+        <picture>
+          <source srcSet="/images/hero-contacto-large.webp" media="(min-width: 1280px)" />
+          <source srcSet="/images/hero-contacto-medium.webp" media="(min-width: 640px)" />
+          <SafeImage
+            src="/images/hero-contacto-small.webp"
+            fallbackSrc="/images/hero-contacto.png"
             alt="Laboratorio de investigación"
-            className="w-full h-full object-cover"
+            className="hero-image"
+            aria-hidden="true"
+            width={1920}
+            height={1080}
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
           />
-          {/* Dark Overlay */}
-          <div className="absolute inset-0 bg-black/50" />
-        </div>
+        </picture>
+        {/* Dark Overlay */}
+        <div className="hero-overlay" />
 
         {/* Hero Content */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="relative z-10 text-center px-4 max-w-4xl mx-auto"
+          className="relative z-10 w-full hero-content-left hero-text-shadow text-center md:text-left"
         >
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 drop-shadow-lg">
-            Conectemos Ciencia y Futuro
+          <h1 className="hero-title font-poppins font-extrabold text-white mb-6 tracking-tight drop-shadow-lg">
+            Contacto y colaboración institucional
           </h1>
-          <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
-            Promovemos la excelencia mediante alianzas en investigación, docencia y extensión. 
+          <p className="hero-subtitle font-inter text-white/95 leading-relaxed drop-shadow-md max-w-3xl mx-auto md:mx-0">
+            Promovemos la excelencia mediante alianzas en investigación, docencia y extensión.
             Tu visión puede ser el motor que transforme la salud del mañana.
           </p>
         </motion.div>

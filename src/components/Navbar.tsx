@@ -77,7 +77,8 @@ const Navbar = () => {
   }, [isMenuOpen, fm]);
 
   const MotionDiv = fm?.motion?.div || "div";
-  const MotionAnimatePresence = fm?.AnimatePresence || React.Fragment;
+  const MotionAnimatePresence =
+    fm?.AnimatePresence || (({ children }: { children: React.ReactNode }) => <>{children}</>);
 
   return (
     <nav role="navigation" aria-label="Principal" className={`nav-root fixed top-0 left-0 right-0 z-50 ${isScrolled ? "is-scrolled" : "bg-white"}`}>
@@ -95,7 +96,7 @@ const Navbar = () => {
                   height={40}
                   className="h-10 w-auto object-contain"
                   loading="eager"
-                  fetchPriority="high"
+                  fetchpriority="high"
                 />
             </div>
               <div className="text-lg font-poppins font-bold text-slate-900 group-hover:text-fyt-blue transition-colors duration-250">

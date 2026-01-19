@@ -14,6 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import SafeImage from "@/components/SafeImage";
 
 /**
  * Página principal de Divulgación
@@ -49,7 +50,7 @@ const DivulgacionPage: React.FC = () => {
   return (
     <div className="w-full bg-background">
       <Seo
-        title="Divulgación Científica FyT"
+        title="Divulgación Científica | Artículos del Grupo FyT"
         description="Artículos de divulgación en farmacología, investigación y salud. Contenido académico accesible del Grupo FyT."
         canonical="https://fyt-research.org/divulgacion"
         openGraph={{
@@ -65,15 +66,32 @@ const DivulgacionPage: React.FC = () => {
         }}
       />
 
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary/5 via-white to-primary/5 border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16 sm:py-20 lg:py-24">
-          <div className="max-w-3xl">
-            <h1 className="font-poppins font-extrabold text-4xl sm:text-5xl lg:text-6xl text-gray-900 mb-6 leading-tight">
-              Divulgación Científica
+      {/* Hero Section con imagen */}
+      <section className="hero-container" aria-label="Hero Divulgación">
+        <picture>
+          <source srcSet="/images/hero-divulgacion-large.webp" media="(min-width: 1280px)" />
+          <source srcSet="/images/hero-divulgacion-medium.webp" media="(min-width: 640px)" />
+          <SafeImage
+            src="/images/hero-divulgacion-small.webp"
+            fallbackSrc="/images/hero-divulgacion.png"
+            alt="Divulgación científica"
+            className="hero-image"
+            aria-hidden="true"
+            width={1920}
+            height={1080}
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+          />
+        </picture>
+        <div className="hero-overlay" />
+        <div className="relative z-10 w-full hero-content-left hero-text-shadow text-center md:text-left">
+          <div className="max-w-3xl mx-auto md:mx-0">
+            <h1 className="hero-title font-poppins font-extrabold text-white mb-6 tracking-tight drop-shadow-lg">
+              Divulgación científica y contenidos del Grupo FyT
             </h1>
-            <p className="font-inter text-lg sm:text-xl text-gray-600 leading-relaxed">
-              Artículos académicos accesibles sobre farmacología, investigación y salud. 
+            <p className="hero-subtitle font-inter text-white/95 leading-relaxed drop-shadow-md">
+              Artículos académicos accesibles sobre farmacología, investigación y salud.
               Conectamos la ciencia con la sociedad a través de contenido riguroso y comprensible.
             </p>
           </div>
