@@ -218,8 +218,8 @@ const App: React.FC = () => {
       <TransitionProvider>
         <React.Suspense fallback={null}>
           <ScrollToTop />
-          {/* Sincroniza el título del navegador con la ruta actual */}
-          <TitleSync />
+          {/* TitleSync deshabilitado: conflicto con Seo.tsx que gestiona títulos por página */}
+          {/* <TitleSync /> */}
           {/* Barra superior fija */}
           <Navbar />
           {/* Contenido principal: darle padding-top para no quedar debajo del navbar */}
