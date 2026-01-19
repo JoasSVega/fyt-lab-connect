@@ -67,17 +67,30 @@ const DivulgacionCientificaPage: React.FC = () => {
           {divulgacionCientifica.length > 0 ? (
             <>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 min-h-[700px]">
-                {pagedItems.map((item, idx) => (
-                  <ContenidoDigitalItem
-                    key={item.id}
-                    titulo={item.titulo}
-                    tipo={item.tipo}
-                    fecha={`${item.anio}-01-01`}
-                    descripcion={item.descripcion}
-                    enlace={item.enlace}
-                    tags={item.plataforma ? [item.plataforma] : undefined}
-                  />
-                ))}
+                {pagedItems.map((item) => {
+                  const meses = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"] as const;
+                  const mesesPorTitulo: Record<string, number> = {
+                    "Synthesizing Amino Acids Modified with Reactive Carbonyls in Silico to Assess Structural Effects Using Molecular Dynamics Simulations": 4,
+                    "Farmacovigilancia: Miocarditis tras la administración de vacunas de RNA": 3,
+                    "Conversatorio Hablemos de farmacia comunitaria": 8,
+                    "Actualización en análisis de los parámetros PK/PD - farmacocinética/farmacodinamia en paciente de cuidado crítico": 8,
+                    "Hábitos de consumo de medicamentos de venta libre por estudiantes del área de la salud en Cartagena-Colombia": 6,
+                    "AUDIOCIENCIA ? PERFILES": 11,
+                  };
+                  const mesNum = mesesPorTitulo[item.titulo] || 1;
+                  const fechaLabel = `${meses[mesNum - 1]} ${item.anio}`;
+                  return (
+                    <ContenidoDigitalItem
+                      key={item.id}
+                      titulo={item.titulo}
+                      tipo={item.tipo}
+                      fecha={fechaLabel}
+                      descripcion={item.descripcion}
+                      enlace={item.enlace}
+                      tags={item.plataforma ? [item.plataforma] : undefined}
+                    />
+                  );
+                })}
               </div>
 
               <div className="mt-8 flex items-center justify-center gap-4">
