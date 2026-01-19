@@ -36,11 +36,11 @@ const Noticias = () => {
           />
         </picture>
         <div className="hero-overlay" />
-        <div className="relative z-10 w-full max-w-4xl mx-auto px-6 md:px-12 text-center hero-text-shadow">
-          <h1 className="hero-title font-poppins font-extrabold text-white mb-4">
+        <div className="relative z-10 w-full hero-content-left text-center md:text-left hero-text-shadow">
+          <h1 className="hero-title font-poppins font-extrabold text-white mb-6 tracking-tight drop-shadow-lg">
             Noticias del Grupo FyT
           </h1>
-          <p className="hero-subtitle text-white/90 max-w-3xl mx-auto leading-relaxed">
+          <p className="hero-subtitle font-inter text-white/95 leading-relaxed drop-shadow-md max-w-3xl mx-auto md:mx-0">
             Actualizaciones institucionales, eventos y lanzamientos del Grupo de Investigación en Farmacología y Terapéutica.
           </p>
         </div>

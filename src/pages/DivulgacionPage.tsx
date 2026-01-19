@@ -85,12 +85,12 @@ const DivulgacionPage: React.FC = () => {
           />
         </picture>
         <div className="hero-overlay" />
-        <div className="relative z-10 w-full max-w-5xl mx-auto px-6 md:px-12 hero-text-shadow text-center lg:text-left">
-          <div className="max-w-3xl">
-            <h1 className="hero-title font-poppins font-extrabold text-white mb-6 leading-tight">
+        <div className="relative z-10 w-full hero-content-left hero-text-shadow text-center md:text-left">
+          <div className="max-w-3xl mx-auto md:mx-0">
+            <h1 className="hero-title font-poppins font-extrabold text-white mb-6 tracking-tight drop-shadow-lg">
               Divulgación Científica
             </h1>
-            <p className="hero-subtitle text-white/95 leading-relaxed">
+            <p className="hero-subtitle font-inter text-white/95 leading-relaxed drop-shadow-md">
               Artículos académicos accesibles sobre farmacología, investigación y salud.
               Conectamos la ciencia con la sociedad a través de contenido riguroso y comprensible.
             </p>

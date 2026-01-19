@@ -30,48 +30,29 @@ const SobreNosotros = () => {
         twitter={{ card: "summary_large_image", site: "@fytlab" }}
       />
       {/* Hero Institucional */}
-      <section
-        className="relative w-full h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden"
-        aria-label="Hero Sobre Nosotros"
-      >
-        {/* Imagen de fondo optimizada para LCP usando <picture> */}
+      <section className="hero-container" aria-label="Hero Sobre Nosotros">
         <picture>
-          {/* Escritorio Grande (>1024px) - Carga la versión LARGE */}
-          <source 
-            media="(min-width: 1024px)" 
-            srcSet="/images/hero-nosotros-large.webp" 
-          />
-          
-          {/* Tablet/Laptop (>640px) - Carga la versión MEDIUM */}
-          <source 
-            media="(min-width: 640px)" 
-            srcSet="/images/hero-nosotros-medium.webp" 
-          />
-          
-          {/* Móvil (Default) - Carga la versión SMALL optimizada */}
-          <img 
-            src="/images/hero-nosotros-small.webp" 
+          <source media="(min-width: 1024px)" srcSet="/images/hero-nosotros-large.webp" />
+          <source media="(min-width: 640px)" srcSet="/images/hero-nosotros-medium.webp" />
+          <img
+            src="/images/hero-nosotros-small.webp"
             alt="Equipo de Grupo FyT"
-            className="w-full h-full object-cover object-center"
+            className="hero-image"
             aria-hidden="true"
             width={1920}
-            height={600}
-            fetchPriority="high"
+            height={1080}
+            fetchpriority="high"
             loading="eager"
             decoding="sync"
           />
         </picture>
-        
-        {/* Overlay oscuro para que el texto se lea bien */}
-        <div className="absolute inset-0 bg-black/40" />
-        
-        {/* Contenido de texto encima */}
-        <div className="absolute inset-0 z-10 w-full max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-start">
-          <div className="max-w-3xl text-left">
-            <h1 className="font-poppins font-extrabold text-white mb-6 tracking-tight drop-shadow-lg text-4xl md:text-5xl lg:text-6xl">
+        <div className="hero-overlay" />
+        <div className="relative z-10 w-full hero-text-shadow text-center md:text-left flex items-center">
+          <div className="hero-content-left max-w-3xl">
+            <h1 className="hero-title font-poppins font-extrabold text-white mb-6 tracking-tight drop-shadow-lg">
               Sobre Nosotros
             </h1>
-            <p className="font-inter text-white/95 leading-relaxed drop-shadow-md text-lg md:text-xl">
+            <p className="hero-subtitle font-inter text-white/95 leading-relaxed drop-shadow-md">
               Somos un equipo comprometido con la innovación farmacéutica, la seguridad del paciente y la excelencia científica. Nuestra misión es desarrollar soluciones inteligentes que impulsen el futuro de la salud.
             </p>
           </div>

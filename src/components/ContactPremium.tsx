@@ -174,12 +174,12 @@ const ContactPremium = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="relative z-10 text-center px-6 md:px-10 max-w-4xl mx-auto hero-text-shadow"
+          className="relative z-10 hero-content-left hero-text-shadow text-center md:text-left"
         >
-          <h1 className="hero-title font-bold text-white mb-6">
+          <h1 className="hero-title font-poppins font-extrabold text-white mb-6 tracking-tight drop-shadow-lg">
             Conectemos Ciencia y Futuro
           </h1>
-          <p className="hero-subtitle text-white/90 max-w-3xl mx-auto leading-relaxed">
+          <p className="hero-subtitle font-inter text-white/95 leading-relaxed drop-shadow-md max-w-3xl mx-auto md:mx-0">
             Promovemos la excelencia mediante alianzas en investigación, docencia y extensión.
             Tu visión puede ser el motor que transforme la salud del mañana.
           </p>

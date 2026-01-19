@@ -122,8 +122,8 @@ export default function HeroInvestigacion() {
         {/* Dark overlay */}
         <div className="hero-overlay" />
         {/* Content with text-shadow */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 hero-text-shadow">
-          <div className="max-w-3xl text-center lg:text-left">
+        <div className="relative z-10 w-full hero-content-left hero-text-shadow text-center md:text-left">
+          <div className="max-w-3xl mx-auto md:mx-0">
             <h1 className="hero-title font-poppins font-extrabold text-white mb-6 tracking-tight drop-shadow-lg">
               Investigación y Producción Académica
             </h1>

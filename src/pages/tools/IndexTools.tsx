@@ -70,7 +70,7 @@ const IndexTools: FC = () => {
         <div className="hero-overlay" />
         {/* Content con text-shadow */}
         <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 text-center hero-text-shadow">
-          <h1 className="hero-title font-poppins font-extrabold text-white mb-6 tracking-tight">
+          <h1 className="hero-title font-poppins font-extrabold text-white mb-6 tracking-tight drop-shadow-lg">
             Herramientas Digitales para Profesionales Farmacéuticos
           </h1>
           <p className="hero-subtitle font-inter text-white/95 leading-relaxed max-w-3xl mx-auto drop-shadow-md">
