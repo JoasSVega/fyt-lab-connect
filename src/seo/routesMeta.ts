@@ -30,7 +30,7 @@ export const routesToPrerender: string[] = [
   '/investigacion/publicaciones',
   '/investigacion/eventos',
   '/investigacion/formacion',
-  '/investigacion/divulgacion-cientifica',
+  '/investigacion/contenido-digital',
   
   // Noticias y divulgación
   '/noticias',
@@ -97,9 +97,9 @@ export const routeMeta: Record<string, { title: string; description: string }> =
     title: 'Formación Académica Investigadores - Grupo FyT Universidad',
     description: 'Programas de formación, maestrías, doctorados y semilleros de investigación en ciencias farmacéuticas del Grupo FyT UdeC.'
   },
-  '/investigacion/divulgacion-cientifica': {
-    title: 'Divulgación Científica Farmacológica - Grupo FyT UdeC',
-    description: 'Contenidos de divulgación científica y transferencia de conocimiento del Grupo de Investigación FyT Universidad de Cartagena.'
+  '/investigacion/contenido-digital': {
+    title: 'Contenido Digital | Grupo FyT UdeC',
+    description: 'Contenido audiovisual y digital sobre investigación en ciencias farmacéuticas del Grupo FyT Universidad de Cartagena.'
   },
   '/divulgacion': {
     title: 'Divulgación Científica | Artículos del Grupo FyT',

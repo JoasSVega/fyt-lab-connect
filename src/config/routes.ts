@@ -12,7 +12,7 @@ export const ROUTE_MAPPING = {
   proyectos: "/investigacion/proyectos",
   eventos: "/investigacion/eventos",
   formacion: "/investigacion/formacion",
-  produccionAudiovisual: "/investigacion/divulgacion-cientifica", // Ruta antigua, renombrada
+  produccionAudiovisual: "/investigacion/contenido-digital", // Ruta renombrada
   
   // 🔄 RUTAS QUE PODRÍAN NECESITAR ACTUALIZACIÓN EN FUTURO
   // (Si se migra a ruta más semántica)
@@ -54,13 +54,12 @@ export const SECTION_NAMES = {
 } as const;
 
 /**
- * RECOMENDACIÓN: Actualizar ruta de "Contenidos digitales"
+ * RECOMENDACIÓN: Ruta actualizada de "Contenido Digital"
  * 
- * Actual: /investigacion/divulgacion-cientifica
- * Sugerida: /investigacion/produccion-audiovisual-sonora
+ * Anterior: /investigacion/divulgacion-cientifica
+ * Actual: /investigacion/contenido-digital
  * 
  * Razón: Mayor claridad semántica y consistencia con nombre oficial
- * Impacto: Requiere actualizar App.tsx, ResearchSubNav.tsx, enlaces internos
  */
 
 export const ROUTER_PATH_CONSTANTS = {
@@ -70,7 +69,7 @@ export const ROUTER_PATH_CONSTANTS = {
   PROYECTOS: "/investigacion/proyectos",
   EVENTOS: "/investigacion/eventos",
   FORMACION: "/investigacion/formacion",
-  PRODUCCION_AUDIOVISUAL: "/investigacion/divulgacion-cientifica", // A considerar renombrar
+  PRODUCCION_AUDIOVISUAL: "/investigacion/contenido-digital",
 } as const;
 
 /**

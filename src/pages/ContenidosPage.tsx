@@ -1,4 +1,4 @@
-// Página de Divulgación Científica y Transferencia del Conocimiento
+// Página de Contenido Digital - Producción audiovisual y sonora
 import React, { useMemo } from "react";
 import { divulgacionCientifica } from "@/data/contenidosDigitales";
 import type { DivulgacionCientifica as DivulgacionCientificaType } from "@/types/investigacion";
@@ -39,16 +39,16 @@ const DivulgacionCientificaPage: React.FC = () => {
   return (
     <div className="w-full bg-background">
       <Seo
-        title="Producción Audiovisual: Grupo FyT"
-        description="Videos y podcasts en ciencias farmacéuticas: producciones audiovisuales de investigación del Grupo FyT."
+        title="Contenido Digital | Grupo FyT"
+        description="Videos, podcasts y contenido audiovisual sobre investigación en ciencias farmacéuticas del Grupo FyT."
         author="Grupo FyT"
         robots="index, follow"
-        canonical="https://fyt-research.org/investigacion/divulgacion-cientifica"
+        canonical="https://fyt-research.org/investigacion/contenido-digital"
         openGraph={{
-          title: "Grupo FyT | Producción Audiovisual y Sonora",
-          description: "Producción audiovisual y sonora en ciencias farmacéuticas",
+          title: "Contenido Digital | Grupo FyT",
+          description: "Contenido audiovisual sobre investigación en ciencias farmacéuticas",
           type: "website",
-          url: "https://fyt-research.org/investigacion/divulgacion-cientifica",
+          url: "https://fyt-research.org/investigacion/contenido-digital",
           siteName: "Grupo FyT",
           locale: "es_ES",
         }}
@@ -56,8 +56,8 @@ const DivulgacionCientificaPage: React.FC = () => {
       />
 
       <SmallHero
-        title="Producción Audiovisual y Sonora"
-        subtitle="Producción audiovisual y sonora asociada a proyectos de investigación en ciencias farmacéuticas."
+        title="Contenido Digital"
+        subtitle="Contenido audiovisual sobre investigación en ciencias farmacéuticas: videos, podcasts y más."
       />
 
       <ResearchSubNav />
