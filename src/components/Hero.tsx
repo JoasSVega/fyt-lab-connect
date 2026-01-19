@@ -5,6 +5,7 @@ export default function Hero() {
     <section
       id="inicio"
       className="hero-container"
+      style={{ paddingTop: 'max(4rem, calc(var(--navbar-height, 4rem) + 1.5rem))' }}
     >
       <picture>
         {/* 1. ESCRITORIO (>1200px): Imagen pesada solo para pantallas muy grandes */}
