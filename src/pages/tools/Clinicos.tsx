@@ -197,6 +197,7 @@ const Clinicos: React.FC = () => {
       <p className="text-center font-bold mt-12 text-sm text-gray-800 dark:text-gray-200">
         Estas herramientas son de uso académico e informativo. No reemplazan el juicio clínico ni las decisiones de un profesional de la salud.
       </p>
+      </div>
     </div>
   );
 };
