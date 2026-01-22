@@ -4,19 +4,22 @@ export interface FilterOptions {
   yearMin?: number;
   yearMax?: number;
   types?: string[];
+  levels?: string[];
   researchLines?: string[];
   status?: string[];
   searchQuery?: string;
 }
 
 export interface FilterableItem {
-  id: number;
+  id: number | string;
   titulo?: string;
   title?: string;
   anio?: number;
   year?: number;
   tipo?: string;
   type?: string;
+  nivel?: string;
+  level?: string;
   categoria?: string;
   estado?: string;
   status?: string;
@@ -41,6 +44,7 @@ export const useAcademicFilters = (items: FilterableItem[]) => {
     yearMin: undefined,
     yearMax: undefined,
     types: [],
+    levels: [],
     researchLines: [],
     status: [],
     searchQuery: "",
@@ -60,6 +64,14 @@ export const useAcademicFilters = (items: FilterableItem[]) => {
       .map((item) => item.tipo || item.type)
       .filter((t): t is string => t !== undefined);
     return [...new Set(types)].sort();
+  }, [items]);
+
+  // Extraer niveles académicos únicos
+  const availableLevels = useMemo(() => {
+    const levels = items
+      .map((item) => item.nivel || item.level)
+      .filter((l): l is string => l !== undefined);
+    return [...new Set(levels)].sort();
   }, [items]);
 
   // Extraer líneas de investigación únicas
@@ -114,6 +126,12 @@ export const useAcademicFilters = (items: FilterableItem[]) => {
         return false;
       }
 
+      // Filtro por nivel académico
+      const itemLevel = item.nivel || item.level;
+      if (filters.levels.length > 0 && itemLevel && !filters.levels.includes(itemLevel)) {
+        return false;
+      }
+
       // Filtro por líneas de investigación
       if (
         filters.researchLines.length > 0 &&
@@ -150,6 +168,15 @@ export const useAcademicFilters = (items: FilterableItem[]) => {
     }));
   };
 
+  const toggleLevel = (level: string) => {
+    setFilters((prev) => ({
+      ...prev,
+      levels: prev.levels?.includes(level)
+        ? prev.levels.filter((l) => l !== level)
+        : [...(prev.levels || []), level],
+    }));
+  };
+
   const toggleResearchLine = (line: string) => {
     setFilters((prev) => ({
       ...prev,
@@ -177,6 +204,7 @@ export const useAcademicFilters = (items: FilterableItem[]) => {
       yearMin: undefined,
       yearMax: undefined,
       types: [],
+      levels: [],
       researchLines: [],
       status: [],
       searchQuery: "",
@@ -188,10 +216,12 @@ export const useAcademicFilters = (items: FilterableItem[]) => {
     filteredItems,
     availableYears,
     availableTypes,
+    availableLevels,
     availableResearchLines,
     availableStatus,
     setYearRange,
     toggleType,
+    toggleLevel,
     toggleResearchLine,
     toggleStatus,
     setSearchQuery,

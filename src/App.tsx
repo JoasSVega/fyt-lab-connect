@@ -48,7 +48,6 @@ const TermsOfUse = React.lazy(() => import("./pages/TermsOfUse"));
 const CodeOfEthics = React.lazy(() => import("./pages/CodeOfEthics"));
 
 // Componentes core lazy loaded
-const DosageCalculator = React.lazy(() => import("./components/DosageCalculator"));
 const Navbar = React.lazy(() => import("./components/Navbar"));
 const ScrollToTop = React.lazy(() => import("./components/ScrollToTop"));
 const Footer = React.lazy(() => import("./components/Footer"));
@@ -119,17 +118,6 @@ function AnimatedRoutes() {
           <Route path="/politica-privacidad" element={<PrivacyPolicy />} />
           <Route path="/terminos-uso" element={<TermsOfUse />} />
           <Route path="/codigo-etica" element={<CodeOfEthics />} />
-          
-          {/* Calculadoras */}
-          <Route
-            path="/calculator/dosage"
-            element={
-              <div className="flex flex-col items-center justify-center min-h-screen p-4 sm:p-8">
-                <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-center">Calculadora de Dosificación</h1>
-                <DosageCalculator />
-              </div>
-            }
-          />
           
           {/* Redirecciones (301 redirects para SEO) */}
           <Route path="/herramientas/antropometricas" element={<Navigate to="/herramientas/antropometricos" replace />} />

@@ -68,7 +68,7 @@ const DivulgacionCientificaPage: React.FC = () => {
         <ScrollReveal>
           {divulgacionCientifica.length > 0 ? (
             <>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 min-h-[700px]">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 min-h-[700px] items-start">
                 {pagedItems.map((item) => {
                   const meses = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"] as const;
                   const mesesPorTitulo: Record<string, number> = {

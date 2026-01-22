@@ -45,7 +45,7 @@ const CursoItem: React.FC<CursoItemProps> = ({
   };
 
   return (
-    <article className="bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 border border-slate-100 hover:scale-[1.02]">
+    <article className="bg-white rounded-xl p-5 shadow-sm hover:shadow-md hover:scale-[1.02] transition-transform duration-300 border border-slate-100 will-change-transform">
       {/* Header con tipo y fecha */}
       <div className="flex flex-wrap items-center gap-3 mb-4">
         {tipo && (
@@ -122,7 +122,7 @@ const CursoItem: React.FC<CursoItemProps> = ({
             href={enlace}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-primary hover:text-primary/80 text-sm font-medium transition-all duration-200 hover:gap-3"
+            className="inline-flex items-center gap-2 text-primary hover:text-primary/80 text-sm font-medium transition-colors"
           >
             <ExternalLink className="w-4 h-4" />
             Ver información del curso

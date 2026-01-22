@@ -100,13 +100,6 @@
     <priority>0.5</priority>
   </url>
 
-  <!-- Calculadora dedicada (ruta histórica) -->
-  <url>
-    <loc>https://fyt-research.org/calculator/dosage</loc>
-    <lastmod>2025-12-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
 
   <!-- Páginas Legales -->
   <url>

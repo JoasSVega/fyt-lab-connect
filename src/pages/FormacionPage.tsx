@@ -1,20 +1,92 @@
 // Página de Formación y Actividades Docentes
-import React from "react";
+import React, { useState, useMemo } from "react";
 import { GraduationCap } from "lucide-react";
-import { cursos, tutorias } from "@/data/formacion";
+import {
+  formacionItems,
+  type FormacionItem,
+} from "@/data/formacionCurada";
 import { usePageReady } from "@/hooks/usePageReady";
 import SmallHero from "@/components/shared/SmallHero";
 import ResearchSubNav from "@/components/investigacion/ResearchSubNav";
-import PlaceholderSection from "@/components/investigacion/PlaceholderSection";
-import CursoItem from "@/components/investigacion/CursoItem";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
+import AcademicItem from "@/components/investigacion/AcademicItem";
+import SmartToolbar from "@/components/investigacion/SmartToolbar";
 import Seo from "@/components/Seo";
 
 const FormacionPage: React.FC = () => {
   usePageReady();
 
-  const hasTutorias = tutorias.length > 0;
-  const hasCursos = cursos.length > 0;
+  // Filtros simples con estado local
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedYear, setSelectedYear] = useState("");
+  const [selectedType, setSelectedType] = useState("");
+  const [selectedLevel, setSelectedLevel] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // Reset handler para limpiar todos los filtros
+  const handleReset = () => {
+    setSearchQuery("");
+    setSelectedYear("");
+    setSelectedType("");
+    setSelectedLevel("");
+  };
+
+  const hasData = formacionItems.length > 0;
+
+  // Cálculo inmediato de opciones disponibles (no bloquea render)
+  const availableYears = useMemo(
+    () => [...new Set(formacionItems.map(f => f.year).filter(Boolean))].sort((a, b) => (b as number) - (a as number)),
+    []
+  );
+  const availableTypes = useMemo(
+    () => [...new Set(formacionItems.map(f => f.type))].sort(),
+    []
+  );
+  const availableLevels = useMemo(
+    () => [...new Set(formacionItems.map(f => f.level).filter(Boolean))].sort(),
+    []
+  );
+
+  // Filtrado optimizado
+  const filteredItems = useMemo(() => {
+    return formacionItems.filter((item) => {
+      const matchesSearch = searchQuery.trim() === "" ||
+        [item.title, item.institution, item.description]
+          .filter(Boolean)
+          .join(" ")
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase());
+      const matchesYear = selectedYear === "" || item.year === Number(selectedYear);
+      const matchesType = selectedType === "" || item.type === selectedType;
+      const matchesLevel = selectedLevel === "" || item.level === selectedLevel;
+      return matchesSearch && matchesYear && matchesType && matchesLevel;
+    });
+  }, [searchQuery, selectedYear, selectedType, selectedLevel]);
+
+  // Paginación: 10 items por página
+  const itemsPerPage = 10;
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const pagedItems = filteredItems.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.max(1, Math.ceil(filteredItems.length / itemsPerPage));
+  const goPrev = () => setCurrentPage((p) => Math.max(1, p - 1));
+  const goNext = () => setCurrentPage((p) => Math.min(totalPages, p + 1));
+
+  // Reset page when filters change
+  React.useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, selectedYear, selectedType, selectedLevel]);
+
+  const typeLabel = (type: FormacionItem["type"]): string => {
+    if (type === "programa") return "Programa";
+    if (type === "curso") return "Curso";
+    return "Tutoría";
+  };
+
+  const levelLabel = (level: FormacionItem["level"]): string | undefined => {
+    if (!level) return undefined;
+    return level.charAt(0).toUpperCase() + level.slice(1);
+  };
 
   return (
     <div className="w-full bg-background">
@@ -36,98 +108,95 @@ const FormacionPage: React.FC = () => {
       />
 
       <SmallHero
-        title="Formación y Actividades Docentes"
-        subtitle="Procesos de acompañamiento académico, tutorías, direcciones de tesis y programas de formación continua del Grupo FyT."
+        title="Formación Académica"
+        subtitle="Programas de posgrado, cursos avanzados y dirección de trabajos académicos del Grupo FyT."
         icon={GraduationCap}
       />
 
       <ResearchSubNav />
 
-      <section className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-12 md:py-16">
-        {/* Sección: Tutorías y Trabajos Dirigidos */}
-        <ScrollReveal>
-          <div className="mb-16">
-            <div className="text-center mb-10">
-              <h2 className="text-2xl sm:text-3xl font-poppins font-bold text-foreground mb-3">
-                Tutorías y Trabajos Dirigidos
-              </h2>
-              <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
-                Acompañamiento académico en pregrado, maestría y doctorado.
-              </p>
-            </div>
-            {hasTutorias ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {tutorias.map((tutoria, idx) => (
-                  <ScrollReveal key={tutoria.id} delay={idx * 50}>
-                    <CursoItem
-                      titulo={tutoria.titulo}
-                      autores={tutoria.estudiante}
-                      fecha={`${tutoria.anio}`}
-                      tipo={tutoria.tipo}
-                      institucion={tutoria.institucion}
-                      enlace={tutoria.enlace}
-                      descripcion={tutoria.descripcion}
-                      tags={tutoria.tags}
-                    />
-                  </ScrollReveal>
-                ))}
-              </div>
-            ) : (
-              <PlaceholderSection message="Aquí se cargará el listado de tutorías, trabajos de grado y tesis dirigidas por miembros del grupo." />
-            )}
-          </div>
-        </ScrollReveal>
+      <SmartToolbar
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
+        onReset={handleReset}
+        availableYears={availableYears}
+        selectedYear={selectedYear}
+        onYearChange={setSelectedYear}
+        availableTypes={availableTypes}
+        selectedType={selectedType}
+        onTypeChange={setSelectedType}
+        availableCategories={availableLevels}
+        selectedCategory={selectedLevel}
+        onCategoryChange={setSelectedLevel}
+        categoryLabel="Nivel"
+        resultCount={filteredItems.length}
+        totalCount={formacionItems.length}
+        isLoading={false}
+      />
 
-        {/* Sección: Cursos y Capacitaciones */}
-        <ScrollReveal delay={100}>
-          <div className="mb-16 pt-12 border-t border-border">
-            <div className="text-center mb-10">
-              <h2 className="text-2xl sm:text-3xl font-poppins font-bold text-foreground mb-3">
-                Cursos y Capacitaciones
-              </h2>
-              <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
-                Programas de formación continua y capacitación profesional.
-              </p>
-            </div>
-            {hasCursos ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {cursos.map((curso, idx) => (
-                  <ScrollReveal key={curso.id} delay={idx * 50}>
-                    <CursoItem
-                      titulo={curso.titulo}
-                      autores={curso.autores}
-                      fecha={`${curso.anio}`}
-                      tipo={curso.tipo}
-                      institucion={curso.institucion}
-                      enlace={curso.enlace}
-                      descripcion={curso.descripcion}
-                      duracion={curso.duracion}
-                      modalidad={curso.modalidad}
-                      tags={curso.tags}
-                    />
-                  </ScrollReveal>
-                ))}
-              </div>
-            ) : (
-              <PlaceholderSection message="Aquí se cargará el catálogo de cursos, talleres y programas de capacitación ofrecidos por el grupo." />
-            )}
-          </div>
-        </ScrollReveal>
+      {/* Main content - Min height reserves space to prevent CLS */}
+      <section className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-8 md:py-12 min-h-[800px]">
+        {hasData ? (
+          <>
+            {/* Lista de formación */}
+            {filteredItems.length > 0 ? (
+              <>
+                <ScrollReveal>
+                  <div className="flex flex-col gap-4 min-h-[600px]">
+                    {pagedItems.map((item) => (
+                      <AcademicItem
+                        key={item.id}
+                        title={item.title}
+                        type={typeLabel(item.type)}
+                        level={levelLabel(item.level)}
+                        year={item.year || undefined}
+                        institution={item.institution}
+                        description={item.description}
+                        link={item.link}
+                        className="hover:shadow-lg transition-shadow"
+                        variant="default"
+                      />
+                    ))}
+                  </div>
+                </ScrollReveal>
 
-        {/* Sección: Docencia */}
-        <ScrollReveal delay={200}>
-          <div className="pt-12 border-t border-border">
-            <div className="text-center mb-10">
-              <h2 className="text-2xl sm:text-3xl font-poppins font-bold text-foreground mb-3">
-                Actividades de Docencia
-              </h2>
-              <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
-                Participación docente en programas académicos institucionales.
-              </p>
+                <div className="mt-8 flex items-center justify-center gap-4">
+                  <button
+                    onClick={goPrev}
+                    disabled={currentPage === 1}
+                    className="px-4 py-2 rounded-lg border border-slate-300 text-slate-700 font-medium hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  >
+                    ← Anterior
+                  </button>
+                  <span className="text-sm text-slate-600 font-medium">
+                    Página {currentPage} de {totalPages}
+                  </span>
+                  <button
+                    onClick={goNext}
+                    disabled={currentPage === totalPages}
+                    className="px-4 py-2 rounded-lg border border-slate-300 text-slate-700 font-medium hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  >
+                    Siguiente →
+                  </button>
+                </div>
+              </>
+            ) : (
+              <ScrollReveal>
+                <div className="text-center py-12 border border-dashed border-slate-300 rounded-lg">
+                  <p className="text-slate-600">
+                    No se encontraron registros de formación con los filtros aplicados.
+                  </p>
+                </div>
+              </ScrollReveal>
+            )}
+          </>
+        ) : (
+          <ScrollReveal>
+            <div className="text-center py-12">
+              <p className="text-slate-600">No hay información de formación disponible.</p>
             </div>
-            <PlaceholderSection message="Aquí se cargará información sobre asignaturas, programas y actividades docentes de los integrantes del grupo." />
-          </div>
-        </ScrollReveal>
+          </ScrollReveal>
+        )}
       </section>
     </div>
   );
