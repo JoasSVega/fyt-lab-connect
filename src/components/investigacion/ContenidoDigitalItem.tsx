@@ -51,15 +51,22 @@ export const ContenidoDigitalItem: React.FC<ContenidoDigitalItemProps> = ({
       <div className={`absolute top-0 left-0 right-0 h-1.5 ${colors.stripe}`} />
 
       {/* Body */}
-      <div className="p-3 space-y-3">
-        <h3 className="text-base md:text-lg font-semibold text-gray-900 leading-tight break-words whitespace-normal">
+      <div className="p-4 space-y-4">
+        <h3 className="text-lg md:text-xl font-semibold text-gray-900 leading-tight break-words whitespace-normal">
           {titulo}
         </h3>
-        {fecha && (
-          <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-gray-100 text-gray-700 text-xs font-medium">
-            {fecha}
-          </span>
-        )}
+        <div className="flex items-center gap-2 flex-wrap">
+          {fecha && (
+            <span className="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 text-gray-700 text-sm font-medium">
+              {fecha}
+            </span>
+          )}
+          {tipo && (
+            <span className="inline-flex items-center px-3 py-1 rounded-full bg-gray-50 text-gray-800 text-xs font-semibold uppercase tracking-wide">
+              {tipo}
+            </span>
+          )}
+        </div>
 
         {/* Tags */}
         {Array.isArray(tags) && tags.length > 0 && (
@@ -82,7 +89,7 @@ export const ContenidoDigitalItem: React.FC<ContenidoDigitalItemProps> = ({
               href={enlace}
               target="_blank"
               rel="noopener noreferrer"
-              className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-md ${colors.button} text-white text-sm font-medium hover:shadow-md transition-all duration-200 hover:scale-[1.01]`}
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-md ${colors.button} text-white text-sm md:text-base font-semibold hover:shadow-md transition-all duration-200 hover:scale-[1.01] min-w-[130px] justify-center`}
             >
               {isVideo ? "Reproducir" : "Escuchar"}
               <ExternalLink className="w-4 h-4" />
@@ -98,9 +105,9 @@ export const ContenidoDigitalItem: React.FC<ContenidoDigitalItemProps> = ({
               </span>
             )}
             {isVideo ? (
-              <PlayCircle className={`w-6 h-6 ${colors.icon}`} />
+              <PlayCircle className={`w-7 h-7 ${colors.icon}`} />
             ) : (
-              <Mic2 className={`w-5 h-5 ${colors.icon}`} />
+              <Mic2 className={`w-6 h-6 ${colors.icon}`} />
             )}
           </div>
         </div>
