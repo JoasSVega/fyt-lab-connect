@@ -278,9 +278,9 @@ const InvestigacionPage: React.FC = () => {
             <p className="text-slate-600 font-inter text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-8">
               Generamos conocimiento para transformar el bienestar. Buscamos aliados para impulsar la investigación con impacto directo en la salud.
             </p>
-            <Link to={pathContactos} className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-violet-600 hover:bg-violet-700 text-white font-semibold shadow-lg shadow-violet-600/20 transition-all duration-200">
+            <Link to={pathContactos} className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-violet-600 hover:bg-violet-700 text-white font-semibold shadow-lg shadow-violet-600/20 transition-all duration-300 hover:shadow-xl hover:shadow-violet-600/40 hover:scale-105 group">
               Proponer Colaboración
-              <ChevronRight className="w-4 h-4" />
+              <ChevronRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
           </div>
         </section>
