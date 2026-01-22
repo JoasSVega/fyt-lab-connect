@@ -46,12 +46,12 @@ export const ContenidoDigitalItem: React.FC<ContenidoDigitalItemProps> = ({
   const isVideo = (tipo || "").toLowerCase().includes("video");
 
   return (
-    <article className="relative bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 hover:scale-[1.01] will-change-transform flex flex-col">
+    <article className="relative bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 hover:scale-[1.01] will-change-transform flex flex-col min-h-[200px] sm:min-h-[210px]">
       {/* Top color stripe (only top, subtle) */}
       <div className={`absolute top-0 left-0 right-0 h-1.5 ${colors.stripe}`} />
 
       {/* Body */}
-      <div className="flex-1 flex flex-col justify-between px-3 sm:px-3.5 py-3 sm:py-3.5 gap-2.5">
+      <div className="flex-1 flex flex-col justify-between px-3 sm:px-3.5 py-2.5 sm:py-3 gap-3">
         <div className="space-y-1.5">
           <h3 className="pt-2 text-sm sm:text-base md:text-lg font-semibold text-gray-900 leading-snug break-words whitespace-normal">
             {titulo}
