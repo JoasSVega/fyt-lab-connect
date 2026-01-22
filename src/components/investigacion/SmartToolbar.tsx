@@ -106,15 +106,16 @@ const SmartToolbar: React.FC<SmartToolbarProps> = ({
 
         {/* Dropdown animado tipo persiana */}
         <div
-          className={`
-            absolute top-full left-0 mt-1 min-w-[200px] bg-white border border-gray-200 rounded-lg shadow-lg z-50
-            overflow-hidden transition-all duration-300 ease-out
-            ${isOpen ? "opacity-100 scale-y-100 origin-top" : "opacity-0 scale-y-95 pointer-events-none origin-top"}
-          `}
+          className="absolute top-full left-0 mt-1 min-w-[200px] bg-white border border-gray-200 rounded-lg shadow-lg z-50 origin-top"
           style={{
             maxHeight: isOpen ? "300px" : "0px",
             overflow: isOpen ? "auto" : "hidden",
+            opacity: isOpen ? 1 : 0,
             transitionProperty: "max-height, opacity, transform",
+            transitionDuration: "300ms",
+            transitionTimingFunction: "ease-out",
+            transform: isOpen ? "scaleY(1)" : "scaleY(0.95)",
+            pointerEvents: isOpen ? "auto" : "none",
           }}
         >
           <div className="py-1">

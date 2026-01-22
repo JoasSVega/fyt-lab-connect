@@ -1410,3 +1410,21 @@ body.modal-open .calc-overlay {
   color: hsl(var(--fyt-blue));
   transform: translateX(2px);
 }
+
+/* Animación de dropdown tipo persiana (blind roll-down) */
+@keyframes dropdownFall {
+  from {
+    opacity: 0;
+    transform: scaleY(0.95);
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+    max-height: 300px;
+  }
+}
+
+.dropdown-animated {
+  animation: dropdownFall 300ms ease-out forwards;
+}

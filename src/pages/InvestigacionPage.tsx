@@ -52,23 +52,23 @@ const InvestigacionPage: React.FC = () => {
         <nav className="py-8 px-6 sm:px-8 md:px-16 lg:px-24 xl:px-32 bg-white border-b border-slate-200">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-wrap gap-3 justify-center">
-              <Link to={pathPublicaciones} className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 text-slate-700 hover:text-blue-700 font-medium text-sm transition-all duration-200">
+              <Link to={pathPublicaciones} className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white border border-slate-300 text-slate-900 font-medium text-sm transition-all duration-200 hover:bg-slate-900 hover:border-slate-900 hover:text-white">
                 <BookOpen className="w-4 h-4" />
                 Publicaciones
               </Link>
-              <Link to={pathProyectos} className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 text-slate-700 hover:text-blue-700 font-medium text-sm transition-all duration-200">
+              <Link to={pathProyectos} className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white border border-slate-300 text-slate-900 font-medium text-sm transition-all duration-200 hover:bg-slate-900 hover:border-slate-900 hover:text-white">
                 <Microscope className="w-4 h-4" />
                 Proyectos
               </Link>
-              <Link to={pathEventos} className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 text-slate-700 hover:text-blue-700 font-medium text-sm transition-all duration-200">
+              <Link to={pathEventos} className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white border border-slate-300 text-slate-900 font-medium text-sm transition-all duration-200 hover:bg-slate-900 hover:border-slate-900 hover:text-white">
                 <Users className="w-4 h-4" />
                 Eventos
               </Link>
-              <Link to={pathFormacion} className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 text-slate-700 hover:text-blue-700 font-medium text-sm transition-all duration-200">
+              <Link to={pathFormacion} className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white border border-slate-300 text-slate-900 font-medium text-sm transition-all duration-200 hover:bg-slate-900 hover:border-slate-900 hover:text-white">
                 <GraduationCap className="w-4 h-4" />
                 Formación
               </Link>
-              <Link to={pathDivulgacionCientifica} className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 text-slate-700 hover:text-blue-700 font-medium text-sm transition-all duration-200">
+              <Link to={pathDivulgacionCientifica} className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white border border-slate-300 text-slate-900 font-medium text-sm transition-all duration-200 hover:bg-slate-900 hover:border-slate-900 hover:text-white">
                 <Video className="w-4 h-4" />
                 Contenido Digital
               </Link>
@@ -132,9 +132,9 @@ const InvestigacionPage: React.FC = () => {
             </div>
 
             <div className="text-center">
-              <Link to={pathPublicaciones} className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-colors duration-200">
+              <Link to={pathPublicaciones} className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold transition-all duration-300 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 hover:scale-105 group">
                 Ver todas las publicaciones
-                <ChevronRight className="w-4 h-4" />
+                <ChevronRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
             </div>
           </section>
@@ -176,9 +176,9 @@ const InvestigacionPage: React.FC = () => {
             </div>
 
             <div className="text-center mt-10">
-              <Link to={pathProyectos} className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-colors duration-200">
+              <Link to={pathProyectos} className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold transition-all duration-300 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 hover:scale-105 group">
                 Ver todos los proyectos
-                <ChevronRight className="w-4 h-4" />
+                <ChevronRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
             </div>
           </section>
@@ -224,9 +224,9 @@ const InvestigacionPage: React.FC = () => {
             </div>
 
             <div className="text-center mt-10">
-              <Link to={pathEventos} className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-colors duration-200">
+              <Link to={pathEventos} className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold transition-all duration-300 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 hover:scale-105 group">
                 Ver todos los eventos
-                <ChevronRight className="w-4 h-4" />
+                <ChevronRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
             </div>
           </section>
@@ -259,9 +259,9 @@ const InvestigacionPage: React.FC = () => {
             </div>
 
             <div className="text-center mt-10">
-              <Link to={pathDivulgacionCientifica} className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-colors duration-200">
+              <Link to={pathDivulgacionCientifica} className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold transition-all duration-300 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 hover:scale-105 group">
                 Ver todos los contenidos
-                <ChevronRight className="w-4 h-4" />
+                <ChevronRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
             </div>
           </section>
