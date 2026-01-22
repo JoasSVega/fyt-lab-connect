@@ -53,9 +53,6 @@ export const routesToPrerender: string[] = [
   '/terminos-uso',
   '/codigo-etica',
   
-  // Calculadoras
-  '/calculator/dosage',
-  
   // ========================================
   // RUTAS DINÁMICAS INYECTADAS AUTOMÁTICAMENTE
   // ========================================
@@ -148,10 +145,6 @@ export const routeMeta: Record<string, { title: string; description: string }> =
   '/codigo-etica': {
     title: 'Código de Ética Investigación Científica - Grupo FyT UdeC',
     description: 'Principios éticos y buenas prácticas de investigación científica del Grupo FyT Universidad de Cartagena. Integridad académica.'
-  },
-  '/calculator/dosage': {
-    title: 'Calculadora Dosificación Farmacológica - Grupo FyT',
-    description: 'Calculadora farmacológica para dosificación y ajuste de dosis. Herramienta de atención farmacéutica del Grupo FyT UdeC.'
   },
   
   // ========================================

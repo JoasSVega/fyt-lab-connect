@@ -4,18 +4,21 @@ import { X, ChevronDown } from "lucide-react";
 interface AcademicFiltersProps {
   availableYears: number[];
   availableTypes: string[];
+  availableLevels?: string[];
   availableResearchLines: string[];
   availableStatus: string[];
   activeFilters: {
     yearMin?: number;
     yearMax?: number;
     types?: string[];
+    levels?: string[];
     researchLines?: string[];
     status?: string[];
     searchQuery?: string;
   };
   onYearRangeChange: (min?: number, max?: number) => void;
   onTypeToggle: (type: string) => void;
+  onLevelToggle?: (level: string) => void;
   onResearchLineToggle: (line: string) => void;
   onStatusToggle: (status: string) => void;
   onSearchChange: (query: string) => void;
@@ -23,6 +26,7 @@ interface AcademicFiltersProps {
   resultCount?: number;
   showResearchLines?: boolean;
   showStatus?: boolean;
+  showLevels?: boolean;
 }
 
 /**
@@ -33,11 +37,13 @@ interface AcademicFiltersProps {
 const AcademicFilters: React.FC<AcademicFiltersProps> = ({
   availableYears,
   availableTypes,
+  availableLevels = [],
   availableResearchLines,
   availableStatus,
   activeFilters,
   onYearRangeChange,
   onTypeToggle,
+  onLevelToggle,
   onResearchLineToggle,
   onStatusToggle,
   onSearchChange,
@@ -45,6 +51,7 @@ const AcademicFilters: React.FC<AcademicFiltersProps> = ({
   resultCount,
   showResearchLines = true,
   showStatus = true,
+  showLevels = false,
 }) => {
   // State for expandable sections
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
@@ -101,6 +108,7 @@ const AcademicFilters: React.FC<AcademicFiltersProps> = ({
     activeFilters.yearMin ||
     activeFilters.yearMax ||
     activeFilters.types.length > 0 ||
+    (activeFilters.levels?.length ?? 0) > 0 ||
     activeFilters.researchLines.length > 0 ||
     activeFilters.status.length > 0 ||
     activeFilters.searchQuery.trim() !== "";
@@ -197,6 +205,25 @@ const AcademicFilters: React.FC<AcademicFiltersProps> = ({
               />
               <span className="text-sm text-slate-700 group-hover:text-slate-900 transition-colors">
                 {type}
+              </span>
+            </label>
+          ))}
+        </CollapsibleSection>
+      )}
+
+      {/* Filtro por nivel académico */}
+      {showLevels && availableLevels.length > 0 && onLevelToggle && (
+        <CollapsibleSection title="Nivel académico" sectionKey="levels">
+          {availableLevels.map((level) => (
+            <label key={level} className="flex items-center gap-3 cursor-pointer group">
+              <input
+                type="checkbox"
+                checked={activeFilters.levels?.includes(level) ?? false}
+                onChange={() => onLevelToggle(level)}
+                className="w-4 h-4 rounded border-slate-300 text-primary focus:ring-2 focus:ring-primary focus:ring-offset-0 transition-all"
+              />
+              <span className="text-sm text-slate-700 group-hover:text-slate-900 transition-colors">
+                {level}
               </span>
             </label>
           ))}

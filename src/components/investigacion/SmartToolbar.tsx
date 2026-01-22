@@ -20,6 +20,7 @@ interface SmartToolbarProps {
   availableCategories?: string[];
   selectedCategory?: string;
   onCategoryChange?: (category: string) => void;
+  categoryLabel?: string; // Label personalizado para el dropdown de categorías
   
   // Reset handler
   onReset?: () => void;
@@ -48,6 +49,7 @@ const SmartToolbar: React.FC<SmartToolbarProps> = ({
   availableCategories = [],
   selectedCategory = "",
   onCategoryChange,
+  categoryLabel = "Categoría",
   onReset,
   resultCount,
   totalCount,
@@ -191,7 +193,7 @@ const SmartToolbar: React.FC<SmartToolbarProps> = ({
             {availableCategories.length > 0 && onCategoryChange && (
               <AnimatedDropdown
                 icon={<Tag className="w-full h-full" />}
-                label="Categoría"
+                label={categoryLabel}
                 value={selectedCategory}
                 options={availableCategories.map((c) => ({ value: c, label: c }))}
                 onChange={onCategoryChange}

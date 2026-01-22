@@ -10,7 +10,9 @@ import { publicacionesFyT } from "@/data/publicaciones";
 import { proyectos } from "@/data/proyectos";
 import { divulgacionCientifica } from "@/data/contenidosDigitales";
 import { eventos } from "@/data/eventos";
+import { formacionItems } from "@/data/formacionCurada";
 import type { Publicacion, Proyecto, DivulgacionCientifica, Evento } from "@/types/investigacion";
+import type { FormacionItem } from "@/data/formacionCurada";
 import { pathPublicaciones, pathProyectos, pathFormacion, pathDivulgacionCientifica, pathEventos, pathContactos } from "@/App";
 const InvestigacionPage: React.FC = () => {
   usePageReady();
@@ -20,6 +22,7 @@ const InvestigacionPage: React.FC = () => {
   const proyectosDestacados = [...proyectos.filter((p: Proyecto) => p.estado === "En curso").slice(0, 2), ...proyectos.filter((p: Proyecto) => p.estado === "Finalizado").slice(0, 1)].slice(0, 3);
   const contenidosDestacados = [...divulgacionCientifica].sort((a: DivulgacionCientifica, b: DivulgacionCientifica) => b.anio - a.anio).slice(0, 3);
   const eventosRecientes = [...eventos].sort((a: Evento, b: Evento) => b.anio - a.anio).slice(0, 3);
+  const formacionDestacados = formacionItems.slice(0, 3);
   return <div className="w-full bg-background flex flex-col">
       <Seo title="Investigación en Salud y Ciencia | Grupo FyT" description="Producción científica en farmacología: publicaciones, proyectos, eventos y divulgación del Grupo FyT." author="Grupo FyT" robots="index, follow" canonical="https://fyt-research.org/investigacion" openGraph={{
       title: "Grupo FyT | Investigación y Producción Académica",
@@ -158,7 +161,13 @@ const InvestigacionPage: React.FC = () => {
                       <Microscope className="w-6 h-6 text-indigo-600" />
                     </span>
                     {/* Badge Estado */}
-                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700">
+                    <span className={`px-3 py-1 rounded-full text-xs font-semibold ring-1 ${
+                      proyecto.estado.toLowerCase().includes("en curso") || proyecto.estado.toLowerCase().includes("activo")
+                        ? "bg-emerald-50 text-emerald-700 ring-emerald-600/20" 
+                        : proyecto.estado.toLowerCase().includes("finalizado") || proyecto.estado.toLowerCase().includes("concluido")
+                        ? "bg-gray-100 text-gray-600 ring-gray-500/20"
+                        : "bg-indigo-50 text-indigo-700 ring-indigo-600/20"
+                    }`}>
                       {proyecto.estado}
                     </span>
                     {/* Badge Año - alineado a la derecha */}
@@ -232,6 +241,59 @@ const InvestigacionPage: React.FC = () => {
           </section>
         </ScrollReveal>
 
+        {/* 🎓 Formación Académica */}
+        <ScrollReveal>
+          <section className="py-16 md:py-20 lg:py-24 border-t border-slate-200">
+            <div className="mb-10 md:mb-12">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-poppins font-bold text-slate-800">
+                Formación Académica
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {formacionDestacados.map((formacion: FormacionItem) => {
+                const typeLabel = formacion.type === "programa" ? "Programa" : formacion.type === "curso" ? "Curso" : "Tutoría";
+                const levelLabel = formacion.level ? formacion.level.charAt(0).toUpperCase() + formacion.level.slice(1) : undefined;
+                
+                return <article key={formacion.id} className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-300">
+                    {/* Header: Icono + Badges en una línea */}
+                    <div className="flex items-center gap-2 mb-3 flex-wrap">
+                      {/* Icono fijo - NO se aplasta */}
+                      <span className="inline-flex items-center justify-center w-6 h-6 min-w-[24px] shrink-0">
+                        <GraduationCap className="w-6 h-6 text-gray-700" />
+                      </span>
+                      {/* Badge Tipo */}
+                      <span className="px-3 py-1 rounded-full text-xs font-semibold bg-stone-300 text-stone-800">
+                        {typeLabel}
+                      </span>
+                      {/* Badge Nivel */}
+                      {levelLabel && <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-900 ring-1 ring-amber-200">
+                          {levelLabel}
+                        </span>}
+                      {/* Badge Año - alineado a la derecha */}
+                      {formacion.year && <span className="ml-auto px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-semibold">
+                          {formacion.year}
+                        </span>}
+                    </div>
+                    {/* Título en línea nueva */}
+                    <div>
+                      <h3 className="text-base md:text-lg font-inter font-semibold text-gray-900 leading-snug">
+                        {formacion.title}
+                      </h3>
+                    </div>
+                  </article>;
+              })}
+            </div>
+
+            <div className="text-center mt-10">
+              <Link to={pathFormacion} className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold transition-all duration-300 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 hover:scale-105 group">
+                Ver toda la formación
+                <ChevronRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
+            </div>
+          </section>
+        </ScrollReveal>
+
         {/* 📣 Producción de contenido digital */}
         <ScrollReveal>
           <section className="py-16 md:py-20 lg:py-24 border-t border-slate-200">
@@ -266,6 +328,8 @@ const InvestigacionPage: React.FC = () => {
             </div>
           </section>
         </ScrollReveal>
+        
+
       </div>
 
       {/* CTA Section - Colaboración */}
