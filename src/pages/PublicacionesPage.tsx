@@ -1,5 +1,6 @@
 // Página de publicaciones científicas y académicas
 import React, { useState, useMemo } from "react";
+import { BookOpen } from "lucide-react";
 import { publicaciones } from "@/data/publicaciones";
 import type { Publicacion } from "@/types/investigacion";
 import { usePageReady } from "@/hooks/usePageReady";
@@ -92,6 +93,7 @@ const PublicacionesPage: React.FC = () => {
       <SmallHero
         title="Publicaciones Científicas y Académicas"
         subtitle="Producción intelectual del Grupo FyT en revistas indexadas, libros y espacios editoriales científicos."
+        icon={BookOpen}
       />
 
       {/* Navigation */}

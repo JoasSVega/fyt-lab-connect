@@ -1,5 +1,6 @@
 // Página de eventos académicos y cursos
 import React, { useState, useMemo } from "react";
+import { Users } from "lucide-react";
 import { eventos } from "@/data/eventos";
 import type { Evento } from "@/types/investigacion";
 import { usePageReady } from "@/hooks/usePageReady";
@@ -102,6 +103,7 @@ const EventosPage: React.FC = () => {
       <SmallHero
         title="Eventos Académicos y Cursos"
         subtitle="Participación del Grupo FyT en congresos, simposios, jornadas científicas y programas de formación."
+        icon={Users}
       />
 
       <ResearchSubNav />

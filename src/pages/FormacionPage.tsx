@@ -1,5 +1,6 @@
 // Página de Formación y Actividades Docentes
 import React from "react";
+import { GraduationCap } from "lucide-react";
 import { cursos, tutorias } from "@/data/formacion";
 import { usePageReady } from "@/hooks/usePageReady";
 import SmallHero from "@/components/shared/SmallHero";
@@ -37,6 +38,7 @@ const FormacionPage: React.FC = () => {
       <SmallHero
         title="Formación y Actividades Docentes"
         subtitle="Procesos de acompañamiento académico, tutorías, direcciones de tesis y programas de formación continua del Grupo FyT."
+        icon={GraduationCap}
       />
 
       <ResearchSubNav />

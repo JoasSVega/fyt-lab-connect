@@ -60,7 +60,7 @@ const ResearchSubNav: React.FC<ResearchSubNavProps> = ({ className = "" }) => {
                   flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium 
                   whitespace-nowrap transition-all duration-200
                   ${isActive 
-                    ? "bg-primary text-primary-foreground shadow-sm" 
+                    ? "bg-slate-600 text-white shadow-sm" 
                     : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
                   }
                 `}

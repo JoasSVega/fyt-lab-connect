@@ -1,5 +1,6 @@
 // Página de listado completo de proyectos de investigación
 import React, { useState, useMemo } from "react";
+import { Microscope } from "lucide-react";
 import { proyectos } from "@/data/proyectos";
 import type { Proyecto } from "@/types/investigacion";
 import { usePageReady } from "@/hooks/usePageReady";
@@ -96,6 +97,7 @@ const ProyectosPage: React.FC = () => {
       <SmallHero
         title="Proyectos de Investigación"
         subtitle="Evidencia científica generada por el Grupo FyT a través de iniciativas en farmacología, terapéutica, farmacia asistencial y modelización molecular."
+        icon={Microscope}
       />
 
       <ResearchSubNav />

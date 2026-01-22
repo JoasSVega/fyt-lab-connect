@@ -1,5 +1,6 @@
 // Página de Contenido Digital - Producción audiovisual y sonora
 import React, { useMemo } from "react";
+import { Video } from "lucide-react";
 import { divulgacionCientifica } from "@/data/contenidosDigitales";
 import type { DivulgacionCientifica as DivulgacionCientificaType } from "@/types/investigacion";
 import { usePageReady } from "@/hooks/usePageReady";
@@ -58,6 +59,7 @@ const DivulgacionCientificaPage: React.FC = () => {
       <SmallHero
         title="Contenido Digital"
         subtitle="Contenido audiovisual sobre investigación en ciencias farmacéuticas: videos, podcasts y más."
+        icon={Video}
       />
 
       <ResearchSubNav />

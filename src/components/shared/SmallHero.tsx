@@ -1,13 +1,15 @@
 import React from "react";
+import { LucideIcon } from "lucide-react";
 
 interface SmallHeroProps {
   title: string;
   subtitle: string;
+  icon: LucideIcon;
 }
 
-const SmallHero: React.FC<SmallHeroProps> = ({ title, subtitle }) => {
+const SmallHero: React.FC<SmallHeroProps> = ({ title, subtitle, icon: Icon }) => {
   return (
-    <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 pt-20 pb-16 md:pt-24 md:pb-20 lg:pt-28 lg:pb-24">
+    <section className="relative bg-gradient-to-br from-slate-800 via-slate-700 to-slate-800 pt-20 pb-16 md:pt-24 md:pb-20 lg:pt-28 lg:pb-24">
       {/* Subtle pattern overlay */}
       <div className="absolute inset-0 opacity-5">
         <div
@@ -20,6 +22,11 @@ const SmallHero: React.FC<SmallHeroProps> = ({ title, subtitle }) => {
 
       {/* Content */}
       <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
+        <div className="flex justify-center mb-4">
+          <div className="p-3 bg-slate-600/30 rounded-full">
+            <Icon className="w-8 h-8 text-slate-300" aria-hidden="true" />
+          </div>
+        </div>
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-poppins font-bold text-white mb-4 md:mb-6">
           {title}
         </h1>
