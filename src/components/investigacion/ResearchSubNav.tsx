@@ -9,31 +9,70 @@ import {
   Video 
 } from "lucide-react";
 
+// Paleta de colores específicos para cada categoría de investigación
+const researchColors = {
+  publicaciones: {
+    hex: "#3B82F6",
+    bg: "bg-blue-600",
+    hover: "hover:bg-blue-100",
+    text: "text-blue-600",
+  },
+  proyectos: {
+    hex: "#10B981",
+    bg: "bg-green-600",
+    hover: "hover:bg-green-100",
+    text: "text-green-600",
+  },
+  eventos: {
+    hex: "#9333EA",
+    bg: "bg-purple-600",
+    hover: "hover:bg-purple-100",
+    text: "text-purple-600",
+  },
+  formacion: {
+    hex: "#6B7280",
+    bg: "bg-gray-600",
+    hover: "hover:bg-gray-100",
+    text: "text-gray-600",
+  },
+  contenido: {
+    hex: "#DC2626",
+    bg: "bg-red-600",
+    hover: "hover:bg-red-100",
+    text: "text-red-600",
+  },
+};
+
 const navItems = [
   { 
     path: "/investigacion/publicaciones", 
     label: "Publicaciones", 
-    icon: BookOpen 
+    icon: BookOpen,
+    colorKey: "publicaciones" as const,
   },
   { 
     path: "/investigacion/proyectos", 
     label: "Proyectos", 
-    icon: Microscope 
+    icon: Microscope,
+    colorKey: "proyectos" as const,
   },
   { 
     path: "/investigacion/eventos", 
     label: "Eventos", 
-    icon: Users 
+    icon: Users,
+    colorKey: "eventos" as const,
   },
   { 
     path: "/investigacion/formacion", 
     label: "Formación", 
-    icon: GraduationCap 
+    icon: GraduationCap,
+    colorKey: "formacion" as const,
   },
   { 
     path: "/investigacion/contenido-digital", 
     label: "Contenido Digital", 
-    icon: Video 
+    icon: Video,
+    colorKey: "contenido" as const,
   },
 ];
 
@@ -51,6 +90,7 @@ const ResearchSubNav: React.FC<ResearchSubNavProps> = ({ className = "" }) => {
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = location.pathname === item.path;
+            const colors = researchColors[item.colorKey];
             
             return (
               <NavLink
@@ -60,8 +100,8 @@ const ResearchSubNav: React.FC<ResearchSubNavProps> = ({ className = "" }) => {
                   flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium 
                   whitespace-nowrap transition-all duration-200
                   ${isActive 
-                    ? "bg-slate-600 text-white shadow-sm" 
-                    : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+                    ? `${colors.bg} text-white shadow-sm` 
+                    : `text-slate-600 ${colors.hover} hover:text-slate-900`
                   }
                 `}
               >

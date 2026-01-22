@@ -9,7 +9,7 @@ interface SmallHeroProps {
 
 const SmallHero: React.FC<SmallHeroProps> = ({ title, subtitle, icon: Icon }) => {
   return (
-    <section className="relative bg-gradient-to-br from-slate-800 via-slate-700 to-slate-800 pt-20 pb-16 md:pt-24 md:pb-20 lg:pt-28 lg:pb-24">
+    <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 pt-20 pb-16 md:pt-24 md:pb-20 lg:pt-28 lg:pb-24">
       {/* Subtle pattern overlay */}
       <div className="absolute inset-0 opacity-5">
         <div
