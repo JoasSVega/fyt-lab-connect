@@ -32,7 +32,7 @@ export const EventoItem: React.FC<EventoItemProps> = ({
 
   return (
     <article className="w-full">
-      <div className="flex items-start gap-4 p-4 border border-gray-200 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 hover:scale-105">
+      <div className="flex items-start gap-4 p-4 border border-gray-200 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 hover:scale-[1.02]">
         {/* Bloque de Año (solo año, centrado) */}
         <div className="w-16 min-w-[64px] aspect-square rounded-lg bg-fuchsia-50 text-fuchsia-700 flex items-center justify-center">
           <div className="text-lg md:text-xl font-extrabold leading-tight">

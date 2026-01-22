@@ -32,7 +32,7 @@ export const ContenidoDigitalItem: React.FC<ContenidoDigitalItemProps> = ({
   const isVideo = (tipo || "").toLowerCase().includes("video");
 
   return (
-    <article className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:scale-105">
+    <article className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 hover:scale-[1.02]">
       {/* Thumbnail simulado */}
       <div className={`relative h-40 bg-gradient-to-br ${grad} flex items-center justify-center`}>
         {isVideo ? (
@@ -73,7 +73,7 @@ export const ContenidoDigitalItem: React.FC<ContenidoDigitalItemProps> = ({
               href={enlace}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90"
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 hover:shadow-md transition-all duration-200 hover:scale-[1.02]"
             >
               {isVideo ? "Reproducir" : "Escuchar"}
               <ExternalLink className="w-4 h-4" />

@@ -42,7 +42,7 @@ export const PublicacionItem: React.FC<PublicacionItemProps> = ({
 
   return (
     <article className="w-full px-2 sm:px-3">
-      <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-4 py-4 border-b border-gray-200 hover:bg-gray-50 rounded-md transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
+      <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-4 py-4 border-b border-gray-200 hover:bg-gray-50 rounded-md transition-all duration-300 hover:scale-[1.01] hover:shadow-md">
         {/* Izquierda: Icono del tipo */}
         <div className="flex items-center sm:items-start gap-3 min-w-0">
           <span className="inline-flex items-center justify-center w-6 h-6 min-w-[24px] shrink-0">
@@ -76,7 +76,7 @@ export const PublicacionItem: React.FC<PublicacionItemProps> = ({
               href={targetUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 px-2.5 py-1 border border-gray-300 text-gray-700 rounded-md text-xs hover:bg-gray-100 transition-colors"
+              className="inline-flex items-center gap-1 px-2.5 py-1 border border-gray-300 text-gray-700 rounded-md text-xs hover:bg-gray-100 hover:border-gray-400 hover:shadow-sm transition-all duration-200"
             >
               <ExternalLink className="w-3.5 h-3.5" />
               <span>Ver</span>
