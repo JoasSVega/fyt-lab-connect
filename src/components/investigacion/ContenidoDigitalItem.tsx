@@ -46,7 +46,7 @@ export const ContenidoDigitalItem: React.FC<ContenidoDigitalItemProps> = ({
   const isVideo = (tipo || "").toLowerCase().includes("video");
 
   return (
-    <article className="relative bg-white border border-slate-700 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 hover:scale-[1.02]">
+    <article className="relative bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 hover:scale-[1.01] will-change-transform">
       {/* Top color stripe (only top, subtle) */}
       <div className={`absolute top-0 left-0 right-0 h-1.5 ${colors.stripe}`} />
 

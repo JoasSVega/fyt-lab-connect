@@ -34,7 +34,7 @@ export const ProyectoItem: React.FC<ProyectoItemProps> = ({
   const isFinished = estado.toLowerCase().includes("finalizado") || estado.toLowerCase().includes("concluido");
 
   return (
-    <article className="bg-white border border-gray-200 rounded-xl p-4 md:p-6 shadow-sm hover:shadow-md transition-all duration-300">
+    <article className="bg-white border border-gray-200 rounded-xl p-4 md:p-5 shadow-sm hover:shadow-md hover:scale-[1.02] transition-transform duration-300 will-change-transform">
       {/* Header */}
       <div className="flex items-center justify-between mb-3">
         <span className={`px-3 py-1 rounded-full text-xs font-semibold ring-1 ${

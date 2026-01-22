@@ -42,7 +42,7 @@ export const PublicacionItem: React.FC<PublicacionItemProps> = ({
 
   return (
     <article className="w-full px-2 sm:px-3">
-      <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-4 py-4 border-b border-gray-200 hover:bg-gray-50 rounded-md transition-colors">
+      <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-4 py-4 border-b border-gray-200 hover:bg-gray-50 rounded-md transition-all duration-200 hover:shadow-sm hover:scale-[1.01] will-change-transform">
         {/* Izquierda: Icono del tipo */}
         <div className="flex items-center sm:items-start gap-3 min-w-0">
           <span className="inline-flex items-center justify-center w-6 h-6 min-w-[24px] shrink-0">
