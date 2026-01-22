@@ -32,7 +32,7 @@ export const ContenidoDigitalItem: React.FC<ContenidoDigitalItemProps> = ({
   const isVideo = (tipo || "").toLowerCase().includes("video");
 
   return (
-    <article className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+    <article className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:scale-105">
       {/* Thumbnail simulado */}
       <div className={`relative h-40 bg-gradient-to-br ${grad} flex items-center justify-center`}>
         {isVideo ? (

@@ -45,7 +45,7 @@ const CursoItem: React.FC<CursoItemProps> = ({
   };
 
   return (
-    <article className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300 border border-slate-100">
+    <article className="bg-white rounded-xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 hover:scale-105">
       {/* Header con tipo y fecha */}
       <div className="flex flex-wrap items-center gap-3 mb-4">
         {tipo && (
