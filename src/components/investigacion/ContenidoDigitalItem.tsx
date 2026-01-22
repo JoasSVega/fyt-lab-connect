@@ -51,15 +51,19 @@ export const ContenidoDigitalItem: React.FC<ContenidoDigitalItemProps> = ({
       <div className={`absolute top-0 left-0 right-0 h-1.5 ${colors.stripe}`} />
 
       {/* Body */}
-      <div className="p-3">
-        <h3 className="text-sm md:text-base font-semibold text-gray-900 leading-snug break-words whitespace-normal">
+      <div className="p-3 space-y-3">
+        <h3 className="text-base md:text-lg font-semibold text-gray-900 leading-tight break-words whitespace-normal">
           {titulo}
         </h3>
-        {fecha && <div className="mt-1 text-xs text-gray-500">{fecha}</div>}
+        {fecha && (
+          <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-gray-100 text-gray-700 text-xs font-medium">
+            {fecha}
+          </span>
+        )}
 
         {/* Tags */}
         {Array.isArray(tags) && tags.length > 0 && (
-          <div className="mt-3 flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2">
             {tags.filter(Boolean).map((t) => (
               <span
                 key={t}
@@ -72,7 +76,7 @@ export const ContenidoDigitalItem: React.FC<ContenidoDigitalItemProps> = ({
         )}
 
         {/* Footer: button left, icon right */}
-        <div className="mt-4 flex items-center justify-between">
+        <div className="flex items-center justify-between">
           {enlace ? (
             <a
               href={enlace}
