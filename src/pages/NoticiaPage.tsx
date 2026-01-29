@@ -6,6 +6,53 @@ import NoticiaClosing from "@/components/noticias/NoticiaClosing";
 import { usePageReady } from "@/hooks/usePageReady";
 import Seo from "@/components/Seo";
 import FloatingContact from "@/components/FloatingContact";
+import type { Noticia } from "@/types/noticias";
+
+/**
+ * Mapeo de categorías a variables CSS (colores primarios y secundarios)
+ * Similar a divulgación pero con paleta institucional de noticias
+ */
+const getCategoryColorVars = (category: Noticia["category"]): Record<string, string> => {
+  const colorMap: Record<Noticia["category"], Record<string, string>> = {
+    "Colaboración": {
+      "--accent-primary": "#1565C0",
+      "--accent-secondary": "#E3F2FD",
+      "--accent-light": "#BBDEFB"
+    },
+    "Evento": {
+      "--accent-primary": "#00897B",
+      "--accent-secondary": "#E0F2F1",
+      "--accent-light": "#B2DFDB"
+    },
+    "Publicación": {
+      "--accent-primary": "#673AB7",
+      "--accent-secondary": "#EDE7F6",
+      "--accent-light": "#CE93D8"
+    },
+    "Lanzamiento": {
+      "--accent-primary": "#F57C00",
+      "--accent-secondary": "#FFF3E0",
+      "--accent-light": "#FFB74D"
+    },
+    "Participación": {
+      "--accent-primary": "#388E3C",
+      "--accent-secondary": "#E8F5E9",
+      "--accent-light": "#81C784"
+    },
+    "Reconocimiento": {
+      "--accent-primary": "#F9A825",
+      "--accent-secondary": "#FFF8E1",
+      "--accent-light": "#FFD54F"
+    },
+    "Comunicado": {
+      "--accent-primary": "#455A64",
+      "--accent-secondary": "#ECEFF1",
+      "--accent-light": "#90A4AE"
+    }
+  };
+
+  return colorMap[category] || colorMap["Comunicado"];
+};
 
 /**
  * Página individual de noticia institucional
@@ -14,7 +61,7 @@ import FloatingContact from "@/components/FloatingContact";
  * 1. SEO y metadatos
  * 2. Hero con categoría, fecha, título, subtítulo
  * 3. Espacio para imagen principal
- * 4. Contenido redactado en HTML
+ * 4. Contenido redactado en HTML (con colores dinámicos)
  * 5. Bloque de cierre institucional
  * 6. Navegación
  */
@@ -42,8 +89,11 @@ const NoticiaPage: React.FC = () => {
   const publishedDate = new Date(noticia.date).toISOString();
   const modifiedDate = new Date(noticia.date).toISOString();
 
+  // Obtener variables de color para la categoría
+  const colorVars = getCategoryColorVars(noticia.category);
+
   return (
-    <div className="w-full bg-background flex flex-col">
+    <div className="w-full bg-background flex flex-col noticia-page" style={colorVars as React.CSSProperties}>
       <Seo
         title={`${noticia.title} | Noticias FyT`}
         description={noticia.summary}
@@ -88,11 +138,10 @@ const NoticiaPage: React.FC = () => {
       <NoticiaHero noticia={noticia} />
 
       {/* Contenido principal */}
-      <article className="w-full bg-white">
+      <article className="w-full bg-white noticia-page__content">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-12 py-12 sm:py-16 lg:py-20">
-          {/* Contenido HTML renderizado */}
+          {/* Contenido HTML renderizado con estilos dinámicos */}
           <div
-            className="prose prose-sm sm:prose md:prose-lg max-w-none text-slate-700 font-inter"
             dangerouslySetInnerHTML={{ __html: noticia.content }}
           />
         </div>
