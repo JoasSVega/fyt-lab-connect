@@ -135,7 +135,7 @@ const SmartImage: React.FC<SmartImageProps> = ({
   ...rest
 }) => {
   // Limpiar basePath de posibles sufijos existentes
-  const cleanBasePath = basePath.replace(/-(small|medium|large)\.webp$/i, '');
+  const cleanBasePath = basePath.replace(/(?:-(small|medium|large))?\.webp$/i, '');
   
   // REGLA DE ORO: srcSet NUNCA incluye -large.webp
   // Solo small (500w) y medium (1000w) para forzar descargas ligeras en móvil

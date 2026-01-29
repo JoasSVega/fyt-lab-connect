@@ -69,7 +69,7 @@ const DivulgacionHero: React.FC<DivulgacionHeroProps> = ({
             basePath={authorImage.replace(/\.webp$/i, "")}
             usage="avatar"
             alt={author}
-            className="w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-full object-cover ring-4 ring-white shadow-xl"
+            className="w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-full object-cover object-[center_20%] ring-4 ring-white shadow-xl"
           />
         </div>
 

@@ -24,12 +24,21 @@ const DivulgacionPostPage: React.FC = () => {
     return getPostBySlug(slug);
   }, [slug]);
 
-  // Obtener posts relacionados (otros 2 posts)
+  // Obtener posts relacionados (máximo 3, misma categoría o autor, aleatorizados)
   const relatedPosts = useMemo(() => {
-    return divulgacionPosts
-      .filter(p => p.slug !== slug)
-      .slice(0, 2);
-  }, [slug]);
+    if (!post) return [];
+    
+    // Filtrar posts de la misma categoría o mismo autor
+    const filtered = divulgacionPosts.filter(p => 
+      p.slug !== slug && (p.category === post.category || p.author === post.author)
+    );
+    
+    // Aleatorizar
+    const shuffled = [...filtered].sort(() => Math.random() - 0.5);
+    
+    // Tomar máximo 3
+    return shuffled.slice(0, 3);
+  }, [slug, post]);
 
   // Si no existe el post, redirigir a 404
   if (!post) {
@@ -187,7 +196,7 @@ const DivulgacionPostPage: React.FC = () => {
       </div>
 
       {/* Artículo principal con estructura semántica */}
-      <article className="bg-white">
+      <article className="bg-white" data-category={post.category}>
         {/* Header del artículo */}
         <header className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-12 py-8 sm:py-12 lg:py-16">
           {/* Breadcrumbs y categoría */}
@@ -373,7 +382,11 @@ const DivulgacionPostPage: React.FC = () => {
                     {post.authorRole}
                   </p>
                 )}
-                <p className="text-gray-700 text-sm leading-relaxed">Antistio Alviz es el Director del grupo FyT. Cuenta con formación como Químico Farmacéutico, MSc. en Farmacología y PhD. en Ciencias Biomédicas. Actualmente se desempeña como docente de planta y Director del programa de Química Farmacéutica.</p>
+                {post.authorBio && (
+                  <p className="text-gray-700 text-sm leading-relaxed">
+                    {post.authorBio}
+                  </p>
+                )}
               </div>
             </div>
           </div>
@@ -427,41 +440,6 @@ const DivulgacionPostPage: React.FC = () => {
         </div>
       </section>
 
-      {/* CTA institucional */}
-      <section className="border-t-2 border-gray-200 bg-gradient-to-b from-white to-gray-50">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-12 py-16 sm:py-20 text-center">
-          <h2 className="font-poppins font-bold text-2xl sm:text-3xl lg:text-4xl text-gray-900 mb-4 break-words px-2">
-            ¿Interesado en colaborar?
-          </h2>
-          <p className="font-inter text-sm sm:text-base lg:text-lg text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed break-words px-2">
-            Si este tema te interesa o deseas proponer una colaboración académica con nuestro grupo de investigación, 
-            estaremos encantados de establecer un diálogo.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center px-2">
-            <Button 
-              asChild 
-              className="text-sm sm:text-base px-6 sm:px-8 font-medium w-full sm:w-auto cta-button cta-secondary"
-              variant="outline"
-              size="lg"
-            >
-              <Link to="/contactos" className="whitespace-nowrap">
-                Ponerse en contacto
-              </Link>
-            </Button>
-            <Button 
-              asChild 
-              className="text-sm sm:text-base px-6 sm:px-8 font-medium w-full sm:w-auto cta-button cta-secondary"
-              variant="outline"
-              size="lg"
-            >
-              <Link to="/investigacion" className="whitespace-nowrap">
-                Ver más investigación
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-
       {/* Artículos relacionados */}
       {relatedPosts.length > 0 && (
         <section className="border-t-2 border-gray-200 bg-white">
@@ -473,14 +451,14 @@ const DivulgacionPostPage: React.FC = () => {
             <p className="text-gray-600 text-sm sm:text-base mb-10 max-w-2xl break-words">
               Continúa explorando nuestras publicaciones científicas
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-12">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
               {relatedPosts.map(relatedPost => (
                 <DivulgacionCard key={relatedPost.slug} post={relatedPost} />
               ))}
             </div>
             <div className="text-center">
-              <Button asChild variant="outline" size="lg" className="border-2 font-medium text-sm sm:text-base w-full sm:w-auto">
-                <Link to="/divulgacion" className="flex items-center justify-center gap-2">
+              <Button asChild size="lg" className="gap-2 cta-button cta-primary w-full sm:w-auto">
+                <Link to="/divulgacion" className="flex items-center justify-center">
                   <span>Ver todos los artículos</span>
                   <ArrowRight className="w-4 h-4 flex-shrink-0" />
                 </Link>

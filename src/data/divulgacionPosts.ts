@@ -15,13 +15,14 @@ import type { DivulgacionPost } from "@/types/divulgacion";
 export const divulgacionPosts: DivulgacionPost[] = [
   {
     slug: "codigos-cups-atencion-farmaceutica-colombia",
-    title: "Códigos CUPS y Atención Farmacéutica: El paso clave para la visibilidad del Químico Farmacéutico en Colombia",
-    excerpt: "Análisis sobre la necesidad de actualizar los códigos CUPS en Colombia para reconocer el rol clínico del Químico Farmacéutico, garantizar la seguridad del paciente y optimizar recursos.",
+    title: "Códigos CUPS: Visibilidad del Químico Farmacéutico en el Sistema de Salud Colombiano",
+    excerpt: "La actualización de los códigos CUPS es clave para reconocer el rol clínico del Químico Farmacéutico y garantizar la seguridad del paciente en Colombia.",
     author: "Antistio Alviz Amador",
     authorRole: "Q.F., MSc, PhD",
     authorImage: "/images/equipo/Antistio-Alviz-large.webp",
+    authorBio: "Químico Farmacéutico, Magíster en Farmacología y Doctor en Ciencias Biomédicas. Director del Grupo de Investigación Farmacia y Terapéutica (FyT) y del programa de Química Farmacéutica de la Universidad de Cartagena.",
     date: "2026-01-06",
-    readTime: "7 min",
+    readTime: "3 min",
     category: "Asuntos Regulatorios",
     tags: ["Codificación en Salud", "CUPS", "Interoperabilidad", "Rol Farmacéutico", "Seguridad del Paciente"],
     content: `
@@ -65,6 +66,97 @@ export const divulgacionPosts: DivulgacionPost[] = [
   <h3>Referencias y Lecturas Recomendadas</h3>
   <ol>
     <li>Ministerio de Salud y Protección Social. Resolución 4678 de 2015: Por la cual se adopta la Clasificación Única de Procedimientos en Salud - CUPS.</li>
+  </ol>
+</div>
+    `
+  },
+  {
+    slug: "innovacion-eeirf-metodo-deti-seguridad-paciente",
+    title: "Prevención y Priorización Clínica: La EEIRF como herramienta de Atención Farmacéutica",
+    excerpt: "Análisis divulgativo de la EEIRF y el Método DETI como herramientas clínicas para priorizar intervenciones farmacéuticas y proteger la seguridad del paciente.",
+    author: "Manuel de los Santos Ávila Padilla",
+    authorRole: "Q.F., MSc",
+    authorImage: "/images/equipo/manuel-avila-large.webp",
+    authorBio: "Químico Farmacéutico y Magíster en Farmacia Asistencial. Autor del Método DETI y la Escala EEIRF. Docente de la Maestría en Farmacia Asistencial y Director del Diplomado en Evaluación de Riesgo Farmacológico de la Universidad de Cartagena.",
+    date: "2026-01-29",
+    readTime: "3 min",
+    category: "Farmacia Clínica",
+    tags: [
+      "Farmacia Clínica",
+      "Seguridad del Paciente",
+      "Atención Farmacéutica",
+      "Método DETI",
+      "EEIRF"
+    ],
+    content: `
+<p class="lead">
+En los sistemas de salud contemporáneos, la seguridad del paciente ya no puede depender exclusivamente de la reacción ante eventos adversos. La creciente complejidad de los tratamientos farmacológicos exige modelos estructurados de prevención, priorización y gestión del riesgo desde la práctica clínica.
+</p>
+
+<h2>¿Por qué evaluar el riesgo farmacológico de forma estructurada?</h2>
+
+<p>
+La práctica clínica reconoce que el <strong>Químico Farmacéutico</strong> interviene en escenarios donde el <strong>riesgo farmacológico</strong> no es homogéneo, y por ello necesita criterios objetivos para la <strong>priorización clínica</strong> de pacientes. Evaluar de forma estructurada permite ordenar la intervención, disminuir la variabilidad del juicio individual y alinear el seguimiento con la gravedad potencial de cada caso.
+</p>
+
+<h2>El Método DETI: del criterio individual al algoritmo clínico</h2>
+
+<p>
+La EEIRF se apoya en el Método DETI de Atención Farmacéutica, que transforma la experiencia clínica en un modelo replicable y trazable para la toma de decisiones en contextos asistenciales reales.
+</p>
+
+<ul class="clinical-checklist">
+  <li>Integrar información clínica del paciente.</li>
+  <li>Analizar la farmacoterapia activa.</li>
+  <li>Incorporar variables sociodemográficas y asistenciales.</li>
+</ul>
+
+<blockquote class="highlight-quote">
+“La atención farmacéutica no es un proceso de soporte logístico, sino un acto clínico autónomo orientado a la seguridad del paciente.”
+</blockquote>
+
+<h2>Construcción y validación: rigor que respalda la práctica clínica</h2>
+
+<p>
+La construcción de la EEIRF se sustentó en metodología de validación científica para asegurar consistencia, claridad y utilidad clínica en escenarios reales de atención farmacéutica.
+</p>
+
+<ul class="clinical-checklist">
+  <li><strong>Validez de contenido</strong> respaldada por acuerdo experto y relevancia temática.</li>
+  <li><strong>Concordancia entre jueces</strong> con niveles de consistencia que soportan decisiones clínicas reproducibles.</li>
+  <li><strong>Consistencia interna</strong> adecuada para un instrumento multidimensional orientado a la práctica.</li>
+</ul>
+
+<h2>¿Qué diferencia a la EEIRF de otras herramientas clínicas?</h2>
+
+<p>
+Mientras los criterios STOPP/START se enfocan en prescripción potencialmente inapropiada, la EEIRF integra una visión más amplia del riesgo, incluyendo la complejidad terapéutica y la dinámica del sistema asistencial.
+</p>
+
+<p>
+Además, herramientas como la carga anticolinérgica, PHARAO, Janusmed e IMPACT aportan métricas específicas, pero no consolidan en un solo instrumento la priorización integral que requiere la práctica farmacéutica clínica.
+</p>
+
+<ul class="clinical-checklist">
+  <li>Manejo de enfermedades huérfanas.</li>
+  <li>Atención pediátrica especializada.</li>
+  <li>Control de la polifarmacia en adultos mayores.</li>
+</ul>
+
+<h2>Una reflexión final</h2>
+
+<p>
+La innovación clínica también implica ordenar la práctica, medir el riesgo y actuar con oportunidad. EEIRF y el Método DETI muestran que la priorización basada en evidencia es una responsabilidad ética y sanitaria.
+</p>
+
+<div class="references-section">
+  <h3>Referencias y lecturas recomendadas</h3>
+  <ol>
+    <li>Ospina AS, Benjumea DM, Amariles PM. Rev Fac Nac Salud Pública. 2011.</li>
+    <li>Organización Panamericana de la Salud. Servicios farmacéuticos basados en APS. 2013.</li>
+    <li>American College of Clinical Pharmacy. Definition of Clinical Pharmacy. 2008.</li>
+    <li>Avila Padilla M. Método DETI de Atención Farmacéutica. 2022.</li>
+    <li>Menezes MS et al. Exploratory Research in Clinical and Social Pharmacy. 2024.</li>
   </ol>
 </div>
     `
@@ -226,6 +318,102 @@ La IA no reemplaza al científico, sino que potencia su capacidad para innovar. 
     `
   }
   */
+  {
+    slug: "eeirf-metodo-deti-seguridad-paciente",
+    title: "Desarrollo y Validación de la EEIRF: Gestión del Riesgo Farmacológico basada en Evidencia",
+    excerpt: "La EEIRF y el Método DETI transforman la práctica farmacéutica en decisiones estructuradas basadas en evidencia para la seguridad del paciente.",
+    author: "Manuel de los Santos Ávila Padilla",
+    authorRole: "Q.F., MSc",
+    authorImage: "/images/equipo/manuel-avila-large.webp",
+    authorBio: "Químico Farmacéutico y Magíster en Farmacia Asistencial. Autor del Método DETI y la Escala EEIRF. Docente de la Maestría en Farmacia Asistencial y Director del Diplomado en Evaluación de Riesgo Farmacológico de la Universidad de Cartagena.",
+    date: "2026-01-29",
+    readTime: "5 min",
+    category: "Farmacia Clínica",
+    tags: ["Seguridad del Paciente", "Atención Farmacéutica", "Seguimiento Farmacoterapéutico", "Método DETI", "EEIRF"],
+    content: `
+<p class="lead">En el escenario actual de la atención sanitaria, el Químico Farmacéutico no solo gestiona medicamentos: gestiona riesgos clínicos. La seguridad del paciente depende, en gran medida, de identificar de forma oportuna quién necesita una intervención farmacéutica prioritaria y por qué.</p>
+
+<h2>El desafío actual: priorizar con criterio clínico y datos</h2>
+
+<p>La práctica farmacéutica contemporánea enfrenta una presión creciente: polifarmacia, pacientes con múltiples comorbilidades, atención domiciliaria y limitación de recursos humanos.</p>
+
+<p>Tradicionalmente, la priorización de pacientes ha dependido del "ojo clínico" o de criterios aislados. Si bien la experiencia profesional es valiosa, la complejidad del riesgo farmacológico exige modelos más estructurados y reproducibles.</p>
+
+<p>Aquí es donde la <strong>Escala de Evaluación Individual de Riesgo Farmacológico (EEIRF)</strong> aporta valor diferencial.</p>
+
+<h2>El Método DETI: fundamento conceptual y operativo</h2>
+
+<p>La EEIRF se fundamenta en el <strong>Método DETI de Atención Farmacéutica</strong>, desarrollado por el Químico Farmacéutico Manuel de los Santos Ávila Padilla, MSc.</p>
+
+<p>Este método propone una estructura clara para el seguimiento farmacoterapéutico, permitiendo al profesional:</p>
+
+<ul class="clinical-checklist">
+  <li><strong>Identificar riesgos</strong> asociados a la medicación de forma sistemática.</li>
+  <li><strong>Priorizar pacientes</strong> de forma objetiva y basada en evidencia.</li>
+  <li><strong>Optimizar el tiempo</strong> de intervención clínica en entornos de alta demanda.</li>
+</ul>
+
+<p>Bajo esta lógica, el Método DETI establece el marco conceptual, mientras que la EEIRF actúa como su herramienta operativa de estratificación del riesgo.</p>
+
+<h2>De la intuición clínica a la evidencia científica</h2>
+
+<p>La EEIRF fue diseñada para abordar el riesgo farmacológico como un fenómeno multidimensional. Integra en un solo instrumento variables:</p>
+
+<ul class="clinical-checklist">
+  <li><strong>Sociodemográficas:</strong> Edad, condiciones de vida, soporte familiar.</li>
+  <li><strong>Clínicas:</strong> Comorbilidades, estado funcional, polifarmacia.</li>
+  <li><strong>De utilización de servicios:</strong> Hospitalizaciones previas, uso de urgencias.</li>
+  <li><strong>Relacionadas con la medicación:</strong> Adherencia, eventos adversos previos, interacciones.</li>
+</ul>
+
+<p>Este enfoque permite una evaluación más realista y alineada con la complejidad de los pacientes atendidos en la práctica clínica actual.</p>
+
+<h2>Validación metodológica: respaldo científico</h2>
+
+<p>El desarrollo y la validación de contenido de la EEIRF se realizaron mediante el método Delphi, siguiendo estándares ampliamente aceptados en investigación en salud.</p>
+
+<p>Los resultados confirman su robustez:</p>
+
+<ul class="clinical-checklist">
+  <li><strong>Validez de contenido:</strong> V de Aiken = 0,98, reflejando consenso experto excepcional.</li>
+  <li><strong>Concordancia entre jueces:</strong> W de Kendall = 0,837, indicando acuerdo sólido sobre los factores evaluados.</li>
+  <li><strong>Confiabilidad:</strong> Alfa de Cronbach = 0,702, adecuado para instrumentos multidimensionales de nueva creación.</li>
+</ul>
+
+<p>Estos indicadores respaldan el uso de la EEIRF como herramienta confiable en la práctica farmacéutica clínica.</p>
+
+<blockquote class="highlight-quote">"La validación científica transforma una propuesta teórica en una herramienta clínica confiable. Sin evidencia que respalde su construcción, cualquier instrumento permanece como una idea sin impacto real en la seguridad del paciente."</blockquote>
+
+<h2>Impacto clínico y proyección profesional</h2>
+
+<p>La implementación de la EEIRF permite al Químico Farmacéutico:</p>
+
+<ul class="clinical-checklist">
+  <li><strong>Priorizar pacientes</strong> con mayor riesgo farmacológico de manera objetiva.</li>
+  <li><strong>Optimizar recursos</strong> y tiempo de intervención en entornos de alta demanda.</li>
+  <li><strong>Fortalecer la trazabilidad</strong> de sus decisiones clínicas con respaldo científico.</li>
+  <li><strong>Generar información útil</strong> para investigación y gestión sanitaria.</li>
+</ul>
+
+<p>En un sistema de salud orientado a resultados, este tipo de herramientas fortalecen el rol clínico del farmacéutico y contribuyen directamente a la seguridad del paciente.</p>
+
+<h2>Conclusión</h2>
+
+<p>La Escala de Evaluación Individual de Riesgo Farmacológico, articulada con el Método DETI, representa un avance significativo para la Farmacia Clínica. Más que un instrumento, constituye una estrategia basada en evidencia que permite transformar la experiencia clínica en decisiones estructuradas y medibles.</p>
+
+<p>Invertir en herramientas validadas no es solo una decisión académica: es una responsabilidad profesional orientada a mejorar los resultados en salud.</p>
+
+<div class="references-section">
+  <h3>Referencias y Lecturas Recomendadas</h3>
+  <ol>
+    <li><strong>Ávila Padilla, M.</strong> Método DETI de Atención Farmacéutica. Grupo de Investigación Farmacia y Terapéutica, Universidad de Cartagena. 2025.</li>
+    <li><strong>Aiken, L.R.</strong> Content validity and reliability of single items or questionnaires. Educational and Psychological Measurement. 1980; 40(4): 955-959.</li>
+    <li><strong>Cronbach, L.J.</strong> Coefficient alpha and the internal structure of tests. Psychometrika. 1951; 16(3): 297-334.</li>
+    <li><strong>Ministerio de Salud y Protección Social.</strong> Política Farmacéutica Nacional. Bogotá, Colombia. 2012.</li>
+  </ol>
+</div>
+    `,
+  },
 ];
 
 /**
