@@ -4,7 +4,7 @@ import { divulgacionPosts } from "@/data/divulgacionPosts";
 import DivulgacionCard from "@/components/divulgacion/DivulgacionCard";
 import { usePageReady } from "@/hooks/usePageReady";
 import Seo from "@/components/Seo";
-import { Search, Filter } from "lucide-react";
+import { Search, Filter, ChevronLeft, ChevronRight } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -25,6 +25,8 @@ const DivulgacionPage: React.FC = () => {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [currentPage, setCurrentPage] = useState(1);
+  const POSTS_PER_PAGE = 9;
 
   // Obtener categorías únicas
   const categories = useMemo(() => {
@@ -34,7 +36,13 @@ const DivulgacionPage: React.FC = () => {
 
   // Filtrar publicaciones
   const filteredPosts = useMemo(() => {
-    return divulgacionPosts.filter(post => {
+    // Primero ordenar por fecha (más reciente primero)
+    const sorted = [...divulgacionPosts].sort((a, b) => {
+      return new Date(b.date).getTime() - new Date(a.date).getTime();
+    });
+
+    // Luego filtrar
+    return sorted.filter(post => {
       const matchesSearch = searchQuery.trim() === "" ||
         post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -46,6 +54,17 @@ const DivulgacionPage: React.FC = () => {
       return matchesSearch && matchesCategory;
     });
   }, [searchQuery, selectedCategory]);
+
+  // Resetear página cuando cambian los filtros
+  useMemo(() => {
+    setCurrentPage(1);
+  }, [searchQuery, selectedCategory]);
+
+  // Calcular paginación
+  const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE);
+  const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
+  const endIndex = startIndex + POSTS_PER_PAGE;
+  const paginatedPosts = filteredPosts.slice(startIndex, endIndex);
 
   return (
     <div className="w-full bg-background">
@@ -154,6 +173,7 @@ const DivulgacionPage: React.FC = () => {
             {filteredPosts.length} {filteredPosts.length === 1 ? "artículo" : "artículos"}
             {searchQuery && ` para "${searchQuery}"`}
             {selectedCategory !== "all" && ` en ${selectedCategory}`}
+            {totalPages > 1 && ` • Página ${currentPage} de ${totalPages}`}
           </div>
         </div>
       </section>
@@ -161,11 +181,51 @@ const DivulgacionPage: React.FC = () => {
       {/* Grid de publicaciones */}
       <section className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-12 sm:py-16 lg:py-20">
         {filteredPosts.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredPosts.map((post) => (
-              <DivulgacionCard key={post.slug} post={post} />
-            ))}
-          </div>
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {paginatedPosts.map((post) => (
+                <DivulgacionCard key={post.slug} post={post} />
+              ))}
+            </div>
+
+            {/* Paginación */}
+            {totalPages > 1 && (
+              <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Button
+                  variant="outline"
+                  onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                  disabled={currentPage === 1}
+                  className="gap-2 w-full sm:w-auto"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                  Anterior
+                </Button>
+
+                <div className="flex items-center gap-2">
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                    <Button
+                      key={page}
+                      variant={currentPage === page ? "default" : "outline"}
+                      onClick={() => setCurrentPage(page)}
+                      className={`w-10 h-10 p-0 ${currentPage === page ? 'cta-button cta-primary' : ''}`}
+                    >
+                      {page}
+                    </Button>
+                  ))}
+                </div>
+
+                <Button
+                  variant="outline"
+                  onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                  disabled={currentPage === totalPages}
+                  className="gap-2 w-full sm:w-auto"
+                >
+                  Siguiente
+                  <ChevronRight className="w-4 h-4" />
+                </Button>
+              </div>
+            )}
+          </>
         ) : (
           <div className="text-center py-20">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 mb-4">
