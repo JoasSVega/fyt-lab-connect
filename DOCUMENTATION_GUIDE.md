@@ -1,6 +1,6 @@
 # 📚 Guía Rápida de Documentación
 
-**Última actualización**: 7 de enero de 2026
+**Última actualización**: 29 de enero de 2026
 
 ---
 
@@ -8,7 +8,7 @@
 
 - ¿Eres **nuevo en el proyecto**? → Leer [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md)
 - ¿Quieres entender la **arquitectura**? → Leer [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
-- ¿Necesitas una **referencia rápida**? → Ir a [docs/index.md](docs/index.md)
+- ¿Necesitas una **referencia rápida**? → Ir a [docs/index.md](docs/index.md) (Índice maestro)
 
 ---
 
@@ -37,25 +37,38 @@ SESION_RESUMEN_2026_01_07.md  ← Resumen de sesión actual
 
 ### Guías Prácticas (`/docs/guides/`)
 ```
-COMPATIBILIDAD_NAVEGADORES.md     ← Safari, Chrome, Firefox
-MEJORA_TIPOGRAFIA_PREMIUM.md      ← Diseño editorial premium
-PORTAL_ACADEMICO_GUIDE.md         ← Implementación portal académico
-PORTAL_ACADEMICO_RESUMEN.md       ← Resumen portal académico
-SEO_ARCHITECTURE.md               ← Arquitectura SEO
-SEO_IMPLEMENTATION_SUMMARY.md     ← Implementación SEO
-SEO_QUICK_REFERENCE.md            ← Referencia rápida SEO
-LOADER_SYSTEM_DOCS.md             ← Sistema de loaders
-SMART_IMAGE_REFACTOR_GUIDE.md     ← Refactorización de imágenes
-TEST_SEO_CHECKLIST.md             ← Checklist de pruebas
-PR_CALCULATORS_UI.md              ← UI de calculadores
+COMPATIBILIDAD_NAVEGADORES.md           ← Safari, Chrome, Firefox
+DIVULGACION_FORMAT_GUIDE.md             ← Formato de divulgación científica
+INDEXATION_FIX_SUMMARY.md               ← Resumen de fix de indexación
+MEJORA_TIPOGRAFIA_PREMIUM.md            ← Diseño editorial premium
+PORTAL_ACADEMICO_GUIDE.md               ← Implementación portal académico
+PORTAL_ACADEMICO_RESUMEN.md             ← Resumen portal académico
+LOADER_SYSTEM_DOCS.md                   ← Sistema de loaders
+SMART_IMAGE_REFACTOR_GUIDE.md           ← Refactorización de imágenes
+TEST_SEO_CHECKLIST.md                   ← Checklist de pruebas
+PR_CALCULATORS_UI.md                    ← UI de calculadores
+VALIDATION_CHECKLIST.md                 ← Checklist de validación
+SEO_ARCHITECTURE.md                     ← Arquitectura SEO
+SEO_IMPLEMENTATION_SUMMARY.md           ← Implementación SEO
+SEO_QUICK_REFERENCE.md                  ← Referencia rápida SEO
+SEO_SOLUTION_QUICK_START.md             ← Solución SEO (resumen 2 min)
+SEO_SOLUTION_COMPLETE.md                ← Solución SEO (guía completa)
+SEO_SOLUTION_ANALYSIS.md                ← Solución SEO (análisis técnico)
+SEO_GOOGLE_SEARCH_CONSOLE.md            ← Solución SEO (Google Search Console)
+SEO_TECHNICAL_CHECKLIST.md              ← Solución SEO (checklist técnico)
+SEO_GITHUB_PAGES_SETUP.md               ← Solución SEO (hosting setup)
 ```
 
 ### Reportes y Auditorías (`/docs/reports/`)
 ```
-SEO_AUDIT_2026.md                 ← Auditoría SEO completa
-SECURITY_AUDIT_2026_01_06.md      ← Auditoría de seguridad
-RELEASE_REPORT_2026_01_06.md      ← Release del 6 de enero
-... (más de 20 reportes de optimización)
+SEO_AUDIT_2026.md                       ← Auditoría SEO completa
+SECURITY_AUDIT_2026-01-06.md            ← Auditoría de seguridad
+RELEASE_REPORT_2026-01-06.md            ← Release del 6 de enero
+GOOGLE_INDEXATION_VERIFICATION.md       ← Verificación de indexación en Google
+REORGANIZACION_COMPLETADA.md            ← Reporte de reorganización SEO
+RESUMEN_EJECUTIVO.md                    ← Resumen ejecutivo del proyecto
+RESUMEN_REORGANIZACION_MARKDOWN.md      ← Resumen de reorganización markdown
+... (más de 15 reportes de optimización)
 ```
 
 ### Componentes (`/docs/components/`)
@@ -76,6 +89,13 @@ PUBLICACIONES_REFACTORED.md   ← Ejemplo de refactorización
 - Referencia rápida: [SEO_QUICK_REFERENCE.md](docs/guides/SEO_QUICK_REFERENCE.md)
 - Arquitectura: [SEO_ARCHITECTURE.md](docs/guides/SEO_ARCHITECTURE.md)
 - Auditoría completa: [SEO_AUDIT_2026.md](docs/reports/SEO_AUDIT_2026.md)
+- **Solución de Indexación (NUEVO)**
+  - Resumen rápido: [SEO_SOLUTION_QUICK_START.md](docs/guides/SEO_SOLUTION_QUICK_START.md)
+  - Guía completa: [SEO_SOLUTION_COMPLETE.md](docs/guides/SEO_SOLUTION_COMPLETE.md)
+  - Análisis técnico: [SEO_SOLUTION_ANALYSIS.md](docs/guides/SEO_SOLUTION_ANALYSIS.md)
+  - Google Search Console: [SEO_GOOGLE_SEARCH_CONSOLE.md](docs/guides/SEO_GOOGLE_SEARCH_CONSOLE.md)
+  - Checklist técnico: [SEO_TECHNICAL_CHECKLIST.md](docs/guides/SEO_TECHNICAL_CHECKLIST.md)
+  - Setup GitHub Pages: [SEO_GITHUB_PAGES_SETUP.md](docs/guides/SEO_GITHUB_PAGES_SETUP.md)
 
 **Imágenes**
 - Sistema general: [IMAGES.md](docs/IMAGES.md)
@@ -105,7 +125,6 @@ PUBLICACIONES_REFACTORED.md   ← Ejemplo de refactorización
 ## 📖 Índices Completos
 
 - **Índice maestro**: [docs/index.md](docs/index.md) ⭐ **EMPEZAR AQUÍ**
-- **Resumen de reorganización**: [docs/RESUMEN_REORGANIZACION_MARKDOWN.md](docs/RESUMEN_REORGANIZACION_MARKDOWN.md)
 - **Auditoría markdown**: [docs/reports/AUDIT_MARKDOWN_FILES.md](docs/reports/AUDIT_MARKDOWN_FILES.md)
 
 ---
@@ -123,6 +142,15 @@ Todos nuestros archivos markdown siguen estos estándares:
 
 ## 🔄 Últimos Cambios
 
+**29 de enero de 2026**: Reorganización completa de documentación SEO y repositorio
+- Movidos 8 archivos de la raíz a sus ubicaciones correctas (/guides/, /reports/)
+- Integrados 6 nuevos documentos SEO a /guides/
+- Eliminada carpeta /SEO/ redundante y consolidado contenido
+- Actualizado DOCUMENTATION_GUIDE.md con nueva estructura
+- Limpieza de duplicados y referencias incorrectas
+
+Ver: [DOCUMENTATION_GUIDE.md](DOCUMENTATION_GUIDE.md) (este archivo)
+
 **7 de enero de 2026**: Auditoría exhaustiva y reorganización de archivos markdown
 - Reorganizados 50 archivos `.md`
 - Movidos 14 archivos a ubicaciones apropiadas
@@ -130,7 +158,7 @@ Todos nuestros archivos markdown siguen estos estándares:
 - Índice maestro actualizado
 - Documentación de auditoría generada
 
-Ver: [RESUMEN_REORGANIZACION_MARKDOWN.md](docs/RESUMEN_REORGANIZACION_MARKDOWN.md)
+Ver: [RESUMEN_REORGANIZACION_MARKDOWN.md](docs/reports/RESUMEN_REORGANIZACION_MARKDOWN.md)
 
 ---
 

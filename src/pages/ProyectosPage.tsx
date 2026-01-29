@@ -44,9 +44,9 @@ const ProyectosPage: React.FC = () => {
     []
   );
 
-  // Filter projects
+  // Filter projects + ordenamiento (reciente a antiguo)
   const filteredProjects = useMemo(() => {
-    return proyectos.filter((p: Proyecto) => {
+    const filtered = proyectos.filter((p: Proyecto) => {
       const matchesSearch = searchQuery.trim() === "" ||
         [p.titulo, p.descripcion, p.institucion]
           .filter(Boolean)
@@ -58,6 +58,8 @@ const ProyectosPage: React.FC = () => {
       const matchesStatus = selectedStatus === "" || p.estado === selectedStatus;
       return matchesSearch && matchesYear && matchesType && matchesStatus;
     });
+    // Ordenar por año: reciente a antiguo
+    return filtered.sort((a, b) => b.anio - a.anio);
   }, [searchQuery, selectedYear, selectedType, selectedStatus]);
 
   const hasData = proyectos.length > 0;

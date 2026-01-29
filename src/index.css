@@ -628,10 +628,53 @@ body.modal-open .calc-overlay {
     font-weight: 700 !important;
   }
 
-  /* Blockquote destacado para citas - Diseño Editorial */
+  /* Blockquote destacado para citas - Diseño Editorial con colores dinámicos por categoría */
+  article[data-category="Asuntos Regulatorios"] .prose .highlight-quote {
+    border-left: 4px solid #1565C0 !important;
+    background: rgba(21, 101, 192, 0.05) !important;
+    box-shadow: 0 2px 8px rgba(21, 101, 192, 0.08);
+  }
+  article[data-category="Asuntos Regulatorios"] .prose .highlight-quote:hover {
+    box-shadow: 0 4px 12px rgba(21, 101, 192, 0.15);
+  }
+
+  article[data-category="Farmacia Clínica"] .prose .highlight-quote {
+    border-left: 4px solid #00897B !important;
+    background: rgba(0, 137, 123, 0.05) !important;
+    box-shadow: 0 2px 8px rgba(0, 137, 123, 0.08);
+  }
+  article[data-category="Farmacia Clínica"] .prose .highlight-quote:hover {
+    box-shadow: 0 4px 12px rgba(0, 137, 123, 0.15);
+  }
+
+  article[data-category="Farmacovigilancia"] .prose .highlight-quote {
+    border-left: 4px solid #C62828 !important;
+    background: rgba(198, 40, 40, 0.05) !important;
+    box-shadow: 0 2px 8px rgba(198, 40, 40, 0.08);
+  }
+  article[data-category="Farmacovigilancia"] .prose .highlight-quote:hover {
+    box-shadow: 0 4px 12px rgba(198, 40, 40, 0.15);
+  }
+
+  article[data-category="Industria & Tecnología"] .prose .highlight-quote {
+    border-left: 4px solid #455A64 !important;
+    background: rgba(69, 90, 100, 0.05) !important;
+    box-shadow: 0 2px 8px rgba(69, 90, 100, 0.08);
+  }
+  article[data-category="Industria & Tecnología"] .prose .highlight-quote:hover {
+    box-shadow: 0 4px 12px rgba(69, 90, 100, 0.15);
+  }
+
+  article[data-category="Data & Salud Digital"] .prose .highlight-quote {
+    border-left: 4px solid #673AB7 !important;
+    background: rgba(103, 58, 183, 0.05) !important;
+    box-shadow: 0 2px 8px rgba(103, 58, 183, 0.08);
+  }
+  article[data-category="Data & Salud Digital"] .prose .highlight-quote:hover {
+    box-shadow: 0 4px 12px rgba(103, 58, 183, 0.15);
+  }
+
   .prose .highlight-quote {
-    border-left: 4px solid hsl(var(--fyt-blue)) !important;
-    background: hsl(var(--fyt-blue) / 0.05) !important;
     padding: 1rem 2rem !important;
     margin: 2rem 2rem 2rem 3rem !important; /* alineado con lista clínica */
     border-radius: 0 0.5rem 0.5rem 0 !important;
@@ -645,7 +688,6 @@ body.modal-open .calc-overlay {
     
     /* Efectos */
     position: relative;
-    box-shadow: 0 2px 8px rgba(0, 191, 255, 0.08);
     transition: all 300ms ease;
   }
 
@@ -656,7 +698,6 @@ body.modal-open .calc-overlay {
   }
 
   .prose .highlight-quote:hover {
-    box-shadow: 0 4px 12px rgba(0, 191, 255, 0.15);
     transform: translateX(4px);
   }
 
@@ -839,12 +880,29 @@ body.modal-open .calc-overlay {
     margin-bottom: 12px;
   }
 
+  /* Colores dinámicos de checkmark por categoría */
+  article[data-category="Asuntos Regulatorios"] .prose ul.clinical-checklist li::before {
+    color: #1565C0;
+  }
+  article[data-category="Farmacia Clínica"] .prose ul.clinical-checklist li::before {
+    color: #00897B;
+  }
+  article[data-category="Farmacovigilancia"] .prose ul.clinical-checklist li::before {
+    color: #C62828;
+  }
+  article[data-category="Industria & Tecnología"] .prose ul.clinical-checklist li::before {
+    color: #455A64;
+  }
+  article[data-category="Data & Salud Digital"] .prose ul.clinical-checklist li::before {
+    color: #673AB7;
+  }
+
   .prose ul.clinical-checklist li::before {
     content: "✓"; /* icono de verificación */
     position: absolute;
     left: 0;
     top: 0.1em;
-    color: #007bff; /* azul corporativo del logo */
+    color: #007bff; /* azul corporativo del logo - fallback */
     font-weight: 700;
     font-size: 1rem;
     line-height: 1;

@@ -12,6 +12,7 @@ export interface DivulgacionPost {
   content: string;
   tags?: string[];
   category?: string;
+  authorBio?: string;
 }
 
 export type DivulgacionCategory = 
