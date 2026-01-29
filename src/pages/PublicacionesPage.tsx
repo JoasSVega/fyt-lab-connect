@@ -40,9 +40,9 @@ const PublicacionesPage: React.FC = () => {
     []
   );
 
-  // Filtrado optimizado
+  // Filtrado optimizado + ordenamiento (reciente a antiguo)
   const filteredItems = useMemo(() => {
-    return publicaciones.filter((pub) => {
+    const filtered = publicaciones.filter((pub) => {
       const matchesSearch = searchQuery.trim() === "" ||
         [pub.titulo, pub.autores, pub.revista, pub.editorial, pub.descripcion]
           .filter(Boolean)
@@ -53,6 +53,8 @@ const PublicacionesPage: React.FC = () => {
       const matchesType = selectedType === "" || pub.tipo === selectedType;
       return matchesSearch && matchesYear && matchesType;
     });
+    // Ordenar por año: reciente a antiguo
+    return filtered.sort((a, b) => b.anio - a.anio);
   }, [searchQuery, selectedYear, selectedType]);
 
   // Paginación: 10 items por página

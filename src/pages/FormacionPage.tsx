@@ -47,9 +47,9 @@ const FormacionPage: React.FC = () => {
     []
   );
 
-  // Filtrado optimizado
+  // Filtrado optimizado + ordenamiento (reciente a antiguo)
   const filteredItems = useMemo(() => {
-    return formacionItems.filter((item) => {
+    const filtered = formacionItems.filter((item) => {
       const matchesSearch = searchQuery.trim() === "" ||
         [item.title, item.institution, item.description]
           .filter(Boolean)
@@ -60,6 +60,12 @@ const FormacionPage: React.FC = () => {
       const matchesType = selectedType === "" || item.type === selectedType;
       const matchesLevel = selectedLevel === "" || item.level === selectedLevel;
       return matchesSearch && matchesYear && matchesType && matchesLevel;
+    });
+    // Ordenar por año: reciente a antiguo
+    return filtered.sort((a, b) => {
+      const yearA = a.year || 0;
+      const yearB = b.year || 0;
+      return yearB - yearA;
     });
   }, [searchQuery, selectedYear, selectedType, selectedLevel]);
 
