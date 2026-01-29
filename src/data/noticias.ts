@@ -14,7 +14,7 @@ import type { Noticia } from "@/types/noticias";
 export const noticias: Noticia[] = [
   {
     slug: "fyt-fortalece-colaboracion-internacional-guadalajara",
-    date: "2026-01-29",
+    date: "2026-01-21",
     category: "Colaboración",
     title: "Grupo FyT fortalece colaboración internacional con la Universidad de Guadalajara",
     summary: "Se consolida una conexión académica internacional orientada al fortalecimiento de la divulgación científica y el desarrollo de investigación computacional e in silico.",
