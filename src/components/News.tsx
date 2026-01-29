@@ -109,10 +109,10 @@ const News = () => {
             </Select>
           </div>
 
-          {/* Grid de noticias */}
+          {/* Grid de noticias - Layout timeline completo */}
           {paginatedNoticias.length > 0 ? (
             <>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="space-y-0">
                 {paginatedNoticias.map((noticia, idx) => (
                   <NoticiaCard
                     key={noticia.slug}
@@ -124,7 +124,7 @@ const News = () => {
 
               {/* Paginación */}
               {totalPages > 1 && (
-                <div className="flex items-center justify-center gap-4 mt-8">
+                <div className="flex items-center justify-center gap-4 mt-12">
                   <Button
                     onClick={goPrev}
                     disabled={currentPage === 1}
