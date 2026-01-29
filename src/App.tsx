@@ -18,6 +18,9 @@ const ContenidosPage = React.lazy(() => import("./pages/ContenidosPage"));
 const DivulgacionPage = React.lazy(() => import("./pages/DivulgacionPage"));
 const DivulgacionPostPage = React.lazy(() => import("./pages/DivulgacionPostPage"));
 
+// Rutas de noticias (carga diferida)
+const NoticiaPage = React.lazy(() => import("./pages/NoticiaPage"));
+
 // Exportar paths
 export const pathInvestigacion = "/investigacion";
 export const pathProyectos = "/investigacion/proyectos";
@@ -97,6 +100,7 @@ function AnimatedRoutes() {
           
           {/* Noticias y Herramientas */}
           <Route path="/noticias" element={<Noticias />} />
+          <Route path="/noticias/:slug" element={<NoticiaPage />} />
           
           {/* Divulgación */}
           <Route path="/divulgacion" element={<DivulgacionPage />} />
