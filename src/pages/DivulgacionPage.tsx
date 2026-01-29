@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { divulgacionPosts } from "@/data/divulgacionPosts";
 import DivulgacionCard from "@/components/divulgacion/DivulgacionCard";
@@ -56,7 +56,7 @@ const DivulgacionPage: React.FC = () => {
   }, [searchQuery, selectedCategory]);
 
   // Resetear página cuando cambian los filtros
-  useMemo(() => {
+  useEffect(() => {
     setCurrentPage(1);
   }, [searchQuery, selectedCategory]);
 
