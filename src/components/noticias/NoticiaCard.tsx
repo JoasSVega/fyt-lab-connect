@@ -72,12 +72,12 @@ const NoticiaCard: React.FC<NoticiaCardProps> = ({ noticia, delay = 0 }) => {
           </span>
 
           {/* Título (máximo 2 líneas, institucional) */}
-          <h3 className="noticia-card__title line-clamp-2">
+          <h3 className="noticia-card__title">
             {noticia.title}
           </h3>
 
           {/* Resumen corto (1-2 líneas, informativo) */}
-          <p className="noticia-card__summary line-clamp-2">
+          <p className="noticia-card__summary">
             {noticia.summary}
           </p>
 
