@@ -9,9 +9,12 @@ const distDir = join(process.cwd(), 'dist');
 const indexPath = join(distDir, 'index.html');
 const notFoundPath = join(distDir, '404.html');
 
-if (process.env.SSG_BUILD === 'true' || process.env.SSG_BUILD === '1') {
-  console.log('[postbuild] Skip SPA 404 generation (SSG build).');
-  process.exit(0);
+// Generar 404.html INCLUSO en SSG builds
+// Necesario para GitHub Pages para manejar rutas SPA que no están prerrenderizadas
+// o para URLs antiguas que podrían existir en el índice de Google
+const isSSGBuild = process.env.SSG_BUILD === 'true' || process.env.SSG_BUILD === '1';
+if (isSSGBuild) {
+  console.log('[postbuild] SSG build detectado - generando 404.html para SPA fallback...');
 }
 
 if (existsSync(indexPath)) {
@@ -26,30 +29,72 @@ if (existsSync(indexPath)) {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Redirigiendo... | Grupo FyT</title>
-  
-  <!-- GitHub Pages SPA redirect hack -->
-  <!-- This script takes the current page's path and query string and stores it in sessionStorage -->
-  <!-- The index.html will then restore the correct route -->
+  <title>Grupo FyT - Redirigiendo</title>
+  <!-- GitHub Pages SPA Routing Fallback
+       Este archivo se sirve cuando una ruta no existe.
+       Redirige al index.html y restaura la URL original para que React Router maneje la navegación.
+  -->
   <script>
-    // Store the path that led to this 404 page
-    sessionStorage.setItem('redirectPath', window.location.pathname + window.location.search + window.location.hash);
-    
-    // Redirect to the homepage (index.html)
-    // The main app will read the stored path and navigate accordingly
-    window.location.replace('/');
+    // Truque de SPA para GitHub Pages: capturar rutas inexistentes y redirigir a index.html
+    (function() {
+      // Obtener la ruta solicitada (sin dominio)
+      var path = window.location.pathname;
+      var search = window.location.search;
+      var hash = window.location.hash;
+      
+      // Excluir archivos reales (assets, API, etc.)
+      // No redirigir si: termina en extensión conocida, es raíz, contiene puntos en el nombre
+      var isFile = /\\.(html|css|js|json|xml|ico|png|jpg|jpeg|gif|webp|svg|woff|woff2|ttf|otf)$/i.test(path);
+      var isRoot = path === '/' || path === '';
+      var isHiddenDir = path.startsWith('/.well-known') || path.startsWith('/.git');
+      
+      // Si es un archivo real o la raíz, dejar que GitHub Pages lo maneje normalmente
+      if (isFile || isRoot || isHiddenDir) {
+        return;
+      }
+      
+      // Para rutas SPA (ej: /investigacion, /herramientas/clinicos, /divulgacion/slug):
+      // Guardar la ruta en sessionStorage, redirigir a /index.html
+      // El script en index.html restaurará la URL en el navegador
+      sessionStorage.setItem('redirectPath', path + search + hash);
+      
+      // Redirigir a index.html (GitHub Pages lo sirve correctamente)
+      window.location = '/index.html';
+    })();
   </script>
-  
-  <!-- Fallback for users with JavaScript disabled -->
-  <meta http-equiv="refresh" content="0;url=/" />
 </head>
-<body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: #f8fafc; color: #0f172a; margin: 0;">
-  <main style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px;">
-    <section style="max-width: 520px; width: 100%; text-align: center; background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 32px; box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);">
-      <h1 style="margin: 0 0 12px; font-size: 28px; font-weight: 700;">Redirigiendo...</h1>
-      <p style="margin: 0 0 20px; font-size: 16px; line-height: 1.6; color: #334155;">Si no eres redirigido automáticamente, <a href="/" style="color: #2563eb; text-decoration: underline;">haz clic aquí</a>.</p>
-    </section>
-  </main>
+<body>
+  <!-- Contenido fallback mientras se procesa el redirect (máximo 1-2 segundos) -->
+  <div style="
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  ">
+    <div style="text-align: center; color: white;">
+      <h1 style="margin: 0 0 20px; font-size: 24px;">Grupo FyT</h1>
+      <p style="margin: 0; font-size: 16px; opacity: 0.9;">Cargando página...</p>
+    </div>
+  </div>
+  
+  <!-- Fallback: si JavaScript está deshabilitado o falla, mostrar mensaje + enlace manual -->
+  <noscript>
+    <style>
+      body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; padding: 40px; }
+      h1 { color: #333; }
+      p { color: #666; margin: 20px 0; }
+      a { color: #667eea; text-decoration: none; }
+      a:hover { text-decoration: underline; }
+    </style>
+    <h1>Página no encontrada</h1>
+    <p>La página que buscas no existe o ha sido movida.</p>
+    <p><a href="/">← Volver al inicio</a></p>
+    <p style="margin-top: 40px; font-size: 12px; color: #999;">
+      Si el problema persiste, intenta vaciar el cache del navegador o <a href="/">haz clic aquí</a> para ir a inicio.
+    </p>
+  </noscript>
 </body>
 </html>`;
     
