@@ -111,16 +111,17 @@ const DivulgacionPostPage: React.FC = () => {
   let ogImageAlt = "Logo Grupo FyT";
   
   if (post.authorImage) {
-    // Convertir la ruta de la imagen del autor a la versión OG
+    // Convertir la ruta de la imagen del autor a la versión OG (1200x630)
     // Ejemplo: /images/equipo/Antistio-Alviz-large.webp -> /images/equipo/Antistio-Alviz-og.webp
-    // Primero extraer el nombre base sin sufijos de tamaño
+    // Ejemplo: /images/equipo/manuel-avila-large.webp -> /images/equipo/manuel-avila-og.webp
+    
     let authorImagePath = post.authorImage;
     
-    // Remover sufijos de tamaño (-large, -medium, -small)
-    authorImagePath = authorImagePath.replace(/-(large|medium|small)\.webp$/, '.webp');
+    // Remover sufijos de tamaño (-large, -medium, -small) si existen
+    authorImagePath = authorImagePath.replace(/-(large|medium|small)\.webp$/, '');
     
-    // Reemplazar .webp con -og.webp
-    authorImagePath = authorImagePath.replace(/\.webp$/, '-og.webp');
+    // Agregar sufijo -og y extensión
+    authorImagePath = `${authorImagePath}-og.webp`;
     
     ogImage = `${baseUrl}${authorImagePath}`;
     ogImageAlt = `Foto del autor ${post.author}`;
