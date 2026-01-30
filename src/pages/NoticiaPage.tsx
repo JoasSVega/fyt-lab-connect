@@ -89,6 +89,9 @@ const NoticiaPage: React.FC = () => {
   // Formatear fecha para SEO
   const publishedDate = new Date(noticia.date).toISOString();
   const modifiedDate = new Date(noticia.date).toISOString();
+  const baseUrl = "https://fyt-research.org";
+  const ogImagePath = "/images/noticias/2026/2026-01-21-fyt-fortalece-colaboracion-internacional-guadalajara/03-og.webp";
+  const ogImage = `${baseUrl}${ogImagePath}`;
 
   // Obtener variables de color para la categoría
   const colorVars = getCategoryColorVars(noticia.category);
@@ -98,6 +101,17 @@ const NoticiaPage: React.FC = () => {
       <Seo
         title={`${noticia.title} | Noticias FyT`}
         description={noticia.summary}
+        keywords={[
+          "Noticias FyT",
+          "Grupo FyT",
+          "Universidad de Cartagena",
+          "Universidad de Guadalajara",
+          "colaboración internacional",
+          "investigación biomédica",
+          "farmacología",
+          "inmunoinformática",
+          "investigación computacional"
+        ]}
         author="Grupo FyT"
         robots="index, follow"
         canonical={`https://fyt-research.org/noticias/${noticia.slug}`}
@@ -107,19 +121,23 @@ const NoticiaPage: React.FC = () => {
           type: "article",
           url: `https://fyt-research.org/noticias/${noticia.slug}`,
           siteName: "Grupo FyT",
-          locale: "es_ES"
+          locale: "es_ES",
+          image: ogImage,
+          imageAlt: "Grupo FyT fortalece colaboración internacional con la Universidad de Guadalajara",
+          imageWidth: "1200",
+          imageHeight: "630"
         }}
         twitter={{
           card: "summary_large_image",
           site: "@fytlab",
-          image: noticia.imageAlt
+          image: ogImage
         }}
         schema={{
           "@context": "https://schema.org",
           "@type": "NewsArticle",
           headline: noticia.title,
           description: noticia.summary,
-          image: noticia.imageAlt ? [noticia.imageAlt] : [],
+          image: [ogImage],
           datePublished: publishedDate,
           dateModified: modifiedDate,
           author: {
@@ -131,9 +149,20 @@ const NoticiaPage: React.FC = () => {
             "@type": "Organization",
             name: "Universidad de Cartagena",
             url: "https://fyt-research.org"
+          },
+          mainEntityOfPage: {
+            "@type": "WebPage",
+            "@id": `https://fyt-research.org/noticias/${noticia.slug}`
           }
         }}
-      />
+      >
+        <meta property="og:image:secure_url" content={ogImage} />
+        <meta property="og:image:type" content="image/webp" />
+        <meta property="article:published_time" content={publishedDate} />
+        <meta property="article:modified_time" content={modifiedDate} />
+        <meta property="article:section" content={noticia.category} />
+        <meta property="article:tag" content="Noticias FyT" />
+      </Seo>
 
       {/* Hero con metadatos */}
       <NoticiaHero noticia={noticia} />

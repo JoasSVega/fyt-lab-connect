@@ -28,29 +28,29 @@ export const noticias: Noticia[] = [
     // Contenido redactado formal
     content: `
 <p class="lead">
-En el marco de un encuentro colaborativo, se consolidó una conexión académica internacional entre la Universidad de Cartagena y la Universidad de Guadalajara, orientada al fortalecimiento de la divulgación científica y al desarrollo de nuevo conocimiento en el área de la investigación computacional e in silico.
+En el marco de un encuentro colaborativo, se consolidó una conexión académica internacional entre la <strong>Universidad de Cartagena</strong> y la <strong>Universidad de Guadalajara</strong>, orientada al fortalecimiento de la divulgación científica y al desarrollo de nuevo conocimiento en el área de la investigación computacional e in silico.
 </p>
 
 <h2>Origen de la colaboración</h2>
 
 <p>
-Esta aproximación surge a partir del interés investigativo del docente Juan Manuel Guzmán Flores, vinculado al Centro Universitario de los Altos (CUALTOS) de la Universidad de Guadalajara, en el desarrollo de estudios in silico. Su visita académica a Colombia permitió un acercamiento directo a la Universidad de Cartagena y al trabajo desarrollado por distintos grupos de investigación enfocados en análisis de datos y computación aplicada.
+Esta aproximación surge a partir del interés investigativo del docente <strong>Juan Manuel Guzmán Flores</strong>, vinculado al <strong>Centro Universitario de los Altos (CUALTOS)</strong> de la <strong>Universidad de Guadalajara</strong>, en el desarrollo de estudios in silico. Su visita académica a Colombia permitió un acercamiento directo a la <strong>Universidad de Cartagena</strong> y al trabajo desarrollado por distintos grupos de investigación enfocados en análisis de datos y computación aplicada.
 </p>
 
 <h2>Establecimiento de vínculos con el Grupo FyT</h2>
 
 <p>
-Como resultado del intercambio académico, se establecieron vínculos de colaboración con el Grupo de Investigación en Farmacología y Terapéutica (FyT) del programa de Ciencias Farmacéuticas de la Universidad de Cartagena. Este proceso fue acompañado por la visión institucional del director del grupo, Antistio Alviz Amador, quien promovió el fortalecimiento de los lazos académicos y de cooperación entre ambas instituciones.
+Como resultado del intercambio académico, se establecieron vínculos de colaboración con el <strong>Grupo de Investigación en Farmacología y Terapéutica (FyT)</strong> del programa de Ciencias Farmacéuticas de la <strong>Universidad de Cartagena</strong>. Este proceso fue acompañado por la visión institucional del director del grupo, <strong>Antistio Alviz Amador</strong>, quien promovió el fortalecimiento de los lazos académicos y de cooperación entre ambas instituciones.
 </p>
 
 <h2>Líneas de trabajo y vinculación estudiantil</h2>
 
 <p>
-En el marco de esta relación internacional, se proyectaron líneas de trabajo de interés común orientadas a fortalecer los procesos investigativos desarrollados por ambos grupos. Esta colaboración derivó en la vinculación de un estudiante pasante con adscripción directa al Centro Universitario de los Altos (CUALTOS).
+En el marco de esta relación internacional, se proyectaron líneas de trabajo de interés común orientadas a fortalecer los procesos investigativos desarrollados por ambos grupos. Esta colaboración derivó en la vinculación de un estudiante pasante con adscripción directa al <strong>Centro Universitario de los Altos (CUALTOS)</strong>.
 </p>
 
 <p>
-La participación del estudiante doctoral Rafael Pineda Alemán constituye el punto de partida formal de esta colaboración internacional, que amplía las oportunidades de trabajo conjunto con diferentes centros universitarios adscritos a la red académica de la Universidad de Guadalajara y contribuye al reconocimiento del trabajo colaborativo con la Universidad de Cartagena.
+La participación del estudiante doctoral <strong>Rafael Pineda Alemán</strong> constituye el punto de partida formal de esta colaboración internacional, que amplía las oportunidades de trabajo conjunto con diferentes centros universitarios adscritos a la red académica de la <strong>Universidad de Guadalajara</strong> y contribuye al reconocimiento del trabajo colaborativo con la <strong>Universidad de Cartagena</strong>.
 </p>
 
 <h2>Proyecto de investigación conjunto</h2>
@@ -60,21 +60,21 @@ Actualmente, se desarrolla de manera conjunta el proyecto de investigación titu
 </p>
 
 <blockquote class="highlight-quote">
-"Diseño in silico de una vacuna peptídica multiepítopo utilizando inmunoinformática y análisis de interacción proteína-proteína para combatir la resistencia a los antibióticos en <em>Acinetobacter baumannii</em>"
+"Diseño in silico de una <strong>vacuna peptídica multiepítopo</strong> utilizando inmunoinformática y análisis de interacción proteína-proteína para combatir la resistencia a los antibióticos en <em>Acinetobacter baumannii</em>"
 </blockquote>
 
 <p>
-Este trabajo ha sido acogido y reconocido por el Centro Universitario de Ciencias de la Salud (CUCS) de la Universidad de Guadalajara, específicamente en el Instituto de Investigaciones en Ciencias Biomédicas, dirigido por el doctor José Francisco Muñoz Valle.
+Este trabajo ha sido acogido y reconocido por el <strong>Centro Universitario de Ciencias de la Salud (CUCS)</strong> de la <strong>Universidad de Guadalajara</strong>, específicamente en el <strong>Instituto de Investigaciones en Ciencias Biomédicas</strong>, dirigido por el doctor <strong>José Francisco Muñoz Valle</strong>.
 </p>
 
 <h2>Acercamiento institucional en la Universidad de Guadalajara</h2>
 
 <p>
-Durante la visita académica internacional a la Universidad de Guadalajara, el doctor Muñoz Valle brindó una cálida bienvenida al profesor Juan Manuel Guzmán Flores y al estudiante doctoral Rafael Pineda Alemán, resaltando la importancia de la cooperación académica e investigativa entre las instituciones participantes. Este acercamiento fortalece el acceso a nuevas oportunidades de colaboración tanto en investigación experimental como in silico.
+Durante la visita académica internacional a la <strong>Universidad de Guadalajara</strong>, el doctor <strong>José Francisco Muñoz Valle</strong> brindó una cálida bienvenida al profesor <strong>Juan Manuel Guzmán Flores</strong> y al estudiante doctoral <strong>Rafael Pineda Alemán</strong>, resaltando la importancia de la cooperación académica e investigativa entre las instituciones participantes. Este acercamiento fortalece el acceso a nuevas oportunidades de colaboración tanto en investigación experimental como in silico.
 </p>
 
 <p>
-A través de sus canales institucionales, el doctor Muñoz Valle destacó la relevancia de la colaboración académica, la investigación conjunta y la cooperación internacional, manifestando su interés en continuar fortaleciendo los lazos de trabajo con la Universidad de Cartagena.
+A través de sus canales institucionales, el doctor <strong>José Francisco Muñoz Valle</strong> destacó la relevancia de la colaboración académica, la investigación conjunta y la cooperación internacional, manifestando su interés en continuar fortaleciendo los lazos de trabajo con la <strong>Universidad de Cartagena</strong>.
 </p>
 
 <h2>Impacto e implicaciones futuras</h2>
@@ -91,7 +91,7 @@ Esta colaboración representa un hito en la consolidación del Grupo FyT como ac
 </ul>
 
 <p>
-El Grupo FyT reafirma su compromiso con la cooperación académica y la investigación de excelencia como herramientas para avanzar en el conocimiento científico y responder a los desafíos del sector salud.
+El <strong>Grupo FyT</strong> reafirma su compromiso con la cooperación académica y la investigación de excelencia como herramientas para avanzar en el conocimiento científico y responder a los desafíos del sector salud.
 </p>
     `,
     
