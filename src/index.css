@@ -2061,30 +2061,19 @@ body.modal-open .calc-overlay {
 /* Modal de galería de imágenes */
 .noticia-gallery__backdrop {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background-color: rgba(0, 0, 0, 0.95);
   z-index: 50;
 }
 
 .noticia-gallery__modal {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90%;
-  height: 90vh;
-  max-width: 1200px;
-  background-color: #000;
-  border-radius: 12px;
-  z-index: 51;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 51;
   padding: 2rem;
-  box-sizing: border-box;
 }
 
 .noticia-gallery__image-container {
@@ -2094,13 +2083,11 @@ body.modal-open .calc-overlay {
   align-items: center;
   justify-content: center;
   position: relative;
-  max-width: 100%;
-  max-height: 100%;
 }
 
 .noticia-gallery__image {
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 90vw;
+  max-height: 90vh;
   width: auto;
   height: auto;
   object-fit: contain;
@@ -2110,7 +2097,7 @@ body.modal-open .calc-overlay {
 
 /* Botón de cerrar */
 .noticia-gallery__close {
-  position: absolute;
+  position: fixed;
   top: 1.5rem;
   right: 1.5rem;
   width: 40px;
@@ -2124,7 +2111,7 @@ body.modal-open .calc-overlay {
   justify-content: center;
   cursor: pointer;
   transition: all 200ms ease;
-  z-index: 10;
+  z-index: 52;
 }
 
 .noticia-gallery__close:hover {
@@ -2138,7 +2125,7 @@ body.modal-open .calc-overlay {
 
 /* Botones de navegación */
 .noticia-gallery__nav-btn {
-  position: absolute;
+  position: fixed;
   top: 50%;
   transform: translateY(-50%);
   width: 48px;
@@ -2152,7 +2139,7 @@ body.modal-open .calc-overlay {
   justify-content: center;
   cursor: pointer;
   transition: all 200ms ease;
-  z-index: 10;
+  z-index: 52;
 }
 
 .noticia-gallery__nav-btn:hover {
@@ -2174,7 +2161,7 @@ body.modal-open .calc-overlay {
 
 /* Contador */
 .noticia-gallery__counter {
-  position: absolute;
+  position: fixed;
   bottom: 1.5rem;
   left: 50%;
   transform: translateX(-50%);
@@ -2184,16 +2171,11 @@ body.modal-open .calc-overlay {
   border-radius: 6px;
   font-size: 0.875rem;
   font-weight: 500;
-  z-index: 10;
+  z-index: 52;
 }
 
 /* Responsive del modal */
 @media (max-width: 768px) {
-  .noticia-gallery__modal {
-    width: 95%;
-    height: 95vh;
-  }
-
   .noticia-gallery__close {
     width: 36px;
     height: 36px;
@@ -2222,9 +2204,7 @@ body.modal-open .calc-overlay {
 
 @media (max-width: 480px) {
   .noticia-gallery__modal {
-    width: 98%;
-    height: 98vh;
-    border-radius: 8px;
+    padding: 1rem;
   }
 
   .noticia-gallery__close {
@@ -2255,6 +2235,11 @@ body.modal-open .calc-overlay {
 
   .noticia-gallery__nav-next {
     right: 0.5rem;
+  }
+
+  .noticia-gallery__image {
+    max-width: 95vw;
+    max-height: 95vh;
   }
 }
 
