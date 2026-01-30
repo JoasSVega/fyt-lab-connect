@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { createPortal } from "react-dom";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
@@ -17,7 +17,7 @@ interface ImageGalleryModalProps {
 /**
  * Modal de galería de imágenes con navegación circular
  * Animación similar a CalculatorModal (scale + opacity)
- * Soporta navegación con flechas, teclado y swipe
+ * Soporta navegación con flechas, teclado y swipe/drag
  */
 const ImageGalleryModal: React.FC<ImageGalleryModalProps> = ({
   images,
@@ -26,6 +26,9 @@ const ImageGalleryModal: React.FC<ImageGalleryModalProps> = ({
   onClose
 }) => {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+  const isDragging = useRef(false);
 
   // Actualizar índice cuando cambie initialIndex
   useEffect(() => {
@@ -40,6 +43,30 @@ const ImageGalleryModal: React.FC<ImageGalleryModalProps> = ({
   const goToPrev = useCallback(() => {
     setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
   }, [images.length]);
+
+  // Handlers de swipe/touch
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    isDragging.current = true;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    touchEndX.current = e.changedTouches[0].clientX;
+    isDragging.current = false;
+    
+    const difference = touchStartX.current - touchEndX.current;
+    const threshold = 50; // mínimo de píxeles para detectar swipe
+    
+    if (Math.abs(difference) > threshold) {
+      if (difference > 0) {
+        // Swipe a la izquierda = siguiente imagen
+        goToNext();
+      } else {
+        // Swipe a la derecha = imagen anterior
+        goToPrev();
+      }
+    }
+  };
 
   // Handlers de teclado
   useEffect(() => {
@@ -58,6 +85,16 @@ const ImageGalleryModal: React.FC<ImageGalleryModalProps> = ({
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, onClose, goToNext, goToPrev]);
+
+  // Prevenir scroll del body cuando modal está abierto
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
 
   const currentImage = images[currentIndex];
 
@@ -101,6 +138,8 @@ const ImageGalleryModal: React.FC<ImageGalleryModalProps> = ({
               ease: [0.4, 0, 0.2, 1]
             }}
             onClick={(e) => e.stopPropagation()}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
           >
             {/* Close button */}
             <button
@@ -129,11 +168,12 @@ const ImageGalleryModal: React.FC<ImageGalleryModalProps> = ({
                   src={currentImage.webp}
                   alt={currentImage.alt}
                   className="noticia-gallery__image"
+                  draggable={false}
                 />
               </picture>
             </div>
 
-            {/* Navigation */}
+            {/* Navigation - Hidden on mobile, use swipe instead */}
             <button
               className="noticia-gallery__nav-btn noticia-gallery__nav-prev"
               onClick={goToPrev}
@@ -156,6 +196,11 @@ const ImageGalleryModal: React.FC<ImageGalleryModalProps> = ({
             <div className="noticia-gallery__counter">
               {currentIndex + 1} / {images.length}
             </div>
+
+            {/* Swipe hint for mobile */}
+            <div className="noticia-gallery__swipe-hint">
+              Desliza para cambiar imagen
+            </div>
           </motion.div>
         </>
       )}
@@ -166,3 +211,4 @@ const ImageGalleryModal: React.FC<ImageGalleryModalProps> = ({
 };
 
 export default ImageGalleryModal;
+
