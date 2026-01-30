@@ -8,6 +8,9 @@ import { usePageReady } from "@/hooks/usePageReady";
 import Seo from "@/components/Seo";
 import FloatingContact from "@/components/FloatingContact";
 import type { Noticia } from "@/types/noticias";
+import { Button } from "@/components/ui/button";
+import { Share2, Linkedin, MessageCircle, Copy } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 /**
  * Mapeo de categorías a variables CSS (colores primarios y secundarios)
@@ -68,6 +71,7 @@ const getCategoryColorVars = (category: Noticia["category"]): Record<string, str
  */
 const NoticiaPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
+  const { toast } = useToast();
   usePageReady();
 
   // Obtener la noticia actual
@@ -95,6 +99,59 @@ const NoticiaPage: React.FC = () => {
 
   // Obtener variables de color para la categoría
   const colorVars = getCategoryColorVars(noticia.category);
+
+  // Función para compartir en LinkedIn
+  const shareOnLinkedIn = () => {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(noticia.title);
+    window.open(
+      `https://www.linkedin.com/sharing/share-offsite/?url=${url}`,
+      "_blank",
+      "width=600,height=600"
+    );
+  };
+
+  // Función para compartir en WhatsApp
+  const shareOnWhatsApp = () => {
+    const sharingText = `📰 ${noticia.title}\n\n${noticia.summary}\n\n🔗 ${window.location.href}`;
+    const text = encodeURIComponent(sharingText);
+    window.open(`https://wa.me/?text=${text}`, "_blank");
+  };
+
+  // Función para copiar enlace
+  const copyLink = async () => {
+    const url = window.location.href;
+    try {
+      if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+        await navigator.clipboard.writeText(url);
+      } else {
+        const textarea = document.createElement('textarea');
+        textarea.value = url;
+        textarea.style.position = 'fixed';
+        textarea.style.top = '0';
+        textarea.style.left = '0';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+        try {
+          document.execCommand('copy');
+        } finally {
+          document.body.removeChild(textarea);
+        }
+      }
+      toast({
+        title: "Enlace copiado",
+        description: "El enlace ha sido copiado al portapapeles",
+      });
+    } catch (err) {
+      toast({
+        title: "Error",
+        description: "No se pudo copiar el enlace",
+        variant: "destructive",
+      });
+    }
+  };
 
   return (
     <div className="w-full bg-background flex flex-col noticia-page" style={colorVars as React.CSSProperties}>
@@ -179,6 +236,52 @@ const NoticiaPage: React.FC = () => {
           />
         </div>
       </article>
+
+      {/* Compartir noticia */}
+      <section className="border-t-2 border-gray-200 bg-white">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-12 py-12 sm:py-14">
+          <div className="flex flex-col items-start gap-6">
+            <div>
+              <h3 className="font-poppins font-bold text-lg sm:text-xl text-gray-900 mb-2 flex items-center gap-2 flex-wrap">
+                <Share2 className="w-5 h-5 text-primary flex-shrink-0" />
+                <span className="break-words">Compartir esta noticia</span>
+              </h3>
+              <p className="text-gray-600 text-sm break-words">
+                Ayúdanos a difundir esta noticia institucional en tu red
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-3 w-full">
+              <Button
+                onClick={shareOnLinkedIn}
+                className="gap-2 cta-button cta-linkedin w-full sm:w-auto justify-center"
+                variant="outline"
+                size="lg"
+              >
+                <Linkedin className="w-5 h-5 flex-shrink-0" />
+                <span>LinkedIn</span>
+              </Button>
+              <Button
+                onClick={shareOnWhatsApp}
+                className="gap-2 cta-button cta-whatsapp w-full sm:w-auto justify-center"
+                variant="outline"
+                size="lg"
+              >
+                <MessageCircle className="w-5 h-5 flex-shrink-0" />
+                <span>WhatsApp</span>
+              </Button>
+              <Button
+                onClick={copyLink}
+                className="gap-2 cta-button cta-copy w-full sm:w-auto justify-center"
+                variant="outline"
+                size="lg"
+              >
+                <Copy className="w-5 h-5 flex-shrink-0" />
+                <span className="whitespace-nowrap">Copiar enlace</span>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Bloque de cierre institucional */}
       <NoticiaClosing noticia={noticia} />

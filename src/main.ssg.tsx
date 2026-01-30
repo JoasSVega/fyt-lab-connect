@@ -16,6 +16,7 @@ import { StaticRouter } from 'react-router-dom/server';
 import App from './App';
 import { routeMeta, routesToPrerender } from './seo/routesMeta';
 import { getPostBySlugSSR } from './data/generateDivulgacionRoutes';
+import { getNoticiaBySlug } from './data/noticias';
 /**
  * Lista de rutas públicas a prerenderizar
  * Incluye tanto rutas estáticas como dinámicas
@@ -42,6 +43,9 @@ export function render(path: string): { html: string; head: string } {
   // Detectar si es un artículo de divulgación
   const divulgacionMatch = path.match(/^\/divulgacion\/([^/]+)$/);
   const post = divulgacionMatch ? getPostBySlugSSR(divulgacionMatch[1]) : null;
+  // Detectar si es una noticia institucional
+  const noticiasMatch = path.match(/^\/noticias\/([^/]+)$/);
+  const noticia = noticiasMatch ? getNoticiaBySlug(noticiasMatch[1]) : null;
   // ========================================
   // RENDERIZADO SSR DEL COMPONENTE REACT
   // ========================================
@@ -119,6 +123,77 @@ export function render(path: string): { html: string; head: string } {
   "publisher": {
     "@type": "Organization",
     "name": "Grupo FyT",
+    "url": "https://fyt-research.org"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "${canonical}"
+  }
+}
+</script>`,
+    ];
+  } else if (noticia) {
+    // SEO para noticias institucionales
+    let ogImage = '/images/logo-fyt-og.webp';
+    if (noticia.images?.length) {
+      const lastImage = noticia.images[noticia.images.length - 1];
+      const imagePath = lastImage.webp || lastImage.png || '';
+      if (imagePath) {
+        ogImage = imagePath.replace(/(\.webp|\.png)$/i, '-og.webp');
+      }
+    }
+
+    headArray = [
+      `<title>${noticia.title} | Noticias FyT</title>`,
+      `<meta name="author" content="Grupo FyT">`,
+      `<meta name="description" content="${noticia.summary}">`,
+      `<link rel="canonical" href="${canonical}">`,
+
+      // Imagen social (OG)
+      `<meta property="og:image" content="${baseUrl}${ogImage}">`,
+      `<meta property="og:image:secure_url" content="${baseUrl}${ogImage}">`,
+      `<meta property="og:image:type" content="image/webp">`,
+      `<meta property="og:image:width" content="1200">`,
+      `<meta property="og:image:height" content="630">`,
+      `<meta property="og:image:alt" content="${noticia.title}">`,
+
+      // OpenGraph para noticias
+      `<meta property="og:title" content="${noticia.title}">`,
+      `<meta property="og:description" content="${noticia.summary}">`,
+      `<meta property="og:type" content="article">`,
+      `<meta property="og:url" content="${canonical}">`,
+      `<meta property="og:site_name" content="Grupo FyT">`,
+      `<meta property="og:locale" content="es_ES">`,
+
+      // Article-specific metadata
+      `<meta property="article:published_time" content="${noticia.date}">`,
+      `<meta property="article:modified_time" content="${noticia.date}">`,
+      `<meta property="article:section" content="${noticia.category}">`,
+
+      // Twitter Card
+      `<meta name="twitter:card" content="summary_large_image">`,
+      `<meta name="twitter:title" content="${noticia.title}">`,
+      `<meta name="twitter:description" content="${noticia.summary}">`,
+      `<meta name="twitter:image" content="${baseUrl}${ogImage}">`,
+
+      // Structured Data (JSON-LD) para noticias
+      `<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "NewsArticle",
+  "headline": "${noticia.title.replace(/"/g, '\\"')}",
+  "description": "${noticia.summary.replace(/"/g, '\\"')}",
+  "image": ["${baseUrl}${ogImage}"],
+  "datePublished": "${noticia.date}",
+  "dateModified": "${noticia.date}",
+  "author": {
+    "@type": "Organization",
+    "name": "Grupo de Investigación en Farmacología y Terapéutica (FyT)",
+    "url": "https://fyt-research.org"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Universidad de Cartagena",
     "url": "https://fyt-research.org"
   },
   "mainEntityOfPage": {
