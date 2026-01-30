@@ -60,23 +60,6 @@ const News = () => {
 
   return (
     <section className="w-full py-16">
-      {/* Encabezado con descripción */}
-      {noticias.length > 0 && (
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12 mb-12">
-          <CardReveal>
-            <div className="flex items-start gap-4 mb-8">
-              <Clock className="w-8 h-8 text-fyt-blue flex-shrink-0 mt-1" style={{ filter: 'drop-shadow(0 2px 8px rgba(59,185,255,0.2))' }} />
-              <div>
-                <h2 className="text-2xl font-bold text-slate-900 mb-2 font-raleway">Registro Institucional de Noticias</h2>
-                <p className="text-slate-700 leading-relaxed">
-                  Comunicaciones institucionales del <span className="font-semibold text-fyt-blue">Grupo de Investigación en Farmacología y Terapéutica (FyT)</span> sobre eventos, colaboraciones internacionales, publicaciones y actividades académicas.
-                </p>
-              </div>
-            </div>
-          </CardReveal>
-        </div>
-      )}
-
       {noticias.length > 0 ? (
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
           {/* Filtros */}

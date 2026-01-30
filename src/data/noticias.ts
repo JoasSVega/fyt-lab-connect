@@ -98,10 +98,7 @@ El Grupo FyT reafirma su compromiso con la cooperación académica y la investig
     // Información institucional
     principalInstitutions: [
       "Universidad de Cartagena",
-      "Universidad de Guadalajara",
-      "Centro Universitario de los Altos (CUALTOS)",
-      "Centro Universitario de Ciencias de la Salud (CUCS)",
-      "Instituto de Investigaciones en Ciencias Biomédicas"
+      "Universidad de Guadalajara"
     ],
     
     researchGroups: [
@@ -109,18 +106,32 @@ El Grupo FyT reafirma su compromiso con la cooperación académica y la investig
       "Grupos de investigación en análisis de datos y computación aplicada"
     ],
     
+    images: [
+      {
+        webp: "/images/noticias/2026/2026-01-21-fyt-fortalece-colaboracion-internacional-guadalajara/01.webp",
+        png: "/images/noticias/2026/2026-01-21-fyt-fortalece-colaboracion-internacional-guadalajara/01.png",
+        alt: "Encuentro académico inicial - Presentación de proyectos de investigación compartidos"
+      },
+      {
+        webp: "/images/noticias/2026/2026-01-21-fyt-fortalece-colaboracion-internacional-guadalajara/02.webp",
+        png: "/images/noticias/2026/2026-01-21-fyt-fortalece-colaboracion-internacional-guadalajara/02.png",
+        alt: "Reunión colaborativa - Discusión académica sobre líneas de investigación conjunta"
+      },
+      {
+        webp: "/images/noticias/2026/2026-01-21-fyt-fortalece-colaboracion-internacional-guadalajara/03.webp",
+        png: "/images/noticias/2026/2026-01-21-fyt-fortalece-colaboracion-internacional-guadalajara/03.png",
+        alt: "Acto protocolar - Representantes institucionales y miembros del Grupo FyT"
+      }
+    ],
+    
     relatedLinks: [
       {
-        title: "Página del Grupo FyT",
-        url: "/"
+        title: "Universidad de Cartagena",
+        url: "https://www.unicartagena.edu.co/"
       },
       {
-        title: "Programa de Ciencias Farmacéuticas",
-        url: "/sobre-nosotros"
-      },
-      {
-        title: "Investigación",
-        url: "/investigacion"
+        title: "Universidad de Guadalajara",
+        url: "https://www.udg.mx/"
       }
     ],
     

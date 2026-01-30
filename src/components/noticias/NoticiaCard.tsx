@@ -24,8 +24,12 @@ interface NoticiaCardProps {
  * - Tipografía raleway + inter (similar a divulgación)
  */
 const NoticiaCard: React.FC<NoticiaCardProps> = ({ noticia, delay = 0 }) => {
-  // Extraer día, mes, año
-  const date = new Date(noticia.date);
+  // Extraer día, mes, año (parseo local para evitar desfase por zona horaria)
+  const parseLocalDate = (isoDate: string) => {
+    const [year, month, day] = isoDate.split("-").map(Number);
+    return new Date(year, (month || 1) - 1, day || 1);
+  };
+  const date = parseLocalDate(noticia.date);
   const day = date.getDate().toString().padStart(2, "0");
   const month = date.toLocaleDateString("es-ES", { month: "short" }).toUpperCase();
   const year = date.getFullYear();

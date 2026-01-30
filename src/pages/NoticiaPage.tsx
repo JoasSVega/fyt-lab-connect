@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 import { useParams, Navigate } from "react-router-dom";
 import { getNoticiaBySlug, getAllNoticias } from "@/data/noticias";
 import NoticiaHero from "@/components/noticias/NoticiaHero";
+import NoticiaImages from "@/components/noticias/NoticiaImages";
 import NoticiaClosing from "@/components/noticias/NoticiaClosing";
 import { usePageReady } from "@/hooks/usePageReady";
 import Seo from "@/components/Seo";
@@ -136,6 +137,9 @@ const NoticiaPage: React.FC = () => {
 
       {/* Hero con metadatos */}
       <NoticiaHero noticia={noticia} />
+
+      {/* Galería de imágenes horizontal */}
+      <NoticiaImages slug={noticia.slug} images={noticia.images} />
 
       {/* Contenido principal */}
       <article className="w-full bg-white noticia-page__content">

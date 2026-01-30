@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Tag } from "lucide-react";
 import type { Noticia } from "@/types/noticias";
 
@@ -20,8 +21,12 @@ interface NoticiaHeroProps {
  * Tipografía: Raleway (títulos) + Inter (metadata)
  */
 const NoticiaHero: React.FC<NoticiaHeroProps> = ({ noticia }) => {
-  // Formatear fecha
-  const formattedDate = new Date(noticia.date).toLocaleDateString("es-ES", {
+  // Formatear fecha (parseo local para evitar desfase por zona horaria)
+  const parseLocalDate = (isoDate: string) => {
+    const [year, month, day] = isoDate.split("-").map(Number);
+    return new Date(year, (month || 1) - 1, day || 1);
+  };
+  const formattedDate = parseLocalDate(noticia.date).toLocaleDateString("es-ES", {
     year: "numeric",
     month: "long",
     day: "numeric"
@@ -30,19 +35,34 @@ const NoticiaHero: React.FC<NoticiaHeroProps> = ({ noticia }) => {
   return (
     <header className="w-full bg-white noticia-page__header">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-12 py-8 sm:py-12 lg:py-16">
-        {/* Categoría badge (dinámico con color) */}
-        <div className="noticia-page__category">
-          <Tag className="w-4 h-4" />
-          {noticia.category}
-        </div>
+        {/* Barra de navegación secundaria */}
+        <nav className="noticia-page__breadcrumb" aria-label="Breadcrumb">
+          <ol>
+            <li>
+              <Link to="/">Inicio</Link>
+            </li>
+            <li aria-hidden="true">/</li>
+            <li>
+              <Link to="/noticias">Noticias</Link>
+            </li>
+            <li aria-hidden="true">/</li>
+            <li className="noticia-page__breadcrumb-current">{noticia.category}</li>
+          </ol>
+        </nav>
 
-        {/* Fecha (pequeña, debajo de categoría) */}
-        <time
-          dateTime={noticia.date}
-          className="inline-block text-sm text-gray-600 font-inter mb-4"
-        >
-          {formattedDate}
-        </time>
+        {/* Categoría y fecha (fecha alineada a la derecha) */}
+        <div className="noticia-page__meta">
+          <div className="noticia-page__category">
+            <Tag className="w-4 h-4" />
+            {noticia.category}
+          </div>
+          <time
+            dateTime={noticia.date}
+            className="noticia-page__date"
+          >
+            {formattedDate}
+          </time>
+        </div>
 
         {/* Título H1 */}
         <h1 className="noticia-page__title">
@@ -56,19 +76,6 @@ const NoticiaHero: React.FC<NoticiaHeroProps> = ({ noticia }) => {
           </p>
         )}
       </div>
-
-      {/* Espacio reservado para imagen principal */}
-      {noticia.imagePlaceholder && (
-        <div className="w-full bg-gray-100 border-t border-gray-200">
-          <div className="max-w-5xl mx-auto aspect-video flex items-center justify-center">
-            <div className="text-center px-4">
-              <p className="text-gray-600 text-sm italic">
-                📸 {noticia.imagePlaceholder}
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
     </header>
   );
 };

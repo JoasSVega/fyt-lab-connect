@@ -20,15 +20,8 @@ export interface Noticia extends NoticiaOverview {
     title: string;
     url: string;
   }>;
-  author?: string; // Opcional: redactor de la noticia
-  metadata?: {
-    institution?: string;
-    location?: string;
-  };
-}
-
-export interface NoticiaUI extends Noticia {
-  // Props adicionales para componentes UI
-  previousSlug?: string;
-  nextSlug?: string;
-}
+  images?: Array<{
+    webp: string;
+    png?: string;
+    alt: string;
+  }>; // Galería de imágenes para la página individual
