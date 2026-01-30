@@ -2001,15 +2001,17 @@ body.modal-open .calc-overlay {
 .noticia-page__images-section {
   width: 100%;
   background-color: #f3f4f6;
-  padding: 2rem 0;
+  padding: 1rem 0;
   border-bottom: 1px solid #e5e7eb;
 }
 
 .noticia-page__images-gallery {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+  gap: 1rem;
   align-items: stretch;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .noticia-page__image-item {
@@ -2043,18 +2045,22 @@ body.modal-open .calc-overlay {
 @media (max-width: 1024px) {
   .noticia-page__images-gallery {
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.25rem;
+    gap: 0.9rem;
+  }
+  
+  .noticia-page__images-section {
+    padding: 0.75rem 0;
   }
 }
 
 @media (max-width: 640px) {
   .noticia-page__images-gallery {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 0.75rem;
   }
   
   .noticia-page__images-section {
-    padding: 1.5rem 0;
+    padding: 0.5rem 0;
   }
 }
 
