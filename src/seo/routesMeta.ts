@@ -10,12 +10,15 @@
  */
 
 import { generateDivulgacionRoutes, generateDivulgacionMeta } from '@/data/generateDivulgacionRoutes';
+import { generateNoticiasRoutes, generateNoticiasMeta } from '@/data/generateNoticiasRoutes';
 
 // ========================================
 // RUTAS DINÁMICAS (AUTOMÁTICAS)
 // ========================================
 const divulgacionRoutes = generateDivulgacionRoutes();
 const divulgacionMeta = generateDivulgacionMeta();
+const noticiasRoutes = generateNoticiasRoutes();
+const noticiasMeta = generateNoticiasMeta();
 
 // ========================================
 // RUTAS ESTÁTICAS (MANUALES)
@@ -57,6 +60,7 @@ export const routesToPrerender: string[] = [
   // RUTAS DINÁMICAS INYECTADAS AUTOMÁTICAMENTE
   // ========================================
   ...divulgacionRoutes,  // /divulgacion/:slug para cada artículo
+  ...noticiasRoutes,     // /noticias/:slug para cada noticia
 ];
 
 // ========================================
@@ -151,4 +155,5 @@ export const routeMeta: Record<string, { title: string; description: string }> =
   // METADATOS DINÁMICOS INYECTADOS AUTOMÁTICAMENTE
   // ========================================
   ...divulgacionMeta,  // Title y description específicos por artículo
+  ...noticiasMeta,     // Title y description específicos por noticia
 };

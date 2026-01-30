@@ -1,6 +1,5 @@
 import React from "react";
 import { Building2, Users, Link as LinkIcon } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import type { Noticia } from "@/types/noticias";
 
 interface NoticiaClosingProps {
@@ -80,17 +79,7 @@ const NoticiaClosing: React.FC<NoticiaClosingProps> = ({ noticia }) => {
           </section>
         )}
 
-        {/* Separador y CTA */}
-        <div className="noticia-page__closing-divider pt-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <p className="text-sm text-gray-600 font-inter">
-            Volver al registro de noticias institucionales
-          </p>
-          <a href="/noticias" className="inline-block">
-            <Button className="transition-all duration-250 hover:translate-y-[-2px] noticia-page__closing-button">
-              ← Ver todas las noticias
-            </Button>
-          </a>
-        </div>
+        <div className="noticia-page__closing-divider pt-8" />
       </div>
     </footer>
   );

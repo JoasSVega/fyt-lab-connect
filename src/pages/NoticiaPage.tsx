@@ -237,6 +237,9 @@ const NoticiaPage: React.FC = () => {
         </div>
       </article>
 
+      {/* Bloque de cierre institucional */}
+      <NoticiaClosing noticia={noticia} />
+
       {/* Compartir noticia */}
       <section className="border-t-2 border-gray-200 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-12 py-12 sm:py-14">
@@ -282,9 +285,6 @@ const NoticiaPage: React.FC = () => {
           </div>
         </div>
       </section>
-
-      {/* Bloque de cierre institucional */}
-      <NoticiaClosing noticia={noticia} />
 
       {/* Contacto flotante */}
       <FloatingContact />
