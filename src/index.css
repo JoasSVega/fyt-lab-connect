@@ -2074,6 +2074,7 @@ body.modal-open .calc-overlay {
   justify-content: center;
   z-index: 51;
   padding: 2rem;
+  box-sizing: border-box;
 }
 
 .noticia-gallery__image-container {
@@ -2083,6 +2084,8 @@ body.modal-open .calc-overlay {
   align-items: center;
   justify-content: center;
   position: relative;
+  max-width: 100vw;
+  box-sizing: border-box;
 }
 
 .noticia-gallery__image {
@@ -2217,6 +2220,8 @@ body.modal-open .calc-overlay {
 @media (max-width: 480px) {
   .noticia-gallery__modal {
     inset: 0;
+    padding: 0;
+    padding-top: 3.5rem;
   }
 
   .noticia-gallery__close {
