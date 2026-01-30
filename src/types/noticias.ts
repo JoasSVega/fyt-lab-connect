@@ -30,6 +30,7 @@ export interface Noticia extends NoticiaOverview {
     institution?: string;
     location?: string;
   };
+}
 
 
 export interface NoticiaUI extends Noticia {
