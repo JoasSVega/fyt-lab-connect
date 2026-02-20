@@ -12,30 +12,14 @@
   environment = { NODE_VERSION = "20" }
 
 # ========================================
-# REDIRECTS PARA SEO (TRAILING SLASHES)
+# NOTA: Los redirects están en public/_redirects
 # ========================================
-
-# ========================================
-# TRAILING SLASH CLEANUP (Primero)
-# ========================================
-
-# Remover trailing slashes de todas las URLs (301 redirect)
-# Este debe estar PRIMERO para que Netlify lo procese antes del SPA routing
-[[redirects]]
-  from = "/*/"
-  to = "/:splat"
-  status = 301
-
-# ========================================
-# SPA ROUTING (Después)
-# ========================================
-
-# Redirigir todas las rutas no encontradas a index.html
-# para que React Router maneje la navegación
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+# Los redirects y rewrite rules están configurados en el archivo _redirects
+# que tiene mayor prioridad que netlify.toml en Netlify.
+# Esto asegura que:
+# 1. Las URLs con trailing slash se redirigen a URLs sin barra (301)
+# 2. El SPA routing funciona correctamente (/*  /index.html con 200)
+# 3. Los archivos estáticos se sirven normalmente
 
 # ========================================
 # HEADERS DE SEGURIDAD Y CACHING
