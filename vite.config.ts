@@ -43,6 +43,7 @@ export default defineConfig(({ mode, command, isSsrBuild }) => ({
     include: [
       'react',
       'react-dom',
+      'react-router-dom',
       '@radix-ui/react-tooltip',
       '@radix-ui/react-primitive',
       '@radix-ui/react-context',
