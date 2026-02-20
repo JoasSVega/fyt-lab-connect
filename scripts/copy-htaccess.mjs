@@ -2,8 +2,11 @@
 /**
  * Copy .htaccess to all prerendered subdirectories
  * 
- * Ensures trailing slash normalization works correctly
- * for all routes in SSG build
+ * IMPORTANTE: Este script solo se ejecuta para deployments en servidores Apache
+ * (como GitHub Pages o servidor propio con Apache).
+ * 
+ * Para Netlify, se ignora porque Netlify usa _redirects (no .htaccess)
+ * y todos los redirects están configurados en public/_redirects
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -14,6 +17,19 @@ const __dirname = path.dirname(__filename);
 const projectRoot = path.resolve(__dirname, '..');
 const distDir = path.join(projectRoot, 'dist');
 const sourceHtaccess = path.join(projectRoot, 'public', '.htaccess');
+
+// ============================================================================
+// SKIP si estamos en Netlify
+// ============================================================================
+// Netlify despliega enviando la variable NETLIFY=true
+// En Netlify, los redirects se manejan SOLO con public/_redirects
+// Los archivos .htaccess se ignoran completamente
+if (process.env.NETLIFY === 'true' || process.env.CONTEXT === 'production' || process.env.CONTEXT === 'deploy-preview') {
+  console.log('ℹ️  Contexto: Netlify detectado');
+  console.log('ℹ️  Los redirects se manejan via public/_redirects (no se copia .htaccess)');
+  console.log('ℹ️  Saltando copia de .htaccess...\n');
+  process.exit(0);
+}
 
 function copyHtaccessToDir(dir) {
   const targetPath = path.join(dir, '.htaccess');
@@ -91,3 +107,4 @@ main().catch((err) => {
   console.error(err.message);
   process.exit(1);
 });
+
