@@ -89,15 +89,8 @@
   <!-- Web App Manifest (PWA metadata) -->
   <link rel="manifest" href="/site.webmanifest" />
   
-  <!-- Preload LCP hero image (WebP variants - Safari compatible) -->
-  <link
-    rel="preload"
-    as="image"
-    href="/images/hero-index-medium-medium.webp"
-    imagesrcset="/images/hero-index-small.webp 400w, /images/hero-index-medium-medium.webp 800w, /images/Hero-Index-large.webp 1200w"
-    imagesizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px"
-    fetchpriority="high"
-  />
+  <!-- NOTA: El preload de hero image se maneja dinámicamente en cada página 
+       para evitar warnings de "preloaded but not used" en páginas que no usan esa imagen -->
 
   <!-- Minimal inline critical CSS for font fallback rendering -->
   <style>

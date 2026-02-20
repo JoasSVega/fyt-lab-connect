@@ -1161,7 +1161,7 @@ const FieldRow: React.FC<FieldRowProps> = React.memo(({ field, modalId, value, o
   if (field.type === 'toggle') {
     return (
       <div className="flex flex-col gap-1">
-        <label className="text-sm font-medium">{commonLabel}</label>
+        {/* Solo usar un label, el que está asociado con el checkbox */}
         <div className="flex items-center gap-2 mt-1">
           <input
             id={baseId}
@@ -1169,8 +1169,9 @@ const FieldRow: React.FC<FieldRowProps> = React.memo(({ field, modalId, value, o
             type="checkbox"
             checked={!!value}
             onChange={(e) => { captureBodyScrollTop(); onValueChange(field.name, e.target.checked); }}
+            aria-label={commonLabel}
           />
-          <label htmlFor={baseId} className="text-sm">{field.placeholder || field.label}</label>
+          <label htmlFor={baseId} className="text-sm font-medium">{commonLabel}</label>
         </div>
       </div>
     );

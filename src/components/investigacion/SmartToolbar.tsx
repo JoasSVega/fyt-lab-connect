@@ -157,11 +157,14 @@ const SmartToolbar: React.FC<SmartToolbarProps> = ({
           <div className="relative w-full md:w-96">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none" />
             <input
+              id="search-toolbar"
+              name="search"
               type="text"
               value={searchQuery}
               onChange={(e) => onSearchChange(e.target.value)}
               placeholder="Buscar por título, autor..."
               className="pl-10 pr-4 py-2 bg-gray-50 border-none rounded-full w-full text-sm text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 transition-all"
+              aria-label="Buscar publicaciones por título o autor"
             />
           </div>
 

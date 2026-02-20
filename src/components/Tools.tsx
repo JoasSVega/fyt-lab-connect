@@ -314,11 +314,14 @@ const Tools = () => {
                   <div className="relative flex-1">
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
                     <Input
+                      id="search-medicamento"
+                      name="search"
                       placeholder="Buscar medicamento (ej: morfina, paracetamol)..."
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
                       onKeyPress={handleKeyPress}
                       className="pl-10"
+                      aria-label="Buscar medicamento por nombre"
                     />
                   </div>
                   <Button 
