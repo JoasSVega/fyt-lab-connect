@@ -59,6 +59,24 @@ function validateHead(head, routePath) {
 }
 
 /**
+ * Sanitiza el HTML removiendo comentarios y templates de error de React SSR
+ * Estos contienen file:// URLs que causan errores de MIME type en el navegador
+ */
+function sanitizeHTML(html) {
+  // Remover comentarios de React Suspense (<!--$!--> y <!--/$-->)
+  let cleaned = html.replace(/<!--\$!-->/g, '');
+  cleaned = cleaned.replace(/<!--\/\$-->/g, '');
+  
+  // Remover templates con mensajes de error de SSR que contienen file:// URLs
+  cleaned = cleaned.replace(/<template[^>]*data-msg="[^"]*"[^>]*data-stck="[^"]*"[^>]*><\/template>/gi, '');
+  
+  // Remover cualquier comentario con file:// URLs
+  cleaned = cleaned.replace(/<!--[\s\S]*?file:\/\/[\s\S]*?-->/gi, '');
+  
+  return cleaned;
+}
+
+/**
  * Escribe el HTML prerenderizado para una ruta específica
  */
 function writeHTMLForRoute(routePath, head, html) {
@@ -78,10 +96,13 @@ function writeHTMLForRoute(routePath, head, html) {
   clientIndex = clientIndex.replace(/<meta\s+property=["']og:[^"']+["'][^>]*>/gi, '');
   clientIndex = clientIndex.replace(/<meta\s+name=["']twitter:[^"']+["'][^>]*>/gi, '');
 
+  // Sanitizar el HTML para remover errores de SSR
+  const sanitizedHTML = sanitizeHTML(html);
+
   // Inyectar head SSR antes del cierre de </head>
   const result = clientIndex
     .replace('</head>', `${head}\n</head>`)
-    .replace('<div id="root"></div>', `<div id="root">${html}</div>`);
+    .replace('<div id="root"></div>', `<div id="root">${sanitizedHTML}</div>`);
 
   fs.writeFileSync(targetFile, result, 'utf-8');
   

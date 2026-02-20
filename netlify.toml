@@ -16,6 +16,9 @@
 # ========================================
 # Solo reescribir URLs no encontradas a /index.html
 # React Router se encarga del trailing slash removal
+# 
+# IMPORTANTE: Netlify solo aplica este rewrite si el archivo NO existe
+# Los archivos en /assets/, /images/, etc. se sirven normalmente
 [[redirects]]
   from = "/*"
   to = "/index.html"
@@ -26,7 +29,21 @@
 # HEADERS DE SEGURIDAD Y CACHING
 # ========================================
 
-# Cache de assets estáticos (JS, CSS, imágenes)
+# JavaScript - MIME type correcto y cache largo
+[[headers]]
+  for = "/assets/*.js"
+  [headers.values]
+    Content-Type = "application/javascript; charset=utf-8"
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# CSS - MIME type correcto y cache largo
+[[headers]]
+  for = "/assets/*.css"
+  [headers.values]
+    Content-Type = "text/css; charset=utf-8"
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Cache de assets estáticos (imágenes, fuentes)
 [[headers]]
   for = "/assets/*"
   [headers.values]
