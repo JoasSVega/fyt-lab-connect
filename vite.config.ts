@@ -64,32 +64,61 @@ export default defineConfig(({ mode, command, isSsrBuild }) => ({
         drop_console: mode === 'production',
         drop_debugger: true,
         pure_funcs: mode === 'production' ? ['console.log', 'console.info', 'console.debug'] : [],
-        passes: 2,
+        passes: 3, // Aumentado de 2 a 3 para mejor compresión
       },
       format: {
         comments: false,
       },
+      mangle: {
+        safari10: false, // Faster on modern browsers
+      },
     },
     cssMinify: true,
+    // Rollup configuration
     rollupOptions: {
+      treeshake: {
+        moduleSideEffects: false, // Better tree-shaking
+        propertyReadSideEffects: false,
+        tryCatchDeoptimization: false,
+      },
       output: {
         manualChunks: (id) => {
-          // Chunk heavy dependencies separately for better caching
+          // Chunk heavy dependencies separately for better caching and tree-shaking
           if (id.includes('node_modules')) {
             // Core React libraries - loaded first, cached long-term
-            if (id.includes('react') || id.includes('react-dom')) {
-              return 'vendor';
+            if (id.includes('react') && !id.includes('@')) {
+              return 'react-core';
+            }
+            if (id.includes('react-dom')) {
+              return 'react-core';
+            }
+            // Router library - needed for all routes
+            if (id.includes('react-router-dom')) {
+              return 'react-router';
             }
             // Animation library - loaded on-demand for interactive components
             if (id.includes('framer-motion')) return 'motion';
-            // Math rendering - large but only needed on specific pages
+            // Math rendering - large but only needed on specific pages with KaTeX
             if (id.includes('katex')) return 'katex';
             // Charts libraries - only for data visualization pages
             if (id.includes('recharts') || id.includes('victory')) return 'charts';
-            // UI component primitives - shared across routes
-            if (id.includes('@radix-ui')) return 'radix';
-            // Carousel/image libraries
+            // Query library - used across the app
+            if (id.includes('@tanstack/react-query')) return 'query';
+            // Form libraries
+            if (id.includes('react-hook-form') || id.includes('zod')) return 'forms';
+            // Individual Radix UI libs to enable tree-shaking
+            if (id.includes('@radix-ui/react-dialog')) return 'radix-dialog';
+            if (id.includes('@radix-ui/react-select')) return 'radix-select';
+            if (id.includes('@radix-ui/react-tooltip')) return 'radix-tooltip';
+            if (id.includes('@radix-ui')) return 'radix-ui';
+            // Carousel/image libraries - lazy loaded on tool pages
             if (id.includes('embla')) return 'carousel';
+            // Icons library - shared across all pages
+            if (id.includes('lucide-react')) return 'icons';
+            // Utilities that might not be fully tree-shaken
+            if (id.includes('class-variance-authority') || id.includes('clsx')) return 'class-utils';
+            // Toast/notification library
+            if (id.includes('sonner')) return 'sonner';
             // Everything else goes to vendor
             return 'vendor';
           }
@@ -100,8 +129,8 @@ export default defineConfig(({ mode, command, isSsrBuild }) => ({
         assetFileNames: 'assets/[name]-[hash].[ext]',
       },
     },
-    // Optimize chunk size warnings
-    chunkSizeWarningLimit: 1000,
+    // Optimize chunk size warnings - mobile-first target
+    chunkSizeWarningLimit: 500, // Target 500 KiB max for better mobile experience
   },
   test: {
     environment: 'jsdom',

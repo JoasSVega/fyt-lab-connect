@@ -50,10 +50,10 @@ const PrivacyPolicy = React.lazy(() => import("./pages/PrivacyPolicy"));
 const TermsOfUse = React.lazy(() => import("./pages/TermsOfUse"));
 const CodeOfEthics = React.lazy(() => import("./pages/CodeOfEthics"));
 
-// Componentes core lazy loaded
-const Navbar = React.lazy(() => import("./components/Navbar"));
+// Componentes core - EAGERLY LOADED para reducir FCP
+import Navbar from "./components/Navbar";
 const ScrollToTop = React.lazy(() => import("./components/ScrollToTop"));
-const Footer = React.lazy(() => import("./components/Footer"));
+import Footer from "./components/Footer";
 const TitleSync = React.lazy(() => import("./components/TitleSync"));
 const AccessibleH1 = React.lazy(() => import("./components/AccessibleH1"));
 const ErrorBoundary = React.lazy(() => import("./components/ErrorBoundary"));
@@ -154,7 +154,7 @@ const App: React.FC = () => {
   // en TransitionProvider; no se requiere gestión local aquí.
 
   // Aplica automáticamente la clase de mejora de legibilidad a botones con texto blanco y fondo sólido.
-  // Optimized: debounced observer to reduce performance impact
+  // Optimized: single run only, no MutationObserver to avoid forced reflows
   useEffect(() => {
     const applyEnhancement = () => {
       const candidates = Array.from(document.querySelectorAll('button.text-white, a.text-white, [role="button"].text-white')) as HTMLElement[];
@@ -177,34 +177,13 @@ const App: React.FC = () => {
       });
     };
     
-    // Primera aplicación diferida para no bloquear FCP
-    // Safari: polyfill de requestIdleCallback cargado en index.html
+    // Ejecutar una vez después del pintado inicial sin observar mutaciones posteriores
+    // Esto reduce forced reflows y es más eficiente para sitios estáticos generados
     if (typeof requestIdleCallback !== 'undefined') {
       requestIdleCallback(applyEnhancement);
     } else {
       setTimeout(applyEnhancement, 100);
     }
-    
-    // Observa mutaciones con debounce para reducir overhead
-    let timeoutId: number | null = null;
-    const debouncedApply = () => {
-      if (timeoutId) clearTimeout(timeoutId);
-      timeoutId = window.setTimeout(applyEnhancement, 150);
-    };
-    
-    const observer = new MutationObserver(mutations => {
-      for (const m of mutations) {
-        if (m.addedNodes.length) {
-          debouncedApply();
-          break; // Solo llamar una vez por batch
-        }
-      }
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
-    return () => {
-      observer.disconnect();
-      if (timeoutId) clearTimeout(timeoutId);
-    };
   }, []);
 
   const shell = (

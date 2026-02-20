@@ -45,10 +45,6 @@
   <meta name="description" content="Investigación en Farmacología y Terapéutica de la Universidad de Cartagena. Proyectos, publicaciones y herramientas científicas." />
   
   <!-- Performance: Preconnect to Google Fonts to shorten the critical chain -->
-  <!-- Critical preconnects -->
-  <link rel="preconnect" href="https://fyt-lab-connect.lovable.app" crossorigin />
-  <link rel="dns-prefetch" href="https://fyt-lab-connect.lovable.app" />
-  
   <!-- Google Fonts: Preconnect with crossorigin for optimal loading -->
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -92,37 +88,71 @@
   <!-- NOTA: El preload de hero image se maneja dinámicamente en cada página 
        para evitar warnings de "preloaded but not used" en páginas que no usan esa imagen -->
 
-  <!-- Minimal inline critical CSS for font fallback rendering -->
+  <!-- Minimal inline critical CSS for first contentful paint -->
   <style>
-    /* System font stack for immediate text rendering before Google Fonts load */
+    :root {
+      --fyt-blue: 195 100% 50%;
+      --fyt-purple: 271 76% 53%;
+      --fyt-dark: 0 0% 15%;
+      --primary: var(--fyt-blue);
+      --primary-foreground: 0 0% 100%;
+      --border: 220 13% 91%;
+      --background: 0 0% 100%;
+      --foreground: 222.2 84% 4.9%;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: hsl(var(--background));
+      color: hsl(var(--foreground));
+      line-height: 1.5;
     }
-    /* Optimized font fallbacks to match Google Fonts metrics (reduces CLS) */
-    @font-face {
-      font-family: 'Poppins Fallback';
-      src: local('Arial');
-      size-adjust: 107%;
-      ascent-override: 92%;
-      descent-override: 25%;
-      line-gap-override: 0%;
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      background-color: white;
+      border-bottom: 1px solid hsl(var(--border));
     }
-    @font-face {
-      font-family: 'Raleway Fallback';
-      src: local('Arial');
-      size-adjust: 99%;
-      ascent-override: 93%;
-      descent-override: 25%;
-      line-gap-override: 0%;
+    nav img { height: 2.5rem; width: auto; display: block; object-fit: contain; }
+    .hero-container {
+      position: relative;
+      width: 100%;
+      height: 25rem;
+      overflow: hidden;
+      background-color: #f8fafc;
     }
-    @font-face {
-      font-family: 'Inter Fallback';
-      src: local('Arial');
-      size-adjust: 107%;
-      ascent-override: 90%;
-      descent-override: 22%;
-      line-gap-override: 0%;
+    .hero-image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
     }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.4);
+      z-index: 1;
+    }
+    .hero-title, .hero-subtitle {
+      position: relative;
+      z-index: 2;
+      color: white;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+    .hero-title { font-size: 1.875rem; font-weight: 700; line-height: 1.2; margin-bottom: 1.5rem; }
+    .hero-subtitle { font-size: 1rem; line-height: 1.6; margin-bottom: 2rem; }
+    button { font-family: inherit; font-size: 1rem; border: none; background: none; cursor: pointer; padding: 0; }
+    a { color: hsl(var(--primary)); text-decoration: none; }
+    main { position: relative; z-index: 0; width: 100%; background-color: #f8fafc; }
+    .container { width: 100%; max-width: 1280px; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem; }
+    @media (min-width: 640px) { .container { padding-left: 1.5rem; padding-right: 1.5rem; } }
+    @media (min-width: 1024px) { .container { padding-left: 2rem; padding-right: 2rem; } }
   </style>
 
   <!-- KaTeX CSS: hint early with preload from CDN; non-blocking load -->

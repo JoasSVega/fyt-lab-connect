@@ -7,9 +7,12 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{ts,tsx,js,jsx}",
+    // Exclude node_modules and dist from scanning
+    "!./node_modules/**",
+    "!./dist/**",
   ],
   prefix: "",
-  // Optimize for production: remove unused styles
+  // Aggressive purging: only keep explicitly used classes
   safelist: [
     // Keep critical utility classes that might be dynamically generated
     'hero-container',
@@ -17,6 +20,30 @@ export default {
     'hero-overlay',
     'hero-title',
     'hero-subtitle',
+    'hero-content-left',
+    'hero-text-shadow',
+    // Color classes generated dynamically for icons
+    'text-blue-600',
+    'text-purple-600',
+    'text-green-600',
+    'text-orange-600',
+    'text-slate-600',
+    'text-teal-600',
+    'bg-blue-50',
+    'bg-purple-50',
+    'bg-green-50',
+    'bg-orange-50',
+    'bg-slate-100',
+    'bg-teal-50',
+    // Button variants
+    'btn-text-enhanced',
+    'btn-solid-interactive',
+    'cta-button',
+    'cta-primary',
+    'cta-secondary',
+    // Form states
+    'focus:ring-2',
+    'focus:ring-offset-2',
   ],
   theme: {
     container: {
