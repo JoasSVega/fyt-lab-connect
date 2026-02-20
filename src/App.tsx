@@ -58,6 +58,9 @@ const TitleSync = React.lazy(() => import("./components/TitleSync"));
 const AccessibleH1 = React.lazy(() => import("./components/AccessibleH1"));
 const ErrorBoundary = React.lazy(() => import("./components/ErrorBoundary"));
 
+// TrailingSlashNormalizer - normaliza URLs con trailing slash
+import TrailingSlashNormalizer from "./components/TrailingSlashNormalizer";
+
 import Loader from "./components/Loader";
 import TopLoader from "./components/loaders/TopLoader";
 import PageLoader from "./components/loaders/PageLoader";
@@ -210,6 +213,8 @@ const App: React.FC = () => {
       <Sonner />
       <TransitionProvider>
         <React.Suspense fallback={null}>
+          {/* Normalizar trailing slashes ANTES de cualquier otra lógica */}
+          <TrailingSlashNormalizer />
           <ScrollToTop />
           {/* TitleSync deshabilitado: conflicto con Seo.tsx que gestiona títulos por página */}
           {/* <TitleSync /> */}

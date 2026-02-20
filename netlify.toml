@@ -12,23 +12,10 @@
   environment = { NODE_VERSION = "20" }
 
 # ========================================
-# REDIRECTS CON FUERZA (force=true)
+# SPA ROUTING - Simple y sin loops
 # ========================================
-# Estos redirects se ejecutan INCLUSO SI EL ARCHIVO EXISTE
-# Esto es crítico para remover trailing slashes
-
-# TRAILING SLASH REMOVAL (debe estar PRIMERO cuando force=true)
-# Redirigir URLs con trailing slash a versión sin barra
-# force=true fuerza el redirect även si /investigacion/index.html existe
-[[redirects]]
-  from = "/*/"
-  to = "/:splat"
-  status = 301
-  force = true
-
-# SPA ROUTING (debe estar DESPUÉS del trailing slash)
-# Reescribir todas las rutas no encontradas a /index.html
-# para que React Router maneje la navegación
+# Solo reescribir URLs no encontradas a /index.html
+# React Router se encarga del trailing slash removal
 [[redirects]]
   from = "/*"
   to = "/index.html"
