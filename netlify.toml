@@ -12,14 +12,28 @@
   environment = { NODE_VERSION = "20" }
 
 # ========================================
-# NOTA: Los redirects están en public/_redirects
+# REDIRECTS CON FUERZA (force=true)
 # ========================================
-# Los redirects y rewrite rules están configurados en el archivo _redirects
-# que tiene mayor prioridad que netlify.toml en Netlify.
-# Esto asegura que:
-# 1. Las URLs con trailing slash se redirigen a URLs sin barra (301)
-# 2. El SPA routing funciona correctamente (/*  /index.html con 200)
-# 3. Los archivos estáticos se sirven normalmente
+# Estos redirects se ejecutan INCLUSO SI EL ARCHIVO EXISTE
+# Esto es crítico para remover trailing slashes
+
+# TRAILING SLASH REMOVAL (debe estar PRIMERO cuando force=true)
+# Redirigir URLs con trailing slash a versión sin barra
+# force=true fuerza el redirect även si /investigacion/index.html existe
+[[redirects]]
+  from = "/*/"
+  to = "/:splat"
+  status = 301
+  force = true
+
+# SPA ROUTING (debe estar DESPUÉS del trailing slash)
+# Reescribir todas las rutas no encontradas a /index.html
+# para que React Router maneje la navegación
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
 
 # ========================================
 # HEADERS DE SEGURIDAD Y CACHING
