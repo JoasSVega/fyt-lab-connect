@@ -1,0 +1,19 @@
+# Redirects para Netlify
+# Este archivo tiene mayor prioridad que netlify.toml
+
+# 1. TRAILING SLASH REMOVAL (301 redirect)
+# Redirige cualquier URL con trailing slash a la versión sin barra
+# Ejemplo: /investigacion/ → /investigacion
+/(.*)/$  /:1  301!
+
+# 2. SPA ROUTING (200 rewrite)
+# Todas las rutas no encontradas se reescriben a index.html
+# Esto permite que React Router maneje la navegación
+/*  /index.html  200
+
+# 3. ARCHIVOS ESTÁTICOS (no modificar)
+# Las rutas a archivos reales (JS, CSS, imágenes) se sirven como están
+/assets/*  200
+/images/*  200
+/favicon*  200
+/logo*  200
