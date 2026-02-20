@@ -348,6 +348,7 @@ const ContactPremium = () => {
                     id="name"
                     name="name"
                     type="text"
+                    autoComplete="name"
                     value={formData.name}
                     onChange={handleInputChange}
                     placeholder="Tu nombre completo"
@@ -365,6 +366,7 @@ const ContactPremium = () => {
                     id="email"
                     name="email"
                     type="email"
+                    autoComplete="email"
                     value={formData.email}
                     onChange={handleInputChange}
                     placeholder="tu@email.com"
@@ -375,7 +377,7 @@ const ContactPremium = () => {
 
                 {/* Subject Select */}
                 <div className="space-y-2">
-                  <Label htmlFor="subject" className="text-sm font-medium text-fyt-dark">
+                  <Label className="text-sm font-medium text-fyt-dark">
                     Asunto *
                   </Label>
                   <Select onValueChange={handleSubjectChange}>
@@ -400,6 +402,7 @@ const ContactPremium = () => {
                   <Textarea
                     id="message"
                     name="message"
+                    autoComplete="off"
                     value={formData.message}
                     onChange={handleInputChange}
                     placeholder="Cuéntanos en qué podemos ayudarte..."

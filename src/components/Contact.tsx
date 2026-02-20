@@ -186,6 +186,7 @@ const Contact = () => {
                     id="name"
                     name="name"
                     type="text"
+                    autoComplete="name"
                     value={formData.name}
                     onChange={handleInputChange}
                     placeholder="Tu nombre completo"
@@ -199,6 +200,7 @@ const Contact = () => {
                     id="email"
                     name="email"
                     type="email"
+                    autoComplete="email"
                     value={formData.email}
                     onChange={handleInputChange}
                     placeholder="tu@email.com"
@@ -212,6 +214,7 @@ const Contact = () => {
                     id="subject"
                     name="subject"
                     type="text"
+                    autoComplete="off"
                     value={formData.subject}
                     onChange={handleInputChange}
                     placeholder="¿En qué podemos ayudarte?"
@@ -224,6 +227,7 @@ const Contact = () => {
                   <Textarea
                     id="message"
                     name="message"
+                    autoComplete="off"
                     value={formData.message}
                     onChange={handleInputChange}
                     placeholder="Escribe tu mensaje aquí..."
