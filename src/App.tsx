@@ -50,10 +50,10 @@ const PrivacyPolicy = React.lazy(() => import("./pages/PrivacyPolicy"));
 const TermsOfUse = React.lazy(() => import("./pages/TermsOfUse"));
 const CodeOfEthics = React.lazy(() => import("./pages/CodeOfEthics"));
 
-// Componentes core - EAGERLY LOADED para reducir FCP
-import Navbar from "./components/Navbar";
+// Componentes core lazy loaded
+const Navbar = React.lazy(() => import("./components/Navbar"));
 const ScrollToTop = React.lazy(() => import("./components/ScrollToTop"));
-import Footer from "./components/Footer";
+const Footer = React.lazy(() => import("./components/Footer"));
 const TitleSync = React.lazy(() => import("./components/TitleSync"));
 const AccessibleH1 = React.lazy(() => import("./components/AccessibleH1"));
 const ErrorBoundary = React.lazy(() => import("./components/ErrorBoundary"));
@@ -154,22 +154,26 @@ const App: React.FC = () => {
   // en TransitionProvider; no se requiere gestión local aquí.
 
   // Aplica automáticamente la clase de mejora de legibilidad a botones con texto blanco y fondo sólido.
-  // Optimized: single run only, no MutationObserver to avoid forced reflows
+  // Optimized: single-run observer to avoid excessive reflows
   useEffect(() => {
     const applyEnhancement = () => {
       const candidates = Array.from(document.querySelectorAll('button.text-white, a.text-white, [role="button"].text-white')) as HTMLElement[];
+      const seen = new Set<HTMLElement>();
+      
       candidates.forEach(el => {
-        if (el.classList.contains('btn-text-enhanced')) return;
+        if (seen.has(el) || el.classList.contains('btn-text-enhanced')) return;
+        seen.add(el);
+        
         const cls = el.className;
         // Detectar clases de fondo sólidas generadas por Tailwind (bg-*) excluyendo bg-transparent
         const hasBgClass = /(^|\s)bg-[^\s]+/.test(cls) && !/(^|\s)bg-transparent(\s|$)/.test(cls);
-        // Detectar uso de bg arbitrario como bg-[#9333ea] (Tailwind JIT genera una clase con ese patrón)
+        // Detectar uso de bg arbitrario como bg-[#9333ea]
         const hasArbitraryBg = /bg-\[/.test(cls);
         // O fondo inline style distinto de transparente
         const inlineBg = el.style.backgroundColor && el.style.backgroundColor !== 'transparent';
+        
         if (hasBgClass || hasArbitraryBg || inlineBg) {
           el.classList.add('btn-text-enhanced');
-          // Añadir clase de interacción corporativa unificada
           if (!el.classList.contains('btn-solid-interactive')) {
             el.classList.add('btn-solid-interactive');
           }
@@ -177,13 +181,27 @@ const App: React.FC = () => {
       });
     };
     
-    // Ejecutar una vez después del pintado inicial sin observar mutaciones posteriores
-    // Esto reduce forced reflows y es más eficiente para sitios estáticos generados
+    // Primera aplicación diferida para no bloquear FCP
     if (typeof requestIdleCallback !== 'undefined') {
       requestIdleCallback(applyEnhancement);
     } else {
       setTimeout(applyEnhancement, 100);
     }
+    
+    // Observer de una sola ejecución para páginas dinámicas
+    let observerActive = true;
+    const observer = new MutationObserver(() => {
+      if (observerActive) {
+        observerActive = false; // Disable after first run to prevent thrashing
+        applyEnhancement();
+        setTimeout(() => { observerActive = true; }, 500); // Re-enable after 500ms
+      }
+    });
+    
+    observer.observe(document.body, { childList: true, subtree: true });
+    return () => {
+      observer.disconnect();
+    };
   }, []);
 
   const shell = (

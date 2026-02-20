@@ -7,12 +7,9 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{ts,tsx,js,jsx}",
-    // Exclude node_modules and dist from scanning
-    "!./node_modules/**",
-    "!./dist/**",
   ],
   prefix: "",
-  // Aggressive purging: only keep explicitly used classes
+  // Optimize for production: remove unused styles
   safelist: [
     // Keep critical utility classes that might be dynamically generated
     'hero-container',
