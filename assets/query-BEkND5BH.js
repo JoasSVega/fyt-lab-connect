@@ -1,1 +1,0 @@
-import{r as e,j as r}from"./react-core-CLqPiW5B.js";var t=e.createContext(void 0),o=({client:o,children:a})=>(e.useEffect(()=>(o.mount(),()=>{o.unmount()}),[o]),r.jsx(t.Provider,{value:o,children:a}));export{o as Q};
