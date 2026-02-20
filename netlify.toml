@@ -16,7 +16,18 @@
 # ========================================
 
 # ========================================
-# SPA ROUTING (Primero)
+# TRAILING SLASH CLEANUP (Primero)
+# ========================================
+
+# Remover trailing slashes de todas las URLs (301 redirect)
+# Este debe estar PRIMERO para que Netlify lo procese antes del SPA routing
+[[redirects]]
+  from = "/*/"
+  to = "/:splat"
+  status = 301
+
+# ========================================
+# SPA ROUTING (Después)
 # ========================================
 
 # Redirigir todas las rutas no encontradas a index.html
@@ -25,13 +36,6 @@
   from = "/*"
   to = "/index.html"
   status = 200
-
-# Remover trailing slashes de todas las URLs (301 redirect)
-# IMPORTANTE: Este redirect debe estar DESPUÉS del SPA routing
-[[redirects]]
-  from = "/*/"
-  to = "/:splat"
-  status = 301
 
 # ========================================
 # HEADERS DE SEGURIDAD Y CACHING
