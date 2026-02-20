@@ -1,0 +1,1 @@
+import{i as o,r}from"./react-core-CLqPiW5B.js";import"./vendor-CtBbLmb7.js";import"./carousel-C_HEXgyx.js";const t=()=>{const{pathname:t}=o();return r.useEffect(()=>{window.__routeTransitionActive||window.scrollTo({top:0,behavior:"smooth"})},[t]),null};export{t as default};
