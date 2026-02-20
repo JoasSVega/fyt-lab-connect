@@ -10,7 +10,6 @@ const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
   // Preload logo variants to ensure they're cached before showing (mobile-first: no -large)
   useImagePreloader([
     '/images/logo-fyt-small.webp',
-    '/images/logo-fyt-medium.webp',
   ], { priority: 'critical', timeout: 5000 });
 
   // Timing optimizado (más rápido, sin demora al final):
@@ -71,27 +70,17 @@ const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
         }}
         className="relative z-10"
       >
-        <picture>
-          <source
-            media="(min-width: 1280px)"
-            srcSet="/images/logo-fyt-medium.webp"
-          />
-          <source
-            media="(min-width: 640px)"
-            srcSet="/images/logo-fyt-medium.webp"
-          />
-          <img
-            src="/images/logo-fyt-small.webp"
-            alt="Logo Grupo FyT"
-            loading="eager"
-            decoding="async"
-            ref={imgRef}
-            className="w-64 h-auto"
-            width={256}
-            height={256}
-            style={{ maxWidth: "256px" }}
-          />
-        </picture>
+        <img
+          src="/images/logo-fyt-small.webp"
+          alt="Logo Grupo FyT"
+          loading="eager"
+          decoding="async"
+          ref={imgRef}
+          className="w-64 h-auto"
+          width={256}
+          height={223}
+          style={{ maxWidth: "256px" }}
+        />
       </motion.div>
     </motion.div>
   );
