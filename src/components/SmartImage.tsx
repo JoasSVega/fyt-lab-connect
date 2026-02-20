@@ -95,11 +95,12 @@ const USAGE_SIZES: Record<ImageUsage, string> = {
   hero: '100vw',
   
   // Card: Para carruseles y grids responsivos (MOBILE FIRST)
-  // Móvil: 100vw (dice que ocupa todo el ancho pero srcSet limitado fuerza small/medium)
-  // Tablet: 50vw (fuerza medium sobre small en tablets)
-  // Desktop: 33vw (permite medium en escritorio)
-  // El "tamaño mentiroso" combinado con srcSet limitado (sin large) fuerza descarga ligera
-  card: '(max-width: 640px) 400px, (max-width: 1024px) 600px, 400px',
+  // Google PageSpeed detectó: dimensiones reales en móvil = 455x455px
+  // Ajustado para coincidir con las dimensiones reales mostradas
+  // Móvil (<640px): 455px (valor real medido en Chrome DevTools móvil)
+  // Tablet (640-1024px): 600px (mantiene medium)
+  // Desktop (>1024px): 455px (regresa a card compacto)
+  card: '(max-width: 640px) 455px, (max-width: 1024px) 600px, 455px',
   
   // Avatar: Tamaño fijo para logos/perfiles
   avatar: '100px',
@@ -113,11 +114,13 @@ const USAGE_SIZES: Record<ImageUsage, string> = {
 
 /**
  * Configuración de anchos descriptores para cada variante
- * NOTA: Solo small y medium para mobile-first (large está prohibido en srcSet)
+ * IMPORTANTE: Deben coincidir con las dimensiones REALES de las imágenes generadas
+ * - small.webp: 800x689px reales (no 500px!)
+ * - medium.webp: 1024x882px reales
  */
 const VARIANT_WIDTHS = {
-  small: 500,  // Móvil estándar (aumentado de 480 para mejor cobertura)
-  medium: 800, // Tablet y pantallas medianas
+  small: 800,  // Ancho REAL de -small.webp generado
+  medium: 1024, // Ancho REAL de -medium.webp generado
   // large NUNCA aparece en srcSet - solo como fallback en casos especiales
 };
 
