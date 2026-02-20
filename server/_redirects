@@ -1,11 +1,2 @@
-# Redirects para Netlify
-# Documentacion: https://docs.netlify.com/routing/redirects/
-
-# SPA ROUTING - debe estar PRIMERO
-# Reescribir todas las rutas no encontradas a /index.html
-/*  /index.html  200
-
-# TRAILING SLASH REMOVAL - debe estar DESPUES del SPA routing
-# Redirigir URLs con trailing slash a version sin barra
-# Ejemplo: /investigacion/ → /investigacion (301 permanente)
-/*/  /:splat  301
+# Este archivo se puede eliminar - los redirects definitivos estan en netlify.toml
+# Netlify usa netlify.toml si existe (tiene prioridad)
