@@ -97,6 +97,7 @@ const Navbar = () => {
                   className="h-10 w-auto object-contain"
                   loading="eager"
                   fetchpriority="high"
+                  decoding="async"
                 />
             </div>
               <div className="text-lg font-poppins font-bold text-slate-900 group-hover:text-fyt-blue transition-colors duration-250">

@@ -49,14 +49,14 @@ const IndexTools: FC = () => {
         {/* Imagen de fondo unificada */}
         <picture>
           <source 
+            media="(min-width: 1280px)"
             srcSet="/images/hero-herramientas-large.webp" 
-            media="(min-width: 1280px)" 
           />
           <source 
+            media="(min-width: 640px)"
             srcSet="/images/hero-herramientas-medium.webp" 
-            media="(min-width: 640px)" 
           />
-          <SafeImage 
+          <img 
             src="/images/hero-herramientas-small.webp" 
             alt="" 
             className="hero-image" 
@@ -64,6 +64,7 @@ const IndexTools: FC = () => {
             width={1920}
             height={1080}
             loading="eager"
+            decoding="async"
             fetchpriority="high"
           />
         </picture>

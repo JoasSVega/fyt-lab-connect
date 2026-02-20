@@ -151,11 +151,10 @@ const ContactPremium = () => {
       {/* Hero Section with Background Image */}
       <section className="hero-container" aria-label="Hero Contacto">
         <picture>
-          <source srcSet="/images/hero-contacto-large.webp" media="(min-width: 1280px)" />
-          <source srcSet="/images/hero-contacto-medium.webp" media="(min-width: 640px)" />
-          <SafeImage
+          <source media="(min-width: 1280px)" srcSet="/images/hero-contacto-large.webp" />
+          <source media="(min-width: 640px)" srcSet="/images/hero-contacto-medium.webp" />
+          <img
             src="/images/hero-contacto-small.webp"
-            fallbackSrc="/images/hero-contacto.png"
             alt="Laboratorio de investigación"
             className="hero-image"
             aria-hidden="true"

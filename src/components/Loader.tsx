@@ -7,11 +7,10 @@ interface LoaderProps {
 }
 
 const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
-  // Preload logo variants to ensure they're cached before showing
+  // Preload logo variants to ensure they're cached before showing (mobile-first: no -large)
   useImagePreloader([
     '/images/logo-fyt-small.webp',
     '/images/logo-fyt-medium.webp',
-    '/images/logo-fyt-large.webp',
   ], { priority: 'critical', timeout: 5000 });
 
   // Timing optimizado (más rápido, sin demora al final):
@@ -74,12 +73,12 @@ const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
       >
         <picture>
           <source
-            srcSet="/images/logo-fyt-large.webp"
             media="(min-width: 1280px)"
+            srcSet="/images/logo-fyt-medium.webp"
           />
           <source
-            srcSet="/images/logo-fyt-medium.webp"
             media="(min-width: 640px)"
+            srcSet="/images/logo-fyt-medium.webp"
           />
           <img
             src="/images/logo-fyt-small.webp"

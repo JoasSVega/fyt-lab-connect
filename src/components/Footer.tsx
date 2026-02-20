@@ -16,16 +16,16 @@ const Footer: React.FC = () => {
           <div className="flex flex-col min-w-[220px] col-span-1">
             <div className="flex items-center gap-4 mb-4">
               <SafeImage
-                src="/images/logo-fyt-medium.webp"
-                srcSet="/images/logo-fyt-small.webp 96w, /images/logo-fyt-medium.webp 192w, /images/logo-fyt-large.webp 288w"
-                sizes="(max-width: 640px) 150px, 300px"
+                src="/images/logo-fyt-small.webp"
+                srcSet="/images/logo-fyt-small.webp 96w, /images/logo-fyt-medium.webp 192w"
+                sizes="(max-width: 640px) 96px, 192px"
                 alt="Logo Grupo FyT"
                 loading="lazy"
                 decoding="async"
                 fetchpriority="low"
-                className="w-20 h-20 sm:w-24 sm:h-24 object-contain drop-shadow-2xl transition-all duration-300"
-                width={96}
-                height={96}
+                className="w-24 h-24 object-contain drop-shadow-2xl transition-all duration-300"
+                width={120}
+                height={40}
               />
               <div>
                 <h3 className="text-xl font-bold text-slate-900 tracking-tight font-poppins">

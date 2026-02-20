@@ -88,11 +88,10 @@ const DivulgacionPage: React.FC = () => {
       {/* Hero Section con imagen */}
       <section className="hero-container" aria-label="Hero Divulgación">
         <picture>
-          <source srcSet="/images/hero-divulgacion-large.webp" media="(min-width: 1280px)" />
-          <source srcSet="/images/hero-divulgacion-medium.webp" media="(min-width: 640px)" />
-          <SafeImage
+          <source media="(min-width: 1280px)" srcSet="/images/hero-divulgacion-large.webp" />
+          <source media="(min-width: 640px)" srcSet="/images/hero-divulgacion-medium.webp" />
+          <img
             src="/images/hero-divulgacion-small.webp"
-            fallbackSrc="/images/hero-divulgacion.png"
             alt="Divulgación científica"
             className="hero-image"
             aria-hidden="true"

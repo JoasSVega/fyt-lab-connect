@@ -74,37 +74,37 @@ const About = () => {
       title: "Atención Farmacéutica y Farmacia Asistencial",
       description:
         "Optimización del uso de medicamentos a través de la atención farmacéutica directa al paciente, educación sanitaria y seguimiento farmacoterapéutico.",
-      image: "/images/Carrusel/Farmacia-Asistencial-medium.webp",
+      image: "/images/Carrusel/Farmacia-Asistencial",
     },
     {
       title: "Diseño de Fármacos por Simulación y Modelización Molecular",
       description:
         "Aplicación de métodos computacionales y modelos moleculares para el diseño racional de nuevos fármacos.",
-      image: "/images/Carrusel/Estudios-In-silico-medium.webp",
+      image: "/images/Carrusel/Estudios-In-silico",
     },
     {
       title: "Farmacoeconomia",
       description:
         "Evaluación comparativa del costo, efectividad y eficiencia de tratamientos y tecnologías farmacéuticas. Se generan análisis costo-beneficio, costo-efectividad y costo-utilidad para optimizar la toma de decisiones en salud.",
-      image: "/images/Carrusel/Farmacoeconomia-medium.webp",
+      image: "/images/Carrusel/Farmacoeconomia",
     },
     {
       title: "Farmacoepidemiologia",
       description:
         "Análisis del uso, efectividad y seguridad de los medicamentos en poblaciones reales, proporcionando evidencia para la toma de decisiones en salud pública.",
-      image: "/images/Carrusel/Farmacoepidemiologia-medium.webp",
+      image: "/images/Carrusel/Farmacoepidemiologia",
     },
     {
       title: "Farmacologia y Terapeutica",
       description:
         "Estudio de los efectos de los medicamentos en el organismo y desarrollo de terapias farmacológicas optimizadas para mejorar la eficacia y seguridad en el tratamiento de enfermedades.",
-      image: "/images/Carrusel/Farmacologia-medium.webp",
+      image: "/images/Carrusel/Farmacologia",
     },
     {
       title: "Farmacovigilancia y Toxicología",
       description:
         "Monitoreo y evaluación continua de la seguridad de los medicamentos, identificación de reacciones adversas y desarrollo de estrategias para minimizar riesgos.",
-      image: "/images/Carrusel/Farmacovigilancia-medium.webp",
+      image: "/images/Carrusel/Farmacovigilancia",
     },
   ];
 
@@ -112,32 +112,32 @@ const About = () => {
     {
       title: "Proyecto de investigación",
       description: "Desarrollo de investigaciones originales en las líneas del grupo, con metodología científica rigurosa y contribución al conocimiento farmacológico.",
-      image: "/images/Carrusel/Proyecto-de-Investigacion-medium.webp"
+      image: "/images/Carrusel/Proyecto-de-Investigacion"
     },
     {
       title: "Monografías",
       description: "Revisiones sistemáticas y análisis críticos de temas específicos en farmacología y terapéutica, con enfoque en evidencia científica actualizada.",
-      image: "/images/Carrusel/Monografia-medium.webp"
+      image: "/images/Carrusel/Monografia"
     },
     {
       title: "Pasantías",
       description: "Experiencias prácticas en centros de investigación, hospitales o industria farmacéutica para aplicar conocimientos teóricos en entornos reales.",
-      image: "/images/Carrusel/Pasantia-medium.webp"
+      image: "/images/Carrusel/Pasantia"
     },
     {
       title: "Asignaturas de postgrado",
       description: "Cursos especializados de nivel avanzado que complementan la formación en áreas específicas de farmacología y terapéutica.",
-      image: "/images/Carrusel/Asignatura-de-Postgrado-medium.webp"
+      image: "/images/Carrusel/Asignatura-de-Postgrado"
     },
     {
       title: "Diplomados",
       description: "Programas de educación continua en áreas especializadas como farmacovigilancia, farmacia clínica y desarrollo de medicamentos.",
-      image: "/images/Carrusel/Diplomado-medium.webp"
+      image: "/images/Carrusel/Diplomado"
     },
     {
       title: "Publicación de artículo científico",
       description: "Contribución al conocimiento científico a través de la publicación de resultados de investigación en revistas indexadas o capítulos de libro.",
-      image: "/images/Carrusel/Articulo-Cientifico-medium.webp"
+      image: "/images/Carrusel/Articulo-Cientifico"
     }
   ];
 
@@ -145,22 +145,22 @@ const About = () => {
     {
       title: "Participación de semilleristas y tesistas",
       description: "Formación integral de estudiantes a través de su participación activa en proyectos de investigación y desarrollo de productos científicos del grupo.",
-      image: "/images/Carrusel/Semilleristas-medium.webp"
+      image: "/images/Carrusel/Semilleristas"
     },
     {
       title: "Ponencias y posters",
       description: "Presentación de resultados de investigación en congresos nacionales e internacionales, promoviendo el intercambio científico y la visibilidad del grupo.",
-      image: "/images/Carrusel/Ponencias-medium.webp"
+      image: "/images/Carrusel/Ponencias"
     },
     {
       title: "Comunidad de aprendizaje",
       description: "Creación de espacios de intercambio académico entre estudiantes y docentes para fomentar el pensamiento crítico y la investigación colaborativa.",
-      image: "/images/Carrusel/Comunidad-medium.webp"
+      image: "/images/Carrusel/Comunidad"
     },
     {
       title: "Cursos y actividades académicas",
       description: "Desarrollo de programas educativos especializados, talleres y seminarios para fortalecer las competencias investigativas en la comunidad académica.",
-      image: "/images/Carrusel/Cursos-medium.webp"
+      image: "/images/Carrusel/Cursos"
     }
   ];
 

@@ -41,21 +41,22 @@ const AboutSobreNosotros = () => (
   <div className="relative h-[400px] w-full flex items-center justify-center">
           <picture>
             <source
-              srcSet="/images/objetivo-large.webp"
               media="(min-width: 1280px)"
+              srcSet="/images/objetivo-large.webp"
             />
             <source
-              srcSet="/images/objetivo-medium.webp"
               media="(min-width: 640px)"
+              srcSet="/images/objetivo-medium.webp"
             />
             <img
               src="/images/objetivo-small.webp"
-              className="w-full h-full object-cover rounded-xl shadow-medium animate-fade-in"
               alt="Miembros del grupo FyT trabajando en investigación"
+              className="w-full h-full object-cover rounded-xl shadow-medium animate-fade-in"
               width={1280}
               height={720}
               loading="lazy"
               decoding="async"
+              fetchpriority="auto"
               style={{ minHeight: 400, maxHeight: 400 }}
             />
           </picture>

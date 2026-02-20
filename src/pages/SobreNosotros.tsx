@@ -43,7 +43,7 @@ const SobreNosotros = () => {
             height={1080}
             fetchpriority="high"
             loading="eager"
-            decoding="sync"
+            decoding="async"
           />
         </picture>
         <div className="hero-overlay" />

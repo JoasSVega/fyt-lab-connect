@@ -104,11 +104,11 @@ export default function HeroInvestigacion() {
       >
         {/* Imagen responsive optimizada */}
         <picture>
-          <source srcSet="/images/hero-investigacion-large.webp" media="(min-width: 1280px)" />
-          <source srcSet="/images/hero-investigacion-medium.webp" media="(min-width: 640px)" />
-          <SafeImage
+          <source media="(min-width: 1280px)" srcSet="/images/hero-investigacion-large.webp" />
+          <source media="(min-width: 640px)" srcSet="/images/hero-investigacion-medium.webp" />
+          <img
             src="/images/hero-investigacion-small.webp"
-            fallbackSrc="/images/hero-investigacion.png"
+            fallback="/images/hero-investigacion.png"
             alt=""
             className="hero-image"
             aria-hidden="true"

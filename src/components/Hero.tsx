@@ -8,10 +8,10 @@ export default function Hero() {
       style={{ paddingTop: 'max(4rem, calc(var(--navbar-height, 4rem) + 1.5rem))' }}
     >
       <picture>
-        {/* 1. ESCRITORIO (>1200px): Imagen pesada solo para pantallas muy grandes */}
-        <source media="(min-width: 1200px)" srcSet="/images/hero-index-large.webp" />
+        {/* 1. ESCRITORIO (>1280px): Imagen pesada solo para pantallas muy grandes */}
+        <source media="(min-width: 1280px)" srcSet="/images/hero-index-large.webp" />
 
-        {/* 2. TABLET/DESKTOP PEQUEÑO (640px - 1199px): Imagen mediana */}
+        {/* 2. TABLET/DESKTOP PEQUEÑO (640px - 1279px): Imagen mediana */}
         <source media="(min-width: 640px)" srcSet="/images/hero-index-medium.webp" />
 
         {/* 3. MÓVIL (<640px): Imagen súper ligera OBLIGATORIA */}
@@ -24,7 +24,7 @@ export default function Hero() {
           height={1080}
           fetchpriority="high"
           loading="eager"
-          decoding="sync"
+          decoding="async"
         />
       </picture>
       {/* Overlay oscuro unificado */}
