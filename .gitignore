@@ -25,4 +25,22 @@ dist-ssr
 *.sln
 *.sw?
 node_modules
-// Deploy verification - jue 29 ene 2026 16:05:40 -05
+
+# ========================================
+# OLD BUILD ARTIFACTS (DO NOT DEPLOY)
+# These directories contain old HTML files
+# Only dist/ should be deployed to production
+# ========================================
+/investigacion/
+/herramientas/
+/sobre-nosotros/
+/sobre-nosotros-new/
+/noticias/
+/contactos/
+/equipo/
+/politica-privacidad/
+/terminos-uso/
+/codigo-etica/
+/calculator/
+
+# Deploy verification - jue 29 ene 2026 16:05:40 -05

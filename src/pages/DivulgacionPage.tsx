@@ -123,22 +123,23 @@ const DivulgacionPage: React.FC = () => {
           <div className="flex flex-col sm:flex-row gap-4 items-center">
             {/* Búsqueda */}
             <div className="relative w-full sm:flex-1">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" aria-hidden="true" />
               <Input
                 type="text"
                 placeholder="Buscar artículos..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-10 w-full"
+                aria-label="Buscar artículos de divulgación"
               />
             </div>
 
             {/* Filtro por categoría */}
             <div className="w-full sm:w-64">
               <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                <SelectTrigger>
+                <SelectTrigger aria-label="Filtrar artículos por categoría">
                   <div className="flex items-center gap-2">
-                    <Filter className="w-4 h-4" />
+                    <Filter className="w-4 h-4" aria-hidden="true" />
                     <SelectValue placeholder="Categoría" />
                   </div>
                 </SelectTrigger>
@@ -162,6 +163,7 @@ const DivulgacionPage: React.FC = () => {
                   setSelectedCategory("all");
                 }}
                 className="w-full sm:w-auto"
+                aria-label="Limpiar todos los filtros de búsqueda"
               >
                 Limpiar
               </Button>
@@ -196,8 +198,9 @@ const DivulgacionPage: React.FC = () => {
                   onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
                   disabled={currentPage === 1}
                   className="gap-2 w-full sm:w-auto"
+                  aria-label="Ir a la página anterior"
                 >
-                  <ChevronLeft className="w-4 h-4" />
+                  <ChevronLeft className="w-4 h-4" aria-hidden="true" />
                   Anterior
                 </Button>
 
@@ -208,6 +211,8 @@ const DivulgacionPage: React.FC = () => {
                       variant={currentPage === page ? "default" : "outline"}
                       onClick={() => setCurrentPage(page)}
                       className={`w-10 h-10 p-0 ${currentPage === page ? 'cta-button cta-primary' : ''}`}
+                      aria-label={`Ir a la página ${page}`}
+                      aria-current={currentPage === page ? "page" : undefined}
                     >
                       {page}
                     </Button>
@@ -219,9 +224,10 @@ const DivulgacionPage: React.FC = () => {
                   onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
                   disabled={currentPage === totalPages}
                   className="gap-2 w-full sm:w-auto"
+                  aria-label="Ir a la siguiente página"
                 >
                   Siguiente
-                  <ChevronRight className="w-4 h-4" />
+                  <ChevronRight className="w-4 h-4" aria-hidden="true" />
                 </Button>
               </div>
             )}
@@ -242,6 +248,7 @@ const DivulgacionPage: React.FC = () => {
                 setSearchQuery("");
                 setSelectedCategory("all");
               }}
+              aria-label="Ver todos los artículos de divulgación"
             >
               Ver todos los artículos
             </Button>
@@ -261,10 +268,10 @@ const DivulgacionPage: React.FC = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" className="text-lg px-8 cta-primary">
-              <Link to="/contactos">Contactar</Link>
+              <Link to="/contactos" aria-label="Contactar con el Grupo FyT">Contactar</Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="text-lg px-8 cta-secondary">
-              <Link to="/investigacion">Ver investigación</Link>
+              <Link to="/investigacion" aria-label="Ver investigación del Grupo FyT">Ver investigación</Link>
             </Button>
           </div>
         </div>

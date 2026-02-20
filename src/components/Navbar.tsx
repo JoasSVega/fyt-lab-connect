@@ -165,11 +165,11 @@ const Navbar = () => {
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-slate-900 hover:text-fyt-blue focus:outline-none focus:ring-2 focus:ring-fyt-blue/30 p-2 rounded-md transition-colors duration-200"
-              aria-label="Abrir menú"
+              aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú"}
               aria-controls="nav-mobile"
               aria-expanded={isMenuOpen}
             >
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isMenuOpen ? <X className="h-6 w-6" aria-hidden="true" /> : <Menu className="h-6 w-6" aria-hidden="true" />}
             </button>
           </div>
         </div>

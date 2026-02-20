@@ -12,7 +12,7 @@ const TermsOfUse = () => {
         description="Condiciones de uso del sitio del Grupo de Investigación en Farmacología y Terapéutica."
         author="Grupo FyT"
         robots="index, follow"
-        canonical="https://fyt-research.org/terminos-de-uso"
+        canonical="https://fyt-research.org/terminos-uso"
         openGraph={{ title: "Grupo FyT | Términos de Uso", description: "Condiciones y responsabilidades", type: "article" }}
         twitter={{ card: "summary", site: "@fytlab" }}
       />

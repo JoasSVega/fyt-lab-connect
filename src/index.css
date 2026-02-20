@@ -1766,10 +1766,16 @@ body.modal-open .calc-overlay {
 
   .noticia-card__title {
     font-size: 1rem;
+    -webkit-line-clamp: unset !important;
+    display: block !important;
+    overflow: visible !important;
   }
 
   .noticia-card__summary {
     font-size: 0.875rem;
+    -webkit-line-clamp: unset !important;
+    display: block !important;
+    overflow: visible !important;
   }
 }
 

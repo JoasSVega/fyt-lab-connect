@@ -14,7 +14,7 @@ const PrivacyPolicy = () => {
           description="Política de privacidad del Grupo de Investigación en Farmacología y Terapéutica."
           author="Grupo FyT"
           robots="index, follow"
-          canonical="https://fyt-research.org/politica-de-privacidad"
+          canonical="https://fyt-research.org/politica-privacidad"
           openGraph={{ title: "Grupo FyT | Política de Privacidad", description: "Tratamiento de datos personales", type: "article" }}
           twitter={{ card: "summary", site: "@fytlab" }}
         />

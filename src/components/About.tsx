@@ -39,28 +39,28 @@ const About = () => {
 
   const values = [
     {
-      icon: <Microscope className="w-8 h-8 text-[#0066FF]" aria-label="Investigación Rigurosa" />,
+      icon: <Microscope className="w-8 h-8 text-[#0066FF]" aria-hidden="true" />,
       title: "Investigación Rigurosa",
       color: "#0066FF",
       border: "#0066FF",
       description: "Aplicamos metodologías científicas de vanguardia en todos nuestros proyectos de investigación."
     },
     {
-      icon: <Heart className="w-8 h-8 text-[#FF0000]" aria-label="Compromiso con la Salud" />,
+      icon: <Heart className="w-8 h-8 text-[#FF0000]" aria-hidden="true" />,
       title: "Compromiso con la Salud",
       color: "#FF0000",
       border: "#FF0000",
       description: "Trabajamos para mejorar la calidad de vida de los pacientes a través de la innovación terapéutica."
     },
     {
-      icon: <Users className="w-8 h-8 text-[#800080]" aria-label="Trabajo Colaborativo" />,
+      icon: <Users className="w-8 h-8 text-[#800080]" aria-hidden="true" />,
       title: "Trabajo Colaborativo",
       color: "#800080",
       border: "#800080",
       description: "Fomentamos la colaboración interdisciplinaria y el intercambio de conocimientos."
     },
     {
-      icon: <BookOpen className="w-8 h-8 text-black" aria-label="Formación Académica" />,
+      icon: <BookOpen className="w-8 h-8 text-black" aria-hidden="true" />,
       title: "Formación Académica",
       color: "#000000",
       border: "#000000",
@@ -227,7 +227,14 @@ const About = () => {
                   size="lg"
                   className="bg-white text-[#3BB9FF] border-2 border-[#3BB9FF] hover:bg-[#3BB9FF] hover:text-white transition-colors duration-300 px-8 py-3 font-inter font-semibold shadow-lg"
                 >
-                  <a href="https://forms.gle/3fbXVW7b4Db6Q9dWA" target="_blank" rel="noopener noreferrer">Inscribirse Ahora</a>
+                  <a 
+                    href="https://forms.gle/3fbXVW7b4Db6Q9dWA" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    aria-label="Inscribirse al semillero de investigación del Grupo FyT"
+                  >
+                    Inscribirse Ahora
+                  </a>
                 </Button>
               </Card>
           </div>

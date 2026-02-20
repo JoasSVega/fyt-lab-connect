@@ -37,6 +37,7 @@ const DivulgacionCard: React.FC<DivulgacionCardProps> = ({ post }) => {
     <Link 
       to={`/divulgacion/${post.slug}`}
       style={{ display: 'block', height: '100%' }}
+      aria-label={`Leer artículo: ${post.title} - ${post.category}`}
     >
       <article className={cardClassName}>
         {/* Cabecera: Categoría y Fecha */}
@@ -70,11 +71,11 @@ const DivulgacionCard: React.FC<DivulgacionCardProps> = ({ post }) => {
           </div>
           <div className="blog-card__meta-action">
             <span className="blog-card__read-time">
-              <Clock className="w-3.5 h-3.5" />
+              <Clock className="w-3.5 h-3.5" aria-hidden="true" />
               {post.readTime}
             </span>
             <span className="blog-card__read-more">
-              Leer más <ArrowRight className="w-4 h-4" />
+              Leer más <ArrowRight className="w-4 h-4" aria-hidden="true" />
             </span>
           </div>
         </footer>

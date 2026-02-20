@@ -66,19 +66,20 @@ const News = () => {
           <div className="mb-8 flex flex-col sm:flex-row gap-4">
             {/* Búsqueda */}
             <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" aria-hidden="true" />
               <Input
                 type="text"
                 placeholder="Buscar noticias..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-10 bg-white border-slate-300"
+                aria-label="Buscar noticias por título o contenido"
               />
             </div>
 
             {/* Filtro por categoría */}
             <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-              <SelectTrigger className="w-full sm:w-48 bg-white border-slate-300">
+              <SelectTrigger className="w-full sm:w-48 bg-white border-slate-300" aria-label="Filtrar noticias por categoría">
                 <SelectValue placeholder="Todas las categorías" />
               </SelectTrigger>
               <SelectContent>
@@ -113,8 +114,9 @@ const News = () => {
                     disabled={currentPage === 1}
                     variant="outline"
                     className="gap-2"
+                    aria-label="Ir a la página anterior de noticias"
                   >
-                    <ChevronLeft className="w-4 h-4" />
+                    <ChevronLeft className="w-4 h-4" aria-hidden="true" />
                     Anterior
                   </Button>
                   <span className="text-sm text-slate-600">
@@ -126,9 +128,10 @@ const News = () => {
                     disabled={currentPage === totalPages}
                     variant="outline"
                     className="gap-2"
+                    aria-label="Ir a la siguiente página de noticias"
                   >
                     Siguiente
-                    <ChevronRight className="w-4 h-4" />
+                    <ChevronRight className="w-4 h-4" aria-hidden="true" />
                   </Button>
                 </div>
               )}

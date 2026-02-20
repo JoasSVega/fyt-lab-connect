@@ -113,15 +113,21 @@ const FloatingContact = () => {
                   className="cursor-pointer"
                   variants={fm ? itemVariants : undefined}
                 >
-                  <a href={option.href} target="_blank" rel="noopener noreferrer">
+                  <a 
+                    href={option.href} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    aria-label={`Contactar por ${option.label}`}
+                  >
                     <Card className="p-3 bg-white shadow-lg border-0">
                       <div className="flex items-center space-x-3">
                         <MotionDiv
                           className={`w-10 h-10 rounded-full flex items-center justify-center ${option.color}`}
                           whileHover={fm ? { scale: 1.13 } : undefined}
                           transition={fm ? { type: "spring", stiffness: 250 } : undefined}
+                          aria-hidden="true"
                         >
-                          <Icon className="h-5 w-5 text-white" />
+                          <Icon className="h-5 w-5 text-white" aria-hidden="true" />
                         </MotionDiv>
                         <span className="text-sm font-medium text-fyt-dark">
                           {option.label}
@@ -151,12 +157,13 @@ const FloatingContact = () => {
           transition: "background 0.6s cubic-bezier(0.42,0,0.58,1)",
           boxShadow: "0 8px 32px rgba(31, 41, 55, 0.18)",
         }}
-        aria-label="Opciones de contacto"
+        aria-label={isOpen ? "Cerrar menú de contacto" : "Abrir menú de contacto"}
+        aria-expanded={isOpen}
       >
         {isOpen ? (
-          <X className="h-6 w-6 text-white" />
+          <X className="h-6 w-6 text-white" aria-hidden="true" />
         ) : (
-          <MessageCircle className="h-6 w-6 text-white" />
+          <MessageCircle className="h-6 w-6 text-white" aria-hidden="true" />
         )}
       </MotionButton>
     </div>

@@ -210,6 +210,7 @@ const Tools = () => {
             <button 
               className="w-full px-4 py-2 rounded-md font-medium bg-muted text-muted-foreground cursor-not-allowed"
               disabled
+              aria-label={`${tool.title} - En desarrollo`}
             >
               En desarrollo
             </button>
@@ -217,6 +218,7 @@ const Tools = () => {
             <a 
               href={tool.href}
               className="block w-full px-4 py-2 rounded-md font-medium transition-all duration-200 bg-gradient-hero text-white hover:bg-primary/90 hover:shadow-soft text-center"
+              aria-label={`Acceder a ${tool.title}`}
             >
               Acceder
             </a>

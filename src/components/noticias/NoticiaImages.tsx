@@ -45,6 +45,7 @@ const NoticiaImages: React.FC<NoticiaImagesProps> = ({ slug, images }) => {
                     handleImageClick(index);
                   }
                 }}
+                aria-label={`Ver imagen ${index + 1} de ${images.length} en pantalla completa: ${image.alt}`}
               >
                 <picture>
                   <source

@@ -12,7 +12,7 @@ const CodeOfEthics = () => {
         description="Principios éticos y valores que guían nuestras actividades científicas y académicas."
         author="Grupo FyT"
         robots="index, follow"
-        canonical="https://fyt-research.org/codigo-de-etica"
+        canonical="https://fyt-research.org/codigo-etica"
         openGraph={{ title: "Grupo FyT | Código de Ética", description: "Principios y valores", type: "article" }}
         twitter={{ card: "summary", site: "@fytlab" }}
       />

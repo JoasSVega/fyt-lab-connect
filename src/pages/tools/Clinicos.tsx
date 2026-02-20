@@ -54,7 +54,13 @@ const Clinicos: React.FC = () => {
           </div>
           <p className="text-sm text-muted-foreground mb-4">Calcula la dosis de carga y la de mantenimiento a partir de Cp, Vd, F, intervalo y Cl.</p>
           <div className="mt-auto">
-            <button onClick={()=>setOpenDCM(true)} className="px-4 py-2 rounded-md bg-indigo-600 text-white font-semibold hover:bg-indigo-700">Abrir Calculadora</button>
+            <button 
+              onClick={()=>setOpenDCM(true)} 
+              className="px-4 py-2 rounded-md bg-indigo-600 text-white font-semibold hover:bg-indigo-700"
+              aria-label="Abrir calculadora de Dosis de Carga y Mantenimiento"
+            >
+              Abrir Calculadora
+            </button>
           </div>
           <CalculatorModal
             id="calc-dcdm"
@@ -79,7 +85,13 @@ const Clinicos: React.FC = () => {
           </div>
           <p className="text-sm text-muted-foreground mb-4">Calcula la dosis total según peso (mg/kg o µg/kg) o superficie corporal (mg/m² o µg/m²).</p>
           <div className="mt-auto">
-            <button onClick={()=>setOpenDose(true)} className="px-4 py-2 rounded-md bg-cyan-600 text-white font-semibold hover:bg-cyan-700">Abrir Calculadora</button>
+            <button 
+              onClick={()=>setOpenDose(true)} 
+              className="px-4 py-2 rounded-md bg-cyan-600 text-white font-semibold hover:bg-cyan-700"
+              aria-label="Abrir calculadora de Dosis por Peso y Superficie Corporal"
+            >
+              Abrir Calculadora
+            </button>
           </div>
           <CalculatorModal
             id="calc-dose"
@@ -104,7 +116,13 @@ const Clinicos: React.FC = () => {
           </div>
           <p className="text-sm text-muted-foreground mb-4">Child‑Pugh, MELD/MELD‑Na, APRI y FIB‑4 para evaluar severidad y fibrosis.</p>
           <div className="mt-auto">
-            <button onClick={()=>setOpenHepatic(true)} className="px-4 py-2 rounded-md bg-amber-600 text-white font-semibold hover:bg-amber-700">Abrir Calculadora</button>
+            <button 
+              onClick={()=>setOpenHepatic(true)} 
+              className="px-4 py-2 rounded-md bg-amber-600 text-white font-semibold hover:bg-amber-700"
+              aria-label="Abrir calculadora de Función Hepática"
+            >
+              Abrir Calculadora
+            </button>
           </div>
           <CalculatorModal
             id="calc-hepatic"
@@ -129,7 +147,13 @@ const Clinicos: React.FC = () => {
           </div>
           <p className="text-sm text-muted-foreground mb-4">Estima TFG/aclaramiento con Cockcroft–Gault, MDRD y CKD‑EPI.</p>
           <div className="mt-auto">
-            <button onClick={()=>setOpenRenal(true)} className="px-4 py-2 rounded-md bg-blue-600 text-white font-semibold hover:bg-blue-700">Abrir Calculadora</button>
+            <button 
+              onClick={()=>setOpenRenal(true)} 
+              className="px-4 py-2 rounded-md bg-blue-600 text-white font-semibold hover:bg-blue-700"
+              aria-label="Abrir calculadora de Función Renal"
+            >
+              Abrir Calculadora
+            </button>
           </div>
           <CalculatorModal
             id="calc-renal"
@@ -154,7 +178,13 @@ const Clinicos: React.FC = () => {
           </div>
           <p className="text-sm text-muted-foreground mb-4">Calcula concentración tras reconstitución, volumen para la dosis y dilución final.</p>
           <div className="mt-auto">
-            <button onClick={()=>setOpenReconst(true)} className="px-4 py-2 rounded-md bg-slate-700 text-white font-semibold transition-transform duration-150 hover:scale-105 hover:bg-slate-800">Abrir Calculadora</button>
+            <button 
+              onClick={()=>setOpenReconst(true)} 
+              className="px-4 py-2 rounded-md bg-slate-700 text-white font-semibold transition-transform duration-150 hover:scale-105 hover:bg-slate-800"
+              aria-label="Abrir calculadora de Reconstitución y Dilución de Antibióticos"
+            >
+              Abrir Calculadora
+            </button>
           </div>
           <CalculatorModal
             id="calc-reconst"
@@ -179,7 +209,13 @@ const Clinicos: React.FC = () => {
           </div>
           <p className="text-sm text-muted-foreground mb-4">Estima mL/h a partir de volumen/tiempo, dosis/concentración y opcionalmente gotas/min.</p>
           <div className="mt-auto">
-            <button onClick={()=>setOpenInf(true)} className="px-4 py-2 rounded-md bg-teal-600 text-white font-semibold hover:bg-teal-700">Abrir Calculadora</button>
+            <button 
+              onClick={()=>setOpenInf(true)} 
+              className="px-4 py-2 rounded-md bg-teal-600 text-white font-semibold hover:bg-teal-700"
+              aria-label="Abrir calculadora de Velocidad de Infusión"
+            >
+              Abrir Calculadora
+            </button>
           </div>
           <CalculatorModal
             id="calc-vi"

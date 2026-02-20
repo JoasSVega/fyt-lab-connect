@@ -124,6 +124,7 @@ const Herramientas = () => {
                     {/* Espacio reservado para imagen/icono */}
                     <div
                       className={`w-16 h-16 flex items-center justify-center rounded-full mb-2 ${tool.color}`}
+                      aria-hidden="true"
                     >
                       {tool.icon}
                     </div>
@@ -136,6 +137,7 @@ const Herramientas = () => {
                     <Button
                       onClick={() => navigate(tool.href)}
                       className={`w-full rounded-full px-5 py-2 font-inter shadow bg-fyt-blue text-white hover:bg-fyt-blue/90 transition font-inter`}
+                      aria-label={`Ir a ${tool.title}: ${tool.description}`}
                     >
                       {tool.buttonText}
                     </Button>

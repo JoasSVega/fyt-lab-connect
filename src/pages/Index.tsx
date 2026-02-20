@@ -49,14 +49,15 @@ const Index = () => {
           {/* Sobre Nosotros */}
           <ScrollReveal delay={0}>
             <div className="flex flex-col h-full items-center gap-4 bg-white rounded-xl shadow-soft p-6 md:p-8 w-full border border-blue-100">
-              <span className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-blue-100 mb-2">
-                <Users className="w-7 h-7 md:w-8 md:h-8 text-blue-600" aria-label="Sobre Nosotros" />
+              <span className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-blue-100 mb-2" aria-hidden="true">
+                <Users className="w-7 h-7 md:w-8 md:h-8 text-blue-600" />
               </span>
               <h3 className="text-[clamp(1rem,1.6vw,1.125rem)] font-raleway font-bold text-fyt-dark mb-1 text-center">Sobre Nosotros</h3>
               <p className="text-muted-foreground text-center text-[clamp(0.9rem,1.4vw,1rem)] mb-4 font-inter">Conoce el objetivo, valores y equipo del grupo FyT.</p>
               <Button
                 onClick={() => navigate('/sobre-nosotros')}
                 className="mt-auto w-full md:w-auto rounded-full px-5 py-2 font-inter shadow bg-fyt-blue text-white border-2 border-fyt-blue btn-solid-interactive"
+                aria-label="Ver más información sobre el equipo y valores del Grupo FyT"
               >
                 Ver Más
               </Button>
@@ -65,14 +66,15 @@ const Index = () => {
           {/* Investigación */}
           <ScrollReveal delay={0.1}>
           <div className="flex flex-col h-full items-center gap-4 bg-white rounded-xl shadow-soft p-6 md:p-8 w-full border border-purple-100">
-            <span className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-purple-100 mb-2">
-              <Microscope className="w-7 h-7 md:w-8 md:h-8 text-purple-600" aria-label="Investigación" />
+            <span className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-purple-100 mb-2" aria-hidden="true">
+              <Microscope className="w-7 h-7 md:w-8 md:h-8 text-purple-600" />
             </span>
             <h3 className="text-[clamp(1rem,1.6vw,1.125rem)] font-raleway font-bold text-fyt-dark mb-1 text-center">Investigación</h3>
             <p className="text-muted-foreground text-center text-[clamp(0.9rem,1.4vw,1rem)] mb-4 font-inter">Conoce nuestras investigaciones actuales y resultados científicos.</p>
             <Button
               onClick={() => navigate('/investigacion')}
               className="mt-auto w-full md:w-auto rounded-full px-5 py-2 font-inter shadow bg-fyt-purple text-white border-2 border-fyt-purple btn-solid-interactive"
+              aria-label="Ver proyectos de investigación, publicaciones y producción científica del Grupo FyT"
             >
               Ver Investigación
             </Button>
@@ -81,14 +83,15 @@ const Index = () => {
           {/* Noticias */}
           <ScrollReveal delay={0.2}>
           <div className="flex flex-col h-full items-center gap-4 bg-white rounded-xl shadow-soft p-6 md:p-8 w-full border border-red-100">
-            <span className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-red-100 mb-2">
-              <BookOpen className="w-7 h-7 md:w-8 md:h-8 text-red-600" aria-label="Noticias" />
+            <span className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-red-100 mb-2" aria-hidden="true">
+              <BookOpen className="w-7 h-7 md:w-8 md:h-8 text-red-600" />
             </span>
             <h3 className="text-[clamp(1rem,1.6vw,1.125rem)] font-raleway font-bold text-fyt-dark mb-1 text-center">Noticias</h3>
             <p className="text-muted-foreground text-center text-[clamp(0.9rem,1.4vw,1rem)] mb-4 font-inter">Mantente informado sobre nuestras actividades y logros recientes.</p>
             <Button
               onClick={() => navigate('/noticias')}
               className="mt-auto w-full md:w-auto rounded-full px-5 py-2 font-inter shadow bg-fyt-red text-white border-2 border-fyt-red btn-solid-interactive"
+              aria-label="Ver noticias y actualizaciones del Grupo FyT"
             >
               Ver Noticias
             </Button>

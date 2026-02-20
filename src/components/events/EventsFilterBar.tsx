@@ -75,6 +75,7 @@ const EventsFilterBar: React.FC<EventsFilterBarProps> = ({
             onParticipationChange("");
           }}
           className="px-3 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+          aria-label="Limpiar todos los filtros de eventos"
         >
           Limpiar filtros
         </button>

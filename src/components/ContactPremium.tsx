@@ -221,8 +221,9 @@ const ContactPremium = () => {
                   >
                     <div
                       className={`flex items-center justify-center w-12 h-12 rounded-full ${item.color} shrink-0`}
+                      aria-hidden="true"
                     >
-                      <Icon className="w-5 h-5" />
+                      <Icon className="w-5 h-5" aria-hidden="true" />
                     </div>
                     <div className="min-w-0">
                       <h3 className="font-semibold text-fyt-dark text-sm mb-0.5">
@@ -259,7 +260,7 @@ const ContactPremium = () => {
               className="p-6 rounded-xl bg-white/80 backdrop-blur-sm border border-gray-100 shadow-sm"
             >
               <h3 className="font-semibold text-fyt-dark mb-4 flex items-center gap-2">
-                <ExternalLink className="w-4 h-4 text-primary" />
+                <ExternalLink className="w-4 h-4 text-primary" aria-hidden="true" />
                 Síguenos en Redes
               </h3>
               <div className="flex gap-3">
@@ -271,10 +272,10 @@ const ContactPremium = () => {
                       href={sanitizeURL(social.href) || social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label={social.label}
+                      aria-label={`Visitar perfil de Instagram del Grupo FyT`}
                       className={`w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 transition-all duration-300 ${social.color} hover:scale-110`}
                     >
-                      <Icon className="w-5 h-5" />
+                      <Icon className="w-5 h-5" aria-hidden="true" />
                     </a>
                   );
                 })}
@@ -309,8 +310,9 @@ const ContactPremium = () => {
                     ) ||
                     "mailto:farmacologiayterapeutica.gi@gmail.com?subject=Propuesta de Colaboración"
                   }
+                  aria-label="Enviar propuesta de colaboración por correo electrónico"
                 >
-                  <Mail className="w-4 h-4 mr-2" />
+                  <Mail className="w-4 h-4 mr-2" aria-hidden="true" />
                   Proponer Colaboración
                 </a>
               </Button>
@@ -412,8 +414,9 @@ const ContactPremium = () => {
                   type="submit"
                   className="w-full bg-violet-600 hover:bg-violet-700 text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-200"
                   size="lg"
+                  aria-label="Enviar mensaje de contacto"
                 >
-                  <Send className="w-5 h-5 mr-2" />
+                  <Send className="w-5 h-5 mr-2" aria-hidden="true" />
                   Enviar Mensaje
                 </Button>
 

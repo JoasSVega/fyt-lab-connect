@@ -51,6 +51,8 @@ const ProjectFilterBar: React.FC<ProjectFilterBarProps> = ({
                 ? "bg-primary text-primary-foreground shadow-sm"
                 : "bg-muted text-muted-foreground hover:bg-muted/80"
             }`}
+            aria-label={`Filtrar proyectos: ${option.label}`}
+            aria-pressed={statusFilter === option.value}
           >
             {option.label}
           </button>
@@ -110,6 +112,7 @@ const ProjectFilterBar: React.FC<ProjectFilterBarProps> = ({
               onRoleChange("");
             }}
             className="px-3 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+            aria-label="Limpiar todos los filtros de proyectos"
           >
             Limpiar filtros
           </button>

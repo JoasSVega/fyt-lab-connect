@@ -51,7 +51,7 @@ export const EventoItem: React.FC<EventoItemProps> = ({
             <Calendar className="w-4 h-4 text-fuchsia-600" />
           </div>
 
-          <h3 className="text-base md:text-lg font-semibold text-gray-900 leading-snug line-clamp-2">
+          <h3 className="text-base md:text-lg font-semibold text-gray-900 leading-snug line-clamp-none sm:line-clamp-2">
             {titulo}
           </h3>
 
