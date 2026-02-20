@@ -1,0 +1,72 @@
+# Configuración de Netlify para fyt-research.org
+# https://docs.netlify.com/configure-builds/file-based-configuration/
+
+[build]
+  # Comando para construir el sitio
+  command = "npm run build"
+  
+  # Directorio que contiene el sitio construido
+  publish = "dist"
+  
+  # Node version
+  environment = { NODE_VERSION = "20" }
+
+# ========================================
+# REDIRECTS PARA SEO (TRAILING SLASHES)
+# ========================================
+
+# Remover trailing slashes de todas las URLs (301 redirect)
+# Esto es CRÍTICO para evitar contenido duplicado en Google
+[[redirects]]
+  from = "/*/"
+  to = "/:splat"
+  status = 301
+  force = true
+
+# ========================================
+# SPA ROUTING
+# ========================================
+
+# Redirigir todas las rutas no encontradas a index.html
+# para que React Router maneje la navegación
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# ========================================
+# HEADERS DE SEGURIDAD Y CACHING
+# ========================================
+
+# Cache de assets estáticos (JS, CSS, imágenes)
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Cache de imágenes
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# HTML - sin cache para navegación fresca
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Service Worker - sin cache
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Headers de seguridad globales
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
