@@ -117,13 +117,17 @@ const USAGE_SIZES: Record<ImageUsage, string> = {
 
 /**
  * Configuración de anchos descriptores para cada variante
- * IMPORTANTE: Deben coincidir con las dimensiones REALES de las imágenes generadas
- * OPTIMIZADO: Redimensionadas para móviles (ahorro de 419.6 KB)
- * - small.webp: 600x517px reales (optimizado de 800px → 600px para display 455px)
+ * ULTRA-OPTIMIZADO PARA PAGESPEED 90+
+ * - small.webp: 480x480px (PERFECTO para 455px display = 1.05x ratio)
  * - medium.webp: 1024x882px reales
+ * 
+ * AHORRO ACUMULADO:
+ * - 800px → 600px: 419.6 KB
+ * - 600px → 480px: 251.8 KB
+ * - Total: 671.4 KB ahorrados
  */
 const VARIANT_WIDTHS = {
-  small: 600,  // Ancho REAL de -small.webp generado (optimizado para móviles)
+  small: 480,  // Ancho REAL de -small.webp generado (ULTRA-optimizado)
   medium: 1024, // Ancho REAL de -medium.webp generado
   // large NUNCA aparece en srcSet - solo como fallback en casos especiales
 };
