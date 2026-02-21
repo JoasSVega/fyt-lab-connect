@@ -9,15 +9,15 @@ export default function Hero() {
     >
       <picture>
         {/* 1. ESCRITORIO (>1280px): Imagen pesada solo para pantallas muy grandes */}
-        <source media="(min-width: 1280px)" srcSet="/images/hero-index-large.webp" />
+        <source media="(min-width: 1280px)" srcSet="/images/hero-index-large.webp?v=20260221" />
 
         {/* 2. TABLET/DESKTOP PEQUEÑO (640px - 1279px): Imagen mediana */}
-        <source media="(min-width: 640px)" srcSet="/images/hero-index-medium.webp" />
+        <source media="(min-width: 640px)" srcSet="/images/hero-index-medium.webp?v=20260221" />
 
         {/* 3. MÓVIL (<640px): Imagen súper ligera OBLIGATORIA */}
         {/* IMPORTANTE: La etiqueta img NO debe tener srcset, solo src */}
         <img
-          src="/images/hero-index-small.webp"
+          src="/images/hero-index-small.webp?v=20260221"
           alt="Investigación rigurosa, impacto real en la salud"
           className="hero-image"
           width={1920}

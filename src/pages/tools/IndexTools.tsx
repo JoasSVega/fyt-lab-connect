@@ -50,14 +50,14 @@ const IndexTools: FC = () => {
         <picture>
           <source 
             media="(min-width: 1280px)"
-            srcSet="/images/hero-herramientas-large.webp" 
+            srcSet="/images/hero-herramientas-large.webp?v=20260221" 
           />
           <source 
             media="(min-width: 640px)"
-            srcSet="/images/hero-herramientas-medium.webp" 
+            srcSet="/images/hero-herramientas-medium.webp?v=20260221" 
           />
           <img 
-            src="/images/hero-herramientas-small.webp" 
+            src="/images/hero-herramientas-small.webp?v=20260221" 
             alt="" 
             className="hero-image" 
             aria-hidden="true"

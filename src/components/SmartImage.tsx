@@ -148,18 +148,23 @@ const SmartImage: React.FC<SmartImageProps> = ({
   // Limpiar basePath de posibles sufijos existentes
   const cleanBasePath = basePath.replace(/(?:-(small|medium|large))?\.webp$/i, '');
   
+  // CACHEBUSTER para forzar recarga de imágenes optimizadas
+  // Netlify CDN estaba sirviendo versiones viejas (800px en lugar de 480px)
+  // Este timestamp fuerza invalidación de cache
+  const cacheBuster = '?v=20260221';
+  
   // ESTRATEGIA RADICAL: Para cards y thumbnails, NO usar srcSet
   // Esto FUERZA al navegador a cargar SIEMPRE small.webp
   // incluso en pantallas Retina 2x/3x
   const shouldUseSrcSet = usage !== 'card' && usage !== 'thumbnail';
   
   // REGLA: src SIEMPRE apunta a -small.webp (mobile first)
-  const src = `${cleanBasePath}-small.webp`;
+  const src = `${cleanBasePath}-small.webp${cacheBuster}`;
   
   // srcSet SOLO para hero, avatar, team (donde se necesita calidad)
   // Para cards: undefined (navegador solo usa src)
   const srcSet = shouldUseSrcSet 
-    ? `${cleanBasePath}-small.webp ${VARIANT_WIDTHS.small}w, ${cleanBasePath}-medium.webp ${VARIANT_WIDTHS.medium}w`
+    ? `${cleanBasePath}-small.webp${cacheBuster} ${VARIANT_WIDTHS.small}w, ${cleanBasePath}-medium.webp${cacheBuster} ${VARIANT_WIDTHS.medium}w`
     : undefined;
   
   // sizes SOLO si hay srcSet

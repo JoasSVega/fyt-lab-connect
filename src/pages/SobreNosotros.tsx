@@ -32,10 +32,10 @@ const SobreNosotros = () => {
       {/* Hero Institucional */}
       <section className="hero-container" aria-label="Hero Sobre Nosotros">
         <picture>
-          <source media="(min-width: 1280px)" srcSet="/images/hero-nosotros-large.webp" />
-          <source media="(min-width: 640px)" srcSet="/images/hero-nosotros-medium.webp" />
+          <source media="(min-width: 1280px)" srcSet="/images/hero-nosotros-large.webp?v=20260221" />
+          <source media="(min-width: 640px)" srcSet="/images/hero-nosotros-medium.webp?v=20260221" />
           <img
-            src="/images/hero-nosotros-small.webp"
+            src="/images/hero-nosotros-small.webp?v=20260221"
             alt="Equipo de Grupo FyT"
             className="hero-image"
             aria-hidden="true"

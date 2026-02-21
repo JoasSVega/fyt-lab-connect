@@ -20,10 +20,10 @@ const Noticias = () => {
       {/* Hero Noticias */}
       <section className="hero-container" aria-label="Hero Noticias">
         <picture>
-          <source media="(min-width: 1280px)" srcSet="/images/hero-noticias-large.webp" />
-          <source media="(min-width: 640px)" srcSet="/images/hero-noticias-medium.webp" />
+          <source media="(min-width: 1280px)" srcSet="/images/hero-noticias-large.webp?v=20260221" />
+          <source media="(min-width: 640px)" srcSet="/images/hero-noticias-medium.webp?v=20260221" />
           <img
-            src="/images/hero-noticias-small.webp"
+            src="/images/hero-noticias-small.webp?v=20260221"
             alt="Noticias del Grupo FyT"
             className="hero-image"
             aria-hidden="true"
