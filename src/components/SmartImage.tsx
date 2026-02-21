@@ -1,23 +1,30 @@
 import React from "react";
 
 /**
- * SmartImage - Componente optimizado para imágenes responsivas
+ * SmartImage - Componente ULTRA-OPTIMIZADO para móviles
  * 
- * REGLAS DE ORO - MOBILE FIRST:
- * 1. El atributo `src` apunta SIEMPRE a -small.webp (mobile first)
- * 2. El `srcSet` NUNCA incluye -large.webp (prohibido en móvil)
- *    - srcSet limitado: ${basePath}-small.webp 500w, ${basePath}-medium.webp 1000w
- * 3. El atributo `sizes` es "mentiroso" para engañar a pantallas Retina:
- *    - "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
- * 4. Lazy loading por defecto: loading="lazy", decoding="async"
+ * ESTRATEGIA RADICAL PARA GOOGLE PAGESPEED 90+:
+ * =================================================
+ * 
+ * PROBLEMA IDENTIFICADO:
+ * - Móviles Retina (2x DPR) calculan: 455px × 2 = 910px
+ * - Con srcSet "600w, 1024w", navegador elige 1024w (medium)
+ * - Resultado: 549 KiB desperdiciados en móviles
+ * 
+ * SOLUCIÓN IMPLEMENTADA:
+ * Para CARDS (carrusel): NO usar srcSet en absoluto
+ * - Solo src="/path/small.webp" 
+ * - Navegador SIEMPRE carga small (600px)
+ * - Suficiente incluso para Retina 2x (1.32x coverage)
+ * 
+ * Para HERO: srcSet normal (necesita calidad)
  * 
  * @example
  * ```tsx
  * <SmartImage 
- *   basePath="/images/evento-importante"
- *   alt="Descripción del evento"
- *   usage="card"
- *   loading="lazy"
+ *   basePath="/images/Carrusel/Farmacologia"
+ *   alt="Farmacología"
+ *   usage="card"  // NO genera srcSet
  * />
  * ```
  */
@@ -88,28 +95,24 @@ export interface SmartImageProps extends Omit<React.ImgHTMLAttributes<HTMLImageE
 
 /**
  * Configuración de sizes predefinidos por tipo de uso
- * MOBILE FIRST - Con "sizes mentiroso" para forzar descarga de versiones ligeras
+ * OPTIMIZADO PARA FORZAR SMALL EN MÓVILES
  */
 const USAGE_SIZES: Record<ImageUsage, string> = {
-  // Hero: Ocupa toda la pantalla en todos los dispositivos
+  // Hero: Necesita srcSet para diferentes viewports
   hero: '100vw',
   
-  // Card: Para carruseles y grids responsivos (MOBILE FIRST)
-  // Google PageSpeed detectó: dimensiones reales en móvil = 455x455px
-  // Ajustado para coincidir con las dimensiones reales mostradas
-  // Móvil (<640px): 455px (valor real medido en Chrome DevTools móvil)
-  // Tablet (640-1024px): 600px (mantiene medium)
-  // Desktop (>1024px): 455px (regresa a card compacto)
-  card: '(max-width: 640px) 455px, (max-width: 1024px) 600px, 455px',
+  // Card: SOLO usa small.webp (sin srcSet)
+  // No necesita sizes porque no tiene srcSet
+  card: '455px', // Informativo, no se usa realmente
   
-  // Avatar: Tamaño fijo para logos/perfiles
+  // Avatar: Tamaño fijo pequeño
   avatar: '100px',
   
-  // Team: Fotos de equipo adaptativas
+  // Team: Fotos de equipo
   team: '(max-width: 640px) 180px, 220px',
   
-  // Thumbnail: Miniaturas pequeñas
-  thumbnail: '(max-width: 640px) 150px, 200px',
+  // Thumbnail: SOLO usa small.webp (sin srcSet)
+  thumbnail: '150px', // Informativo, no se usa realmente
 };
 
 /**
@@ -141,15 +144,22 @@ const SmartImage: React.FC<SmartImageProps> = ({
   // Limpiar basePath de posibles sufijos existentes
   const cleanBasePath = basePath.replace(/(?:-(small|medium|large))?\.webp$/i, '');
   
-  // REGLA DE ORO: srcSet NUNCA incluye -large.webp
-  // Solo small (500w) y medium (1000w) para forzar descargas ligeras en móvil
-  const srcSet = `${cleanBasePath}-small.webp ${VARIANT_WIDTHS.small}w, ${cleanBasePath}-medium.webp ${VARIANT_WIDTHS.medium}w`;
+  // ESTRATEGIA RADICAL: Para cards y thumbnails, NO usar srcSet
+  // Esto FUERZA al navegador a cargar SIEMPRE small.webp
+  // incluso en pantallas Retina 2x/3x
+  const shouldUseSrcSet = usage !== 'card' && usage !== 'thumbnail';
   
-  // REGLA DE ORO: src SIEMPRE apunta a -small.webp (mobile first)
+  // REGLA: src SIEMPRE apunta a -small.webp (mobile first)
   const src = `${cleanBasePath}-small.webp`;
   
-  // Obtener sizes predefinido según el uso (con "tamaño mentiroso" mobile-first)
-  const sizes = USAGE_SIZES[usage];
+  // srcSet SOLO para hero, avatar, team (donde se necesita calidad)
+  // Para cards: undefined (navegador solo usa src)
+  const srcSet = shouldUseSrcSet 
+    ? `${cleanBasePath}-small.webp ${VARIANT_WIDTHS.small}w, ${cleanBasePath}-medium.webp ${VARIANT_WIDTHS.medium}w`
+    : undefined;
+  
+  // sizes SOLO si hay srcSet
+  const sizes = shouldUseSrcSet ? USAGE_SIZES[usage] : undefined;
   
   // Derivar atributos de prioridad
   const loading: 'eager' | 'lazy' = priority ? 'eager' : 'lazy';
